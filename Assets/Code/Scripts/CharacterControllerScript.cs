@@ -243,14 +243,19 @@ public AnimationClip jumpPoseAnimation;
 		}
 	}
 
-	void  UpdateSmoothedMovementDirection ()
+	public void SetLookAt(Vector3 direction)
+	{
+
+	}
+
+	public void  UpdateSmoothedMovementDirection ()
 	{
 		
 
 		bool grounded = IsGrounded();
 
 			
-			movingBack = false;
+		movingBack = false;
 		
 		
 		
@@ -696,11 +701,23 @@ public AnimationClip jumpPoseAnimation;
 
 		//Debug.Log("COLLISION: " + hit.gameObject.name);
 
-		if(hit.gameObject.tag == "Items")
+		if(hit.gameObject.tag == "Items" && this.GetComponent<CharacterProgressScript>().IsGoingToPickUpObject == hit.gameObject)
 		{
 
-			this.GetComponent<CharacterProgressScript>().PickupItem(hit.gameObject/*.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()*/);
-			//Destroy(hit.gameObject);
+			if(hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Food)
+			{
+				if(this.GetComponent<CharacterProgressScript>().OnInteractWithPopupItem(hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()))
+				{
+					this.GetComponent<CharacterProgressScript>().GroundItems.Remove(hit.gameObject);
+					Destroy(hit.gameObject);
+
+				}
+			}
+			else
+			{
+				this.GetComponent<CharacterProgressScript>().PickupItem(hit.gameObject/*.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()*/);
+			}
+				//Destroy(hit.gameObject);
 		}
 
 		if(hit.gameObject.tag == "EnemyJumbTop")

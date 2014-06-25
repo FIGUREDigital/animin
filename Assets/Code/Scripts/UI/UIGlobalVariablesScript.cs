@@ -42,6 +42,8 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject PopupIndicator;
 	public GameObject ImageTarget;
 
+	public GameObject IndicatorAboveHead;
+
 	// Set from the code, keep static
 	public static GameObject ButtonTriggeredMainMenuPopupRef;
 	public static UIFunctionalityId SelectedMinigameToPlay;

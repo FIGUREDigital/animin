@@ -41,8 +41,8 @@ public class DragDropMainBarItem : UIDragDropItem
 				// its a character drag and drop
 				if(dds.GetComponent<CharacterProgressScript>() != null)
 				{
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().DragedObjectedFromUIToWorld = true;
-					dds.GetComponent<CharacterProgressScript>().OnInteractWithPopupItem(popScript);
+					//UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().DragedObjectedFromUIToWorld = true;
+					//dds.GetComponent<CharacterProgressScript>().OnInteractWithPopupItem(popScript);
 				}
 				else
 				{

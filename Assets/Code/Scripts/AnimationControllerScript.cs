@@ -1,23 +1,159 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+public enum AnimationHappyId
+{
+	None = 0,
+	Happy1,
+	Happy2,
+	Happy3,
+	Happy4,
+}
+
 public class AnimationControllerScript : MonoBehaviour 
 {
 	protected Animator animator;
-	public IdleStateId IdleState
-	{
-		get 
-		{
-			return (IdleStateId)animator.GetInteger("Idle Animation Id");
-		}
-	}
 	private float TimeInIdleState;
+	private bool HoldingWeightAnimationUp;
 
-	public bool IsSleeping
+	public AnimationHappyId IsHappy 
 	{
 		get
 		{
-			return IdleState == IdleStateId.Sleeping;
+			AnimationHappyId id = AnimationHappyId.None;
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("happy_01")) id = AnimationHappyId.Happy1;
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("happy_02")) id = AnimationHappyId.Happy2;
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("happy_03")) id = AnimationHappyId.Happy3;
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("happy_04")) id = AnimationHappyId.Happy4;
+
+			return id;
+		}
+		
+		set
+		{
+			animator.SetInteger("IsHappy", (int)value );
+		}
+	}
+
+
+
+
+	public bool IsCelebrate
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("celebrate");
+		}
+		
+		set
+		{
+			animator.SetBool("IsCelebrate", value );
+		}
+	}
+
+
+	public bool IsAngry
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("angry");
+		}
+		
+		set
+		{
+			animator.SetBool("IsAngry", value );
+		}
+	}
+
+	public bool IsDance
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("dance");
+		}
+		
+		set
+		{
+			animator.SetBool("IsDance", value );
+		}
+	}
+
+	public bool IsEvolving
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("evolve_react");
+		}
+		
+		set
+		{
+			animator.SetBool("IsEvolving", value );
+		}
+	}
+
+	public bool IsHungry
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("hungry_loop");
+		}
+		
+		set
+		{
+			animator.SetBool("IsHungry", value );
+		}
+	}
+
+	public bool IsNo
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("no");
+		}
+		
+		set
+		{
+			animator.SetBool("IsNo", value );
+		}
+	}
+
+	public bool IsFull
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("full");
+		}
+		
+		set
+		{
+			animator.SetBool("IsFull", value );
+		}
+	}
+
+
+	public bool IsPat
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("pat_react");
+		}
+		
+		set
+		{
+			animator.SetBool("IsPat", value );
+		}
+	}
+
+	public bool IsNotWell
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("unwell");
+		}
+		
+		set
+		{
+			animator.SetBool("IsNotWell", value );
 		}
 	}
 
@@ -31,6 +167,19 @@ public class AnimationControllerScript : MonoBehaviour
 		set
 		{
 			animator.SetBool("IsEating", value );
+		}
+	}
+
+	public bool IsSad
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("idle_sad");
+		}
+		
+		set
+		{
+			animator.SetBool("IsSad", value );
 		}
 	}
 
@@ -60,6 +209,113 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
+	public bool IsIdle
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("idle_stand");
+		}
+	}
+
+	public bool IsWakingUp
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("Transition Animation: Sleep to Idle");
+		}
+	}
+
+	public bool IsIdleLook1
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("look_01");
+		}
+		
+		set
+		{
+			animator.SetBool("IsIdleLook1", value );
+		}
+	}
+
+	public bool IsIdleLook2
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("look_02");
+		}
+		
+		set
+		{
+			animator.SetBool("IsIdleLook2", value );
+		}
+	}
+
+	public bool IsIdleLook3
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("look_03");
+		}
+		
+		set
+		{
+			animator.SetBool("IsIdleLook3", value );
+		}
+	}
+
+	public bool IsIdleLook4
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("look_04");
+		}
+		
+		set
+		{
+			animator.SetBool("IsIdleLook4", value );
+		}
+	}
+
+	public bool IsIdleWave
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("IsIdleWave");
+		}
+		
+		set
+		{
+			animator.SetBool("IsIdleWave", value );
+		}
+	}
+
+	public bool IsSleeping
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("Sleep");
+		}
+		
+		set
+		{
+			animator.SetBool("IsSleeping", value );
+		}
+	}
+
+	public bool IsThrowing
+	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("throw");
+		}
+		
+		set
+		{
+			animator.SetBool("IsThrowing", value );
+		}
+	}
+
 	public bool IsHoldingItem
 	{
 		get
@@ -70,16 +326,29 @@ public class AnimationControllerScript : MonoBehaviour
 		
 		set
 		{
-			if(value == true) animator.SetLayerWeight(1, 1);
-			else animator.SetLayerWeight(1, 0);
+			if(value == true) HoldingWeightAnimationUp = true;
+			else HoldingWeightAnimationUp = false;
 
 			animator.SetBool("IsHoldingItem", value );
 		}
 	}
 
 
+	public bool IsAnyIdleAnimationPlaying()
+	{
+		if(IsIdle 
+		        || IsIdleLook1 
+		        || IsIdleLook2 
+		        || IsIdleLook3 
+		        || IsIdleLook4
+		        || IsIdleWave)
+		{
+			return true;
+		}
 
-
+		return false;
+	}
+	
 	void Awake()
 	{
 		animator = GetComponent<Animator>();
@@ -108,74 +377,58 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
-	public void Wakeup()
+	public bool IsWalking
 	{
-		SetAnimation(IdleStateId.Default);   
+		set
+		{
+			animator.SetBool("IsWalking", value);
+		}
 	}
 
-	public void SetAnimation(IdleStateId animId)
-	{
-		Debug.Log("Changing state from: " + IdleState.ToString() + " to: " + animId.ToString());
-		animator.SetInteger("Idle Animation Id", (int)animId);   
-	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
-		switch(IdleState)
+
+		if(HoldingWeightAnimationUp && animator.GetLayerWeight(1) >= 1)
 		{
-			case IdleStateId.Default:
+		}
+		else if(!HoldingWeightAnimationUp && animator.GetLayerWeight(1) <= 0)
+		{
+		}
+		else if(HoldingWeightAnimationUp)
+		{
+			float value = animator.GetLayerWeight(1) + Time.deltaTime * 8;
+			if(value >= 1) value = 1;
+			animator.SetLayerWeight(1, value);
+		}
+		else 
+		{
+		
+			float value = animator.GetLayerWeight(1) - Time.deltaTime * 5;
+			if(value <= 0) value = 0;
+			animator.SetLayerWeight(1, value);
+
+		}
+
+		if(IsIdle)
+		{
+			TimeInIdleState += Time.deltaTime;
+			if(TimeInIdleState >= 6.0f)
 			{
-				TimeInIdleState += Time.deltaTime;
-				if(TimeInIdleState >= 6.0f)
-				{
-					List<int> randomIdles = new List<int>();
-					randomIdles.Add((int)IdleStateId.Look1);
-					randomIdles.Add((int)IdleStateId.Look2);
-					randomIdles.Add((int)IdleStateId.Look3);
-					randomIdles.Add((int)IdleStateId.Wave);
-
-					IdleStateId newId = (IdleStateId)randomIdles[UnityEngine.Random.Range(0, randomIdles.Count)];
-					
-					SetAnimation(newId); 
-					TimeInIdleState = 0;
-				}
-
-				break;
-			}
-
-			case IdleStateId.Look1:
-			case IdleStateId.Look2:
-			case IdleStateId.Look3:
-			case IdleStateId.Wave:
-			case IdleStateId.Eating:
-			case IdleStateId.TakingPill:
-			{
-
-				if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-				   SetAnimation(IdleStateId.Default); 
-
-				break;
-			}
-
-
-			case IdleStateId.Sleeping:
-			{
-				
-				break;
-			}
-
-			case IdleStateId.Sad:
-			{
-				break;
-			}
-			case IdleStateId.Moving:
-			{
-
-				break;
+				int random = UnityEngine.Random.Range(0, 4);
+				if(random == 0) IsIdleLook1 = true;
+				else if(random == 1) IsIdleLook2 = true;
+				else if(random == 2) IsIdleLook3 = true;
+				else if(random == 3) IsIdleWave = true;
+				else if(random == 4) IsIdleLook4 = true;
+				TimeInIdleState = 0;
 			}
 		}
-	
+		else
+		{
+			TimeInIdleState = 0;
+		}
 	}
 
 	void LateUpdate()
@@ -183,20 +436,26 @@ public class AnimationControllerScript : MonoBehaviour
 		IsEating = false;
 		IsTakingPill = false;
 		IsTickled = false;
+		IsIdleLook1 = false;
+		IsIdleLook2 = false;
+		IsIdleLook3 = false;
+		IsIdleLook4 = false;
+		IsIdleWave = false;
+		IsThrowing = false;
+		IsHappy = AnimationHappyId.None;
+		IsFull = false;
+	
+		IsCelebrate = false;
+		IsAngry = false;
+		IsDance = false;
+		IsEvolving = false;
+		IsHungry = false;
+		IsNo = false;
+		IsPat = false;
+
+		IsEating = false;
+	
 	}
 }
 
 
-public enum IdleStateId
-{
-	Default = 0,
-	Look1 = 1,
-	Look2 = 2,
-	Look3 = 3,
-	Wave = 4,
-	Sad = 5,
-	Sleeping = 6,
-	Moving = 7,
-	Eating = 8,
-	TakingPill = 9,
-}

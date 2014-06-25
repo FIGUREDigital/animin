@@ -13,6 +13,7 @@ public class UIPopupItemScript : MonoBehaviour
 	public int Points;
 	public PopupItemType Type;
 	public GameObject Model3D;
+	public bool NonInteractable;
 
 	// Use this for initialization
 	void Start () 

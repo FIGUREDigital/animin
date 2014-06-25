@@ -40,4 +40,6 @@ public enum UIFunctionalityId
 	OpenCloseMedicine,
 	OpenCloseItems,
 	ChangeCameraFacingMode,
+	ClearAllGroundItems,
+	ClearDragedItem,
 }

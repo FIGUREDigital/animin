@@ -264,6 +264,27 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.PicturesScreenRef.GetComponent<DeviceCameraScript>().SavePicture();
 			break;
 		}
+
+		case UIFunctionalityId.ClearAllGroundItems:
+		{
+			CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+			for(int i=0;i<script.GroundItems.Count;++i)
+			{
+				Destroy(script.GroundItems[i]);
+			}
+
+			script.GroundItems.Clear();
+
+			break;
+		}
+
+		case UIFunctionalityId.ClearDragedItem:
+		{
+
+			
+			break;
+		}
 			
 		}
 	}

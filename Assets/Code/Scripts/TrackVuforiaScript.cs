@@ -6,12 +6,15 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 {
 	private TrackableBehaviour mTrackableBehaviour;
 
+	Vector3 SavedARPosition;
+
 	//public GameObject ARSceneRef;
 	public GameObject NonARSceneRef;
 	public GameObject MainSceneRef;
 	public GameObject CharacterRef;
 
 	public static bool IsTracking;
+
 
 	void Start()
 	{
@@ -23,6 +26,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 
 		this.renderer.enabled = false;
+		SavedARPosition = new Vector3(0, 0.0f, 0);
 	}
 
 	public void OnTrackableStateChanged(
@@ -67,7 +71,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 		CharacterRef.transform.parent = MainSceneRef.transform;
 
-		CharacterRef.transform.localPosition = new Vector3(0, 0.5f, 0);
+		//CharacterRef.transform.localP.osition = new Vector3(0, 0.5f, 0);
+		SavedARPosition.y = 0;
+		CharacterRef.transform.localPosition = SavedARPosition + new Vector3(0, 0.5f, 0);
 		CharacterRef.transform.localRotation = Quaternion.identity;
 		CharacterRef.GetComponent<CharacterProgressScript>().Stop();
 
@@ -105,6 +111,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 	
 	private void OnTrackingLost()
 	{
+		if(IsTracking)
+			SavedARPosition = CharacterRef.transform.localPosition;
+
 		CharacterRef.transform.parent = null;
 
 		NonARSceneRef.SetActive (true);
@@ -112,6 +121,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 		Camera.main.transform.position = Vector3.zero;
 		Camera.main.transform.rotation = Quaternion.identity;
+
 
 		//Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		CharacterRef.transform.parent = NonARSceneRef.transform;
