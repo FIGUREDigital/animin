@@ -95,7 +95,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("hungry_loop");
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("hungry_loop") || animator.GetAnimatorTransitionInfo(0).IsName("hungry_loop") ;
 		}
 		
 		set
@@ -148,7 +148,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("unwell");
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("unwell") || animator.GetAnimatorTransitionInfo(0).IsName("unwell");
 		}
 		
 		set
@@ -174,7 +174,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("idle_sad");
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("idle_sad") || animator.GetAnimatorTransitionInfo(0).IsName("idle_sad");
 		}
 		
 		set
@@ -398,14 +398,14 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 		else if(HoldingWeightAnimationUp)
 		{
-			float value = animator.GetLayerWeight(1) + Time.deltaTime * 8;
+			float value = animator.GetLayerWeight(1) + Time.deltaTime * 3;
 			if(value >= 1) value = 1;
 			animator.SetLayerWeight(1, value);
 		}
 		else 
 		{
 		
-			float value = animator.GetLayerWeight(1) - Time.deltaTime * 5;
+			float value = animator.GetLayerWeight(1) - Time.deltaTime * 3;
 			if(value <= 0) value = 0;
 			animator.SetLayerWeight(1, value);
 
@@ -449,12 +449,10 @@ public class AnimationControllerScript : MonoBehaviour
 		IsAngry = false;
 		IsDance = false;
 		IsEvolving = false;
-		IsHungry = false;
 		IsNo = false;
 		IsPat = false;
 
-		IsEating = false;
-	
+		IsEating = false;	
 	}
 }
 

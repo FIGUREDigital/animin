@@ -83,6 +83,11 @@ public class CharacterProgressScript : MonoBehaviour
 	bool IsDetectFlick;
 	float FeedMyselfTimer;
 
+
+	float TimeForNextHungryUnwellSadAnimation;
+	float LengthOfHungryUnwellSadAnimation;
+	HungrySadUnwellLoopId sadUnwellLoopState;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -221,7 +226,7 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 
 
-		Debug.Log(CurrentAction.ToString());
+
 		switch(CurrentAction)
 		{
 			case ActionId.EnterSleep:
@@ -296,7 +301,10 @@ public class CharacterProgressScript : MonoBehaviour
 					{
 						Debug.Log("looking at new point");
 						this.gameObject.transform.LookAt(allHits[i].point);
-						//this.GetComponent<CharacterControllerScript>().MovementDirection = Vector3.Normalize(allHits[i].point - this.transform.position);
+						transform.LookAt(this.transform.position);
+						this.GetComponent<CharacterControllerScript>().moveDirection = Vector3.Normalize(allHits[i].point - this.transform.position);
+						
+						//	.MovementDirection = Vector3.Normalize(allHits[i].point - this.transform.position);
 						//this.GetComponent<CharacterControllerScript>().UpdateSmoothedMovementDirection();
 						//this.GetComponent<CharacterControllerScript>().MovementDirection = Vector3.zero;
 						break;
@@ -390,40 +398,52 @@ public class CharacterProgressScript : MonoBehaviour
 				if (hadRayCollision)
 				{
 
-							if(hitInfo.collider.name.StartsWith("MainCharacter") || hitInfo.collider.gameObject == ObjectHolding)
-							{
-								if(ObjectHolding != null && !ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
-								{
-									UIPopupItemScript item = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+					if(hitInfo.collider.name.StartsWith("MainCharacter") || hitInfo.collider.gameObject == ObjectHolding)
+					{
+						if(ObjectHolding != null && !ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
+						{
+							UIPopupItemScript item = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
 
-									if(OnInteractWithPopupItem(item))
-									{
-										Destroy(ObjectHolding);
-										ObjectHolding = null;
-										animationController.IsHoldingItem = false;
-										
-									}
+							if(OnInteractWithPopupItem(item))
+							{
+								Destroy(ObjectHolding);
+								ObjectHolding = null;
+								animationController.IsHoldingItem = false;
+								
+							}
 
 
-								}
-								else if(ObjectHolding == null && animationController.IsAnyIdleAnimationPlaying())
-								{
-									animationController.IsTickled = true;
-								}
-							}
-							else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
-							{
-								//float distane = Vector3.Distance(hitInfo.point, this.transform.position);
-								//MoveTo(hitInfo.point, distane > 220.0f ? true : false);
-								if(RequestedToMoveToCounter == 0) RequestedTime = Time.time;
-								RequestedToMoveToCounter++;
-								moveHitInfo = hitInfo;
-							}
-							else
-							{
-								Stop();
-								Debug.Log("STOPING BECAUSE NOTHING HIT");
-							}
+						}
+						else if(ObjectHolding == null && animationController.IsAnyIdleAnimationPlaying())
+						{
+							animationController.IsTickled = true;
+						}
+					}
+					else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
+					{
+						//float distane = Vector3.Distance(hitInfo.point, this.transform.position);
+						//MoveTo(hitInfo.point, distane > 220.0f ? true : false);
+						if(RequestedToMoveToCounter == 0) RequestedTime = Time.time;
+						RequestedToMoveToCounter++;
+						moveHitInfo = hitInfo;
+
+						if(ObjectHolding != null && (hitInfo.collider.tag == "Items"))
+						{
+							ObjectHolding.layer = LayerMask.NameToLayer("Default");
+							ObjectHolding.transform.parent = this.transform.parent;
+							ObjectHolding.transform.localPosition = new Vector3(ObjectHolding.transform.localPosition.x, 0, ObjectHolding.transform.localPosition.z);
+
+							GroundItems.Add(ObjectHolding);
+							ObjectHolding = null;
+							animationController.IsHoldingItem = false;
+
+						}
+				   }
+					else
+					{
+						Stop();
+						Debug.Log("STOPING BECAUSE NOTHING HIT");
+					}
 				}
 					
 
@@ -440,9 +460,11 @@ public class CharacterProgressScript : MonoBehaviour
 						Vector3 point = moveHitInfo.point;
 						if(moveHitInfo.collider.tag == "Items")
 						{
+						moveHitInfo.collider.gameObject.AddComponent<FlashObjectScript>();
+
 							point = moveHitInfo.transform.position;
 							
-							if(!animationController.IsHoldingItem)
+							if(ObjectHolding == null)
 							{
 								IsGoingToPickUpObject = moveHitInfo.collider.gameObject;
 								Debug.Log("going to pickup");
@@ -545,26 +567,72 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 
 
+		switch(sadUnwellLoopState)
+		{
+		case HungrySadUnwellLoopId.DetectAnimation:
+		{
+			if(Hungry <= 50 && animationController.IsIdle)
+			{
+				animationController.IsHungry = true;
+				TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
+				LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(1.7f, 2.6f);
+				sadUnwellLoopState = HungrySadUnwellLoopId.PlayHungry;
+				
+			}
+			else if(Health <= 50 && animationController.IsIdle)
+			{
+				animationController.IsNotWell = true;
+				TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
+				LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 4.0f);
+				sadUnwellLoopState = HungrySadUnwellLoopId.PlayUnwell;
+				
+			}
+			else if(Happy <= 50 && animationController.IsIdle)
+			{
+				animationController.IsSad = true;
+				TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
+				LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.5f, 5.6f);
+				sadUnwellLoopState = HungrySadUnwellLoopId.PlaySad;
+			}
+
+			break;
+		}
+
+		case HungrySadUnwellLoopId.PlayHungry:
+		case HungrySadUnwellLoopId.PlaySad:
+		case HungrySadUnwellLoopId.PlayUnwell:
+		{
+			Debug.Log("in the state");
+			LengthOfHungryUnwellSadAnimation -= Time.deltaTime;
+			if(LengthOfHungryUnwellSadAnimation <= 0)
+			{
+				animationController.IsSad = false;
+				animationController.IsNotWell = false;
+				animationController.IsHungry = false;
+				sadUnwellLoopState = HungrySadUnwellLoopId.OnCooldown;
+			}
+
+			break;
+		}
+
+		case HungrySadUnwellLoopId.OnCooldown:
+		{
+			TimeForNextHungryUnwellSadAnimation -= Time.deltaTime;
+
+			if(TimeForNextHungryUnwellSadAnimation <= 0)
+			{
+				sadUnwellLoopState = HungrySadUnwellLoopId.DetectAnimation;
+			}
+
+			break;
+		}
+
+		}
 
 
-		if(Hungry <= 50)
-		{
-			animationController.IsHungry = true;
-		}
-		else if(Health <= 50)
-		{
-			animationController.IsNotWell = true;
-		}
-		else if(Happy <= 50)
-		{
-			animationController.IsSad = true;
-		}
-		else
-		{
-			animationController.IsNotWell = false;
-			animationController.IsHungry = false;
-			animationController.IsSad = false;
-		}
+
+
+
 		
 		if(IsMovingTowardsLocation)
 		{
@@ -645,6 +713,8 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public void PickupItem(GameObject item)
 	{
+		Debug.Log("void PickupItem(GameObject item)");
+
 		this.GetComponent<CharacterProgressScript>().GroundItems.Remove(item);
 		Stop();
 		//Physics.IgnoreCollision(item.collider, this.collider, true);
@@ -770,6 +840,15 @@ public enum ActionId
 	DetectFlickAndThrow,
 }
 
+public enum HungrySadUnwellLoopId
+{
+	DetectAnimation = 0,
+	PlayHungry,
+	PlaySad,
+	PlayUnwell,
+	OnCooldown,
+}
+
 //public enum AniminStateId
 //{
 //	Idle = 0,
@@ -795,3 +874,4 @@ public enum ItemId
 	None = 0,
 	Strawberry,
 }
+

@@ -3,34 +3,8 @@ using System.Collections;
 
 public class CharacterControllerScript : MonoBehaviour 
 {
-	
-	public AnimationClip idleAnimation;
-	
-	public AnimationClip walkAnimation;
-	
-	public AnimationClip runAnimation;
-	
-	public AnimationClip jumpPoseAnimation;
-	
-	
-	
-	public float walkMaxAnimationSpeed = 0.75F;
-	
-	public float trotMaxAnimationSpeed = 1F;
-	
-	public float runMaxAnimationSpeed = 1F;
-	
-	public float jumpAnimationSpeed = 1F;
-	
-	public float landAnimationSpeed =1F;
-	
-	
-	
-	private Animation _animation;
 	public Camera CameraRef;
-	
-	
-	
+
 	enum CharacterState {
 		
 		Idle = 0,
@@ -105,7 +79,7 @@ public class CharacterControllerScript : MonoBehaviour
 	
 	// The current move direction in x-z
 	
-	private Vector3 moveDirection = Vector3.zero;
+	public Vector3 moveDirection = Vector3.zero;
 	
 	// The current vertical speed
 	
@@ -188,59 +162,7 @@ public class CharacterControllerScript : MonoBehaviour
 		
 		moveDirection = transform.TransformDirection(Vector3.forward);
 		
-		
-		
-		_animation = GetComponent<Animation>();
-		
-		if(!_animation)
-			
-			Debug.Log("The character you would like to control doesn't have animations. Moving her might look weird.");
-		
-		
-		
-		/*
-
-public AnimationClip idleAnimation;
-
-public AnimationClip walkAnimation;
-
-public AnimationClip runAnimation;
-
-public AnimationClip jumpPoseAnimation; 
-
-    */
-		
-		if(!idleAnimation) {
-			
-			_animation = null;
-			
-			Debug.Log("No idle animation found. Turning off animations.");
-			
-		}
-		
-		if(!walkAnimation) {
-			
-			_animation = null;
-			
-			Debug.Log("No walk animation found. Turning off animations.");
-			
-		}
-		
-		if(!runAnimation) {
-			
-			_animation = null;
-			
-			Debug.Log("No run animation found. Turning off animations.");
-			
-		}
-		
-		if(!jumpPoseAnimation && canJump) {
-			
-			_animation = null;
-			
-			Debug.Log("No jump animation found and the character has canJump enabled. Turning off animations.");
-			
-		}
+	
 	}
 
 	public void SetLookAt(Vector3 direction)
@@ -557,97 +479,13 @@ public AnimationClip jumpPoseAnimation;
 		CharacterController controller = GetComponent<CharacterController>();
 		collisionFlags = controller.Move(movement);
 
-
-		// ANIMATION sector
-		
-		if(_animation) {
-			
-			if(_characterState == CharacterState.Jumping) 
-				
-			{
-				
-				if(!jumpingReachedApex) {
-					
-					_animation[jumpPoseAnimation.name].speed = jumpAnimationSpeed;
-					
-					_animation[jumpPoseAnimation.name].wrapMode = WrapMode.ClampForever;
-					
-					_animation.CrossFade(jumpPoseAnimation.name);
-					
-				} else {
-					
-					_animation[jumpPoseAnimation.name].speed = -landAnimationSpeed;
-					
-					_animation[jumpPoseAnimation.name].wrapMode = WrapMode.ClampForever;
-					
-					_animation.CrossFade(jumpPoseAnimation.name);               
-					
-				}
-				
-			} 
-			
-			else 
-				
-			{
-				
-				if(controller.velocity.sqrMagnitude < 0.1f) {
-					
-					_animation.CrossFade(idleAnimation.name);
-					
-				}
-				
-				else 
-					
-				{
-					
-					if(_characterState == CharacterState.Running) {
-						
-						_animation[runAnimation.name].speed = Mathf.Clamp(controller.velocity.magnitude, 0.0f, runMaxAnimationSpeed);
-						
-						_animation.CrossFade(runAnimation.name);    
-						
-					}
-					
-					else if(_characterState == CharacterState.Trotting) {
-						
-						_animation[walkAnimation.name].speed = Mathf.Clamp(controller.velocity.magnitude, 0.0f, trotMaxAnimationSpeed);
-						
-						_animation.CrossFade(walkAnimation.name);   
-						
-					}
-					
-					else if(_characterState == CharacterState.Walking) {
-						
-						_animation[walkAnimation.name].speed = Mathf.Clamp(controller.velocity.magnitude, 0.0f, walkMaxAnimationSpeed);
-						
-						_animation.CrossFade(walkAnimation.name);   
-						
-					}
-					
-					
-					
-				}
-				
-			}
-			
-		}
-		
-		// ANIMATION sector
-		
-		
 		
 		// Set rotation to the move direction
 		
 		if (IsGrounded())
-			
 		{
-			
-			
-			
+
 			transform.rotation = Quaternion.LookRotation(moveDirection);
-			
-			
-			
 		}   
 		
 		else
