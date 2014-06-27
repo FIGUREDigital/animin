@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class FlashObjectScript : MonoBehaviour 
 {
@@ -17,6 +17,59 @@ public class FlashObjectScript : MonoBehaviour
 	private Shader savedShader;
 	private StateId State;
 	private float Lerp;
+	//private Dictionary<GameObject, Shader> savedObjects; 
+
+
+	private void SaveShaders(GameObject gameObject)
+	{
+		if(gameObject.renderer != null)
+		{
+			if(gameObject.renderer.material != null)
+			{
+				savedShader = gameObject.renderer.material.shader;
+			}
+		}
+		
+		for(int i=0;i<gameObject.transform.childCount;++i)
+		{
+			SaveShaders(gameObject.transform.GetChild(i).transform.gameObject);
+		}
+	}
+
+	private void RecursiveSetShader(GameObject gameObject, Shader shader)
+	{
+		if(gameObject.renderer != null)
+		{
+			if(gameObject.renderer.material != null)
+			{
+				if(gameObject.renderer.material.shader != savedShader)
+					savedShader = gameObject.renderer.material.shader;
+
+				gameObject.renderer.material.shader = shader;
+			}
+		}
+
+		for(int i=0;i<gameObject.transform.childCount;++i)
+		{
+			RecursiveSetShader(gameObject.transform.GetChild(i).transform.gameObject, shader);
+		}
+	}
+
+	private void SetBlendFactor(GameObject gameObject)
+	{
+		if(gameObject.renderer != null)
+		{
+			if(gameObject.renderer.material != null)
+			{
+				gameObject.renderer.material.SetFloat("_BlendFactor", Lerp);
+			}
+		}
+		
+		for(int i=0;i<gameObject.transform.childCount;++i)
+		{
+			SetBlendFactor(gameObject.transform.GetChild(i).transform.gameObject);
+		}
+	}
 
 	void Update() 
 	{
@@ -24,40 +77,40 @@ public class FlashObjectScript : MonoBehaviour
 		{
 		case StateId.Intro:
 			FlashShader = Shader.Find("Custom/Flash Select");
-			savedShader = renderer.material.shader;
-			renderer.material.shader = FlashShader;
+			SaveShaders(this.gameObject);
+			RecursiveSetShader(this.gameObject, FlashShader);
 			Lerp = 0;
 			State = StateId.FlashUp1;
-			renderer.material.SetFloat("_BlendFactor", Lerp);
+			SetBlendFactor(this.gameObject);
 			break;
 
 		case StateId.FlashUp1:
 		case StateId.FlashUp2:
 
-			Lerp += Time.deltaTime * 5;
+			Lerp += Time.deltaTime * 9;
 			if(Lerp >= 1) 
 			{
 				Lerp = 1;
 				State = StateId.FlashDown1;
 			}
 
-			renderer.material.SetFloat("_BlendFactor", Lerp);
+			SetBlendFactor(this.gameObject);
 			break;
 
 		case StateId.FlashDown1:
 		case StateId.FlashDown2:
-			Lerp -= Time.deltaTime * 5;
+			Lerp -= Time.deltaTime * 9;
 			if(Lerp <= 0) 
 			{
 				Lerp = 0;
 				State = StateId.Outro;
 			}
 			
-			renderer.material.SetFloat("_BlendFactor", Lerp);
+			SetBlendFactor(this.gameObject);
 			break;
 
 		case StateId.Outro:
-			renderer.material.shader = savedShader;
+			RecursiveSetShader(this.gameObject, savedShader);
 			Destroy(this);
 			break;
 		}

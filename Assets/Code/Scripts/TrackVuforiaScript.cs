@@ -27,6 +27,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 		this.renderer.enabled = false;
 		SavedARPosition = new Vector3(0, 0.0f, 0);
+		Input.gyro.enabled = true;
 	}
 
 	public void OnTrackableStateChanged(
@@ -105,9 +106,36 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 	void Update()
 	{
-		//Debug.Log(Input.gyro.attitude.eulerAngles.ToString());
-		//NonARSceneRef.transform.localRotation = Quaternion.Euler(Input.gyro.attitude.eulerAngles.x / 340.0f, Input.gyro.attitude.eulerAngles.y / 340.0f, Input.gyro.attitude.eulerAngles.z / 340.0f);
+
+		//Debug.Log("GYOR: " + Input.gyro.attitude.eulerAngles.ToString());
+
+		if(NonARSceneRef.activeSelf)
+		{
+			/*float gyroAngle = 270 - Input.gyro.attitude.eulerAngles.z;
+			if(gyroAngle >= 30) gyroAngle = 30;
+			if(gyroAngle <= -30) gyroAngle = -30;
+
+			gyroAngle += 30;
+			gyroAngle /= 60;*/
+
+			//float xAngle = Mathf.Lerp(15.5f, -15.5f, (Input.acceleration.x + 1) / 2);
+
+
+			Debug.Log("GYRO: " + Input.gyro.attitude.eulerAngles.ToString());
+
+			//NonARSceneRef.transform.localRotation = Quaternion.Euler(gyroAngleY, 0, 0);
+
+			Debug.Log("Acceleration: " + Input.acceleration.ToString());
+			Debug.Log("Gravity: " + Input.gyro.gravity.ToString());
+
+			//0.0f to -0.5f to -1.0f
+
+			Camera.main.transform.rotation = Quaternion.Euler(14.73474f + (Input.acceleration.y) * 10, -(Input.acceleration.x) * 10, 0);
+
+		}
+
 	}
+
 	
 	private void OnTrackingLost()
 	{
@@ -119,13 +147,13 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		NonARSceneRef.SetActive (true);
 		MainSceneRef.SetActive(false);
 
-		Camera.main.transform.position = Vector3.zero;
-		Camera.main.transform.rotation = Quaternion.identity;
+		Camera.main.transform.position = new Vector3(0, 152.73f, -198.3f);
+		Camera.main.transform.rotation = Quaternion.Euler(14.73474f, 0.0f, 0.0f);
 
 
 		//Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		CharacterRef.transform.parent = NonARSceneRef.transform;
-		CharacterRef.transform.localPosition = new Vector3(0, 0.5f, -0.7f);
+		CharacterRef.transform.localPosition = new Vector3(0, 0.0006500053f, 0.0f);
 		CharacterRef.transform.localRotation = Quaternion.identity;
 		CharacterRef.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 
