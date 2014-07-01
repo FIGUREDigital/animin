@@ -43,6 +43,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject ImageTarget;
 
 	public GameObject IndicatorAboveHead;
+	public GameObject Item3DPopupMenu;
 
 	// Set from the code, keep static
 	public static GameObject ButtonTriggeredMainMenuPopupRef;

@@ -77,6 +77,7 @@ public class FlashObjectScript : MonoBehaviour
 		{
 		case StateId.Intro:
 			FlashShader = Shader.Find("Custom/Flash Select");
+			if(FlashShader == null) Debug.Log("THE FUCKING SHADER IS NULL");
 			SaveShaders(this.gameObject);
 			RecursiveSetShader(this.gameObject, FlashShader);
 			Lerp = 0;

@@ -11,3 +11,34 @@ Cmd: compileSnippet
   api=5 type=0 insize=1020 outsize=782 kw= ok=1
 Cmd: compileSnippet
   api=5 type=1 insize=1020 outsize=6 kw= ok=1
+Cmd: preprocess
+  insize=1148 outsize=423 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1022 outsize=365 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1022 outsize=98 kw= ok=1
+Cmd: preprocess
+  insize=1150 outsize=423 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1024 outsize=365 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1024 outsize=98 kw= ok=1
+Cmd: preprocess
+  insize=1148 outsize=423 ok=1
+Cmd: compileSnippet
+  error: 2 plat 0 at (41): syntax error, unexpected '/' at token "/" type name expected at token "/" declaration of "texcol" conflicts with previous declaration at (40)
+  api=0 type=0 insize=1022 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=1148 outsize=423 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1022 outsize=365 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1022 outsize=229 kw= ok=1
+Cmd: compileSnippet
+  api=9 type=0 insize=1022 outsize=762 kw= ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=1022 outsize=6 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=5539 outsize=1534 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=5539 outsize=1110 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1

@@ -15,9 +15,36 @@ public class UIClickButtonMasterScript : MonoBehaviour
 	
 	}
 
+	void OnDoubleClick()
+	{
+		HandleDoubleClick(FunctionalityId);
+	}
+
 	void OnClick()
 	{
 		HandleClick(FunctionalityId);
+	}
+
+	void HandleDoubleClick(UIFunctionalityId id)
+	{
+		GameObject mainMenuPopupRef = UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef;
+		Debug.Log("BUTTON: " + id.ToString());
+		switch(id)
+		{
+		case UIFunctionalityId.ClearAllGroundItems:
+		{
+			CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+			
+			for(int i=0;i<script.GroundItems.Count;++i)
+			{
+				Destroy(script.GroundItems[i]);
+			}
+			
+			script.GroundItems.Clear();
+			
+			break;
+		}
+		}
 	}
 
 	void HandleClick(UIFunctionalityId id)
@@ -265,19 +292,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			break;
 		}
 
-		case UIFunctionalityId.ClearAllGroundItems:
-		{
-			CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
-
-			for(int i=0;i<script.GroundItems.Count;++i)
-			{
-				Destroy(script.GroundItems[i]);
-			}
-
-			script.GroundItems.Clear();
-
-			break;
-		}
+		
 
 		case UIFunctionalityId.ClearDragedItem:
 		{

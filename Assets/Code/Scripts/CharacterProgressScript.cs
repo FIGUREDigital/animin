@@ -82,11 +82,13 @@ public class CharacterProgressScript : MonoBehaviour
 	bool IsDetectingMouseMoveForDrag;
 	bool IsDetectFlick;
 	float FeedMyselfTimer;
+	private bool HadUITouchLastFrame;
 
 
 	float TimeForNextHungryUnwellSadAnimation;
 	float LengthOfHungryUnwellSadAnimation;
 	HungrySadUnwellLoopId sadUnwellLoopState;
+	float HoldingLeftButtonDownTimer;
 
 	// Use this for initialization
 	void Start () 
@@ -255,17 +257,21 @@ public class CharacterProgressScript : MonoBehaviour
 			
 			case ActionId.None:
 			{
-				
-				if(lastActionId != ActionId.None)
-				{
-				}
-			   
-				else if(hadUItouch || DragedObjectedFromUIToWorld)
-				{
+				if(Input.GetButton("Fire1"))
+					HoldingLeftButtonDownTimer += Time.deltaTime;
+				else
+					HoldingLeftButtonDownTimer = 0;
 					
+			if(lastActionId != ActionId.None)
+			{
+			}
+		   
+			else if(HadUITouchLastFrame || hadUItouch || DragedObjectedFromUIToWorld)
+			{
+				Debug.Log("UI TOUCH");
 
-					break;
-				}
+				break;
+			}
 				
 			else if(Input.GetButtonDown("Fire1"))
 			{
@@ -286,6 +292,21 @@ public class CharacterProgressScript : MonoBehaviour
 						Debug.Log("DetectMouseMoveAndDrag");
 					}
 				}
+
+			}
+			else if(HoldingLeftButtonDownTimer >= 0.80f && Input.GetButton("Fire1") && hadRayCollision && hitInfo.collider.tag == "Items" && (hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu != MenuFunctionalityUI.None))
+			{
+
+				Vector3 localPoint = Camera.main.WorldToScreenPoint(hitInfo.collider.transform.position);
+				localPoint.z = 0;
+				
+				localPoint.x += 578 / 2;
+				
+				
+				UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
+				UIGlobalVariablesScript.Singleton.Item3DPopupMenu.transform.localPosition = localPoint;
+			
+
 			}
 			else if(IsDetectFlick && !Input.GetButton("Fire1") && (Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves)> 25) && ObjectHolding != null)
 			{
@@ -328,7 +349,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 				GroundItems.Add(ObjectHolding);
 				
-				
+				ObjectHolding.transform.localRotation = Quaternion.Euler(0, ObjectHolding.transform.rotation.eulerAngles.y, 0);
 				pickupItemSavedData.WasInHands = true;
 				animationController.IsThrowing = true;
 				IsDetectFlick = false;
@@ -369,7 +390,7 @@ public class CharacterProgressScript : MonoBehaviour
 				// GRAB FROM FLOOR
 				//else
 				{
-
+					//Debug.Log("IT SHOULD GO AND DRAG NOW");
 
 					DragableObject = detectDragHit.collider.gameObject;
 					pickupItemSavedData.WasInHands = false;
@@ -488,11 +509,11 @@ public class CharacterProgressScript : MonoBehaviour
 			{
 
 
-				if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && Hungry <= 90)
+				if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && Hungry <= 70)
 				{
 					FeedMyselfTimer += Time.deltaTime;
 
-					if(FeedMyselfTimer >= 8)
+					if(FeedMyselfTimer >= 1)
 					{
 						GameObject closestFood = GetClosestFoodToEat();
 						if(closestFood != null)
@@ -527,7 +548,7 @@ public class CharacterProgressScript : MonoBehaviour
 					PutItemInHands(DragableObject);
 					validDrop = true;
 				}
-				else if(hadRayCollision && hitInfo.collider.tag == "Floor")
+			else if(hadRayCollision && hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
 				{
 					DragableObject.transform.parent = this.transform.parent.transform;
 					validDrop = true;
@@ -549,7 +570,7 @@ public class CharacterProgressScript : MonoBehaviour
 			case ActionId.DragItemAround:
 			{
 
-				if(hadRayCollision && hitInfo.collider.tag == "Floor")
+				if(hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
 				{
 					Debug.Log("DRAGGING");
 					DragableObject.transform.position = hitInfo.point;
@@ -571,28 +592,31 @@ public class CharacterProgressScript : MonoBehaviour
 		{
 		case HungrySadUnwellLoopId.DetectAnimation:
 		{
-			if(Hungry <= 50 && animationController.IsIdle)
+			if(ObjectHolding == null)
 			{
-				animationController.IsHungry = true;
-				TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
-				LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(1.7f, 2.6f);
-				sadUnwellLoopState = HungrySadUnwellLoopId.PlayHungry;
-				
-			}
-			else if(Health <= 50 && animationController.IsIdle)
-			{
-				animationController.IsNotWell = true;
-				TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
-				LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 4.0f);
-				sadUnwellLoopState = HungrySadUnwellLoopId.PlayUnwell;
-				
-			}
-			else if(Happy <= 50 && animationController.IsIdle)
-			{
-				animationController.IsSad = true;
-				TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
-				LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.5f, 5.6f);
-				sadUnwellLoopState = HungrySadUnwellLoopId.PlaySad;
+				if(Hungry <= 50 && animationController.IsIdle)
+				{
+					animationController.IsHungry = true;
+					TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
+					LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(1.7f, 2.6f);
+					sadUnwellLoopState = HungrySadUnwellLoopId.PlayHungry;
+					
+				}
+				else if(Health <= 50 && animationController.IsIdle)
+				{
+					animationController.IsNotWell = true;
+					TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
+					LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 4.0f);
+					sadUnwellLoopState = HungrySadUnwellLoopId.PlayUnwell;
+					
+				}
+				else if(Happy <= 50 && animationController.IsIdle)
+				{
+					animationController.IsSad = true;
+					TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
+					LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.5f, 5.6f);
+					sadUnwellLoopState = HungrySadUnwellLoopId.PlaySad;
+				}
 			}
 
 			break;
@@ -602,7 +626,7 @@ public class CharacterProgressScript : MonoBehaviour
 		case HungrySadUnwellLoopId.PlaySad:
 		case HungrySadUnwellLoopId.PlayUnwell:
 		{
-			Debug.Log("in the state");
+
 			LengthOfHungryUnwellSadAnimation -= Time.deltaTime;
 			if(LengthOfHungryUnwellSadAnimation <= 0)
 			{
@@ -670,6 +694,7 @@ public class CharacterProgressScript : MonoBehaviour
 	
 		DragedObjectedFromUIToWorld = false;
 		lastActionId = CurrentAction;
+		HadUITouchLastFrame = hadUItouch;
 	}
 
 	public void ShowText(string text)

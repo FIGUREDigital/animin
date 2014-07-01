@@ -59,6 +59,7 @@
      <Compile Include="Assets\Code\Scripts\EvilCharacterPatternMovementScript.cs" />
      <Compile Include="Assets\Code\Scripts\FlashObjectScript.cs" />
      <Compile Include="Assets\Code\Scripts\JoystiqScript.cs" />
+     <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
      <Compile Include="Assets\Code\Scripts\MinigameCollectorScript.cs" />
      <Compile Include="Assets\Code\Scripts\ObjectLookAtDeviceScript.cs" />
      <Compile Include="Assets\Code\Scripts\OscillationUpDownScript.cs" />
@@ -243,7 +244,7 @@
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
-     <None Include="Assets\Shaders\SignalFlashshader.shader" />
+     <None Include="Assets\Resources\Shaders\SignalFlashshader.shader" />
      <None Include="Assets\StreamingAssets\QCAR\newscientist.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\license_3rdpartynotice.txt" />
@@ -252,7 +253,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 3.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
      <None Include="Assets\Qualcomm Augmented Reality\Shaders\RenderVideoBackground.shader" />
-     <None Include="Assets\Shaders\TransparentUnlitDoubleSided.shader" />
+     <None Include="Assets\Resources\Shaders\TransparentUnlitDoubleSided.shader" />
      <None Include="Assets\TunnelingExample\Shaders\DepthMask.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 1.shader" />

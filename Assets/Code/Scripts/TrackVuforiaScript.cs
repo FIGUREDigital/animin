@@ -1,6 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public class ValueSmoother
+{
+	public float ValueNow;
+	public float ValueNext;
+
+	public void Update()
+	{
+		if(Mathf.Abs(ValueNow - ValueNext) >= 0.15f)
+			ValueNow = Mathf.Lerp(ValueNow, ValueNext, Time.deltaTime * 6);
+	}
+}
+
 
 public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 {
@@ -15,6 +27,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 	public static bool IsTracking;
 
+
+	private ValueSmoother SmootherAxisX = new ValueSmoother();
+	private ValueSmoother SmootherAxisY = new ValueSmoother();
 
 	void Start()
 	{
@@ -121,20 +136,65 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			//float xAngle = Mathf.Lerp(15.5f, -15.5f, (Input.acceleration.x + 1) / 2);
 
 
-			Debug.Log("GYRO: " + Input.gyro.attitude.eulerAngles.ToString());
+			//Debug.Log("GYRO: " + Input.gyro.attitude.eulerAngles.ToString());
 
 			//NonARSceneRef.transform.localRotation = Quaternion.Euler(gyroAngleY, 0, 0);
 
-			Debug.Log("Acceleration: " + Input.acceleration.ToString());
-			Debug.Log("Gravity: " + Input.gyro.gravity.ToString());
+			//Debug.Log("Acceleration: " + Input.acceleration.ToString() + "_" + ((Input.acceleration.x + 1) / 2).ToString());
+			//Debug.Log("Gravity: " + Input.gyro.gravity.ToString());
 
 			//0.0f to -0.5f to -1.0f
+			//Debug.Log((Mathf.Lerp(-50, 50, (Input.acceleration.x + 1) / 2)).ToString());
+			//Camera.main.transform.rotation = Quaternion.Euler(14.73474f + (Input.acceleration.y) * 10, -(Input.acceleration.x) * 10, 0);
+			//Camera.main.transform.localPosition = new Vector3(Mathf.Lerp(200, -200, (Input.acceleration.x + 1) / 2), Camera.main.transform.localPosition.y, Camera.main.transform.localPosition.z);
 
-			Camera.main.transform.rotation = Quaternion.Euler(14.73474f + (Input.acceleration.y) * 10, -(Input.acceleration.x) * 10, 0);
 
+			//Debug.Log(	GetQuadraticCoordinates(((Camera.main.transform.localPosition.x + 200) / 1)).ToString());
+
+		
+			float stableAccelerationX = (float)System.Math.Round(Input.acceleration.x, 2);
+			float stableAccelerationY = (float)System.Math.Round(Input.acceleration.y, 2);
+
+			float angle = Mathf.Lerp(180, 360, (stableAccelerationX + 1) / 2 /*(Mathf.Sin(Time.time) + 1) / 2*/);
+			SmootherAxisX.ValueNext = (float)System.Math.Round(angle);
+
+			Vector3 newPosition = new Vector3(
+				Mathf.Cos(SmootherAxisX.ValueNow* Mathf.Deg2Rad ) * 220,
+				0,
+				(Mathf.Sin(SmootherAxisX.ValueNow* Mathf.Deg2Rad ) * 220) * 0.2f);
+
+
+		
+
+			float value = stableAccelerationY;
+			if(value > 0) value = 0;
+			if(value < -1) value = -1;
+			value *= -1;
+			//value = 1 - value;
+
+			float angle2 = Mathf.Lerp(360, 180, value/*(Mathf.Sin(Time.time) + 1) / 2*/);
+			SmootherAxisY.ValueNext = (float)System.Math.Round(angle2);
+		
+			Vector3 newPosition2 = new Vector3(
+				0,
+				Mathf.Cos(SmootherAxisY.ValueNow* Mathf.Deg2Rad ) * 90,
+				(Mathf.Sin(SmootherAxisY.ValueNow* Mathf.Deg2Rad ) * 90) * 0.2f);
+
+
+
+			Camera.main.transform.localPosition = new Vector3(0, 233.1f, -198.3f) + newPosition2 + newPosition;
+			Camera.main.transform.LookAt(NonARSceneRef.transform);
 		}
 
+
+		SmootherAxisX.Update();
+		SmootherAxisY.Update();
+
 	}
+
+
+
+	
 
 	
 	private void OnTrackingLost()
@@ -147,7 +207,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		NonARSceneRef.SetActive (true);
 		MainSceneRef.SetActive(false);
 
-		Camera.main.transform.position = new Vector3(0, 152.73f, -198.3f);
+		Camera.main.transform.position = new Vector3(0, 123.1f, -198.3f);
 		Camera.main.transform.rotation = Quaternion.Euler(14.73474f, 0.0f, 0.0f);
 
 

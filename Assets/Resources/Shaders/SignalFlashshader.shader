@@ -35,9 +35,9 @@
 		            return o;
 		        }
 
-		        half4 frag (v2f i) : COLOR
+		        float4 frag (v2f i) : COLOR
 		        {
-		            half4 texcol = tex2D (_MainTex, i.uv);
+		            float4 texcol = tex2D (_MainTex, i.uv);
 		            texcol.rgb = lerp(texcol.rgb, _Color.rgb, _BlendFactor);
 		            return texcol;
 		        }
