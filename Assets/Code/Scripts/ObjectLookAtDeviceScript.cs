@@ -8,6 +8,12 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 	float angle =0;
 	float speed = (2 * Mathf.PI) / 5; //2*PI in degress is 360, so you get 5 seconds to complete a circle
 	float radius=5;
+	public Transform ObjectTrasnform;
+
+	public Vector3 Angles;
+	public float Weight;
+	private float IdleTimer;
+	private float TimeStartingAwayFromCamera;
 
 
 	void Start () 
@@ -39,14 +45,77 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 
 		//DoBillboardOrientation ();
 		//DoWholeOrientation ();
-		DoLookRotation ();
+		//DoLookRotation ();
+
+		//GetComponent<Animator>().SetLayerWeight(2, 1);
+
+		float dotProduct = Vector3.Dot(Camera.main.transform.forward, this.transform.forward);
+		if(GetComponent<AnimationControllerScript>().IsIdle && dotProduct > 0)
+		{
+			TimeStartingAwayFromCamera += Time.deltaTime;
+			//transform.parent.LookAt(this.transform.position);
+			//transform.parent.GetComponent<CharacterControllerScript>().moveDirection = transform.parent.position + transform.parent.forward * 5;
+//			Debug.Log("turn around man");
+
+			if(TimeStartingAwayFromCamera >= 3)
+			{
+				//transform.parent.LookAt(Camera.main.transform.position);
+				Vector3 newCameraPoint = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
+				Vector3 playerPoint = new Vector3(transform.parent.position.x, 0, transform.parent.position.z);
+				//transform.parent.GetComponent<CharacterControllerScript>().moveDirection = Vector3.Normalize(Camera.main.transform.position - newCameraPoint);
+				//transform.parent.GetComponent<CharacterControllerScript>().MovementDirection = Vector3.Normalize(transform.parent.position - newCameraPoint);
+				transform.parent.GetComponent<CharacterProgressScript>().MoveTo(transform.parent.position + Vector3.Normalize(newCameraPoint - transform.parent.position ) * 20, false);
+				//Debug.Log("MOVING FOR ROTATION");
+			}
+		}
+		else
+		{
+			TimeStartingAwayFromCamera = 0;
+		}
+
+	}
+
+	void LateUpdate()
+	{
+		//ObjectTrasnform.rotation *= Quaternion.Euler(Angles);
+
+		var relativePos = Camera.main.transform.position - this.transform.position;
+		var rotation = Quaternion.LookRotation (relativePos);
+//		Debug.Log(rotation.eulerAngles.ToString());
+
+		float dotProduct = Vector3.Dot(Camera.main.transform.forward, this.transform.forward);
+
+		//Debug.Log(dotProduct.ToString());
+
+		if(GetComponent<AnimationControllerScript>().IsIdle) IdleTimer += Time.deltaTime;
+		else IdleTimer = 0;
+
+		if(dotProduct < -0.5f && IdleTimer >= 0.5f)
+		{
+			Weight = Mathf.Lerp(Weight, 0.8f, Time.deltaTime * 3);
+		}
+		else
+		{
+			Weight = Mathf.Lerp(Weight, 0.0f, Time.deltaTime * 7);
+		}
+
+		ObjectTrasnform.rotation = Quaternion.Slerp(ObjectTrasnform.rotation, rotation * Quaternion.Euler(Angles), Weight);
+	}
+
+	void OnAnimatorIK()
+	{
+		//DoLookRotation();
+		//DoLookRotation();
+		//Debug.Log("IKKKK");
+
+
 	}
 
 	private void DoLookRotation()
 	{
-		var relativePos = Camera.main.transform.position - transform.position;
+		var relativePos = Camera.main.transform.position - ObjectTrasnform.position;
 				var rotation = Quaternion.LookRotation (relativePos);
-				transform.rotation = rotation;
+		ObjectTrasnform.rotation = rotation;// * Quaternion.Euler(-90, 90, -90);
 	}
 
 	private void DoWholeOrientation()

@@ -120,10 +120,11 @@ public class CharacterProgressScript : MonoBehaviour
 		if(pauseStatus)
 		{
 			Stop();
-			CurrentAction = ActionId.EnterSleep;
+			//CurrentAction = ActionId.EnterSleep;
 		}
 		else
 		{
+			Stop();
 		}
 	}
 
@@ -299,8 +300,15 @@ public class CharacterProgressScript : MonoBehaviour
 
 				Vector3 localPoint = Camera.main.WorldToScreenPoint(hitInfo.collider.transform.position);
 				localPoint.z = 0;
-				
-				localPoint.x += 578 / 2;
+				/*-
+				localPoint.y = (localPoint.y / Screen.height) * 1536;
+
+				float multiplier = (float) 1536.0f / (float) Screen.height;
+				localPoint = new Vector3 (localPoint.x * multiplier, localPoint.y * multiplier, 0);
+				*/
+
+
+				//localPoint.x += 578 / 2;
 				
 				
 				UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
@@ -315,22 +323,30 @@ public class CharacterProgressScript : MonoBehaviour
 
 				Ray raySecond = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-				RaycastHit[] allHits = Physics.RaycastAll(raySecond);
+				Vector3 throwdirection = Vector3.Normalize(Input.mousePosition - MousePositionAtDragIfMouseMoves);
+				throwdirection.z = throwdirection.y;
+				throwdirection.y = 0;
+
+
+				/*RaycastHit[] allHits = Physics.RaycastAll(raySecond);
 				for(int i=0;i<allHits.Length;++i)
 				{
 					if(allHits[i].collider.name.StartsWith("Invisible Ground"))
 					{
-						Debug.Log("looking at new point");
-						this.gameObject.transform.LookAt(allHits[i].point);
-						transform.LookAt(this.transform.position);
-						this.GetComponent<CharacterControllerScript>().moveDirection = Vector3.Normalize(allHits[i].point - this.transform.position);
-						
+						Debug.Log("looking at new point");*/
+				//this.gameObject.transform.LookAt(this.transform.position + throwdirection * 5);
+				//		transform.LookAt(this.transform.position);
+				//this.GetComponent<CharacterControllerScript>().moveDirection = new Vector3(throwdirection.x, this.transform.position.y, throwdirection.z);
+				
 						//	.MovementDirection = Vector3.Normalize(allHits[i].point - this.transform.position);
 						//this.GetComponent<CharacterControllerScript>().UpdateSmoothedMovementDirection();
 						//this.GetComponent<CharacterControllerScript>().MovementDirection = Vector3.zero;
-						break;
-					}			
-				}
+					//	break;
+					//}			
+				//}
+
+
+				this.gameObject.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(this.transform.position + throwdirection * 50);
 
 
 				//pickupItemSavedData.Position = DragableObject.transform.position;
@@ -339,9 +355,11 @@ public class CharacterProgressScript : MonoBehaviour
 				ObjectHolding.transform.parent = this.transform.parent;
 				
 				ThrowAnimationScript throwScript = ObjectHolding.AddComponent<ThrowAnimationScript>();
-				throwScript.Begin(this.transform.forward);
+
+			
+				throwScript.Begin(throwdirection, Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) * 0.4f);
 				
-				
+
 				//ObjectHolding.transform.position = this.transform.position;
 				
 
@@ -472,39 +490,39 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 
 
-				if(RequestedToMoveToCounter > 0)
+			if(RequestedToMoveToCounter > 0)
+			{
+				if((Time.time - RequestedTime) >= 0.17f)
 				{
-					if((Time.time - RequestedTime) >= 0.17f)
+				Stop();
+					
+					Vector3 point = moveHitInfo.point;
+					if(moveHitInfo.collider.tag == "Items")
 					{
-					Stop();
-						
-						Vector3 point = moveHitInfo.point;
-						if(moveHitInfo.collider.tag == "Items")
-						{
-						moveHitInfo.collider.gameObject.AddComponent<FlashObjectScript>();
+					moveHitInfo.collider.gameObject.AddComponent<FlashObjectScript>();
 
-							point = moveHitInfo.transform.position;
-							
-							if(ObjectHolding == null)
-							{
-								IsGoingToPickUpObject = moveHitInfo.collider.gameObject;
-								Debug.Log("going to pickup");
-							}
-							else
-							{
-								Debug.Log("will not pick up, i already have item");
-							}
+						point = moveHitInfo.transform.position;
+						
+						if(ObjectHolding == null)
+						{
+							IsGoingToPickUpObject = moveHitInfo.collider.gameObject;
+							Debug.Log("going to pickup");
 						}
-						
-						if(RequestedToMoveToCounter > 1)
-							MoveTo(point, true);
 						else
-							MoveTo(point, false);
-						
-						
-						RequestedToMoveToCounter = 0;
+						{
+							Debug.Log("will not pick up, i already have item");
+						}
 					}
+					
+					if(RequestedToMoveToCounter > 1)
+						MoveTo(point, true);
+					else
+						MoveTo(point, false);
+					
+					
+					RequestedToMoveToCounter = 0;
 				}
+			}
 			else
 			{
 
@@ -570,7 +588,7 @@ public class CharacterProgressScript : MonoBehaviour
 			case ActionId.DragItemAround:
 			{
 
-				if(hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
+				if(hadRayCollision && hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
 				{
 					Debug.Log("DRAGGING");
 					DragableObject.transform.position = hitInfo.point;
@@ -594,11 +612,15 @@ public class CharacterProgressScript : MonoBehaviour
 		{
 			if(ObjectHolding == null)
 			{
+
+
+
+
 				if(Hungry <= 50 && animationController.IsIdle)
 				{
 					animationController.IsHungry = true;
 					TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
-					LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(1.7f, 2.6f);
+					LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 					sadUnwellLoopState = HungrySadUnwellLoopId.PlayHungry;
 					
 				}
@@ -606,7 +628,7 @@ public class CharacterProgressScript : MonoBehaviour
 				{
 					animationController.IsNotWell = true;
 					TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
-					LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 4.0f);
+					LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 					sadUnwellLoopState = HungrySadUnwellLoopId.PlayUnwell;
 					
 				}
@@ -617,6 +639,7 @@ public class CharacterProgressScript : MonoBehaviour
 					LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.5f, 5.6f);
 					sadUnwellLoopState = HungrySadUnwellLoopId.PlaySad;
 				}
+
 			}
 
 			break;
@@ -660,14 +683,25 @@ public class CharacterProgressScript : MonoBehaviour
 		
 		if(IsMovingTowardsLocation)
 		{
-			float d1 = Vector3.Distance(TravelLocation, this.transform.position);
+			Vector3 direction = Vector3.Normalize(DestinationLocation - this.transform.position);
+			this.gameObject.GetComponent<CharacterControllerScript>().MovementDirection = direction;
+
+
+			this.gameObject.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(DestinationLocation);
+
+			if(Vector3.Distance(DestinationLocation , transform.position) <= 5)
+			{
+				Stop();
+			}
+
+			/*float d1 = Vector3.Distance(TravelLocation, this.transform.position);
 //			Debug.Log(d1.ToString() + "   _   " + TravelDistance.ToString());
 			//Debug.Log(Vector3.Distance(TravelLocation, this.transform.position).ToString());
 
 			if(d1 >= TravelDistance)
 			{
 				Stop();
-			}
+			}*/
 		}
 		else
 		{
@@ -826,6 +860,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public void MoveTo(Vector3 location, bool run)
 	{
+		Debug.Log("Moving to point: " + location.ToString());
 		IsMovingTowardsLocation = true;
 		TravelLocation = this.transform.position;
 		TravelDistance = Vector3.Distance(location, this.transform.position);
@@ -839,6 +874,7 @@ public class CharacterProgressScript : MonoBehaviour
 		if(run) GetComponent<CharacterControllerScript>().walkSpeed = 120;
 
 		Vector3 direction = Vector3.Normalize(location - this.transform.position);
+
 //		Debug.Log(direction.ToString());
 		this.gameObject.GetComponent<CharacterControllerScript>().MovementDirection = direction;
 	}

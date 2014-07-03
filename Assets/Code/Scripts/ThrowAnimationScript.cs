@@ -15,18 +15,20 @@ public class ThrowAnimationScript : MonoBehaviour
 	Vector3 Direction;
 
 	float VerticalSpeed;
+	private float ThrowSpeed = 100;
 
-	public void Begin(Vector3 direction)
+	public void Begin(Vector3 direction, float speed)
 	{
 		Direction = direction;
 		State = StateEnum.Begin;
+		ThrowSpeed = speed;
 
 		//Rigidbody body = this.gameObject.AddComponent<Rigidbody>();
 		//body.AddForce(direction * 100);
 
 		//body.velocity = new Vector3(1 * direction.x, -1000, 1 * direction.z);
 		//Physics.gravity = new Vector3(0, -10.0F, 0);
-		VerticalSpeed = -220;
+		VerticalSpeed = -260;
 
 	}
 
@@ -40,11 +42,16 @@ public class ThrowAnimationScript : MonoBehaviour
 		{
 			case StateEnum.Begin:
 			{
-				this.transform.position += Direction * Time.deltaTime * 100;
+			this.transform.position += Direction * Time.deltaTime * ThrowSpeed;
 				this.transform.position -= new Vector3(0, VerticalSpeed * Time.deltaTime, 0);
-				if(this.transform.localPosition.y <=0)
+				
+			if(this.transform.position.y <= UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.y)
 			{
 				//Destroy(this.rigidbody);
+				this.transform.position = new Vector3(
+					this.transform.position.x,
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.y,
+					this.transform.position.z);
 				Destroy(this);
 				this.gameObject.layer = LayerMask.NameToLayer("Default");
 			}

@@ -79,7 +79,7 @@ public class CharacterControllerScript : MonoBehaviour
 	
 	// The current move direction in x-z
 	
-	public Vector3 moveDirection = Vector3.zero;
+	//public Vector3 moveDirection = Vector3.zero;
 	
 	// The current vertical speed
 	
@@ -160,15 +160,11 @@ public class CharacterControllerScript : MonoBehaviour
 	
 	void  Awake (){
 		
-		moveDirection = transform.TransformDirection(Vector3.forward);
+		//moveDirection = transform.TransformDirection(Vector3.forward);
 		
 	
 	}
 
-	public void SetLookAt(Vector3 direction)
-	{
-
-	}
 
 	public void  UpdateSmoothedMovementDirection ()
 	{
@@ -190,7 +186,7 @@ public class CharacterControllerScript : MonoBehaviour
 		// Target direction relative to the camera
 		
 		Vector3 targetDirection= MovementDirection;//h * right + v * forward;
-		
+
 		
 		
 		// Grounded controls
@@ -225,23 +221,23 @@ public class CharacterControllerScript : MonoBehaviour
 					
 				{
 					
-					moveDirection = targetDirection.normalized;
+					//moveDirection = targetDirection.normalized;
 					
 				}
 				
 				// Otherwise smoothly turn towards it
 				
-				/*else
+				//else
 					
 				{
 					
-					moveDirection = Vector3.RotateTowards(moveDirection, targetDirection, rotateSpeed * Mathf.Deg2Rad * Time.deltaTime, 1000);
+					//moveDirection = Vector3.RotateTowards(moveDirection, targetDirection, rotateSpeed * Mathf.Deg2Rad * Time.deltaTime * 0.1f, 1000);
 					
 					
 					
-					moveDirection = moveDirection.normalized;
+					//moveDirection = moveDirection.normalized;
 					
-				}*/
+				}
 				
 			}
 			
@@ -458,7 +454,7 @@ public class CharacterControllerScript : MonoBehaviour
 
 		// Calculate actual motion
 		
-		Vector3 movement= moveDirection * moveSpeed + new Vector3 (0, verticalSpeed, 0) + inAirVelocity;
+		Vector3 movement= MovementDirection * moveSpeed + new Vector3 (0, verticalSpeed, 0) + inAirVelocity;
 		
 		movement *= Time.deltaTime;
 
@@ -482,10 +478,10 @@ public class CharacterControllerScript : MonoBehaviour
 		
 		// Set rotation to the move direction
 		
-		if (IsGrounded())
+		/*if (IsGrounded())
 		{
 
-			transform.rotation = Quaternion.LookRotation(moveDirection);
+			//transform.rotation = Quaternion.LookRotation(moveDirection);
 		}   
 		
 		else
@@ -504,7 +500,7 @@ public class CharacterControllerScript : MonoBehaviour
 				
 			}
 			
-		}   
+		}   */
 		
 		
 		
@@ -599,6 +595,12 @@ public class CharacterControllerScript : MonoBehaviour
 		return jumping;
 		
 	}
+
+	public void RotateToLookAtPoint(Vector3 worldPoint)
+	{
+
+		transform.LookAt(worldPoint, Vector3.up);
+	}
 	
 	
 	
@@ -610,11 +612,11 @@ public class CharacterControllerScript : MonoBehaviour
 	
 	
 	
-	Vector3  GetDirection (){
-		
-		return moveDirection;
-		
-	}
+//	Vector3  GetDirection (){
+//		
+//		return moveDirection;
+//		
+//	}
 	
 	
 	

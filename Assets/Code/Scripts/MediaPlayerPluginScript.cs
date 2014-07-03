@@ -7,6 +7,9 @@ public class MediaPlayerPluginScript : MonoBehaviour
 	void Start () 
 	{
 		// not necessary now, but we'll use it later
+		if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			_initMediaPlayer();
+		}
 	}
 
 	void Update()
@@ -30,5 +33,7 @@ public class MediaPlayerPluginScript : MonoBehaviour
 			_setVideo(filename);
 		}
 	}
-	
+
+	[DllImport("__Internal")]
+	private static extern void _initMediaPlayer();
 }
