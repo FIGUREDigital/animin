@@ -12,6 +12,7 @@ public enum MenuFunctionalityUI
 {
 	None = 0,
 	Mp3Player,
+	Clock,
 }
 
 public class UIPopupItemScript : MonoBehaviour 

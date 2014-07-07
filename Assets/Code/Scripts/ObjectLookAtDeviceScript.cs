@@ -50,14 +50,16 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 		//GetComponent<Animator>().SetLayerWeight(2, 1);
 
 		float dotProduct = Vector3.Dot(Camera.main.transform.forward, this.transform.forward);
-		if(GetComponent<AnimationControllerScript>().IsIdle && dotProduct > 0)
+		if(
+			(GetComponent<AnimationControllerScript>().IsIdle || GetComponent<AnimationControllerScript>().IsIdleWave || GetComponent<AnimationControllerScript>().IsIdleLook1 || GetComponent<AnimationControllerScript>().IsIdleLook2 || GetComponent<AnimationControllerScript>().IsIdleLook3 || GetComponent<AnimationControllerScript>().IsIdleLook4 )
+		   && dotProduct > 0)
 		{
 			TimeStartingAwayFromCamera += Time.deltaTime;
 			//transform.parent.LookAt(this.transform.position);
 			//transform.parent.GetComponent<CharacterControllerScript>().moveDirection = transform.parent.position + transform.parent.forward * 5;
 //			Debug.Log("turn around man");
 
-			if(TimeStartingAwayFromCamera >= 3)
+			if(TimeStartingAwayFromCamera >= 1)
 			{
 				//transform.parent.LookAt(Camera.main.transform.position);
 				Vector3 newCameraPoint = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);

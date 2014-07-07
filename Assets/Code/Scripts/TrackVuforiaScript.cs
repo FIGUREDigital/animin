@@ -90,8 +90,8 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		//CharacterRef.transform.localP.osition = new Vector3(0, 0.5f, 0);
 		SavedARPosition.y = 0;
 		CharacterRef.transform.localPosition = SavedARPosition + new Vector3(0, 0.5f, 0);
-		CharacterRef.transform.localRotation = Quaternion.identity;
-		CharacterRef.GetComponent<CharacterProgressScript>().Stop();
+		CharacterRef.transform.localRotation = Quaternion.Euler(0, 180, 0);
+		CharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
 
 		UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(true);
 		UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(false);
@@ -214,10 +214,10 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		//Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		CharacterRef.transform.parent = NonARSceneRef.transform;
 		CharacterRef.transform.localPosition = new Vector3(0, 0.0006500053f, 0.0f);
-		CharacterRef.transform.localRotation = Quaternion.identity;
+		CharacterRef.transform.localRotation = Quaternion.Euler(0, 180, 0);
 		CharacterRef.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 
-		CharacterRef.GetComponent<CharacterProgressScript>().Stop();
+		CharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
 
 		UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(false);
 		UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive( true);

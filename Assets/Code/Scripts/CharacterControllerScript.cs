@@ -525,6 +525,8 @@ public class CharacterControllerScript : MonoBehaviour
 			}
 			
 		}
+
+		UpdateRotationLookAt();
 	
 		PressedJumb = false;
 	}
@@ -596,10 +598,20 @@ public class CharacterControllerScript : MonoBehaviour
 		
 	}
 
+	private void UpdateRotationLookAt()
+	{
+		transform.rotation = Quaternion.Slerp(transform.rotation, RotateDirectionLookAt, Time.deltaTime * 6);
+	}
+
+	private Quaternion RotateDirectionLookAt = Quaternion.Euler(0, 180, 0);
+
 	public void RotateToLookAtPoint(Vector3 worldPoint)
 	{
+		//float angle = Vector3.Angle(transform.forward, Vector3.Normalize(worldPoint - transform.position));
+//		Debug.Log("ANGLE: " + angle.ToString());
 
-		transform.LookAt(worldPoint, Vector3.up);
+		RotateDirectionLookAt = Quaternion.LookRotation(Vector3.Normalize(worldPoint - transform.position));
+	//	transform.Rotate(new Vector3(0, angle, 0));
 	}
 	
 	
