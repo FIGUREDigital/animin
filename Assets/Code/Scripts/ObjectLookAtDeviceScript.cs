@@ -14,6 +14,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 	public float Weight;
 	private float IdleTimer;
 	private float TimeStartingAwayFromCamera;
+	public float IsActiveTimer;
 
 
 	void Start () 
@@ -50,9 +51,10 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 		//GetComponent<Animator>().SetLayerWeight(2, 1);
 
 		float dotProduct = Vector3.Dot(Camera.main.transform.forward, this.transform.forward);
+//		Debug.Log(dotProduct.ToString());
 		if(
 			(GetComponent<AnimationControllerScript>().IsIdle || GetComponent<AnimationControllerScript>().IsIdleWave || GetComponent<AnimationControllerScript>().IsIdleLook1 || GetComponent<AnimationControllerScript>().IsIdleLook2 || GetComponent<AnimationControllerScript>().IsIdleLook3 || GetComponent<AnimationControllerScript>().IsIdleLook4 )
-		   && dotProduct > 0)
+		   && dotProduct >= -0.4f)
 		{
 			TimeStartingAwayFromCamera += Time.deltaTime;
 			//transform.parent.LookAt(this.transform.position);
@@ -66,7 +68,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 				Vector3 playerPoint = new Vector3(transform.parent.position.x, 0, transform.parent.position.z);
 				//transform.parent.GetComponent<CharacterControllerScript>().moveDirection = Vector3.Normalize(Camera.main.transform.position - newCameraPoint);
 				//transform.parent.GetComponent<CharacterControllerScript>().MovementDirection = Vector3.Normalize(transform.parent.position - newCameraPoint);
-				transform.parent.GetComponent<CharacterProgressScript>().MoveTo(transform.parent.position + Vector3.Normalize(newCameraPoint - transform.parent.position ) * 20, false);
+				transform.parent.GetComponent<CharacterProgressScript>().MoveTo(transform.parent.position + Vector3.Normalize(newCameraPoint - playerPoint ) * 20, false);
 				//Debug.Log("MOVING FOR ROTATION");
 			}
 		}
@@ -89,10 +91,12 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 
 		//Debug.Log(dotProduct.ToString());
 
+		IsActiveTimer -= Time.deltaTime;
+
 		if(GetComponent<AnimationControllerScript>().IsIdle) IdleTimer += Time.deltaTime;
 		else IdleTimer = 0;
 
-		if(dotProduct < -0.5f && IdleTimer >= 0.5f)
+		if(dotProduct < -0.2f && IdleTimer >= 0.2f && IsActiveTimer > 0)
 		{
 			Weight = Mathf.Lerp(Weight, 0.8f, Time.deltaTime * 3);
 		}

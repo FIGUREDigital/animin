@@ -55,6 +55,14 @@ public class DragDropMainBarItem : UIDragDropItem
 
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().DragedObjectedFromUIToWorld = true;
 
+
+					if(popScript.Type == PopupItemType.Food)
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.DropFood);
+					else if(popScript.Type == PopupItemType.Item)
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.DropItem);
+					else if(popScript.Type == PopupItemType.Medicine)
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.DropMeds);
+
 					//child.AddComponent<UIPopupItemScript>();
 					//child.GetComponent<UIPopupItemScript>().Points = this.gameObject.GetComponent<UIPopupItemScript>().Points;
 					//child.GetComponent<UIPopupItemScript>().Type = this.gameObject.GetComponent<UIPopupItemScript>().Type;

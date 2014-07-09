@@ -61,44 +61,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		}
 	}
 	
-	private void OnTrackingFound()
-	{
-		//Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-		//MainSceneRef.transform.parent = ARSceneRef.transform;
-	
-		//MainSceneRef.transform.localPosition = Vector3.zero;
-		//MainSceneRef.transform.localRotation = Quaternion.identity;
-		//MainSceneRef.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-		//MainSceneRef.transform.position = Vector3.zero;
-		//MainSceneRef.transform.rotation = Quaternion.identity;
-
-
-
-		/*for (int i=0; i<this.transform.childCount; ++i) {
-			this.transform.GetChild(i).gameObject.SetActive(true);
-		}*/
-
-		CharacterRef.transform.parent = null;
-
-		NonARSceneRef.SetActive (false);
-		MainSceneRef.SetActive(true);
-
-		CharacterRef.transform.parent = MainSceneRef.transform;
-
-		//CharacterRef.transform.localP.osition = new Vector3(0, 0.5f, 0);
-		SavedARPosition.y = 0;
-		CharacterRef.transform.localPosition = SavedARPosition + new Vector3(0, 0.5f, 0);
-		CharacterRef.transform.localRotation = Quaternion.Euler(0, 180, 0);
-		CharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
-
-		UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(true);
-		UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(false);
-	
-		//Debug.Log ("scene @ track: " + MainSceneRef.transform.position.ToString ());
-		IsTracking = true;
-	}
 
 	public void FlipFrontBackCamera()
 	{
@@ -194,34 +157,70 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 
 
-	
+	public void OnEnterARScene()
+	{
+		//Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		
+		//MainSceneRef.transform.parent = ARSceneRef.transform;
+		
+		//MainSceneRef.transform.localPosition = Vector3.zero;
+		//MainSceneRef.transform.localRotation = Quaternion.identity;
+		//MainSceneRef.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+		
+		//MainSceneRef.transform.position = Vector3.zero;
+		//MainSceneRef.transform.rotation = Quaternion.identity;
+		
+		
+		
+		/*for (int i=0; i<this.transform.childCount; ++i) {
+			this.transform.GetChild(i).gameObject.SetActive(true);
+		}*/
+		
+		CharacterRef.transform.parent = null;
+		
+		NonARSceneRef.SetActive (false);
+		MainSceneRef.SetActive(true);
+		
+		CharacterRef.transform.parent = MainSceneRef.transform;
+		
+		//CharacterRef.transform.localP.osition = new Vector3(0, 0.5f, 0);
+		SavedARPosition.y = 0;
+		CharacterRef.transform.localPosition = SavedARPosition + new Vector3(0, 0.5f, 0);
+		CharacterRef.transform.localRotation = Quaternion.Euler(0, 180, 0);
+		CharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
+		
+		UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(true);
+		UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(false);
+		
+		//Debug.Log ("scene @ track: " + MainSceneRef.transform.position.ToString ());
+		IsTracking = true;
+	}
 
-	
-	private void OnTrackingLost()
+	public void OnExitAR()
 	{
 		if(IsTracking)
 			SavedARPosition = CharacterRef.transform.localPosition;
-
+		
 		CharacterRef.transform.parent = null;
-
+		
 		NonARSceneRef.SetActive (true);
 		MainSceneRef.SetActive(false);
-
+		
 		Camera.main.transform.position = new Vector3(0, 123.1f, -198.3f);
 		Camera.main.transform.rotation = Quaternion.Euler(14.73474f, 0.0f, 0.0f);
-
-
+		
+		
 		//Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		CharacterRef.transform.parent = NonARSceneRef.transform;
 		CharacterRef.transform.localPosition = new Vector3(0, 0.0006500053f, 0.0f);
 		CharacterRef.transform.localRotation = Quaternion.Euler(0, 180, 0);
 		CharacterRef.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-
+		
 		CharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
-
+		
 		UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(false);
 		UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive( true);
-
+		
 		/*MainSceneRef.transform.parent = NonARSceneRef.transform;
 
 		MainSceneRef.transform.localPosition = Vector3.zero;
@@ -229,16 +228,31 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		MainSceneRef.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);*/
 		//MainSceneRef.transform.position = Vector3.zero;
 		//MainSceneRef.transform.rotation = Quaternion.identity;
-
-
-
+		
+		
+		
 		/*for (int i=0; i<this.transform.childCount; ++i) {
 		
 			this.transform.GetChild(i).gameObject.SetActive(false);
 		}*/
-
-
+		
+		
 		//Debug.Log ("scene @ notrack: " + MainSceneRef.transform.position.ToString ());
 		IsTracking	= false;
+	}
+
+
+	private void OnTrackingFound()
+	{
+		OnEnterARScene();
+		
+		//CharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToNonAR;
+	}
+
+	
+	private void OnTrackingLost()
+	{
+		OnExitAR();
+		//CharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToNonAR;
 	}
 }

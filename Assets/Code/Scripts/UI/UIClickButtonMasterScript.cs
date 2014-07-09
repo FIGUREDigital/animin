@@ -143,6 +143,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(true);
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = true;
 			
 			break;
 		}
@@ -206,6 +207,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
+
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = false;
 			
 			switch(UIGlobalVariablesScript.SelectedMinigameToPlay)
 			{
@@ -213,6 +216,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				{
 					UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(true);
 					UIGlobalVariablesScript.Singleton.SpaceshipMinigameSceneRef.SetActive(true);
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().enabled = true;
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().EnableJoystick();
 					break;
 				}
 

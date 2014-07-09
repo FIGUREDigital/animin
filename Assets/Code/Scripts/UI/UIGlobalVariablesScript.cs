@@ -44,6 +44,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 
 	public GameObject IndicatorAboveHead;
 	public GameObject Item3DPopupMenu;
+	public SoundEngineScript SoundEngine;
 
 	// Set from the code, keep static
 	public static GameObject ButtonTriggeredMainMenuPopupRef;

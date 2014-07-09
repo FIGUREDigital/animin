@@ -8,6 +8,10 @@ public enum AnimationHappyId
 	Happy2,
 	Happy3,
 	Happy4,
+	Sad1,
+	Sad2,
+	Sad3,
+	Sad4,
 }
 
 public class AnimationControllerScript : MonoBehaviour 
@@ -35,6 +39,25 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
+	public int IsInPortalStage 
+	{
+		get
+		{
+
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("jump_in_portal")) return 1;
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("jump_out_portal")) return 2;
+
+			return 0;
+		}
+		
+		set
+		{
+			animator.SetInteger("EnterPotal", (int)value );
+		}
+	}
+
+
+
 
 
 
@@ -50,6 +73,24 @@ public class AnimationControllerScript : MonoBehaviour
 			animator.SetBool("IsCelebrate", value );
 		}
 	}
+
+	
+	public bool IsLookingCamera
+	{
+		get
+		{
+			return GetComponent<ObjectLookAtDeviceScript>().IsActiveTimer > 0;
+		}
+		
+		set
+		{
+			if(value)
+				GetComponent<ObjectLookAtDeviceScript>().IsActiveTimer = UnityEngine.Random.Range(4.0f, 6.0f);
+			else
+				GetComponent<ObjectLookAtDeviceScript>().IsActiveTimer = 0;
+		}
+	}
+
 
 
 	public bool IsAngry
@@ -341,7 +382,8 @@ public class AnimationControllerScript : MonoBehaviour
 		        || IsIdleLook2 
 		        || IsIdleLook3 
 		        || IsIdleLook4
-		        || IsIdleWave)
+		        || IsIdleWave
+		   || IsLookingCamera)
 		{
 			return true;
 		}
@@ -411,17 +453,35 @@ public class AnimationControllerScript : MonoBehaviour
 
 		}
 
-		if(IsIdle)
+		if(IsIdle && !IsLookingCamera)
 		{
 			TimeInIdleState += Time.deltaTime;
-			if(TimeInIdleState >= 6.0f)
+			if(TimeInIdleState >= 4.0f)
 			{
-				int random = UnityEngine.Random.Range(0, 4);
+				int random = UnityEngine.Random.Range(0, 15);
 				if(random == 0) IsIdleLook1 = true;
 				else if(random == 1) IsIdleLook2 = true;
 				else if(random == 2) IsIdleLook3 = true;
 				else if(random == 3) IsIdleWave = true;
 				else if(random == 4) IsIdleLook4 = true;
+				else if(random >= 5 && random <= 10) IsLookingCamera = true;
+				else
+				{
+					CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+
+					if(script.Happy >= (12.5f * 7)) IsHappy = AnimationHappyId.Happy1;
+					else if(script.Happy >= (12.5f * 6)) IsHappy = AnimationHappyId.Happy2;
+					else if(script.Happy >= (12.5f * 5)) IsHappy = AnimationHappyId.Happy3;
+					else if(script.Happy >= (12.5f * 4)) IsHappy = AnimationHappyId.Happy4;
+					else if(script.Happy >= (12.5f * 3)) IsHappy = AnimationHappyId.Sad1;
+					else if(script.Happy >= (12.5f * 2)) IsHappy = AnimationHappyId.Sad2;
+					else if(script.Happy >= (12.5f * 1)) IsHappy = AnimationHappyId.Sad3;
+					else IsHappy = AnimationHappyId.Sad4;
+
+
+
+				}
 				TimeInIdleState = 0;
 			}
 		}

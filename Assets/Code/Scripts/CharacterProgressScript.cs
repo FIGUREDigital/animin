@@ -21,6 +21,7 @@ public class ItemPickupSavedData
 
 public class CharacterProgressScript : MonoBehaviour 
 {
+	public CreatureTypeId CreaturePlayerId;
 	public float Happy;
 	public float Hungry;
 	public float Fitness;
@@ -31,6 +32,8 @@ public class CharacterProgressScript : MonoBehaviour
 	public List<AchievementId> Achievements = new List<AchievementId>();
 	public DateTime NextHappynBonusTimeAt;
 	public DateTime LastSavePerformed;
+	public DateTime LastTimeToilet;
+
 
 
 	private List<GameObject> groundItemsOnARscene = new List<GameObject>();
@@ -50,6 +53,9 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 		}
 	}
+
+	public GameObject PooPrefab;
+	public GameObject PissPrefab;
 
 	private Vector3 DestinationLocation;
 	private float TravelDistance;
@@ -96,11 +102,13 @@ public class CharacterProgressScript : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		CreaturePlayerId = CreatureTypeId.TBOBaby;
 		Happy = 100;
 		Hungry = 100;
 		Fitness = 100;
 		Health = 100;
 		LastSavePerformed = DateTime.Now;
+		LastTimeToilet = DateTime.Now;
 
 		Load();
 
@@ -112,7 +120,11 @@ public class CharacterProgressScript : MonoBehaviour
 			LayerMask.NameToLayer( "IgnoreCollisionWithCharacter"),  
 			LayerMask.NameToLayer( "Character"));
 
-		CurrentAction = ActionId.EnterSleep;
+		//CurrentAction = ActionId.EnterSleep;
+
+		animationController.IsSleeping = true;
+		CurrentAction = ActionId.Sleep;
+		SleepBoundingBox.SetActive(true);
 
 
 	}
@@ -139,6 +151,8 @@ public class CharacterProgressScript : MonoBehaviour
 
 		for(int i=0;i<GroundItems.Count;++i)
 		{
+			if(GroundItems[i].GetComponent<ReferencedObjectScript>() == null) continue;
+
 			UIPopupItemScript itemData = GroundItems[i].GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
 			if(itemData.Type == PopupItemType.Food)
 			{
@@ -162,9 +176,10 @@ public class CharacterProgressScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		Hungry -= Time.deltaTime * 0.4f;
-		Fitness -= Time.deltaTime * 0.4f;
-		Health -= Time.deltaTime * 0.4f;
+		Hungry -= Time.deltaTime * 0.2f;
+		//Fitness -= Time.deltaTime * 0.2f;
+		Fitness = 50;
+		Health -= Time.deltaTime * 0.2f;
 
 		if(Health < 0 ) Health = 0;
 		if(Hungry < 0 ) Hungry = 0;
@@ -232,9 +247,28 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 
 
+
 		Debug.Log(CurrentAction.ToString());
 		switch(CurrentAction)
 		{
+		case ActionId.EnterPortalToAR:
+			{
+				Stop(true);
+				animationController.IsInPortalStage = 1;
+
+
+
+				break;
+			}
+
+			case ActionId.EnterPortalToNonAR:
+			{
+				Stop(true);
+				animationController.IsInPortalStage = 1;
+
+				break;
+			}
+
 			case ActionId.EnterSleep:
 			{
 				animationController.IsSleeping = true;
@@ -245,16 +279,18 @@ public class CharacterProgressScript : MonoBehaviour
 
 			case ActionId.Sleep:
 			{
-			if( Input.GetButtonUp("Fire1") )
-			{
-				if (!hadUItouch && hadRayCollision && hitInfo.collider.gameObject == SleepBoundingBox)
+				if( Input.GetButtonUp("Fire1") )
 				{
-					Debug.Log("exit sleep");
-					animationController.IsSleeping = false;
-					CurrentAction = ActionId.None;
-					SleepBoundingBox.SetActive(false);
+					if (!hadUItouch && hadRayCollision && hitInfo.collider.gameObject == SleepBoundingBox)
+					{
+						Debug.Log("exit sleep");
+						animationController.IsSleeping = false;
+						CurrentAction = ActionId.None;
+						SleepBoundingBox.SetActive(false);
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.SleepToIdle);
+						
+					}
 				}
-			}
 
 				break;
 			}
@@ -337,7 +373,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 				throwScript.Begin(throwdirection, maxDistance);
 				
-
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Throw);
 				//ObjectHolding.transform.position = this.transform.position;
 				
 
@@ -434,6 +470,7 @@ public class CharacterProgressScript : MonoBehaviour
 						else if(ObjectHolding == null && animationController.IsAnyIdleAnimationPlaying())
 						{
 							animationController.IsTickled = true;
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Tickle);
 						}
 					}
 					else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
@@ -570,12 +607,13 @@ public class CharacterProgressScript : MonoBehaviour
 					PutItemInHands(DragableObject);
 					validDrop = true;
 				}
-			else if(hadRayCollision && hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
+				else if(hadRayCollision && hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
 				{
 					DragableObject.transform.parent = this.transform.parent.transform;
 					validDrop = true;
 					GroundItems.Add(DragableObject);
 					DragableObject.layer = LayerMask.NameToLayer("Default");
+
 				}
 				else
 				{
@@ -623,6 +661,7 @@ public class CharacterProgressScript : MonoBehaviour
 						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
 						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 						sadUnwellLoopState = HungrySadUnwellLoopId.PlayHungry;
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Hungry);
 						
 					}
 					else if(Health <= 50 && animationController.IsIdle)
@@ -631,15 +670,17 @@ public class CharacterProgressScript : MonoBehaviour
 						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
 						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 						sadUnwellLoopState = HungrySadUnwellLoopId.PlayUnwell;
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Unwell);
 						
 					}
-					else if(Happy <= 50 && animationController.IsIdle)
+					/*else if(Happy <= 50 && animationController.IsIdle)
 					{
 						animationController.IsSad = true;
 						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
 						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.5f, 5.6f);
 						sadUnwellLoopState = HungrySadUnwellLoopId.PlaySad;
-					}
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Happy1);
+					}*/
 
 				}
 
@@ -678,6 +719,27 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 
 
+
+		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 40 && !animationController.IsSleeping)
+		{
+			GameObject newPoo;
+			if(UnityEngine.Random.Range(0, 2) == 0)
+			{
+				newPoo = GameObject.Instantiate(PooPrefab) as GameObject;
+			}
+			else
+			{
+				newPoo = GameObject.Instantiate(PissPrefab) as GameObject;
+			}
+
+			newPoo.transform.parent = this.transform.parent;
+			newPoo.transform.position = this.transform.position;
+			newPoo.transform.rotation = Quaternion.Euler(0, 180 + UnityEngine.Random.Range(-30.0f, 30.0f), 0);
+
+			GroundItems.Add(newPoo);
+
+			LastTimeToilet = DateTime.Now;
+		}
 
 
 
@@ -774,7 +836,7 @@ public class CharacterProgressScript : MonoBehaviour
 	public void PickupItem(GameObject item)
 	{
 		Debug.Log("void PickupItem(GameObject item)");
-
+		UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.ItemPickup);
 		this.GetComponent<CharacterProgressScript>().GroundItems.Remove(item);
 		Stop(true);
 		//Physics.IgnoreCollision(item.collider, this.collider, true);
@@ -820,6 +882,7 @@ public class CharacterProgressScript : MonoBehaviour
 				Hungry += item.Points;
 				Stop(true);
 				animationController.IsEating = true;
+			UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Feed);
 			//}
 				break;
 			}
@@ -844,6 +907,7 @@ public class CharacterProgressScript : MonoBehaviour
 				Health += item.Points;
 				Stop(true);
 				animationController.IsTakingPill = true;
+			UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.EatPill);
 			//}
 				break;
 			}
@@ -904,6 +968,8 @@ public enum ActionId
 	MoveToRequestedLocation,
 	DragItemAround,
 	DetectFlickAndThrow,
+	EnterPortalToAR,
+	EnterPortalToNonAR,
 }
 
 public enum HungrySadUnwellLoopId

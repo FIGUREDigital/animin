@@ -230,7 +230,7 @@ public class JoystiqScript : MonoBehaviour {
 
 	void Start()
 	{
-
+		EnableJoystick();
 	}
 	
 	
