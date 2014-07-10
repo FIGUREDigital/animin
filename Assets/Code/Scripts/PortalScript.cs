@@ -25,14 +25,14 @@ public class PortalScript : MonoBehaviour {
 					{
 						case PortalId.Garden:
 						{
-							UIGlobalVariablesScript.Singleton.DefaultARSceneRef.SetActive(false);
+							UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 							UIGlobalVariablesScript.Singleton.GardenSceneRef.SetActive(true);
 							break;
 						}
 
 						case PortalId.ExitGarden:
 						{
-							UIGlobalVariablesScript.Singleton.DefaultARSceneRef.SetActive(true);
+						UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
 							UIGlobalVariablesScript.Singleton.GardenSceneRef.SetActive(false);
 							break;
 						}

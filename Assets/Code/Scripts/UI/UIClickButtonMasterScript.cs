@@ -4,6 +4,7 @@ using System.Collections;
 public class UIClickButtonMasterScript : MonoBehaviour 
 {
 	public UIFunctionalityId FunctionalityId;
+	private float SavedRadius;
 
 	// Use this for initialization
 	void Start () {
@@ -119,6 +120,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 		case UIFunctionalityId.OpenMinigamesScreen:
 		{
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
+
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(false);
 
@@ -144,6 +147,14 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = true;
+			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.gameObject.GetComponent<ObjectLookAtDeviceScript>().enabled = true;
+	
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().DisableJoystick();
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().enabled = false;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = SavedRadius;
+			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
+
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localRotation = Quaternion.Euler(0, 180, 0);
 			
 			break;
 		}
@@ -203,21 +214,24 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 		case UIFunctionalityId.StartSelectedMinigame:
 		{
+
 			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
 
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = false;
-			
+			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.gameObject.GetComponent<ObjectLookAtDeviceScript>().enabled = false;
+
+			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
+
 			switch(UIGlobalVariablesScript.SelectedMinigameToPlay)
 			{
 				case UIFunctionalityId.PlayMinigameSpaceship:
 				{
 					UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(true);
 					UIGlobalVariablesScript.Singleton.SpaceshipMinigameSceneRef.SetActive(true);
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().enabled = true;
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().EnableJoystick();
+					
 					break;
 				}
 
@@ -225,7 +239,15 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				{
 					UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(true);
 					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(true);
-					break;
+				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().HardcoreReset();
+
+				SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().enabled = true;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().EnableJoystick();
+
+				
+				break;
 				}
 			}
 			

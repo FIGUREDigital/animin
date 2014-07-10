@@ -11,7 +11,7 @@ public class MinigameCollectorScript : MonoBehaviour
 	public GameObject CharacterRef;
 	private List<AnimationJob> AnimationJobs = new List<AnimationJob>();
 	//private List<GameObject> AvailableSpotsToPlaceStars = new List<GameObject>();
-	public int StarsOwned = 10;
+
 	public List<GameObject> EvilCharacters = new List<GameObject>();
 	public GameObject[] EvilCharacterPool;
 
@@ -44,7 +44,7 @@ public class MinigameCollectorScript : MonoBehaviour
 	}
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 		CubeMatrix = new GameObject[MapWidth, MapHeight];
 		
@@ -62,12 +62,9 @@ public class MinigameCollectorScript : MonoBehaviour
 			}
 		}
 
-		LevelsToComplete.Add(111);
-		LevelsToComplete.Add(112);
-		LevelsToComplete.Add(113);
-		LevelsToComplete.Add(114);
+	
 
-		Reset();
+		HardcoreReset();
 	}
 	
 	// Update is called once per frame
@@ -83,10 +80,12 @@ public class MinigameCollectorScript : MonoBehaviour
 
 		if (CharacterRef.transform.localPosition.y <= -0.5f) 
 		{
-			StarsOwned -= 3;
-			if(StarsOwned < 0 ) StarsOwned = 0;
+			CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
+			if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
 			Reset();
 		}
+
+		UIGlobalVariablesScript.Singleton.TextForStarsInMiniCollector.text = CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned.ToString();
 	}
 
 	void ResetCharacter()
@@ -95,20 +94,20 @@ public class MinigameCollectorScript : MonoBehaviour
 		CharacterRef.GetComponent<CharacterControllerScript>().IsResetFalling = true;
 
 	}
-
+	/*
 	void OnGUI()
 	{
-		GUI.skin.label.fontSize = 30;
-		GUI.skin.button.fontSize = 30;
+		//GUI.skin.label.fontSize = 30;
+		//GUI.skin.button.fontSize = 30;
 
 
 		if (GUI.Button (new Rect (10, 10, 120, 50), "Reset")) {
 			Reset();
 			
 		}
-		GUI.Label (new Rect (Screen.width - 500, 10, 200, 50), "Stars: " + StarsOwned.ToString());
+		//GUI.Label (new Rect (Screen.width - 500, 10, 200, 50), "Stars: " + StarsOwned.ToString());
 	}
-
+*/
 
 	public void OnEvilCharacterHitFromTop(GameObject gameObject)
 	{
@@ -132,14 +131,14 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	public void OnEvilCharacterHit(GameObject gameObject)
 	{
-		StarsOwned -= 3;
+		CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
 
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 
 		TemporaryDisableCollisionEvent collisionEvent = new TemporaryDisableCollisionEvent(gameObject);
 		PresentationEventManager.Create(collisionEvent);
 
-		CharacterRef.AddComponent<FlashMaterialColorScript>();
+		//CharacterRef.AddComponent<FlashMaterialColorScript>();
 	}
 
 	private void UpdateAnimations()
@@ -169,7 +168,7 @@ public class MinigameCollectorScript : MonoBehaviour
 //			Debug.Log(d);
 			if(d <= 26)
 			{
-				StarsOwned++;
+				CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned++;
 				GameObject.Destroy(Collections[i]);
 
 				Collections.RemoveAt(i);
@@ -181,7 +180,20 @@ public class MinigameCollectorScript : MonoBehaviour
 				}
 			}
 		}
+	}
 
+	public void HardcoreReset()
+	{
+		currentLevelId = -1;
+		CompletedLevels.Clear();
+
+		LevelsToComplete.Clear();
+		LevelsToComplete.Add(111);
+		LevelsToComplete.Add(112);
+		LevelsToComplete.Add(113);
+		LevelsToComplete.Add(114);
+
+		Reset();
 
 	}
 

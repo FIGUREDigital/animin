@@ -33,7 +33,7 @@ public class CharacterProgressScript : MonoBehaviour
 	public DateTime NextHappynBonusTimeAt;
 	public DateTime LastSavePerformed;
 	public DateTime LastTimeToilet;
-
+	public int StarsOwned = 10;
 
 
 	private List<GameObject> groundItemsOnARscene = new List<GameObject>();
@@ -43,7 +43,7 @@ public class CharacterProgressScript : MonoBehaviour
 	{
 		get
 		{
-			if(this.transform.parent == UIGlobalVariablesScript.Singleton.DefaultARSceneRef)
+			if(UIGlobalVariablesScript.Singleton.ARSceneRef.activeInHierarchy)
 			{
 				return groundItemsOnARscene;
 			}
@@ -51,6 +51,17 @@ public class CharacterProgressScript : MonoBehaviour
 			{
 				return groundItemsOnNonARScene;
 			}
+		}
+	}
+
+	public GameObject ActiveARScene
+	{
+		get
+		{
+			if(UIGlobalVariablesScript.Singleton.ARSceneRef.activeInHierarchy)
+				return UIGlobalVariablesScript.Singleton.ARSceneRef;
+			else
+				return UIGlobalVariablesScript.Singleton.NonSceneRef;
 		}
 	}
 
@@ -192,6 +203,11 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 		Happy = (Hungry + Fitness + Health) / 3.0f;
+
+		Evolution += (Happy / 100.0f) * Time.deltaTime * 0.1f;
+		if(Evolution >= 100) Evolution = 100;
+
+		UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
 
 		if(NextHappynBonusTimeAt >= DateTime.Now)
 		{
@@ -365,7 +381,7 @@ public class CharacterProgressScript : MonoBehaviour
 				//pickupItemSavedData.Position = DragableObject.transform.position;
 				//pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
 				
-				ObjectHolding.transform.parent = this.transform.parent;
+				ObjectHolding.transform.parent = ActiveARScene.transform;
 				
 				ThrowAnimationScript throwScript = ObjectHolding.AddComponent<ThrowAnimationScript>();
 				float maxDistance = Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) * 0.35f;
@@ -388,7 +404,7 @@ public class CharacterProgressScript : MonoBehaviour
 				ObjectHolding = null;
 				//CurrentAction = ActionId.None;
 			}
-			else if(IsDetectingMouseMoveForDrag && Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) >= 1 && Input.GetButton("Fire1"))
+			else if(IsDetectingMouseMoveForDrag && Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) >= 5 && Input.GetButton("Fire1"))
 			{
 				pickupItemSavedData.WasInHands = false;
 				
@@ -484,7 +500,7 @@ public class CharacterProgressScript : MonoBehaviour
 						if(ObjectHolding != null && (hitInfo.collider.tag == "Items"))
 						{
 							ObjectHolding.layer = LayerMask.NameToLayer("Default");
-							ObjectHolding.transform.parent = this.transform.parent;
+							ObjectHolding.transform.parent = ActiveARScene.transform;
 							ObjectHolding.transform.localPosition = new Vector3(ObjectHolding.transform.localPosition.x, 0, ObjectHolding.transform.localPosition.z);
 
 							GroundItems.Add(ObjectHolding);
@@ -609,7 +625,7 @@ public class CharacterProgressScript : MonoBehaviour
 				}
 				else if(hadRayCollision && hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
 				{
-					DragableObject.transform.parent = this.transform.parent.transform;
+				DragableObject.transform.parent = ActiveARScene.transform;
 					validDrop = true;
 					GroundItems.Add(DragableObject);
 					DragableObject.layer = LayerMask.NameToLayer("Default");
@@ -720,7 +736,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 
-		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 40 && !animationController.IsSleeping)
+		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 90 && !animationController.IsSleeping)
 		{
 			GameObject newPoo;
 			if(UnityEngine.Random.Range(0, 2) == 0)
@@ -732,7 +748,7 @@ public class CharacterProgressScript : MonoBehaviour
 				newPoo = GameObject.Instantiate(PissPrefab) as GameObject;
 			}
 
-			newPoo.transform.parent = this.transform.parent;
+			newPoo.transform.parent = ActiveARScene.transform;
 			newPoo.transform.position = this.transform.position;
 			newPoo.transform.rotation = Quaternion.Euler(0, 180 + UnityEngine.Random.Range(-30.0f, 30.0f), 0);
 

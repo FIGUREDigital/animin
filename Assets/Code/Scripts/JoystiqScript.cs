@@ -230,7 +230,7 @@ public class JoystiqScript : MonoBehaviour {
 
 	void Start()
 	{
-		EnableJoystick();
+
 	}
 	
 	
@@ -282,6 +282,8 @@ public class JoystiqScript : MonoBehaviour {
 					}
 					
 				}
+
+				Debug.Log(VJRnormals.ToString());
 				
 			}
 			
@@ -319,7 +321,43 @@ public class JoystiqScript : MonoBehaviour {
 		}
 	
 
-		CharacterControllerRef.MovementDirection = VJRnormals;
+		//Vector3 vectorA = new Vector3(UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.x, 0, UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.z);
+		//Vector3 vectorB = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
+
+
+		CharacterControllerRef.MovementDirection = Camera.main.transform.right * VJRnormals.x;//new Vector3(VJRnormals.x, 0, VJRnormals.y);
+		CharacterControllerRef.MovementDirection += Vector3.Normalize(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.transform.forward.z)) * VJRnormals.y;
+		CharacterControllerRef.MovementDirection.y = 0;
+
+		if(VJRnormals != Vector2.zero)
+		{
+
+			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
+			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = true;
+			CharacterControllerRef.RotateToLookAtPoint(CharacterControllerRef.transform.position + CharacterControllerRef.MovementDirection * 6);
+			CharacterControllerRef.walkSpeed = 60;
+		}
+		else
+		{
+			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
+			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = false;
+			CharacterControllerRef.MovementDirection = Vector3.zero;
+		}
+
+
+
+		for (int i=0; i<Input.touchCount; ++i) 
+		{
+			if (Input.touches [i].phase == TouchPhase.Began) {
+
+				if ((Input.touches [i].position.x > Screen.width / 2) && (Input.touches [i].position.y < (Screen.height / 2))) {
+					//Debug.Log ("jumbed!");
+					//JumbFingerId = Input.touches[i].fingerId;
+					this.GetComponent<CharacterControllerScript> ().PressedJumb = true;
+					break;
+				}
+			}
+		}
 
 	}
 	

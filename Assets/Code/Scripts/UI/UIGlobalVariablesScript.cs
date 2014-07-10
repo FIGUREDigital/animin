@@ -25,7 +25,8 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject SpaceshipMinigameSceneRef;
 	public GameObject CubeRunnerMinigameSceneRef;
 	public GameObject GardenSceneRef;
-	public GameObject DefaultARSceneRef;
+	public GameObject ARSceneRef;
+	public GameObject NonSceneRef;
 
 	// Interface Bars
 	public GameObject FitnessControlBarRef;
@@ -34,10 +35,13 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject HapynessControlBarRef;
 	public GameObject EvolutionControlBarRef;
 
+	public AnimationControllerScript MainCharacterAnimationControllerRef;
 	public GameObject MainCharacterRef;
 	public GameObject PanelMedicine;
 	public GameObject PanelFoods;
 	public GameObject PanelItems;
+	public UILabel TextForStarsInMiniCollector;
+	public UISprite EvolutionProgressSprite;
 
 	public GameObject PopupIndicator;
 	public GameObject ImageTarget;

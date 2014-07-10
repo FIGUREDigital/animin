@@ -561,13 +561,13 @@ public class CharacterControllerScript : MonoBehaviour
 			// hit from above
 			if(hit.normal.y >= 0.5f)
 			{
-				MinigameRef.OnEvilCharacterHitFromTop(hit.gameObject);
+				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().OnEvilCharacterHitFromTop(hit.gameObject);
 			}
 			else
 			{
 				//Debug.Log("HIT FROM SIDES");
 
-				MinigameRef.OnEvilCharacterHit(hit.gameObject);
+				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().OnEvilCharacterHit(hit.gameObject);
 
 
 				//CharacterController controller = GetComponent<CharacterController>();
