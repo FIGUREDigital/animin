@@ -14,7 +14,10 @@ public class SoundEngineScript : MonoBehaviour
 		GenericSounds[(int)GenericSoundId.ItemPickup] = Resources.Load("Sounds/Items/Item_Pick_Up") as AudioClip;
 		GenericSounds[(int)GenericSoundId.DropMeds] = Resources.Load("Sounds/Items/Meds_Drop") as AudioClip;
 		GenericSounds[(int)GenericSoundId.DropItem] = Resources.Load("Sounds/Items/Item_Drop") as AudioClip;
-
+		GenericSounds[(int)GenericSoundId.TakePoo] = Resources.Load("Sounds/Toilet Functions/Poo") as AudioClip;
+		GenericSounds[(int)GenericSoundId.TakePiss] = Resources.Load("Sounds/Toilet Functions/Wee") as AudioClip;
+		GenericSounds[(int)GenericSoundId.CleanPooPiss] = Resources.Load("Sounds/Toilet Functions/Poo and Wee Cleanup") as AudioClip;
+		GenericSounds[(int)GenericSoundId.ItemLand] = Resources.Load("Sounds/Items/Item Land") as AudioClip;
 
 		CreatureSounds = new AudioClip[(int)CreatureTypeId.Count, (int)CreatureSoundId.Count];
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Celebrate] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@celebrate") as AudioClip;
@@ -28,14 +31,16 @@ public class SoundEngineScript : MonoBehaviour
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.JumbInPortal] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@ump_in_portal") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.JumbOutPortal] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@ump_out_portal") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.No] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@No") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad1] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Sad01") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad2] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Sad02") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad3] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Sad03") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad4] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Sad04") as AudioClip;
+		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad1] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@sad01") as AudioClip;
+		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad2] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@sad02") as AudioClip;
+		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad3] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@sad03") as AudioClip;
+		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad4] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@sad04") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.SleepToIdle] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@sleep_to_idle_stand") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Throw] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Throw") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Tickle] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Tickle") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Unwell] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Unwell") as AudioClip;
+
+
 
 	}
 
@@ -62,6 +67,10 @@ public enum GenericSoundId
 	DropFood,
 	DropMeds,
 	ItemPickup,
+	TakePoo,
+	TakePiss,
+	CleanPooPiss,
+	ItemLand,
 	Count,
 }
 

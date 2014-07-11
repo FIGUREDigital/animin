@@ -34,7 +34,10 @@ public class CharacterProgressScript : MonoBehaviour
 	public DateTime LastSavePerformed;
 	public DateTime LastTimeToilet;
 	public int StarsOwned = 10;
-
+	private bool IsDetectingSwipeRight;
+	private int SwipesDetectedCount;
+	private bool AtLeastOneSwipeDetected;
+	private List<GameObject> TouchesObjcesWhileSwiping = new List<GameObject>();
 
 	private List<GameObject> groundItemsOnARscene = new List<GameObject>();
 	private List<GameObject> groundItemsOnNonARScene = new List<GameObject>();
@@ -69,9 +72,7 @@ public class CharacterProgressScript : MonoBehaviour
 	public GameObject PissPrefab;
 
 	private Vector3 DestinationLocation;
-	private float TravelDistance;
-	private Vector3 TravelLocation;
-	private float IdleCooldown;
+
 	public TextMesh TextTest;
 	public AnimationControllerScript animationController;
 	public bool IsMovingTowardsLocation;
@@ -109,9 +110,10 @@ public class CharacterProgressScript : MonoBehaviour
 	HungrySadUnwellLoopId sadUnwellLoopState;
 	float HoldingLeftButtonDownTimer;
 	private bool TriggeredHoldAction;
+	private List<Vector3> SwipeHistoryPositions = new List<Vector3>();
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 		CreaturePlayerId = CreatureTypeId.TBOBaby;
 		Happy = 100;
@@ -123,13 +125,12 @@ public class CharacterProgressScript : MonoBehaviour
 
 		Load();
 
-		IdleCooldown = UnityEngine.Random.Range(1.0f, 3.0f);
-
 		TextTest.color = new Color(1, 1, 1, 0.0f);
 
 		Physics.IgnoreLayerCollision(
 			LayerMask.NameToLayer( "IgnoreCollisionWithCharacter"),  
 			LayerMask.NameToLayer( "Character"));
+
 
 		//CurrentAction = ActionId.EnterSleep;
 
@@ -160,6 +161,8 @@ public class CharacterProgressScript : MonoBehaviour
 	{
 		GameObject closestFood = null;
 
+		Debug.Log("GROUND ITEMs: " + GroundItems.Count.ToString());
+
 		for(int i=0;i<GroundItems.Count;++i)
 		{
 			if(GroundItems[i].GetComponent<ReferencedObjectScript>() == null) continue;
@@ -187,6 +190,9 @@ public class CharacterProgressScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if(Input.GetButtonDown("Fire1")) Debug.Log("DETECTED  DOWN INSIDE UPDATE AT TOP");
+
+
 		Hungry -= Time.deltaTime * 0.2f;
 		//Fitness -= Time.deltaTime * 0.2f;
 		Fitness = 50;
@@ -299,6 +305,7 @@ public class CharacterProgressScript : MonoBehaviour
 				{
 					if (!hadUItouch && hadRayCollision && hitInfo.collider.gameObject == SleepBoundingBox)
 					{
+						LastTimeToilet = DateTime.Now;
 						Debug.Log("exit sleep");
 						animationController.IsSleeping = false;
 						CurrentAction = ActionId.None;
@@ -313,294 +320,411 @@ public class CharacterProgressScript : MonoBehaviour
 			
 			case ActionId.None:
 			{
+				//Debug.Log("INSIDE NONE");
+
 				if(Input.GetButton("Fire1"))
 					HoldingLeftButtonDownTimer += Time.deltaTime;
 				else
 					HoldingLeftButtonDownTimer = 0;
+
+
+				if(Input.GetButtonDown("Fire1")) Debug.Log("DETECTED A BUTTON DOWN THING");
+
 					
-			if(lastActionId != ActionId.None)
-			{
-			}
-		   
-			else if(HadUITouchLastFrame || hadUItouch || DragedObjectedFromUIToWorld)
-			{
-				Debug.Log("UI TOUCH");
-
-				break;
-			}
-				
-			else if(Input.GetButtonDown("Fire1"))
-			{
-				if(hadRayCollision)
+				if(lastActionId != ActionId.None)
 				{
-					if(hitInfo.collider.gameObject == ObjectHolding || hitInfo.collider.gameObject == this.gameObject)
-					{
-						IsDetectFlick = true;
-						//CurrentAction = ActionId.DetectFlickAndThrow;
-						MousePositionAtDragIfMouseMoves = Input.mousePosition;
-					}
-					else if(hitInfo.collider.tag == "Items")
-					{
-						IsDetectingMouseMoveForDrag = true;
-						//CurrentAction = ActionId.DetectMouseMoveAndDrag;
-						MousePositionAtDragIfMouseMoves = Input.mousePosition;
-						detectDragHit = hitInfo;
-						Debug.Log("DetectMouseMoveAndDrag");
-					}
+					Debug.Log("if(lastActionId != ActionId.None)");
 				}
-
-			}
-			/*else if(HoldingLeftButtonDownTimer >= 0.70f && Input.GetButton("Fire1") && hadRayCollision && hitInfo.collider.tag == "Items" && (hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu != MenuFunctionalityUI.None))
-			{
-
-
-				if(hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Clock)
+			   
+				else if(HadUITouchLastFrame || hadUItouch || DragedObjectedFromUIToWorld)
 				{
-					UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
-					TriggeredHoldAction = true;
-					UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
+					Debug.Log("UI TOUCH");
+
+					break;
 				}
-			
-
-			}*/
-			else if(IsDetectFlick && !Input.GetButton("Fire1") && (Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves)> 25) && ObjectHolding != null)
-			{
-				//DragableObject = ObjectHolding;
-				animationController.IsHoldingItem = false;
-
-				Ray raySecond = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-				Vector3 throwdirection = Vector3.Normalize(Input.mousePosition - MousePositionAtDragIfMouseMoves);
-				throwdirection.z = throwdirection.y;
-				throwdirection.y = 0;
-
-
-				this.gameObject.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(this.transform.position + throwdirection * 50);
-
-
-				//pickupItemSavedData.Position = DragableObject.transform.position;
-				//pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
-				
-				ObjectHolding.transform.parent = ActiveARScene.transform;
-				
-				ThrowAnimationScript throwScript = ObjectHolding.AddComponent<ThrowAnimationScript>();
-				float maxDistance = Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) * 0.35f;
-				if(maxDistance >= 160) maxDistance = 160;
-
-				throwScript.Begin(throwdirection, maxDistance);
-				
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Throw);
-				//ObjectHolding.transform.position = this.transform.position;
-				
-
-
-
-				GroundItems.Add(ObjectHolding);
-				
-				ObjectHolding.transform.rotation = Quaternion.Euler(0, ObjectHolding.transform.rotation.eulerAngles.y, 0);
-				pickupItemSavedData.WasInHands = true;
-				animationController.IsThrowing = true;
-				IsDetectFlick = false;
-				ObjectHolding = null;
-				//CurrentAction = ActionId.None;
-			}
-			else if(IsDetectingMouseMoveForDrag && Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) >= 5 && Input.GetButton("Fire1"))
-			{
-				pickupItemSavedData.WasInHands = false;
-				
-				// DRAG ITEM FROM CHARACTER AWAY FROM HIM
-				/*if(hit.collider.name.StartsWith("MainCharacter") && DragableObject == null && animationController.IsHoldingItem)
+					
+				else if(Input.GetButtonDown("Fire1"))
 				{
+					Debug.Log("else if(Input.GetButtonDown(Fire1))");
+
+					if(hadRayCollision)
+					{
+						if(hitInfo.collider.gameObject == ObjectHolding || hitInfo.collider.gameObject == this.gameObject)
+						{
+							IsDetectFlick = true;
+							//CurrentAction = ActionId.DetectFlickAndThrow;
+							MousePositionAtDragIfMouseMoves = Input.mousePosition;
+						}
+						else if(hitInfo.collider.tag == "Items")
+						{
+							IsDetectingMouseMoveForDrag = true;
+							//CurrentAction = ActionId.DetectMouseMoveAndDrag;
+							MousePositionAtDragIfMouseMoves = Input.mousePosition;
+							detectDragHit = hitInfo;
+							Debug.Log("DetectMouseMoveAndDrag");
+						}
+					}
+
+				}
+				/*else if(HoldingLeftButtonDownTimer >= 0.70f && Input.GetButton("Fire1") && hadRayCollision && hitInfo.collider.tag == "Items" && (hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu != MenuFunctionalityUI.None))
+				{
+
+
+					if(hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Clock)
+					{
+						UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+						TriggeredHoldAction = true;
+						UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
+					}
+				
+
+				}*/
+				else if(IsDetectFlick && !Input.GetButton("Fire1") && (Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves)> 25) && ObjectHolding != null)
+				{
+					Debug.Log("IsDetectFlick");
+					//DragableObject = ObjectHolding;
+					animationController.IsHoldingItem = false;
+
+					Ray raySecond = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+					Vector3 throwdirection = Vector3.Normalize(Input.mousePosition - MousePositionAtDragIfMouseMoves);
+					throwdirection.z = throwdirection.y;
+					throwdirection.y = 0;
+
+
+					this.gameObject.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(this.transform.position + throwdirection * 50);
+
+
 					//pickupItemSavedData.Position = DragableObject.transform.position;
 					//pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
-					//pickupItemSavedData.WasInHands = true;
+					
+					ObjectHolding.transform.parent = ActiveARScene.transform;
+					
+					ThrowAnimationScript throwScript = ObjectHolding.AddComponent<ThrowAnimationScript>();
+					float maxDistance = Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) * 0.35f;
+					if(maxDistance >= 160) maxDistance = 160;
 
-					//Debug.Log("SELECTED OBJECT:" + hit.collider.name);
-					//DragableObject = ObjectHolding;
-					//DragableObject.GetComponent<BoxCollider>().enabled = false;
-					DragableObject.transform.parent = this.transform.parent;
-					animationController.IsHoldingItem = false;
+					throwScript.Begin(throwdirection, maxDistance);
+					
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Throw);
+					//ObjectHolding.transform.position = this.transform.position;
+					
+
+
+
+					GroundItems.Add(ObjectHolding);
+					
+					ObjectHolding.transform.rotation = Quaternion.Euler(0, ObjectHolding.transform.rotation.eulerAngles.y, 0);
+					pickupItemSavedData.WasInHands = true;
 					animationController.IsThrowing = true;
-					//Physics.IgnoreCollision(DragableObject.collider, this.collider, true);
-
-
+					IsDetectFlick = false;
+					ObjectHolding = null;
+					//CurrentAction = ActionId.None;
 				}
-				
-				// GRAB ITEM ITSELF EITHER FROM HANDS OR FLOOR
-				else*/ 
-				
-				// THROW IT AWAY
-				//if(animationController.IsHoldingItem)
-				//{
-				//	CurrentAction = ActionId.DetectFlickAndThrow;
-				//}
-				
-				// GRAB FROM FLOOR
-				//else
+				else if(IsDetectingMouseMoveForDrag && Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) >= 5 && Input.GetButton("Fire1"))
 				{
-					//Debug.Log("IT SHOULD GO AND DRAG NOW");
-
-					DragableObject = detectDragHit.collider.gameObject;
+					Debug.Log("IsDetectingMouseMoveForDrag");
 					pickupItemSavedData.WasInHands = false;
 					
-					pickupItemSavedData.Position = DragableObject.transform.position;
-					pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
-					//Physics.IgnoreCollision(DragableObject.collider, this.collider, true);
-					//Debug.Log("DISABLING COLLISION");
-					
-					CurrentAction = ActionId.DragItemAround;
-					IsDetectingMouseMoveForDrag = false;
-
-					DragableObject.layer = LayerMask.NameToLayer("IgnoreCollisionWithCharacter");
-				}
-				
-				
-				
-				Debug.Log("SELECTED OBJECT:" + detectDragHit.collider.name);
-				
-				DragableObject.GetComponent<BoxCollider>().enabled = false;
-			}
-			else if (Input.GetButtonUp("Fire1")) 
-			{
-				IsDetectFlick = false;
-				IsDetectingMouseMoveForDrag = false;
-				if (hadRayCollision/* && !TriggeredHoldAction*/)
-				{
-
-					if(hitInfo.collider.name.StartsWith("MainCharacter") || hitInfo.collider.gameObject == ObjectHolding)
+					// DRAG ITEM FROM CHARACTER AWAY FROM HIM
+					/*if(hit.collider.name.StartsWith("MainCharacter") && DragableObject == null && animationController.IsHoldingItem)
 					{
-						if(ObjectHolding != null && !ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
-						{
-							UIPopupItemScript item = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+						//pickupItemSavedData.Position = DragableObject.transform.position;
+						//pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
+						//pickupItemSavedData.WasInHands = true;
 
-							if(OnInteractWithPopupItem(item))
-							{
-								Destroy(ObjectHolding);
-								ObjectHolding = null;
-								animationController.IsHoldingItem = false;
-								
-							}
+						//Debug.Log("SELECTED OBJECT:" + hit.collider.name);
+						//DragableObject = ObjectHolding;
+						//DragableObject.GetComponent<BoxCollider>().enabled = false;
+						DragableObject.transform.parent = this.transform.parent;
+						animationController.IsHoldingItem = false;
+						animationController.IsThrowing = true;
+						//Physics.IgnoreCollision(DragableObject.collider, this.collider, true);
 
 
-						}
-						else if(ObjectHolding == null && animationController.IsAnyIdleAnimationPlaying())
-						{
-							animationController.IsTickled = true;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Tickle);
-						}
 					}
-					else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
+					
+					// GRAB ITEM ITSELF EITHER FROM HANDS OR FLOOR
+					else*/ 
+					
+					// THROW IT AWAY
+					//if(animationController.IsHoldingItem)
+					//{
+					//	CurrentAction = ActionId.DetectFlickAndThrow;
+					//}
+					
+					// GRAB FROM FLOOR
+					//else
 					{
-						//float distane = Vector3.Distance(hitInfo.point, this.transform.position);
-						//MoveTo(hitInfo.point, distane > 220.0f ? true : false);
-						if(RequestedToMoveToCounter == 0) RequestedTime = Time.time;
-						RequestedToMoveToCounter++;
-						moveHitInfo = hitInfo;
+						//Debug.Log("IT SHOULD GO AND DRAG NOW");
 
-						if(ObjectHolding != null && (hitInfo.collider.tag == "Items"))
-						{
-							ObjectHolding.layer = LayerMask.NameToLayer("Default");
-							ObjectHolding.transform.parent = ActiveARScene.transform;
-							ObjectHolding.transform.localPosition = new Vector3(ObjectHolding.transform.localPosition.x, 0, ObjectHolding.transform.localPosition.z);
+						DragableObject = detectDragHit.collider.gameObject;
+						pickupItemSavedData.WasInHands = false;
+						
+						pickupItemSavedData.Position = DragableObject.transform.position;
+						pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
+						//Physics.IgnoreCollision(DragableObject.collider, this.collider, true);
+						//Debug.Log("DISABLING COLLISION");
+						
+						CurrentAction = ActionId.DragItemAround;
+						IsDetectingMouseMoveForDrag = false;
 
-							GroundItems.Add(ObjectHolding);
-							ObjectHolding = null;
-							animationController.IsHoldingItem = false;
+						DragableObject.layer = LayerMask.NameToLayer("IgnoreCollisionWithCharacter");
+					}
+					
+					
+					
+					Debug.Log("SELECTED OBJECT:" + detectDragHit.collider.name);
+					
+					DragableObject.GetComponent<BoxCollider>().enabled = false;
+				}
+				else if(Input.GetButton("Fire1"))
+				{
+					Debug.Log("DETECT SWIPE MECHANISM");
 
-						}
-				   }
+					if(SwipeHistoryPositions.Count == 0)
+					{
+						SwipeHistoryPositions.Add(Input.mousePosition);
+					}
 					else
 					{
-						Stop(true);
-						Debug.Log("STOPING BECAUSE NOTHING HIT");
-					}
-				}
-
-				//TriggeredHoldAction = false;
-					
-
-
-			}
-
-
-			if(RequestedToMoveToCounter > 0)
-			{
-				if((Time.time - RequestedTime) >= 0.17f)
-				{
-					Stop(true);
-
-					bool preventMovingTo = false;
-					Vector3 point = moveHitInfo.point;
-					if(moveHitInfo.collider.tag == "Items")
-					{
-						moveHitInfo.collider.gameObject.AddComponent<FlashObjectScript>();
-
-						point = moveHitInfo.transform.position;
-
-						bool isItemAlreadyOn = false;
-						if(UIGlobalVariablesScript.Singleton.Item3DPopupMenu.activeInHierarchy && (LastKnownObjectWithMenuUp == moveHitInfo.collider.gameObject))
+						if(IsDetectingSwipeRight)
 						{
-							isItemAlreadyOn = true;
-						}
-
-						if(RequestedToMoveToCounter == 1 && !isItemAlreadyOn  && (moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu != MenuFunctionalityUI.None))
-						{
-							if( moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Clock)
+							if((Input.mousePosition.x - SwipeHistoryPositions[SwipeHistoryPositions.Count - 1].x) >= 15)
 							{
-								UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
-								//TriggeredHoldAction = true;
-								UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
-								LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
-								preventMovingTo = true;
+								SwipeHistoryPositions.Add(Input.mousePosition);
+								IsDetectingSwipeRight = !IsDetectingSwipeRight;
+								SwipesDetectedCount++;
+								Debug.Log("swipe moving right: " + SwipesDetectedCount.ToString());
 							}
 						}
-						
-						else if(ObjectHolding == null)
-						{
-							IsGoingToPickUpObject = moveHitInfo.collider.gameObject;
-							Debug.Log("going to pickup");
-						}
 						else
 						{
-							Debug.Log("will not pick up, i already have item");
+							if((SwipeHistoryPositions[SwipeHistoryPositions.Count - 1].x - Input.mousePosition.x) >= 15)
+							{
+								SwipeHistoryPositions.Add(Input.mousePosition);
+								IsDetectingSwipeRight = !IsDetectingSwipeRight;
+								SwipesDetectedCount++;
+								Debug.Log("swipe moving left: " + SwipesDetectedCount.ToString());
+							}
 						}
-					}
 
-					if(!preventMovingTo)
-					{
-						UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
-	
-						if(RequestedToMoveToCounter > 1)
-							MoveTo(point, true);
-						else
-							MoveTo(point, false);
-					}
-					
-					
-					RequestedToMoveToCounter = 0;
+						if(SwipesDetectedCount > 0 && hadRayCollision)
+						{
+							if(!TouchesObjcesWhileSwiping.Contains(hitInfo.collider.gameObject))
+								TouchesObjcesWhileSwiping.Add(hitInfo.collider.gameObject);
+						}
+
+						if(SwipesDetectedCount >= 3)
+						{
+							AtLeastOneSwipeDetected = true;
+							Debug.Log("SWIPE DETECTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+							IsDetectingSwipeRight = !IsDetectingSwipeRight;
+							SwipesDetectedCount = 0;
+
+							bool cleanedShit = false;
+							for(int i=0;i<TouchesObjcesWhileSwiping.Count;++i)
+							{
+								if(TouchesObjcesWhileSwiping[i].tag == "Shit" || TouchesObjcesWhileSwiping[i].tag == "Items")
+								{
+									if(TouchesObjcesWhileSwiping[i].tag == "Shit") cleanedShit = true;
+
+									GroundItems.Remove(TouchesObjcesWhileSwiping[i]);
+									Destroy(TouchesObjcesWhileSwiping[i]);
+									TouchesObjcesWhileSwiping.RemoveAt(i);
+									i--;
+								}
+							}
+
+						if(cleanedShit) UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CleanPooPiss);
+
+												
+							if(TouchesObjcesWhileSwiping.Contains(this.gameObject) && !cleanedShit)
+							{
+								int random = UnityEngine.Random.Range(0, 5);
+								if(random == 0) animationController.IsIdleLook1 = true;
+								else if(random == 1) animationController.IsIdleLook2 = true;
+								else if(random == 2) animationController.IsIdleLook3 = true;
+								else if(random == 3) animationController.IsIdleWave = true;
+								
+								else if(random == 4) animationController.IsTickled = true;
+							}
+
+						}
 				}
-			}
-			else
-			{
+				
+
+				
+
+					/*
+					List<GameObject> TouchedUnttouchedSwipeList = new List<GameObject>();
+					// Consider this object for swiped
+					if(hadRayCollision && (hitInfo.collider.tag == "Items" || hitInfo.collider.tag == "Shit"))
+					{
+						if(!TouchedUnttouchedSwipeList.Contains(hitInfo.collider.gameObject))
+						{
+							TouchedUnttouchedSwipeList.Remove(hitInfo.collider.gameObject);
+						}
+						else
+						{
+							if(!TouchedUnttouchedSwipeList.Contains(hitInfo.collider.gameObject))
+								TouchedUnttouchedSwipeList.Add(hitInfo.collider.gameObject);
+						}
+					}
+					else
+					{
+						for(int i=0;i<TouchedUnttouchedSwipeList.Count;++i)
+						{
+							SwipeHitsPerObject[TouchedUnttouchedSwipeList[i]]++;
+						}
+
+						TouchedUnttouchedSwipeList.Clear();
+					}*/
 
 
-				if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && Hungry <= 70)
+
+				}
+				else if (Input.GetButtonUp("Fire1")) 
 				{
-					FeedMyselfTimer += Time.deltaTime;
-
-					if(FeedMyselfTimer >= 1)
+					Debug.Log("Input.GetButtonUp(Fire1)");
+					IsDetectFlick = false;
+					IsDetectingMouseMoveForDrag = false;
+					if (!AtLeastOneSwipeDetected && hadRayCollision/* && !TriggeredHoldAction*/)
 					{
-						GameObject closestFood = GetClosestFoodToEat();
-						if(closestFood != null)
-						{
-							IsGoingToPickUpObject = closestFood;
-							MoveTo(closestFood.transform.position, false);
-						}
 
-						FeedMyselfTimer = 0;
+						if(hitInfo.collider.name.StartsWith("MainCharacter") || hitInfo.collider.gameObject == ObjectHolding)
+						{
+							if(ObjectHolding != null && !ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
+							{
+								UIPopupItemScript item = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+
+								if(OnInteractWithPopupItem(item))
+								{
+									Destroy(ObjectHolding);
+									ObjectHolding = null;
+									animationController.IsHoldingItem = false;
+									
+								}
+
+
+							}
+							else if(ObjectHolding == null && animationController.IsAnyIdleAnimationPlaying())
+							{
+								animationController.IsTickled = true;
+								UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Tickle);
+							}
+						}
+						else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
+						{
+							//float distane = Vector3.Distance(hitInfo.point, this.transform.position);
+							//MoveTo(hitInfo.point, distane > 220.0f ? true : false);
+							if(RequestedToMoveToCounter == 0) RequestedTime = Time.time;
+							RequestedToMoveToCounter++;
+							moveHitInfo = hitInfo;
+
+							if(ObjectHolding != null && (hitInfo.collider.tag == "Items"))
+							{
+								ObjectHolding.layer = LayerMask.NameToLayer("Default");
+								ObjectHolding.transform.parent = ActiveARScene.transform;
+								ObjectHolding.transform.localPosition = new Vector3(ObjectHolding.transform.localPosition.x, 0, ObjectHolding.transform.localPosition.z);
+
+								GroundItems.Add(ObjectHolding);
+								ObjectHolding = null;
+								animationController.IsHoldingItem = false;
+
+							}
+					   }
+						else
+						{
+							Stop(true);
+							Debug.Log("STOPING BECAUSE NOTHING HIT");
+						}
+					}
+
+					//TriggeredHoldAction = false;
+				}
+
+				//Debug.Log("END OF NONE");
+
+
+				if(RequestedToMoveToCounter > 0)
+				{
+					if((Time.time - RequestedTime) >= 0.17f)
+					{
+						Stop(true);
+
+						bool preventMovingTo = false;
+						Vector3 point = moveHitInfo.point;
+						if(moveHitInfo.collider.tag == "Items")
+						{
+							moveHitInfo.collider.gameObject.AddComponent<FlashObjectScript>();
+
+							point = moveHitInfo.transform.position;
+							
+
+							bool isItemAlreadyOn = false;
+							if(UIGlobalVariablesScript.Singleton.Item3DPopupMenu.activeInHierarchy && (LastKnownObjectWithMenuUp == moveHitInfo.collider.gameObject))
+							{
+								isItemAlreadyOn = true;
+							}
+
+							if(RequestedToMoveToCounter == 1 && !isItemAlreadyOn  && (moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu != MenuFunctionalityUI.None))
+							{
+								if( moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Clock)
+								{
+									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+									//TriggeredHoldAction = true;
+									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
+									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+									preventMovingTo = true;
+								}
+							}
+							
+							else if(ObjectHolding == null)
+							{
+								IsGoingToPickUpObject = moveHitInfo.collider.gameObject;
+								Debug.Log("going to pickup");
+							}
+							else
+							{
+								Debug.Log("will not pick up, i already have item");
+							}
+						}
+						point.y = this.transform.position.y;
+
+						if(!preventMovingTo)
+						{
+							UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
+		
+							if(RequestedToMoveToCounter > 1)
+								MoveTo(point, true);
+							else
+								MoveTo(point, false);
+						}
+						
+						
+						RequestedToMoveToCounter = 0;
 					}
 				}
-			}
+				else
+				{
+					if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && Hungry <= 70)
+					{
+						FeedMyselfTimer += Time.deltaTime;
+
+						if(FeedMyselfTimer >= 1)
+						{
+							GameObject closestFood = GetClosestFoodToEat();
+							if(closestFood != null)
+							{
+								IsGoingToPickUpObject = closestFood;
+								MoveTo(closestFood.transform.position, false);
+							}
+
+							FeedMyselfTimer = 0;
+						}
+					}
+				}
 				
 				
 
@@ -620,14 +744,18 @@ public class CharacterProgressScript : MonoBehaviour
 				// DRAG ITEM ON TO THE CHARACTER
 				if(hadRayCollision && hitInfo.collider.name.StartsWith("MainCharacter") && !animationController.IsHoldingItem)
 				{
+
+				//if(GroundItems.Contains(DragableObject)) Debug.Log("BUG REPORT!!!!!!!");
+
+				GroundItems.Remove(DragableObject);
 					PutItemInHands(DragableObject);
 					validDrop = true;
 				}
 				else if(hadRayCollision && hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
 				{
-				DragableObject.transform.parent = ActiveARScene.transform;
+					DragableObject.transform.parent = ActiveARScene.transform;
 					validDrop = true;
-					GroundItems.Add(DragableObject);
+					//GroundItems.Add(DragableObject);
 					DragableObject.layer = LayerMask.NameToLayer("Default");
 
 				}
@@ -736,16 +864,18 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 
-		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 90 && !animationController.IsSleeping)
+		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 30 && !animationController.IsSleeping && animationController.IsIdle)
 		{
 			GameObject newPoo;
 			if(UnityEngine.Random.Range(0, 2) == 0)
 			{
 				newPoo = GameObject.Instantiate(PooPrefab) as GameObject;
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.TakePoo);
 			}
 			else
 			{
 				newPoo = GameObject.Instantiate(PissPrefab) as GameObject;
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.TakePiss);
 			}
 
 			newPoo.transform.parent = ActiveARScene.transform;
@@ -753,6 +883,11 @@ public class CharacterProgressScript : MonoBehaviour
 			newPoo.transform.rotation = Quaternion.Euler(0, 180 + UnityEngine.Random.Range(-30.0f, 30.0f), 0);
 
 			GroundItems.Add(newPoo);
+
+			int sign = -1;
+			if(UnityEngine.Random.Range(0, 2) == 0) sign = 1;
+
+			MoveTo(this.transform.position + new Vector3(UnityEngine.Random.Range(-40, 40), 0, UnityEngine.Random.Range(30, 40) * sign), false);
 
 			LastTimeToilet = DateTime.Now;
 		}
@@ -803,6 +938,16 @@ public class CharacterProgressScript : MonoBehaviour
 			hadButtonDownLastFrame = true;
 		else
 			hadButtonDownLastFrame = false;
+
+
+		if(!Input.GetButton("Fire1"))
+		{
+			IsDetectingSwipeRight = false;
+			SwipesDetectedCount = 0;
+			SwipeHistoryPositions.Clear();
+			AtLeastOneSwipeDetected = false;
+			TouchesObjcesWhileSwiping.Clear();
+		}
 	
 	
 		DragedObjectedFromUIToWorld = false;
@@ -943,8 +1088,7 @@ public class CharacterProgressScript : MonoBehaviour
 	{
 		Debug.Log("Moving to point: " + location.ToString());
 		IsMovingTowardsLocation = true;
-		TravelLocation = this.transform.position;
-		TravelDistance = Vector3.Distance(location, this.transform.position);
+	
 		DestinationLocation = location;
 
 

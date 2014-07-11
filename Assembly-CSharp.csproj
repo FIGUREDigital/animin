@@ -81,6 +81,7 @@
      <Compile Include="Assets\Code\Scripts\UI\UIClickButtonMasterScript.cs" />
      <Compile Include="Assets\Code\Scripts\UI\UIGlobalVariablesScript.cs" />
      <Compile Include="Assets\Code\Scripts\UI\UIPopupItemScript.cs" />
+     <Compile Include="Assets\Code\TestScript.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />

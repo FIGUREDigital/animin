@@ -358,6 +358,7 @@ public class CharacterControllerScript : MonoBehaviour
 	}
 
 	public bool PressedJumb;
+
 	
 	void  ApplyGravity ()
 	{

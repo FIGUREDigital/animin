@@ -52,8 +52,14 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 
 		float dotProduct = Vector3.Dot(Camera.main.transform.forward, this.transform.forward);
 //		Debug.Log(dotProduct.ToString());
-		if(
-			(GetComponent<AnimationControllerScript>().IsIdle || GetComponent<AnimationControllerScript>().IsIdleWave || GetComponent<AnimationControllerScript>().IsIdleLook1 || GetComponent<AnimationControllerScript>().IsIdleLook2 || GetComponent<AnimationControllerScript>().IsIdleLook3 || GetComponent<AnimationControllerScript>().IsIdleLook4 )
+		if(!UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().IsMovingTowardsLocation &&
+			(GetComponent<AnimationControllerScript>().IsIdle 
+		 	|| GetComponent<AnimationControllerScript>().IsIdleWave 
+		 	|| GetComponent<AnimationControllerScript>().IsIdleLook1 
+		 	|| GetComponent<AnimationControllerScript>().IsIdleLook2 
+		 	|| GetComponent<AnimationControllerScript>().IsIdleLook3 
+		 	
+		 	|| GetComponent<AnimationControllerScript>().IsHappy == AnimationHappyId.None)
 		   && dotProduct >= -0.4f)
 		{
 			TimeStartingAwayFromCamera += Time.deltaTime;
@@ -68,7 +74,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 				Vector3 playerPoint = new Vector3(transform.parent.position.x, 0, transform.parent.position.z);
 				//transform.parent.GetComponent<CharacterControllerScript>().moveDirection = Vector3.Normalize(Camera.main.transform.position - newCameraPoint);
 				//transform.parent.GetComponent<CharacterControllerScript>().MovementDirection = Vector3.Normalize(transform.parent.position - newCameraPoint);
-				transform.parent.GetComponent<CharacterProgressScript>().MoveTo(transform.parent.position + Vector3.Normalize(newCameraPoint - playerPoint ) * 20, false);
+				transform.parent.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(transform.parent.position + Vector3.Normalize(newCameraPoint - playerPoint ) * 20);
 				//Debug.Log("MOVING FOR ROTATION");
 			}
 		}

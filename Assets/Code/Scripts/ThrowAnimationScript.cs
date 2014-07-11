@@ -54,6 +54,7 @@ public class ThrowAnimationScript : MonoBehaviour
 					this.transform.position.z);
 				Destroy(this);
 				this.gameObject.layer = LayerMask.NameToLayer("Default");
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.ItemLand);
 			}
 				break;
 			}

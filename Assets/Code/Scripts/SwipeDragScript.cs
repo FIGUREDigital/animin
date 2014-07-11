@@ -30,8 +30,9 @@ public class SwipeDragScript : UIDragDropItem
 
 		CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
-		if(surface != null && surface.tag == "Items" && script.GroundItems.Contains(surface))
+		if(surface != null && (surface.tag == "Items" || surface.tag == "Shit") && script.GroundItems.Contains(surface))
 		{
+			Debug.Log("clearing");
 			script.GroundItems.Remove(surface);
 			Destroy(surface);
 

@@ -305,7 +305,7 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
-	public bool IsIdleLook4
+	/*public bool IsIdleLook4
 	{
 		get
 		{
@@ -316,7 +316,7 @@ public class AnimationControllerScript : MonoBehaviour
 		{
 			animator.SetBool("IsIdleLook4", value );
 		}
-	}
+	}*/
 
 	public bool IsIdleWave
 	{
@@ -381,7 +381,7 @@ public class AnimationControllerScript : MonoBehaviour
 		        || IsIdleLook1 
 		        || IsIdleLook2 
 		        || IsIdleLook3 
-		        || IsIdleLook4
+		       
 		        || IsIdleWave
 		   || IsLookingCamera)
 		{
@@ -463,25 +463,54 @@ public class AnimationControllerScript : MonoBehaviour
 				else if(random == 1) IsIdleLook2 = true;
 				else if(random == 2) IsIdleLook3 = true;
 				else if(random == 3) IsIdleWave = true;
-				else if(random == 4) IsIdleLook4 = true;
-				else if(random >= 5 && random <= 10) IsLookingCamera = true;
+				else if(random >= 4 && random <= 10) IsLookingCamera = true;
 				else
 				{
 					CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
 
-					if(script.Happy >= (12.5f * 7)) IsHappy = AnimationHappyId.Happy1;
-					else if(script.Happy >= (12.5f * 6)) IsHappy = AnimationHappyId.Happy2;
-					else if(script.Happy >= (12.5f * 5)) IsHappy = AnimationHappyId.Happy3;
-					else if(script.Happy >= (12.5f * 4)) IsHappy = AnimationHappyId.Happy4;
-					else if(script.Happy >= (12.5f * 3)) IsHappy = AnimationHappyId.Sad1;
-					else if(script.Happy >= (12.5f * 2)) IsHappy = AnimationHappyId.Sad2;
-					else if(script.Happy >= (12.5f * 1)) IsHappy = AnimationHappyId.Sad3;
-					else IsHappy = AnimationHappyId.Sad4;
-
-
-
+					if(script.Happy >= (12.5f * 7)) 
+					{
+						IsHappy = AnimationHappyId.Happy4;
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy4);
+					}
+					else if(script.Happy >= (12.5f * 6)) 
+					{
+						IsHappy = AnimationHappyId.Happy3;
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy3);
+					}
+					else if(script.Happy >= (12.5f * 5)) 
+					{
+						IsHappy = AnimationHappyId.Happy2;
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy2);
+					}
+					else if(script.Happy >= (12.5f * 4)) 
+					{
+						IsHappy = AnimationHappyId.Happy1;
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy1);
+					}
+					else if(script.Happy >= (12.5f * 3)) 
+					{
+						IsHappy = AnimationHappyId.Sad1;
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Sad1);
+					}
+					else if(script.Happy >= (12.5f * 2)) 
+					{
+						IsHappy = AnimationHappyId.Sad2;
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Sad2);
+					}
+					else if(script.Happy >= (12.5f * 1)) 
+					{
+						IsHappy = AnimationHappyId.Sad3;
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Sad3);
+					}
+					else 
+					{
+						IsHappy = AnimationHappyId.Sad4;
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Sad4);
+					}
 				}
+
 				TimeInIdleState = 0;
 			}
 		}
@@ -499,7 +528,7 @@ public class AnimationControllerScript : MonoBehaviour
 		IsIdleLook1 = false;
 		IsIdleLook2 = false;
 		IsIdleLook3 = false;
-		IsIdleLook4 = false;
+	
 		IsIdleWave = false;
 		IsThrowing = false;
 		IsHappy = AnimationHappyId.None;

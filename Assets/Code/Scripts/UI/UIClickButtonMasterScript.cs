@@ -42,6 +42,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			}
 			
 			script.GroundItems.Clear();
+			UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CleanPooPiss);
 			
 			break;
 		}
