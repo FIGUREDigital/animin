@@ -55,7 +55,6 @@ public class TestScript : MonoBehaviour {
 					IsDetectingSwipeRight = !IsDetectingSwipeRight;
 					SwipesDetectedCount = 0;
 				}
-				
 			}
 			
 			

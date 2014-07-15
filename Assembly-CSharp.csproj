@@ -51,8 +51,11 @@
      <Compile Include="Assets\Code\PrefabPool.cs" />
      <Compile Include="Assets\Code\Scripts\AnimationControllerScript.cs" />
      <Compile Include="Assets\Code\Scripts\CameraFacingBillboardScript.cs" />
+     <Compile Include="Assets\Code\Scripts\CameraModelScript.cs" />
      <Compile Include="Assets\Code\Scripts\CharacterControllerScript.cs" />
      <Compile Include="Assets\Code\Scripts\CharacterProgressScript.cs" />
+     <Compile Include="Assets\Code\Scripts\DetectBroomScript.cs" />
+     <Compile Include="Assets\Code\Scripts\DetectDragIconScript.cs" />
      <Compile Include="Assets\Code\Scripts\DeviceCameraScript.cs" />
      <Compile Include="Assets\Code\Scripts\DragDrop3DItemScript.cs" />
      <Compile Include="Assets\Code\Scripts\DragDropMainBarItem.cs" />

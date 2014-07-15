@@ -161,7 +161,7 @@ public class CharacterProgressScript : MonoBehaviour
 	{
 		GameObject closestFood = null;
 
-		Debug.Log("GROUND ITEMs: " + GroundItems.Count.ToString());
+		//Debug.Log("GROUND ITEMs: " + GroundItems.Count.ToString());
 
 		for(int i=0;i<GroundItems.Count;++i)
 		{
@@ -190,9 +190,6 @@ public class CharacterProgressScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetButtonDown("Fire1")) Debug.Log("DETECTED  DOWN INSIDE UPDATE AT TOP");
-
-
 		Hungry -= Time.deltaTime * 0.2f;
 		//Fitness -= Time.deltaTime * 0.2f;
 		Fitness = 50;
@@ -270,14 +267,20 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 
-		Debug.Log(CurrentAction.ToString());
+		//Debug.Log(CurrentAction.ToString());
 		switch(CurrentAction)
 		{
 		case ActionId.EnterPortalToAR:
 			{
-				Stop(true);
-				animationController.IsInPortalStage = 1;
+				//OnEnterARScene();
 
+				if(animationController.IsExitPortal)
+			   	{
+					Debug.Log("EnterPortalToAR finished");
+					CurrentAction = ActionId.None;
+					UIGlobalVariablesScript.Singleton.Vuforia.OnEnterARScene();
+				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
+				}
 
 
 				break;
@@ -285,9 +288,14 @@ public class CharacterProgressScript : MonoBehaviour
 
 			case ActionId.EnterPortalToNonAR:
 			{
-				Stop(true);
-				animationController.IsInPortalStage = 1;
-
+				if(animationController.IsExitPortal)
+				{
+					Debug.Log("EnterPortalToNonAR finished");
+					CurrentAction = ActionId.None;
+					UIGlobalVariablesScript.Singleton.Vuforia.OnExitAR();
+				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
+				}
+				
 				break;
 			}
 
@@ -327,10 +335,7 @@ public class CharacterProgressScript : MonoBehaviour
 				else
 					HoldingLeftButtonDownTimer = 0;
 
-
-				if(Input.GetButtonDown("Fire1")) Debug.Log("DETECTED A BUTTON DOWN THING");
-
-					
+							
 				if(lastActionId != ActionId.None)
 				{
 					Debug.Log("if(lastActionId != ActionId.None)");
@@ -480,36 +485,58 @@ public class CharacterProgressScript : MonoBehaviour
 				}
 				else if(Input.GetButton("Fire1"))
 				{
-					Debug.Log("DETECT SWIPE MECHANISM");
+					//Debug.Log("DETECT SWIPE MECHANISM");
 
-					if(SwipeHistoryPositions.Count == 0)
+					/*if(SwipeHistoryPositions.Count == 0)
 					{
 						SwipeHistoryPositions.Add(Input.mousePosition);
 					}
 					else
-					{
-						if(IsDetectingSwipeRight)
+					{*/
+//						Debug.Log("DIFFERENCE: " + (Input.mousePosition.x - SwipeHistoryPositions[SwipeHistoryPositions.Count - 1].x).ToString());
+
+						bool triedOnce = false;
+						if(IsDetectingSwipeRight || SwipesDetectedCount == 0)
 						{
-							if((Input.mousePosition.x - SwipeHistoryPositions[SwipeHistoryPositions.Count - 1].x) >= 15)
+							bool hadEnoughMovement = false;
+							for(int i=0;i<SwipeHistoryPositions.Count;++i)
+								if((Input.mousePosition.x - SwipeHistoryPositions[i].x) >= 30)
+								{
+									hadEnoughMovement = true;
+									break;
+								}
+
+							if(hadEnoughMovement)
 							{
-								SwipeHistoryPositions.Add(Input.mousePosition);
+								//Debug.Log((Input.mousePosition.x - SwipeHistoryPositions[SwipeHistoryPositions.Count - 1].x).ToString());
+								
 								IsDetectingSwipeRight = !IsDetectingSwipeRight;
 								SwipesDetectedCount++;
 								Debug.Log("swipe moving right: " + SwipesDetectedCount.ToString());
+								triedOnce = true;
+								SwipeHistoryPositions.Clear();
 							}
 						}
-						else
+						
+						if(!triedOnce && (!IsDetectingSwipeRight || SwipesDetectedCount == 0))
 						{
-							if((SwipeHistoryPositions[SwipeHistoryPositions.Count - 1].x - Input.mousePosition.x) >= 15)
+							bool hadEnoughMovement = false;
+							for(int i=0;i<SwipeHistoryPositions.Count;++i)
+							if((SwipeHistoryPositions[i].x - Input.mousePosition.x) >= 30)
+									hadEnoughMovement = true;
+
+							if(hadEnoughMovement)
 							{
-								SwipeHistoryPositions.Add(Input.mousePosition);
+								//Debug.Log((Input.mousePosition.x - SwipeHistoryPositions[SwipeHistoryPositions.Count - 1].x).ToString());
+								//SwipeHistoryPositions.Add(Input.mousePosition);
 								IsDetectingSwipeRight = !IsDetectingSwipeRight;
 								SwipesDetectedCount++;
 								Debug.Log("swipe moving left: " + SwipesDetectedCount.ToString());
+								SwipeHistoryPositions.Clear();
 							}
 						}
 
-						if(SwipesDetectedCount > 0 && hadRayCollision)
+						if(hadRayCollision)
 						{
 							if(!TouchesObjcesWhileSwiping.Contains(hitInfo.collider.gameObject))
 								TouchesObjcesWhileSwiping.Add(hitInfo.collider.gameObject);
@@ -521,6 +548,7 @@ public class CharacterProgressScript : MonoBehaviour
 							Debug.Log("SWIPE DETECTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 							IsDetectingSwipeRight = !IsDetectingSwipeRight;
 							SwipesDetectedCount = 0;
+							
 
 							bool cleanedShit = false;
 							for(int i=0;i<TouchesObjcesWhileSwiping.Count;++i)
@@ -539,19 +567,26 @@ public class CharacterProgressScript : MonoBehaviour
 						if(cleanedShit) UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CleanPooPiss);
 
 												
-							if(TouchesObjcesWhileSwiping.Contains(this.gameObject) && !cleanedShit)
-							{
-								int random = UnityEngine.Random.Range(0, 5);
-								if(random == 0) animationController.IsIdleLook1 = true;
-								else if(random == 1) animationController.IsIdleLook2 = true;
-								else if(random == 2) animationController.IsIdleLook3 = true;
-								else if(random == 3) animationController.IsIdleWave = true;
-								
-								else if(random == 4) animationController.IsTickled = true;
-							}
-
+						if(TouchesObjcesWhileSwiping.Contains(this.gameObject) && !cleanedShit)
+						{
+							int random = UnityEngine.Random.Range(0, 5);
+							if(random == 0) animationController.IsIdleLook1 = true;
+							else if(random == 1) animationController.IsIdleLook2 = true;
+							else if(random == 2) animationController.IsIdleLook3 = true;
+							else if(random == 3) animationController.IsIdleWave = true;
+							
+							else if(random == 4) animationController.IsTickled = true;
 						}
+					}
+
+				
+				SwipeHistoryPositions.Add(Input.mousePosition);
+				if(SwipeHistoryPositions.Count >= 100)
+				{
+					SwipeHistoryPositions.RemoveAt(0);
+					Debug.Log("TOO MANY!!");
 				}
+				//}
 				
 
 				
@@ -584,7 +619,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 				}
-				else if (Input.GetButtonUp("Fire1")) 
+				else if (Input.GetButtonUp("Fire1") && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 0) 
 				{
 					Debug.Log("Input.GetButtonUp(Fire1)");
 					IsDetectFlick = false;
@@ -605,8 +640,6 @@ public class CharacterProgressScript : MonoBehaviour
 									animationController.IsHoldingItem = false;
 									
 								}
-
-
 							}
 							else if(ObjectHolding == null && animationController.IsAnyIdleAnimationPlaying())
 							{
@@ -983,8 +1016,8 @@ public class CharacterProgressScript : MonoBehaviour
 		if(PlayerPrefs.HasKey("Fitness"))
 			Fitness = PlayerPrefs.GetFloat("Fitness");
 
-		if(PlayerPrefs.HasKey("Evolution"))
-			Evolution = PlayerPrefs.GetFloat("Evolution");
+		//if(PlayerPrefs.HasKey("Evolution"))
+		//	Evolution = PlayerPrefs.GetFloat("Evolution");
 
 		if(PlayerPrefs.HasKey("EvolutionStage"))
 			EvolutionStage = PlayerPrefs.GetInt("EvolutionStage");

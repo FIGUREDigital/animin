@@ -185,7 +185,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		
 		//CharacterRef.transform.localP.osition = new Vector3(0, 0.5f, 0);
 		SavedARPosition.y = 0;
-		CharacterRef.transform.localPosition = SavedARPosition + new Vector3(0, 0.5f, 0);
+		CharacterRef.transform.localPosition = new Vector3(0, 0.1f, 0);
 		CharacterRef.transform.localRotation = Quaternion.Euler(0, 180, 0);
 		CharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
 		
@@ -244,15 +244,37 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 	private void OnTrackingFound()
 	{
-		OnEnterARScene();
-		
+		return;
+		UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToAR;
+
+		UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
+		Debug.Log("ENTERING AR STATE ");
 		//CharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToNonAR;
 	}
 
 	
 	private void OnTrackingLost()
 	{
-		OnExitAR();
-		//CharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToNonAR;
+		return;
+		if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.Sleep ||
+		   UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.EnterSleep)
+		{
+			OnExitAR();
+
+		}
+		else
+		{
+			Debug.Log("ENTERING NON AR STATE ");
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
+			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToNonAR;
+			
+			UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
+			
+			//OnExitAR();
+			//CharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToNonAR;
+		}
 	}
 }

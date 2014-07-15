@@ -42,20 +42,25 @@ public class ThrowAnimationScript : MonoBehaviour
 		{
 			case StateEnum.Begin:
 			{
-			this.transform.position += Direction * Time.deltaTime * ThrowSpeed;
+				this.transform.position += Direction * Time.deltaTime * ThrowSpeed;
 				this.transform.position -= new Vector3(0, VerticalSpeed * Time.deltaTime, 0);
 				
-			if(this.transform.position.y <= UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.y)
-			{
-				//Destroy(this.rigidbody);
-				this.transform.position = new Vector3(
-					this.transform.position.x,
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.y,
-					this.transform.position.z);
-				Destroy(this);
-				this.gameObject.layer = LayerMask.NameToLayer("Default");
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.ItemLand);
-			}
+				if(this.transform.position.y <= UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.y)
+				{
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.ItemLand);
+
+					//Destroy(this.rigidbody);
+					this.transform.position = new Vector3(
+						this.transform.position.x,
+						UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.y,
+						this.transform.position.z);
+					Destroy(this);
+
+					this.gameObject.layer = LayerMask.NameToLayer("Default");
+					
+					
+				}
+
 				break;
 			}
 

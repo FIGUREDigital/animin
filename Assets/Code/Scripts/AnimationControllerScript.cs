@@ -39,20 +39,31 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
-	public int IsInPortalStage 
+	public bool IsEnterPortal 
 	{
 		get
 		{
 
-			if(animator.GetCurrentAnimatorStateInfo(0).IsName("jump_in_portal")) return 1;
-			if(animator.GetCurrentAnimatorStateInfo(0).IsName("jump_out_portal")) return 2;
-
-			return 0;
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("jump_in_portal") || animator.GetBool("IsEnterPortal");
 		}
 		
 		set
 		{
-			animator.SetInteger("EnterPotal", (int)value );
+			animator.SetBool("IsEnterPortal", value );
+		}
+	}
+
+	public bool IsExitPortal 
+	{
+		get
+		{
+			
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("jump_out_portal");
+		}
+		
+		set
+		{
+			animator.SetBool("IsExitPortal", value );
 		}
 	}
 
@@ -542,6 +553,8 @@ public class AnimationControllerScript : MonoBehaviour
 		IsPat = false;
 
 		IsEating = false;	
+		IsExitPortal = false;
+		IsEnterPortal = false;
 	}
 }
 

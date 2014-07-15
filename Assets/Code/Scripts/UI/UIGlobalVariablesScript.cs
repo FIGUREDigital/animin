@@ -27,6 +27,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject GardenSceneRef;
 	public GameObject ARSceneRef;
 	public GameObject NonSceneRef;
+	public GameObject DragableUI3DObject;
 
 	// Interface Bars
 	public GameObject FitnessControlBarRef;
@@ -34,6 +35,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject HungryControlBarRef;
 	public GameObject HapynessControlBarRef;
 	public GameObject EvolutionControlBarRef;
+	public GameObject ARPortal;
 
 	public AnimationControllerScript MainCharacterAnimationControllerRef;
 	public GameObject MainCharacterRef;
@@ -46,6 +48,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject PopupIndicator;
 	public GameObject ImageTarget;
 
+	public TrackVuforiaScript Vuforia;
 	public GameObject IndicatorAboveHead;
 	public GameObject Item3DPopupMenu;
 	public SoundEngineScript SoundEngine;
@@ -53,6 +56,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	// Set from the code, keep static
 	public static GameObject ButtonTriggeredMainMenuPopupRef;
 	public static UIFunctionalityId SelectedMinigameToPlay;
+
 	
 
 	void Awake()
