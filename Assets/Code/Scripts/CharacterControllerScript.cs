@@ -604,6 +604,11 @@ public class CharacterControllerScript : MonoBehaviour
 		transform.rotation = Quaternion.Slerp(transform.rotation, RotateDirectionLookAt, Time.deltaTime * 6);
 	}
 
+	public void ResetRotation()
+	{
+		RotateDirectionLookAt = transform.rotation;
+	}
+
 	private Quaternion RotateDirectionLookAt = Quaternion.Euler(0, 180, 0);
 
 	public void RotateToLookAtPoint(Vector3 worldPoint)

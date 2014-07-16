@@ -58,7 +58,7 @@ public class AnimationControllerScript : MonoBehaviour
 		get
 		{
 			
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("jump_out_portal");
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("jump_out_portal")|| animator.GetBool("IsExitPortal");
 		}
 		
 		set

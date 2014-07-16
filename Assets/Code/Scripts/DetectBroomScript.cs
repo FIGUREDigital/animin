@@ -21,6 +21,7 @@ public class DetectBroomScript : MonoBehaviour {
 
 
 		GameObject child = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+		child.name = "Broom";
 
 		child.GetComponent<SphereCollider>().enabled = false;
 		

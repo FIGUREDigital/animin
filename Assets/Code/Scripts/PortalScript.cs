@@ -11,9 +11,11 @@ public class PortalScript : MonoBehaviour {
 	
 	}
 
-	public void Show(bool isArMode)
+	public void Show(bool isArMode, bool isJumbingIn)
 	{
 		this.gameObject.SetActive(true);
+
+	
 
 		if(isArMode)
 		{
@@ -24,7 +26,11 @@ public class PortalScript : MonoBehaviour {
 			this.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
 		}
 
-		this.transform.localPosition = Vector3.zero;
+		this.transform.localPosition = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition;
+		if(isJumbingIn)
+		{
+			this.transform.localPosition += new Vector3(0, 0, 0.1f);
+		}
 		//this.transform.position = Vector3.zero;
 
 

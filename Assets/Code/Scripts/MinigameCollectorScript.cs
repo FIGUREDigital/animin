@@ -25,6 +25,9 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	private List<int> LevelsToComplete = new List<int>();
 
+	private Vector3 CenterOffset = new Vector3(0.5f, 0, 0.5f);
+	private Vector3 CubeScaleSize = new Vector3(0.2f, 0.20f, 0.2f);
+
 
 	private class AnimationJob
 	{
@@ -55,8 +58,8 @@ public class MinigameCollectorScript : MonoBehaviour
 				CubeMatrix[j,i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				CubeMatrix[j,i].transform.parent = this.transform;
 				
-				CubeMatrix[j,i].transform.localPosition = new Vector3((j * 0.20f) + 0.1f, -0.10f, (i * 0.20f) + 0.1f);
-				CubeMatrix[j,i].transform.localScale = new Vector3(0.20f, 0.2f, 0.20f);
+				CubeMatrix[j,i].transform.localPosition = new Vector3((j * CubeScaleSize.x) + 0.1f, -0.10f, (i * CubeScaleSize.z) + 0.1f) - CenterOffset;
+				CubeMatrix[j,i].transform.localScale = new Vector3(CubeScaleSize.x, CubeScaleSize.y, CubeScaleSize.z);
 				CubeMatrix[j,i].transform.localRotation = Quaternion.identity;
 				
 			}
@@ -90,7 +93,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	void ResetCharacter()
 	{
-		CharacterRef.transform.localPosition = new Vector3(0.5f, 1, 0.5f);
+		CharacterRef.transform.localPosition = new Vector3(0.5f, 1, 0.5f) - CenterOffset;
 		CharacterRef.GetComponent<CharacterControllerScript>().IsResetFalling = true;
 
 	}
@@ -412,7 +415,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	private Vector3 GetPositionForCell(int x, float height, int z)
 	{
-		return new Vector3 ((x * 0.20f) + 0.1f, height, (z* 0.20f) + 0.1f);
+		return new Vector3 ((x * CubeScaleSize.x) + 0.1f, height, (z* CubeScaleSize.z) + 0.1f) - CenterOffset;
 	}
 
 
@@ -424,16 +427,16 @@ public class MinigameCollectorScript : MonoBehaviour
 				if(builder.NormalCubes.Contains(new Vector2(j, i)))
 				{
 
-					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], CubeMatrix [j, i].transform.localPosition, new Vector3 ((j * 0.20f) + 0.1f, -0.1f, (i* 0.20f) + 0.1f)));
+					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], CubeMatrix [j, i].transform.localPosition, new Vector3 ((j * CubeScaleSize.x) + 0.1f, -0.1f, (i* CubeScaleSize.z) + 0.1f) - CenterOffset));
 				}
 				else if(builder.RaisedCubes.Contains(new Vector2(j, i)))
 				{
 
-					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], CubeMatrix [j, i].transform.localPosition, new Vector3 ((j * 0.20f) + 0.1f, 0.1f, (i* 0.20f) + 0.1f)));
+					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], CubeMatrix [j, i].transform.localPosition, new Vector3 ((j * CubeScaleSize.x) + 0.1f, 0.1f, (i* CubeScaleSize.z) + 0.1f)- CenterOffset));
 				}
 				else
 				{
-					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], CubeMatrix [j, i].transform.localPosition, new Vector3 ((j * 0.20f) + 0.1f, -0.9f, (i* 0.20f) + 0.1f)));
+					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], CubeMatrix [j, i].transform.localPosition, new Vector3 ((j * CubeScaleSize.x) + 0.1f, -0.9f, (i* CubeScaleSize.z) + 0.1f)- CenterOffset));
 				}
 			}
 		}

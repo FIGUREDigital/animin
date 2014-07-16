@@ -111,6 +111,7 @@ public class CharacterProgressScript : MonoBehaviour
 	float HoldingLeftButtonDownTimer;
 	private bool TriggeredHoldAction;
 	private List<Vector3> SwipeHistoryPositions = new List<Vector3>();
+	public float PortalTimer;
 
 	// Use this for initialization
 	void Awake () 
@@ -273,32 +274,41 @@ public class CharacterProgressScript : MonoBehaviour
 		case ActionId.EnterPortalToAR:
 			{
 				//OnEnterARScene();
+				PortalTimer += Time.deltaTime;
 
-				if(animationController.IsExitPortal)
+				if(PortalTimer >= 1.10f)
 			   	{
 					Debug.Log("EnterPortalToAR finished");
 					CurrentAction = ActionId.None;
 					UIGlobalVariablesScript.Singleton.Vuforia.OnEnterARScene();
-				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
-				}
+					
+					
+			
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
+
+				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true, false);
+			}
 
 
 				break;
 			}
 
-			case ActionId.EnterPortalToNonAR:
+			/*case ActionId.EnterPortalToNonAR:
 			{
-				if(animationController.IsExitPortal)
+				PortalTimer += Time.deltaTime;
+			
+				if(PortalTimer >= 1.10f)
 				{
 					Debug.Log("EnterPortalToNonAR finished");
 					CurrentAction = ActionId.None;
 					UIGlobalVariablesScript.Singleton.Vuforia.OnExitAR();
-				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
+					UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(false);
 				}
 				
 				break;
 			}
-
+*/
 			case ActionId.EnterSleep:
 			{
 				animationController.IsSleeping = true;
@@ -619,12 +629,22 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 				}
-				else if (Input.GetButtonUp("Fire1") && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 0) 
+				else if (Input.GetButtonUp("Fire1")) 
 				{
 					Debug.Log("Input.GetButtonUp(Fire1)");
 					IsDetectFlick = false;
 					IsDetectingMouseMoveForDrag = false;
-					if (!AtLeastOneSwipeDetected && hadRayCollision/* && !TriggeredHoldAction*/)
+
+				if(UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 1 && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.GetChild(0).name == "Broom")
+				{
+					if(hadRayCollision != null && (hitInfo.collider.tag == "Items" || hitInfo.collider.tag == "Shit") && GroundItems.Contains(hitInfo.collider.gameObject))
+					{
+						GroundItems.Remove(hitInfo.collider.gameObject);
+						Destroy(hitInfo.collider.gameObject);
+						
+					}
+				}
+				else if (!AtLeastOneSwipeDetected && hadRayCollision/* && !TriggeredHoldAction*/)
 					{
 
 						if(hitInfo.collider.name.StartsWith("MainCharacter") || hitInfo.collider.gameObject == ObjectHolding)
@@ -826,8 +846,21 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 
-		switch(sadUnwellLoopState)
+		if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId != AnimateCharacterOutPortalScript.JumbStateId.None 
+		   || CurrentAction == ActionId.EnterPortalToAR 
+		   || CurrentAction == ActionId.EnterPortalToNonAR 
+		   || animationController.IsEnterPortal 
+		   || animationController.IsExitPortal)
 		{
+			animationController.IsSad = false;
+			animationController.IsNotWell = false;
+			animationController.IsHungry = false;
+			sadUnwellLoopState = HungrySadUnwellLoopId.DetectAnimation;
+		}
+		else
+		{
+			switch(sadUnwellLoopState)
+			{
 			case HungrySadUnwellLoopId.DetectAnimation:
 			{
 				if(ObjectHolding == null)
@@ -838,7 +871,7 @@ public class CharacterProgressScript : MonoBehaviour
 						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
 						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 						sadUnwellLoopState = HungrySadUnwellLoopId.PlayHungry;
-					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Hungry);
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Hungry);
 						
 					}
 					else if(Health <= 50 && animationController.IsIdle)
@@ -847,7 +880,7 @@ public class CharacterProgressScript : MonoBehaviour
 						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
 						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 						sadUnwellLoopState = HungrySadUnwellLoopId.PlayUnwell;
-					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Unwell);
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Unwell);
 						
 					}
 					/*else if(Happy <= 50 && animationController.IsIdle)
@@ -858,17 +891,17 @@ public class CharacterProgressScript : MonoBehaviour
 						sadUnwellLoopState = HungrySadUnwellLoopId.PlaySad;
 					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Happy1);
 					}*/
-
+					
 				}
-
+				
 				break;
 			}
-
+				
 			case HungrySadUnwellLoopId.PlayHungry:
 			case HungrySadUnwellLoopId.PlaySad:
 			case HungrySadUnwellLoopId.PlayUnwell:
 			{
-
+				
 				LengthOfHungryUnwellSadAnimation -= Time.deltaTime;
 				if(LengthOfHungryUnwellSadAnimation <= 0)
 				{
@@ -877,23 +910,26 @@ public class CharacterProgressScript : MonoBehaviour
 					animationController.IsHungry = false;
 					sadUnwellLoopState = HungrySadUnwellLoopId.OnCooldown;
 				}
-
+				
 				break;
 			}
-
+				
 			case HungrySadUnwellLoopId.OnCooldown:
 			{
 				TimeForNextHungryUnwellSadAnimation -= Time.deltaTime;
-
+				
 				if(TimeForNextHungryUnwellSadAnimation <= 0)
 				{
 					sadUnwellLoopState = HungrySadUnwellLoopId.DetectAnimation;
 				}
-
+				
 				break;
 			}
-
+				
+			}
 		}
+
+
 
 
 

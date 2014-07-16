@@ -62,7 +62,7 @@ public class JoystiqScript : MonoBehaviour {
 	
 	public void EnableJoystick() 
 	{
-		joystick.enabled = true;
+		//joystick.enabled = true;
 		background.enabled = true;
 		backOBJ.SetActive(true);
 		enable = true; 
@@ -203,7 +203,8 @@ public class JoystiqScript : MonoBehaviour {
 		
 		joystick = gameObject.AddComponent("GUITexture") as GUITexture;
 		
-		joystick.texture = joystick2D; joystick.color = inactiveColor;
+		joystick.texture = joystick2D; 
+		joystick.color = inactiveColor;
 		
 		backOBJ = new GameObject("VJR-Joystick Back");
 		
@@ -211,7 +212,8 @@ public class JoystiqScript : MonoBehaviour {
 		
 		background = backOBJ.AddComponent("GUITexture") as GUITexture;
 		
-		background.texture = background2D; background.color = inactiveColor;
+		background.texture = background2D; 
+		background.color = inactiveColor;
 		
 		fingerID = -1; 
 		lastID = -1; 

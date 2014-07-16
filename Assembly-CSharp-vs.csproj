@@ -49,6 +49,7 @@
      <Compile Include="Assets\Code\Enumerations\UIFunctionalityId.cs" />
      <Compile Include="Assets\Code\Helpers.cs" />
      <Compile Include="Assets\Code\PrefabPool.cs" />
+     <Compile Include="Assets\Code\Scripts\AnimateCharacterOutPortalScript.cs" />
      <Compile Include="Assets\Code\Scripts\AnimationControllerScript.cs" />
      <Compile Include="Assets\Code\Scripts\CameraFacingBillboardScript.cs" />
      <Compile Include="Assets\Code\Scripts\CameraModelScript.cs" />

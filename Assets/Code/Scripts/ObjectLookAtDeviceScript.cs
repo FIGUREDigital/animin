@@ -60,14 +60,14 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 		 	|| GetComponent<AnimationControllerScript>().IsIdleLook3 
 		 	
 		 	|| GetComponent<AnimationControllerScript>().IsHappy == AnimationHappyId.None)
-		   && dotProduct >= -0.4f)
+		   && dotProduct >= -0.4f && UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId == AnimateCharacterOutPortalScript.JumbStateId.None)
 		{
 			TimeStartingAwayFromCamera += Time.deltaTime;
 			//transform.parent.LookAt(this.transform.position);
 			//transform.parent.GetComponent<CharacterControllerScript>().moveDirection = transform.parent.position + transform.parent.forward * 5;
 //			Debug.Log("turn around man");
 
-			if(TimeStartingAwayFromCamera >= 1)
+			if(TimeStartingAwayFromCamera >= 1.5f)
 			{
 				//transform.parent.LookAt(Camera.main.transform.position);
 				Vector3 newCameraPoint = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
