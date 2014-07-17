@@ -47,6 +47,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 
 	public GameObject PopupIndicator;
 	public GameObject ImageTarget;
+	public GameObject MinigameInterruptedMenu;
 
 	public TrackVuforiaScript Vuforia;
 	public GameObject IndicatorAboveHead;

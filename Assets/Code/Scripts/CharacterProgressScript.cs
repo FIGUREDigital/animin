@@ -192,8 +192,7 @@ public class CharacterProgressScript : MonoBehaviour
 	void Update () 
 	{
 		Hungry -= Time.deltaTime * 0.2f;
-		//Fitness -= Time.deltaTime * 0.2f;
-		Fitness = 50;
+		Fitness -= Time.deltaTime * 0.2f;
 		Health -= Time.deltaTime * 0.2f;
 
 		if(Health < 0 ) Health = 0;
@@ -933,7 +932,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 
-		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 30 && !animationController.IsSleeping && animationController.IsIdle)
+		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 90 && !animationController.IsSleeping && animationController.IsIdle)
 		{
 			GameObject newPoo;
 			if(UnityEngine.Random.Range(0, 2) == 0)

@@ -25,8 +25,9 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	private List<int> LevelsToComplete = new List<int>();
 
-	private Vector3 CenterOffset = new Vector3(0.5f, 0, 0.5f);
-	private Vector3 CubeScaleSize = new Vector3(0.2f, 0.20f, 0.2f);
+	//private Vector3 CenterOffset = new Vector3(0.5f, 0, 0.5f);
+	//private Vector3 CubeScaleSize = new Vector3(0.2f, 0.20f, 0.2f);
+	public GameObject Stage;
 
 
 	private class AnimationJob
@@ -50,17 +51,34 @@ public class MinigameCollectorScript : MonoBehaviour
 	void Awake () 
 	{
 		CubeMatrix = new GameObject[MapWidth, MapHeight];
+
+		int xCounter = 0;
+		int yCounter = 0;
+
+		for(int i=0;i<Stage.transform.childCount;++i)
+		{
+			if(Stage.transform.GetChild(i).name.StartsWith("Cube"))
+			{
+				CubeMatrix[yCounter, xCounter] = Stage.transform.GetChild(i).gameObject;
+				xCounter++;
+				if(xCounter == 5)
+				{
+					xCounter = 0;
+					yCounter++;
+				}
+			}
+		}
 		
 		for (int i=0; i<MapHeight; ++i) 
 		{
 			for(int j=0; j<MapWidth; ++j)
 			{
-				CubeMatrix[j,i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
-				CubeMatrix[j,i].transform.parent = this.transform;
+				//CubeMatrix[j,i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+				//CubeMatrix[j,i].transform.parent = this.transform;
 				
-				CubeMatrix[j,i].transform.localPosition = new Vector3((j * CubeScaleSize.x) + 0.1f, -0.10f, (i * CubeScaleSize.z) + 0.1f) - CenterOffset;
-				CubeMatrix[j,i].transform.localScale = new Vector3(CubeScaleSize.x, CubeScaleSize.y, CubeScaleSize.z);
-				CubeMatrix[j,i].transform.localRotation = Quaternion.identity;
+				//CubeMatrix[j,i].transform.localPosition = new Vector3((j * CubeScaleSize.x) + 0.1f, -0.10f, (i * CubeScaleSize.z) + 0.1f) - CenterOffset;
+				//CubeMatrix[j,i].transform.localScale = new Vector3(CubeScaleSize.x, CubeScaleSize.y, CubeScaleSize.z);
+				//CubeMatrix[j,i].transform.localRotation = Quaternion.identity;
 				
 			}
 		}
@@ -76,12 +94,12 @@ public class MinigameCollectorScript : MonoBehaviour
 	
 		UpdateAnimations ();
 		CheckForPickupCollision ();
-		if(CharacterRef.transform.localPosition.y <= -0.1f)
+		if(CharacterRef.transform.localPosition.y <= -2)
 		{
 			CharacterRef.GetComponent<CharacterControllerScript>().IsResetFalling = true;
 		}
 
-		if (CharacterRef.transform.localPosition.y <= -0.5f) 
+		if (CharacterRef.transform.localPosition.y <= -5f) 
 		{
 			CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
 			if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
@@ -89,11 +107,13 @@ public class MinigameCollectorScript : MonoBehaviour
 		}
 
 		UIGlobalVariablesScript.Singleton.TextForStarsInMiniCollector.text = CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned.ToString();
+	
 	}
 
 	void ResetCharacter()
 	{
-		CharacterRef.transform.localPosition = new Vector3(0.5f, 1, 0.5f) - CenterOffset;
+		CharacterRef.transform.localPosition = Vector3.zero;
+		CharacterRef.transform.position = new Vector3(0, 2, 0);
 		CharacterRef.GetComponent<CharacterControllerScript>().IsResetFalling = true;
 
 	}
@@ -228,7 +248,7 @@ public class MinigameCollectorScript : MonoBehaviour
 	 	LevelBuilder level = RandomizeLevel (MapWidth, MapHeight, newLevel);
 
 		BuildFromLevelBuilder(level);
-
+		Debug.Log("MINIGAME TEST 1");
 		for(int i=0;i<EvilCharacters.Count;++i)
 		{
 			EvilCharacters[i].SetActive(true);
@@ -273,11 +293,11 @@ public class MinigameCollectorScript : MonoBehaviour
 
 
 				builder.CreateEvilPatternCharacter(new Vector3[] { 
-				GetPositionForCell(0, -0.042f, 0), 
-				GetPositionForCell(4, -0.042f, 0),
-				GetPositionForCell(4, -0.042f, 4),
-				GetPositionForCell(0, -0.042f, 4),
-				GetPositionForCell(0, -0.042f, 0) });
+				GetPositionForCell(0, 0, 0), 
+				GetPositionForCell(4, 0, 0),
+				GetPositionForCell(4, 0, 4),
+				GetPositionForCell(0, 0, 4),
+				GetPositionForCell(0, 0, 0) });
 
 				return builder;
 			}
@@ -331,14 +351,14 @@ public class MinigameCollectorScript : MonoBehaviour
 
 
 			builder.CreateEvilPatternCharacter(new Vector3[] { 
-				GetPositionForCell(0, -0.042f, 1), 
-				GetPositionForCell(4, -0.042f, 1),
-				GetPositionForCell(0, -0.042f, 1) });
+				GetPositionForCell(0, 0, 1), 
+				GetPositionForCell(4, 0, 1),
+				GetPositionForCell(0, 0, 1) });
 
 			builder.CreateEvilPatternCharacter(new Vector3[] { 
-				GetPositionForCell(0, -0.042f, 3), 
-				GetPositionForCell(4, -0.042f, 3),
-				GetPositionForCell(0, -0.042f, 3) });
+				GetPositionForCell(0, 0, 3), 
+				GetPositionForCell(4, 0, 3),
+				GetPositionForCell(0, 0, 3) });
 				
 				
 				return builder;
@@ -412,10 +432,9 @@ public class MinigameCollectorScript : MonoBehaviour
 		return null;
 	}
 
-
-	private Vector3 GetPositionForCell(int x, float height, int z)
+		private Vector3 GetPositionForCell(int x, float height, int z)
 	{
-		return new Vector3 ((x * CubeScaleSize.x) + 0.1f, height, (z* CubeScaleSize.z) + 0.1f) - CenterOffset;
+		return new Vector3(CubeMatrix[x, z].transform.position.x, height, CubeMatrix[x, z].transform.position.z );// new Vector3 ((x * CubeScaleSize.x) + 0.1f, height, (z* CubeScaleSize.z) + 0.1f) - CenterOffset;
 	}
 
 
@@ -424,19 +443,21 @@ public class MinigameCollectorScript : MonoBehaviour
 		for (int i=0; i<MapHeight; ++i) {
 			for (int j=0; j<MapWidth; ++j) {
 
+				Transform localTransform = CubeMatrix [j, i].transform;
+
 				if(builder.NormalCubes.Contains(new Vector2(j, i)))
 				{
 
-					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], CubeMatrix [j, i].transform.localPosition, new Vector3 ((j * CubeScaleSize.x) + 0.1f, -0.1f, (i* CubeScaleSize.z) + 0.1f) - CenterOffset));
+					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], localTransform.localPosition, new Vector3(localTransform.localPosition.x, 0, localTransform.localPosition.z)));
 				}
 				else if(builder.RaisedCubes.Contains(new Vector2(j, i)))
 				{
 
-					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], CubeMatrix [j, i].transform.localPosition, new Vector3 ((j * CubeScaleSize.x) + 0.1f, 0.1f, (i* CubeScaleSize.z) + 0.1f)- CenterOffset));
+					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], localTransform.localPosition, new Vector3(localTransform.localPosition.x, 2, localTransform.localPosition.z)));
 				}
 				else
 				{
-					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], CubeMatrix [j, i].transform.localPosition, new Vector3 ((j * CubeScaleSize.x) + 0.1f, -0.9f, (i* CubeScaleSize.z) + 0.1f)- CenterOffset));
+					AnimationJobs.Add (new AnimationJob (CubeMatrix [j, i], localTransform.localPosition, new Vector3(localTransform.localPosition.x, -30, localTransform.localPosition.z)));
 				}
 			}
 		}
@@ -457,7 +478,7 @@ public class MinigameCollectorScript : MonoBehaviour
 			collection.transform.parent = randomParent.transform;
 			collection.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 			collection.transform.localRotation = Quaternion.identity;
-			collection.transform.localPosition = new Vector3(-0.0f, 1.0f, -0.0f);
+			collection.transform.localPosition = new Vector3(-1, 0.3f, -1.0f);
 			
 			collection.AddComponent<OscillationUpDownScript>();
 
@@ -480,7 +501,7 @@ public class MinigameCollectorScript : MonoBehaviour
 		{
 			EvilCharacterPatternMovementScript component = EvilCharacterPool[i].AddComponent<EvilCharacterPatternMovementScript>();
 			component.Pattern = builder.EvilCharactersInPatterns[i];
-			component.Speed = 0.1f;
+			component.Speed = 20.1f;
 			component.Lerp = 0;
 			component.Index = 0;
 			

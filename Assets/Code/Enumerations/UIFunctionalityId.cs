@@ -42,4 +42,7 @@ public enum UIFunctionalityId
 	ChangeCameraFacingMode,
 	ClearAllGroundItems,
 	ClearDragedItem,
+
+	ResumeInterruptedMinigame,
+	ExitInterruptedMinigame,
 }

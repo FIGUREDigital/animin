@@ -265,9 +265,12 @@ public class JoystiqScript : MonoBehaviour {
 					if (touch.fingerId == fingerID) {
 						
 						position = touch.position; 
+						//Debug.Log("position1:" + position.ToString());
 						position = GetRadius(origin, position,length);
-						
+						//Debug.Log("position2:" + position.ToString());
+
 						VJRvector = GetControls(position,origin); 
+						//Debug.Log("VJRVECTOR:" + VJRvector.ToString());
 						VJRnormals = new Vector2(VJRvector.x/length,VJRvector.y/length);
 						
 						if (Input.GetTouch(fingerID).position.x > (Screen.width/3)+background.pixelInset.width
@@ -334,10 +337,21 @@ public class JoystiqScript : MonoBehaviour {
 		if(VJRnormals != Vector2.zero)
 		{
 
-			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
-			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = true;
+			if(Mathf.Abs(VJRnormals.x) >= 0.9f || Mathf.Abs(VJRnormals.y) >= 0.9f)
+			{
+				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = true;
+				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = false;
+				CharacterControllerRef.walkSpeed = 120;
+			}
+			else
+			{
+				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
+				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = true;
+				CharacterControllerRef.walkSpeed = 60;
+			}
+
 			CharacterControllerRef.RotateToLookAtPoint(CharacterControllerRef.transform.position + CharacterControllerRef.MovementDirection * 6);
-			CharacterControllerRef.walkSpeed = 60;
+
 		}
 		else
 		{

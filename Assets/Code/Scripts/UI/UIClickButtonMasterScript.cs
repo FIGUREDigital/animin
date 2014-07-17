@@ -156,6 +156,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
 
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localRotation = Quaternion.Euler(0, 180, 0);
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Fitness += 45;
 			
 			break;
 		}
@@ -240,17 +241,19 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				{
 					UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(true);
 					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(true);
-				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().HardcoreReset();
+					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().HardcoreReset();
 
-				SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().enabled = true;
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().EnableJoystick();
+					SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().enabled = true;
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().EnableJoystick();
 
 				
-				break;
+					break;
 				}
 			}
+
+
 			
 			break;
 		}
@@ -326,6 +329,21 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 
 			
+			break;
+		}
+
+		case UIFunctionalityId.ResumeInterruptedMinigame:
+		{
+			UIGlobalVariablesScript.Singleton.MinigameInterruptedMenu.SetActive(false);
+
+			break;
+		}
+
+		case UIFunctionalityId.ExitInterruptedMinigame:
+		{
+			UIGlobalVariablesScript.Singleton.MinigameInterruptedMenu.SetActive(false);
+			HandleClick(UIFunctionalityId.CloseCurrentMinigame);
+			UIGlobalVariablesScript.Singleton.Vuforia.OnTrackingLost();
 			break;
 		}
 			

@@ -32,7 +32,7 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 			//Debug.Log("Change Index: " + Index.ToString());
 		}
 		
-		this.transform.localPosition = Vector3.Lerp(
+		this.transform.position = Vector3.Lerp(
 			Pattern[Index], 
 			Pattern[Index + 1], 
 			Lerp);
