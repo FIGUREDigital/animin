@@ -6,26 +6,39 @@ using UnityEngine;
 
 
 public class JoystiqScript : MonoBehaviour {
-	
+
+	public UISprite ThumbpadFront;
+	public UISprite ThumbpadBack;
+
+	private float LeftAnchorStartPosition;
+	private float RightAnchorStartPosition;
+	private float TopAnchorStartPosition;
+	private float BottomAnchorPosition;
+
 	public static Vector2 VJRvector;    // Joystick's controls in Screen-Space.
 	
 	public static Vector2 VJRnormals;   // Joystick's normalized controls.
 	
 	public static bool VJRdoubleTap;    // Player double tapped this Joystick.
 	
-	public Color activeColor;           // Joystick's color when active.
+	//public Color activeColor;           // Joystick's color when active.
 	
-	public Color inactiveColor;         // Joystick's color when inactive.
+	//public Color inactiveColor;         // Joystick's color when inactive.
 	
-	public Texture2D joystick2D;        // Joystick's Image.
+	//public Texture2D joystick2D;        // Joystick's Image.
 	
-	public Texture2D background2D;      // Background's Image.
+	//public Texture2D background2D;      // Background's Image.
+	//public Texture2D jumb2D;
 	
-	private GameObject backOBJ;         // Background's Object.
+	//private GameObject backOBJ;         // Background's Object.
+
+	//private GameObject jumbOBJ;
+
+	//private GUITexture jumbTexture;
 	
-	private GUITexture joystick;        // Joystick's GUI.
+	//private GUITexture joystick;        // Joystick's GUI.
 	
-	private GUITexture background;      // Background's GUI.
+	//private GUITexture background;      // Background's GUI.
 	
 	private Vector2 origin;             // Touch's Origin in Screen-Space.
 	
@@ -51,8 +64,9 @@ public class JoystiqScript : MonoBehaviour {
 	
 	
 	
-	public void DisableJoystick() 
+	/*public void DisableJoystick() 
 	{
+
 		joystick.enabled = false;
 		background.enabled = false;
 		backOBJ.SetActive(false);
@@ -65,38 +79,37 @@ public class JoystiqScript : MonoBehaviour {
 		//joystick.enabled = true;
 		background.enabled = true;
 		backOBJ.SetActive(true);
-		enable = true; 
+		enable = true;
 		ResetJoystick();
-	}
+	}*/
 	
 	
 	
 	//
-	
-	
-	
-	private void ResetJoystick() 
+	/*
+	public void DisableJoystick() 
 	{
-		
-		VJRvector = new Vector2(0,0); 
-
-		VJRnormals = VJRvector;
-		
-		lastID = fingerID; fingerID = -1; 
-
-		tapTimer = 0.150f;
-		
-		joystick.color = inactiveColor;
-
-		position = origin; 
-
-		gotPosition = false;
-		
+		enable = false; 
+		ResetJoystick();
+	}
+	public void EnableJoystick() 
+	{
+		enable = true; 
+		ResetJoystick();
 	}
 	
+	public void ResetJoystick() 
+	{
+		
+		VJRvector = new Vector2(0,0); VJRnormals = VJRvector;
+		lastID = fingerID; fingerID = -1; tapTimer = 0.150f;
+		//joystick.color = inactiveColor; position = origin; gotPosition = false;
+		
+	}
+	*/
 	
 	
-	private Vector2 GetRadius(Vector2 midPoint, Vector2 endPoint, float maxDistance) {
+	/*private Vector2 GetRadius(Vector2 midPoint, Vector2 endPoint, float maxDistance) {
 		
 		Vector2 distance = endPoint;
 		
@@ -128,15 +141,15 @@ public class JoystiqScript : MonoBehaviour {
 					
 					position = Input.GetTouch(fingerID).position;
 
-					//origin = position;
+					origin = position;
 
 					//Debug.Log("GET POSITION@:" + position.ToString());
 					
-					joystick.texture = joystick2D; 
-					joystick.color = activeColor;
-					
-					background.texture = background2D; 
-					background.color = activeColor;
+//					joystick.texture = joystick2D; 
+//					joystick.color = activeColor;
+//					
+//					background.texture = background2D; 
+//					background.color = activeColor;
 					
 					if (fingerID == lastID && tapTimer > 0) 
 					{
@@ -148,30 +161,30 @@ public class JoystiqScript : MonoBehaviour {
 				}
 			}
 		}
-	}
+	}*/
 	
 	
-	
+	/*
 	private void GetConstraints() {
 		
-		if (origin.x < (background.pixelInset.width/2)+25) 
+		if (origin.x < (ThumbpadBack.transform.position.x)) 
 		{
-			origin.x = (background.pixelInset.width/2)+25;
+			origin.x = ThumbpadBack.transform.position.x;
 		}
 		
-		if (origin.y < (background.pixelInset.height/2)+25) 
+		if (origin.y < (ThumbpadBack.transform.position.y)) 
 		{
-			origin.y = (background.pixelInset.height/2)+25;
+			origin.y = (ThumbpadBack.transform.position.y);
 		}
 		
-		if (origin.x > Screen.width/3) 
+		if (origin.x > (ThumbpadBack.transform.position.x + ThumbpadBack.width)) 
 		{
-			origin.x = Screen.width/3;
+			origin.x = (ThumbpadBack.transform.position.x + ThumbpadBack.width);
 		}
 		
-		if (origin.y > Screen.height/3) 
+		if (origin.y > (ThumbpadBack.transform.position.y + ThumbpadBack.height)) 
 		{
-			origin.y = Screen.height/3;
+			origin.y = (ThumbpadBack.transform.position.y + ThumbpadBack.height);
 		}
 		
 	}
@@ -182,63 +195,196 @@ public class JoystiqScript : MonoBehaviour {
 		
 		Vector2 vector = new Vector2();
 		
-		if (Vector2.Distance(pos,ori) > 0) {vector = new Vector2(pos.x-ori.x,pos.y-ori.y);}
+		if (Vector2.Distance(pos,ori) > 0)
+		{
+			vector = new Vector2(pos.x-ori.x,pos.y-ori.y);
+		}
 		
 		return vector;
 	}
 	
 	
-	
+	*/
 	//
 	
 	
 	
 	private void Awake() {
 		
-		gameObject.transform.localScale = new Vector3(0,0,0);
-		
+		/*gameObject.transform.localScale = new Vector3(0,0,0);
 		gameObject.transform.position = new Vector3(0,0,999);
-		
-		if (Screen.width > Screen.height) {size = Screen.height;} else {size = Screen.width;} VJRvector = new Vector2(0,0);
-		
+
+		if (Screen.width > Screen.height) 
+		{
+			size = Screen.height;
+		} 
+		else 
+		{
+			size = Screen.width;
+		} 
+
+		VJRvector = new Vector2(0,0);*/
+
+		/*
 		joystick = gameObject.AddComponent("GUITexture") as GUITexture;
-		
-		joystick.texture = joystick2D; 
-		joystick.color = inactiveColor;
-		
+		joystick.texture = joystick2D; joystick.color = inactiveColor;
+
 		backOBJ = new GameObject("VJR-Joystick Back");
-		
+		backOBJ.transform.parent = this.transform;
 		backOBJ.transform.localScale = new Vector3(0,0,0);
-		
 		background = backOBJ.AddComponent("GUITexture") as GUITexture;
-		
-		background.texture = background2D; 
-		background.color = inactiveColor;
-		
+		background.texture = background2D; background.color = inactiveColor;
+
+
+		jumbOBJ = new GameObject("jumb button");
+		jumbOBJ.transform.parent = this.transform;
+		jumbOBJ.transform.localScale = new Vector3(0,0,0);
+		jumbTexture = jumbOBJ.AddComponent("GUITexture") as GUITexture;
+
+		jumbTexture.texture = jumb2D; 
+		jumbTexture.color = Color.white;
+
+		*/
+
 		fingerID = -1; 
 		lastID = -1; 
 		VJRdoubleTap = false; 
 		tapTimer = 0; 
-		length = 50;
-		
-		position = new Vector2(200, 200); 
+		length = 140;
 
-		origin = position;
-		
-		gotPosition = false; 
+		//position = new Vector2(ThumbpadBack.transform.position.x + ThumbpadBack.width / 2, ThumbpadBack.transform.position.y + ThumbpadBack.height / 2); //new Vector2((Screen.width/3)/2,(Screen.height/3)/2);; 
 
-		DisableJoystick(); 
+		//origin = position;
+		//gotPosition = false; EnableJoystick(); enable = true;
 	}
 
 	void Start()
 	{
-
+		LeftAnchorStartPosition = ThumbpadFront.leftAnchor.absolute;
+		RightAnchorStartPosition = ThumbpadFront.rightAnchor.absolute;
+		TopAnchorStartPosition = ThumbpadFront.topAnchor.absolute;
+		BottomAnchorPosition = ThumbpadFront.bottomAnchor.absolute;
 	}
 	
-	
+
+	private Vector2 finalMovementDirection = Vector2.zero;
 	
 	private void Update() {
-		
+
+		/*if(Input.GetKey(KeyCode.A))
+		{
+			Debug.Log("DOING A: " + ThumbpadBack.leftAnchor.relative.ToString() + "_" + ThumbpadBack.leftAnchor.absolute.ToString() + "_" + ThumbpadFront.width.ToString());
+
+
+			ThumbpadFront.leftAnchor.Set(ThumbpadFront.leftAnchor.relative, ThumbpadFront.leftAnchor.absolute + 1);
+			ThumbpadFront.rightAnchor.Set(ThumbpadFront.rightAnchor.relative, ThumbpadFront.rightAnchor.absolute + 1);
+			ThumbpadFront.ResetAnchors();
+			ThumbpadFront.UpdateAnchors();
+		}*/
+
+		bool isButtonDown = false;
+		Vector3 mousePosition = Vector3.zero;
+
+		for(int i=0;i<Input.touchCount;++i)
+		{
+			TouchPhase phase = Input.GetTouch(i).phase;
+
+			if(fingerID == -1)
+			{
+				if(Input.GetTouch(i).position.x < Screen.width/3 
+				   && Input.GetTouch(i).position.y < Screen.height/3 
+				   && Input.GetTouch(i).phase == TouchPhase.Began)
+				{
+					fingerID = Input.GetTouch(i).fingerId;
+					isButtonDown = true;
+					mousePosition = Input.GetTouch(i).position;
+				}
+			}
+			else
+			{
+				if(Input.GetTouch(i).fingerId == fingerID)
+				{
+					isButtonDown = true;
+					mousePosition = Input.GetTouch(i).position;
+				}
+			}
+		}
+
+		if(!isButtonDown) fingerID = -1;
+
+
+
+
+
+		float movementSpeed = 0;
+
+		bool fingerTouchValid = false;
+
+		if(isButtonDown)
+		{
+			//float ffff = (ThumbpadBack.worldCorners[2].x - ThumbpadBack.worldCorners[0].x) * ThumbpadBack.width;
+			fingerTouchValid = true;
+			Vector3 bottomLeftWorld = UICamera.mainCamera.WorldToScreenPoint(ThumbpadBack.worldCorners[0]);
+			Vector3 topRightWorld = UICamera.mainCamera.WorldToScreenPoint(ThumbpadBack.worldCorners[2]);
+			//Debug.Log("bottomLeftWorld: " + bottomLeftWorld.ToString());
+			//Debug.Log("topRightWorld: " + topRightWorld.ToString());
+
+
+			Vector3 middle = bottomLeftWorld + (topRightWorld - bottomLeftWorld) / 2;
+
+			//float invertedY = Screen.height - Input.mousePosition.y;
+
+			//if(Input.mousePosition.x >= bottomLeftWorld.x && Input.mousePosition.x <= topRightWorld.x)
+			{
+				//if(Input.mousePosition.y >= bottomLeftWorld.y && Input.mousePosition.y <= topRightWorld.y)
+				{
+
+					movementSpeed = Vector3.Distance(middle, mousePosition);
+					if(movementSpeed >= 80)
+					{
+						movementSpeed = 80;
+					}
+					Debug.Log("DISTANCE: " + movementSpeed.ToString());
+					//movementDireciton = Vector3.Normalize(new Vector2(Input.mousePosition.x, Input.mousePosition.y) - new Vector2(middle.x, middle.y));
+
+					float horizontalDistance = (mousePosition.x - middle.x);
+					horizontalDistance /= ((topRightWorld.x - bottomLeftWorld.x) / 2);
+					if(horizontalDistance < -1) horizontalDistance = -1;
+					if(horizontalDistance > 1) horizontalDistance = 1;
+
+					float verticalDistance = (mousePosition.y - middle.y);
+					verticalDistance /= ((topRightWorld.y - bottomLeftWorld.y) / 2);
+					if(verticalDistance < -1) verticalDistance = -1;
+					if(verticalDistance > 1) verticalDistance = 1;
+
+					float lerpH = horizontalDistance * (ThumbpadBack.width / 2);
+					float lerpV = verticalDistance * (ThumbpadBack.height / 2);
+
+					ThumbpadFront.leftAnchor.Set(ThumbpadFront.leftAnchor.relative, LeftAnchorStartPosition + lerpH);
+					ThumbpadFront.rightAnchor.Set(ThumbpadFront.rightAnchor.relative, RightAnchorStartPosition + lerpH);
+
+					ThumbpadFront.topAnchor.Set(ThumbpadFront.topAnchor.relative, TopAnchorStartPosition + lerpV);
+					ThumbpadFront.bottomAnchor.Set(ThumbpadFront.bottomAnchor.relative, BottomAnchorPosition + lerpV);
+				
+					finalMovementDirection.x = horizontalDistance;
+					finalMovementDirection.y = verticalDistance;
+				}
+			}
+		}
+
+
+		if(!fingerTouchValid)
+		{
+			finalMovementDirection = Vector2.zero;
+			ThumbpadFront.leftAnchor.Set(ThumbpadFront.leftAnchor.relative, LeftAnchorStartPosition);
+			ThumbpadFront.rightAnchor.Set(ThumbpadFront.rightAnchor.relative, RightAnchorStartPosition);
+			
+			ThumbpadFront.topAnchor.Set(ThumbpadFront.topAnchor.relative, TopAnchorStartPosition);
+			ThumbpadFront.bottomAnchor.Set(ThumbpadFront.bottomAnchor.relative, BottomAnchorPosition);
+		}
+
+		Debug.Log(finalMovementDirection.ToString());
+		/*
 		if (tapTimer > 0) 
 		{
 			tapTimer -= Time.deltaTime;
@@ -273,20 +419,15 @@ public class JoystiqScript : MonoBehaviour {
 						//Debug.Log("VJRVECTOR:" + VJRvector.ToString());
 						VJRnormals = new Vector2(VJRvector.x/length,VJRvector.y/length);
 						
-						if (Input.GetTouch(fingerID).position.x > (Screen.width/3)+background.pixelInset.width
-						    
-						    || Input.GetTouch(fingerID).position.y > (Screen.height/3)+background.pixelInset.height) 
+						if (Input.GetTouch(fingerID).position.x > (ThumbpadBack.transform.position.x + ThumbpadBack.width)
+						    || Input.GetTouch(fingerID).position.y > (ThumbpadBack.transform.position.y + ThumbpadBack.height)) 
 						{
 							ResetJoystick();
 						}
-						
-						//
-						
 						//Debug.Log("Joystick Axis:: "+VJRnormals); //<-- Delete this line | (X,Y), from -1.0 to +1.0 | Use this value "VJRnormals" in your scripts.
-						
 					}
-					
 				}
+				
 
 				Debug.Log(VJRnormals.ToString());
 				
@@ -301,80 +442,67 @@ public class JoystiqScript : MonoBehaviour {
 				
 			}
 			
-			if (gotPosition == false && fingerID == -1 && tapTimer <= 0) 
+			/*if (gotPosition == false && fingerID == -1 && tapTimer <= 0) 
 			{
 				if (background.color != inactiveColor) 
 				{
 					background.color = inactiveColor;
 				}
-			}
-			
-			background.pixelInset = new Rect(origin.x-(background.pixelInset.width/2),origin.y-(background.pixelInset.height/2),size/5,size/5);
-			joystick.pixelInset = new Rect(position.x-(joystick.pixelInset.width/2),position.y-(joystick.pixelInset.height/2),size/11,size/11);
+			}*/
 
+			//background.pixelInset = new Rect(origin.x-(background.pixelInset.width/2),origin.y-(background.pixelInset.height/2),size/4,size/4);
+			//joystick.pixelInset = new Rect(position.x-(joystick.pixelInset.width/2),position.y-(joystick.pixelInset.height/2),size/4,size/4);
+		
+
+
+		 
+
+			//Vector2 jumbPosition = new Vector2((Screen.width/3)/2,(Screen.height/3)/2);;
+			//jumbTexture.pixelInset = new Rect(Screen.width-(jumbTexture.pixelInset.width) * 1.3f, (jumbTexture.pixelInset.height/2),size/6,size/6);
 			//Debug.Log("background.pixelInset: " + background.pixelInset.ToString());
 			///Debug.Log("origin: " + origin.ToString());
 			//Debug.Log("joystick.pixelInset:" + joystick.pixelInset.ToString());
-			
-		}
-		else if (background.pixelInset.width > 0) 
+			//*
+
+			//Debug.Log(ThumbpadBack.rightAnchor.rect.ToString());
+			//Debug.Log(ThumbpadBack.leftAnchor.rect.ToString());
+		//}
+		/*else if (background.pixelInset.width > 0) 
 		{
 			background.pixelInset = new Rect(0,0,0,0); 
 			joystick.pixelInset = new Rect(0,0,0,0);
 
 			//Debug.Log("pixel inset 0");
-		}
+		}*/
 	
 
 		//Vector3 vectorA = new Vector3(UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.x, 0, UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.z);
 		//Vector3 vectorB = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
 
 
-		CharacterControllerRef.MovementDirection = Camera.main.transform.right * VJRnormals.x;//new Vector3(VJRnormals.x, 0, VJRnormals.y);
-		CharacterControllerRef.MovementDirection += Vector3.Normalize(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.transform.forward.z)) * VJRnormals.y;
-		CharacterControllerRef.MovementDirection.y = 0;
-
-		if(VJRnormals != Vector2.zero)
+		if(CharacterControllerRef != null)
 		{
 
-			if(Mathf.Abs(VJRnormals.x) >= 0.9f || Mathf.Abs(VJRnormals.y) >= 0.9f)
+			CharacterControllerRef.MovementDirection = Camera.main.transform.right * finalMovementDirection.x;//new Vector3(VJRnormals.x, 0, VJRnormals.y);
+			CharacterControllerRef.MovementDirection += Vector3.Normalize(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.transform.forward.z)) * finalMovementDirection.y;
+			CharacterControllerRef.MovementDirection.y = 0;
+
+			if(finalMovementDirection != Vector2.zero)
 			{
-				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = true;
-				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = false;
-				CharacterControllerRef.walkSpeed = 120;
+
+				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
+				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = true;
+				CharacterControllerRef.walkSpeed =  movementSpeed * 1.0f;
+				CharacterControllerRef.RotateToLookAtPoint(CharacterControllerRef.transform.position + CharacterControllerRef.MovementDirection * 6);
+
 			}
 			else
 			{
 				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
-				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = true;
-				CharacterControllerRef.walkSpeed = 60;
-			}
-
-			CharacterControllerRef.RotateToLookAtPoint(CharacterControllerRef.transform.position + CharacterControllerRef.MovementDirection * 6);
-
-		}
-		else
-		{
-			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
-			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = false;
-			CharacterControllerRef.MovementDirection = Vector3.zero;
-		}
-
-
-
-		for (int i=0; i<Input.touchCount; ++i) 
-		{
-			if (Input.touches [i].phase == TouchPhase.Began) {
-
-				if ((Input.touches [i].position.x > Screen.width / 2) && (Input.touches [i].position.y < (Screen.height / 2))) {
-					//Debug.Log ("jumbed!");
-					//JumbFingerId = Input.touches[i].fingerId;
-					this.GetComponent<CharacterControllerScript> ().PressedJumb = true;
-					break;
-				}
+				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = false;
+				CharacterControllerRef.MovementDirection = Vector3.zero;
 			}
 		}
 
 	}
-	
 }

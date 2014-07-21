@@ -136,12 +136,12 @@ public class MinigameCollectorScript : MonoBehaviour
 	{
 		for(int i=0;i<EvilCharacters.Count;++i)
 		{
-			if(EvilCharacters[i] == gameObject.transform.parent.gameObject)
+			if(EvilCharacters[i] == gameObject)
 			{
 				//Debug.Log("HIT FROM ABOVE");
 
-				gameObject.transform.parent.gameObject.AddComponent<EnemyDeathAnimationScript>();
-				EvilCharacterPatternMovementScript movementScript = gameObject.transform.parent.gameObject.GetComponent<EvilCharacterPatternMovementScript>();
+				gameObject.AddComponent<EnemyDeathAnimationScript>();
+				EvilCharacterPatternMovementScript movementScript = gameObject.GetComponent<EvilCharacterPatternMovementScript>();
 				if(movementScript != null) Destroy(movementScript);
 
 				EvilCharacters.RemoveAt(i);
@@ -432,9 +432,10 @@ public class MinigameCollectorScript : MonoBehaviour
 		return null;
 	}
 
-		private Vector3 GetPositionForCell(int x, float height, int z)
+	private Vector3 GetPositionForCell(int x, float height, int z)
 	{
-		return new Vector3(CubeMatrix[x, z].transform.position.x, height, CubeMatrix[x, z].transform.position.z );// new Vector3 ((x * CubeScaleSize.x) + 0.1f, height, (z* CubeScaleSize.z) + 0.1f) - CenterOffset;
+		Debug.Log("the x: " + CubeMatrix[x, z].transform.position.x.ToString());
+		return new Vector3(CubeMatrix[x, z].transform.position.x - 30, height, CubeMatrix[x, z].transform.position.z - 30);// new Vector3 ((x * CubeScaleSize.x) + 0.1f, height, (z* CubeScaleSize.z) + 0.1f) - CenterOffset;
 	}
 
 
@@ -501,7 +502,7 @@ public class MinigameCollectorScript : MonoBehaviour
 		{
 			EvilCharacterPatternMovementScript component = EvilCharacterPool[i].AddComponent<EvilCharacterPatternMovementScript>();
 			component.Pattern = builder.EvilCharactersInPatterns[i];
-			component.Speed = 20.1f;
+			component.Speed = 30.1f;
 			component.Lerp = 0;
 			component.Index = 0;
 			

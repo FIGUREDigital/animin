@@ -53,6 +53,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject IndicatorAboveHead;
 	public GameObject Item3DPopupMenu;
 	public SoundEngineScript SoundEngine;
+	public JoystiqScript Joystick;
 
 	// Set from the code, keep static
 	public static GameObject ButtonTriggeredMainMenuPopupRef;

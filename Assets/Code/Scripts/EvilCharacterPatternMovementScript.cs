@@ -31,6 +31,29 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 			Lerp = 0;
 			//Debug.Log("Change Index: " + Index.ToString());
 		}
+
+		if(Pattern[Index + 1].x > Pattern[Index].x)
+		{
+			//Debug.Log("greater x:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
+			this.transform.rotation = Quaternion.Euler(0, 90, 0);
+		}
+		else if(Pattern[Index + 1].x < Pattern[Index].x)
+		{
+			//Debug.Log("less x:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
+			this.transform.rotation = Quaternion.Euler(0, 180, 0);
+		}
+		else if(Pattern[Index + 1].y > Pattern[Index].y)
+		{
+			//Debug.Log("greater y:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
+			this.transform.rotation = Quaternion.Euler(0, 270, 0);
+		}
+		else if(Pattern[Index + 1].y < Pattern[Index].y)
+		{
+
+			this.transform.rotation = Quaternion.Euler(0, 0, 0);
+		}
+
+		Debug.Log("normal:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
 		
 		this.transform.position = Vector3.Lerp(
 			Pattern[Index], 

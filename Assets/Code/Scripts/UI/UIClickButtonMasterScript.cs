@@ -26,6 +26,23 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		HandleClick(FunctionalityId);
 	}
 
+	void OnPress (bool isPressed)
+	{
+
+		if(isPressed)
+		{
+			//Debug.Log("PRESS DETECTED");
+			switch(FunctionalityId)
+			{
+				case UIFunctionalityId.JumbOnCubeRunner:
+				{
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript> ().PressedJumb = true;
+					break;
+				}
+			}
+		}
+	}
+
 	void HandleDoubleClick(UIFunctionalityId id)
 	{
 		GameObject mainMenuPopupRef = UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef;
@@ -150,8 +167,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = true;
 			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.gameObject.GetComponent<ObjectLookAtDeviceScript>().enabled = true;
 	
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().DisableJoystick();
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().enabled = false;
+			//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
+			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = SavedRadius;
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
 
@@ -245,8 +262,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 					SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().enabled = true;
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<JoystiqScript>().EnableJoystick();
+				UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
+				//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
+					
 
 				
 					break;
@@ -346,6 +364,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.Vuforia.OnTrackingLost();
 			break;
 		}
+
+		
 			
 		}
 	}

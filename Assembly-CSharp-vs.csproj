@@ -65,6 +65,7 @@
      <Compile Include="Assets\Code\Scripts\JoystiqScript.cs" />
      <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
      <Compile Include="Assets\Code\Scripts\MinigameCollectorScript.cs" />
+     <Compile Include="Assets\Code\Scripts\NewJoystickScript.cs" />
      <Compile Include="Assets\Code\Scripts\ObjectLookAtDeviceScript.cs" />
      <Compile Include="Assets\Code\Scripts\OscillationUpDownScript.cs" />
      <Compile Include="Assets\Code\Scripts\PlantScript.cs" />
