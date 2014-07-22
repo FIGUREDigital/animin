@@ -285,6 +285,14 @@ public class JoystiqScript : MonoBehaviour {
 		bool isButtonDown = false;
 		Vector3 mousePosition = Vector3.zero;
 
+#if UNITY_EDITOR
+		if(Input.GetMouseButton(0))
+		{
+			isButtonDown = true;
+			mousePosition = Input.mousePosition;
+		}
+#endif
+
 		for(int i=0;i<Input.touchCount;++i)
 		{
 			TouchPhase phase = Input.GetTouch(i).phase;
@@ -339,13 +347,8 @@ public class JoystiqScript : MonoBehaviour {
 				//if(Input.mousePosition.y >= bottomLeftWorld.y && Input.mousePosition.y <= topRightWorld.y)
 				{
 
-					movementSpeed = Vector3.Distance(middle, mousePosition);
-					if(movementSpeed >= 80)
-					{
-						movementSpeed = 80;
-					}
-					Debug.Log("DISTANCE: " + movementSpeed.ToString());
-					//movementDireciton = Vector3.Normalize(new Vector2(Input.mousePosition.x, Input.mousePosition.y) - new Vector2(middle.x, middle.y));
+
+
 
 					float horizontalDistance = (mousePosition.x - middle.x);
 					horizontalDistance /= ((topRightWorld.x - bottomLeftWorld.x) / 2);
@@ -357,8 +360,17 @@ public class JoystiqScript : MonoBehaviour {
 					if(verticalDistance < -1) verticalDistance = -1;
 					if(verticalDistance > 1) verticalDistance = 1;
 
-					float lerpH = horizontalDistance * (ThumbpadBack.width / 2);
-					float lerpV = verticalDistance * (ThumbpadBack.height / 2);
+					float maxRadius = (topRightWorld.y - middle.y);// + (topRightWorld.y - middle.y) * 0.8f;
+					Vector2 directionVector = (new Vector2(mousePosition.x, mousePosition.y) - new Vector2(middle.x, middle.y));
+					directionVector.Normalize();
+
+					float currentDistance = Vector2.Distance(new Vector2(mousePosition.x, mousePosition.y), new Vector2(middle.x, middle.y));
+					if(currentDistance >= maxRadius) currentDistance = maxRadius;
+					movementSpeed = currentDistance / maxRadius;
+					//Debug.Log("speeD: " + movementSpeed.ToString());
+
+					float lerpH = (directionVector.x * Mathf.Abs(horizontalDistance)) * ((ThumbpadFront.width * 0.9f) / 2);
+					float lerpV = (directionVector.y * Mathf.Abs(verticalDistance)) * ((ThumbpadFront.height * 0.9f) / 2);
 
 					ThumbpadFront.leftAnchor.Set(ThumbpadFront.leftAnchor.relative, LeftAnchorStartPosition + lerpH);
 					ThumbpadFront.rightAnchor.Set(ThumbpadFront.rightAnchor.relative, RightAnchorStartPosition + lerpH);
@@ -366,8 +378,8 @@ public class JoystiqScript : MonoBehaviour {
 					ThumbpadFront.topAnchor.Set(ThumbpadFront.topAnchor.relative, TopAnchorStartPosition + lerpV);
 					ThumbpadFront.bottomAnchor.Set(ThumbpadFront.bottomAnchor.relative, BottomAnchorPosition + lerpV);
 				
-					finalMovementDirection.x = horizontalDistance;
-					finalMovementDirection.y = verticalDistance;
+					finalMovementDirection.x = directionVector.x;
+					finalMovementDirection.y = directionVector.y;
 				}
 			}
 		}
@@ -383,7 +395,7 @@ public class JoystiqScript : MonoBehaviour {
 			ThumbpadFront.bottomAnchor.Set(ThumbpadFront.bottomAnchor.relative, BottomAnchorPosition);
 		}
 
-		Debug.Log(finalMovementDirection.ToString());
+		//Debug.Log(finalMovementDirection.ToString());
 		/*
 		if (tapTimer > 0) 
 		{
@@ -482,19 +494,24 @@ public class JoystiqScript : MonoBehaviour {
 
 		if(CharacterControllerRef != null)
 		{
-
 			CharacterControllerRef.MovementDirection = Camera.main.transform.right * finalMovementDirection.x;//new Vector3(VJRnormals.x, 0, VJRnormals.y);
 			CharacterControllerRef.MovementDirection += Vector3.Normalize(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.transform.forward.z)) * finalMovementDirection.y;
 			CharacterControllerRef.MovementDirection.y = 0;
 
 			if(finalMovementDirection != Vector2.zero)
 			{
-
-				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
-				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = true;
-				CharacterControllerRef.walkSpeed =  movementSpeed * 1.0f;
+				if(movementSpeed < 0.7f)
+				{
+					UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
+					UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = true;
+				}
+				else
+				{
+					UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = true;
+					UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = false;
+				}
+				CharacterControllerRef.walkSpeed =  movementSpeed * 120.0f;
 				CharacterControllerRef.RotateToLookAtPoint(CharacterControllerRef.transform.position + CharacterControllerRef.MovementDirection * 6);
-
 			}
 			else
 			{

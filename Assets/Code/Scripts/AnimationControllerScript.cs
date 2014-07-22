@@ -53,6 +53,20 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
+	public bool IsJumbing 
+	{
+		get
+		{
+			
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("IsJumbing") || animator.GetBool("IsJumbing");
+		}
+		
+		set
+		{
+			animator.SetBool("IsJumbing", value );
+		}
+	}
+
 	public bool IsExitPortal 
 	{
 		get

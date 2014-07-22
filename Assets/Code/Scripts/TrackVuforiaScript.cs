@@ -225,7 +225,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		CharacterRef.transform.parent = NonARSceneRef.transform;
 		CharacterRef.transform.localPosition = new Vector3(0, 0.01f, 0);
 		CharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
-		CharacterRef.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+		//CharacterRef.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
 		
 		CharacterRef.GetComponent<CharacterProgressScript>().Stop(true);

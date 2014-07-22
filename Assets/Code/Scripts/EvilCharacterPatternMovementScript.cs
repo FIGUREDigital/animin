@@ -8,6 +8,9 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 	public Vector3[] Pattern;
 	public int Index;
 
+	private Quaternion RotateDirectionLookAt;
+
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -32,7 +35,9 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 			//Debug.Log("Change Index: " + Index.ToString());
 		}
 
-		if(Pattern[Index + 1].x > Pattern[Index].x)
+		RotateDirectionLookAt = Quaternion.LookRotation(Vector3.Normalize(Pattern[Index + 1] - transform.position));
+
+		/*if(Pattern[Index + 1].x > Pattern[Index].x)
 		{
 			//Debug.Log("greater x:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
 			this.transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -54,11 +59,14 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 		}
 
 		Debug.Log("normal:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
-		
+		*/
 		this.transform.position = Vector3.Lerp(
 			Pattern[Index], 
 			Pattern[Index + 1], 
 			Lerp);
+
+
+		transform.rotation = Quaternion.Slerp(transform.rotation, RotateDirectionLookAt, Time.deltaTime * 6);
 		
 		//Debug.Log(Pattern[Index].ToString() + " " + Pattern[Index + 1].ToString() + " " + Lerp.ToString() + " " + amount.ToString());
 		

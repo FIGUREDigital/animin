@@ -524,9 +524,14 @@ public class CharacterControllerScript : MonoBehaviour
 				SendMessage("DidLand", SendMessageOptions.DontRequireReceiver);
 				
 			}
-			
 		}
 
+		UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsJumbing = IsJumping();
+	
+		if(IsJumping())
+		{
+			Debug.Log("JUMBING");
+		}
 		UpdateRotationLookAt();
 	
 		PressedJumb = false;

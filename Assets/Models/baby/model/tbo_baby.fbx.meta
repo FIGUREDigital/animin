@@ -39,6 +39,9 @@ ModelImporter:
     100066: tbo_baby:spine_05_joint
     100068: tbo_baby:tbo_baby_geo
     100070: tbo_baby:world_root
+    100072: tbo_baby:tbo_baby
+    100074: tbo_baby:tbo_characterNode_01
+    100076: tbo_baby:tbo_mesh_grp
     400000: //RootNode
     400002: tbo_baby:belly_end_joint
     400004: tbo_baby:belly_joint
@@ -75,9 +78,14 @@ ModelImporter:
     400066: tbo_baby:spine_05_joint
     400068: tbo_baby:tbo_baby_geo
     400070: tbo_baby:world_root
+    400072: tbo_baby:tbo_baby
+    400074: tbo_baby:tbo_characterNode_01
+    400076: tbo_baby:tbo_mesh_grp
     4300000: tbo_baby:tbo_baby_geo
+    4300002: tbo_baby:tbo_baby
     9500000: //RootNode
     13700000: tbo_baby:tbo_baby_geo
+    13700002: tbo_baby:tbo_baby
   materials:
     importMaterials: 1
     materialName: 0
@@ -86,6 +94,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5

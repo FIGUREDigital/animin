@@ -5,6 +5,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 {
 	public UIFunctionalityId FunctionalityId;
 	private float SavedRadius;
+	private Vector3 SavedScale;
 
 	// Use this for initialization
 	void Start () {
@@ -45,8 +46,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 	void HandleDoubleClick(UIFunctionalityId id)
 	{
-		GameObject mainMenuPopupRef = UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef;
-		Debug.Log("BUTTON: " + id.ToString());
+		//GameObject mainMenuPopupRef = UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef;
+		//Debug.Log("BUTTON: " + id.ToString());
 		switch(id)
 		{
 		case UIFunctionalityId.ClearAllGroundItems:
@@ -186,6 +187,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.SelectedMinigameToPlay = FunctionalityId;
 			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(false);
+
+			HandleClick(UIFunctionalityId.StartSelectedMinigame);
 			break;
 		}
 			
@@ -266,6 +269,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 					
 
+				SavedScale = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+
 				
 					break;
 				}
@@ -287,7 +293,10 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.SpaceshipMinigameSceneRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(false);
 
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = SavedScale;
+
 			HandleClick(UIFunctionalityId.BackFromMinigames);
+
 
 			
 			break;
