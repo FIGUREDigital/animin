@@ -19,6 +19,7 @@ public class AnimationControllerScript : MonoBehaviour
 	protected Animator animator;
 	private float TimeInIdleState;
 	private bool HoldingWeightAnimationUp;
+	private float TimeToPlayIdleSoundFX = 6;
 
 	public AnimationHappyId IsHappy 
 	{
@@ -542,6 +543,21 @@ public class AnimationControllerScript : MonoBehaviour
 		else
 		{
 			TimeInIdleState = 0;
+		}
+
+		if(IsIdle && !IsHungry && !IsNotWell)
+		{
+			TimeToPlayIdleSoundFX -= Time.deltaTime;
+
+			if(TimeToPlayIdleSoundFX <= 0)
+			{
+				int randomId = UnityEngine.Random.Range(0, 7);
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CreaturePlayerId,
+					(CreatureSoundId)((int)CreatureSoundId.RandomTalk1 + randomId ));
+
+				TimeToPlayIdleSoundFX = UnityEngine.Random.Range(6.0f, 9.0f);
+			}
 		}
 	}
 

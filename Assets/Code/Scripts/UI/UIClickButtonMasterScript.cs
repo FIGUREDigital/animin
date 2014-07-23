@@ -61,6 +61,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 			script.GroundItems.Clear();
 			UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CleanPooPiss);
+			UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
 			
 			break;
 		}
@@ -165,16 +166,40 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(true);
+
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Fitness += 45;
+			
+			break;
+		}
+
+		case UIFunctionalityId.CloseCurrentMinigame:
+		{
+			// Disable UI
+			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
+			
+			// Disable Scenes
+			UIGlobalVariablesScript.Singleton.SpaceshipMinigameSceneRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(false);
+
+			Debug.Log("SavedScale: " + SavedScale.ToString());
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.035f, 0.035f, 0.035f);
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position = Vector3.zero;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition = new Vector3(0, 0.01f, 0);
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
+
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = true;
 			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.gameObject.GetComponent<ObjectLookAtDeviceScript>().enabled = true;
-	
+			
 			//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = SavedRadius;
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
-
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localRotation = Quaternion.Euler(0, 180, 0);
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Fitness += 45;
+			
+			HandleClick(UIFunctionalityId.BackFromMinigames);
+			
+			
 			
 			break;
 		}
@@ -236,6 +261,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 		case UIFunctionalityId.StartSelectedMinigame:
 		{
+			SavedScale = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale;
+			Debug.Log("SavedScale 1:" + SavedScale.ToString());
 
 			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
@@ -247,6 +274,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 
+		
 			switch(UIGlobalVariablesScript.SelectedMinigameToPlay)
 			{
 				case UIFunctionalityId.PlayMinigameSpaceship:
@@ -265,12 +293,12 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 					SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
-				UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
-				//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
+					UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
+					//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 					
 
-				SavedScale = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale;
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+					
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
 
 				
 					break;
@@ -282,25 +310,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			break;
 		}
 			
-		case UIFunctionalityId.CloseCurrentMinigame:
-		{
-			// Disable UI
-			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
 
-			// Disable Scenes
-			UIGlobalVariablesScript.Singleton.SpaceshipMinigameSceneRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(false);
-
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = SavedScale;
-
-			HandleClick(UIFunctionalityId.BackFromMinigames);
-
-
-			
-			break;
-		}
 
 		case UIFunctionalityId.CloseSettings:
 		{

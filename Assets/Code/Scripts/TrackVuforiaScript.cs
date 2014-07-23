@@ -256,6 +256,8 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 	private void OnTrackingFound()
 	{
+		CharacterProgressScript progress = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
 		 if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.Sleep ||
 		   UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.EnterSleep)
 		{
@@ -274,12 +276,13 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			else
 			{
 				//return;
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(progress.CreaturePlayerId, CreatureSoundId.JumbInPortal);
 				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToAR;
+				progress.CurrentAction = ActionId.EnterPortalToAR;
 
 				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(false, true);
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().PortalTimer = 0;
+				progress.Stop(true);
+				progress.PortalTimer = 0;
 				Debug.Log("ENTERING AR STATE ");
 				//CharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToNonAR;
 
@@ -314,11 +317,14 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			}
 			else
 			{
+				CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+		
+
 				//UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().PortalTimer = 0;
 				Debug.Log("ENTERING NON AR STATE ");
 				//UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
 				//UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.None;
+				progressScript.CurrentAction = ActionId.None;
 				//UIGlobalVariablesScript.Singleton.Vuforia.OnExitAR();
 				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(false, false);
 				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsExitPortal = true;
@@ -327,7 +333,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
-				
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(progressScript.CreaturePlayerId, CreatureSoundId.JumbOutPortal);
 				//UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
 				
 				//OnExitAR();

@@ -281,12 +281,13 @@ public class CharacterProgressScript : MonoBehaviour
 					CurrentAction = ActionId.None;
 					UIGlobalVariablesScript.Singleton.Vuforia.OnEnterARScene();
 					
-					
-			
+
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
 
-				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true, false);
+					UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true, false);
+
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.JumbOutPortal);
 			}
 
 
@@ -582,7 +583,11 @@ public class CharacterProgressScript : MonoBehaviour
 							if(random == 0) animationController.IsIdleLook1 = true;
 							else if(random == 1) animationController.IsIdleLook2 = true;
 							else if(random == 2) animationController.IsIdleLook3 = true;
-							else if(random == 3) animationController.IsIdleWave = true;
+							else if(random == 3) 
+						{
+							animationController.IsIdleWave = true;
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.IdleWave);
+						}
 							
 							else if(random == 4) animationController.IsTickled = true;
 						}
@@ -663,7 +668,7 @@ public class CharacterProgressScript : MonoBehaviour
 							else if(ObjectHolding == null && animationController.IsAnyIdleAnimationPlaying())
 							{
 								animationController.IsTickled = true;
-								UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Tickle);
+								UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, (CreatureSoundId)((int)CreatureSoundId.Tickle + UnityEngine.Random.Range(0, 3)));
 							}
 						}
 						else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
@@ -975,21 +980,12 @@ public class CharacterProgressScript : MonoBehaviour
 			{
 				Stop(true);
 			}
-
-			/*float d1 = Vector3.Distance(TravelLocation, this.transform.position);
-//			Debug.Log(d1.ToString() + "   _   " + TravelDistance.ToString());
-			//Debug.Log(Vector3.Distance(TravelLocation, this.transform.position).ToString());
-
-			if(d1 >= TravelDistance)
-			{
-				Stop();
-			}*/
 		}
 		else
 		{
 
 		}
-
+		 
 
 		UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Hungry / 100.0f), UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition.y, 0);
 		UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Health / 100.0f), UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition.y, 0);
@@ -1111,7 +1107,7 @@ public class CharacterProgressScript : MonoBehaviour
 				Hungry += item.Points;
 				Stop(true);
 				animationController.IsEating = true;
-			UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Feed);
+			UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedFood);
 			//}
 				break;
 			}
