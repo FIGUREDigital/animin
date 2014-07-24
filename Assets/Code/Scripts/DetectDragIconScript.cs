@@ -37,5 +37,7 @@ public class DetectDragIconScript : MonoBehaviour {
 		child.transform.localRotation = Quaternion.identity;
 		child.transform.localPosition = Vector3.zero;
 
+		child.transform.localRotation = Quaternion.Euler(0, 180, 0);
+
 	}
 }

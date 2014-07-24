@@ -40,7 +40,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		}
 
 
-		this.renderer.enabled = false;
+		//this.renderer.enabled = false;
 		SavedARPosition = new Vector3(0, 0.0f, 0);
 		Input.gyro.enabled = true;
 	}

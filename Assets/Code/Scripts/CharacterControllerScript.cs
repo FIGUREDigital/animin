@@ -1,5 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+
+public class CharacterForces
+{
+	public Vector3 Direction;
+	public float Speed;
+	public float Length;
+}
 
 public class CharacterControllerScript : MonoBehaviour 
 {
@@ -142,7 +149,9 @@ public class CharacterControllerScript : MonoBehaviour
 	
 	
 	private float lastGroundedTime = 0.0F;
-	
+
+
+	public List<CharacterForces> Forces = new List<CharacterForces>();
 	
 	
 	
@@ -187,7 +196,8 @@ public class CharacterControllerScript : MonoBehaviour
 		
 		Vector3 targetDirection= MovementDirection;//h * right + v * forward;
 
-		
+
+
 		
 		// Grounded controls
 		
@@ -325,13 +335,6 @@ public class CharacterControllerScript : MonoBehaviour
 				inAirVelocity += targetDirection.normalized * Time.deltaTime * inAirControlAcceleration;
 			
 		}
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	void  ApplyJumping ()
@@ -470,6 +473,20 @@ public class CharacterControllerScript : MonoBehaviour
 		{
 			speedSmoothing = 90;
 		}
+
+
+		for(int i=0; i<Forces.Count;++i)
+		{
+			Forces[i].Speed = Mathf.Lerp(Forces[i].Speed, 0, Time.deltaTime * 6);
+			Vector3 totalForce = Forces[i].Direction * Forces[i].Speed * Time.deltaTime;
+			movement += totalForce;
+			Forces[i].Length -= Time.deltaTime;
+			if(Forces[i].Length <= 0)
+			{
+				Forces.RemoveAt(i);
+				i--;
+			}
+		}
 		
 		
 		// Move the controller
@@ -564,14 +581,17 @@ public class CharacterControllerScript : MonoBehaviour
 
 		if(hit.gameObject.tag == "EnemyJumbTop")
 		{
+			Debug.Log("HIT ENEMY");
 			// hit from above
 			if(hit.normal.y >= 0.5f)
 			{
+
+				Debug.Log("HIT FROM TOP");
 				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().OnEvilCharacterHitFromTop(hit.gameObject);
 			}
 			else
 			{
-				//Debug.Log("HIT FROM SIDES");
+				Debug.Log("HIT FROM SIDES");
 
 				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().OnEvilCharacterHit(hit.gameObject);
 

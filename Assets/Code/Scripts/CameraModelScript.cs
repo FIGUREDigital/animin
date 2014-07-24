@@ -85,7 +85,7 @@ public class CameraModelScript : MonoBehaviour
 			child.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveARScene.transform;
 			
 			child.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-			child.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
+			child.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(130, 230), 0);
 			
 			child.GetComponent<ReferencedObjectScript>().Reference = refScript.Reference;
 			

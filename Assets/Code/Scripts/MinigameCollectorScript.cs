@@ -15,6 +15,7 @@ public class MinigameCollectorScript : MonoBehaviour
 	public GameObject[] EvilCharacterPool;
 
 
+	private int oldLevelId = -1;
 	private int currentLevelId = -1;
 	public List<int> CompletedLevels = new List<int>();
 	public const int MaxLevels = 4;
@@ -62,55 +63,18 @@ public class MinigameCollectorScript : MonoBehaviour
 				for(int a=0;a<stageTransform.childCount;++a)
 				{
 					//Debug.Log("STAGES 2");
-					if(stageTransform.GetChild(a).name == "cubes")
+					if(stageTransform.GetChild(a).name.StartsWith("cubes"))
 					{
 						//Debug.Log("STAGES 3");
 						Transform stageCubes = stageTransform.GetChild(a);
 						for(int b=0;b<stageCubes.childCount;++b)
 						{
-							stageCubes.GetChild(b).gameObject.AddComponent<BoxCollider>();
+							stageCubes.GetChild(b).gameObject.AddComponent<MeshCollider>();
 						}
 					}
 				}
 			}
 		}
-
-	/*	CubeMatrix = new GameObject[MapWidth, MapHeight];
-
-		int xCounter = 0;
-		int yCounter = 0;
-
-		for(int i=0;i<Stage.transform.childCount;++i)
-		{
-			if(Stage.transform.GetChild(i).name.StartsWith("Cube"))
-			{
-				CubeMatrix[yCounter, xCounter] = Stage.transform.GetChild(i).gameObject;
-				xCounter++;
-				if(xCounter == 5)
-				{
-					xCounter = 0;
-					yCounter++;
-				}
-			}
-		}
-		
-		for (int i=0; i<MapHeight; ++i) 
-		{
-			for(int j=0; j<MapWidth; ++j)
-			{
-				//CubeMatrix[j,i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
-				//CubeMatrix[j,i].transform.parent = this.transform;
-				
-				//CubeMatrix[j,i].transform.localPosition = new Vector3((j * CubeScaleSize.x) + 0.1f, -0.10f, (i * CubeScaleSize.z) + 0.1f) - CenterOffset;
-				//CubeMatrix[j,i].transform.localScale = new Vector3(CubeScaleSize.x, CubeScaleSize.y, CubeScaleSize.z);
-				//CubeMatrix[j,i].transform.localRotation = Quaternion.identity;
-				
-			}
-		}*/
-
-	
-
-		//HardcoreReset();
 	}
 	
 	// Update is called once per frame
@@ -126,6 +90,11 @@ public class MinigameCollectorScript : MonoBehaviour
 			{
 				for(int i=0;i<EvilCharacters.Count;++i)
 					EvilCharacters[i].SetActive(true);
+
+				if(oldLevelId != -1)
+				{
+					Stage.transform.GetChild(oldLevelId).gameObject.SetActive(false);
+				}
 				
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(true);
 				
@@ -138,18 +107,23 @@ public class MinigameCollectorScript : MonoBehaviour
 		{
 		
 			CheckForPickupCollision ();
+
+			if (CharacterRef.transform.position.y <= -100f) 
+			{
+				CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
+				if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
+				Reset();
+			}
+
+			//if(Input.GetKeyDown(KeyCode.F))
+			//	Reset();
 		}
 //		if(CharacterRef.transform.localPosition.y <= -2)
 //		{
 //			CharacterRef.GetComponent<CharacterControllerScript>().IsResetFalling = true;
 //		}
 
-//		if (CharacterRef.transform.localPosition.y <= -5f) 
-//		{
-//			CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
-//			if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
-//			Reset();
-//		}
+
 
 		UIGlobalVariablesScript.Singleton.TextForStarsInMiniCollector.text = CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned.ToString();
 	
@@ -166,13 +140,13 @@ public class MinigameCollectorScript : MonoBehaviour
 		for(int a=0;a<stageTransform.childCount;++a)
 		{
 			//Debug.Log("STAGES 2");
-			if(stageTransform.GetChild(a).name == "dummies")
+			if(stageTransform.GetChild(a).name.StartsWith("dummies"))
 			{
 				//Debug.Log("STAGES 3");
 				Transform dummies = stageTransform.GetChild(a);
 				for(int b=0;b<dummies.childCount;++b)
 				{
-					if(dummies.GetChild(b).name == "start")
+					if(dummies.GetChild(b).name.StartsWith("start"))
 					{
 //						Debug.Log("STAGES 4: " + dummies.GetChild(b).transform.position.ToString());
 						CharacterRef.transform.position = dummies.GetChild(b).transform.position;
@@ -228,6 +202,11 @@ public class MinigameCollectorScript : MonoBehaviour
 		TemporaryDisableCollisionEvent collisionEvent = new TemporaryDisableCollisionEvent(gameObject);
 		PresentationEventManager.Create(collisionEvent);
 
+		Debug.Log("ADDING FORCE");
+		CharacterRef.GetComponent<CharacterControllerScript>().Forces.Add(
+			new CharacterForces() { Speed = 900, Direction = -CharacterRef.transform.forward, Length = 0.3f }
+		);
+
 		//CharacterRef.AddComponent<FlashMaterialColorScript>();
 	}
 
@@ -254,9 +233,9 @@ public class MinigameCollectorScript : MonoBehaviour
 	{
 		for (int i=0; i<Collections.Count; ++i) {
 				
-			float d = Vector3.Distance(Collections[i].transform.position, CharacterRef.transform.position + new Vector3(0, 0.2f, 0));
+			float d = Vector3.Distance(Collections[i].transform.position, CharacterRef.transform.position);
 //			Debug.Log(d);
-			if(d <= 26)
+			if(d <= 25)
 			{
 				CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned++;
 				GameObject.Destroy(Collections[i]);
@@ -274,6 +253,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	public void HardcoreReset()
 	{
+		oldLevelId = -1;
 		currentLevelId = -1;
 		CompletedLevels.Clear();
 
@@ -311,22 +291,54 @@ public class MinigameCollectorScript : MonoBehaviour
 		}
 		Collections.Clear ();
 
-		int newLevel = 0;
+		Transform stageTransformOld = null;
+		// FADE OUT EXISTING LEVEL
+		if(currentLevelId != -1)
+		{
+			stageTransformOld = Stage.transform.GetChild(currentLevelId);
 
-		//if(LevelsToComplete.Count > 0)
-		//   newLevel = LevelsToComplete[UnityEngine.Random.Range(0, LevelsToComplete.Count)];
-		currentLevelId = newLevel;
+			for(int a=0;a<stageTransformOld.childCount;++a)
+			{
+				if(stageTransformOld.GetChild(a).name.StartsWith("cubes"))
+				{
+					Transform cubes = stageTransformOld.GetChild(a);
+					
+					for(int b=0;b<cubes.childCount;++b)
+					{
+						CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.AddComponent<CubeAnimatonScript>();
+						cubeScript.ValueNext = cubeScript.transform.position + new Vector3(0, -600, 0);
+						//cubeScript.transform.position = cubeScript.transform.position + new Vector3(0, -200, 0);
+						cubeScript.Delay = 0.03f * b;
+
+					}
+				}
+			}
+		}
+
+		oldLevelId = currentLevelId;
+		if(currentLevelId == -1)
+		{
+			currentLevelId = LevelsToComplete[0];
+		}
+		else if(LevelsToComplete.Count > 0)
+		{
+			LevelsToComplete.Remove(currentLevelId);
+			currentLevelId = LevelsToComplete[UnityEngine.Random.Range(0, LevelsToComplete.Count)];
+		}
 
 
+		//Debug.Log("Stage.transform.childCount: " + Stage.transform.childCount.ToString());
 		for(int i=0;i<Stage.transform.childCount;++i)
 		{
-			if(Stage.transform.GetChild(i).name.StartsWith("stage"))
+			if(Stage.transform.GetChild(i).childCount > 0)
 			{
-				Stage.transform.GetChild(i).gameObject.SetActive(false);
+				if(stageTransformOld != Stage.transform.GetChild(i).transform)
+					Stage.transform.GetChild(i).gameObject.SetActive(false);
 			}
 		}
 
 		Stage.transform.GetChild(currentLevelId).gameObject.SetActive(true);
+		//Debug.Log("Stage.transform.GetChild(currentLevelId): " + Stage.transform.GetChild(currentLevelId).name);
 
 
 		GameStartDelay = 0.5f;
@@ -337,7 +349,8 @@ public class MinigameCollectorScript : MonoBehaviour
 		// BUILD BAD GYES
 		for(int a=0;a<stageTransform.childCount;++a)
 		{
-			if(stageTransform.GetChild(a).name == "dummies")
+
+			if(stageTransform.GetChild(a).name.StartsWith("dummies"))
 			{
 				Transform dummies = stageTransform.GetChild(a);
 				for(int b=0;b<dummies.childCount;++b)
@@ -363,30 +376,63 @@ public class MinigameCollectorScript : MonoBehaviour
 						badGuyCounter++;
 
 					}
+
+					// BUILD STARS
+					if(dummies.GetChild(b).name.StartsWith("star") && !dummies.GetChild(b).name.StartsWith("start"))
+					{
+						//GameObject randomParent = CubeMatrix [(int)builder.CollectionPoints[i].x, (int)builder.CollectionPoints[i].y];
+						
+						GameObject collection = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+						Destroy (collection.rigidbody);
+						
+						Collections.Add (collection);
+						
+						
+						//GameObject randomParent = AvailableSpotsToPlaceStars [Randomizer.Next (0, AvailableSpotsToPlaceStars.Count)];
+						//AvailableSpotsToPlaceStars.Remove (randomParent);
+
+						collection.transform.parent = dummies.GetChild(b).transform.parent;
+						collection.transform.position = dummies.GetChild(b).transform.position;
+						collection.transform.localScale = new Vector3(1, 1, 1);
+						//collection.transform.localRotation = Quaternion.identity;
+						//collection.transform.localPosition = new Vector3(-1, 0.3f, -1.0f);
+						
+						collection.AddComponent<OscillationUpDownScript>();
+						
+						SphereCollider colliderToKill = collection.GetComponent<SphereCollider>();
+						Destroy(colliderToKill);
+						
+					}
 				}
 			}
+
+
 		}
+
+	
 
 		for(int i=0;i<EvilCharacters.Count;++i)
 			EvilCharacters[i].SetActive(false);
 
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(false);
 
-		Debug.Log("TOTAL CHILDREN: " + stageTransform.childCount.ToString());
+		//Debug.Log("stageTransform.childCount: " + stageTransform.childCount.ToString());
+
 		// BUILD ANIMATION FOR CUBES
 		for(int a=0;a<stageTransform.childCount;++a)
 		{
-			if(stageTransform.GetChild(a).name == "cubes")
+			if(stageTransform.GetChild(a).name.StartsWith("cubes"))
 			{
 				Transform cubes = stageTransform.GetChild(a);
-				Debug.Log("CUBES TOTAL: " + cubes.childCount.ToString());
+				//Debug.Log("cubes: " + cubes.childCount.ToString());
 
 				for(int b=0;b<cubes.childCount;++b)
 				{
+//					Debug.Log("adding cube animation down to: " + cubes.GetChild(b).name);
 					CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.AddComponent<CubeAnimatonScript>();
 					cubeScript.ValueNext = cubeScript.transform.position;
 					cubeScript.transform.position = cubeScript.transform.position + new Vector3(0, 400, 0);
-					cubeScript.Delay = 0.04f * b;
+					cubeScript.Delay = 0.2f + 0.04f * b;
 					GameStartDelay += 0.04f;
 
 				}

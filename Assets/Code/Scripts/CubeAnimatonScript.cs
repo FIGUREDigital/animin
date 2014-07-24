@@ -23,6 +23,7 @@ public class CubeAnimatonScript : MonoBehaviour
 				
 			this.transform.position = Vector3.Lerp(this.transform.position, ValueNext, Time.deltaTime * 11);
 
+		
 			if(Vector3.Distance(this.transform.position, ValueNext) <= 0.1f)
 			{
 				this.transform.position = ValueNext;
@@ -30,7 +31,5 @@ public class CubeAnimatonScript : MonoBehaviour
 			}
 
 		}
-
-	
 	}
 }

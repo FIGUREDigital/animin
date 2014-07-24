@@ -73,7 +73,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 	private Vector3 DestinationLocation;
 
-	public TextMesh TextTest;
+	//public TextMesh TextTest;
 	public AnimationControllerScript animationController;
 	public bool IsMovingTowardsLocation;
 	public GameObject ObjectCarryAttachmentBone;
@@ -126,7 +126,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 		Load();
 
-		TextTest.color = new Color(1, 1, 1, 0.0f);
+		//TextTest.color = new Color(1, 1, 1, 0.0f);
 
 		Physics.IgnoreLayerCollision(
 			LayerMask.NameToLayer( "IgnoreCollisionWithCharacter"),  
@@ -200,9 +200,9 @@ public class CharacterProgressScript : MonoBehaviour
 		if(Fitness < 0) Fitness = 0;
 
 	
-		TextTest.color = new Color(1,1,1, TextTest.color.a - Time.deltaTime * 0.6f);
-		if(TextTest.color.a < 0)
-			TextTest.color = new Color(1,1,1, 0);
+		//TextTest.color = new Color(1,1,1, TextTest.color.a - Time.deltaTime * 0.6f);
+		//if(TextTest.color.a < 0)
+		//	TextTest.color = new Color(1,1,1, 0);
 
 
 		Happy = (Hungry + Fitness + Health) / 3.0f;
@@ -1019,11 +1019,11 @@ public class CharacterProgressScript : MonoBehaviour
 		HadUITouchLastFrame = hadUItouch;
 	}
 
-	public void ShowText(string text)
-	{
-		TextTest.text = text;
-		TextTest.color = new Color(1,1,1,1);
-	}
+//	public void ShowText(string text)
+//	{
+//		TextTest.text = text;
+//		TextTest.color = new Color(1,1,1,1);
+//	}
 
 	public void Save()
 	{
@@ -1103,7 +1103,7 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 			else
 			{*/
-				ShowText("yum yum");
+				//ShowText("yum yum");
 				Hungry += item.Points;
 				Stop(true);
 				animationController.IsEating = true;
@@ -1114,7 +1114,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 			case PopupItemType.Item:
 			{
-				ShowText("I can't use this item");
+				//ShowText("I can't use this item");
 				return false;
 				break;
 			}
@@ -1128,7 +1128,7 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 			else
 			{*/
-				ShowText("I feel good");
+				//ShowText("I feel good");
 				Health += item.Points;
 				Stop(true);
 				animationController.IsTakingPill = true;

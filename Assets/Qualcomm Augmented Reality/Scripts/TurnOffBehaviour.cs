@@ -20,8 +20,8 @@ public class TurnOffBehaviour : TurnOffAbstractBehaviour
         {
             // We remove the mesh components at run-time only, but keep them for
             // visualization when running in the editor:
-            MeshRenderer targetMeshRenderer = this.GetComponent<MeshRenderer>();
-            Destroy(targetMeshRenderer);
+            //MeshRenderer targetMeshRenderer = this.GetComponent<MeshRenderer>();
+           // Destroy(targetMeshRenderer);
             MeshFilter targetMesh = this.GetComponent<MeshFilter>();
             Destroy(targetMesh);
         }
