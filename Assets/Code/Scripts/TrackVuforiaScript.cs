@@ -205,6 +205,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		
 		//Debug.Log ("scene @ track: " + MainSceneRef.transform.position.ToString ());
 		IsTracking = true;
+
+		if(UIGlobalVariablesScript.Singleton.RequiresGamecardScreenRef.activeInHierarchy)
+			UIClickButtonMasterScript.HandleClick(UIFunctionalityId.OpenMinigamesScreen, null);
 	}
 
 	public void OnExitAR()
@@ -251,6 +254,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		
 		//Debug.Log ("scene @ notrack: " + MainSceneRef.transform.position.ToString ());
 		IsTracking	= false;
+
+		if(UIGlobalVariablesScript.Singleton.RequiresGamecardScreenRef.activeInHierarchy)
+			UIClickButtonMasterScript.HandleClick(UIFunctionalityId.OpenMinigamesScreen, null);
 	}
 
 

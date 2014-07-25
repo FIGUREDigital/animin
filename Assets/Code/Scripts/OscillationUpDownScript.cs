@@ -40,17 +40,29 @@ public class EnemyDeathAnimationScript : MonoBehaviour
 	{
 		Timer = 3;
 		Speed = UnityEngine.Random.Range(0.3f, 0.4f);
+		//this.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y * 0.07f, this.transform.localScale.z);
+	
+		for(int i=0;i<this.transform.childCount;++i)
+		{
+			if(this.transform.GetChild(i).name == "Sphere")
+				this.transform.GetChild(i).gameObject.SetActive(true);
+			else
+				this.transform.GetChild(i).gameObject.SetActive(false);
+		}
+		//this.GetComponent<Animator>().SetBool("None", true );
+		this.GetComponent<BoxCollider>().enabled = false;
 	}
 	
 	void Update()
 	{
-		this.transform.localPosition = this.transform.localPosition - new Vector3(0, Time.deltaTime * Speed, 0);
+		//this.transform.localPosition = this.transform.localPosition - new Vector3(0, Time.deltaTime * Speed, 0);
 
 		Timer -= Time.deltaTime;
 		if(Timer <= 0)
 		{
+
 			Destroy(this);
-			this.gameObject.SetActive(false);
+			//this.gameObject.SetActive(false);
 		}
 	}
 }

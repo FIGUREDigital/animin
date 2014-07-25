@@ -60,6 +60,7 @@
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
      <None Include="Assets\Resources\Shaders\SignalFlashshader.shader" />
      <None Include="Assets\StreamingAssets\QCAR\newscientist.xml" />
+     <None Include="Assets\Resources\Shaders\VuforaSamplerShader.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\license_3rdpartynotice.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />

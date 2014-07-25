@@ -482,17 +482,23 @@ public class AnimationControllerScript : MonoBehaviour
 		if(IsIdle && !IsLookingCamera)
 		{
 			TimeInIdleState += Time.deltaTime;
-			if(TimeInIdleState >= 4.0f)
+			if(TimeInIdleState >= 3.0f)
 			{
-				int random = UnityEngine.Random.Range(0, 15);
+				CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+
+				int random = UnityEngine.Random.Range(0, 25);
 				if(random == 0) IsIdleLook1 = true;
 				else if(random == 1) IsIdleLook2 = true;
 				else if(random == 2) IsIdleLook3 = true;
-				else if(random == 3) IsIdleWave = true;
-				else if(random >= 4 && random <= 10) IsLookingCamera = true;
+				else if(random == 3) 
+				{
+					IsIdleWave = true;
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.IdleWave);
+				}
+				else if(random >= 4 && random <= 14) IsLookingCamera = true;
 				else
 				{
-					CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
 
 					if(script.Happy >= (12.5f * 7)) 

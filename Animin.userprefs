@@ -2,21 +2,22 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/MinigameCollectorScript.cs">
     <Files>
-      <File FileName="Assets/Code/Scripts/MinigameCollectorScript.cs" Line="342" Column="4" />
-      <File FileName="Assets/Code/Scripts/TrackVuforiaScript.cs" Line="199" Column="65" />
+      <File FileName="Assets/Code/Scripts/TestVuforiaScript.cs" Line="32" Column="6" />
+      <File FileName="Assets/Code/Scripts/MinigameCollectorScript.cs" Line="115" Column="4" />
+      <File FileName="Assets/Code/Scripts/TrackVuforiaScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/JoystiqScript.cs" Line="505" Column="27" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="585" Column="42" />
-      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="187" Column="15" />
+      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="589" Column="103" />
+      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Enumerations/UIFunctionalityId.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/EvilCharacterPatternMovementScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="615" Column="3" />
+      <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="480" Column="71" />
       <File FileName="Assets/Code/Scripts/MediaPlayerPluginScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/NewJoystickScript.cs" Line="111" Column="66" />
+      <File FileName="Assets/Code/Scripts/NewJoystickScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CameraModelScript.cs" Line="38" Column="8" />
+      <File FileName="Assets/Code/Scripts/CameraModelScript.cs" Line="88" Column="88" />
       <File FileName="Assets/Code/Scripts/ObjectLookAtDeviceScript.cs" Line="65" Column="19" />
       <File FileName="Assets/Code/Scripts/ThumbstickControlsScript.cs" Line="1" Column="1" />
       <File FileName="Assets/NGUI/Scripts/Interaction/UIButton.cs" Line="1" Column="1" />
@@ -26,8 +27,23 @@
       <File FileName="Assets/Code/Scripts/BlinkingScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/SoundEngineScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/SmoothLookAt.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CubeAnimatonScript.cs" Line="24" Column="98" />
+      <File FileName="Assets/Code/Scripts/CubeAnimatonScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/DragDropMainBarItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/DragDrop3DItemScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/DeviceCameraScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/SwipeDragScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/DetectDragIconScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/DetectBroomScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CameraFacingBillboardScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/PresentationEventScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/FlashObjectScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/TurnOffBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/DefaultTrackableEventHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/ImageTargetBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Shaders/VuforaSamplerShader.shader" Line="41" Column="12" />
+      <File FileName="Assets/Resources/Shaders/SignalFlashshader.shader" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Shaders/TransparentUnlitDoubleSided.shader" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/TestVuforiaScript.cs" Line="37" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

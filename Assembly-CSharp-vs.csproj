@@ -64,6 +64,7 @@
      <Compile Include="Assets\Code\Scripts\DragDropMainBarItem.cs" />
      <Compile Include="Assets\Code\Scripts\EvilCharacterPatternMovementScript.cs" />
      <Compile Include="Assets\Code\Scripts\FlashObjectScript.cs" />
+     <Compile Include="Assets\Code\Scripts\FlatScalerScript.cs" />
      <Compile Include="Assets\Code\Scripts\JoystiqScript.cs" />
      <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
      <Compile Include="Assets\Code\Scripts\MinigameCollectorScript.cs" />
@@ -82,6 +83,7 @@
      <Compile Include="Assets\Code\Scripts\SpaceEnemyScript.cs" />
      <Compile Include="Assets\Code\Scripts\SpaceshipMinigameScript.cs" />
      <Compile Include="Assets\Code\Scripts\SwipeDragScript.cs" />
+     <Compile Include="Assets\Code\Scripts\TestVuforiaScript.cs" />
      <Compile Include="Assets\Code\Scripts\ThrowAnimationScript.cs" />
      <Compile Include="Assets\Code\Scripts\ThumbstickControlsScript.cs" />
      <Compile Include="Assets\Code\Scripts\TrackVuforiaScript.cs" />
@@ -256,6 +258,7 @@
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
      <None Include="Assets\Resources\Shaders\SignalFlashshader.shader" />
      <None Include="Assets\StreamingAssets\QCAR\newscientist.xml" />
+     <None Include="Assets\Resources\Shaders\VuforaSamplerShader.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\license_3rdpartynotice.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />

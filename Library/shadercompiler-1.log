@@ -1,3 +1,103 @@
 Base path: /Applications/Unity/Unity.app/Contents
 Pipe name: \\.\pipe\UnityShaderCompiler-1--1584676440
 Cmd: getPlatforms
+Cmd: preprocess
+  insize=443 outsize=1189 ok=1
+Cmd: preprocess
+  insize=1156 outsize=425 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1028 outsize=388 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1028 outsize=229 kw= ok=1
+Cmd: preprocess
+  insize=1170 outsize=425 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1042 outsize=305 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1042 outsize=229 kw= ok=1
+Cmd: preprocess
+  insize=1045 outsize=371 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=971 outsize=305 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=971 outsize=98 kw= ok=1
+Cmd: preprocess
+  insize=1054 outsize=371 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=980 outsize=305 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=980 outsize=92 kw= ok=1
+Cmd: preprocess
+  insize=1026 outsize=372 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=951 outsize=365 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=951 outsize=98 kw= ok=1
+Cmd: preprocess
+  insize=1032 outsize=372 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=957 outsize=388 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=957 outsize=98 kw= ok=1
+Cmd: preprocess
+  insize=1031 outsize=371 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=956 outsize=387 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=956 outsize=98 kw= ok=1
+Cmd: preprocess
+  insize=1033 outsize=372 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=958 outsize=388 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=958 outsize=98 kw= ok=1
+Cmd: preprocess
+  insize=1034 outsize=372 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=959 outsize=396 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=959 outsize=98 kw= ok=1
+Cmd: preprocess
+  insize=1026 outsize=372 ok=1
+Cmd: compileSnippet
+  api=5 type=0 insize=951 outsize=604 kw= ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=951 outsize=6 kw= ok=1
+Cmd: preprocess
+  insize=1075 outsize=372 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1000 outsize=331 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1000 outsize=98 kw= ok=1
+Cmd: preprocess
+  insize=1153 outsize=372 ok=1
+Cmd: compileSnippet
+  error: 2 plat 0 at (42): expression left of ."xy" is not a struct or array; swizzle mask element not present in operand "xy"
+  api=0 type=0 insize=1078 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=1151 outsize=372 ok=1
+Cmd: compileSnippet
+  error: 2 plat 0 at (42): expression left of ."xy" is not a struct or array
+  api=0 type=0 insize=1076 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=1155 outsize=371 ok=1
+Cmd: compileSnippet
+  error: 2 plat 0 at (36): undefined variable "newUV"
+  api=0 type=0 insize=1080 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=1160 outsize=372 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1085 outsize=365 kw= ok=1
+Cmd: compileSnippet
+  error: 2 plat 0 at (42): variable/member "pos" has semantic "POSITION" which is not visible in this profile; variable/member "pos" has semantic "POSITION" which is not visible in this profile
+  api=0 type=1 insize=1085 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=1173 outsize=372 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1098 outsize=364 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1098 outsize=98 kw= ok=1
+Cmd: compileSnippet
+  api=5 type=0 insize=1098 outsize=588 kw= ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=1098 outsize=6 kw= ok=1

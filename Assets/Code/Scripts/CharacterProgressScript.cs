@@ -872,7 +872,7 @@ public class CharacterProgressScript : MonoBehaviour
 					if(Hungry <= 50 && animationController.IsIdle)
 					{
 						animationController.IsHungry = true;
-						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
+						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(15.0f, 20.0f);
 						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 						sadUnwellLoopState = HungrySadUnwellLoopId.PlayHungry;
 						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Hungry);
@@ -881,7 +881,7 @@ public class CharacterProgressScript : MonoBehaviour
 					else if(Health <= 50 && animationController.IsIdle)
 					{
 						animationController.IsNotWell = true;
-						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
+						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(15.0f, 20.0f);
 						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 						sadUnwellLoopState = HungrySadUnwellLoopId.PlayUnwell;
 						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Unwell);

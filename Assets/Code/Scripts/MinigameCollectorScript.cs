@@ -8,7 +8,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	private List<GameObject> Collections = new List<GameObject>();
 	public GameObject CharacterRef;
-	private List<AnimationJob> AnimationJobs = new List<AnimationJob>();
+
 	//private List<GameObject> AvailableSpotsToPlaceStars = new List<GameObject>();
 
 	public List<GameObject> EvilCharacters = new List<GameObject>();
@@ -30,22 +30,6 @@ public class MinigameCollectorScript : MonoBehaviour
 	public GameObject Stage;
 	private float? GameStartDelay;
 
-	private class AnimationJob
-	{
-		public Vector3 StartPosition;
-		public Vector3 EndPosition;
-		public float Lerp;
-		public GameObject AnimatedObject;
-
-		public AnimationJob(GameObject animatedObject, Vector3 start, Vector3 end)
-		{
-			StartPosition = start;
-			EndPosition = end;
-			Lerp = 0;
-			AnimatedObject = animatedObject;
-
-		}
-	}
 
 	// Use this for initialization
 	void Awake () 
@@ -70,16 +54,65 @@ public class MinigameCollectorScript : MonoBehaviour
 						for(int b=0;b<stageCubes.childCount;++b)
 						{
 							stageCubes.GetChild(b).gameObject.AddComponent<MeshCollider>();
+							CubeAnimatonScript script = stageCubes.GetChild(b).gameObject.AddComponent<CubeAnimatonScript>();
+							script.ResetPosition = script.transform.position;
+							script.ValueNext = script.transform.position;
 						}
 					}
 				}
 			}
 		}
 	}
+
+
+
+	void OnGUI()
+	{
+//		GameObject obj = GameObject.Find("TextureBufferCamera");
+//
+//		GameObject hole = GameObject.Find("insideHole");
+//
+//		Texture texture = obj.GetComponent<Camera>().targetTexture;
+//		hole.renderer.material.mainTexture = texture;
+//
+//
+//		hole.renderer.material.SetTextureScale (
+//			"_MainTex", 
+//			new Vector2(0.05f, 0.05f)
+//			);
+//		
+//		hole.renderer.material.SetTextureOffset (
+//			"_MainTex", 
+//			new Vector2(0.5f, 0.5f)
+//			);
+
+		//GUI.DrawTexture(new Rect(0, 0, 200, 200), texture);
+	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+
+		/*GameObject obj = GameObject.Find("TextureBufferCamera");
+		
+		GameObject hole = GameObject.Find("insideHole");
+
+		if(obj != null)
+		{
+			Texture texture = obj.GetComponent<Camera>().targetTexture;
+			hole.renderer.material.mainTexture = texture;*/
+		/*	
+			
+			hole.renderer.material.SetTextureScale (
+				"_MainTex", 
+				new Vector2(0.05f, 0.05f)
+				);
+			
+			hole.renderer.material.SetTextureOffset (
+				"_MainTex", 
+				new Vector2(0.5f, 0.5f)
+				);*/
+		//}
 
 		if(GameStartDelay.HasValue)
 		{
@@ -94,6 +127,8 @@ public class MinigameCollectorScript : MonoBehaviour
 				if(oldLevelId != -1)
 				{
 					Stage.transform.GetChild(oldLevelId).gameObject.SetActive(false);
+
+
 				}
 				
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(true);
@@ -251,6 +286,7 @@ public class MinigameCollectorScript : MonoBehaviour
 		}
 	}
 
+
 	public void HardcoreReset()
 	{
 		oldLevelId = -1;
@@ -263,6 +299,34 @@ public class MinigameCollectorScript : MonoBehaviour
 			if(Stage.transform.GetChild(i).transform.childCount > 0)
 			{
 				LevelsToComplete.Add(i);
+			}
+		}
+
+
+		for(int i=0;i<Stage.transform.childCount;++i)
+		{
+			// its a level!
+			if(Stage.transform.GetChild(i).childCount > 0)
+			{
+				//Debug.Log("STAGES 1");
+				Transform stageTransform = Stage.transform.GetChild(i);
+				
+				for(int a=0;a<stageTransform.childCount;++a)
+				{
+					//Debug.Log("STAGES 2");
+					if(stageTransform.GetChild(a).name.StartsWith("cubes"))
+					{
+						//Debug.Log("STAGES 3");
+						Transform stageCubes = stageTransform.GetChild(a);
+						for(int b=0;b<stageCubes.childCount;++b)
+						{
+
+							CubeAnimatonScript script = stageCubes.GetChild(b).gameObject.GetComponent<CubeAnimatonScript>();
+							script.transform.position = script.ResetPosition;
+							script.ValueNext = script.ResetPosition;
+						}
+					}
+				}
 			}
 		}
 
@@ -305,10 +369,13 @@ public class MinigameCollectorScript : MonoBehaviour
 					
 					for(int b=0;b<cubes.childCount;++b)
 					{
-						CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.AddComponent<CubeAnimatonScript>();
+						CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.GetComponent<CubeAnimatonScript>();
+
+
 						cubeScript.ValueNext = cubeScript.transform.position + new Vector3(0, -600, 0);
 						//cubeScript.transform.position = cubeScript.transform.position + new Vector3(0, -200, 0);
 						cubeScript.Delay = 0.03f * b;
+						cubeScript.ResetPosition = cubeScript.transform.position;
 
 					}
 				}
@@ -371,7 +438,21 @@ public class MinigameCollectorScript : MonoBehaviour
 						component.Speed = 30.1f;
 						component.Lerp = 0;
 						component.Index = 0;
-							
+
+
+						EvilCharacterPool[badGuyCounter].GetComponent<BoxCollider>().enabled = true;
+						for(int i=0;i<EvilCharacterPool[badGuyCounter].transform.childCount;++i)
+						{
+							if(EvilCharacterPool[badGuyCounter].transform.GetChild(i).name == "Sphere")
+								EvilCharacterPool[badGuyCounter].transform.GetChild(i).gameObject.SetActive(false);
+							else 
+								EvilCharacterPool[badGuyCounter].transform.GetChild(i).gameObject.SetActive(true);
+						}
+
+
+
+						//EvilCharacterPool[badGuyCounter].GetComponent<Animator>().SetBool("None", false );
+						//EvilCharacterPool[badGuyCounter].transform.localScale = new Vector3(EvilCharacterPool[badGuyCounter].transform.localScale.x, EvilCharacterPool[badGuyCounter].transform.localScale.x, EvilCharacterPool[badGuyCounter].transform.localScale.x);
 						EvilCharacters.Add(EvilCharacterPool[badGuyCounter]);
 						badGuyCounter++;
 
@@ -429,9 +510,9 @@ public class MinigameCollectorScript : MonoBehaviour
 				for(int b=0;b<cubes.childCount;++b)
 				{
 //					Debug.Log("adding cube animation down to: " + cubes.GetChild(b).name);
-					CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.AddComponent<CubeAnimatonScript>();
-					cubeScript.ValueNext = cubeScript.transform.position;
-					cubeScript.transform.position = cubeScript.transform.position + new Vector3(0, 400, 0);
+					CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.GetComponent<CubeAnimatonScript>();
+					cubeScript.ValueNext = cubeScript.ResetPosition;
+					cubeScript.transform.position = cubeScript.ResetPosition + new Vector3(0, 800, 0);
 					cubeScript.Delay = 0.2f + 0.04f * b;
 					GameStartDelay += 0.04f;
 
@@ -441,31 +522,3 @@ public class MinigameCollectorScript : MonoBehaviour
 	}
 }
 
-public class LevelBuilder
-{
-	public List<Vector2> RaisedCubes = new List<Vector2>();
-	public List<Vector2> NormalCubes = new List<Vector2>();
-	public List<Vector2> CollectionPoints = new List<Vector2>();
-	public List<Vector3[]> EvilCharactersInPatterns = new List<Vector3[]>();
-
-	public void CreateRaisedCubeAt(int x, int z)
-	{
-		RaisedCubes.Add(new Vector2(x, z));
-	}
-
-	public void CreateNormalCubeAt(int x, int z)
-	{
-		NormalCubes.Add(new Vector2(x, z));
-	}
-
-	public void AddCollection(int x, int z)
-	{
-		CollectionPoints.Add(new Vector2(x, z));
-	}
-
-	public void CreateEvilPatternCharacter(Vector3[] points)
-	{
-		EvilCharactersInPatterns.Add(points);
-
-	}
-}
