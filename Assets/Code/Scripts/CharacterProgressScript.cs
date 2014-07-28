@@ -38,6 +38,7 @@ public class CharacterProgressScript : MonoBehaviour
 	private int SwipesDetectedCount;
 	private bool AtLeastOneSwipeDetected;
 	private List<GameObject> TouchesObjcesWhileSwiping = new List<GameObject>();
+	private Vector3 lastMousePosition;
 
 	private List<GameObject> groundItemsOnARscene = new List<GameObject>();
 	private List<GameObject> groundItemsOnNonARScene = new List<GameObject>();
@@ -495,6 +496,8 @@ public class CharacterProgressScript : MonoBehaviour
 				}
 				else if(Input.GetButton("Fire1"))
 				{
+
+
 					//Debug.Log("DETECT SWIPE MECHANISM");
 
 					/*if(SwipeHistoryPositions.Count == 0)
@@ -635,9 +638,11 @@ public class CharacterProgressScript : MonoBehaviour
 				}
 				else if (Input.GetButtonUp("Fire1")) 
 				{
-					Debug.Log("Input.GetButtonUp(Fire1)");
+					//Debug.Log("Input.GetButtonUp(Fire1)");
 					IsDetectFlick = false;
 					IsDetectingMouseMoveForDrag = false;
+
+
 
 				if(UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 1 && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.GetChild(0).name == "Broom")
 				{
@@ -653,6 +658,8 @@ public class CharacterProgressScript : MonoBehaviour
 
 						if(hitInfo.collider.name.StartsWith("MainCharacter") || hitInfo.collider.gameObject == ObjectHolding)
 						{
+							//Debug.Log("HIT THE CHARACTER FOR INTERACTION");
+
 							if(ObjectHolding != null && !ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
 							{
 								UIPopupItemScript item = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
@@ -690,13 +697,21 @@ public class CharacterProgressScript : MonoBehaviour
 								animationController.IsHoldingItem = false;
 
 							}
-					   }
+					   	}
 						else
 						{
 							Stop(true);
 							Debug.Log("STOPING BECAUSE NOTHING HIT");
 						}
 					}
+//					else if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy)
+//					{
+//						UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation = 
+//							Quaternion.Euler(
+//								UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.x, 
+//								UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.y + 90, 
+//								UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.z);
+//					}
 
 					//TriggeredHoldAction = false;
 				}
@@ -848,6 +863,14 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 		}
 
+		if(Input.GetKeyDown(KeyCode.D))
+		{
+			UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation = 
+				Quaternion.Euler(
+					UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.x, 
+					UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.y + 90, 
+					UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.z);
+		}
 
 
 		if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId != AnimateCharacterOutPortalScript.JumbStateId.None 
@@ -887,15 +910,7 @@ public class CharacterProgressScript : MonoBehaviour
 						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Unwell);
 						
 					}
-					/*else if(Happy <= 50 && animationController.IsIdle)
-					{
-						animationController.IsSad = true;
-						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(6.0f, 10.0f);
-						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.5f, 5.6f);
-						sadUnwellLoopState = HungrySadUnwellLoopId.PlaySad;
-					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Happy1);
-					}*/
-					
+						
 				}
 				
 				break;
@@ -1014,6 +1029,7 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 	
 	
+		lastMousePosition = Input.mousePosition;
 		DragedObjectedFromUIToWorld = false;
 		lastActionId = CurrentAction;
 		HadUITouchLastFrame = hadUItouch;

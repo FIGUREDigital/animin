@@ -458,11 +458,26 @@ public class AnimationControllerScript : MonoBehaviour
 	void Update () 
 	{
 
+		/*if(Input.GetKeyDown(KeyCode.D))
+		{
+			Debug.Log("ANIM!!");
+			//animator.Play(
+			//	Animator.StringToHash("PortalLayer.jumbin")
+			//	);
+			//animator.SetLayerWeight(2, 0);
+			animator.SetLayerWeight(2, 1);
+			//animator.CrossFade("PortalLayer.jumbin", 0.4f);
+			//animator.Play("PortalLayer.jumbin", 2);
+			animator.SetBool("ExtraLayerPortal", true);
+		}*/
+
 		if(HoldingWeightAnimationUp && animator.GetLayerWeight(1) >= 1)
 		{
+
 		}
 		else if(!HoldingWeightAnimationUp && animator.GetLayerWeight(1) <= 0)
 		{
+
 		}
 		else if(HoldingWeightAnimationUp)
 		{

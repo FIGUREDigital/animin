@@ -28,6 +28,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject ARSceneRef;
 	public GameObject NonSceneRef;
 	public GameObject DragableUI3DObject;
+	public GameObject ARSceneContainer;
 
 	// Interface Bars
 	public GameObject FitnessControlBarRef;
@@ -59,7 +60,6 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public static GameObject ButtonTriggeredMainMenuPopupRef;
 	public static UIFunctionalityId SelectedMinigameToPlay;
 
-	
 
 	void Awake()
 	{

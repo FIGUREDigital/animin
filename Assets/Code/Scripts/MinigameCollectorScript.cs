@@ -55,8 +55,9 @@ public class MinigameCollectorScript : MonoBehaviour
 						{
 							stageCubes.GetChild(b).gameObject.AddComponent<MeshCollider>();
 							CubeAnimatonScript script = stageCubes.GetChild(b).gameObject.AddComponent<CubeAnimatonScript>();
-							script.ResetPosition = script.transform.position;
-							script.ValueNext = script.transform.position;
+							script.ResetPosition = script.transform.localPosition;
+							script.ValueNext = script.transform.localPosition;
+							script.enabled = false;
 						}
 					}
 				}
@@ -88,11 +89,96 @@ public class MinigameCollectorScript : MonoBehaviour
 
 		//GUI.DrawTexture(new Rect(0, 0, 200, 200), texture);
 	}
-	
+
+	Vector3 lastMousePosition;
+
+	private float snapAngle;
+	private float AngleInTransform;
 	// Update is called once per frame
 	void Update () 
 	{
 
+		if(Input.GetButtonDown("Fire1"))
+		{
+			lastMousePosition = Input.mousePosition;
+		}
+	 	else if(Input.GetButton("Fire1"))
+		{
+			//Debug.Log((Input.mousePosition.x - lastMousePosition.x).ToString());
+			/*UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.Rotate(
+				new Vector3(0, 
+			            (lastMousePosition.x - Input.mousePosition.x) * Time.deltaTime, 
+			            0));*/
+
+			//Debug.Log("mouse difference: " + (lastMousePosition.x - Input.mousePosition.x).ToString());
+			snapAngle += (lastMousePosition.x - Input.mousePosition.x) * 0.1f;
+			/*if(snapAngle > 180)
+			{
+				snapAngle = -180 + (snapAngle - 180);
+			}
+			else if(snapAngle < -180)
+			{
+				snapAngle = 180 + (snapAngle + 180);
+			}*/
+
+
+			lastMousePosition = Input.mousePosition;
+
+			//Debug.Log("angle y: " + UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.y.ToString());
+			//Debug.Log("snapAngle: " + snapAngle.ToString());
+
+		}
+		else if(Input.GetButtonUp("Fire1"))
+		{
+			float divide = AngleInTransform / 90.0f;
+			//Debug.Log("divide: " + divide.ToString());
+			int snapDivide = (int)divide;
+			snapAngle = snapDivide * 90.0f;
+			if(Mathf.Abs(divide - snapDivide) >= 0.5f)
+			{
+				snapAngle = (snapDivide + 1) * 90.0f;
+			}
+			//Debug.Log("snapAngle: " + snapAngle.ToString());
+		}
+		else
+		{
+
+
+		}
+
+
+		AngleInTransform = Mathf.Lerp(AngleInTransform, snapAngle, Time.deltaTime * 7);
+
+		float finalTransform = AngleInTransform;
+		//if(finalTransform > 180) finalTransform = -180 + (finalTransform - 180);
+
+		//if(AngleInTransform < 0) AngleInTransform = 360 + AngleInTransform;
+		/*float savedAngle= UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.y;
+		UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation = Quaternion.Euler(
+			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.x,
+			snapAngle,
+			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.z
+			);
+		snapAngle = UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.y;
+
+
+		UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation = Quaternion.Euler(
+			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.x,
+			savedAngle,
+			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.z
+			);
+		*/
+		Debug.Log("AngleInTransform: " + finalTransform.ToString());
+
+		UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation = Quaternion.Euler(
+			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.x,
+			finalTransform,
+			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.z
+			);
+
+
+
+	
 		/*GameObject obj = GameObject.Find("TextureBufferCamera");
 		
 		GameObject hole = GameObject.Find("insideHole");
@@ -324,6 +410,7 @@ public class MinigameCollectorScript : MonoBehaviour
 							CubeAnimatonScript script = stageCubes.GetChild(b).gameObject.GetComponent<CubeAnimatonScript>();
 							script.transform.position = script.ResetPosition;
 							script.ValueNext = script.ResetPosition;
+							script.enabled = false;
 						}
 					}
 				}
@@ -372,11 +459,11 @@ public class MinigameCollectorScript : MonoBehaviour
 						CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.GetComponent<CubeAnimatonScript>();
 
 
-						cubeScript.ValueNext = cubeScript.transform.position + new Vector3(0, -600, 0);
+						cubeScript.ValueNext = cubeScript.transform.localPosition + new Vector3(0, -60, 0);
 						//cubeScript.transform.position = cubeScript.transform.position + new Vector3(0, -200, 0);
 						cubeScript.Delay = 0.03f * b;
-						cubeScript.ResetPosition = cubeScript.transform.position;
-
+						cubeScript.ResetPosition = cubeScript.transform.localPosition;
+						cubeScript.enabled = true;
 					}
 				}
 			}
@@ -424,6 +511,8 @@ public class MinigameCollectorScript : MonoBehaviour
 				{
 					if(dummies.GetChild(b).name.StartsWith("badguy"))
 					{
+						if(badGuyCounter >= EvilCharacterPool.Length) continue;
+
 						CharacterRef.transform.position = dummies.GetChild(b).transform.position;
 
 						EvilCharacterPool[badGuyCounter].SetActive(true);
@@ -515,6 +604,7 @@ public class MinigameCollectorScript : MonoBehaviour
 					cubeScript.transform.position = cubeScript.ResetPosition + new Vector3(0, 800, 0);
 					cubeScript.Delay = 0.2f + 0.04f * b;
 					GameStartDelay += 0.04f;
+					cubeScript.enabled = true;
 
 				}
 			}
