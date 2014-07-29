@@ -35,7 +35,7 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 			//Debug.Log("Change Index: " + Index.ToString());
 		}
 
-		RotateDirectionLookAt = Quaternion.LookRotation(Vector3.Normalize(Pattern[Index + 1] - transform.position));
+		RotateDirectionLookAt = Quaternion.LookRotation(Vector3.Normalize(Pattern[Index + 1] - transform.localPosition));
 
 		/*if(Pattern[Index + 1].x > Pattern[Index].x)
 		{
@@ -60,13 +60,13 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 
 		Debug.Log("normal:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
 		*/
-		this.transform.position = Vector3.Lerp(
+		this.transform.localPosition = Vector3.Lerp(
 			Pattern[Index], 
 			Pattern[Index + 1], 
 			Lerp);
 
 
-		transform.rotation = Quaternion.Slerp(transform.rotation, RotateDirectionLookAt, Time.deltaTime * 6);
+		transform.localRotation = Quaternion.Slerp(transform.localRotation, RotateDirectionLookAt, Time.deltaTime * 6);
 		
 		//Debug.Log(Pattern[Index].ToString() + " " + Pattern[Index + 1].ToString() + " " + Lerp.ToString() + " " + amount.ToString());
 		

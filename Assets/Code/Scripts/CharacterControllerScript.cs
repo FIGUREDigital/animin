@@ -411,10 +411,12 @@ public class CharacterControllerScript : MonoBehaviour
 		_characterState = CharacterState.Jumping;
 		
 	}
+
+	public bool FreezeCollisionDetection;
 	
 	void  Update (){
 		
-		
+		if(FreezeCollisionDetection) return;
 		
 		if (!isControllable)
 			
@@ -545,10 +547,10 @@ public class CharacterControllerScript : MonoBehaviour
 
 		UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsJumbing = IsJumping();
 	
-		if(IsJumping())
+		/*if(IsJumping())
 		{
 			Debug.Log("JUMBING");
-		}
+		}*/
 		UpdateRotationLookAt();
 	
 		PressedJumb = false;

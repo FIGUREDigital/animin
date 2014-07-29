@@ -90,91 +90,141 @@ public class MinigameCollectorScript : MonoBehaviour
 		//GUI.DrawTexture(new Rect(0, 0, 200, 200), texture);
 	}
 
+	private bool CanBeginLevelSwipe()
+	{
+		// CHECK FOR UI TOUCH
+
+			// This grabs the camera attached to the NGUI UI_Root object.
+			Camera nguiCam = UICamera.mainCamera;
+			
+			if( nguiCam != null )
+			{
+				// pos is the Vector3 representing the screen position of the input
+				Ray inputRay = nguiCam.ScreenPointToRay( Input.mousePosition );    
+				RaycastHit hit;
+				
+				if (Physics.Raycast(inputRay, out hit))
+				{
+					//Debug.Log("TOUCH: " + hit.collider.gameObject.layer.ToString());
+					
+					//Debug.Log("normalUIRAY:" + hit.collider.gameObject);
+					if(hit.collider.gameObject.layer == LayerMask.NameToLayer( "NGUI" ))
+					{
+						return false;
+					}
+					
+				}
+			}
+
+		
+		
+		/*RaycastHit hitInfo;
+	
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		if (Physics.Raycast(ray, out hitInfo))
+		{
+			if(!hitInfo.collider.name.StartsWith("Border1")) 
+			{
+
+				Debug.Log("normalUIRAY:" + hitInfo.collider.gameObject);
+				return false;
+			}
+		}*/
+
+		return true;
+	}
+
+
 	Vector3 lastMousePosition;
 
+	private bool isSwipingAllowed;
 	private float snapAngle;
 	private float AngleInTransform;
+	private float TimeStartedSwipe;
+	private float SnapAngleDifference;
 	// Update is called once per frame
 	void Update () 
 	{
 
-		if(Input.GetButtonDown("Fire1"))
+		if(Input.GetButtonDown("Fire1") && CanBeginLevelSwipe())
 		{
 			lastMousePosition = Input.mousePosition;
+			isSwipingAllowed = true;
+			TimeStartedSwipe = Time.time;
+			SnapAngleDifference = 0;
+
 		}
-	 	else if(Input.GetButton("Fire1"))
+		else if(Input.GetButton("Fire1") && isSwipingAllowed)
 		{
-			//Debug.Log((Input.mousePosition.x - lastMousePosition.x).ToString());
-			/*UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.Rotate(
-				new Vector3(0, 
-			            (lastMousePosition.x - Input.mousePosition.x) * Time.deltaTime, 
-			            0));*/
-
-			//Debug.Log("mouse difference: " + (lastMousePosition.x - Input.mousePosition.x).ToString());
-			snapAngle += (lastMousePosition.x - Input.mousePosition.x) * 0.1f;
-			/*if(snapAngle > 180)
-			{
-				snapAngle = -180 + (snapAngle - 180);
-			}
-			else if(snapAngle < -180)
-			{
-				snapAngle = 180 + (snapAngle + 180);
-			}*/
-
-
+			SnapAngleDifference += (lastMousePosition.x - Input.mousePosition.x) * 0.10f;
+			snapAngle += (lastMousePosition.x - Input.mousePosition.x) * 0.10f;
 			lastMousePosition = Input.mousePosition;
-
-			//Debug.Log("angle y: " + UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.y.ToString());
-			//Debug.Log("snapAngle: " + snapAngle.ToString());
-
 		}
-		else if(Input.GetButtonUp("Fire1"))
+		else if(Input.GetButtonUp("Fire1") && isSwipingAllowed)
 		{
-			float divide = AngleInTransform / 90.0f;
-			//Debug.Log("divide: " + divide.ToString());
-			int snapDivide = (int)divide;
-			snapAngle = snapDivide * 90.0f;
-			if(Mathf.Abs(divide - snapDivide) >= 0.5f)
+			//fast swipe
+			if((Time.time - TimeStartedSwipe) <= 0.4f)
 			{
-				snapAngle = (snapDivide + 1) * 90.0f;
+				snapAngle -= SnapAngleDifference;
+
+
+				// rotate right
+				if(Input.mousePosition.x >= lastMousePosition.x)
+				{
+					snapAngle  -= 90.0f;
+					snapAngle = (int)(snapAngle / 90.0f) * 90f;
+					//Debug.Log("PATH A");/
+				}
+
+				// rotate left
+				else
+				{
+					snapAngle  += 90.0f;
+					snapAngle = (int)(snapAngle / 90.0f) * 90f;
+					//Debug.Log("PATH B");
+				}
+				
+
 			}
-			//Debug.Log("snapAngle: " + snapAngle.ToString());
+
+			// slow swipe
+			else
+			{
+
+
+			}
+
+
 		}
 		else
 		{
 
-
+			isSwipingAllowed = false;
 		}
 
 
 		AngleInTransform = Mathf.Lerp(AngleInTransform, snapAngle, Time.deltaTime * 7);
 
 		float finalTransform = AngleInTransform;
-		//if(finalTransform > 180) finalTransform = -180 + (finalTransform - 180);
 
-		//if(AngleInTransform < 0) AngleInTransform = 360 + AngleInTransform;
-		/*float savedAngle= UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.y;
-		UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation = Quaternion.Euler(
-			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.x,
-			snapAngle,
-			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.z
-			);
-		snapAngle = UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.y;
-
-
-		UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation = Quaternion.Euler(
-			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.x,
-			savedAngle,
-			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.z
-			);
-		*/
-		Debug.Log("AngleInTransform: " + finalTransform.ToString());
 
 		UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation = Quaternion.Euler(
 			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.x,
 			finalTransform,
 			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.z
 			);
+
+		//Debug.Log("AngleInTransform - snapAngle:" + Mathf.Abs(AngleInTransform - snapAngle).ToString());
+
+		if( Mathf.Abs(AngleInTransform - snapAngle) <= 0.1f)
+		{
+			AngleInTransform = snapAngle;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
+		}
+		else
+		{
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = true;
+		}
 
 
 
@@ -408,7 +458,7 @@ public class MinigameCollectorScript : MonoBehaviour
 						{
 
 							CubeAnimatonScript script = stageCubes.GetChild(b).gameObject.GetComponent<CubeAnimatonScript>();
-							script.transform.position = script.ResetPosition;
+							script.transform.localPosition = script.ResetPosition;
 							script.ValueNext = script.ResetPosition;
 							script.enabled = false;
 						}
@@ -459,7 +509,7 @@ public class MinigameCollectorScript : MonoBehaviour
 						CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.GetComponent<CubeAnimatonScript>();
 
 
-						cubeScript.ValueNext = cubeScript.transform.localPosition + new Vector3(0, -60, 0);
+						cubeScript.ValueNext = cubeScript.transform.localPosition + new Vector3(0, -35, 0);
 						//cubeScript.transform.position = cubeScript.transform.position + new Vector3(0, -200, 0);
 						cubeScript.Delay = 0.03f * b;
 						cubeScript.ResetPosition = cubeScript.transform.localPosition;
@@ -513,18 +563,21 @@ public class MinigameCollectorScript : MonoBehaviour
 					{
 						if(badGuyCounter >= EvilCharacterPool.Length) continue;
 
+
 						CharacterRef.transform.position = dummies.GetChild(b).transform.position;
 
 						EvilCharacterPool[badGuyCounter].SetActive(true);
+						EvilCharacterPool[badGuyCounter].transform.parent = dummies.GetChild(b).transform.parent;
+						//EvilCharacterPool[badGuyCounter].transform.localPosition = dummies.GetChild(b).transform.localPosition;
 
 						EvilCharacterPatternMovementScript component = EvilCharacterPool[badGuyCounter].AddComponent<EvilCharacterPatternMovementScript>();
 						component.Pattern = new Vector3[dummies.GetChild(b).transform.childCount];
 						for(int c=0;c<dummies.GetChild(b).childCount;++c)
 						{
-							component.Pattern[c] = dummies.GetChild(b).transform.GetChild(c).transform.position;
+							component.Pattern[c] = dummies.GetChild(b).transform.GetChild(c).transform.localPosition;
 						}
-						component.transform.position = dummies.GetChild(b).transform.GetChild(0).transform.position;
-						component.Speed = 30.1f;
+						component.transform.localPosition = dummies.GetChild(b).transform.GetChild(0).transform.localPosition;
+						component.Speed = 2.1f;
 						component.Lerp = 0;
 						component.Index = 0;
 
@@ -562,7 +615,7 @@ public class MinigameCollectorScript : MonoBehaviour
 						//AvailableSpotsToPlaceStars.Remove (randomParent);
 
 						collection.transform.parent = dummies.GetChild(b).transform.parent;
-						collection.transform.position = dummies.GetChild(b).transform.position;
+						collection.transform.localPosition = dummies.GetChild(b).transform.localPosition;
 						collection.transform.localScale = new Vector3(1, 1, 1);
 						//collection.transform.localRotation = Quaternion.identity;
 						//collection.transform.localPosition = new Vector3(-1, 0.3f, -1.0f);
@@ -601,7 +654,7 @@ public class MinigameCollectorScript : MonoBehaviour
 //					Debug.Log("adding cube animation down to: " + cubes.GetChild(b).name);
 					CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.GetComponent<CubeAnimatonScript>();
 					cubeScript.ValueNext = cubeScript.ResetPosition;
-					cubeScript.transform.position = cubeScript.ResetPosition + new Vector3(0, 800, 0);
+					cubeScript.transform.localPosition = cubeScript.ResetPosition + new Vector3(0, 80, 0);
 					cubeScript.Delay = 0.2f + 0.04f * b;
 					GameStartDelay += 0.04f;
 					cubeScript.enabled = true;

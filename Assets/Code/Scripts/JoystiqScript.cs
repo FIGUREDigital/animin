@@ -299,8 +299,11 @@ public class JoystiqScript : MonoBehaviour {
 
 			if(fingerID == -1)
 			{
-				if(Input.GetTouch(i).position.x < Screen.width/3 
-				   && Input.GetTouch(i).position.y < Screen.height/3 
+				Vector3 bottomLeftWorld = UICamera.mainCamera.WorldToScreenPoint(ThumbpadBack.worldCorners[0]);
+				Vector3 topRightWorld = UICamera.mainCamera.WorldToScreenPoint(ThumbpadBack.worldCorners[2]);
+
+				if(Input.GetTouch(i).position.x < topRightWorld.x 
+				   && Input.GetTouch(i).position.y < topRightWorld.y 
 				   && Input.GetTouch(i).phase == TouchPhase.Began)
 				{
 					fingerID = Input.GetTouch(i).fingerId;
