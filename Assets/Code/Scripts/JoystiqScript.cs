@@ -503,7 +503,7 @@ public class JoystiqScript : MonoBehaviour {
 
 			if(finalMovementDirection != Vector2.zero)
 			{
-				if(movementSpeed < 0.7f)
+				if(movementSpeed < 0.5f)
 				{
 					UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = false;
 					UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = true;
@@ -513,7 +513,7 @@ public class JoystiqScript : MonoBehaviour {
 					UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsRunning = true;
 					UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsWalking = false;
 				}
-				CharacterControllerRef.walkSpeed =  movementSpeed * 120.0f;
+				CharacterControllerRef.walkSpeed =  movementSpeed * 150.0f;
 				CharacterControllerRef.RotateToLookAtPoint(CharacterControllerRef.transform.position + CharacterControllerRef.MovementDirection * 6);
 			}
 			else

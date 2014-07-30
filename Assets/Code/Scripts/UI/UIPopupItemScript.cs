@@ -15,6 +15,14 @@ public enum MenuFunctionalityUI
 	Clock,
 }
 
+public enum SpecialFunctionalityId
+{
+	None,
+	Liquid,
+	Injection,
+
+}
+
 public class UIPopupItemScript : MonoBehaviour 
 {
 	public int Points;
@@ -22,6 +30,7 @@ public class UIPopupItemScript : MonoBehaviour
 	public GameObject Model3D;
 	public bool NonInteractable;
 	public MenuFunctionalityUI Menu;
+	public SpecialFunctionalityId SpecialId;
 
 	// Use this for initialization
 	void Start () 

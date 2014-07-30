@@ -202,7 +202,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("pat_react");
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("pat_react") || animator.GetBool("IsPat");
 		}
 		
 		set
@@ -267,7 +267,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("tickle");
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("tickle") || animator.GetBool("IsTickled");
 		}
 		
 		set
@@ -494,12 +494,14 @@ public class AnimationControllerScript : MonoBehaviour
 
 		}
 
-		if(IsIdle && !IsLookingCamera)
+		CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+
+		if(IsIdle && !IsLookingCamera && script.CurrentAction != ActionId.EnterPortalToAR && script.CurrentAction != ActionId.EnterPortalToNonAR)
 		{
 			TimeInIdleState += Time.deltaTime;
 			if(TimeInIdleState >= 3.0f)
 			{
-				CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
 
 				int random = UnityEngine.Random.Range(0, 25);
@@ -586,7 +588,14 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		IsEating = false;
 		IsTakingPill = false;
-		IsTickled = false;
+		//IsTickled = false;
+
+		if(animator.GetCurrentAnimatorStateInfo(0).IsName("tickle"))
+			IsTickled = false;
+
+		if(animator.GetCurrentAnimatorStateInfo(0).IsName("pat_react"))
+			IsPat = false;
+
 		IsIdleLook1 = false;
 		IsIdleLook2 = false;
 		IsIdleLook3 = false;
@@ -601,12 +610,18 @@ public class AnimationControllerScript : MonoBehaviour
 		IsDance = false;
 		IsEvolving = false;
 		IsNo = false;
-		IsPat = false;
+		//IsPat = false;
 
-		IsEating = false;	
-		IsExitPortal = false;
-		IsEnterPortal = false;
+		IsEating = false;
+
+		if(animator.GetCurrentAnimatorStateInfo(0).IsName("jump_out_portal"))
+			IsExitPortal = false;
+
+		if(animator.GetCurrentAnimatorStateInfo(0).IsName("jump_in_portal"))
+			IsEnterPortal = false;
+
 	}
+
 }
 
 

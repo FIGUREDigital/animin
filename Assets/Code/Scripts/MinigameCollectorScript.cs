@@ -156,8 +156,8 @@ public class MinigameCollectorScript : MonoBehaviour
 		}
 		else if(Input.GetButton("Fire1") && isSwipingAllowed)
 		{
-			SnapAngleDifference += (lastMousePosition.x - Input.mousePosition.x) * 0.10f;
-			snapAngle += (lastMousePosition.x - Input.mousePosition.x) * 0.10f;
+			SnapAngleDifference += (lastMousePosition.x - Input.mousePosition.x) * 0.09f;
+			snapAngle += (lastMousePosition.x - Input.mousePosition.x) * 0.09f;
 			lastMousePosition = Input.mousePosition;
 		}
 		else if(Input.GetButtonUp("Fire1") && isSwipingAllowed)
@@ -281,6 +281,8 @@ public class MinigameCollectorScript : MonoBehaviour
 
 			if (CharacterRef.transform.position.y <= -100f) 
 			{
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Fall_Through_Levels);
+
 				CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
 				if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
 				Reset();
@@ -351,6 +353,7 @@ public class MinigameCollectorScript : MonoBehaviour
 			if(EvilCharacters[i] == gameObject)
 			{
 				//Debug.Log("HIT FROM ABOVE");
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Kill_Baddy);
 
 				gameObject.AddComponent<EnemyDeathAnimationScript>();
 				EvilCharacterPatternMovementScript movementScript = gameObject.GetComponent<EvilCharacterPatternMovementScript>();
@@ -372,6 +375,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 		TemporaryDisableCollisionEvent collisionEvent = new TemporaryDisableCollisionEvent(gameObject);
 		PresentationEventManager.Create(collisionEvent);
+		UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Bump_Into_Baddy);
 
 		Debug.Log("ADDING FORCE");
 		CharacterRef.GetComponent<CharacterControllerScript>().Forces.Add(
@@ -411,10 +415,15 @@ public class MinigameCollectorScript : MonoBehaviour
 				CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned++;
 				GameObject.Destroy(Collections[i]);
 
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Star_Collect);
+
+
 				Collections.RemoveAt(i);
 				i--;
 
 				if (Collections.Count <= 0) {
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Star_Complete);
+
 					LevelsToComplete.Remove(currentLevelId);
 					Reset ();
 				}
@@ -475,6 +484,8 @@ public class MinigameCollectorScript : MonoBehaviour
 	public void Reset()
 	{
 		EvilCharacters.Clear();
+		UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Grid_Cubes_Fall);
+
 
 		for(int i=0;i<EvilCharacterPool.Length;++i)
 		{

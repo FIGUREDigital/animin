@@ -3,8 +3,10 @@ using System.Collections;
 
 public class SoundEngineScript : MonoBehaviour 
 {
+	//private AudioClip[] MinigameCubeRunners;
 	private AudioClip[] GenericSounds;
 	private AudioClip[,] CreatureSounds;
+	public AudioSource SoundFxLooper1;
 
 	// Use this for initialization
 	void Start () 
@@ -18,6 +20,18 @@ public class SoundEngineScript : MonoBehaviour
 		GenericSounds[(int)GenericSoundId.TakePiss] = Resources.Load("Sounds/Toilet Functions/Wee") as AudioClip;
 		GenericSounds[(int)GenericSoundId.CleanPooPiss] = Resources.Load("Sounds/Toilet Functions/Poo and Wee Cleanup") as AudioClip;
 		GenericSounds[(int)GenericSoundId.ItemLand] = Resources.Load("Sounds/Items/Item Land") as AudioClip;
+
+		GenericSounds[(int)GenericSoundId.Bump_Into_Baddy] = Resources.Load("Sounds/Minigame01_Platform/Bump_Into_Baddy") as AudioClip;
+		GenericSounds[(int)GenericSoundId.Collect_Box] = Resources.Load("Sounds/Minigame01_Platform/Collect_Box") as AudioClip;
+		GenericSounds[(int)GenericSoundId.Fall_Through_Levels] = Resources.Load("Sounds/Minigame01_Platform/Fall_Through_Levels") as AudioClip;
+		GenericSounds[(int)GenericSoundId.Grid_Cubes_Fall] = Resources.Load("Sounds/Minigame01_Platform/Grid_Cubes_Fall") as AudioClip;
+		GenericSounds[(int)GenericSoundId.Jump] = Resources.Load("Sounds/Minigame01_Platform/Jump") as AudioClip;
+		GenericSounds[(int)GenericSoundId.Kill_Baddy] = Resources.Load("Sounds/Minigame01_Platform/Kill_Baddy") as AudioClip;
+		GenericSounds[(int)GenericSoundId.Land_After_Falling_Lose_3_Stars] = Resources.Load("Sounds/Minigame01_Platform/Land_After_Falling_Lose_3_Stars") as AudioClip;
+		GenericSounds[(int)GenericSoundId.Star_Collect] = Resources.Load("Sounds/Minigame01_Platform/Star_Collect") as AudioClip;
+		GenericSounds[(int)GenericSoundId.Star_Complete] = Resources.Load("Sounds/Minigame01_Platform/Star_Complete") as AudioClip;
+
+
 
 		CreatureSounds = new AudioClip[(int)CreatureTypeId.Count, (int)CreatureSoundId.Count];
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Celebrate] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@celebrate") as AudioClip;
@@ -41,6 +55,7 @@ public class SoundEngineScript : MonoBehaviour
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Tickle] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Tickle") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Tickle2] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@tickle_02") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Tickle3] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@tickle_03") as AudioClip;
+		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.SnoringSleeping] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@sleep_snoring_loop") as AudioClip;
 
 
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Unwell] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Unwell") as AudioClip;
@@ -60,6 +75,17 @@ public class SoundEngineScript : MonoBehaviour
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk7] = Resources.Load("Sounds/TboBabyAnims/tbo_baby_talk_07") as AudioClip;
 
 
+	}
+
+	public void PlayLoop(CreatureTypeId creatureId, CreatureSoundId soundId)
+	{
+		SoundFxLooper1.clip = CreatureSounds[(int)creatureId, (int)soundId];
+		SoundFxLooper1.Play();
+	}
+
+	public void StopLoop()
+	{
+		SoundFxLooper1.Stop();
 	}
 
 	public void Play(GenericSoundId id)
@@ -89,6 +115,19 @@ public enum GenericSoundId
 	TakePiss,
 	CleanPooPiss,
 	ItemLand,
+
+	Bump_Into_Baddy,
+	Collect_Box,
+	Fall_Through_Levels,
+	Grid_Cubes_Fall,
+	Jump,
+	Kill_Baddy,
+	Land_After_Falling_Lose_3_Stars,
+	Star_Collect,
+	Star_Complete,
+
+
+
 	Count,
 }
 
@@ -123,6 +162,7 @@ public enum CreatureSoundId
 	InjectionReact,
 
 	IdleWave,
+	SnoringSleeping,
 
 
 	RandomTalk1,

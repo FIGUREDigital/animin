@@ -46,7 +46,37 @@ public class CameraModelScript : MonoBehaviour
 
 					if(hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
 					{
-						Spawn();
+						Spawn(false);
+					}
+					else if(hitInfo.collider.gameObject == UIGlobalVariablesScript.Singleton.MainCharacterRef)
+					{
+						ReferencedObjectScript refScript = SpriteRef.GetComponent<ReferencedObjectScript>();
+						UIPopupItemScript popScript = refScript.Reference.GetComponent<UIPopupItemScript>();
+
+						CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+
+						if(popScript.Type == PopupItemType.Food)
+						{
+							progressScript.OnInteractWithPopupItem(popScript);
+							DestroyChildModelAndHide();
+						}
+						else if(popScript.Type == PopupItemType.Item)
+						{
+							if(progressScript.ObjectHolding == null)
+							{
+								Spawn(true);
+							}
+							else
+							{
+								DestroyChildModelAndHide();
+							}
+						}
+						else if(popScript.Type == PopupItemType.Medicine)
+						{
+							progressScript.OnInteractWithPopupItem(popScript);
+							DestroyChildModelAndHide();
+						}
 					}
 					else
 					{
@@ -71,7 +101,7 @@ public class CameraModelScript : MonoBehaviour
 		SpriteRef = null;
 	}
 
-	private void Spawn()
+	private void Spawn(bool holdInHands)
 	{
 		if(SpriteRef != null)
 		{
@@ -110,8 +140,17 @@ public class CameraModelScript : MonoBehaviour
 			//					{
 			//						trans.rotation = Quaternion.LookRotation(UICamera.lastHit.normal) * Quaternion.Euler(90f, 0f, 0f);
 			//					}
-			
+
+
+			CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().GroundItems.Add(child);
+			if(holdInHands)
+			{
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().PickupItem(child);
+
+			}
+
 			//Debug.Log("DCREATED!!!");
 			// Destroy this icon as it's no longer needed
 			//NGUITools.Destroy(gameObject);

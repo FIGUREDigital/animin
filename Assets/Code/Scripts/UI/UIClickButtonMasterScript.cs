@@ -4,7 +4,7 @@ using System.Collections;
 public class UIClickButtonMasterScript : MonoBehaviour 
 {
 	public UIFunctionalityId FunctionalityId;
-	private float SavedRadius;
+	private static float SavedRadius;
 	//private Vector3 SavedScale;
 
 	// Use this for initialization
@@ -37,6 +37,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			{
 				case UIFunctionalityId.JumbOnCubeRunner:
 				{
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
+
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript> ().PressedJumb = true;
 					break;
 				}
@@ -199,13 +201,14 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 			//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = sender.GetComponent<UIClickButtonMasterScript>().SavedRadius;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = UIClickButtonMasterScript.SavedRadius;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
 			
 			HandleClick(UIFunctionalityId.BackFromMinigames, sender);
 			Camera.main.GetComponent<AudioSource>().Stop();
-			
-			
+
+	
 			break;
 		}
 			
@@ -296,8 +299,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(true);
 					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().HardcoreReset();
 
-				sender.GetComponent<UIClickButtonMasterScript>().SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
+					UIClickButtonMasterScript.SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
+
 					UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
 					//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 					

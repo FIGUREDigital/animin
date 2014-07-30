@@ -79,7 +79,7 @@ public class CharacterProgressScript : MonoBehaviour
 	public bool IsMovingTowardsLocation;
 	public GameObject ObjectCarryAttachmentBone;
 	private GameObject DragableObject;
-	private GameObject ObjectHolding;
+	public GameObject ObjectHolding;
 	private float LastTapClick;
 
 	private int RequestedToMoveToCounter;
@@ -134,11 +134,11 @@ public class CharacterProgressScript : MonoBehaviour
 			LayerMask.NameToLayer( "Character"));
 
 
-		//CurrentAction = ActionId.EnterSleep;
+		CurrentAction = ActionId.EnterSleep;
 
-		animationController.IsSleeping = true;
-		CurrentAction = ActionId.Sleep;
-		SleepBoundingBox.SetActive(true);
+		//animationController.IsSleeping = true;
+		//CurrentAction = ActionId.Sleep;
+		//SleepBoundingBox.SetActive(true);
 
 
 	}
@@ -315,6 +315,8 @@ public class CharacterProgressScript : MonoBehaviour
 				animationController.IsSleeping = true;
 				CurrentAction = ActionId.Sleep;
 				SleepBoundingBox.SetActive(true);
+				UIGlobalVariablesScript.Singleton.SoundEngine.PlayLoop(CreaturePlayerId, CreatureSoundId.SnoringSleeping);
+
 				break;
 			}
 
@@ -330,6 +332,7 @@ public class CharacterProgressScript : MonoBehaviour
 						CurrentAction = ActionId.None;
 						SleepBoundingBox.SetActive(false);
 						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.SleepToIdle);
+						UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
 						
 					}
 				}
@@ -361,7 +364,7 @@ public class CharacterProgressScript : MonoBehaviour
 					
 				else if(Input.GetButtonDown("Fire1"))
 				{
-					Debug.Log("else if(Input.GetButtonDown(Fire1))");
+					//Debug.Log("else if(Input.GetButtonDown(Fire1))");
 
 					if(hadRayCollision)
 					{
@@ -580,19 +583,16 @@ public class CharacterProgressScript : MonoBehaviour
 						if(cleanedShit) UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CleanPooPiss);
 
 												
-						if(TouchesObjcesWhileSwiping.Contains(this.gameObject) && !cleanedShit)
+						if(TouchesObjcesWhileSwiping.Contains(this.gameObject) && !cleanedShit && !animationController.IsTickled)
 						{
-							int random = UnityEngine.Random.Range(0, 5);
-							if(random == 0) animationController.IsIdleLook1 = true;
-							else if(random == 1) animationController.IsIdleLook2 = true;
-							else if(random == 2) animationController.IsIdleLook3 = true;
-							else if(random == 3) 
-						{
-							animationController.IsIdleWave = true;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.IdleWave);
-						}
+							Stop(true);
+							animationController.IsTickled = true;
+
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, 
+						                                                   (CreatureSoundId)((int)CreatureSoundId.Tickle + UnityEngine.Random.Range(0, 3)));
 							
-							else if(random == 4) animationController.IsTickled = true;
+							
+							
 						}
 					}
 
@@ -603,35 +603,7 @@ public class CharacterProgressScript : MonoBehaviour
 					SwipeHistoryPositions.RemoveAt(0);
 					Debug.Log("TOO MANY!!");
 				}
-				//}
-				
 
-				
-
-					/*
-					List<GameObject> TouchedUnttouchedSwipeList = new List<GameObject>();
-					// Consider this object for swiped
-					if(hadRayCollision && (hitInfo.collider.tag == "Items" || hitInfo.collider.tag == "Shit"))
-					{
-						if(!TouchedUnttouchedSwipeList.Contains(hitInfo.collider.gameObject))
-						{
-							TouchedUnttouchedSwipeList.Remove(hitInfo.collider.gameObject);
-						}
-						else
-						{
-							if(!TouchedUnttouchedSwipeList.Contains(hitInfo.collider.gameObject))
-								TouchedUnttouchedSwipeList.Add(hitInfo.collider.gameObject);
-						}
-					}
-					else
-					{
-						for(int i=0;i<TouchedUnttouchedSwipeList.Count;++i)
-						{
-							SwipeHitsPerObject[TouchedUnttouchedSwipeList[i]]++;
-						}
-
-						TouchedUnttouchedSwipeList.Clear();
-					}*/
 
 
 
@@ -646,11 +618,10 @@ public class CharacterProgressScript : MonoBehaviour
 
 				if(UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 1 && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.GetChild(0).name == "Broom")
 				{
-					if(hadRayCollision != null && (hitInfo.collider.tag == "Items" || hitInfo.collider.tag == "Shit") && GroundItems.Contains(hitInfo.collider.gameObject))
+					if(hadRayCollision && (hitInfo.collider.tag == "Items" || hitInfo.collider.tag == "Shit") && GroundItems.Contains(hitInfo.collider.gameObject))
 					{
 						GroundItems.Remove(hitInfo.collider.gameObject);
 						Destroy(hitInfo.collider.gameObject);
-						
 					}
 				}
 				else if (!AtLeastOneSwipeDetected && hadRayCollision/* && !TriggeredHoldAction*/)
@@ -672,10 +643,13 @@ public class CharacterProgressScript : MonoBehaviour
 									
 								}
 							}
-							else if(ObjectHolding == null && animationController.IsAnyIdleAnimationPlaying())
+						else if(ObjectHolding == null && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 0 && !animationController.IsPat)
 							{
-								animationController.IsTickled = true;
-								UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, (CreatureSoundId)((int)CreatureSoundId.Tickle + UnityEngine.Random.Range(0, 3)));
+								Stop(true);
+								animationController.IsPat = true;
+								//Debug.Log("IS TICKLED");
+								
+								UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.PatReact);
 							}
 						}
 						else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
@@ -780,7 +754,7 @@ public class CharacterProgressScript : MonoBehaviour
 				}
 				else
 				{
-					if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && Hungry <= 70)
+				if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && Hungry <= 70 && !animationController.IsTickled)
 					{
 						FeedMyselfTimer += Time.deltaTime;
 
@@ -882,7 +856,9 @@ public class CharacterProgressScript : MonoBehaviour
 			animationController.IsSad = false;
 			animationController.IsNotWell = false;
 			animationController.IsHungry = false;
-			sadUnwellLoopState = HungrySadUnwellLoopId.DetectAnimation;
+			sadUnwellLoopState = HungrySadUnwellLoopId.OnCooldown;
+			if(TimeForNextHungryUnwellSadAnimation <= 3)
+				TimeForNextHungryUnwellSadAnimation += 3;
 		}
 		else
 		{
@@ -1087,7 +1063,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 
-	private void PutItemInHands(GameObject item)
+	public void PutItemInHands(GameObject item)
 	{
 		//item.GetComponent<BoxCollider>().enabled = false;
 		//if(item.collider.gameObject.activeInHierarchy)
@@ -1123,7 +1099,11 @@ public class CharacterProgressScript : MonoBehaviour
 				Hungry += item.Points;
 				Stop(true);
 				animationController.IsEating = true;
-			UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedFood);
+
+			if(item.SpecialId == SpecialFunctionalityId.Liquid)
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedDrink);
+			else
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedFood);
 			//}
 				break;
 			}
@@ -1148,7 +1128,12 @@ public class CharacterProgressScript : MonoBehaviour
 				Health += item.Points;
 				Stop(true);
 				animationController.IsTakingPill = true;
-			UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.EatPill);
+
+			if(item.SpecialId == SpecialFunctionalityId.Injection)
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.InjectionReact);
+			else
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.EatPill);
+
 			//}
 				break;
 			}
@@ -1187,6 +1172,16 @@ public class CharacterProgressScript : MonoBehaviour
 	public void Stop(bool stopMovingAsWell)
 	{
 		IsGoingToPickUpObject = null;
+
+		animationController.IsSad = false;
+		animationController.IsNotWell = false;
+		animationController.IsHungry = false;
+		sadUnwellLoopState = HungrySadUnwellLoopId.OnCooldown;
+
+		if(TimeForNextHungryUnwellSadAnimation <= 1)
+		{
+			TimeForNextHungryUnwellSadAnimation += 1;
+		}
 
 		if(stopMovingAsWell)
 		{
