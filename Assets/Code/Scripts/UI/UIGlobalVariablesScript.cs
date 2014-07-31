@@ -37,6 +37,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject HapynessControlBarRef;
 	public GameObject EvolutionControlBarRef;
 	public GameObject ARPortal;
+	public GameObject Shadow;
 
 	public AnimationControllerScript MainCharacterAnimationControllerRef;
 	public GameObject MainCharacterRef;

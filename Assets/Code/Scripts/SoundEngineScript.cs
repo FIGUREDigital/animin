@@ -57,15 +57,10 @@ public class SoundEngineScript : MonoBehaviour
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Tickle3] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@tickle_03") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.SnoringSleeping] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@sleep_snoring_loop") as AudioClip;
 
-
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Unwell] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@Unwell") as AudioClip;
-
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.InjectionReact] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@injection_react") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.PatReact] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@pat_react") as AudioClip;
-
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.IdleWave] = Resources.Load("Sounds/TboBabyAnims/tbo_baby@idle_wave") as AudioClip;
-
-
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk1] = Resources.Load("Sounds/TboBabyAnims/tbo_baby_talk_01") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk2] = Resources.Load("Sounds/TboBabyAnims/tbo_baby_talk_02") as AudioClip;
 		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk3] = Resources.Load("Sounds/TboBabyAnims/tbo_baby_talk_03") as AudioClip;

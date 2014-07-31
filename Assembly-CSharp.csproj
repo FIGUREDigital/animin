@@ -75,6 +75,7 @@
      <Compile Include="Assets\Code\Scripts\EvilCharacterPatternMovementScript.cs" />
      <Compile Include="Assets\Code\Scripts\FlashObjectScript.cs" />
      <Compile Include="Assets\Code\Scripts\FlatScalerScript.cs" />
+     <Compile Include="Assets\Code\Scripts\GroundShadowScript.cs" />
      <Compile Include="Assets\Code\Scripts\JoystiqScript.cs" />
      <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
      <Compile Include="Assets\Code\Scripts\MinigameCollectorScript.cs" />

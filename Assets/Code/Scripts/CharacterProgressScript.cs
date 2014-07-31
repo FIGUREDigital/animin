@@ -19,10 +19,31 @@ public class ItemPickupSavedData
 	}
 }
 
+public class HappyStateRange
+{
+	public static HappyStateRange[] HappyStates = new HappyStateRange[] 
+	{
+		new HappyStateRange() { Min = 0, Max = 14 },
+		new HappyStateRange() { Min = 8, Max = 26 },
+		new HappyStateRange() { Min = 20, Max = 38 },
+		new HappyStateRange() { Min = 32, Max = 50 },
+		new HappyStateRange() { Min = 45, Max = 65 },
+		new HappyStateRange() { Min = 60, Max = 80 },
+		new HappyStateRange() { Min = 75, Max = 95 },
+		new HappyStateRange() { Min = 90, Max = 110 },
+		new HappyStateRange() { Min = 105, Max = 125 },
+	};
+
+	public float Min;
+	public float Max;
+}
+
 public class CharacterProgressScript : MonoBehaviour 
 {
 	public CreatureTypeId CreaturePlayerId;
+	public const float MaxHappy = 125.0f;
 	public float Happy;
+
 	public float Hungry;
 	public float Fitness;
 	public float Evolution;
@@ -106,9 +127,9 @@ public class CharacterProgressScript : MonoBehaviour
 	private GameObject LastKnownObjectWithMenuUp;
 
 
-	float TimeForNextHungryUnwellSadAnimation;
-	float LengthOfHungryUnwellSadAnimation;
-	HungrySadUnwellLoopId sadUnwellLoopState;
+	//float TimeForNextHungryUnwellSadAnimation;
+	//float LengthOfHungryUnwellSadAnimation;
+	//HungrySadUnwellLoopId sadUnwellLoopState;
 	float HoldingLeftButtonDownTimer;
 	private bool TriggeredHoldAction;
 	private List<Vector3> SwipeHistoryPositions = new List<Vector3>();
@@ -118,7 +139,7 @@ public class CharacterProgressScript : MonoBehaviour
 	void Awake () 
 	{
 		CreaturePlayerId = CreatureTypeId.TBOBaby;
-		Happy = 100;
+		Happy = MaxHappy;
 		Hungry = 100;
 		Fitness = 100;
 		Health = 100;
@@ -208,7 +229,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 		Happy = (Hungry + Fitness + Health) / 3.0f;
 
-		Evolution += (Happy / 100.0f) * Time.deltaTime * 0.1f;
+		Evolution += (Happy / MaxHappy) * Time.deltaTime * 0.1f;
 		if(Evolution >= 100) Evolution = 100;
 
 		UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
@@ -837,7 +858,7 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 		}
 
-		if(Input.GetKeyDown(KeyCode.D))
+		/*if(Input.GetKeyDown(KeyCode.D))
 		{
 			UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation = 
 				Quaternion.Euler(
@@ -845,9 +866,9 @@ public class CharacterProgressScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.y + 90, 
 					UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.z);
 		}
+		*/
 
-
-		if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId != AnimateCharacterOutPortalScript.JumbStateId.None 
+		/*if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId != AnimateCharacterOutPortalScript.JumbStateId.None 
 		   || CurrentAction == ActionId.EnterPortalToAR 
 		   || CurrentAction == ActionId.EnterPortalToNonAR 
 		   || animationController.IsEnterPortal 
@@ -922,7 +943,7 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 				
 			}
-		}
+		}*/
 
 
 
@@ -980,7 +1001,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 		UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Hungry / 100.0f), UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition.y, 0);
 		UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Health / 100.0f), UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition.y, 0);
-		UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Happy / 100.0f), UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition.y, 0);
+		UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Happy / MaxHappy), UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition.y, 0);
 		UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Fitness / 100.0f), UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition.y, 0);
 		//UIGlobalVariablesScript.Singleton.EvolutionControlBarRef.GetComponent<UISlider>().value = Evolution / 100.0f;
 
@@ -1173,15 +1194,15 @@ public class CharacterProgressScript : MonoBehaviour
 	{
 		IsGoingToPickUpObject = null;
 
-		animationController.IsSad = false;
 		animationController.IsNotWell = false;
 		animationController.IsHungry = false;
-		sadUnwellLoopState = HungrySadUnwellLoopId.OnCooldown;
+
+		/*sadUnwellLoopState = HungrySadUnwellLoopId.OnCooldown;
 
 		if(TimeForNextHungryUnwellSadAnimation <= 1)
 		{
 			TimeForNextHungryUnwellSadAnimation += 1;
-		}
+		}*/
 
 		if(stopMovingAsWell)
 		{

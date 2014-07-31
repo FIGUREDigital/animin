@@ -195,6 +195,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position = Vector3.zero;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition = new Vector3(0, 0.01f, 0);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
+			UIGlobalVariablesScript.Singleton.Shadow.transform.localScale = new Vector3(0.46f, 0.46f, 0.46f);
+
+
 
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = true;
 			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.gameObject.GetComponent<ObjectLookAtDeviceScript>().enabled = true;
@@ -282,7 +285,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 
-		
+			UIGlobalVariablesScript.Singleton.Shadow.transform.localScale = new Vector3(0.79f, 0.79f, 0.79f);
+
 			switch(UIGlobalVariablesScript.SelectedMinigameToPlay)
 			{
 				case UIFunctionalityId.PlayMinigameSpaceship:
@@ -307,7 +311,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					
 
 					
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
 					Camera.main.GetComponent<AudioSource>().Play();
 				
 					break;

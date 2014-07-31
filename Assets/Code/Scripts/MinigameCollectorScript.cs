@@ -20,6 +20,9 @@ public class MinigameCollectorScript : MonoBehaviour
 	public List<int> CompletedLevels = new List<int>();
 	public const int MaxLevels = 4;
 
+	private int Hearts;
+	private int StarsCollected;
+
 	//private const int MapWidth = 5;
 	//private const int MapHeight = 5;
 
@@ -29,6 +32,9 @@ public class MinigameCollectorScript : MonoBehaviour
 	//private Vector3 CubeScaleSize = new Vector3(0.2f, 0.20f, 0.2f);
 	public GameObject Stage;
 	private float? GameStartDelay;
+
+	public GameObject[] HeartUI;
+	public GameObject[] StarsUI;
 
 
 	// Use this for initialization
@@ -283,9 +289,10 @@ public class MinigameCollectorScript : MonoBehaviour
 			{
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Fall_Through_Levels);
 
-				CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
-				if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
-				Reset();
+				//CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
+			//	if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
+
+				LoseHeart(true);
 			}
 
 			//if(Input.GetKeyDown(KeyCode.F))
@@ -298,8 +305,23 @@ public class MinigameCollectorScript : MonoBehaviour
 
 
 
-		UIGlobalVariablesScript.Singleton.TextForStarsInMiniCollector.text = CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned.ToString();
+		UIGlobalVariablesScript.Singleton.TextForStarsInMiniCollector.text = StarsCollected.ToString();
 	
+	}
+
+	private void LoseHeart(bool resetIfZero)
+	{
+		Hearts--;
+		if( Hearts >0)
+		{
+			HeartUI[Hearts].SetActive(false);
+
+			if(resetIfZero) Reset();
+		}
+		else
+		{
+			UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
+		}
 	}
 
 	void ResetCharacter()
@@ -369,7 +391,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	public void OnEvilCharacterHit(GameObject gameObject)
 	{
-		CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
+		//StarsCollected -= 3;
 
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 
@@ -381,6 +403,9 @@ public class MinigameCollectorScript : MonoBehaviour
 		CharacterRef.GetComponent<CharacterControllerScript>().Forces.Add(
 			new CharacterForces() { Speed = 900, Direction = -CharacterRef.transform.forward, Length = 0.3f }
 		);
+
+
+		LoseHeart(false);
 
 		//CharacterRef.AddComponent<FlashMaterialColorScript>();
 	}
@@ -412,18 +437,42 @@ public class MinigameCollectorScript : MonoBehaviour
 //			Debug.Log(d);
 			if(d <= 25)
 			{
-				CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned++;
+
 				GameObject.Destroy(Collections[i]);
 
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Star_Collect);
 
+				int starsActive = 0;
+				for(int a=0;a<StarsUI.Length;++a)
+				{
+					if(!StarsUI[a].activeSelf)
+					{
+						starsActive++;
+						StarsUI[a].SetActive(true);
+						break;
+					}
+					else starsActive++;
+				}
+
+				if(starsActive >= 5) 
+				{
+					StarsCollected++;
+//					for(int a=0;a<StarsUI.Length;++a)
+//					{
+//						StarsUI[a].SetActive(false);
+//					}
+				}
 
 				Collections.RemoveAt(i);
 				i--;
 
-				if (Collections.Count <= 0) {
+				if(StarsCollected >= 10)
+				{
+					UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
+					break;
+				}
+				else if (Collections.Count <= 0) {
 					UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Star_Complete);
-
 					LevelsToComplete.Remove(currentLevelId);
 					Reset ();
 				}
@@ -434,9 +483,16 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	public void HardcoreReset()
 	{
+		Hearts = 3;
 		oldLevelId = -1;
 		currentLevelId = -1;
 		CompletedLevels.Clear();
+		StarsCollected = 0;
+
+		for(int i=0;i<StarsUI.Length;++i)
+			StarsUI[i].SetActive(false);
+		for(int i=0;i<HeartUI.Length;++i)
+			HeartUI[i].SetActive(true);
 
 		LevelsToComplete.Clear();
 		for(int i=0;i<Stage.transform.childCount;++i)
@@ -486,6 +542,9 @@ public class MinigameCollectorScript : MonoBehaviour
 		EvilCharacters.Clear();
 		UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Grid_Cubes_Fall);
 
+
+		for(int i=0;i<StarsUI.Length;++i)
+			StarsUI[i].SetActive(false);
 
 		for(int i=0;i<EvilCharacterPool.Length;++i)
 		{

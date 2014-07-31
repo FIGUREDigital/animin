@@ -25,16 +25,14 @@ public class AnimateCharacterOutPortalScript : MonoBehaviour {
 		{
 			case JumbStateId.JumbIn:
 			{
-			Timer += Time.deltaTime;
+				Timer += Time.deltaTime;
 
-			if(Timer >= 0.5f)
-				this.transform.position -= this.transform.forward * Time.deltaTime * 120;
-
-				
+				if(Timer >= 0.5f)
+					this.transform.position -= this.transform.forward * Time.deltaTime * 120;
 
 				if(Timer >= 0.9f)
 				{
-				JumbId = JumbStateId.None;
+					JumbId = JumbStateId.None;
 				}
 
 				break;
@@ -42,15 +40,13 @@ public class AnimateCharacterOutPortalScript : MonoBehaviour {
 
 			case JumbStateId.Jumbout:
 			{
-			Timer += Time.deltaTime;
+				Timer += Time.deltaTime;
 
 				this.transform.position += Vector3.back * Time.deltaTime * 120;
 				
-
-				
 				if(Timer >= 0.6f)
 				{
-				JumbId = JumbStateId.None;
+					JumbId = JumbStateId.None;
 				}
 
 				break;
@@ -61,6 +57,5 @@ public class AnimateCharacterOutPortalScript : MonoBehaviour {
 				break;
 			}
 		}
-	
 	}
 }
