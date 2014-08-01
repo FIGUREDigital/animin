@@ -42,12 +42,80 @@ public class CharacterProgressScript : MonoBehaviour
 {
 	public CreatureTypeId CreaturePlayerId;
 	public const float MaxHappy = 125.0f;
-	public float Happy;
 
-	public float Hungry;
-	public float Fitness;
-	public float Evolution;
-	public float Health;
+	private float happy;
+	private float hungry;
+	private float fitness;
+	private float evolution;
+	private float health;
+
+	public float Happy
+	{
+		get
+		{
+			return happy;
+		}
+		set
+		{
+			happy = value;
+			if(happy > MaxHappy) happy = MaxHappy;
+			if(happy < 0) happy = 0;
+		}
+	}
+	public float Hungry
+	{
+		get
+		{
+			return hungry;
+		}
+		set
+		{
+			hungry = value;
+			if(hungry > 100) hungry = 100;
+			if(hungry < 0) hungry = 0;
+		}
+	}
+	public float Fitness
+	{
+		get
+		{
+			return fitness;
+		}
+		set
+		{
+			fitness = value;
+			if(fitness > 100) fitness = 100;
+			if(fitness < 0) fitness = 0;
+		}
+	}
+	public float Evolution
+	{
+		get
+		{
+			return evolution;
+		}
+		set
+		{
+			evolution = value;
+			if(evolution > 100) evolution = 100;
+			if(evolution < 0) evolution = 0;
+		}
+	}
+	public float Health
+	{
+		get
+		{
+			return health;
+		}
+		set
+		{
+			health = value;
+			if(health > 100) health = 100;
+			if(health < 0) health = 0;
+		}
+	}
+	
+
 	public int EvolutionStage;
 	public int ZefTokens;
 	public List<AchievementId> Achievements = new List<AchievementId>();
@@ -134,6 +202,7 @@ public class CharacterProgressScript : MonoBehaviour
 	private bool TriggeredHoldAction;
 	private List<Vector3> SwipeHistoryPositions = new List<Vector3>();
 	public float PortalTimer;
+	public float SmallCooldownTimer;
 
 	// Use this for initialization
 	void Awake () 
@@ -216,18 +285,24 @@ public class CharacterProgressScript : MonoBehaviour
 		Hungry -= Time.deltaTime * 0.2f;
 		Fitness -= Time.deltaTime * 0.2f;
 		Health -= Time.deltaTime * 0.2f;
-
-		if(Health < 0 ) Health = 0;
-		if(Hungry < 0 ) Hungry = 0;
-		if(Fitness < 0) Fitness = 0;
-
 	
 		//TextTest.color = new Color(1,1,1, TextTest.color.a - Time.deltaTime * 0.6f);
 		//if(TextTest.color.a < 0)
 		//	TextTest.color = new Color(1,1,1, 0);
 
 
-		Happy = (Hungry + Fitness + Health) / 3.0f;
+		Happy = ((
+			(Hungry / 100.0f) + 
+			(Fitness / 100.0f) + 
+			(Health / 100.0f)) 
+		         / 3.0f) 
+			* MaxHappy;
+
+
+		//Debug.Log("Hungry: " + (Hungry / 100.0f).ToString());
+		//Debug.Log("Fitness: " + (Fitness / 100.0f).ToString());
+		//Debug.Log("Health: " + (Health / 100.0f).ToString());
+		//Debug.Log("Happy: " + (Happy / MaxHappy).ToString());
 
 		Evolution += (Happy / MaxHappy) * Time.deltaTime * 0.1f;
 		if(Evolution >= 100) Evolution = 100;
@@ -292,6 +367,16 @@ public class CharacterProgressScript : MonoBehaviour
 		//Debug.Log(CurrentAction.ToString());
 		switch(CurrentAction)
 		{
+		case ActionId.SmallCooldownPeriod:
+		{
+			SmallCooldownTimer -= Time.deltaTime;
+			if(SmallCooldownTimer <= 0)
+			{
+				CurrentAction = ActionId.None;
+			}
+
+			break;
+		}
 		case ActionId.EnterPortalToAR:
 			{
 				//OnEnterARScene();
@@ -307,7 +392,7 @@ public class CharacterProgressScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
 
-					UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true, false);
+					UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.ARscene, false);
 
 					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.JumbOutPortal);
 			}
@@ -331,6 +416,8 @@ public class CharacterProgressScript : MonoBehaviour
 				break;
 			}
 */
+
+
 			case ActionId.EnterSleep:
 			{
 				animationController.IsSleeping = true;
@@ -971,8 +1058,10 @@ public class CharacterProgressScript : MonoBehaviour
 
 			int sign = -1;
 			if(UnityEngine.Random.Range(0, 2) == 0) sign = 1;
+			float randomDistanceA = UnityEngine.Random.Range(30, 40);
+			//if(Physics.Raycast(new Ray(UIGlobalVariablesScript.Singleton.main
 
-			MoveTo(this.transform.position + new Vector3(UnityEngine.Random.Range(-40, 40), 0, UnityEngine.Random.Range(30, 40) * sign), false);
+			MoveTo(this.transform.position + new Vector3(UnityEngine.Random.Range(-40, 40), 0, randomDistanceA * sign), false);
 
 			LastTimeToilet = DateTime.Now;
 		}
@@ -1001,7 +1090,8 @@ public class CharacterProgressScript : MonoBehaviour
 
 		UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Hungry / 100.0f), UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition.y, 0);
 		UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Health / 100.0f), UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition.y, 0);
-		UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Happy / MaxHappy), UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition.y, 0);
+		UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, 
+		                                                                                                         Happy / MaxHappy), UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition.y, 0);
 		UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Fitness / 100.0f), UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition.y, 0);
 		//UIGlobalVariablesScript.Singleton.EvolutionControlBarRef.GetComponent<UISlider>().value = Evolution / 100.0f;
 
@@ -1226,6 +1316,7 @@ public enum ActionId
 	DetectFlickAndThrow,
 	EnterPortalToAR,
 	EnterPortalToNonAR,
+	SmallCooldownPeriod,
 }
 
 public enum HungrySadUnwellLoopId

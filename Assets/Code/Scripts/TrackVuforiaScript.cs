@@ -94,7 +94,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 	void LateUpdate()
 	{
 
-		if(NonARSceneRef.activeSelf)
+		if(NonARSceneRef.activeInHierarchy)
 		{
 			Camera.main.transform.position = new Vector3(0, 123.1f, -198.3f);
 			Camera.main.transform.rotation = Quaternion.Euler(14.73474f, 0.0f, 0.0f);
@@ -286,7 +286,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
 				progress.CurrentAction = ActionId.EnterPortalToAR;
 
-				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(false, true);
+				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, true);
 				progress.Stop(true);
 				progress.PortalTimer = 0;
 				Debug.Log("ENTERING AR STATE ");
@@ -324,7 +324,6 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			else
 			{
 				CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
-		
 
 				//UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().PortalTimer = 0;
 				Debug.Log("ENTERING NON AR STATE ");
@@ -332,7 +331,8 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 				//UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
 				progressScript.CurrentAction = ActionId.None;
 				//UIGlobalVariablesScript.Singleton.Vuforia.OnExitAR();
-				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(false, false);
+				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, false);
+
 				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsExitPortal = true;
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
@@ -341,7 +341,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(progressScript.CreaturePlayerId, CreatureSoundId.JumbOutPortal);
 				//UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
-				
+				progressScript.CurrentAction = ActionId.SmallCooldownPeriod;
+				progressScript.SmallCooldownTimer = 0.5f;
+
 				//OnExitAR();
 				//CharacterRef.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EnterPortalToNonAR;
 			}

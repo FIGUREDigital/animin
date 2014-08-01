@@ -1,14 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/MinigameCollectorScript.cs">
     <Files>
       <File FileName="Assets/Code/Scripts/GroundShadowScript.cs" Line="18" Column="60" />
-      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="665" Column="29" />
-      <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="29" Column="4" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="1198" Column="22" />
+      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="644" Column="6" />
+      <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="1034" Column="8" />
       <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="306" Column="31" />
-      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="40" Column="27" />
+      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/MinigameCollectorScript.cs" Line="455" Column="6" />
+      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/JoystiqScript.cs" Line="455" Column="22" />
+      <File FileName="Assets/Code/Scripts/TurdRotationScript.cs" Line="16" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

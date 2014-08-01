@@ -4,6 +4,14 @@ using System.Collections.Generic;
 
 public class MinigameCollectorScript : MonoBehaviour 
 {
+	private enum MinigameStateId
+	{
+		Playing = 0,
+		ExitMinigame,
+	}
+
+	private MinigameStateId State;
+
 	//private GameObject[,] CubeMatrix;
 
 	private List<GameObject> Collections = new List<GameObject>();
@@ -141,6 +149,67 @@ public class MinigameCollectorScript : MonoBehaviour
 	}
 
 
+	private void EnterMinigame()
+	{
+		CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+		
+		
+		UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsExitPortal = true;
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
+		
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
+		UIGlobalVariablesScript.Singleton.SoundEngine.Play(progressScript.CreaturePlayerId, CreatureSoundId.JumbOutPortal);
+		//progressScript.CurrentAction = ActionId.EnterPortalToNonAR;
+		
+
+		UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.MinigameCuberRunners, false);
+	}
+	
+	
+	private void ExitMinigame(bool succesfullyCompleted)
+	{
+		CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().Forces.Clear();
+
+		//if(succesfullyCompleted)
+		{
+//			UIGlobalVariablesScript.Singleton.SoundEngine.Play(progressScript.CreaturePlayerId, CreatureSoundId.JumbInPortal);
+//			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
+//			progressScript.CurrentAction = ActionId.EnterPortalToAR;
+//			
+//			UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.MinigameCuberRunners, true);
+//			progressScript.PortalTimer = 0;
+		}
+		//else
+		{
+			UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
+			progressScript.Stop(true);
+			progressScript.CurrentAction = ActionId.SmallCooldownPeriod;
+			progressScript.SmallCooldownTimer = 0.5f;
+
+
+			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsExitPortal = true;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
+			
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
+			UIGlobalVariablesScript.Singleton.SoundEngine.Play(progressScript.CreaturePlayerId, CreatureSoundId.JumbOutPortal);
+			//progressScript.CurrentAction = ActionId.EnterPortalToNonAR;
+
+			if(UIGlobalVariablesScript.Singleton.ARSceneRef.activeSelf)
+				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.ARscene, false);
+			else
+				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, false);
+
+		}
+	}
+	
+	
 	Vector3 lastMousePosition;
 
 	private bool isSwipingAllowed;
@@ -151,161 +220,181 @@ public class MinigameCollectorScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
-		if(Input.GetButtonDown("Fire1") && CanBeginLevelSwipe())
+		if(State == MinigameStateId.ExitMinigame)
 		{
-			lastMousePosition = Input.mousePosition;
-			isSwipingAllowed = true;
-			TimeStartedSwipe = Time.time;
-			SnapAngleDifference = 0;
+			UIGlobalVariablesScript.Singleton.SoundEngine.Play(progressScript.CreaturePlayerId, CreatureSoundId.JumbInPortal);
+			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
+			progressScript.CurrentAction = ActionId.EnterPortalToAR;
+			
+			UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.MinigameCuberRunners, true);
+			progressScript.PortalTimer = 0;
 
+		
 		}
-		else if(Input.GetButton("Fire1") && isSwipingAllowed)
+		else
 		{
-			SnapAngleDifference += (lastMousePosition.x - Input.mousePosition.x) * 0.09f;
-			snapAngle += (lastMousePosition.x - Input.mousePosition.x) * 0.09f;
-			lastMousePosition = Input.mousePosition;
-		}
-		else if(Input.GetButtonUp("Fire1") && isSwipingAllowed)
-		{
-			//fast swipe
-			if((Time.time - TimeStartedSwipe) <= 0.4f)
+
+			if(Input.GetButtonDown("Fire1") && CanBeginLevelSwipe())
 			{
-				snapAngle -= SnapAngleDifference;
-
-
-				// rotate right
-				if(Input.mousePosition.x >= lastMousePosition.x)
-				{
-					snapAngle  -= 90.0f;
-					snapAngle = (int)(snapAngle / 90.0f) * 90f;
-					//Debug.Log("PATH A");/
-				}
-
-				// rotate left
-				else
-				{
-					snapAngle  += 90.0f;
-					snapAngle = (int)(snapAngle / 90.0f) * 90f;
-					//Debug.Log("PATH B");
-				}
-				
+				lastMousePosition = Input.mousePosition;
+				isSwipingAllowed = true;
+				TimeStartedSwipe = Time.time;
+				SnapAngleDifference = 0;
 
 			}
+			else if(Input.GetButton("Fire1") && isSwipingAllowed)
+			{
+				SnapAngleDifference += (lastMousePosition.x - Input.mousePosition.x) * 0.09f;
+				snapAngle += (lastMousePosition.x - Input.mousePosition.x) * 0.09f;
+				lastMousePosition = Input.mousePosition;
+			}
+			else if(Input.GetButtonUp("Fire1") && isSwipingAllowed)
+			{
+				//fast swipe
+				if((Time.time - TimeStartedSwipe) <= 0.4f)
+				{
+					snapAngle -= SnapAngleDifference;
 
-			// slow swipe
+
+					// rotate right
+					if(Input.mousePosition.x >= lastMousePosition.x)
+					{
+						snapAngle  -= 90.0f;
+						snapAngle = (int)(snapAngle / 90.0f) * 90f;
+						//Debug.Log("PATH A");/
+					}
+
+					// rotate left
+					else
+					{
+						snapAngle  += 90.0f;
+						snapAngle = (int)(snapAngle / 90.0f) * 90f;
+						//Debug.Log("PATH B");
+					}
+					
+
+				}
+
+				// slow swipe
+				else
+				{
+
+
+				}
+
+
+			}
 			else
 			{
 
-
+				isSwipingAllowed = false;
 			}
 
 
-		}
-		else
-		{
+			AngleInTransform = Mathf.Lerp(AngleInTransform, snapAngle, Time.deltaTime * 7);
 
-			isSwipingAllowed = false;
-		}
+			float finalTransform = AngleInTransform;
 
-
-		AngleInTransform = Mathf.Lerp(AngleInTransform, snapAngle, Time.deltaTime * 7);
-
-		float finalTransform = AngleInTransform;
-
-
-		UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation = Quaternion.Euler(
-			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.x,
-			finalTransform,
-			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.z
-			);
-
-		//Debug.Log("AngleInTransform - snapAngle:" + Mathf.Abs(AngleInTransform - snapAngle).ToString());
-
-		if( Mathf.Abs(AngleInTransform - snapAngle) <= 0.1f)
-		{
-			AngleInTransform = snapAngle;
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
-		}
-		else
-		{
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = true;
-		}
-
-
-
-	
-		/*GameObject obj = GameObject.Find("TextureBufferCamera");
-		
-		GameObject hole = GameObject.Find("insideHole");
-
-		if(obj != null)
-		{
-			Texture texture = obj.GetComponent<Camera>().targetTexture;
-			hole.renderer.material.mainTexture = texture;*/
-		/*	
-			
-			hole.renderer.material.SetTextureScale (
-				"_MainTex", 
-				new Vector2(0.05f, 0.05f)
+			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation = Quaternion.Euler(
+				UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.x,
+				finalTransform,
+				UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.z
 				);
-			
-			hole.renderer.material.SetTextureOffset (
-				"_MainTex", 
-				new Vector2(0.5f, 0.5f)
-				);*/
-		//}
 
-		if(GameStartDelay.HasValue)
-		{
-//			Debug.Log("DELAY: " + GameStartDelay.ToString());
-			GameStartDelay -= Time.deltaTime;
 
-			if(GameStartDelay <= 0)
+
+			//Debug.Log("AngleInTransform - snapAngle:" + Mathf.Abs(AngleInTransform - snapAngle).ToString());
+
+			if( Mathf.Abs(AngleInTransform - snapAngle) <= 0.1f)
 			{
-				for(int i=0;i<EvilCharacters.Count;++i)
-					EvilCharacters[i].SetActive(true);
+				AngleInTransform = snapAngle;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
+			}
+			else
+			{
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = true;
+			}
 
-				if(oldLevelId != -1)
+
+
+		
+			/*GameObject obj = GameObject.Find("TextureBufferCamera");
+			
+			GameObject hole = GameObject.Find("insideHole");
+
+			if(obj != null)
+			{
+				Texture texture = obj.GetComponent<Camera>().targetTexture;
+				hole.renderer.material.mainTexture = texture;*/
+			/*	
+				
+				hole.renderer.material.SetTextureScale (
+					"_MainTex", 
+					new Vector2(0.05f, 0.05f)
+					);
+				
+				hole.renderer.material.SetTextureOffset (
+					"_MainTex", 
+					new Vector2(0.5f, 0.5f)
+					);*/
+			//}
+
+			if(GameStartDelay.HasValue)
+			{
+	//			Debug.Log("DELAY: " + GameStartDelay.ToString());
+				GameStartDelay -= Time.deltaTime;
+
+				if(GameStartDelay <= 0)
 				{
-					Stage.transform.GetChild(oldLevelId).gameObject.SetActive(false);
+					for(int i=0;i<EvilCharacters.Count;++i)
+						EvilCharacters[i].SetActive(true);
 
+					if(oldLevelId != -1)
+					{
+						Stage.transform.GetChild(oldLevelId).gameObject.SetActive(false);
+
+
+					}
+
+
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(true);
+					GameStartDelay = null;
+					ResetCharacter();
+
+					//if(oldLevelId == -1)
+					//	EnterMinigame();
 
 				}
-				
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(true);
-				
-				GameStartDelay = null;
-			
-				ResetCharacter();
 			}
-		}
-		else
-		{
-		
-			CheckForPickupCollision ();
-
-			if (CharacterRef.transform.position.y <= -100f) 
+			else
 			{
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Fall_Through_Levels);
+			
+				CheckForPickupCollision ();
 
-				//CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
-			//	if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
+				if (CharacterRef.transform.position.y <= -100f) 
+				{
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Fall_Through_Levels);
 
-				LoseHeart(true);
+					//CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
+				//	if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
+
+					LoseHeart(true);
+				}
+
+				//if(Input.GetKeyDown(KeyCode.F))
+				//	Reset();
 			}
+	//		if(CharacterRef.transform.localPosition.y <= -2)
+	//		{
+	//			CharacterRef.GetComponent<CharacterControllerScript>().IsResetFalling = true;
+	//		}
 
-			//if(Input.GetKeyDown(KeyCode.F))
-			//	Reset();
+
+
+			UIGlobalVariablesScript.Singleton.TextForStarsInMiniCollector.text = StarsCollected.ToString();
 		}
-//		if(CharacterRef.transform.localPosition.y <= -2)
-//		{
-//			CharacterRef.GetComponent<CharacterControllerScript>().IsResetFalling = true;
-//		}
-
-
-
-		UIGlobalVariablesScript.Singleton.TextForStarsInMiniCollector.text = StarsCollected.ToString();
 	
 	}
 
@@ -320,7 +409,8 @@ public class MinigameCollectorScript : MonoBehaviour
 		}
 		else
 		{
-			UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
+			ExitMinigame(false);
+
 		}
 	}
 
@@ -456,6 +546,8 @@ public class MinigameCollectorScript : MonoBehaviour
 
 				if(starsActive >= 5) 
 				{
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Fitness += 5;
+
 					StarsCollected++;
 //					for(int a=0;a<StarsUI.Length;++a)
 //					{
@@ -468,7 +560,8 @@ public class MinigameCollectorScript : MonoBehaviour
 
 				if(StarsCollected >= 10)
 				{
-					UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
+					ExitMinigame(true);
+					//UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
 					break;
 				}
 				else if (Collections.Count <= 0) {
@@ -483,6 +576,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	public void HardcoreReset()
 	{
+		State = MinigameStateId.Playing;
 		Hearts = 3;
 		oldLevelId = -1;
 		currentLevelId = -1;
@@ -732,6 +826,7 @@ public class MinigameCollectorScript : MonoBehaviour
 				}
 			}
 		}
+
 	}
 }
 

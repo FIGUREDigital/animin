@@ -8,11 +8,11 @@ public enum AnimationHappyId
 	Happy2,
 	Happy3,
 	Happy4,
-	Happy5,
 	Sad1,
 	Sad2,
 	Sad3,
 	Sad4,
+	Happy5,
 }
 
 public class AnimationControllerScript : MonoBehaviour 
@@ -241,18 +241,18 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
-	public bool IsSad
-	{
-		get
-		{
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("idle_sad") || animator.GetAnimatorTransitionInfo(0).IsName("idle_sad");
-		}
-		
-		set
-		{
-			animator.SetBool("IsSad", value );
-		}
-	}
+//	public bool IsSad
+//	{
+//		get
+//		{
+//			return animator.GetCurrentAnimatorStateInfo(0).IsName("idle_sad") || animator.GetAnimatorTransitionInfo(0).IsName("idle_sad");
+//		}
+//		
+//		set
+//		{
+//			animator.SetBool("IsSad", value );
+//		}
+//	}
 
 	public bool IsTakingPill
 	{
@@ -508,10 +508,11 @@ public class AnimationControllerScript : MonoBehaviour
 			{
 				IsNotWell = false;
 				IsHungry = false;
+				TimeInIdleState = 0;
 			}
 		}
 
-		if(IsIdle && (script.ObjectHolding == null) && !IsLookingCamera && script.CurrentAction != ActionId.EnterPortalToAR && script.CurrentAction != ActionId.EnterPortalToNonAR)
+		if(IsIdle && !script.IsMovingTowardsLocation && (script.ObjectHolding == null) && !IsLookingCamera && script.CurrentAction != ActionId.EnterPortalToAR && script.CurrentAction != ActionId.EnterPortalToNonAR)
 		{
 			TimeInIdleState += Time.deltaTime;
 			if(TimeInIdleState >= 2.0f)
@@ -557,7 +558,7 @@ public class AnimationControllerScript : MonoBehaviour
 						if(script.Hungry <= 30) randomHungryOrUnwell.Add(0);
 						if(script.Health <= 30) randomHungryOrUnwell.Add(1);
 
-						if(Random.Range(0, randomHungryOrUnwell.Count) == 0)
+						if(randomHungryOrUnwell[Random.Range(0, randomHungryOrUnwell.Count)] == 0)
 						{
 							IsHungry = true;
 							//TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(15.0f, 20.0f);
@@ -592,7 +593,7 @@ public class AnimationControllerScript : MonoBehaviour
 						Debug.Log("finalAnimationId: " + finalAnimationId.ToString());
 						if(finalAnimationId == 8) 
 						{
-							IsHappy = AnimationHappyId.Happy4;
+							IsHappy = AnimationHappyId.Happy5;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy4);
 						}
 						else if(finalAnimationId == 7) 

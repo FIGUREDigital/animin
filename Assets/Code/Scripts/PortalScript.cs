@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum PortalStageId
+{
+	ARscene,
+	NonARScene,
+	MinigameCuberRunners,
+}
+
 public class PortalScript : MonoBehaviour {
 
 	public PortalId Id;
@@ -11,21 +18,26 @@ public class PortalScript : MonoBehaviour {
 	
 	}
 
-	public void Show(bool isArMode, bool isJumbingIn)
+	public void Show(PortalStageId stageId, bool isJumbingIn)
 	{
 		this.gameObject.SetActive(true);
 
 	
 
-		if(isArMode)
+		if(stageId == PortalStageId.ARscene)
 		{
 			this.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
 		}
-		else
+		else if(stageId == PortalStageId.NonARScene)
 		{
 			this.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
 		}
+		else if(stageId == PortalStageId.MinigameCuberRunners)
+		{
+			this.transform.parent = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
+		}
 
+		this.transform.rotation = Quaternion.identity;
 		this.transform.localPosition = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition;
 		if(isJumbingIn)
 		{
