@@ -23,19 +23,20 @@ public class HappyStateRange
 {
 	public static HappyStateRange[] HappyStates = new HappyStateRange[] 
 	{
-		new HappyStateRange() { Min = 0, Max = 14 },
-		new HappyStateRange() { Min = 8, Max = 26 },
-		new HappyStateRange() { Min = 20, Max = 38 },
-		new HappyStateRange() { Min = 32, Max = 50 },
-		new HappyStateRange() { Min = 45, Max = 65 },
-		new HappyStateRange() { Min = 60, Max = 80 },
-		new HappyStateRange() { Min = 75, Max = 95 },
-		new HappyStateRange() { Min = 90, Max = 110 },
-		new HappyStateRange() { Min = 105, Max = 125 },
+		new HappyStateRange() { Min = 0, Max = 14, Id = AnimationHappyId.Sad4 },
+		new HappyStateRange() { Min = 8, Max = 26 , Id = AnimationHappyId.Sad3},
+		new HappyStateRange() { Min = 20, Max = 38, Id = AnimationHappyId.Sad2 },
+		new HappyStateRange() { Min = 32, Max = 50, Id = AnimationHappyId.Sad1 },
+		new HappyStateRange() { Min = 45, Max = 65, Id = AnimationHappyId.Happy1 },
+		new HappyStateRange() { Min = 60, Max = 80, Id = AnimationHappyId.Happy2 },
+		new HappyStateRange() { Min = 75, Max = 95 , Id = AnimationHappyId.Happy3},
+		new HappyStateRange() { Min = 90, Max = 110, Id = AnimationHappyId.Happy4 },
+		new HappyStateRange() { Min = 105, Max = 125, Id = AnimationHappyId.Happy5 },
 	};
 
 	public float Min;
 	public float Max;
+	public AnimationHappyId Id;
 }
 
 public class CharacterProgressScript : MonoBehaviour 
@@ -303,16 +304,20 @@ public class CharacterProgressScript : MonoBehaviour
 		//Debug.Log("Fitness: " + (Fitness / 100.0f).ToString());
 		//Debug.Log("Health: " + (Health / 100.0f).ToString());
 		//Debug.Log("Happy: " + (Happy / MaxHappy).ToString());
-
-		Evolution += (Happy / MaxHappy) * Time.deltaTime * 0.1f;
-		if(Evolution >= 100) Evolution = 100;
-
-		UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
-
-		if(NextHappynBonusTimeAt >= DateTime.Now)
+		// EVOLUTION BAR
 		{
-			// do bonus of happyness
+			//Evolution += (Happy / MaxHappy) * Time.deltaTime * 0.1f;
+			//if(Evolution >= 100) Evolution = 100;
+			
+			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
+			
+			if(NextHappynBonusTimeAt >= DateTime.Now)
+			{
+				// do bonus of happyness
+			}
 		}
+
+
 
 		if(ObjectHolding != null)
 		{
@@ -1036,7 +1041,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 
-		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 90 && !animationController.IsSleeping && animationController.IsIdle)
+		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 90 && !animationController.IsSleeping && animationController.IsIdle && !IsMovingTowardsLocation)
 		{
 			GameObject newPoo;
 			if(UnityEngine.Random.Range(0, 2) == 0)
@@ -1067,13 +1072,24 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 
 
+		if(UIGlobalVariablesScript.Singleton.NonSceneRef.activeInHierarchy && UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition.y <= -2)
+		{
+
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition = new Vector3(0, 1.01f, 0);
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation =
+				Quaternion.Euler(0,
+				                 UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation.eulerAngles.y,
+				                 0);
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
+			Stop(true);
+		}
+
 
 		
 		if(IsMovingTowardsLocation)
 		{
 			Vector3 direction = Vector3.Normalize(DestinationLocation - this.transform.position);
 			this.gameObject.GetComponent<CharacterControllerScript>().MovementDirection = direction;
-
 
 			this.gameObject.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(DestinationLocation);
 
@@ -1195,8 +1211,21 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public bool OnInteractWithPopupItem(UIPopupItemScript item)
 	{
+
+
 		switch(item.Type)
 		{
+			case PopupItemType.Token:
+			{
+				Stop(true);
+				Evolution += item.Points;
+
+				UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
+			Debug.Log("TOKEN COLLECTED");
+
+				break;
+			}
+
 			case PopupItemType.Food:
 			{
 			/*if(Hungry >= 95)

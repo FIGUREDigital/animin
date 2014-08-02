@@ -21,7 +21,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	public List<GameObject> EvilCharacters = new List<GameObject>();
 	public GameObject[] EvilCharacterPool;
-
+	public GameObject StarShardPrefab;
 
 	private int oldLevelId = -1;
 	private int currentLevelId = -1;
@@ -72,6 +72,25 @@ public class MinigameCollectorScript : MonoBehaviour
 							script.ResetPosition = script.transform.localPosition;
 							script.ValueNext = script.transform.localPosition;
 							script.enabled = false;
+
+
+//							if(script.transform.childCount > 0)
+//							{
+//								EvilCharacterPatternMovementScript component = script.gameObject.AddComponent<EvilCharacterPatternMovementScript>();
+//								
+//								component.Pattern = new Vector3[script.transform.childCount];
+//								for(int c=0;c<script.transform.childCount;++c)
+//								{
+//									component.Pattern[c] = script.transform.GetChild(c).transform.localPosition;
+//								}
+//								
+//								component.transform.localPosition = script.transform.GetChild(0).transform.localPosition;
+//								component.Speed = 2.1f;
+//								component.Lerp = 0;
+//								component.Index = 0;
+//								component.enabled = false;
+//							}
+
 						}
 					}
 				}
@@ -363,6 +382,27 @@ public class MinigameCollectorScript : MonoBehaviour
 					GameStartDelay = null;
 					ResetCharacter();
 
+
+					Transform newTransform = Stage.transform.GetChild(currentLevelId);
+					
+					for(int a=0;a<newTransform.childCount;++a)
+					{
+						if(newTransform.GetChild(a).name.StartsWith("cubes"))
+						{
+							Transform cubes = newTransform.GetChild(a);
+							
+							for(int b=0;b<cubes.childCount;++b)
+							{
+//								EvilCharacterPatternMovementScript patternScript = cubes.GetChild(b).gameObject.GetComponent<EvilCharacterPatternMovementScript>();
+//								if(patternScript != null) 
+//								{
+//									patternScript.enabled = true;
+//									Debug.Log("found cube with animation script");
+//								}
+							}
+						}
+					}
+
 					//if(oldLevelId == -1)
 					//	EnterMinigame();
 
@@ -544,9 +584,15 @@ public class MinigameCollectorScript : MonoBehaviour
 					else starsActive++;
 				}
 
+				if(starsActive == 1) UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CollectStar1);
+				else if(starsActive == 2) UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CollectStar2);
+				else if(starsActive == 3) UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CollectStar3);
+				else if(starsActive == 4) UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CollectStar4);
+				else if(starsActive == 5) UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CollectStar5);
+
 				if(starsActive >= 5) 
 				{
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Fitness += 5;
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Fitness += 10;
 
 					StarsCollected++;
 //					for(int a=0;a<StarsUI.Length;++a)
@@ -620,6 +666,9 @@ public class MinigameCollectorScript : MonoBehaviour
 							script.transform.localPosition = script.ResetPosition;
 							script.ValueNext = script.ResetPosition;
 							script.enabled = false;
+
+							//EvilCharacterPatternMovementScript patternScript = script.GetComponent<EvilCharacterPatternMovementScript>();
+							//if(patternScript != null) patternScript.enabled = false;
 						}
 					}
 				}
@@ -672,12 +721,14 @@ public class MinigameCollectorScript : MonoBehaviour
 					{
 						CubeAnimatonScript cubeScript = cubes.GetChild(b).gameObject.GetComponent<CubeAnimatonScript>();
 
-
 						cubeScript.ValueNext = cubeScript.transform.localPosition + new Vector3(0, -35, 0);
 						//cubeScript.transform.position = cubeScript.transform.position + new Vector3(0, -200, 0);
 						cubeScript.Delay = 0.03f * b;
 						cubeScript.ResetPosition = cubeScript.transform.localPosition;
 						cubeScript.enabled = true;
+
+						//EvilCharacterPatternMovementScript patternScript = cubeScript.GetComponent<EvilCharacterPatternMovementScript>();
+						//if(patternScript != null) patternScript.enabled = false;
 					}
 				}
 			}
@@ -744,7 +795,7 @@ public class MinigameCollectorScript : MonoBehaviour
 						component.Speed = 2.1f;
 						component.Lerp = 0;
 						component.Index = 0;
-
+						component.ApplyRotation = true;
 
 						EvilCharacterPool[badGuyCounter].GetComponent<BoxCollider>().enabled = true;
 						for(int i=0;i<EvilCharacterPool[badGuyCounter].transform.childCount;++i)
@@ -823,6 +874,9 @@ public class MinigameCollectorScript : MonoBehaviour
 					GameStartDelay += 0.04f;
 					cubeScript.enabled = true;
 
+					//EvilCharacterPatternMovementScript patternScript = cubeScript.GetComponent<EvilCharacterPatternMovementScript>();
+					//if(patternScript != null) patternScript.enabled = false;
+					
 				}
 			}
 		}

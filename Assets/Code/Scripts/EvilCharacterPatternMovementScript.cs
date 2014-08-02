@@ -7,7 +7,7 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 	public float Lerp;
 	public Vector3[] Pattern;
 	public int Index;
-
+	public bool ApplyRotation;
 	private Quaternion RotateDirectionLookAt;
 
 
@@ -35,51 +35,19 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 			//Debug.Log("Change Index: " + Index.ToString());
 		}
 
-		RotateDirectionLookAt = Quaternion.LookRotation(Vector3.Normalize(Pattern[Index + 1] - transform.localPosition));
-
-		/*if(Pattern[Index + 1].x > Pattern[Index].x)
-		{
-			//Debug.Log("greater x:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
-			this.transform.rotation = Quaternion.Euler(0, 90, 0);
-		}
-		else if(Pattern[Index + 1].x < Pattern[Index].x)
-		{
-			//Debug.Log("less x:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
-			this.transform.rotation = Quaternion.Euler(0, 180, 0);
-		}
-		else if(Pattern[Index + 1].y > Pattern[Index].y)
-		{
-			//Debug.Log("greater y:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
-			this.transform.rotation = Quaternion.Euler(0, 270, 0);
-		}
-		else if(Pattern[Index + 1].y < Pattern[Index].y)
-		{
-
-			this.transform.rotation = Quaternion.Euler(0, 0, 0);
-		}
-
-		Debug.Log("normal:" + (Pattern[Index + 1] - Pattern[Index]).normalized.ToString());
-		*/
 		this.transform.localPosition = Vector3.Lerp(
 			Pattern[Index], 
 			Pattern[Index + 1], 
 			Lerp);
 
-
-		transform.localRotation = Quaternion.Slerp(transform.localRotation, RotateDirectionLookAt, Time.deltaTime * 6);
-		
-		//Debug.Log(Pattern[Index].ToString() + " " + Pattern[Index + 1].ToString() + " " + Lerp.ToString() + " " + amount.ToString());
-		
-		/*float d = Vector3.Distance(ObjectRef.transform.position, CharacterRef.transform.position);
-		if(d <= 16)
+		if(ApplyRotation)
 		{
-			StarsOwned -= 3;
-			//ResetCharacter();
-			//Debug.Log("EVIL KILL");
-			//CharacterRef.GetComponent<CharacterControllerScript>().
-		}*/
-			
-
-	
+			RotateDirectionLookAt = Quaternion.LookRotation(Vector3.Normalize(Pattern[Index + 1] - transform.localPosition));
+			transform.localRotation = Quaternion.Slerp(transform.localRotation, RotateDirectionLookAt, Time.deltaTime * 6);
+		}
+		else
+		{
+			Debug.Log("UPDATING MOVEMENT FOR CUBE");
+		}
 	}
 }

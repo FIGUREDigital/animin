@@ -206,8 +206,54 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		//Debug.Log ("scene @ track: " + MainSceneRef.transform.position.ToString ());
 		IsTracking = true;
 
-		if(UIGlobalVariablesScript.Singleton.RequiresGamecardScreenRef.activeInHierarchy)
-			UIClickButtonMasterScript.HandleClick(UIFunctionalityId.OpenMinigamesScreen, null);
+
+
+		EnableDisableMinigamesBasedOnARStatus();
+	}
+
+	public static void EnableDisableMinigamesBasedOnARStatus()
+	{
+		GameObject sprite = GameObject.Find("SpriteCubeWorld");
+
+		if(sprite != null)
+		{
+			if(IsTracking)
+			{
+				sprite.GetComponent<UISprite>().color = new Color(1, 1, 1, 1);
+				sprite.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.PlayMinigameCubeRunners;
+
+				sprite.GetComponent<UIButton>().defaultColor = new Color(
+					sprite.GetComponent<UIButton>().defaultColor.r,
+					sprite.GetComponent<UIButton>().defaultColor.g,
+					sprite.GetComponent<UIButton>().defaultColor.b,
+					1);
+
+				sprite.GetComponent<UIButton>().hover = new Color(
+					sprite.GetComponent<UIButton>().hover.r,
+					sprite.GetComponent<UIButton>().hover.g,
+					sprite.GetComponent<UIButton>().hover.b,
+					1);
+				
+				//UIGlobalVariablesScript.Singleton.RequiresGamecardScreenRef.SetActive(false);
+			}
+			else
+			{
+				sprite.GetComponent<UISprite>().color = new Color(1, 1, 1, 0.5f);
+				sprite.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.None;
+
+				sprite.GetComponent<UIButton>().defaultColor = new Color(
+					sprite.GetComponent<UIButton>().defaultColor.r,
+					sprite.GetComponent<UIButton>().defaultColor.g,
+					sprite.GetComponent<UIButton>().defaultColor.b,
+					0.5f);
+
+				sprite.GetComponent<UIButton>().hover = new Color(
+					sprite.GetComponent<UIButton>().hover.r,
+					sprite.GetComponent<UIButton>().hover.g,
+					sprite.GetComponent<UIButton>().hover.b,
+					0.5f);
+			}
+		}
 	}
 
 	public void OnExitAR()
@@ -255,8 +301,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		//Debug.Log ("scene @ notrack: " + MainSceneRef.transform.position.ToString ());
 		IsTracking	= false;
 
-		if(UIGlobalVariablesScript.Singleton.RequiresGamecardScreenRef.activeInHierarchy)
-			UIClickButtonMasterScript.HandleClick(UIFunctionalityId.OpenMinigamesScreen, null);
+		EnableDisableMinigamesBasedOnARStatus();
 	}
 
 
@@ -275,10 +320,10 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			{
 				UIGlobalVariablesScript.Singleton.MinigameInterruptedMenu.SetActive(false);
 			}
-			else if(UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.activeInHierarchy)
+			/*else if(UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.activeInHierarchy)
 			{
 				MainSceneRef.SetActive(true);
-			}
+			}*/
 			else
 			{
 				//return;
@@ -302,11 +347,11 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 	
 	public void OnTrackingLost()
 	{
-		if(UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.activeInHierarchy)
+		/*if(UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.activeInHierarchy)
 		{
 			MainSceneRef.SetActive(false);
 		}
-		else if(UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.activeInHierarchy)
+		else*/ if(UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.activeInHierarchy)
 		{
 			UIGlobalVariablesScript.Singleton.MinigameInterruptedMenu.SetActive(true);
 		}

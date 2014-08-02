@@ -128,6 +128,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<ReferencedObjectScript>().Reference = sender;
 			
 			//string spriteName = UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<UISprite>().spriteName;
+			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<UISprite>().atlas = sender.GetComponent<UISprite>().atlas;
 			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<UISprite>().spriteName = sender.GetComponent<UISprite>().spriteName;
 			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<UIButton>().normalSprite = sender.GetComponent<UISprite>().spriteName;
 			//UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<UISprite>().MakePixelPerfect();
@@ -147,23 +148,11 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(false);
 
-			if(TrackVuforiaScript.IsTracking)
-			{
-				UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(true);
-				UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(true);
-
-				UIGlobalVariablesScript.Singleton.RequiresGamecardScreenRef.SetActive(false);
-			}
-			else
-			{
-				UIGlobalVariablesScript.Singleton.RequiresGamecardScreenRef.SetActive(true);
-
-				UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
-				UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(false);
-
-			}
+			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(true);
+			UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(true);
 
 
+			TrackVuforiaScript.EnableDisableMinigamesBasedOnARStatus();
 
 			
 			break;
@@ -245,10 +234,10 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 		case UIFunctionalityId.OpenPictureScreen:
 		{
-			UIGlobalVariablesScript.Singleton.PicturesScreenRef.SetActive(true);
-			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
+			//UIGlobalVariablesScript.Singleton.PicturesScreenRef.SetActive(true);
+			//UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
 
-			UIGlobalVariablesScript.Singleton.PicturesScreenRef.GetComponent<DeviceCameraScript>().ResetCamera();
+			//UIGlobalVariablesScript.Singleton.PicturesScreenRef.GetComponent<DeviceCameraScript>().ResetCamera();
 
 			break;
 		}

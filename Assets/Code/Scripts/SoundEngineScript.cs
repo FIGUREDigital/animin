@@ -31,6 +31,11 @@ public class SoundEngineScript : MonoBehaviour
 		GenericSounds[(int)GenericSoundId.Star_Collect] = Resources.Load("Sounds/Minigame01_Platform/Star_Collect") as AudioClip;
 		GenericSounds[(int)GenericSoundId.Star_Complete] = Resources.Load("Sounds/Minigame01_Platform/Star_Complete") as AudioClip;
 
+		GenericSounds[(int)GenericSoundId.CollectStar1] = Resources.Load("Sounds/Minigame01_Platform/Star_Collect_note1") as AudioClip;
+		GenericSounds[(int)GenericSoundId.CollectStar2] = Resources.Load("Sounds/Minigame01_Platform/Star_Collect_note2") as AudioClip;
+		GenericSounds[(int)GenericSoundId.CollectStar3] = Resources.Load("Sounds/Minigame01_Platform/Star_Collect_note3") as AudioClip;
+		GenericSounds[(int)GenericSoundId.CollectStar4] = Resources.Load("Sounds/Minigame01_Platform/Star_Collect_note4") as AudioClip;
+		GenericSounds[(int)GenericSoundId.CollectStar5] = Resources.Load("Sounds/Minigame01_Platform/Star_Collect_note5") as AudioClip;
 
 
 		CreatureSounds = new AudioClip[(int)CreatureTypeId.Count, (int)CreatureSoundId.Count];
@@ -121,6 +126,11 @@ public enum GenericSoundId
 	Star_Collect,
 	Star_Complete,
 
+	CollectStar1,
+	CollectStar2,
+	CollectStar3,
+	CollectStar4,
+	CollectStar5,
 
 
 	Count,

@@ -556,16 +556,17 @@ public class CharacterControllerScript : MonoBehaviour
 		PressedJumb = false;
 	}
 	
-	void  OnControllerColliderHit ( ControllerColliderHit hit   ){
-		
+	void  OnControllerColliderHit ( ControllerColliderHit hit   )
+	{
 		//  Debug.DrawRay(hit.point, hit.normal);
 
 		//Debug.Log("COLLISION: " + hit.gameObject.name);
 
 		if(hit.gameObject.tag == "Items" && this.GetComponent<CharacterProgressScript>().IsGoingToPickUpObject == hit.gameObject)
 		{
+			PopupItemType itemType = hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type;
 
-			if(hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Food)
+			if(itemType == PopupItemType.Food || itemType == PopupItemType.Token)
 			{
 				if(this.GetComponent<CharacterProgressScript>().OnInteractWithPopupItem(hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()))
 				{

@@ -60,7 +60,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 		 	|| GetComponent<AnimationControllerScript>().IsIdleLook3 
 		 	
 		 	|| GetComponent<AnimationControllerScript>().IsHappy == AnimationHappyId.None)
-		   && dotProduct >= -0.2f && UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId == AnimateCharacterOutPortalScript.JumbStateId.None)
+		   && dotProduct >= -0.12f && UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId == AnimateCharacterOutPortalScript.JumbStateId.None)
 		{
 			TimeStartingAwayFromCamera += Time.deltaTime;
 			//transform.parent.LookAt(this.transform.position);

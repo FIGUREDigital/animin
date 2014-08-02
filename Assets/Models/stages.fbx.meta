@@ -848,6 +848,30 @@ ModelImporter:
     101684: badguy2_8
     101686: badguy2_9
     101688: badguy3_2
+    101690: 1_37
+    101692: 1_38
+    101694: 1_39
+    101696: 1_40
+    101698: 1_41
+    101700: 1_42
+    101702: 2_36
+    101704: 2_37
+    101706: 2_38
+    101708: 2_39
+    101710: 2_40
+    101712: 2_41
+    101714: 3_35
+    101716: 3_36
+    101718: 3_37
+    101720: 3_38
+    101722: 3_39
+    101724: 3_40
+    101726: Cube_mobileplatform_
+    101728: cube_mobileplatform_
+    101730: Cube_mobileplatform__2
+    101732: cube_mobileplatform__2
+    101734: cube_mobileplatform__3
+    101736: cube_mobileplatform__4
     400000: 1
     400002: 10
     400004: 11
@@ -1693,6 +1717,30 @@ ModelImporter:
     401684: badguy2_8
     401686: badguy2_9
     401688: badguy3_2
+    401690: 1_37
+    401692: 1_38
+    401694: 1_39
+    401696: 1_40
+    401698: 1_41
+    401700: 1_42
+    401702: 2_36
+    401704: 2_37
+    401706: 2_38
+    401708: 2_39
+    401710: 2_40
+    401712: 2_41
+    401714: 3_35
+    401716: 3_36
+    401718: 3_37
+    401720: 3_38
+    401722: 3_39
+    401724: 3_40
+    401726: Cube_mobileplatform_
+    401728: cube_mobileplatform_
+    401730: Cube_mobileplatform__2
+    401732: cube_mobileplatform__2
+    401734: cube_mobileplatform__3
+    401736: cube_mobileplatform__4
     2300000: Cube
     2300002: Cube_1
     2300004: Cube_10
@@ -2182,6 +2230,12 @@ ModelImporter:
     2300972: Cube_9_17
     2300974: Cube_9_18
     2300976: Cube_9_19
+    2300978: Cube_mobileplatform_
+    2300980: cube_mobileplatform_
+    2300982: Cube_mobileplatform__2
+    2300984: cube_mobileplatform__2
+    2300986: cube_mobileplatform__3
+    2300988: cube_mobileplatform__4
     3300000: Cube
     3300002: Cube_1
     3300004: Cube_10
@@ -2671,6 +2725,12 @@ ModelImporter:
     3300972: Cube_9_17
     3300974: Cube_9_18
     3300976: Cube_9_19
+    3300978: Cube_mobileplatform_
+    3300980: cube_mobileplatform_
+    3300982: Cube_mobileplatform__2
+    3300984: cube_mobileplatform__2
+    3300986: cube_mobileplatform__3
+    3300988: cube_mobileplatform__4
     4300000: topPlane
     4300002: insideHole
     4300004: Cube_1
@@ -3160,6 +3220,12 @@ ModelImporter:
     4300972: Cube_4_27
     4300974: Cube_2_28
     4300976: Cube_32_2
+    4300978: Cube_mobileplatform_
+    4300980: cube_mobileplatform_
+    4300982: cube_mobileplatform__2
+    4300984: cube_mobileplatform__3
+    4300986: Cube_mobileplatform__2
+    4300988: cube_mobileplatform__4
     9500000: //RootNode
   materials:
     importMaterials: 1

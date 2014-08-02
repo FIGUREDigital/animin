@@ -23,13 +23,17 @@ public class CubeAnimatonScript : MonoBehaviour
 		{
 			this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, ValueNext, Time.deltaTime * 9);
 
-			if(Vector3.Distance(this.transform.localPosition, ValueNext) <= 0.1f)
+			if(this.transform.localPosition == ValueNext)
+			{
+				this.enabled = false;
+			}
+			else if(Vector3.Distance(this.transform.localPosition, ValueNext) <= 0.1f)
 			{
 				this.transform.localPosition = ValueNext;
 				//Destroy(this);
 
-			}
 
+			}
 		}
 	}
 }

@@ -87,12 +87,14 @@
      <Compile Include="Assets\Code\Scripts\PortalAnimationScript.cs" />
      <Compile Include="Assets\Code\Scripts\PortalScript.cs" />
      <Compile Include="Assets\Code\Scripts\PresentationEventScript.cs" />
+     <Compile Include="Assets\Code\Scripts\ProgressBarUVScript.cs" />
      <Compile Include="Assets\Code\Scripts\ReferencedObjectScript.cs" />
      <Compile Include="Assets\Code\Scripts\SetTimerOnLabelScript.cs" />
      <Compile Include="Assets\Code\Scripts\SmoothLookAt.cs" />
      <Compile Include="Assets\Code\Scripts\SoundEngineScript.cs" />
      <Compile Include="Assets\Code\Scripts\SpaceEnemyScript.cs" />
      <Compile Include="Assets\Code\Scripts\SpaceshipMinigameScript.cs" />
+     <Compile Include="Assets\Code\Scripts\SpinObjectScript.cs" />
      <Compile Include="Assets\Code\Scripts\SwipeDragScript.cs" />
      <Compile Include="Assets\Code\Scripts\TestVuforiaScript.cs" />
      <Compile Include="Assets\Code\Scripts\ThrowAnimationScript.cs" />

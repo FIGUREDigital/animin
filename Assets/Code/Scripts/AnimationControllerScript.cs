@@ -580,58 +580,59 @@ public class AnimationControllerScript : MonoBehaviour
 					{
 
 						Debug.Log("HAPPY: " + script.Happy.ToString());
-						List<int> animationList = new List<int>();
+						List<AnimationHappyId> animationList = new List<AnimationHappyId>();
 						for(int a=0;a<HappyStateRange.HappyStates.Length;++a)
 						{
 							if(script.Happy >= HappyStateRange.HappyStates[a].Min && script.Happy <= HappyStateRange.HappyStates[a].Max)
 							{
-								animationList.Add(a);
+								animationList.Add(HappyStateRange.HappyStates[a].Id);
 							}
 						}
 						
-						int finalAnimationId = animationList[Random.Range(0, animationList.Count)];
+						AnimationHappyId finalAnimationId = animationList[Random.Range(0, animationList.Count)];
 						Debug.Log("finalAnimationId: " + finalAnimationId.ToString());
-						if(finalAnimationId == 8) 
+
+						if(finalAnimationId == AnimationHappyId.Happy5) 
 						{
 							IsHappy = AnimationHappyId.Happy5;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy4);
 						}
-						else if(finalAnimationId == 7) 
+						else if(finalAnimationId == AnimationHappyId.Happy4) 
 						{
 							IsHappy = AnimationHappyId.Happy4;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy4);
 						}
-						else if(finalAnimationId == 6) 
+						else if(finalAnimationId == AnimationHappyId.Happy3) 
 						{
 							IsHappy = AnimationHappyId.Happy3;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy3);
 						}
-						else if(finalAnimationId == 5) 
+						else if(finalAnimationId == AnimationHappyId.Happy2) 
 						{
 							IsHappy = AnimationHappyId.Happy2;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy2);
 						}
-						else if(finalAnimationId == 4) 
+						else if(finalAnimationId == AnimationHappyId.Happy1) 
 						{
 							IsHappy = AnimationHappyId.Happy1;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Happy1);
 						}
-						else if(finalAnimationId == 3) 
+						else if(finalAnimationId == AnimationHappyId.Sad1) 
 						{
 							IsHappy = AnimationHappyId.Sad1;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Sad1);
 						}
-						else if(finalAnimationId == 2) 
+						else if(finalAnimationId == AnimationHappyId.Sad2) 
 						{
 							IsHappy = AnimationHappyId.Sad2;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Sad2);
 						}
-						else if(finalAnimationId == 1) 
+						else if(finalAnimationId == AnimationHappyId.Sad3) 
 						{
 							IsHappy = AnimationHappyId.Sad3;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Sad3);
 						}
-						else if(finalAnimationId == 0) 
+						else if(finalAnimationId == AnimationHappyId.Sad4) 
 						{
 							IsHappy = AnimationHappyId.Sad4;
 							UIGlobalVariablesScript.Singleton.SoundEngine.Play(script.CreaturePlayerId, CreatureSoundId.Sad4);
