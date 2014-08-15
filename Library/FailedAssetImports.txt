@@ -1,1 +1,0 @@
-Assets/Chickens Shader Bundle/Examples/Cube/NCube_AO.png

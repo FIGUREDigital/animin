@@ -822,18 +822,26 @@ public class CharacterProgressScript : MonoBehaviour
 							
 
 							bool isItemAlreadyOn = false;
-							if(UIGlobalVariablesScript.Singleton.Item3DPopupMenu.activeInHierarchy && (LastKnownObjectWithMenuUp == moveHitInfo.collider.gameObject))
+							if((UIGlobalVariablesScript.Singleton.Item3DPopupMenu.activeInHierarchy || UIGlobalVariablesScript.Singleton.StereoUI.activeInHierarchy) && (LastKnownObjectWithMenuUp == moveHitInfo.collider.gameObject))
 							{
 								isItemAlreadyOn = true;
 							}
 
-							if(RequestedToMoveToCounter == 1 && !isItemAlreadyOn  && (moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu != MenuFunctionalityUI.None))
+							if(RequestedToMoveToCounter == 1 && !isItemAlreadyOn && (moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu != MenuFunctionalityUI.None))
 							{
 								if( moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Clock)
 								{
 									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
 									//TriggeredHoldAction = true;
 									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
+									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+									preventMovingTo = true;
+								}
+								else if( moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Mp3Player)
+								{
+									UIGlobalVariablesScript.Singleton.StereoUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+									UIGlobalVariablesScript.Singleton.StereoUI.SetActive(true);
+
 									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
 									preventMovingTo = true;
 								}
@@ -854,6 +862,7 @@ public class CharacterProgressScript : MonoBehaviour
 						if(!preventMovingTo)
 						{
 							UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
+							UIGlobalVariablesScript.Singleton.StereoUI.SetActive(false);
 		
 							if(RequestedToMoveToCounter > 1)
 								MoveTo(point, true);
@@ -949,97 +958,6 @@ public class CharacterProgressScript : MonoBehaviour
 				break;
 			}
 		}
-
-		/*if(Input.GetKeyDown(KeyCode.D))
-		{
-			UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation = 
-				Quaternion.Euler(
-					UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.x, 
-					UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.y + 90, 
-					UIGlobalVariablesScript.Singleton.ImageTarget.transform.rotation.eulerAngles.z);
-		}
-		*/
-
-		/*if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId != AnimateCharacterOutPortalScript.JumbStateId.None 
-		   || CurrentAction == ActionId.EnterPortalToAR 
-		   || CurrentAction == ActionId.EnterPortalToNonAR 
-		   || animationController.IsEnterPortal 
-		   || animationController.IsExitPortal)
-		{
-			animationController.IsSad = false;
-			animationController.IsNotWell = false;
-			animationController.IsHungry = false;
-			sadUnwellLoopState = HungrySadUnwellLoopId.OnCooldown;
-			if(TimeForNextHungryUnwellSadAnimation <= 3)
-				TimeForNextHungryUnwellSadAnimation += 3;
-		}
-		else
-		{
-			switch(sadUnwellLoopState)
-			{
-			case HungrySadUnwellLoopId.DetectAnimation:
-			{
-				if(ObjectHolding == null)
-				{
-					if(Hungry <= 50 && animationController.IsIdle)
-					{
-						animationController.IsHungry = true;
-						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(15.0f, 20.0f);
-						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
-						sadUnwellLoopState = HungrySadUnwellLoopId.PlayHungry;
-						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Hungry);
-						
-					}
-					else if(Health <= 50 && animationController.IsIdle)
-					{
-						animationController.IsNotWell = true;
-						TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(15.0f, 20.0f);
-						LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
-						sadUnwellLoopState = HungrySadUnwellLoopId.PlayUnwell;
-						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Unwell);
-						
-					}
-						
-				}
-				
-				break;
-			}
-				
-			case HungrySadUnwellLoopId.PlayHungry:
-			case HungrySadUnwellLoopId.PlaySad:
-			case HungrySadUnwellLoopId.PlayUnwell:
-			{
-				
-				LengthOfHungryUnwellSadAnimation -= Time.deltaTime;
-				if(LengthOfHungryUnwellSadAnimation <= 0)
-				{
-					animationController.IsSad = false;
-					animationController.IsNotWell = false;
-					animationController.IsHungry = false;
-					sadUnwellLoopState = HungrySadUnwellLoopId.OnCooldown;
-				}
-				
-				break;
-			}
-				
-			case HungrySadUnwellLoopId.OnCooldown:
-			{
-				TimeForNextHungryUnwellSadAnimation -= Time.deltaTime;
-				
-				if(TimeForNextHungryUnwellSadAnimation <= 0)
-				{
-					sadUnwellLoopState = HungrySadUnwellLoopId.DetectAnimation;
-				}
-				
-				break;
-			}
-				
-			}
-		}*/
-
-
-
-
 
 		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 90 && !animationController.IsSleeping && animationController.IsIdle && !IsMovingTowardsLocation)
 		{

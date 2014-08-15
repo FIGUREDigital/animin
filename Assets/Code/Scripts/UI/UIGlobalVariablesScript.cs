@@ -56,6 +56,16 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject Item3DPopupMenu;
 	public SoundEngineScript SoundEngine;
 	public JoystiqScript Joystick;
+	public GameObject UIRoot;
+	public GameObject StereoUI;
+	public UILabel CurrentArtistLabel;
+	public UILabel CurrentSongLabel;
+	public UISprite PlayPauseButton;
+	public UISprite ProgressSongBar;
+
+	public GameObject TracklistPanel;
+	public GameObject PlaySongPanel;
+	public GameObject PanelWithAllSongs;
 
 	// Set from the code, keep static
 	public static GameObject ButtonTriggeredMainMenuPopupRef;

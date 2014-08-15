@@ -46,4 +46,12 @@ public enum UIFunctionalityId
 	ResumeInterruptedMinigame,
 	ExitInterruptedMinigame,
 	JumbOnCubeRunner,
+
+	PlayPauseSong,
+	NextSong,
+	PreviousSong,
+
+	ViewTracklist,
+	ReturnFromTracklist,
+	SelectedTrack,
 }

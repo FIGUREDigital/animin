@@ -1,43 +1,48 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/MinigameCollectorScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/MediaPlayerPluginScript.cs">
     <Files>
-      <File FileName="Assets/Code/Scripts/GroundShadowScript.cs" Line="18" Column="60" />
-      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="625" Column="31" />
+      <File FileName="Assets/Code/Scripts/GroundShadowScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="204" Column="2" />
       <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="289" Column="2" />
-      <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="600" Column="5" />
-      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/MinigameCollectorScript.cs" Line="741" Column="4" />
-      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="9" Column="8" />
-      <File FileName="Assets/Code/Scripts/JoystiqScript.cs" Line="455" Column="22" />
+      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="504" Column="1" />
+      <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="431" Column="4" />
+      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="68" Column="38" />
+      <File FileName="Assets/Code/Scripts/MinigameCollectorScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="16" Column="8" />
+      <File FileName="Assets/Code/Scripts/JoystiqScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/TurdRotationScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/DeviceCameraScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/SmoothLookAt.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/ObjectLookAtDeviceScript.cs" Line="63" Column="28" />
-      <File FileName="Assets/Code/Scripts/TrackVuforiaScript.cs" Line="198" Column="67" />
+      <File FileName="Assets/Code/Scripts/ObjectLookAtDeviceScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/TrackVuforiaScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/PortalScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/PortalAnimationScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/ThrowAnimationScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/ThumbstickControlsScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/TestVuforiaScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/SwipeDragScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CubeAnimatonScript.cs" Line="28" Column="25" />
+      <File FileName="Assets/Code/Scripts/CubeAnimatonScript.cs" Line="1" Column="1" />
       <File FileName="Assets/NGUI/Scripts/Interaction/UIButton.cs" Line="1" Column="1" />
       <File FileName="Assets/NGUI/Scripts/Interaction/UIButtonColor.cs" Line="1" Column="1" />
       <File FileName="Assets/NGUI/Scripts/Editor/UIAtlasMaker.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/SoundEngineScript.cs" Line="38" Column="114" />
+      <File FileName="Assets/Code/Scripts/SoundEngineScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/SpaceEnemyScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/ProgressBarUVScript.cs" Line="43" Column="12" />
-      <File FileName="Assets/Code/Scripts/CameraModelScript.cs" Line="150" Column="96" />
-      <File FileName="Assets/Code/Scripts/EvilCharacterPatternMovementScript.cs" Line="19" Column="2" />
-      <File FileName="Assets/Code/Scripts/DragDropMainBarItem.cs" Line="51" Column="6" />
+      <File FileName="Assets/Code/Scripts/ProgressBarUVScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CameraModelScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/EvilCharacterPatternMovementScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/DragDropMainBarItem.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/DragDrop3DItemScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/DetectDragIconScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/DetectBroomScript.cs" Line="35" Column="47" />
-      <File FileName="Assets/Code/Scripts/SpinObjectScript.cs" Line="16" Column="2" />
+      <File FileName="Assets/Code/Scripts/DetectBroomScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/SpinObjectScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/NewJoystickScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/FlatScalerScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/MediaPlayerPluginScript.cs" Line="24" Column="4" />
+      <File FileName="Assets/Code/Enumerations/UIFunctionalityId.cs" Line="45" Column="2" />
+      <File FileName="Assets/Code/Scripts/BlinkingScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CameraFacingBillboardScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

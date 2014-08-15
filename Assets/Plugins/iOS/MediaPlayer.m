@@ -2,27 +2,61 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "MediaPlayer.h"
 
+extern void UnitySendMessage(const char *, const char *, const char *);
 
 void _setVideo(const char * filename)
 {
     NSLog(@"Native plugin: %@", [NSString stringWithUTF8String:filename]);
 }
 
+void _playSongAtIndex(int index)
+{
+    [[AniminMediaPlayer sharedInstance] playSongAtIndex:index];
+}
+
 void _play()
 {
-    
+    [[AniminMediaPlayer sharedInstance] playPause];
+}
+
+void _moveToNextSong()
+{
+    [[AniminMediaPlayer sharedInstance] nextSong];
+}
+
+void _moveToPreviousSong()
+{
+    [[AniminMediaPlayer sharedInstance] previousSong];
 }
 
 void _pause()
 {
 }
 
-void _initMediaPlayer()
+float _getProgress()
 {
-    [[AniminMediaPlayer sharedInstance] initializeAll];
+    return  [[AniminMediaPlayer sharedInstance] getProgress];
 }
 
+int _initMediaPlayer()
+{
+    return [[AniminMediaPlayer sharedInstance] initializeAll];
+}
 
+char* MakeStringCopy (const char* string)
+{
+    if (string == NULL)
+        return NULL;
+    
+    char* res = (char*)malloc(strlen(string) + 1);
+    strcpy(res, string);
+    return res;
+}
+
+const char* _getNextSongFromList()
+{
+    return MakeStringCopy([[AniminMediaPlayer sharedInstance] getNextSongFromList]);
+}
 
 
 @implementation AniminMediaPlayer
@@ -36,9 +70,9 @@ static AniminMediaPlayer *sharedInstance = nil;
 }
 
 
-- (void) initializeAll
+- (int) initializeAll
 {
-    
+    nextSongIndex = 0;
     musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
     /*
      
@@ -73,40 +107,91 @@ static AniminMediaPlayer *sharedInstance = nil;
     
     [musicPlayer beginGeneratingPlaybackNotifications];
     
+    
+    //Create a query that will return all songs by The Beatles grouped by album
+    //    MPMediaQuery* query = [MPMediaQuery songsQuery];
+    //    [query addFilterPredicate:[MPMediaPropertyPredicate predicateWithValue:@"The Beatles" forProperty:MPMediaItemPropertyArtist comparisonType:MPMediaPredicateComparisonEqualTo]];
+    //    [query setGroupingType:MPMediaGroupingAlbum];
+    
+    
+    MPMediaQuery *everything = [[MPMediaQuery alloc] init];
+    itemsFromGenericQuery = [[everything items] retain];
+    
+    //Pass the query to the player
+    [musicPlayer setQueueWithQuery:everything];
+    [musicPlayer prepareToPlay];
+    //[musicPlayer play];
+    
+    // [self updateTrackText];
+    
+    return itemsFromGenericQuery.count;
+}
+
+-(const char*)getNextSongFromList
+{
+    MPMediaItem* singleSongIndex = [itemsFromGenericQuery objectAtIndex:nextSongIndex];
+    NSString *songTitle = [singleSongIndex valueForProperty: MPMediaItemPropertyTitle];
+    nextSongIndex++;
+    return [songTitle UTF8String];
+}
+
+-(void)playSongAtIndex:(int)index
+{
+    MPMediaItem* singleSongIndex = [itemsFromGenericQuery objectAtIndex:index];
+    
+    [musicPlayer setNowPlayingItem:singleSongIndex];
+    [musicPlayer play];
+}
+
+-(float)getProgress
+{
+    long currentPlaybackTime = musicPlayer.currentPlaybackTime;
+    long totalPlaybackTime = [[[musicPlayer nowPlayingItem] valueForProperty: @"playbackDuration"] longValue];
+    return ((float)currentPlaybackTime / (float)totalPlaybackTime);
+}
+
+
+- (void) updateTrackText
+{
+    MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
+    NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
+    NSString *artistString = [currentItem valueForProperty:MPMediaItemPropertyArtist];
+    
+    if(artistString == nil) artistString = @"";
+    if(titleString == nil) titleString = @"";
+    
+    UnitySendMessage("UI Root", "UpdateTrackInfo", [artistString UTF8String]);
+    UnitySendMessage("UI Root", "UpdateArtistInfo", [titleString UTF8String]);
 }
 
 - (void) handle_NowPlayingItemChanged: (id) notification
 {
-    MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
-    UIImage *artworkImage = [UIImage imageNamed:@"noArtworkImage.png"];
-    MPMediaItemArtwork *artwork = [currentItem valueForProperty: MPMediaItemPropertyArtwork];
     
-    /* if (artwork) {
-     artworkImage = [artwork imageWithSize: CGSizeMake (200, 200)];
-     }*/
     
-    //[artworkImageView setImage:artworkImage];
+    [self updateTrackText];
+}
+
+- (void) handle_PlaybackStateChanged: (id) notification
+{
+    MPMusicPlaybackState playbackState = [musicPlayer playbackState];
     
-    NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
-    /*if (titleString) {
-     titleLabel.text = [NSString stringWithFormat:@"Title: %@",titleString];
-     } else {
-     titleLabel.text = @"Title: Unknown title";
-     }*/
-    
-    NSString *artistString = [currentItem valueForProperty:MPMediaItemPropertyArtist];
-    /* if (artistString) {
-     artistLabel.text = [NSString stringWithFormat:@"Artist: %@",artistString];
-     } else {
-     artistLabel.text = @"Artist: Unknown artist";
-     }*/
-    
-    NSString *albumString = [currentItem valueForProperty:MPMediaItemPropertyAlbumTitle];
-    /*if (albumString) {
-     albumLabel.text = [NSString stringWithFormat:@"Album: %@",albumString];
-     } else {
-     albumLabel.text = @"Album: Unknown album";
-     }*/
+    if (playbackState == MPMusicPlaybackStatePaused)
+    {
+        // [playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
+        UnitySendMessage("UI Root", "UpdatePlayingStatus",  "false");
+        
+    }
+    else if (playbackState == MPMusicPlaybackStatePlaying)
+    {
+        //[playPauseButton setImage:[UIImage imageNamed:@"pauseButton.png"] forState:UIControlStateNormal];
+        UnitySendMessage("UI Root", "UpdatePlayingStatus",  "true");
+        
+    } else if (playbackState == MPMusicPlaybackStateStopped)
+    {
+        UnitySendMessage("UI Root", "UpdatePlayingStatus",  "false");
+        //[playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
+        [musicPlayer stop];
+    }
     
 }
 
@@ -115,30 +200,9 @@ static AniminMediaPlayer *sharedInstance = nil;
     //[volumeSlider setValue:[musicPlayer volume]];
 }
 
-- (IBAction)volumeChanged:(id)sender
-{
-    //[musicPlayer setVolume:[volumeSlider value]];
-}
 
-- (IBAction)previousSong:(id)sender
-{
-    // [musicPlayer skipToPreviousItem];
-}
 
-- (IBAction)playPause:(id)sender
-{
-    /*
-     if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
-     [musicPlayer pause];
-     
-     } else {
-     [musicPlayer play];
-     
-     }
-     */
-}
-
-- (IBAction)showMediaPicker:(id)sender
+- (void)showMediaPicker
 {
     MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeAny];
     
@@ -146,8 +210,20 @@ static AniminMediaPlayer *sharedInstance = nil;
     mediaPicker.allowsPickingMultipleItems = YES;
     mediaPicker.prompt = @"Select songs to play";
     
-    [self presentModalViewController:mediaPicker animated:YES];
-    [mediaPicker release];
+    UIViewController *rootContoller = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    [rootContoller presentViewController:mediaPicker animated:true completion:nil];
+    //[self presentViewController:mediaPicker animated:true completion:nil];
+    
+    
+    
+    
+    // [self presentViewController:mediaPicker animated:true completion:nil];
+    // [self.navigationController presentViewController:mediaPicker animated:YES completion:nil];
+    
+    
+    // [self presentModalViewController:mediaPicker animated:YES];
+    // [mediaPicker release];
     
 }
 
@@ -160,42 +236,53 @@ static AniminMediaPlayer *sharedInstance = nil;
         [musicPlayer play];
     }
     
-    [self dismissModalViewControllerAnimated: YES];
+    UIViewController *rootContoller = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    [rootContoller dismissViewControllerAnimated:YES completion:^ {
+        //
+    }];
     
 }
 
 - (void) mediaPickerDidCancel: (MPMediaPickerController *) mediaPicker
 {
-    [self dismissModalViewControllerAnimated: YES];
+    //[self dismissViewControllerAnimated: YES completion:nil];
+    UIViewController *rootContoller = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    [rootContoller dismissViewControllerAnimated:YES completion:^ {
+        //
+    }];
 }
 
-- (IBAction)nextSong:(id)sender
+
+
+
+- (void)previousSong
+{
+    [musicPlayer skipToPreviousItem];
+}
+
+- (void)playPause
+{
+    
+    if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying)
+    {
+        [musicPlayer pause];
+        
+    }
+    else
+    {
+        [musicPlayer play];
+    }
+    
+}
+
+- (void)nextSong
 {
     [musicPlayer skipToNextItem];
 }
 
-- (void) handle_PlaybackStateChanged: (id) notification
-{
-    
-    MPMusicPlaybackState playbackState = [musicPlayer playbackState];
-    
-    if (playbackState == MPMusicPlaybackStatePaused) {
-        // [playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
-        
-    }
-    else if (playbackState == MPMusicPlaybackStatePlaying) {
-        //[playPauseButton setImage:[UIImage imageNamed:@"pauseButton.png"] forState:UIControlStateNormal];
-        
-    } else if (playbackState == MPMusicPlaybackStateStopped) {
-        
-        //[playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
-        [musicPlayer stop];
-        
-    }
-    
-}
-
-- (void)  DestroyAll
+- (void) DestroyAll
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self
                                                     name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification
@@ -210,8 +297,6 @@ static AniminMediaPlayer *sharedInstance = nil;
                                                   object: musicPlayer];
     
     [musicPlayer endGeneratingPlaybackNotifications];
-    
-    [musicPlayer release];
 }
 
 @end

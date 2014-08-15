@@ -385,8 +385,55 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			break;
 		}
 
-		
+
+		case UIFunctionalityId.PlayPauseSong:
+		{
+			UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<MediaPlayerPluginScript>().PlayPause();
+
+			break;
+		}
+
+		case UIFunctionalityId.NextSong:
+		{
+			UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<MediaPlayerPluginScript>().NextSong();
+			break;
+		}
+
+		case UIFunctionalityId.PreviousSong:
+		{
+			UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<MediaPlayerPluginScript>().PreviousSong();
+			break;
+		}
+
+		case UIFunctionalityId.ViewTracklist:
+		{
+
+			UIGlobalVariablesScript.Singleton.TracklistPanel.SetActive(true);
+			UIGlobalVariablesScript.Singleton.PlaySongPanel.SetActive(false);
+
+			break;
+		}
+
+		case UIFunctionalityId.ReturnFromTracklist:
+		{
+			UIGlobalVariablesScript.Singleton.TracklistPanel.SetActive(false);
+			UIGlobalVariablesScript.Singleton.PlaySongPanel.SetActive(true);
 			
+			break;
+		}
+
+		case UIFunctionalityId.SelectedTrack:
+		{
+			UIGlobalVariablesScript.Singleton.TracklistPanel.SetActive(false);
+			UIGlobalVariablesScript.Singleton.PlaySongPanel.SetActive(true);
+
+			UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<MediaPlayerPluginScript>().PlaySongAtIndex(
+				sender.GetComponent<TrackSongIndexScript>().TrackIndex);
+
+
+			break;
+		}
+
 		}
 	}
 

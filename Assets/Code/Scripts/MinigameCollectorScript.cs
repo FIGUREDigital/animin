@@ -843,8 +843,6 @@ public class MinigameCollectorScript : MonoBehaviour
 					}
 				}
 			}
-
-
 		}
 
 	

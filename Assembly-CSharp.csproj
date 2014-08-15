@@ -99,6 +99,7 @@
      <Compile Include="Assets\Code\Scripts\TestVuforiaScript.cs" />
      <Compile Include="Assets\Code\Scripts\ThrowAnimationScript.cs" />
      <Compile Include="Assets\Code\Scripts\ThumbstickControlsScript.cs" />
+     <Compile Include="Assets\Code\Scripts\TrackSongIndexScript.cs" />
      <Compile Include="Assets\Code\Scripts\TrackVuforiaScript.cs" />
      <Compile Include="Assets\Code\Scripts\TurdRotationScript.cs" />
      <Compile Include="Assets\Code\Scripts\UI\UIClickButtonMasterScript.cs" />
