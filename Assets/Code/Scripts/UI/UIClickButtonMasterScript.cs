@@ -64,7 +64,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			script.GroundItems.Clear();
 			UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CleanPooPiss);
 			UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
-			
+			UIGlobalVariablesScript.Singleton.StereoUI.SetActive(false);
+
 			break;
 		}
 		}
