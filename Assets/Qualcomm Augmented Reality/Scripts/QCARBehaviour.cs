@@ -19,6 +19,7 @@ public class QCARBehaviour : QCARAbstractBehaviour
 {
     QCARBehaviour()
     {
+
         mAndroidUnityPlayer = new AndroidUnityPlayer();
     }
 }

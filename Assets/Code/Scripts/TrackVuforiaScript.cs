@@ -40,6 +40,8 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		}
 
 
+
+
 		//this.renderer.enabled = false;
 		SavedARPosition = new Vector3(0, 0.0f, 0);
 		Input.gyro.enabled = true;
@@ -219,7 +221,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		{
 			if(IsTracking)
 			{
-				sprite.GetComponent<UISprite>().color = new Color(1, 1, 1, 1);
+				sprite.GetComponent<UIWidget>().color = new Color(1, 1, 1, 1);
 				sprite.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.PlayMinigameCubeRunners;
 
 				sprite.GetComponent<UIButton>().defaultColor = new Color(
@@ -238,7 +240,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			}
 			else
 			{
-				sprite.GetComponent<UISprite>().color = new Color(1, 1, 1, 0.5f);
+				sprite.GetComponent<UIWidget>().color = new Color(1, 1, 1, 0.5f);
 				sprite.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.None;
 
 				sprite.GetComponent<UIButton>().defaultColor = new Color(

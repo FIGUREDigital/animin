@@ -1,22 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/MediaPlayerPluginScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Aperture/Scripts/IAperture.cs">
     <Files>
       <File FileName="Assets/Code/Scripts/GroundShadowScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="204" Column="2" />
+      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="504" Column="1" />
+      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="431" Column="4" />
-      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="68" Column="38" />
+      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="369" Column="61" />
+      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="19" Column="30" />
       <File FileName="Assets/Code/Scripts/MinigameCollectorScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="16" Column="8" />
+      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/JoystiqScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/TurdRotationScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/DeviceCameraScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/DeviceCameraScript.cs" Line="56" Column="2" />
       <File FileName="Assets/Code/Scripts/SmoothLookAt.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/ObjectLookAtDeviceScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/TrackVuforiaScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/TrackVuforiaScript.cs" Line="5" Column="2" />
       <File FileName="Assets/Code/Scripts/PortalScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/PortalAnimationScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/ThrowAnimationScript.cs" Line="1" Column="1" />
@@ -39,10 +39,16 @@
       <File FileName="Assets/Code/Scripts/SpinObjectScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/NewJoystickScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/FlatScalerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/MediaPlayerPluginScript.cs" Line="24" Column="4" />
-      <File FileName="Assets/Code/Enumerations/UIFunctionalityId.cs" Line="45" Column="2" />
+      <File FileName="Assets/Code/Scripts/MediaPlayerPluginScript.cs" Line="3" Column="1" />
+      <File FileName="Assets/Code/Enumerations/UIFunctionalityId.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/BlinkingScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/CameraFacingBillboardScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/TrackSongIndexScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/QCARBehaviour.cs" Line="22" Column="3" />
+      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/Internal/BGRenderingBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/Internal/AndroidUnityPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Aperture/Scripts/Aperture.cs" Line="186" Column="16" />
+      <File FileName="Assets/Aperture/Scripts/IAperture.cs" Line="15" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -58,6 +58,12 @@ const char* _getNextSongFromList()
     return MakeStringCopy([[AniminMediaPlayer sharedInstance] getNextSongFromList]);
 }
 
+void _saveScreenshotToCameraRoll()
+{
+    return [[AniminMediaPlayer sharedInstance] saveScreenshotToCameraRoll];
+
+}
+
 
 @implementation AniminMediaPlayer
 
@@ -297,6 +303,42 @@ static AniminMediaPlayer *sharedInstance = nil;
                                                   object: musicPlayer];
     
     [musicPlayer endGeneratingPlaybackNotifications];
+}
+
+
+-(void)saveScreenshotToCameraRoll
+{
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    CGRect rect = [keyWindow bounds];
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [keyWindow.layer renderInContext:context];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Image to save
+    // UIImage *img = [UIImage imageNamed:@"ImageName.png"];
+    
+    // Request to save the image to camera roll
+    UIImageWriteToSavedPhotosAlbum(img, self,
+                                   @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    
+    UIGraphicsEndImageContext();
+    
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
+  contextInfo:(void *)contextInfo
+{
+    // Was there an error?
+    if (error != NULL)
+    {
+        // Show error message...
+        
+    }
+    else  // No errors
+    {
+        // Show message image successfully saved
+    }
 }
 
 @end

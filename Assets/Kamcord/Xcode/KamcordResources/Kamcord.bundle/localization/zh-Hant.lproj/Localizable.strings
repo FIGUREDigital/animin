@@ -1,0 +1,326 @@
+"Current password" = "目前的密碼";
+
+"Please enter a valid username" = "請輸入一個有效的用戶名";
+
+"Username must be less than 16 characters" = "用戶名必須少於16個字符";
+
+"Connection error" = "連接錯誤";
+
+"Please allow Twitter access to share" = "請允許Twitter訪問共享";
+
+"Please log in to Twitter in iOS Settings" = "請在iOS設置中登錄Twitter";
+
+"Unclaimed Videos" = "無人認領的視頻";
+
+"Please sign-in again and authorize posting to share to Facebook." = "請重新登錄並授權Facebook發布分享";
+
+"YouTube" = "YouTube";
+
+"Disable" = "禁用";
+
+"Sign in" = "登錄";
+
+"Please enable at least one account in Settings -> Twitter and grant this application permissions." = "請在設置中啟用至少一個賬戶->Twitter並授權此應用程序。";
+
+"Invalid email" = "無效電子郵件";
+
+"Reset" = "重新設置";
+
+"On" = "開";
+
+"Ok" = "確定";
+
+"Voice overlay is disabled on this device." = "當前設備禁用聲音疊加";
+
+"Voice Overlay Disabled" = "禁用聲音疊加";
+
+"Please sign-in in Settings > Facebook and grant this application permission." = "請在設置>Facebook登錄並允許該應用程序。";
+
+"Send a password reset email" = "發送密碼重置郵件";
+
+"OK" = "確定";
+
+"Confirm Facebook Sign Out" = "確認退出Facebook";
+
+"Share" = "分享";
+
+"Watch Replays" = "觀看視頻";
+
+"Create" = "創建";
+
+"Kamcord requires an internet connection" = "Kamcord需要網絡連接";
+
+"Voice Overlay" = "聲音疊加";
+
+"Save" = "保存";
+
+"You must enter an email" = "您必須輸入一個郵件地址";
+
+"Email" = "電子郵件";
+
+"Enable" = "啟用";
+
+"No Internet" = "沒有聯網";
+
+"Please try again later." = "請稍後再試。";
+
+"Connected" = "連接";
+
+"Upload failed" = "上傳失敗";
+
+"Confirm Twitter Sign Out" = "確認退出Twitter";
+
+"Email Not Sent" = "電子郵件未發送";
+
+"We've emailed you a link to reset your password!" = "我們已經通過電子郵件發送給您一個鏈接來重置您的密碼！";
+
+"Terms of Service" = "服務條款";
+
+"Don't have a profile yet?" = "還沒有個人資料嗎？";
+
+"Powered by Kamcord" = "Kamcord提供技術支持";
+
+"New password" = "新密碼";
+
+"Sign In" = "登錄";
+
+"Confirm Kamcord Sign Out" = "確認退出Kamcord";
+
+"Change Password" = "修改密碼";
+
+"Back" = "返回";
+
+"Privacy Policy" = "隱私策略";
+
+"Another password reset request is already pending." = "另一個密碼重置請求已在等待中。";
+
+"Confirm YouTube Sign Out" = "確認退出YouTube";
+
+"Videos Saved" = "視頻已保存";
+
+"Not Now" = "以後";
+
+"Yes" = "是";
+
+"Username must be at least 5 characters" = "用戶名必須至少5個字符";
+
+"No Email Accounts" = "沒有電子郵件帳戶";
+
+"No" = "否";
+
+"Watch" = "觀看";
+
+"Forgot your password?" = "忘記了您的密碼？";
+
+"Is your email correct?" = "您的電子郵件正確嗎？";
+
+"Are you sure you want to sign out?" = "您確定要退出嗎？";
+
+"New password (again)" = "新密碼（重複）";
+
+"Not authorized" = "未經授權";
+
+"Sorry, we could not find any matching accounts." = "對不起,我們找不到任何匹配的賬戶。";
+
+"Facebook" = "Facebook";
+
+"Other Games" = "其他遊戲";
+
+"Please check Twitter settings" = "請檢查Twitter設置";
+
+"Must enter a username and password" = "必須輸入一個用戶名和密碼";
+
+"Not Authorized" = "未經授權";
+
+"Already have a profile?" = "已經有個人資料了？";
+
+"Twitter" = "Twitter";
+
+"The videos on this device are now associated with your profile" = "這個設備上的視頻已經和您的個人資料關聯";
+
+"Kamcord" = "Kamcord";
+
+"Edit Profile" = "編輯個人資料";
+
+"Done" = "完成";
+
+"Cancel" = "取消";
+
+"Password must be at least 6 characters" = "密碼必須至少6個字符";
+
+"Any unclaimed videos will be associated with your profile." = "任何無人認領的視頻將和您的個人資料關聯";
+
+"Search" = "搜索";
+
+"Please sign-in in Settings > Twitter and grant this application permission." = "請在設置>Twitter登錄並允許該應用程序。";
+
+"No Account Found" = "沒有發現賬戶";
+
+"Profile Creation Error" = "簡介創建錯誤";
+
+"Profile creation did not work, please try again later" = "無法創建個人資料，請稍後再試";
+
+"The email you entered is %@" = "您輸入的電子郵件是%@";
+
+"Profile" = "個人資料";
+
+"Kamcord Profile" = "Kamcord 個人資料";
+
+"By clicking Create Profile you are indicating that you have read and agree to the Privacy Policy and Terms of Service." = "點擊創建個人資料表示您已經閱讀並同意隱私策略和服務條款。";
+
+"Create Profile" = "創建個人資料";
+
+"Sign Out" = "退出";
+
+"No Internet Connection" = "無互聯網連接";
+
+"Illegal characters in username" = "用戶名中有非法字符";
+
+"Email Sent" = "已發送電子郵件";
+
+"New passwords do not match" = "新密碼不匹配";
+
+"You must enter a password" = "您必須輸入一個密碼";
+
+"Off" = "關";
+
+"Connect account" = "連接帳戶";
+
+"Write a title..." = "寫一個標題...";
+
+"Please enter your current password" = "請輸入您的當前密碼";
+
+"Trim" = "裁剪";
+
+"Share Replay" = "分享視頻";
+
+"My Videos" = "我的視頻";
+
+"Password must be less than 31 characters" = "密碼必須少於31 個字符";
+
+"Please setup an email account in Settings > Mail." = "請在設置中設置電子郵件帳戶";
+
+"Select Twitter account to use" = "選擇要使用的Twitter帳戶";
+
+"Watch the new Gameplay of the Week!" = "觀看本週的精選視頻!";
+
+"Watch Video" = "觀看視頻";
+
+"Password" = "密碼";
+
+"Username" = "用戶名";
+
+"Trimming..." = "裁剪中...";
+
+"Release to refresh..." = "放開可刷新...";
+
+"Settings" = "設置";
+
+"Uploading" = "上傳中";
+
+"Refreshing page..." = "頁面刷新中...";
+
+"Reset Password" = "重設密碼";
+
+"Upload Failed" = "上傳失敗";
+
+"Working..." = "處理中...";
+
+"Upload Done!" = "上傳完畢!";
+
+"Gameplay of the Week" = "本週的精選視頻";
+
+"Pull down to refresh..." = "拉下可刷新...";
+
+"Enter your Kamcord username or the email address associated with your account." = "請輸入您的Kamcord用戶名或相關的電子郵箱地址。";
+
+"Username or Email" = "用戶名或電子郵箱地址";
+
+"Enable Voice Overlay?" = "使用聲音疊加?";
+
+"Uploading Failed" = "上傳失敗";
+
+"Upload Finished!" = "上傳完畢!";
+
+"You can enable voice overlay by going to Profile => Settings or pressing Enable below." = "您可以在個人資料＝>設置或以下的啟用按鈕來啟用聲音疊加。";
+
+"No account linked" = "沒有相關的帳號";
+
+"Voice Overlay will be enabled for future videos." = "將後的視頻會使用聲音疊加.";
+
+"Enter the username or email address of your Kamcord profile." = "請輸入您的Kamcord用戶名或相關的電子郵箱地址。";
+
+"Close" = "關閉";
+
+"Uploading..." = "上傳中 ...";
+
+"Voice Overlay Enabled!" = "使用聲音疊加!";
+
+"No Voice in Simulator" = "模擬器沒有聲音疊加功能";
+
+"I'm Ready!" = "準備完畢!";
+
+"Working ..." = "處理中 ...";
+
+"The page is taking a long time to load. Check your Internet connection and try again." = "頁面加載時間過長。請檢查您的網絡連接並重試。";
+
+"Enable Voice Overlay" = "啟用聲音疊加";
+
+"Retry" = "重試";
+
+"The server is not responding. Try again at a later time." = "服務器未響應。請稍後重試。";
+
+"Cannot Connect to Server" = "無法連接服務器";
+
+"Please reconnect and try again." = "請重新連接並重試。";
+
+"Slow Internet Connection" = "網絡連接遲緩";
+
+"You must install the LINE App before you can share to LINE." = "You must install the LINE App before you can share to LINE.";
+
+"You must install the WeChat App before you can share to WeChat." = "You must install the WeChat App before you can share to WeChat.";
+
+"LINE App Not Found" = "LINE App Not Found";
+
+"gameplay" = "gameplay";
+
+"WeChat App Not Found" = "WeChat App Not Found";
+
+"Featured Playlist" = "特色播放列表";
+"WeChat Sharing Disabled" = "WeChat Sharing Disabled";
+
+"LINE" = "LINE";
+
+"You cannot share to WeChat on this device." = "You cannot share to WeChat on this device.";
+
+"WeChat" = "微信";
+
+"Change Email" = "更改電子郵件";
+
+"New email" = "新電子郵件";
+
+"New email (again)" = "新電子郵件（再次輸入）";
+
+"No Video Available" = "無可用視頻";
+
+"Email must be less than 65 characters" = "電子郵件地址必須少於65 個字符";
+
+"Email or username does not exist" = "電子郵件或用戶名不存在";
+
+"Invalid password" = "密碼無效";
+
+"New emails do not match" = "新電子郵件不匹配";
+
+"Your preferred email was successfully changed." = "您的首選電子郵件已成功更改。";
+
+"Your password was successfully changed." = "您的密碼已成功更改。";
+
+"Success!" = "成功！";
+
+"Username is already in use" = "用戶名已被使用";
+
+"Email is already in use" = "電子郵件已被使用";
+
+"Sign In Error" = "登錄錯誤";
+
+"Really Delete" = "確認刪除";

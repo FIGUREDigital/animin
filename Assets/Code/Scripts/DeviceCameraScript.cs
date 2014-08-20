@@ -4,35 +4,35 @@ using System.Collections;
 public class DeviceCameraScript : MonoBehaviour 
 {
 
-	WebCamDevice[] devices;
-	WebCamTexture webcamTexture;
+	//WebCamDevice[] devices;
+	//WebCamTexture webcamTexture;
 
-	public bool IsFrontCameraFacing;
+	//public bool IsFrontCameraFacing;
 
 
-	public WebCamDevice? FrontCamera
-	{
-		get
-		{
-			for(int i=0;i<devices.Length;++i)
-				if(devices[i].isFrontFacing)
-					return devices[i];
-
-			return null;
-		}
-	}
-
-	public WebCamDevice? BackCamera
-	{
-		get
-		{
-			for(int i=0;i<devices.Length;++i)
-				if(!devices[i].isFrontFacing)
-					return devices[i];
-
-			return null;
-		}
-	}
+//	public WebCamDevice? FrontCamera
+//	{
+//		get
+//		{
+//			for(int i=0;i<devices.Length;++i)
+//				if(devices[i].isFrontFacing)
+//					return devices[i];
+//
+//			return null;
+//		}
+//	}
+//
+//	public WebCamDevice? BackCamera
+//	{
+//		get
+//		{
+//			for(int i=0;i<devices.Length;++i)
+//				if(!devices[i].isFrontFacing)
+//					return devices[i];
+//
+//			return null;
+//		}
+//	}
 
 	public void ResetCamera()
 	{
@@ -76,13 +76,21 @@ public class DeviceCameraScript : MonoBehaviour
 	{
 		//devices = WebCamTexture.devices;
 		//webcamTexture = new WebCamTexture();
+		//if(FrontCamera.HasValue) webcamTexture.name = FrontCamera.Value.name;
+		//else if(BackCamera.HasValue) webcamTexture.name = BackCamera.Value.name;
+		//webcamTexture.Play();
 	}
 
 	void OnGUI()
 	{
+		//Image img = CameraDevice.Instance.GetCameraImage(Image.PIXEL_FORMAT.RGBA8888);
+	
+
+		//UIGlobalVariablesScript.Singleton.Vuforia.camera
+
 		/*if(webcamTexture != null && webcamTexture.isPlaying)
 		{
-			//GUI.DrawTexture(new Rect(330, 0, 200, 200), webcamTexture);
+			GUI.DrawTexture(new Rect(330, 0, 200, 200), webcamTexture);
 		}*/
 	}
 	

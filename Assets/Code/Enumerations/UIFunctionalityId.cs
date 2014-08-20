@@ -54,4 +54,6 @@ public enum UIFunctionalityId
 	ViewTracklist,
 	ReturnFromTracklist,
 	SelectedTrack,
+	RecordVideo,
+	StopRecordVideo,
 }

@@ -7,6 +7,7 @@ void _moveToPreviousSong();
 float _getProgress();
 const char* _getNextSongFromList();
 void _playSongAtIndex(int index);
+void _saveScreenshotToCameraRoll();
 
 @interface AniminMediaPlayer : UIViewController <MPMediaPickerControllerDelegate>
 {
@@ -25,5 +26,6 @@ void _playSongAtIndex(int index);
 -(float)getProgress;
 -(const char*)getNextSongFromList;
 -(void)playSongAtIndex:(int)index;
+-(void)saveScreenshotToCameraRoll;
 
 @end

@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 public class UIClickButtonMasterScript : MonoBehaviour 
 {
+	[DllImport("__Internal")]
+	private static extern void _saveScreenshotToCameraRoll();
+
 	public UIFunctionalityId FunctionalityId;
 	private static float SavedRadius;
 	//private Vector3 SavedScale;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 	
 	}
 	
@@ -235,10 +240,10 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 		case UIFunctionalityId.OpenPictureScreen:
 		{
-			//UIGlobalVariablesScript.Singleton.PicturesScreenRef.SetActive(true);
-			//UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.PicturesScreenRef.SetActive(true);
+			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
 
-			//UIGlobalVariablesScript.Singleton.PicturesScreenRef.GetComponent<DeviceCameraScript>().ResetCamera();
+			UIGlobalVariablesScript.Singleton.PicturesScreenRef.GetComponent<DeviceCameraScript>().ResetCamera();
 
 			break;
 		}
@@ -353,16 +358,34 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		case UIFunctionalityId.ChangeCameraFacingMode:
 		{
 			UIGlobalVariablesScript.Singleton.ImageTarget.GetComponent<TrackVuforiaScript>().FlipFrontBackCamera();
+
 			break;
 		}
 
 		case UIFunctionalityId.TakePicture:
 		{
-			UIGlobalVariablesScript.Singleton.PicturesScreenRef.GetComponent<DeviceCameraScript>().SavePicture();
+			if (Application.platform == RuntimePlatform.IPhonePlayer) 
+			{
+				GameObject.Find("Aperture").GetComponent<Aperture>().Photo();
+			}
+
 			break;
 		}
 
-		
+		case UIFunctionalityId.RecordVideo:
+		{
+			GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().StartRecording();
+			sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.StopRecordVideo;
+			break;
+		}
+
+		case UIFunctionalityId.StopRecordVideo:
+		{
+			GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().StopRecording();
+			sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.RecordVideo;
+			break;
+		}
+
 
 		case UIFunctionalityId.ClearDragedItem:
 		{
