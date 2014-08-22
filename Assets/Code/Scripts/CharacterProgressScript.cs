@@ -148,14 +148,14 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 	}
 
-	public GameObject ActiveARScene
+	public GameObject ActiveWorld
 	{
 		get
 		{
 			if(UIGlobalVariablesScript.Singleton.ARSceneRef.activeInHierarchy)
-				return UIGlobalVariablesScript.Singleton.ARSceneRef;
+				return UIGlobalVariablesScript.Singleton.ARWorldRef;
 			else
-				return UIGlobalVariablesScript.Singleton.NonSceneRef;
+				return UIGlobalVariablesScript.Singleton.NonARWorldRef;
 		}
 	}
 
@@ -279,6 +279,9 @@ public class CharacterProgressScript : MonoBehaviour
 
 		return closestFood;
 	}
+
+	private float EatAlphaTimer;
+	private bool PlayedEatingSound;
 	
 	// Update is called once per frame
 	void Update () 
@@ -382,6 +385,90 @@ public class CharacterProgressScript : MonoBehaviour
 
 			break;
 		}
+
+		case ActionId.EatItem:
+		{
+
+			CurrentAction = ActionId.WaitEatingFinish;
+			animationController.IsHoldingItem = false;
+			animationController.IsEating = true;
+			EatAlphaTimer = 0;
+
+
+			PlayedEatingSound = false;
+			break;
+		}
+		case ActionId.WaitEatingFinish:
+		{
+			if(!animationController.IsEating)
+			{
+
+				PopupItemType itemType = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type;
+
+				Debug.Log("FINISHED EATING");
+
+				OnInteractWithPopupItem(ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>());
+				this.GetComponent<CharacterProgressScript>().GroundItems.Remove(ObjectHolding);
+				Destroy(ObjectHolding);
+				
+
+				pickupItemSavedData.WasInHands = true;
+				ObjectHolding = null;
+				CurrentAction = ActionId.None;
+			}
+			else
+			{
+				EatAlphaTimer += Time.deltaTime;
+
+				if(EatAlphaTimer >= 0.7f)
+				{
+					if(!PlayedEatingSound)
+					{
+						UIPopupItemScript popup = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+
+						PlayedEatingSound = true;
+						if(popup.SpecialId == SpecialFunctionalityId.Liquid)
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedDrink);
+						else
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedFood);
+
+					}
+				}
+
+				if(EatAlphaTimer >= 1)
+				{
+					if(ObjectHolding.renderer != null) 
+					{
+						float alpha = ObjectHolding.renderer.material.color.a;
+						alpha -= Time.deltaTime *  3;
+						if(alpha <= 0) alpha = 0;
+						ObjectHolding.renderer.material.color = new Color(
+							ObjectHolding.renderer.material.color.r,
+							ObjectHolding.renderer.material.color.g,
+							ObjectHolding.renderer.material.color.b,
+							alpha);
+					}
+
+					for(int a=0;a<ObjectHolding.transform.childCount;++a)
+					{
+						if(ObjectHolding.transform.GetChild(a).renderer == null) continue;
+						
+						float alpha = ObjectHolding.transform.GetChild(a).renderer.material.color.a;
+						alpha -= Time.deltaTime *  3;
+						if(alpha <= 0) alpha = 0;
+						ObjectHolding.transform.GetChild(a).renderer.material.color = new Color(
+							ObjectHolding.transform.GetChild(a).renderer.material.color.r,
+							ObjectHolding.transform.GetChild(a).renderer.material.color.g,
+							ObjectHolding.transform.GetChild(a).renderer.material.color.b,
+							alpha);
+					}
+				}
+
+			}
+
+			break;
+		}
+
 		case ActionId.EnterPortalToAR:
 			{
 				//OnEnterARScene();
@@ -391,7 +478,10 @@ public class CharacterProgressScript : MonoBehaviour
 			   	{
 					Debug.Log("EnterPortalToAR finished");
 					CurrentAction = ActionId.None;
-					UIGlobalVariablesScript.Singleton.Vuforia.OnEnterARScene();
+
+					UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (false);
+					UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
+					UIGlobalVariablesScript.Singleton.Vuforia.OnCharacterEnterARScene();
 					
 
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
@@ -530,7 +620,7 @@ public class CharacterProgressScript : MonoBehaviour
 					//pickupItemSavedData.Position = DragableObject.transform.position;
 					//pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
 					
-					ObjectHolding.transform.parent = ActiveARScene.transform;
+				ObjectHolding.transform.parent = ActiveWorld.transform;
 					
 					ThrowAnimationScript throwScript = ObjectHolding.AddComponent<ThrowAnimationScript>();
 					float maxDistance = Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) * 0.35f;
@@ -756,7 +846,7 @@ public class CharacterProgressScript : MonoBehaviour
 									
 								}
 							}
-						else if(ObjectHolding == null && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 0 && !animationController.IsPat)
+							else if(ObjectHolding == null && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 0 && !animationController.IsPat)
 							{
 								Stop(true);
 								animationController.IsPat = true;
@@ -764,6 +854,12 @@ public class CharacterProgressScript : MonoBehaviour
 								
 								UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.PatReact);
 							}
+						}
+						if((hitInfo.collider.tag == "Items") && hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
+						{
+							OnInteractWithPopupItem(hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>());
+							this.GetComponent<CharacterProgressScript>().GroundItems.Remove(hitInfo.collider.gameObject);
+							Destroy(hitInfo.collider.gameObject);
 						}
 						else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
 						{
@@ -776,7 +872,7 @@ public class CharacterProgressScript : MonoBehaviour
 							if(ObjectHolding != null && (hitInfo.collider.tag == "Items"))
 							{
 								ObjectHolding.layer = LayerMask.NameToLayer("Default");
-								ObjectHolding.transform.parent = ActiveARScene.transform;
+							ObjectHolding.transform.parent = ActiveWorld.transform;
 								ObjectHolding.transform.localPosition = new Vector3(ObjectHolding.transform.localPosition.x, 0, ObjectHolding.transform.localPosition.z);
 
 								GroundItems.Add(ObjectHolding);
@@ -921,7 +1017,7 @@ public class CharacterProgressScript : MonoBehaviour
 				}
 				else if(hadRayCollision && hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
 				{
-					DragableObject.transform.parent = ActiveARScene.transform;
+				DragableObject.transform.parent = ActiveWorld.transform;
 					validDrop = true;
 					//GroundItems.Add(DragableObject);
 					DragableObject.layer = LayerMask.NameToLayer("Default");
@@ -973,7 +1069,7 @@ public class CharacterProgressScript : MonoBehaviour
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.TakePiss);
 			}
 
-			newPoo.transform.parent = ActiveARScene.transform;
+			newPoo.transform.parent = ActiveWorld.transform;
 			newPoo.transform.position = this.transform.position;
 			newPoo.transform.rotation = Quaternion.Euler(0, 180 + UnityEngine.Random.Range(-30.0f, 30.0f), 0);
 
@@ -1112,7 +1208,7 @@ public class CharacterProgressScript : MonoBehaviour
 	{
 		//item.GetComponent<BoxCollider>().enabled = false;
 		//if(item.collider.gameObject.activeInHierarchy)
-			
+
 		item.layer = LayerMask.NameToLayer("IgnoreCollisionWithCharacter");
 		item.transform.parent = ObjectCarryAttachmentBone.transform;
 		animationController.IsHoldingItem = true;
@@ -1135,11 +1231,11 @@ public class CharacterProgressScript : MonoBehaviour
 		{
 			case PopupItemType.Token:
 			{
-				Stop(true);
+				//Stop(true);
 				Evolution += item.Points;
 
 				UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
-			Debug.Log("TOKEN COLLECTED");
+				Debug.Log("TOKEN COLLECTED");
 
 				break;
 			}
@@ -1155,14 +1251,11 @@ public class CharacterProgressScript : MonoBehaviour
 			{*/
 				//ShowText("yum yum");
 				Hungry += item.Points;
-				Stop(true);
-				animationController.IsEating = true;
+				//Stop(true);
+						
 
-			if(item.SpecialId == SpecialFunctionalityId.Liquid)
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedDrink);
-			else
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedFood);
-			//}
+		
+					//}
 				break;
 			}
 
@@ -1264,6 +1357,8 @@ public enum ActionId
 	EnterPortalToAR,
 	EnterPortalToNonAR,
 	SmallCooldownPeriod,
+	EatItem,
+	WaitEatingFinish,
 }
 
 public enum HungrySadUnwellLoopId

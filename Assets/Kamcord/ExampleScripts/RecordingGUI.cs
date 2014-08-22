@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 public class RecordingGUI : MonoBehaviour
 {
-    //public Font buttonFont;
+    public Font buttonFont;
 
 #if UNITY_IPHONE || (UNITY_ANDROID && ((!(UNITY_2_6 || UNITY_3_0 || UNITY_3_1 || UNITY_3_2 || UNITY_3_3 || UNITY_3_4 || UNITY_3_5 || UNITY_4_0 || UNITY_4_1))))
     private bool firstVideoRecorded;
 
-    //private Rect startRecordingButtonRect;
-    //private Rect stopRecordingButtonRect;
-    //private Rect showViewButtonRect;
-    //private Rect showWatchViewButtonRect;
+    private Rect startRecordingButtonRect;
+    private Rect stopRecordingButtonRect;
+    private Rect showViewButtonRect;
+    private Rect showWatchViewButtonRect;
     private System.DateTime recordingStartedAt;
 
     void Awake()
@@ -22,9 +22,51 @@ public class RecordingGUI : MonoBehaviour
     void Start()
     {
         firstVideoRecorded = false;
+        //InitGUI();
     }
 
-  
+    /*private void InitGUI()
+    {
+        int w = 265; // button width
+        int h = 100; // button height
+        int m = 20;  // margin around buttons
+
+        startRecordingButtonRect = new Rect(m, m, w, h);
+        stopRecordingButtonRect = new Rect(m, 2*m+h, w, h);
+        showViewButtonRect = new Rect(m, 3*m+2*h, w, h);
+        showWatchViewButtonRect = new Rect(2*m+w, m, w, h);
+    }*/
+
+	public void StartRecording()
+	{
+		Kamcord.StartRecording();
+		
+		recordingStartedAt = System.DateTime.Now;
+	}
+
+	public void ShowVideos()
+	{
+		Kamcord.ShowWatchView();
+	}
+
+	public void StopRecording()
+	{
+		Kamcord.StopRecording();
+		
+		// It is very important to set a descriptive video title for each video.
+		// In addition to the video title, setting the level and score also makes
+		// the watch experience significantly better.
+		double gameplayDuration = (System.DateTime.Now - recordingStartedAt).TotalSeconds;
+		Kamcord.SetVideoTitle("An Awesome Gameplay - " + gameplayDuration.ToString("F2") + " sec");
+		
+		Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.level, "Level", "1");
+		Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.score, "Score", "1000");
+		Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.other, "Key", "Value");
+		Kamcord.SetDeveloperMetadataWithNumericValue(Kamcord.MetadataType.other, "Key", "Value", 1000);
+		
+		firstVideoRecorded = true;
+		Kamcord.ShowView();
+	}
 
     private void RegisterCallbacks()
     {
@@ -85,128 +127,82 @@ public class RecordingGUI : MonoBehaviour
         Kamcord.adjustAndroidWhitelist -= MyAdjustAndroidWhitelist;
     }
 
+    /*GUIStyle GetStyle()
+    {
+        return new GUIStyle(GUI.skin.button);
+    }
 
-	public void StartRecording()
-	{
-		if (!Kamcord.IsEnabled()) return;
+    void OnGUI()
+    {
+        GUIStyle style = GetStyle();
 
-		Kamcord.StartRecording();
-		
-		recordingStartedAt = System.DateTime.Now;
-	}
+        if ((Application.platform == RuntimePlatform.IPhonePlayer ||
+             Application.platform == RuntimePlatform.Android))
+        {
+            if ( GUI.Button(showWatchViewButtonRect, "Show Watch View", style) )
+            {
+                Kamcord.ShowWatchView();
+            }
+        }
 
-	public void StopRecording()
-	{
-		if (!Kamcord.IsEnabled()) return;
+        if (!Kamcord.IsEnabled())
+        {
+            string reason = Kamcord.GetDisabledReason();
+            GUI.Label(startRecordingButtonRect, "Kamcord Disabled:\n" + reason);
+            return;
+        }
 
-		Kamcord.StopRecording();
-		
-		// It is very important to set a descriptive video title for each video.
-		// In addition to the video title, setting the level and score also makes
-		// the watch experience significantly better.
-		double gameplayDuration = (System.DateTime.Now - recordingStartedAt).TotalSeconds;
-		Kamcord.SetVideoTitle("An Awesome Gameplay - " + gameplayDuration.ToString("F2") + " sec");
-		
-		Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.level, "Level", "1");
-		Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.score, "Score", "1000");
-		Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.other, "Key", "Value");
-		Kamcord.SetDeveloperMetadataWithNumericValue(Kamcord.MetadataType.other, "Key", "Value", 1000);
-		
-		firstVideoRecorded = true;
-		Kamcord.ShowView();
-	}
+        if (Kamcord.IsRecording() || Kamcord.IsPaused())
+        {
+            if (Kamcord.IsPaused())
+            {
+                if (GUI.Button(startRecordingButtonRect, "Resume", style))
+                {
+                    Kamcord.Resume();
+                }
+            }
+            else
+            {
+                if (GUI.Button(startRecordingButtonRect, "Pause", style))
+                {
+                    Kamcord.Pause();
+                }
+            }
 
-	public void PauseRecording()
-	{
-		if (!Kamcord.IsEnabled()) return;
-	}
+            if (GUI.Button(stopRecordingButtonRect, "Stop Recording", style))
+            {
+                Kamcord.StopRecording();
 
-	public void ShowShareScreen()
-	{
-		if (!Kamcord.IsEnabled()) return;
-	}
+                // It is very important to set a descriptive video title for each video.
+                // In addition to the video title, setting the level and score also makes
+                // the watch experience significantly better.
+                double gameplayDuration = (System.DateTime.Now - recordingStartedAt).TotalSeconds;
+                Kamcord.SetVideoTitle("An Awesome Gameplay - " + gameplayDuration.ToString("F2") + " sec");
 
-	public void ShowVideosOnline()
-	{
-		Kamcord.ShowWatchView();
-	}
+                Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.level, "Level", "1");
+                Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.score, "Score", "1000");
+                Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.other, "Key", "Value");
+                Kamcord.SetDeveloperMetadataWithNumericValue(Kamcord.MetadataType.other, "Key", "Value", 1000);
 
-//    GUIStyle GetStyle()
-//    {
-//        return new GUIStyle(GUI.skin.button);
-//    }
-//
-//    void OnGUI()
-//    {
-//        GUIStyle style = GetStyle();
-//
-//        if ((Application.platform == RuntimePlatform.IPhonePlayer ||
-//             Application.platform == RuntimePlatform.Android))
-//        {
-//            if ( GUI.Button(showWatchViewButtonRect, "Show Watch View", style) )
-//            {
-//                Kamcord.ShowWatchView();
-//            }
-//        }
-//
-//        if (!Kamcord.IsEnabled())
-//        {
-//            string reason = Kamcord.GetDisabledReason();
-//            GUI.Label(startRecordingButtonRect, "Kamcord Disabled:\n" + reason);
-//            return;
-//        }
-//
-//        if (Kamcord.IsRecording() || Kamcord.IsPaused())
-//        {
-//            if (Kamcord.IsPaused())
-//            {
-//                if (GUI.Button(startRecordingButtonRect, "Resume", style))
-//                {
-//                    Kamcord.Resume();
-//                }
-//            }
-//            else
-//            {
-//                if (GUI.Button(startRecordingButtonRect, "Pause", style))
-//                {
-//                    Kamcord.Pause();
-//                }
-//            }
-//
-//            if (GUI.Button(stopRecordingButtonRect, "Stop Recording", style))
-//            {
-//                Kamcord.StopRecording();
-//
-//                // It is very important to set a descriptive video title for each video.
-//                // In addition to the video title, setting the level and score also makes
-//                // the watch experience significantly better.
-//                double gameplayDuration = (System.DateTime.Now - recordingStartedAt).TotalSeconds;
-//                Kamcord.SetVideoTitle("An Awesome Gameplay - " + gameplayDuration.ToString("F2") + " sec");
-//
-//                Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.level, "Level", "1");
-//                Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.score, "Score", "1000");
-//                Kamcord.SetDeveloperMetadata(Kamcord.MetadataType.other, "Key", "Value");
-//                Kamcord.SetDeveloperMetadataWithNumericValue(Kamcord.MetadataType.other, "Key", "Value", 1000);
-//
-//                firstVideoRecorded = true;
-//            }
-//        }
-//        else
-//        {
-//            if (GUI.Button(startRecordingButtonRect, "Start Recording", style))
-//            {
-//                Kamcord.StartRecording();
-//
-//                recordingStartedAt = System.DateTime.Now;
-//            }
-//
-//            if (firstVideoRecorded &&
-//                GUI.Button(showViewButtonRect, "Show Last Video", style))
-//            {
-//                Kamcord.ShowView();
-//            }
-//        }
-//    }
+                firstVideoRecorded = true;
+            }
+        }
+        else
+        {
+            if (GUI.Button(startRecordingButtonRect, "Start Recording", style))
+            {
+                Kamcord.StartRecording();
+
+                recordingStartedAt = System.DateTime.Now;
+            }
+
+            if (firstVideoRecorded &&
+                GUI.Button(showViewButtonRect, "Show Last Video", style))
+            {
+                Kamcord.ShowView();
+            }
+        }
+    }*/
 
 #if UNITY_IPHONE
     void Update()

@@ -562,11 +562,21 @@ public class CharacterControllerScript : MonoBehaviour
 
 		//Debug.Log("COLLISION: " + hit.gameObject.name);
 
+		if(hit.gameObject.tag == "Items" && hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
+		{
+			if(this.GetComponent<CharacterProgressScript>().OnInteractWithPopupItem(hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()))
+			{
+				this.GetComponent<CharacterProgressScript>().GroundItems.Remove(hit.gameObject);
+				Destroy(hit.gameObject);
+				
+			}
+		}
+
 		if(hit.gameObject.tag == "Items" && this.GetComponent<CharacterProgressScript>().IsGoingToPickUpObject == hit.gameObject)
 		{
 			PopupItemType itemType = hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type;
 
-			if(itemType == PopupItemType.Food || itemType == PopupItemType.Token)
+			/*if(itemType == PopupItemType.Token)
 			{
 				if(this.GetComponent<CharacterProgressScript>().OnInteractWithPopupItem(hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()))
 				{
@@ -574,6 +584,12 @@ public class CharacterControllerScript : MonoBehaviour
 					Destroy(hit.gameObject);
 
 				}
+			}
+			else*/ if(itemType == PopupItemType.Food)
+			{
+				this.GetComponent<CharacterProgressScript>().PickupItem(hit.gameObject);
+				this.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EatItem;
+			
 			}
 			else
 			{

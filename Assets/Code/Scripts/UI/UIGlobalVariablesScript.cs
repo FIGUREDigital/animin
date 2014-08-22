@@ -27,8 +27,11 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject GardenSceneRef;
 	public GameObject ARSceneRef;
 	public GameObject NonSceneRef;
+	public GameObject NonARWorldRef;
+	public GameObject ARWorldRef;
 	public GameObject DragableUI3DObject;
-	public GameObject ARSceneContainer;
+	//public GameObject ARSceneContainer;
+
 
 	// Interface Bars
 	public GameObject FitnessControlBarRef;

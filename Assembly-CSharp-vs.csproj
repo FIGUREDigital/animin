@@ -549,6 +549,7 @@
      <None Include="Assets\Plugins\Android\kamcord\res\values-pt\kamcord_strings.xml" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Relief_Detail_SC_nshad.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Mobile\Free\TranslucencyVertex_SH.shader" />
+     <None Include="Assets\Resources\Shaders\ItemShader.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Mobile\SkinTest_Unmod.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Relief_Mapping_Shaded_Specular_cutout.shader" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth.shader" />

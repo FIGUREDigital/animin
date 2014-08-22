@@ -49,7 +49,7 @@ public class DragDropMainBarItem : UIDragDropItem
 					GameObject child = (GameObject)GameObject.Instantiate(popScript.Model3D);
 
 
-					child.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveARScene.transform;
+					child.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
 
 					child.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 					child.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);

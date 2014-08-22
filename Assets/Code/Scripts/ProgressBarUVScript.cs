@@ -36,7 +36,7 @@ public class ProgressBarUVScript : MonoBehaviour
 				for(int i=0;i<TokensPerHappyAverage;++i)
 				{
 					GameObject gameObject = GameObject.Instantiate(ZefToken) as GameObject;
-					gameObject.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveARScene.transform;
+					gameObject.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
 
 					gameObject.transform.localPosition = new Vector3(
 						Random.Range(-0.9f, 0.9f),

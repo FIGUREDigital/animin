@@ -158,7 +158,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(true);
 
 
-			TrackVuforiaScript.EnableDisableMinigamesBasedOnARStatus();
+			//TrackVuforiaScript.EnableDisableMinigamesBasedOnARStatus();
 
 			
 			break;
@@ -185,13 +185,14 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(false);
 
 			//Debug.Log("SavedScale: " + SavedScale.ToString());
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.035f, 0.035f, 0.035f);
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position = Vector3.zero;
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition = new Vector3(0, 0.01f, 0);
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
-			UIGlobalVariablesScript.Singleton.Shadow.transform.localScale = new Vector3(0.46f, 0.46f, 0.46f);
+//			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.035f, 0.035f, 0.035f);
+//			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position = Vector3.zero;
+//			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition = new Vector3(0, 0.01f, 0);
+//			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
 
 
+			UIGlobalVariablesScript.Singleton.NonARWorldRef.SetActive(true);
+			UIGlobalVariablesScript.Singleton.ARWorldRef.SetActive(true);
 
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = true;
 			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.gameObject.GetComponent<ObjectLookAtDeviceScript>().enabled = true;
@@ -200,10 +201,22 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = UIClickButtonMasterScript.SavedRadius;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
-			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
+
 			
 			HandleClick(UIFunctionalityId.BackFromMinigames, sender);
 			Camera.main.GetComponent<AudioSource>().Stop();
+
+			if(TrackVuforiaScript.IsTracking)
+			{
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
+				UIGlobalVariablesScript.Singleton.Vuforia.OnCharacterEnterARScene();
+			}
+			else
+			{
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
+				UIGlobalVariablesScript.Singleton.Vuforia.OnCharacterEnterNonARScene();
+			}
+
 
 	
 			break;
@@ -269,6 +282,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			//SavedScale = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale;
 			//Debug.Log("SavedScale 1:" + SavedScale.ToString());
 
+			UIGlobalVariablesScript.Singleton.ARWorldRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.NonARWorldRef.SetActive(false);
+
 			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
@@ -277,7 +293,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = false;
 			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.gameObject.GetComponent<ObjectLookAtDeviceScript>().enabled = false;
 
-			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
+			//UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 
 			UIGlobalVariablesScript.Singleton.Shadow.transform.localScale = new Vector3(0.79f, 0.79f, 0.79f);
 
@@ -304,6 +320,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 					
 
+					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
 					
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
 					Camera.main.GetComponent<AudioSource>().Play();
@@ -372,10 +389,18 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			break;
 		}
 
+		case UIFunctionalityId.ShowAlbum:
+		{
+			GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().ShowVideos();
+			break;
+		}
+
 		case UIFunctionalityId.RecordVideo:
 		{
 			GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().StartRecording();
 			sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.StopRecordVideo;
+			sender.GetComponent<UISprite>().spriteName = "stopvideo";
+			sender.GetComponent<UIButton>().normalSprite = "stopvideo";
 			break;
 		}
 
@@ -383,6 +408,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().StopRecording();
 			sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.RecordVideo;
+			sender.GetComponent<UISprite>().spriteName = "video 1";
+			sender.GetComponent<UIButton>().normalSprite = "video 1";
 			break;
 		}
 

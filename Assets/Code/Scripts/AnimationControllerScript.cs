@@ -232,7 +232,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("feed");
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("feed") || animator.GetBool("IsEating");
 		}
 
 		set
@@ -512,7 +512,7 @@ public class AnimationControllerScript : MonoBehaviour
 			}
 		}
 
-		if(IsIdle && !script.IsMovingTowardsLocation && (script.ObjectHolding == null) && !IsLookingCamera && script.CurrentAction != ActionId.EnterPortalToAR && script.CurrentAction != ActionId.EnterPortalToNonAR)
+		if(IsIdle && !script.IsMovingTowardsLocation && (script.ObjectHolding == null) && !IsLookingCamera && script.CurrentAction != ActionId.EnterPortalToAR && script.CurrentAction != ActionId.EnterPortalToNonAR && !IsEating)
 		{
 			TimeInIdleState += Time.deltaTime;
 			if(TimeInIdleState >= 2.0f)
@@ -653,7 +653,7 @@ public class AnimationControllerScript : MonoBehaviour
 			TimeInIdleState = 0;
 		}
 
-		if(IsIdle && !IsHungry && !IsNotWell)
+		if(IsIdle && !IsHungry && !IsNotWell && !IsEating)
 		{
 			TimeToPlayIdleSoundFX -= Time.deltaTime;
 
@@ -671,7 +671,7 @@ public class AnimationControllerScript : MonoBehaviour
 
 	void LateUpdate()
 	{
-		IsEating = false;
+	
 		IsTakingPill = false;
 		//IsTickled = false;
 
@@ -697,13 +697,16 @@ public class AnimationControllerScript : MonoBehaviour
 		IsNo = false;
 		//IsPat = false;
 
-		IsEating = false;
+		if(animator.GetCurrentAnimatorStateInfo(0).IsName("feed"))
+			IsEating = false;
 
 		if(animator.GetCurrentAnimatorStateInfo(0).IsName("jump_out_portal"))
 			IsExitPortal = false;
 
 		if(animator.GetCurrentAnimatorStateInfo(0).IsName("jump_in_portal"))
 			IsEnterPortal = false;
+
+//		Debug.Log(animator.GetCurrentAnimatorStateInfo(0).nameHash.ToString());
 
 	}
 

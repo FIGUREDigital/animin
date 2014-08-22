@@ -210,7 +210,7 @@ public class MinigameCollectorScript : MonoBehaviour
 			progressScript.CurrentAction = ActionId.SmallCooldownPeriod;
 			progressScript.SmallCooldownTimer = 0.5f;
 
-
+			/*
 			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsExitPortal = true;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
@@ -224,7 +224,7 @@ public class MinigameCollectorScript : MonoBehaviour
 				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.ARscene, false);
 			else
 				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, false);
-
+			*/
 		}
 	}
 	
@@ -316,10 +316,10 @@ public class MinigameCollectorScript : MonoBehaviour
 
 			float finalTransform = AngleInTransform;
 
-			UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation = Quaternion.Euler(
-				UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.x,
+			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.rotation = Quaternion.Euler(
+				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.rotation.eulerAngles.x,
 				finalTransform,
-				UIGlobalVariablesScript.Singleton.ARSceneContainer.transform.rotation.eulerAngles.z
+				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.rotation.eulerAngles.z
 				);
 
 
@@ -413,7 +413,7 @@ public class MinigameCollectorScript : MonoBehaviour
 			
 				CheckForPickupCollision ();
 
-				if (CharacterRef.transform.position.y <= -100f) 
+				if (CharacterRef.transform.localPosition.y <= -1f) 
 				{
 					UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Fall_Through_Levels);
 
