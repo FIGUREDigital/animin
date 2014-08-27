@@ -227,6 +227,8 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(false);
 
 			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
+			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
+
 			//CubeGamePosition.ValueNext = Vector3.zero;
 			//CubeGameRotation.ValueNext = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent.rotation.eulerAngles;
 		}
@@ -239,6 +241,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(true);
 
 			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
+			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
 
 			//CubeGameRotation.ValueNext = new Vector3(0,0,0);
 			//CubeGamePosition.ValueNext = new Vector3(0,-0.3f,-0.1f);
@@ -364,7 +367,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			{
 				//return;
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(progress.CreaturePlayerId, CreatureSoundId.JumbInPortal);
-				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsEnterPortal = true;
 				progress.CurrentAction = ActionId.EnterPortalToAR;
 
 				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, true);
@@ -427,7 +430,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 				//UIGlobalVariablesScript.Singleton.Vuforia.OnExitAR();
 				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, false);
 
-				UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsExitPortal = true;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsExitPortal = true;
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
 		

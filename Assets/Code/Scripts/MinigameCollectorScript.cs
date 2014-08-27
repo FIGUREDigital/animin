@@ -174,7 +174,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 		
 		
-		UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsExitPortal = true;
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsExitPortal = true;
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
 		
@@ -244,7 +244,7 @@ public class MinigameCollectorScript : MonoBehaviour
 		if(State == MinigameStateId.ExitMinigame)
 		{
 			UIGlobalVariablesScript.Singleton.SoundEngine.Play(progressScript.CreaturePlayerId, CreatureSoundId.JumbInPortal);
-			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsEnterPortal = true;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsEnterPortal = true;
 			progressScript.CurrentAction = ActionId.EnterPortalToAR;
 			
 			UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.MinigameCuberRunners, true);

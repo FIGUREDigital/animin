@@ -181,12 +181,4 @@ public enum CreatureSoundId
 	Count,
 }
 
-public enum CreatureTypeId
-{
-	TBOBaby,
-	TBOMiddle,
-	TBOAdult,
-	
-	
-	Count,
-}
+

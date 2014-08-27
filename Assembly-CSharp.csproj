@@ -68,11 +68,13 @@
      <Compile Include="Assets\Code\PrefabPool.cs" />
      <Compile Include="Assets\Code\Scripts\AnimateCharacterOutPortalScript.cs" />
      <Compile Include="Assets\Code\Scripts\AnimationControllerScript.cs" />
+     <Compile Include="Assets\Code\Scripts\BarrelCollisionScript.cs" />
      <Compile Include="Assets\Code\Scripts\BlinkingScript.cs" />
      <Compile Include="Assets\Code\Scripts\CameraFacingBillboardScript.cs" />
      <Compile Include="Assets\Code\Scripts\CameraModelScript.cs" />
      <Compile Include="Assets\Code\Scripts\CharacterControllerScript.cs" />
      <Compile Include="Assets\Code\Scripts\CharacterProgressScript.cs" />
+     <Compile Include="Assets\Code\Scripts\CharacterSwapManagementScript.cs" />
      <Compile Include="Assets\Code\Scripts\CubeAnimatonScript.cs" />
      <Compile Include="Assets\Code\Scripts\DetectBroomScript.cs" />
      <Compile Include="Assets\Code\Scripts\DetectDragIconScript.cs" />
@@ -83,6 +85,8 @@
      <Compile Include="Assets\Code\Scripts\FlashObjectScript.cs" />
      <Compile Include="Assets\Code\Scripts\FlatScalerScript.cs" />
      <Compile Include="Assets\Code\Scripts\GroundShadowScript.cs" />
+     <Compile Include="Assets\Code\Scripts\GunsMinigameScript.cs" />
+     <Compile Include="Assets\Code\Scripts\HeadReferenceScript.cs" />
      <Compile Include="Assets\Code\Scripts\JoystiqScript.cs" />
      <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
      <Compile Include="Assets\Code\Scripts\MinigameCollectorScript.cs" />
@@ -95,6 +99,7 @@
      <Compile Include="Assets\Code\Scripts\PortalScript.cs" />
      <Compile Include="Assets\Code\Scripts\PresentationEventScript.cs" />
      <Compile Include="Assets\Code\Scripts\ProgressBarUVScript.cs" />
+     <Compile Include="Assets\Code\Scripts\ProjectileScript.cs" />
      <Compile Include="Assets\Code\Scripts\ReferencedObjectScript.cs" />
      <Compile Include="Assets\Code\Scripts\SetTimerOnLabelScript.cs" />
      <Compile Include="Assets\Code\Scripts\SmoothLookAt.cs" />
@@ -348,6 +353,7 @@
      <None Include="Assets\Qualcomm Augmented Reality\Shaders\RenderVideoBackground.shader" />
      <None Include="Assets\Resources\Shaders\TransparentUnlitDoubleSided.shader" />
      <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_media_controller.xml" />
+     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_outline_cutout.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Cartoony_outline_transparent_sepspec_sharp.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_outline_transparent_sharp.shader" />

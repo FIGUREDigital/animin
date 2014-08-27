@@ -39,7 +39,7 @@
 		        struct v2f {
 		            float4 pos : SV_POSITION;
 		            float2 uv : TEXCOORD0;
-		            float4 color : COLOR0;
+		            //float4 color : COLOR0;
 		        };
 
 		        float4 _MainTex_ST;
@@ -49,16 +49,14 @@
 		            v2f o;
 		            o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
 		            o.uv = TRANSFORM_TEX (v.texcoord, _MainTex);
-		            float4 worldPos = mul(_Object2World, v.vertex);
-		            float3 lighting = ShadeVertexLights(worldPos, v.normal);
-		            o.color = float4(lighting ,1);
+		    
 		           
 		            return o;
 		        }
 
 		        float4 frag (v2f i) : COLOR
 		        {
-		            float4 texcol = tex2D (_MainTex, i.uv) * _Color * i.color;
+		            float4 texcol = tex2D (_MainTex, i.uv) * _Color;
 		            return texcol;
 		        }
 		        

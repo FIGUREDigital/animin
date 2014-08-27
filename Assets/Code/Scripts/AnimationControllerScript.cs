@@ -24,6 +24,8 @@ public class AnimationControllerScript : MonoBehaviour
 	float LengthOfHungryUnwellSadAnimation;
 	HungrySadUnwellLoopId sadUnwellLoopState;
 
+	public GameObject CharacterModel;
+
 	public AnimationHappyId IsHappy 
 	{
 		get
@@ -423,8 +425,14 @@ public class AnimationControllerScript : MonoBehaviour
 	
 	void Awake()
 	{
-		animator = GetComponent<Animator>();
+		SetCharacter(CharacterModel);
 
+	}
+
+	public void SetCharacter(GameObject newCharacterModel)
+	{
+		CharacterModel = newCharacterModel;
+		animator = CharacterModel.GetComponent<Animator>();
 	}
 
 
@@ -432,7 +440,7 @@ public class AnimationControllerScript : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		 
+
 	}
 
 	public void SetMovementNormalized(float speed)

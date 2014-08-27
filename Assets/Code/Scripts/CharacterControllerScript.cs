@@ -545,7 +545,7 @@ public class CharacterControllerScript : MonoBehaviour
 			}
 		}
 
-		UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsJumbing = IsJumping();
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsJumbing = IsJumping();
 	
 		/*if(IsJumping())
 		{

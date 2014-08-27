@@ -42,7 +42,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject ARPortal;
 	public GameObject Shadow;
 
-	public AnimationControllerScript MainCharacterAnimationControllerRef;
+	//public AnimationControllerScript MainCharacterAnimationControllerRef;
 	public GameObject MainCharacterRef;
 	public GameObject PanelMedicine;
 	public GameObject PanelFoods;
@@ -55,10 +55,11 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject MinigameInterruptedMenu;
 
 	public TrackVuforiaScript Vuforia;
-	public GameObject IndicatorAboveHead;
+	//public GameObject IndicatorAboveHead;
 	public GameObject Item3DPopupMenu;
 	public SoundEngineScript SoundEngine;
 	public JoystiqScript Joystick;
+	public GameObject JoystickArt;
 	public GameObject UIRoot;
 	public GameObject StereoUI;
 	public UILabel CurrentArtistLabel;
@@ -74,6 +75,8 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public static GameObject ButtonTriggeredMainMenuPopupRef;
 	public static UIFunctionalityId SelectedMinigameToPlay;
 
+	public GameObject GunGameScene;
+	public GameObject GunGameInterface;
 
 	void Awake()
 	{

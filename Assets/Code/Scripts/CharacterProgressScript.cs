@@ -227,6 +227,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 		CurrentAction = ActionId.EnterSleep;
 
+		animationController = GetComponent<AnimationControllerScript>();
 		//animationController.IsSleeping = true;
 		//CurrentAction = ActionId.Sleep;
 		//SleepBoundingBox.SetActive(true);
@@ -320,15 +321,15 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 		}
 
-
+		GameObject indicator = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>().Indicator;
 
 		if(ObjectHolding != null)
 		{
-			UIGlobalVariablesScript.Singleton.IndicatorAboveHead.SetActive(true);
+			indicator.SetActive(true);
 		}
 		else
 		{
-			UIGlobalVariablesScript.Singleton.IndicatorAboveHead.SetActive(false);
+			indicator.SetActive(false);
 		}
 
 		bool hadUItouch = false;
@@ -439,6 +440,8 @@ public class CharacterProgressScript : MonoBehaviour
 				{
 					if(ObjectHolding.renderer != null) 
 					{
+						ObjectHolding.renderer.material.shader = Shader.Find("Custom/ItemShader");
+
 						float alpha = ObjectHolding.renderer.material.color.a;
 						alpha -= Time.deltaTime *  3;
 						if(alpha <= 0) alpha = 0;
@@ -452,6 +455,8 @@ public class CharacterProgressScript : MonoBehaviour
 					for(int a=0;a<ObjectHolding.transform.childCount;++a)
 					{
 						if(ObjectHolding.transform.GetChild(a).renderer == null) continue;
+
+						ObjectHolding.transform.GetChild(a).renderer.material.shader = Shader.Find("Custom/ItemShader");
 						
 						float alpha = ObjectHolding.transform.GetChild(a).renderer.material.color.a;
 						alpha -= Time.deltaTime *  3;

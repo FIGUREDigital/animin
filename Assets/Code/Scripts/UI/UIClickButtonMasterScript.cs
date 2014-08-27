@@ -42,11 +42,18 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			{
 				case UIFunctionalityId.JumbOnCubeRunner:
 				{
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
 
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript> ().PressedJumb = true;
 					break;
 				}
+			case UIFunctionalityId.ShootBullet:
+			{
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
+				
+				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ShootBulletForward();
+				break;
+			}
 			}
 		}
 	}
@@ -179,10 +186,12 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.GunGameInterface.SetActive(false);
 			
 			// Disable Scenes
 			UIGlobalVariablesScript.Singleton.SpaceshipMinigameSceneRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().CloseGame();
 
 			//Debug.Log("SavedScale: " + SavedScale.ToString());
 //			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.035f, 0.035f, 0.035f);
@@ -195,10 +204,11 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.ARWorldRef.SetActive(true);
 
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = true;
-			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.gameObject.GetComponent<ObjectLookAtDeviceScript>().enabled = true;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<ObjectLookAtDeviceScript>().enabled = true;
 			
 			//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
-			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);
+			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);	
+			UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(false);	
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = UIClickButtonMasterScript.SavedRadius;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
 
@@ -291,7 +301,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
 
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = false;
-			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.gameObject.GetComponent<ObjectLookAtDeviceScript>().enabled = false;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<ObjectLookAtDeviceScript>().enabled = false;
 
 			//UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 
@@ -307,6 +317,29 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					break;
 				}
 
+			case UIFunctionalityId.PlayMinigameGunFighters:
+			{
+				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().Reset();
+				//UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(true);
+				UIGlobalVariablesScript.Singleton.GunGameScene.SetActive(true);
+				UIGlobalVariablesScript.Singleton.GunGameInterface.SetActive(true);
+				//UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().HardcoreReset();
+				UIGlobalVariablesScript.Singleton.GunGameScene.transform.localPosition = Vector3.zero;
+				UIClickButtonMasterScript.SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
+				
+				UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
+				UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
+				
+				
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
+				
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
+				//Camera.main.GetComponent<AudioSource>().Play();
+
+				break;
+			}
+
 				case UIFunctionalityId.PlayMinigameCubeRunners:
 				{
 					UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(true);
@@ -317,6 +350,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
 
 					UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
+					UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
 					//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 					
 

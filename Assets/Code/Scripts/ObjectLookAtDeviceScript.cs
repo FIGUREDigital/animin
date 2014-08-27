@@ -8,7 +8,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 	float angle =0;
 	float speed = (2 * Mathf.PI) / 5; //2*PI in degress is 360, so you get 5 seconds to complete a circle
 	float radius=5;
-	public Transform ObjectTrasnform;
+	//public Transform ObjectTrasnform;
 
 	public Vector3 Angles;
 	public float Weight;
@@ -74,7 +74,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 				Vector3 playerPoint = new Vector3(transform.parent.position.x, 0, transform.parent.position.z);
 				//transform.parent.GetComponent<CharacterControllerScript>().moveDirection = Vector3.Normalize(Camera.main.transform.position - newCameraPoint);
 				//transform.parent.GetComponent<CharacterControllerScript>().MovementDirection = Vector3.Normalize(transform.parent.position - newCameraPoint);
-				transform.parent.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(transform.parent.position + Vector3.Normalize(newCameraPoint - playerPoint ) * 20);
+				transform.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(transform.position + Vector3.Normalize(newCameraPoint - playerPoint ) * 20);
 				//Debug.Log("MOVING FOR ROTATION");
 			}
 		}
@@ -111,7 +111,9 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 			Weight = Mathf.Lerp(Weight, 0.0f, Time.deltaTime * 7);
 		}
 
-		ObjectTrasnform.rotation = Quaternion.Slerp(ObjectTrasnform.rotation, rotation * Quaternion.Euler(Angles), Weight);
+		HeadReferenceScript head = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>();
+
+		head.ObjectTransform.transform.rotation = Quaternion.Slerp(head.ObjectTransform.transform.rotation, rotation * Quaternion.Euler(Angles), Weight);
 	}
 
 	void OnAnimatorIK()
@@ -125,9 +127,12 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 
 	private void DoLookRotation()
 	{
-		var relativePos = Camera.main.transform.position - ObjectTrasnform.position;
+		HeadReferenceScript head = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>();
+
+
+		var relativePos = Camera.main.transform.position - head.ObjectTransform.transform.position;
 				var rotation = Quaternion.LookRotation (relativePos);
-		ObjectTrasnform.rotation = rotation;// * Quaternion.Euler(-90, 90, -90);
+		head.ObjectTransform.transform.rotation = rotation;// * Quaternion.Euler(-90, 90, -90);
 	}
 
 	private void DoWholeOrientation()

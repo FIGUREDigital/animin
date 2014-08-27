@@ -56,4 +56,5 @@ public enum UIFunctionalityId
 	SelectedTrack,
 	RecordVideo,
 	StopRecordVideo,
+	ShootBullet,
 }

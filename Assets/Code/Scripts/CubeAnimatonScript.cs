@@ -15,9 +15,7 @@ public class CubeAnimatonScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
 		Delay -= Time.deltaTime;
-		
 
 		if(Delay <= 0)
 		{
