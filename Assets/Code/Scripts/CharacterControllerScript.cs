@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class CharacterForces
@@ -560,7 +560,7 @@ public class CharacterControllerScript : MonoBehaviour
 	{
 		//  Debug.DrawRay(hit.point, hit.normal);
 
-		//Debug.Log("COLLISION: " + hit.gameObject.name);
+//		Debug.Log("COLLISION: " + hit.gameObject.name);
 
 		if(hit.gameObject.tag == "Items" && hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
 		{
@@ -570,6 +570,13 @@ public class CharacterControllerScript : MonoBehaviour
 				Destroy(hit.gameObject);
 				
 			}
+		}
+
+		if(hit.gameObject.tag == "EnemyGunGame")
+		{
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(hit.gameObject);
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(hit.gameObject);
+			Destroy(hit.gameObject);
 		}
 
 		if(hit.gameObject.tag == "Items" && this.GetComponent<CharacterProgressScript>().IsGoingToPickUpObject == hit.gameObject)
@@ -664,8 +671,7 @@ public class CharacterControllerScript : MonoBehaviour
 	//	transform.Rotate(new Vector3(0, angle, 0));
 	}
 	
-	
-	
+
 	bool  IsGrounded (){
 		
 		return (collisionFlags & CollisionFlags.CollidedBelow) != 0;

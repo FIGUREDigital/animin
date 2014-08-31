@@ -70,12 +70,14 @@
      <Compile Include="Assets\Code\Scripts\AnimationControllerScript.cs" />
      <Compile Include="Assets\Code\Scripts\BarrelCollisionScript.cs" />
      <Compile Include="Assets\Code\Scripts\BlinkingScript.cs" />
+     <Compile Include="Assets\Code\Scripts\BulletAmmoLostScript.cs" />
      <Compile Include="Assets\Code\Scripts\CameraFacingBillboardScript.cs" />
      <Compile Include="Assets\Code\Scripts\CameraModelScript.cs" />
      <Compile Include="Assets\Code\Scripts\CharacterControllerScript.cs" />
      <Compile Include="Assets\Code\Scripts\CharacterProgressScript.cs" />
      <Compile Include="Assets\Code\Scripts\CharacterSwapManagementScript.cs" />
      <Compile Include="Assets\Code\Scripts\CubeAnimatonScript.cs" />
+     <Compile Include="Assets\Code\Scripts\DestroyedBarrelScript.cs" />
      <Compile Include="Assets\Code\Scripts\DetectBroomScript.cs" />
      <Compile Include="Assets\Code\Scripts\DetectDragIconScript.cs" />
      <Compile Include="Assets\Code\Scripts\DeviceCameraScript.cs" />
@@ -85,11 +87,13 @@
      <Compile Include="Assets\Code\Scripts\FlashObjectScript.cs" />
      <Compile Include="Assets\Code\Scripts\FlatScalerScript.cs" />
      <Compile Include="Assets\Code\Scripts\GroundShadowScript.cs" />
+     <Compile Include="Assets\Code\Scripts\GunGameEnemyScript.cs" />
      <Compile Include="Assets\Code\Scripts\GunsMinigameScript.cs" />
      <Compile Include="Assets\Code\Scripts\HeadReferenceScript.cs" />
      <Compile Include="Assets\Code\Scripts\JoystiqScript.cs" />
      <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
      <Compile Include="Assets\Code\Scripts\MinigameCollectorScript.cs" />
+     <Compile Include="Assets\Code\Scripts\MusicScript.cs" />
      <Compile Include="Assets\Code\Scripts\NewJoystickScript.cs" />
      <Compile Include="Assets\Code\Scripts\ObjectLookAtDeviceScript.cs" />
      <Compile Include="Assets\Code\Scripts\OscillationUpDownScript.cs" />
@@ -107,6 +111,7 @@
      <Compile Include="Assets\Code\Scripts\SpaceEnemyScript.cs" />
      <Compile Include="Assets\Code\Scripts\SpaceshipMinigameScript.cs" />
      <Compile Include="Assets\Code\Scripts\SpinObjectScript.cs" />
+     <Compile Include="Assets\Code\Scripts\SplatFadeScript.cs" />
      <Compile Include="Assets\Code\Scripts\SwipeDragScript.cs" />
      <Compile Include="Assets\Code\Scripts\TestVuforiaScript.cs" />
      <Compile Include="Assets\Code\Scripts\ThrowAnimationScript.cs" />
@@ -471,6 +476,7 @@
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Relief_Mapping_Specular_SC_nshad.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\ForceField_rim_1side.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+     <None Include="Assets\Resources\Shaders\SplatShader.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Bumped_Diffuse_Detail.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
      <None Include="Assets\Plugins\Android\kamcord\res\values-ar\kamcord_strings.xml" />

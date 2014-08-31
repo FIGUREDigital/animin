@@ -312,8 +312,15 @@ public class CharacterProgressScript : MonoBehaviour
 		{
 			//Evolution += (Happy / MaxHappy) * Time.deltaTime * 0.1f;
 			//if(Evolution >= 100) Evolution = 100;
+
+			float percentage = ((Evolution / 100.0f));
 			
-			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
+			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * percentage);
+			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.uvRect = new Rect(0, 0, percentage, 1);
+			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.MarkAsChanged();
+
+
+			//UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
 			
 			if(NextHappynBonusTimeAt >= DateTime.Now)
 			{
@@ -1239,7 +1246,8 @@ public class CharacterProgressScript : MonoBehaviour
 				//Stop(true);
 				Evolution += item.Points;
 
-				UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
+
+				//UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
 				Debug.Log("TOKEN COLLECTED");
 
 				break;

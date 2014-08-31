@@ -329,6 +329,7 @@
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Relief_Mapping_Specular_SC_nshad.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\ForceField_rim_1side.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+     <None Include="Assets\Resources\Shaders\SplatShader.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Bumped_Diffuse_Detail.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
      <None Include="Assets\Plugins\Android\kamcord\res\values-ar\kamcord_strings.xml" />

@@ -209,12 +209,15 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);	
 			UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(false);	
+
+
+
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = UIClickButtonMasterScript.SavedRadius;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
 
 			
 			HandleClick(UIFunctionalityId.BackFromMinigames, sender);
-			Camera.main.GetComponent<AudioSource>().Stop();
+			Camera.main.GetComponent<MusicScript>().Stop();
 
 			if(TrackVuforiaScript.IsTracking)
 			{
@@ -304,6 +307,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<ObjectLookAtDeviceScript>().enabled = false;
 
 			//UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.JumbButton.SetActive(false);
+			UIGlobalVariablesScript.Singleton.ShootButton.SetActive(false);
 
 			UIGlobalVariablesScript.Singleton.Shadow.transform.localScale = new Vector3(0.79f, 0.79f, 0.79f);
 
@@ -331,11 +336,12 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
 				UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
 				
-				
+				//UIGlobalVariablesScript.Singleton.ShootButton.SetActive(true);
+
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
 				
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
-				//Camera.main.GetComponent<AudioSource>().Play();
+				Camera.main.GetComponent<MusicScript>().PlayGun();
 
 				break;
 			}
@@ -352,12 +358,13 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
 					UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
 					//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
-					
+
+					UIGlobalVariablesScript.Singleton.JumbButton.SetActive(true);
 
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
 					
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
-					Camera.main.GetComponent<AudioSource>().Play();
+				Camera.main.GetComponent<MusicScript>().PlayCube();
 				
 					break;
 				}
