@@ -66,6 +66,10 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public UILabel CurrentSongLabel;
 	public UISprite PlayPauseButton;
 	public UISprite ProgressSongBar;
+	public GameObject LightbulbUI;
+	public GameObject LightbulbSwitchButton;
+	public GameObject LightbulbRedButton;
+	public GameObject LightbulbGreenButton;
 
 	public GameObject TracklistPanel;
 	public GameObject PlaySongPanel;

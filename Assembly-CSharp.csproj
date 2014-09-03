@@ -91,8 +91,10 @@
      <Compile Include="Assets\Code\Scripts\GunsMinigameScript.cs" />
      <Compile Include="Assets\Code\Scripts\HeadReferenceScript.cs" />
      <Compile Include="Assets\Code\Scripts\JoystiqScript.cs" />
+     <Compile Include="Assets\Code\Scripts\LighbulbSwitchOnOffScript.cs" />
      <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
      <Compile Include="Assets\Code\Scripts\MinigameCollectorScript.cs" />
+     <Compile Include="Assets\Code\Scripts\MonsterSplatExplosionScript.cs" />
      <Compile Include="Assets\Code\Scripts\MusicScript.cs" />
      <Compile Include="Assets\Code\Scripts\NewJoystickScript.cs" />
      <Compile Include="Assets\Code\Scripts\ObjectLookAtDeviceScript.cs" />

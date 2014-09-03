@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
+using System.Linq;
+
 
 public class UIClickButtonMasterScript : MonoBehaviour 
 {
@@ -11,16 +13,6 @@ public class UIClickButtonMasterScript : MonoBehaviour
 	private static float SavedRadius;
 	//private Vector3 SavedScale;
 
-	// Use this for initialization
-	void Start () 
-	{
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void OnDoubleClick()
 	{
@@ -77,6 +69,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CleanPooPiss);
 			UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
 			UIGlobalVariablesScript.Singleton.StereoUI.SetActive(false);
+			UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(false);
 
 			break;
 		}
@@ -210,12 +203,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);	
 			UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(false);	
 
-
-
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = UIClickButtonMasterScript.SavedRadius;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
-
-			
+						
 			HandleClick(UIFunctionalityId.BackFromMinigames, sender);
 			Camera.main.GetComponent<MusicScript>().Stop();
 
@@ -426,6 +416,36 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			{
 				GameObject.Find("Aperture").GetComponent<Aperture>().Photo();
 			}
+
+			break;
+		}
+
+		case UIFunctionalityId.LighbulbSwitch:
+		{
+			UIWidget widget = UIGlobalVariablesScript.Singleton.LightbulbUI.GetComponent<UIWidget>();
+
+			Debug.Log(widget.leftAnchor.target.gameObject.name);
+			LighbulbSwitchOnOffScript script = widget.leftAnchor.target.gameObject.GetComponent<LighbulbSwitchOnOffScript>();
+
+
+			if(UIGlobalVariablesScript.Singleton.LightbulbGreenButton.activeInHierarchy)
+			{
+				UIGlobalVariablesScript.Singleton.LightbulbGreenButton.SetActive(false);
+				UIGlobalVariablesScript.Singleton.LightbulbRedButton.SetActive(true);
+
+				UIGlobalVariablesScript.Singleton.LightbulbSwitchButton.transform.localPosition = new Vector3(-42, 198, 0);
+				script.SetOff();
+			}
+			else
+			{
+				UIGlobalVariablesScript.Singleton.LightbulbGreenButton.SetActive(true);
+				UIGlobalVariablesScript.Singleton.LightbulbRedButton.SetActive(false);
+
+				UIGlobalVariablesScript.Singleton.LightbulbSwitchButton.transform.localPosition = new Vector3(27, 198, 0);
+				script.SetOn();
+			}
+
+
 
 			break;
 		}

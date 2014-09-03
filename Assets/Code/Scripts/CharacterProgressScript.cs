@@ -858,6 +858,10 @@ public class CharacterProgressScript : MonoBehaviour
 									
 								}
 							}
+							else if(ObjectHolding != null && ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
+							{
+								UIGlobalVariablesScript.Singleton.SoundEngine.PlayFart();
+							}
 							else if(ObjectHolding == null && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 0 && !animationController.IsPat)
 							{
 								Stop(true);
@@ -867,6 +871,7 @@ public class CharacterProgressScript : MonoBehaviour
 								UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.PatReact);
 							}
 						}
+
 						if((hitInfo.collider.tag == "Items") && hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
 						{
 							OnInteractWithPopupItem(hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>());
@@ -953,6 +958,14 @@ public class CharacterProgressScript : MonoBehaviour
 									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
 									preventMovingTo = true;
 								}
+								else if( moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Lightbulb)
+								{
+									UIGlobalVariablesScript.Singleton.LightbulbUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+									UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(true);
+									
+									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+									preventMovingTo = true;
+								}
 							}
 							
 							else if(ObjectHolding == null)
@@ -971,7 +984,8 @@ public class CharacterProgressScript : MonoBehaviour
 						{
 							UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
 							UIGlobalVariablesScript.Singleton.StereoUI.SetActive(false);
-		
+							UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(false);
+
 							if(RequestedToMoveToCounter > 1)
 								MoveTo(point, true);
 							else

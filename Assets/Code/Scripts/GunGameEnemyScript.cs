@@ -8,6 +8,8 @@ public class GunGameEnemyScript : MonoBehaviour
 	public int Level;
 	public bool HasMerged;
 	public GameObject Splat;
+	public Color SkinColor;
+	public GameObject BulletSplat;
 
 	// Use this for initialization
 	void Start () 
@@ -18,10 +20,15 @@ public class GunGameEnemyScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(HasMerged) return;
-
 		GameObject mainCharacter = UIGlobalVariablesScript.Singleton.MainCharacterRef;
 		GunsMinigameScript minigame = UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>();
+
+		if(HasMerged) 
+		{
+			minigame.SpawnedObjects.Remove(this.gameObject);
+			Destroy(this.gameObject);
+			return;
+		}
 
 		Vector3 direction = Vector3.Normalize(TargetToFollow.transform.localPosition - this.transform.localPosition);
 		this.transform.localPosition += direction * Speed * Time.deltaTime;
@@ -32,6 +39,7 @@ public class GunGameEnemyScript : MonoBehaviour
 			if(allEnemies[i] == this.gameObject) continue;
 			GunGameEnemyScript enemyScript = allEnemies[i].GetComponent<GunGameEnemyScript>();
 			if(enemyScript.Level != this.Level) continue;
+			if(enemyScript.HasMerged) continue;
 
 			float radius = Vector3.Distance(allEnemies[i].transform.localPosition, this.gameObject.transform.localPosition);
 
@@ -44,12 +52,13 @@ public class GunGameEnemyScript : MonoBehaviour
 				HasMerged = true;
 				enemyScript.HasMerged = true;
 
+				//minigame.SpawnedObjects.Remove(this.gameObject);
+				//Destroy(this.gameObject);
 
-				minigame.SpawnedObjects.Remove(this.gameObject);
-				Destroy(this.gameObject);
+				//minigame.SpawnedObjects.Remove(allEnemies[i]);
+				//Destroy(allEnemies[i]);
 
-				minigame.SpawnedObjects.Remove(allEnemies[i]);
-				Destroy(allEnemies[i]);
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.GunGame_monsters_merge);
 
 			}
 			else if(radius <= 0.6f && enemyScript.TargetToFollow == mainCharacter)
@@ -88,7 +97,7 @@ public class GunGameEnemyScript : MonoBehaviour
 
 	void OnCollisionEnter(Collision collision)
 	{
-		Debug.Log("COLLISION DETECTED: " + collision.gameObject.name + "_" + this.name);
+//		Debug.Log("COLLISION DETECTED: " + collision.gameObject.name + "_" + this.name);
 		
 		if(collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Player")
 		{
@@ -109,8 +118,27 @@ public class GunGameEnemyScript : MonoBehaviour
 			if(collision.gameObject.name.Contains("ALL"))
 				isRightColor = true;
 
+
+
 			if(isRightColor)
 			{
+				if(TargetToFollow != null)
+				{
+					Debug.Log("TargetToFollow != null: " + TargetToFollow.name);
+				}
+
+				if(TargetToFollow != null && TargetToFollow != UIGlobalVariablesScript.Singleton.MainCharacterRef)
+				{
+					Debug.Log("the new code works");
+
+					GunGameEnemyScript script = TargetToFollow.GetComponent<GunGameEnemyScript>();
+
+					if(script.TargetToFollow == this.gameObject)
+					{
+						script.TargetToFollow = UIGlobalVariablesScript.Singleton.MainCharacterRef;
+					}
+				}
+
 				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
 				Destroy(this.gameObject);
 
@@ -120,6 +148,11 @@ public class GunGameEnemyScript : MonoBehaviour
 				instance.transform.rotation = Quaternion.Euler(instance.transform.rotation.eulerAngles.x, instance.transform.rotation.eulerAngles.y, Random.Range(0, 360));
 				
 				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
+
+				for(int i=0;i<20;++i)
+				{
+					UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ShootEnemyDestroyedEffects(Random.Range(0.30f, 0.50f), this.gameObject.transform.localPosition, SkinColor, BulletSplat);
+				}
 
 			}
 			

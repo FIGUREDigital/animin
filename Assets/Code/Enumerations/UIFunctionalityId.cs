@@ -57,4 +57,6 @@ public enum UIFunctionalityId
 	RecordVideo,
 	StopRecordVideo,
 	ShootBullet,
+
+	LighbulbSwitch,
 }

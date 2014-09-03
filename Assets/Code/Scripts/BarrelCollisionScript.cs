@@ -59,7 +59,7 @@ public class BarrelCollisionScript : MonoBehaviour
 	void OnCollisionEnter(Collision collision)
 	{
 
-		Debug.Log("COLLISION DETECTED: " + collision.gameObject.tag);
+		//Debug.Log("COLLISION DETECTED: " + collision.gameObject.tag);
 
 		if(collision.gameObject.tag == "Bullet")
 		{

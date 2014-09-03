@@ -101,7 +101,7 @@ public class ProjectileScript : MonoBehaviour
 
 	void OnCollisionEnter(Collision collision)
 	{
-		Debug.Log("COLLISION DETECTED: " + collision.gameObject.tag);
+//		Debug.Log("COLLISION DETECTED: " + collision.gameObject.tag);
 		BeginFadeOut = true;
 
 		if(renderer != null) 

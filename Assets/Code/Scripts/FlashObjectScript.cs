@@ -14,7 +14,7 @@ public class FlashObjectScript : MonoBehaviour
 	}
 
 	private Shader FlashShader;
-	private Shader savedShader;
+	private Dictionary<Material, Shader> savedShader = new Dictionary<Material, Shader>();
 	private StateId State;
 	private float Lerp;
 	//private Dictionary<GameObject, Shader> savedObjects; 
@@ -26,7 +26,8 @@ public class FlashObjectScript : MonoBehaviour
 		{
 			if(gameObject.renderer.material != null)
 			{
-				savedShader = gameObject.renderer.material.shader;
+				if(!savedShader.ContainsKey(gameObject.renderer.material))
+					savedShader.Add(gameObject.renderer.material, gameObject.renderer.material.shader);
 			}
 		}
 		
@@ -36,14 +37,32 @@ public class FlashObjectScript : MonoBehaviour
 		}
 	}
 
+	private void RestoreShaders(GameObject gameObject)
+	{
+		if(gameObject.renderer != null)
+		{
+			if(gameObject.renderer.material != null)
+			{
+				gameObject.renderer.material.shader = savedShader[gameObject.renderer.material];
+				//if(!savedShader.ContainsKey(gameObject.renderer.material))
+				//	savedShader.Add(gameObject.renderer.material, gameObject.renderer.material.shader);
+			}
+		}
+		
+		for(int i=0;i<gameObject.transform.childCount;++i)
+		{
+			RestoreShaders(gameObject.transform.GetChild(i).transform.gameObject);
+		}
+	}
+
 	private void RecursiveSetShader(GameObject gameObject, Shader shader)
 	{
 		if(gameObject.renderer != null)
 		{
 			if(gameObject.renderer.material != null)
 			{
-				if(gameObject.renderer.material.shader != savedShader)
-					savedShader = gameObject.renderer.material.shader;
+				//if(gameObject.renderer.material.shader != savedShader)
+				//	savedShader = gameObject.renderer.material.shader;
 
 				gameObject.renderer.material.shader = shader;
 			}
@@ -111,7 +130,8 @@ public class FlashObjectScript : MonoBehaviour
 			break;
 
 		case StateId.Outro:
-			RecursiveSetShader(this.gameObject, savedShader);
+			RestoreShaders(this.gameObject);
+			//RecursiveSetShader(this.gameObject, savedShader);
 			Destroy(this);
 			break;
 		}

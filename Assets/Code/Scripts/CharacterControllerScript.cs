@@ -575,6 +575,14 @@ public class CharacterControllerScript : MonoBehaviour
 		if(hit.gameObject.tag == "EnemyGunGame")
 		{
 			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(hit.gameObject);
+			//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(hit.gameObject);
+			//Destroy(hit.gameObject);
+		}
+
+		if(hit.gameObject.tag == "RandomCubeGunGame")
+		{
+			UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.GunGame_bonus_box);
+			//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(hit.gameObject);
 			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(hit.gameObject);
 			Destroy(hit.gameObject);
 		}
@@ -611,7 +619,6 @@ public class CharacterControllerScript : MonoBehaviour
 			// hit from above
 			if(hit.normal.y >= 0.5f)
 			{
-
 				Debug.Log("HIT FROM TOP");
 				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().OnEvilCharacterHitFromTop(hit.gameObject);
 			}
