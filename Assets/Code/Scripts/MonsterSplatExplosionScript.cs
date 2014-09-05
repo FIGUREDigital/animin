@@ -15,21 +15,23 @@ public class MonsterSplatExplosionScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(this.transform.localPosition.y <= 0)
+		if(this.transform.localPosition.y <= -0.2f)
 		{
 			if(SplatPrefab != null)
 			{
-				Debug.Log("MAKE SPLA!!!!!!!!!!!!!!!!!!!T");
+
 				GameObject instance = (GameObject)Instantiate(SplatPrefab);
-				instance.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
-				instance.transform.position = Vector3.zero;
-				instance.transform.localPosition = this.transform.localPosition;
+				instance.transform.parent = this.transform.parent;
+				instance.transform.position = this.transform.position;
 				instance.transform.rotation = Quaternion.Euler(
 					instance.transform.rotation.eulerAngles.x, 
-					instance.transform.rotation.eulerAngles.y, Random.Range(0, 360));
+					instance.transform.rotation.eulerAngles.y,
+					Random.Range(0, 360));
 				
 				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
+
 			}
+
 
 			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
 			Destroy(this.gameObject);

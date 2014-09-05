@@ -50,7 +50,6 @@ public class ProjectileScript : MonoBehaviour
 			for(int a=0;a<transform.childCount;++a)
 			{
 				if(transform.GetChild(a).renderer == null) continue;
-				
 
 				float alpha = transform.GetChild(a).renderer.material.color.a;
 				alpha -= Time.deltaTime * 7;
