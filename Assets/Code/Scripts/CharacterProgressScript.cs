@@ -179,6 +179,8 @@ public class CharacterProgressScript : MonoBehaviour
 	private bool ShouldDragIfMouseMoves;
 	private Vector3 MousePositionAtDragIfMouseMoves;
 	public GameObject IsGoingToPickUpObject;
+	public bool InteractWithItemOnPickup;
+	public bool ShouldThrowObjectAfterPickup;
 	public bool DragedObjectedFromUIToWorld;
 	public ActionId CurrentAction;
 
@@ -194,7 +196,7 @@ public class CharacterProgressScript : MonoBehaviour
 	float FeedMyselfTimer;
 	private bool HadUITouchLastFrame;
 	private GameObject LastKnownObjectWithMenuUp;
-
+	public const float ConsideredHungryLevels = 70;
 
 	//float TimeForNextHungryUnwellSadAnimation;
 	//float LengthOfHungryUnwellSadAnimation;
@@ -250,6 +252,62 @@ public class CharacterProgressScript : MonoBehaviour
 	}
 
 
+
+	public GameObject GetRandomItem()
+	{
+		List<GameObject> list = new List<GameObject>();
+		
+		for(int i=0;i<GroundItems.Count;++i)
+		{
+			if(GroundItems[i].GetComponent<ReferencedObjectScript>() == null) continue;
+			
+			UIPopupItemScript itemData = GroundItems[i].GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+			if(itemData.Type == PopupItemType.Item)
+			{
+				list.Add(GroundItems[i]);
+			}
+		}
+
+		if(list.Count > 0)
+			return list[UnityEngine.Random.Range(0, list.Count)];
+		else
+			return null;
+	}
+
+	public void ThrowItemFromHands(Vector3 throwdirection)
+	{
+		//DragableObject = ObjectHolding;
+		animationController.IsHoldingItem = false;
+
+		this.gameObject.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(this.transform.position + throwdirection * 50);
+		
+		
+		//pickupItemSavedData.Position = DragableObject.transform.position;
+		//pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
+		
+		ObjectHolding.transform.parent = ActiveWorld.transform;
+		
+		ThrowAnimationScript throwScript = ObjectHolding.AddComponent<ThrowAnimationScript>();
+		float maxDistance = Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) * 0.35f;
+		if(maxDistance >= 160) maxDistance = 160;
+		
+		throwScript.Begin(throwdirection, maxDistance);
+		
+		UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Throw);
+		//ObjectHolding.transform.position = this.transform.position;
+		
+		
+		
+		
+		GroundItems.Add(ObjectHolding);
+		
+		ObjectHolding.transform.rotation = Quaternion.Euler(0, ObjectHolding.transform.rotation.eulerAngles.y, 0);
+		pickupItemSavedData.WasInHands = true;
+		animationController.IsThrowing = true;
+		IsDetectFlick = false;
+		ObjectHolding = null;
+		//CurrentAction = ActionId.None;
+	}
 
 	private GameObject GetClosestFoodToEat()
 	{
@@ -390,6 +448,19 @@ public class CharacterProgressScript : MonoBehaviour
 			{
 				CurrentAction = ActionId.None;
 			}
+
+			break;
+		}
+
+		case ActionId.ThrowItemAfterPickup:
+		{
+			if(animationController.IsHoldingItemComplete)
+			{
+				Vector3 throwdirection = Vector3.Normalize(new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f) ));
+				ThrowItemFromHands(throwdirection);
+				CurrentAction = ActionId.None;
+			}
+
 
 			break;
 		}
@@ -616,44 +687,13 @@ public class CharacterProgressScript : MonoBehaviour
 				else if(IsDetectFlick && !Input.GetButton("Fire1") && (Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves)> 25) && ObjectHolding != null)
 				{
 					Debug.Log("IsDetectFlick");
-					//DragableObject = ObjectHolding;
-					animationController.IsHoldingItem = false;
-
-					Ray raySecond = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 					Vector3 throwdirection = Vector3.Normalize(Input.mousePosition - MousePositionAtDragIfMouseMoves);
 					throwdirection.z = throwdirection.y;
 					throwdirection.y = 0;
 
+					ThrowItemFromHands(throwdirection);
 
-					this.gameObject.GetComponent<CharacterControllerScript>().RotateToLookAtPoint(this.transform.position + throwdirection * 50);
-
-
-					//pickupItemSavedData.Position = DragableObject.transform.position;
-					//pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
-					
-				ObjectHolding.transform.parent = ActiveWorld.transform;
-					
-					ThrowAnimationScript throwScript = ObjectHolding.AddComponent<ThrowAnimationScript>();
-					float maxDistance = Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) * 0.35f;
-					if(maxDistance >= 160) maxDistance = 160;
-
-					throwScript.Begin(throwdirection, maxDistance);
-					
-					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Throw);
-					//ObjectHolding.transform.position = this.transform.position;
-					
-
-
-
-					GroundItems.Add(ObjectHolding);
-					
-					ObjectHolding.transform.rotation = Quaternion.Euler(0, ObjectHolding.transform.rotation.eulerAngles.y, 0);
-					pickupItemSavedData.WasInHands = true;
-					animationController.IsThrowing = true;
-					IsDetectFlick = false;
-					ObjectHolding = null;
-					//CurrentAction = ActionId.None;
 				}
 				else if(IsDetectingMouseMoveForDrag && Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) >= 5 && Input.GetButton("Fire1"))
 				{
@@ -848,22 +888,33 @@ public class CharacterProgressScript : MonoBehaviour
 
 							if(ObjectHolding != null && !ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
 							{
+								//Debug.Log("HIT THE CHARACTER FOR INTERACTION 2");
+
 								UIPopupItemScript item = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
 
-								if(OnInteractWithPopupItem(item))
+								if(item.Type == PopupItemType.Food)
 								{
+									//Debug.Log("HIT THE CHARACTER FOR INTERACTION 3");
+
+									this.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EatItem;
+								}
+								else if(OnInteractWithPopupItem(item))
+								{
+								//Debug.Log("HIT THE CHARACTER FOR INTERACTION 4");
 									Destroy(ObjectHolding);
 									ObjectHolding = null;
 									animationController.IsHoldingItem = false;
-									
 								}
+
 							}
 							else if(ObjectHolding != null && ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
 							{
+							//Debug.Log("HIT THE CHARACTER FOR INTERACTION 3");
 								UIGlobalVariablesScript.Singleton.SoundEngine.PlayFart();
 							}
 							else if(ObjectHolding == null && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 0 && !animationController.IsPat)
 							{
+							//Debug.Log("HIT THE CHARACTER FOR INTERACTION 4");
 								Stop(true);
 								animationController.IsPat = true;
 								//Debug.Log("IS TICKLED");
@@ -872,7 +923,7 @@ public class CharacterProgressScript : MonoBehaviour
 							}
 						}
 
-						if((hitInfo.collider.tag == "Items") && hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
+						else if((hitInfo.collider.tag == "Items") && hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
 						{
 							OnInteractWithPopupItem(hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>());
 							this.GetComponent<CharacterProgressScript>().GroundItems.Remove(hitInfo.collider.gameObject);
@@ -935,7 +986,10 @@ public class CharacterProgressScript : MonoBehaviour
 							
 
 							bool isItemAlreadyOn = false;
-							if((UIGlobalVariablesScript.Singleton.Item3DPopupMenu.activeInHierarchy || UIGlobalVariablesScript.Singleton.StereoUI.activeInHierarchy) && (LastKnownObjectWithMenuUp == moveHitInfo.collider.gameObject))
+							if((UIGlobalVariablesScript.Singleton.Item3DPopupMenu.activeInHierarchy 
+						    || UIGlobalVariablesScript.Singleton.StereoUI.activeInHierarchy
+						    || UIGlobalVariablesScript.Singleton.LightbulbUI.activeInHierarchy) 
+						   && (LastKnownObjectWithMenuUp == moveHitInfo.collider.gameObject))
 							{
 								isItemAlreadyOn = true;
 							}
@@ -998,7 +1052,7 @@ public class CharacterProgressScript : MonoBehaviour
 				}
 				else
 				{
-				if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && Hungry <= 70 && !animationController.IsTickled)
+					if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && Hungry <= ConsideredHungryLevels && !animationController.IsTickled)
 					{
 						FeedMyselfTimer += Time.deltaTime;
 
@@ -1353,6 +1407,8 @@ public class CharacterProgressScript : MonoBehaviour
 
 		animationController.IsNotWell = false;
 		animationController.IsHungry = false;
+		InteractWithItemOnPickup = false;
+		ShouldThrowObjectAfterPickup = false;
 
 		/*sadUnwellLoopState = HungrySadUnwellLoopId.OnCooldown;
 
@@ -1386,6 +1442,7 @@ public enum ActionId
 	SmallCooldownPeriod,
 	EatItem,
 	WaitEatingFinish,
+	ThrowItemAfterPickup,
 }
 
 public enum HungrySadUnwellLoopId

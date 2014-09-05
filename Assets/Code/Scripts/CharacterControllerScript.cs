@@ -558,9 +558,7 @@ public class CharacterControllerScript : MonoBehaviour
 	
 	void  OnControllerColliderHit ( ControllerColliderHit hit   )
 	{
-		//  Debug.DrawRay(hit.point, hit.normal);
-
-//		Debug.Log("COLLISION: " + hit.gameObject.name);
+		CharacterProgressScript script = this.GetComponent<CharacterProgressScript>();
 
 		if(hit.gameObject.tag == "Items" && hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
 		{
@@ -591,16 +589,20 @@ public class CharacterControllerScript : MonoBehaviour
 		{
 			PopupItemType itemType = hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type;
 
-			/*if(itemType == PopupItemType.Token)
-			{
-				if(this.GetComponent<CharacterProgressScript>().OnInteractWithPopupItem(hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()))
-				{
-					this.GetComponent<CharacterProgressScript>().GroundItems.Remove(hit.gameObject);
-					Destroy(hit.gameObject);
 
-				}
+			if(script.InteractWithItemOnPickup && hit.gameObject.GetComponent<LighbulbSwitchOnOffScript>() != null)
+			{
+				script.Stop(true);
+				hit.gameObject.GetComponent<LighbulbSwitchOnOffScript>().Switch();
 			}
-			else*/ if(itemType == PopupItemType.Food)
+			else if(this.GetComponent<CharacterProgressScript>().ShouldThrowObjectAfterPickup)
+			{
+				this.GetComponent<CharacterProgressScript>().PickupItem(hit.gameObject/*.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()*/);
+				this.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.ThrowItemAfterPickup;
+
+			}
+
+			else if(itemType == PopupItemType.Food && this.GetComponent<CharacterProgressScript>().Hungry < CharacterProgressScript.ConsideredHungryLevels)
 			{
 				this.GetComponent<CharacterProgressScript>().PickupItem(hit.gameObject);
 				this.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EatItem;
@@ -609,6 +611,7 @@ public class CharacterControllerScript : MonoBehaviour
 			else
 			{
 				this.GetComponent<CharacterProgressScript>().PickupItem(hit.gameObject/*.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()*/);
+			
 			}
 				//Destroy(hit.gameObject);
 		}

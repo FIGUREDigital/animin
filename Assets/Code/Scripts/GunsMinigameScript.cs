@@ -20,7 +20,7 @@ public class GunsMinigameScript : MonoBehaviour
 	public GameObject[] Barrels;
 	public GameObject[] EnemyPrefabs;
 	public UITexture MeterBar;
-	public UITexture MeterBarBackground;
+	public UISprite MeterBarBackground;
 	public List<GameObject> CurrentBullets = new List<GameObject>();
 	private GameStateId State;
 	private float AmmoTimer;
@@ -45,6 +45,8 @@ public class GunsMinigameScript : MonoBehaviour
 	private float AutoShootCooldown;
 	private float RandomCubeTimer;
 	public GameObject RandomCubePrefab;
+	public UILabel PointsLabel;
+	public int Points;
 	
 	// Use this for initialization
 	void Start () 
@@ -69,6 +71,7 @@ public class GunsMinigameScript : MonoBehaviour
 				Wave = 0;
 				WaveTimerForNext = WaveTimers[0];
 				RandomCubeTimer = Random.Range(8, 20);
+			Points = 0;
 
 			//ShootBulletForward();
 				break;
@@ -179,6 +182,8 @@ public class GunsMinigameScript : MonoBehaviour
 				break;
 			}
 		}
+
+		PointsLabel.text = Points.ToString() + " pts";
 	}
 
 
@@ -236,6 +241,8 @@ public class GunsMinigameScript : MonoBehaviour
 		CurrentBullets.Clear();
 		CurrentBullets.AddRange(prefabs);
 
+		Points += 100;
+
 		UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.GunGame_barrel_destroy);
 	}
 
@@ -254,7 +261,7 @@ public class GunsMinigameScript : MonoBehaviour
 		newProjectile.transform.position = Vector3.zero;
 		newProjectile.transform.rotation = Quaternion.identity;
 		newProjectile.transform.localScale = new Vector3(0.06f * scale, 0.06f * scale, 0.06f * scale);
-		newProjectile.transform.localPosition = new Vector3(Random.Range(-2.5f, 2.5f), 0, Random.Range(-2.5f, 2.5f));
+		newProjectile.transform.localPosition = new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f));
 
 		//if(level == 1)
 		//	newProjectile.transform.rotation = Quaternion.Euler(15, 0, 0);
@@ -293,8 +300,8 @@ public class GunsMinigameScript : MonoBehaviour
 		newProjectile.transform.parent = this.transform;
 		newProjectile.transform.position = Vector3.zero;
 		newProjectile.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-		newProjectile.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
-		newProjectile.transform.localPosition = new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f));
+		newProjectile.transform.localScale = new Vector3(0.19f, 0.19f, 0.19f);
+		newProjectile.transform.localPosition = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
 
 		SpawnedObjects.Add(newProjectile);
 	}

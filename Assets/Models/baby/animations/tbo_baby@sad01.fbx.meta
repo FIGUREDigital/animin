@@ -74,7 +74,7 @@ ModelImporter:
     400066: tbo_baby:world_root
     400068: //RootNode
     7400000: sad01
-    7400002: Take 001
+    7400002: sad01
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -91,7 +91,103 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: sad01
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 81
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: tbo_baby:world_root
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:left_leg_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:left_leg_01_joint/tbo_baby:left_leg_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:left_leg_01_joint/tbo_baby:left_leg_02_joint/tbo_baby:left_leg_03_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:right_leg_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:right_leg_01_joint/tbo_baby:right_leg_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:right_leg_01_joint/tbo_baby:right_leg_02_joint/tbo_baby:right_leg_03_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:belly_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:belly_joint/tbo_baby:belly_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:left_clavicle_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:left_clavicle_01_joint/tbo_baby:left_arm_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:left_clavicle_01_joint/tbo_baby:left_arm_01_joint/tbo_baby:left_arm_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:left_clavicle_01_joint/tbo_baby:left_arm_01_joint/tbo_baby:left_arm_02_joint/tbo_baby:left_arm_03_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:head_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:left_ear_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:left_ear_01_joint/tbo_baby:left_ear_02_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:left_ear_01_joint/tbo_baby:left_ear_02_joint/tbo_baby:left_ear_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:nose_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:nose_joint/tbo_baby:nose_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:right_ear_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:right_ear_01_joint/tbo_baby:right_ear_02_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:right_ear_01_joint/tbo_baby:right_ear_02_joint/tbo_baby:right_ear_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:right_clavicle_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:right_clavicle_01_joint/tbo_baby:right_arm_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:right_clavicle_01_joint/tbo_baby:right_arm_01_joint/tbo_baby:right_arm_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:right_clavicle_01_joint/tbo_baby:right_arm_01_joint/tbo_baby:right_arm_02_joint/tbo_baby:right_arm_03_joint
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

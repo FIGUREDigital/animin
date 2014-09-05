@@ -19,6 +19,25 @@ public class LighbulbSwitchOnOffScript : MonoBehaviour
 	
 	}
 
+	public void Switch()
+	{
+		for(int i=0;i<transform.childCount;++i)
+		{
+			if(transform.GetChild(i).GetComponent<Light>() != null)
+			{
+				if(transform.GetChild(i).gameObject.activeSelf)
+				{
+					SetOff();
+				}
+				else
+				{
+					SetOn();
+				}
+				return;
+			}
+		}
+	}
+
 	public void SetOn()
 	{
 		ChangeTexture(this.gameObject, On);

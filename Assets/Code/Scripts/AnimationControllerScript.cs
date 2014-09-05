@@ -389,6 +389,16 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
+	public bool IsHoldingItemComplete
+	{
+		get
+		{
+			
+			return animator.GetLayerWeight(1) >= 1;
+		}
+	
+	}
+
 	public bool IsHoldingItem
 	{
 		get
@@ -523,9 +533,12 @@ public class AnimationControllerScript : MonoBehaviour
 		if(IsIdle && !script.IsMovingTowardsLocation && (script.ObjectHolding == null) && !IsLookingCamera && script.CurrentAction != ActionId.EnterPortalToAR && script.CurrentAction != ActionId.EnterPortalToNonAR && !IsEating)
 		{
 			TimeInIdleState += Time.deltaTime;
+
+
+
 			if(TimeInIdleState >= 2.0f)
 			{
-				int randomAnimationGroup = UnityEngine.Random.Range(0, 5);
+				int randomAnimationGroup = UnityEngine.Random.Range(0, 6);
 				switch(randomAnimationGroup)
 				{
 				case 0:
@@ -649,6 +662,37 @@ public class AnimationControllerScript : MonoBehaviour
 
 					break;
 				}
+
+				case 5:
+				{
+					GameObject randomItem = script.GetRandomItem();
+
+					if(true)
+					{
+					}
+						else if(TrueOrFalse() || randomItem == null)
+						{
+						script.MoveTo(new Vector3(Random.Range(-0.7f * 200, 0.7f * 200), 0, Random.Range(-0.7f * 200, 0.7f * 200)), TrueOrFalse());
+						} 
+						else if(randomItem != null)
+						{
+							if(script.Happy < 50)
+							{
+								script.ShouldThrowObjectAfterPickup = true;
+								script.IsGoingToPickUpObject = randomItem;
+								script.MoveTo(randomItem.transform.position, TrueOrFalse());
+							}
+							else
+							{
+								script.InteractWithItemOnPickup = true;
+								script.IsGoingToPickUpObject = randomItem;
+								script.MoveTo(randomItem.transform.position, TrueOrFalse());
+							}
+						}
+					
+
+					break;
+				}
 				
 				}
 
@@ -676,6 +720,13 @@ public class AnimationControllerScript : MonoBehaviour
 			}
 		}
 	}
+
+	public bool TrueOrFalse()
+	{
+		if(Random.Range(0, 2) == 0) return true;
+		return false;
+	}
+
 
 	void LateUpdate()
 	{
