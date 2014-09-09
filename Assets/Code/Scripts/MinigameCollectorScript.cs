@@ -4,6 +4,15 @@ using System.Collections.Generic;
 
 public class MinigameCollectorScript : MonoBehaviour 
 {
+	public enum TutorialStateId
+	{
+		None = 0,
+		ShowMovement,
+		ShowJumb,
+		ShowSwipeLevel,
+		Completed,
+	}
+
 	private enum MinigameStateId
 	{
 		Playing = 0,
@@ -16,6 +25,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	private List<GameObject> Collections = new List<GameObject>();
 	public GameObject CharacterRef;
+	public GameObject PointsLabel;
 
 	//private List<GameObject> AvailableSpotsToPlaceStars = new List<GameObject>();
 
@@ -30,6 +40,12 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	private int Hearts;
 	private int StarsCollected;
+	private int Points;
+	public TutorialStateId TutorialId;
+	public GameObject TutorialMoveGraphic;
+	public GameObject TutorialJumbGraphic;
+	public GameObject TutorialSwipeLevelGraphic;
+	public GameObject TutorialHandGraphic;
 
 	//private const int MapWidth = 5;
 	//private const int MapHeight = 5;
@@ -98,6 +114,35 @@ public class MinigameCollectorScript : MonoBehaviour
 		}
 	}
 
+
+	public void AdvanceTutorial()
+	{
+		TutorialHandGraphic.SetActive(false);
+		TutorialJumbGraphic.SetActive(false);
+		TutorialMoveGraphic.SetActive(false);
+		TutorialSwipeLevelGraphic.SetActive(false);
+
+		TutorialId = (TutorialStateId) ((int)TutorialId + 1);
+
+		if(TutorialId == TutorialStateId.ShowMovement)
+		{
+			TutorialMoveGraphic.SetActive(true);
+		}
+		else if(TutorialId == TutorialStateId.ShowJumb)
+		{
+			TutorialJumbGraphic.SetActive(true);
+		}
+		else if(TutorialId == TutorialStateId.ShowSwipeLevel)
+		{
+			TutorialSwipeLevelGraphic.SetActive(true);
+			TutorialHandGraphic.SetActive(true);
+		}
+		else if(TutorialId == TutorialStateId.Completed)
+		{
+
+		}
+
+	}
 
 
 	void OnGUI()
@@ -239,6 +284,7 @@ public class MinigameCollectorScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		PointsLabel.GetComponent<UILabel>().text = Points.ToString() + " pts";
 		CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
 		if(State == MinigameStateId.ExitMinigame)
@@ -271,6 +317,10 @@ public class MinigameCollectorScript : MonoBehaviour
 			}
 			else if(Input.GetButtonUp("Fire1") && isSwipingAllowed)
 			{
+				if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowSwipeLevel)
+					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
+
+
 				//fast swipe
 				if((Time.time - TimeStartedSwipe) <= 0.4f)
 				{
@@ -567,7 +617,8 @@ public class MinigameCollectorScript : MonoBehaviour
 //			Debug.Log(d);
 			if(d <= 25)
 			{
-
+				Points += 200;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Fitness += 10;
 				GameObject.Destroy(Collections[i]);
 
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Star_Collect);
@@ -592,8 +643,8 @@ public class MinigameCollectorScript : MonoBehaviour
 
 				if(starsActive >= 5) 
 				{
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Fitness += 10;
 
+					Points += 1500;
 					StarsCollected++;
 //					for(int a=0;a<StarsUI.Length;++a)
 //					{
@@ -622,6 +673,8 @@ public class MinigameCollectorScript : MonoBehaviour
 
 	public void HardcoreReset()
 	{
+		TutorialId = TutorialStateId.None;
+		Points = 0;
 		State = MinigameStateId.Playing;
 		Hearts = 3;
 		oldLevelId = -1;
@@ -677,6 +730,8 @@ public class MinigameCollectorScript : MonoBehaviour
 
 
 		Reset();
+
+		AdvanceTutorial();
 
 	}
 

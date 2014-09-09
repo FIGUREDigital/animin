@@ -37,6 +37,10 @@ public class ThumbstickControlsScript : MonoBehaviour
 				if ((Input.touches[i].fingerId == MovementFingerId)) {
 					foundMovementFinger = true;
 
+					if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowMovement)
+						UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
+
+
 					if(Input.touches[i].position != LastMovementFingerPosition && Vector2.Distance(Input.touches[i].position, LastMovementFingerPosition) >= 3)
 					{
 						//Debug.Log(Vector2.Distance(Input.touches[i].position, LastMovementFingerPosition).ToString());

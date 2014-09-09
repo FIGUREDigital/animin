@@ -43,6 +43,9 @@ public class CharacterProgressScript : MonoBehaviour
 {
 	public CreatureTypeId CreaturePlayerId;
 	public const float MaxHappy = 125.0f;
+	public const float MaxHungry = 100;
+	public const float MaxFitness = 100;
+	public const float MaxHealth = 100;
 
 	private float happy;
 	private float hungry;
@@ -211,10 +214,12 @@ public class CharacterProgressScript : MonoBehaviour
 	void Awake () 
 	{
 		CreaturePlayerId = CreatureTypeId.TBOBaby;
+
 		Happy = MaxHappy;
-		Hungry = 100;
-		Fitness = 100;
-		Health = 100;
+		Hungry = MaxHungry;
+		Fitness = MaxFitness;
+		Health = MaxHealth;
+
 		LastSavePerformed = DateTime.Now;
 		LastTimeToilet = DateTime.Now;
 
@@ -783,7 +788,7 @@ public class CharacterProgressScript : MonoBehaviour
 								
 								IsDetectingSwipeRight = !IsDetectingSwipeRight;
 								SwipesDetectedCount++;
-								Debug.Log("swipe moving right: " + SwipesDetectedCount.ToString());
+								//Debug.Log("swipe moving right: " + SwipesDetectedCount.ToString());
 								triedOnce = true;
 								SwipeHistoryPositions.Clear();
 							}
@@ -802,7 +807,7 @@ public class CharacterProgressScript : MonoBehaviour
 								//SwipeHistoryPositions.Add(Input.mousePosition);
 								IsDetectingSwipeRight = !IsDetectingSwipeRight;
 								SwipesDetectedCount++;
-								Debug.Log("swipe moving left: " + SwipesDetectedCount.ToString());
+								//Debug.Log("swipe moving left: " + SwipesDetectedCount.ToString());
 								SwipeHistoryPositions.Clear();
 							}
 						}
@@ -831,6 +836,17 @@ public class CharacterProgressScript : MonoBehaviour
 									GroundItems.Remove(TouchesObjcesWhileSwiping[i]);
 									Destroy(TouchesObjcesWhileSwiping[i]);
 									TouchesObjcesWhileSwiping.RemoveAt(i);
+
+									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
+									UIGlobalVariablesScript.Singleton.StereoUI.SetActive(false);
+									UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(false);
+									
+									if(ObjectHolding == hitInfo.collider.gameObject)
+									{
+										ObjectHolding = null;
+										animationController.IsHoldingItem = false;
+									}
+
 									i--;
 								}
 							}
@@ -875,6 +891,10 @@ public class CharacterProgressScript : MonoBehaviour
 				{
 					if(hadRayCollision && (hitInfo.collider.tag == "Items" || hitInfo.collider.tag == "Shit") && GroundItems.Contains(hitInfo.collider.gameObject))
 					{
+						Debug.Log("DOES IT EVER GET HERE");
+
+
+
 						GroundItems.Remove(hitInfo.collider.gameObject);
 						Destroy(hitInfo.collider.gameObject);
 					}
@@ -891,6 +911,7 @@ public class CharacterProgressScript : MonoBehaviour
 								//Debug.Log("HIT THE CHARACTER FOR INTERACTION 2");
 
 								UIPopupItemScript item = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+
 
 								if(item.Type == PopupItemType.Food)
 								{
@@ -1247,6 +1268,44 @@ public class CharacterProgressScript : MonoBehaviour
 		PlayerPrefs.SetInt("EvolutionStage", EvolutionStage);
 		PlayerPrefs.SetInt("ZefTokens", ZefTokens);
 
+	}
+
+	public static bool IsSoundOn
+	{
+		get
+		{
+			return true;
+			//return bool.Parse(PlayerPrefs.GetString("Sound"));
+		}
+
+		set
+		{
+			PlayerPrefs.SetString("Sound", value.ToString());
+		}
+	}
+
+	public static bool IsMusicOn
+	{
+		get
+		{
+			return true;
+			//return bool.Parse(PlayerPrefs.GetString("Music"));
+		}
+		
+		set
+		{
+			PlayerPrefs.SetString("Music", value.ToString());
+		}
+	}
+
+
+
+	public void ResetAnimin()
+	{
+		Happy = MaxHappy;
+		Hungry = MaxHungry;
+		Fitness = MaxFitness;
+		Health = MaxHealth;
 	}
 
 	public void Load()

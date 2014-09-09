@@ -97,6 +97,8 @@ public class SoundEngineScript : MonoBehaviour
 
 	public void PlayFart()
 	{
+		if(!CharacterProgressScript.IsSoundOn) return;
+
 		this.audio.PlayOneShot( FartSounds[Random.Range(0, FartSounds.Length)] );
 	}
 
@@ -113,11 +115,14 @@ public class SoundEngineScript : MonoBehaviour
 
 	public void Play(GenericSoundId id)
 	{
+		if(!CharacterProgressScript.IsSoundOn) return;
 		this.audio.PlayOneShot(GenericSounds[(int)id]);
 	}
 
 	public void Play(CreatureTypeId creatureId, CreatureSoundId soundId)
 	{
+		if(!CharacterProgressScript.IsSoundOn) return;
+
 		this.audio.PlayOneShot(CreatureSounds[(int)creatureId, (int)soundId]);
 	}
 	

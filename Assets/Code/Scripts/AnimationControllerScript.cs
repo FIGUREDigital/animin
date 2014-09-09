@@ -538,7 +538,16 @@ public class AnimationControllerScript : MonoBehaviour
 
 			if(TimeInIdleState >= 2.0f)
 			{
-				int randomAnimationGroup = UnityEngine.Random.Range(0, 6);
+				int randomAnimationGroup  = 0;
+				while(true)
+				{
+					randomAnimationGroup = UnityEngine.Random.Range(0, 6);
+					if(randomAnimationGroup != LastRandomAnimationGroup)
+						break;
+				}
+
+				LastRandomAnimationGroup = randomAnimationGroup;
+
 				switch(randomAnimationGroup)
 				{
 				case 0:
@@ -667,12 +676,10 @@ public class AnimationControllerScript : MonoBehaviour
 				{
 					GameObject randomItem = script.GetRandomItem();
 
-					if(true)
-					{
-					}
-						else if(TrueOrFalse() || randomItem == null)
+
+					    if(TrueOrFalse() || randomItem == null)
 						{
-						script.MoveTo(new Vector3(Random.Range(-0.7f * 200, 0.7f * 200), 0, Random.Range(-0.7f * 200, 0.7f * 200)), TrueOrFalse());
+						script.MoveTo(new Vector3(Random.Range(-150, 150), script.transform.position.y, Random.Range(150, 500)), TrueOrFalse());
 						} 
 						else if(randomItem != null)
 						{
@@ -721,6 +728,8 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
+	private int LastRandomAnimationGroup = -1;
+
 	public bool TrueOrFalse()
 	{
 		if(Random.Range(0, 2) == 0) return true;
@@ -751,7 +760,7 @@ public class AnimationControllerScript : MonoBehaviour
 	
 		IsCelebrate = false;
 		IsAngry = false;
-		IsDance = false;
+
 		IsEvolving = false;
 		IsNo = false;
 		//IsPat = false;
@@ -764,6 +773,11 @@ public class AnimationControllerScript : MonoBehaviour
 
 		if(animator.GetCurrentAnimatorStateInfo(0).IsName("jump_in_portal"))
 			IsEnterPortal = false;
+
+		if(animator.GetCurrentAnimatorStateInfo(0).IsName("dance"))
+			IsDance = false;
+
+
 
 //		Debug.Log(animator.GetCurrentAnimatorStateInfo(0).nameHash.ToString());
 

@@ -59,4 +59,9 @@ public enum UIFunctionalityId
 	ShootBullet,
 
 	LighbulbSwitch,
+	PauseGame,
+	ResumeGame,
+	HomeGame,
+	RestartGame,
+	AudioOnOffGame,
 }

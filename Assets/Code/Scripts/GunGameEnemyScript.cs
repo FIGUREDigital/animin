@@ -139,7 +139,7 @@ public class GunGameEnemyScript : MonoBehaviour
 					}
 				}
 
-				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().Points += 10 * (Level + 1);
+				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().Points += 200;// * (Level + 1);
 				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
 				Destroy(this.gameObject);
 

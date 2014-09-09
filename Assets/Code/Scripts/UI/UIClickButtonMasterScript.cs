@@ -37,6 +37,10 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
 
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript> ().PressedJumb = true;
+				if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowJumb)
+					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
+
+
 					break;
 				}
 			case UIFunctionalityId.ShootBullet:
@@ -175,6 +179,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.CloseCurrentMinigame:
 		{
+
 			// Disable UI
 			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
@@ -288,6 +293,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.ARWorldRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.NonARWorldRef.SetActive(false);
 
+			UIGlobalVariablesScript.Singleton.PauseGameButton.SetActive(true);
+			UIGlobalVariablesScript.Singleton.PausedScreen.SetActive(false);
+
 			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
@@ -364,8 +372,21 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 			break;
 		}
-			
 
+
+		case UIFunctionalityId.PauseGame:
+		{
+			UIGlobalVariablesScript.Singleton.PauseGameButton.SetActive(false);
+			UIGlobalVariablesScript.Singleton.PausedScreen.SetActive(true);
+			break;
+		}
+
+		case UIFunctionalityId.ResumeGame:
+		{
+			UIGlobalVariablesScript.Singleton.PauseGameButton.SetActive(true);
+			UIGlobalVariablesScript.Singleton.PausedScreen.SetActive(false);
+			break;
+		}
 
 		case UIFunctionalityId.CloseSettings:
 		{
@@ -501,6 +522,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		case UIFunctionalityId.PlayPauseSong:
 		{
 			UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<MediaPlayerPluginScript>().PlayPause();
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsDance = true;
 
 			break;
 		}

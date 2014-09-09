@@ -95,6 +95,7 @@
      <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
      <Compile Include="Assets\Code\Scripts\MinigameCollectorScript.cs" />
      <Compile Include="Assets\Code\Scripts\MonsterSplatExplosionScript.cs" />
+     <Compile Include="Assets\Code\Scripts\MoveTutorialHandScript.cs" />
      <Compile Include="Assets\Code\Scripts\MusicScript.cs" />
      <Compile Include="Assets\Code\Scripts\NewJoystickScript.cs" />
      <Compile Include="Assets\Code\Scripts\ObjectLookAtDeviceScript.cs" />

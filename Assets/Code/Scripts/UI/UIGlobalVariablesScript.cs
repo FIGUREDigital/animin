@@ -84,6 +84,8 @@ public class UIGlobalVariablesScript : MonoBehaviour
 
 	public GameObject ShootButton;
 	public GameObject JumbButton;
+	public GameObject PauseGameButton;
+	public GameObject PausedScreen;
 
 	void Awake()
 	{

@@ -51,7 +51,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 		//GetComponent<Animator>().SetLayerWeight(2, 1);
 
 		float dotProduct = Vector3.Dot(Camera.main.transform.forward, this.transform.forward);
-//		Debug.Log(dotProduct.ToString());
+		//Debug.Log(dotProduct.ToString());
 		if(!UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().IsMovingTowardsLocation &&
 			(GetComponent<AnimationControllerScript>().IsIdle 
 		 	|| GetComponent<AnimationControllerScript>().IsIdleWave 
@@ -60,7 +60,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 		 	|| GetComponent<AnimationControllerScript>().IsIdleLook3 
 		 	
 		 	|| GetComponent<AnimationControllerScript>().IsHappy == AnimationHappyId.None)
-		   && dotProduct >= -0.07f && UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId == AnimateCharacterOutPortalScript.JumbStateId.None)
+		   && dotProduct >= -0.9f && UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId == AnimateCharacterOutPortalScript.JumbStateId.None)
 		{
 			TimeStartingAwayFromCamera += Time.deltaTime;
 			//transform.parent.LookAt(this.transform.position);

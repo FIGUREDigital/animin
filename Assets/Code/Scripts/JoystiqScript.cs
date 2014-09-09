@@ -309,6 +309,8 @@ public class JoystiqScript : MonoBehaviour {
 					fingerID = Input.GetTouch(i).fingerId;
 					isButtonDown = true;
 					mousePosition = Input.GetTouch(i).position;
+
+
 				}
 			}
 			else
@@ -339,6 +341,10 @@ public class JoystiqScript : MonoBehaviour {
 			Vector3 topRightWorld = UICamera.mainCamera.WorldToScreenPoint(ThumbpadBack.worldCorners[2]);
 			//Debug.Log("bottomLeftWorld: " + bottomLeftWorld.ToString());
 			//Debug.Log("topRightWorld: " + topRightWorld.ToString());
+
+			
+			if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowMovement)
+				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
 
 
 			Vector3 middle = bottomLeftWorld + (topRightWorld - bottomLeftWorld) / 2;
