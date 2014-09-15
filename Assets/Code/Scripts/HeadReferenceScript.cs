@@ -3,8 +3,9 @@ using System.Collections;
 
 public class HeadReferenceScript : MonoBehaviour {
 
-	public GameObject ObjectTransform;
+	public GameObject HeadBoneToRotate;
 	public GameObject Indicator;
+	public GameObject ObjectCarryAttachmentBone;
 
 	// Use this for initialization
 	void Start () {

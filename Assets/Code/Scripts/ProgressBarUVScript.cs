@@ -11,6 +11,8 @@ public class ProgressBarUVScript : MonoBehaviour
 	private float Timer;
 	private int SamplesTaken;
 
+
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -27,24 +29,20 @@ public class ProgressBarUVScript : MonoBehaviour
 		if(Timer <= 0)
 		{
 			Timer = 1;
-			Accumulator += script.Happy;
+			Accumulator += PersistentData.Singleton.Happy;
 			SamplesTaken++;
 
 			if(SamplesTaken >= SamplesPerTrigger)
 			{
-				int TokensPerHappyAverage = (int)((Accumulator / (CharacterProgressScript.MaxHappy * SamplesTaken)) * 6);
+				int TokensPerHappyAverage = (int)((Accumulator / (PersistentData.MaxHappy * SamplesTaken)) * 6);
 				for(int i=0;i<TokensPerHappyAverage;++i)
 				{
-					GameObject gameObject = GameObject.Instantiate(ZefToken) as GameObject;
-					gameObject.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
-
-					gameObject.transform.localPosition = new Vector3(
+					Vector3 position = new Vector3(
 						Random.Range(-0.9f, 0.9f),
 						0.0f,
 						Random.Range(-0.9f, 0.9f));
-					gameObject.transform.localRotation = Quaternion.Euler(0, Random.Range(-180, 180), 0);
-				
-					script.GroundItems.Add(gameObject);
+
+					script.SpawnZef(position);
 				}
 
 

@@ -1,0 +1,584 @@
+fileFormatVersion: 2
+guid: 5afd5064c73694063bce78da49330f55
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: tbo_baby:belly_end_joint
+    100002: tbo_baby:belly_joint
+    100004: tbo_baby:head_end_joint
+    100006: tbo_baby:head_joint
+    100008: tbo_baby:hips_joint
+    100010: tbo_baby:left_arm_01_joint
+    100012: tbo_baby:left_arm_02_joint
+    100014: tbo_baby:left_arm_03_joint
+    100016: tbo_baby:left_clavicle_01_joint
+    100018: tbo_baby:left_ear_01_joint
+    100020: tbo_baby:left_ear_02_joint
+    100022: tbo_baby:left_ear_end_joint
+    100024: tbo_baby:left_leg_01_joint
+    100026: tbo_baby:left_leg_02_joint
+    100028: tbo_baby:left_leg_03_joint
+    100030: tbo_baby:neck_joint
+    100032: tbo_baby:nose_end_joint
+    100034: tbo_baby:nose_joint
+    100036: tbo_baby:right_arm_01_joint
+    100038: tbo_baby:right_arm_02_joint
+    100040: tbo_baby:right_arm_03_joint
+    100042: tbo_baby:right_clavicle_01_joint
+    100044: tbo_baby:right_ear_01_joint
+    100046: tbo_baby:right_ear_02_joint
+    100048: tbo_baby:right_ear_end_joint
+    100050: tbo_baby:right_leg_01_joint
+    100052: tbo_baby:right_leg_02_joint
+    100054: tbo_baby:right_leg_03_joint
+    100056: tbo_baby:spine_01_joint
+    100058: tbo_baby:spine_02_joint
+    100060: tbo_baby:spine_03_joint
+    100062: tbo_baby:spine_04_joint
+    100064: tbo_baby:spine_05_joint
+    100066: tbo_baby:world_root
+    100068: //RootNode
+    400000: tbo_baby:belly_end_joint
+    400002: tbo_baby:belly_joint
+    400004: tbo_baby:head_end_joint
+    400006: tbo_baby:head_joint
+    400008: tbo_baby:hips_joint
+    400010: tbo_baby:left_arm_01_joint
+    400012: tbo_baby:left_arm_02_joint
+    400014: tbo_baby:left_arm_03_joint
+    400016: tbo_baby:left_clavicle_01_joint
+    400018: tbo_baby:left_ear_01_joint
+    400020: tbo_baby:left_ear_02_joint
+    400022: tbo_baby:left_ear_end_joint
+    400024: tbo_baby:left_leg_01_joint
+    400026: tbo_baby:left_leg_02_joint
+    400028: tbo_baby:left_leg_03_joint
+    400030: tbo_baby:neck_joint
+    400032: tbo_baby:nose_end_joint
+    400034: tbo_baby:nose_joint
+    400036: tbo_baby:right_arm_01_joint
+    400038: tbo_baby:right_arm_02_joint
+    400040: tbo_baby:right_arm_03_joint
+    400042: tbo_baby:right_clavicle_01_joint
+    400044: tbo_baby:right_ear_01_joint
+    400046: tbo_baby:right_ear_02_joint
+    400048: tbo_baby:right_ear_end_joint
+    400050: tbo_baby:right_leg_01_joint
+    400052: tbo_baby:right_leg_02_joint
+    400054: tbo_baby:right_leg_03_joint
+    400056: tbo_baby:spine_01_joint
+    400058: tbo_baby:spine_02_joint
+    400060: tbo_baby:spine_03_joint
+    400062: tbo_baby:spine_04_joint
+    400064: tbo_baby:spine_05_joint
+    400066: tbo_baby:world_root
+    400068: //RootNode
+    7400000: look_01
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: look_01
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 42
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: tbo_baby:world_root
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:left_leg_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:left_leg_01_joint/tbo_baby:left_leg_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:left_leg_01_joint/tbo_baby:left_leg_02_joint/tbo_baby:left_leg_03_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:right_leg_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:right_leg_01_joint/tbo_baby:right_leg_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:right_leg_01_joint/tbo_baby:right_leg_02_joint/tbo_baby:right_leg_03_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:belly_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:belly_joint/tbo_baby:belly_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:left_clavicle_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:left_clavicle_01_joint/tbo_baby:left_arm_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:left_clavicle_01_joint/tbo_baby:left_arm_01_joint/tbo_baby:left_arm_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:left_clavicle_01_joint/tbo_baby:left_arm_01_joint/tbo_baby:left_arm_02_joint/tbo_baby:left_arm_03_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:head_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:left_ear_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:left_ear_01_joint/tbo_baby:left_ear_02_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:left_ear_01_joint/tbo_baby:left_ear_02_joint/tbo_baby:left_ear_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:nose_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:nose_joint/tbo_baby:nose_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:right_ear_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:right_ear_01_joint/tbo_baby:right_ear_02_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:neck_joint/tbo_baby:head_joint/tbo_baby:right_ear_01_joint/tbo_baby:right_ear_02_joint/tbo_baby:right_ear_end_joint
+        weight: 0
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:right_clavicle_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:right_clavicle_01_joint/tbo_baby:right_arm_01_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:right_clavicle_01_joint/tbo_baby:right_arm_01_joint/tbo_baby:right_arm_02_joint
+        weight: 1
+      - path: tbo_baby:world_root/tbo_baby:hips_joint/tbo_baby:spine_01_joint/tbo_baby:spine_02_joint/tbo_baby:spine_03_joint/tbo_baby:spine_04_joint/tbo_baby:spine_05_joint/tbo_baby:right_clavicle_01_joint/tbo_baby:right_arm_01_joint/tbo_baby:right_arm_02_joint/tbo_baby:right_arm_03_joint
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    human:
+    - boneName: tbo_baby:hips_joint
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:left_leg_01_joint
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:right_leg_01_joint
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:left_leg_02_joint
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:right_leg_02_joint
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:spine_03_joint
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:spine_04_joint
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:neck_joint
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:head_joint
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:left_clavicle_01_joint
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:right_clavicle_01_joint
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:left_arm_01_joint
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:right_arm_01_joint
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:left_arm_02_joint
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:right_arm_02_joint
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:left_ear_01_joint
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:right_ear_01_joint
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:nose_joint
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:left_arm_03_joint
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:right_arm_03_joint
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:right_leg_03_joint
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: tbo_baby:left_leg_03_joint
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: tbo_baby(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:tbo_baby_geo
+      position: {x: 7.1054272e-17, y: 0, z: .099999994}
+      rotation: {x: 0, y: -0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:world_root
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:hips_joint
+      position: {x: -.0166571122, y: 2.02592134, z: .0403687097}
+      rotation: {x: -.496147901, y: .503822684, z: -.496147901, w: .503822684}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_leg_01_joint
+      position: {x: .0118840346, y: .0811803192, z: -.459437639}
+      rotation: {x: -.0551072732, y: -.704956174, z: .704956174, w: .0551072732}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_leg_02_joint
+      position: {x: -.889187992, y: -4.26325632e-16, z: 4.26325632e-16}
+      rotation: {x: 3.28701103e-19, y: -.142261744, z: 5.69983359e-17, w: .989829063}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_leg_03_joint
+      position: {x: -.912585914, y: -7.10542693e-16, z: -3.5527136e-17}
+      rotation: {x: 0, y: 2.77555756e-17, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_leg_01_joint
+      position: {x: .0118836267, y: .081180349, z: .459437996}
+      rotation: {x: -.704956174, y: .0551072732, z: -.0551072732, w: .704956174}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_leg_02_joint
+      position: {x: .889188766, y: 7.10542693e-16, z: 2.6892269e-07}
+      rotation: {x: 7.37480121e-09, y: -.142261744, z: 1.05993336e-09, w: .989829063}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_leg_03_joint
+      position: {x: .912585437, y: 4.97379917e-16, z: -9.66881686e-08}
+      rotation: {x: 0, y: 2.77555756e-17, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:spine_01_joint
+      position: {x: -2.84217088e-16, y: 1.7763568e-17, z: 0}
+      rotation: {x: -.707106829, y: 7.86751862e-17, z: 1.12433364e-30, w: .707106829}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:belly_joint
+      position: {x: -.31515342, y: 3.77977494e-16, z: -.174906537}
+      rotation: {x: .707085967, y: -.707085967, z: -.00542687532, w: .00542687532}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:belly_end_joint
+      position: {x: 1.80485e-16, y: .00592431333, z: .574704289}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:spine_02_joint
+      position: {x: -.319306284, y: -4.26045373e-31, z: 0}
+      rotation: {x: .707106829, y: 0, z: -0, w: .707106829}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:spine_03_joint
+      position: {x: -.319306284, y: 3.5527136e-17, z: -6.3108871e-32}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:spine_04_joint
+      position: {x: -.319306284, y: -3.5527136e-17, z: 6.3108871e-32}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:spine_05_joint
+      position: {x: -.319306284, y: 1.7763568e-17, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_clavicle_01_joint
+      position: {x: -.0431871898, y: -.300127774, z: -.454102427}
+      rotation: {x: .604877532, y: -.532855451, z: .403929561, w: .432468802}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_arm_01_joint
+      position: {x: -.401089162, y: -1.13686835e-15, z: 0}
+      rotation: {x: -.00956828799, y: .16863896, z: .0758989751, w: .982704818}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_arm_02_joint
+      position: {x: -.921649933, y: 3.41060506e-15, z: 1.77635673e-16}
+      rotation: {x: .0272496156, y: .0185081456, z: -.0211996548, w: .999232471}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_arm_03_joint
+      position: {x: -.759809852, y: -5.68434176e-16, z: 2.48689959e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:neck_joint
+      position: {x: -.330667019, y: -.0558442473, z: 3.69423732e-16}
+      rotation: {x: -1.25262905e-17, y: -1.96196488e-17, z: .157524809, w: .987515032}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:head_joint
+      position: {x: -.333234161, y: 1.42108544e-16, z: 7.39928477e-17}
+      rotation: {x: -.698051035, y: .112804122, z: -.112804122, w: .698051035}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:head_end_joint
+      position: {x: -3.81769943, y: 5.61006597e-16, z: -2.14612433e-16}
+      rotation: {x: .707095563, y: -.707095563, z: -.00399149116, w: .00399149116}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_ear_01_joint
+      position: {x: -1.58064222, y: 1.5703218, z: .79733032}
+      rotation: {x: .205772951, y: -.556472421, z: -.279190451, w: .755015612}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_ear_02_joint
+      position: {x: -0, y: 1.16958547, z: 0}
+      rotation: {x: -.0423332825, y: .0592518263, z: .0876603425, w: .993485212}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:left_ear_end_joint
+      position: {x: 2.84217088e-16, y: 1.20968401, z: 0}
+      rotation: {x: -2.68882139e-17, y: 2.25514052e-17, z: 1.30104261e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:nose_joint
+      position: {x: -1.37424493, y: 1.70530253e-15, z: -.222741291}
+      rotation: {x: .707095563, y: -.707095563, z: -.00399149116, w: .00399149116}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:nose_end_joint
+      position: {x: 1.61761768e-15, y: -.0452817194, z: 2.00514388}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_ear_01_joint
+      position: {x: -1.5806396, y: -1.57031989, z: .797330618}
+      rotation: {x: -.279190481, y: .755015671, z: -.205772966, w: .55647248}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_ear_02_joint
+      position: {x: 5.56902751e-06, y: -1.16958463, z: 1.506221e-06}
+      rotation: {x: -.0423332825, y: .0592518263, z: .0876603425, w: .993485212}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_ear_end_joint
+      position: {x: -4.67337213e-06, y: -1.20968938, z: -4.04095954e-06}
+      rotation: {x: -2.68882139e-17, y: 2.25514052e-17, z: 1.30104261e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_clavicle_01_joint
+      position: {x: -.0431908518, y: -.300127596, z: .45410198}
+      rotation: {x: .532854974, y: .604878783, z: .432469606, w: -.403927445}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_arm_01_joint
+      position: {x: .401089251, y: 3.34591414e-06, z: -1.54927875e-07}
+      rotation: {x: -.00956793223, y: .168639734, z: .0759012997, w: .982704461}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_arm_02_joint
+      position: {x: .921648741, y: 6.59745638e-07, z: -4.00780692e-07}
+      rotation: {x: .0272494759, y: .0185078345, z: -.0211986676, w: .999232531}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: tbo_baby:right_arm_03_joint
+      position: {x: .759809077, y: -1.99558463e-06, z: -3.97529988e-07}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 26174e35a9ec44926856066c77f6caa3,
+    type: 3}
+  animationType: 3
+  additionalBone: 0
+  userData: 

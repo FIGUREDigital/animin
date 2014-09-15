@@ -113,7 +113,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 
 		HeadReferenceScript head = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>();
 
-		head.ObjectTransform.transform.rotation = Quaternion.Slerp(head.ObjectTransform.transform.rotation, rotation * Quaternion.Euler(Angles), Weight);
+		head.HeadBoneToRotate.transform.rotation = Quaternion.Slerp(head.HeadBoneToRotate.transform.rotation, rotation * Quaternion.Euler(Angles), Weight);
 	}
 
 	void OnAnimatorIK()
@@ -121,8 +121,6 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 		//DoLookRotation();
 		//DoLookRotation();
 		//Debug.Log("IKKKK");
-
-
 	}
 
 	private void DoLookRotation()
@@ -130,9 +128,9 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 		HeadReferenceScript head = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>();
 
 
-		var relativePos = Camera.main.transform.position - head.ObjectTransform.transform.position;
+		var relativePos = Camera.main.transform.position - head.HeadBoneToRotate.transform.position;
 				var rotation = Quaternion.LookRotation (relativePos);
-		head.ObjectTransform.transform.rotation = rotation;// * Quaternion.Euler(-90, 90, -90);
+		head.HeadBoneToRotate.transform.rotation = rotation;// * Quaternion.Euler(-90, 90, -90);
 	}
 
 	private void DoWholeOrientation()

@@ -225,7 +225,7 @@ public class MinigameCollectorScript : MonoBehaviour
 		
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
-		UIGlobalVariablesScript.Singleton.SoundEngine.Play(progressScript.CreaturePlayerId, CreatureSoundId.JumbOutPortal);
+		UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
 		//progressScript.CurrentAction = ActionId.EnterPortalToNonAR;
 		
 
@@ -252,8 +252,9 @@ public class MinigameCollectorScript : MonoBehaviour
 		{
 			UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
 			progressScript.Stop(true);
-			progressScript.CurrentAction = ActionId.SmallCooldownPeriod;
-			progressScript.SmallCooldownTimer = 0.5f;
+			//progressScript.CurrentAction = ActionId.SmallCooldownPeriod;
+			//progressScript.SmallCooldownTimer = 0.5f;
+			progressScript.CurrentAction = ActionId.ExitPortalMainStage;
 
 			/*
 			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsExitPortal = true;
@@ -271,6 +272,13 @@ public class MinigameCollectorScript : MonoBehaviour
 				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, false);
 			*/
 		}
+
+		if(Points >= 10000)
+			AchievementsScript.Singleton.Show(AchievementTypeId.Gold, Points);
+		else if(Points >= 5000)
+			AchievementsScript.Singleton.Show(AchievementTypeId.Silver, Points);
+		else 
+			AchievementsScript.Singleton.Show(AchievementTypeId.Bronze, Points);
 	}
 	
 	
@@ -289,12 +297,8 @@ public class MinigameCollectorScript : MonoBehaviour
 
 		if(State == MinigameStateId.ExitMinigame)
 		{
-			UIGlobalVariablesScript.Singleton.SoundEngine.Play(progressScript.CreaturePlayerId, CreatureSoundId.JumbInPortal);
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsEnterPortal = true;
-			progressScript.CurrentAction = ActionId.EnterPortalToAR;
-			
-			UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.MinigameCuberRunners, true);
-			progressScript.PortalTimer = 0;
+
+			progressScript.CurrentAction = ActionId.ExitPortalMainStage;
 
 		
 		}
@@ -559,10 +563,11 @@ public class MinigameCollectorScript : MonoBehaviour
 
 				gameObject.AddComponent<EnemyDeathAnimationScript>();
 				EvilCharacterPatternMovementScript movementScript = gameObject.GetComponent<EvilCharacterPatternMovementScript>();
-				if(movementScript != null) Destroy(movementScript);
+				if(movementScript != null) 
+					movementScript.enabled = false;
 
-				EvilCharacters.RemoveAt(i);
-				i--;
+				//EvilCharacters.RemoveAt(i);
+				//i--;
 
 				//Debug.Log("chars found:" + EvilCharacters.Count.ToString());
 			}
@@ -618,7 +623,7 @@ public class MinigameCollectorScript : MonoBehaviour
 			if(d <= 25)
 			{
 				Points += 200;
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Fitness += 10;
+				PersistentData.Singleton.Fitness += 10;
 				GameObject.Destroy(Collections[i]);
 
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Star_Collect);

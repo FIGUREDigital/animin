@@ -1,12 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum EmotionId
+{
+	Default = 0,
+	Blink,
+	Happy1,
+	Happy2,
+	Happy3,
+	Happy4,
+	Happy5,
+	Happy6,
+	Count,
+
+}
+
+public class EmotionPerModelData
+{
+	public string[] TexturePaths;
+}
+
 public class CharacterSwapManagementScript : MonoBehaviour 
 {
 	//private AnimationClip[,] AnimationsPerModel;
-	private string[] Models;
+	private string[,] Models;
 	public GameObject CurrentModel;
+
 	public AnimatorOverrideController TBOAdultAnimations;
+	public AnimatorOverrideController[,] AnimationLists;
 
 
 	void Awake()
@@ -15,11 +36,28 @@ public class CharacterSwapManagementScript : MonoBehaviour
 
 		//LoadAnimations(CreatureTypeId.TBOAdult, "Models/TBO/Adult", "/tbo_adult@");
 		//LoadAnimations(CreatureTypeId.TBOAdult, "Models/TBO/Kid", "/tbo_kid@");
+	
+		Models = new string[(int)AniminId.Count, (int)AniminEvolutionStageId.Count];
+		Models[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Baby] = "Prefabs/tbo_baby";
+		Models[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Kid] = "Prefabs/tbo_kid";
+		Models[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = "Prefabs/tbo_adult";
 
-		Models = new string[(int)CreatureTypeId.Count];
-		Models[(int)CreatureTypeId.TBOBaby] = "Prefabs/tbo_baby";
-		Models[(int)CreatureTypeId.TBOKid] = "Prefabs/tbo_kid";
-		Models[(int)CreatureTypeId.TBOAdult] = "Prefabs/tbo_adult";
+		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ke_baby";
+		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ke_baby";
+		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_baby";
+
+
+
+		AnimationLists = new AnimatorOverrideController[(int)AniminId.Count, (int)AniminEvolutionStageId.Count];
+		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"TBOBabyAnimations");
+		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"TBOKidAnimations");
+		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"TBOAdultAnimations");
+	
+		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"KelsiBabyAnimations");
+		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"KelsiBabyAnimations");
+		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"KelsiBabyAnimations");
+
+		
 	}
 
 	void OnGUI()
@@ -40,9 +78,9 @@ public class CharacterSwapManagementScript : MonoBehaviour
 //		}
 	}
 
-	public void LoadCharacter(CreatureTypeId id)
+	public void LoadCharacter(AniminId animinId, AniminEvolutionStageId id)
 	{
-		Object resource = Resources.Load(Models[(int)id]);
+		Object resource = Resources.Load(Models[(int)animinId, (int)id]);
 
 		GameObject instance = GameObject.Instantiate(resource) as GameObject;
 		Vector3 scale = instance.transform.localScale;
@@ -62,7 +100,7 @@ public class CharacterSwapManagementScript : MonoBehaviour
 //		TBOAdultAnimations.runtimeAnimatorController = CurrentModel.GetComponent<Animator>().runtimeAnimatorController;
 
 		//AnimatorOverrideController overrideController = new AnimatorOverrideController();
-		CurrentModel.GetComponent<Animator>().runtimeAnimatorController = TBOAdultAnimations;
+		CurrentModel.GetComponent<Animator>().runtimeAnimatorController = AnimationLists[(int)animinId, (int)id];
 		
 		/*for(int i=0;i<TBOAdultAnimations.clips.Length;++i)
 		{
@@ -112,13 +150,21 @@ public class CharacterSwapManagementScript : MonoBehaviour
 	}
 }
 
-public enum CreatureTypeId
+public enum AniminId
 {
-	TBOBaby = 0,
-	TBOKid,
-	TBOAdult,
-	
-	
+	Tbo = 0,
+	Kelsi,
+	Mandi,
+	Pi,
+	Count,
+}
+
+public enum AniminEvolutionStageId
+{
+	Baby = 0,
+	Kid,
+	Adult,
+
 	Count,
 }
 

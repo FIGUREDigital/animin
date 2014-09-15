@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 public class MediaPlayerPluginScript : MonoBehaviour
 {
 	public GameObject TrackSongPrefab;
+	public static bool IsPlaying;
 
 	void Start () 
 	{
@@ -94,6 +95,7 @@ public class MediaPlayerPluginScript : MonoBehaviour
 
 	public void UpdatePlayingStatus(string isPlaying)
 	{
+		IsPlaying = bool.Parse(isPlaying);
 		Debug.Log("MUSIC PLAYER STATUS: " + isPlaying);
 		if(!bool.Parse(isPlaying))
 		{

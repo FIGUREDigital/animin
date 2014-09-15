@@ -1,0 +1,425 @@
+fileFormatVersion: 2
+guid: b634f315b006a4f5b81880cb4c11c8fc
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: ke_adult:body
+    100004: ke_adult:bow
+    100006: ke_adult:hair
+    100008: ke_adult:skin_ankle_l_joint
+    100010: ke_adult:skin_ankle_r_joint
+    100012: ke_adult:skin_clavicle_l_joint
+    100014: ke_adult:skin_clavicle_r_joint
+    100016: ke_adult:skin_cog_joint
+    100018: ke_adult:skin_elbow_l_joint
+    100020: ke_adult:skin_elbow_r_joint
+    100022: ke_adult:skin_hair_1_joint
+    100024: ke_adult:skin_hair_2_joint
+    100026: ke_adult:skin_hair_3_joint
+    100028: ke_adult:skin_hair_4_joint
+    100030: ke_adult:skin_head_joint
+    100032: ke_adult:skin_hip_l_joint
+    100034: ke_adult:skin_hip_r_joint
+    100036: ke_adult:skin_knee_l_joint
+    100038: ke_adult:skin_knee_r_joint
+    100040: ke_adult:skin_neck_joint
+    100042: ke_adult:skin_nose_joint
+    100044: ke_adult:skin_shoulder_l_joint
+    100046: ke_adult:skin_shoulder_r_joint
+    100048: ke_adult:skin_spine_1_joint
+    100050: ke_adult:skin_spine_2_joint
+    100052: ke_adult:skin_spine_3_joint
+    100054: ke_adult:skin_spine_4_joint
+    100056: ke_adult:skin_spine_5_joint
+    100058: ke_adult:skin_spine_6_joint
+    100060: ke_adult:skin_spine_7_joint
+    100062: ke_adult:skin_wrist_l_joint
+    100064: ke_adult:skin_wrist_r_joint
+    400000: //RootNode
+    400002: ke_adult:body
+    400004: ke_adult:bow
+    400006: ke_adult:hair
+    400008: ke_adult:skin_ankle_l_joint
+    400010: ke_adult:skin_ankle_r_joint
+    400012: ke_adult:skin_clavicle_l_joint
+    400014: ke_adult:skin_clavicle_r_joint
+    400016: ke_adult:skin_cog_joint
+    400018: ke_adult:skin_elbow_l_joint
+    400020: ke_adult:skin_elbow_r_joint
+    400022: ke_adult:skin_hair_1_joint
+    400024: ke_adult:skin_hair_2_joint
+    400026: ke_adult:skin_hair_3_joint
+    400028: ke_adult:skin_hair_4_joint
+    400030: ke_adult:skin_head_joint
+    400032: ke_adult:skin_hip_l_joint
+    400034: ke_adult:skin_hip_r_joint
+    400036: ke_adult:skin_knee_l_joint
+    400038: ke_adult:skin_knee_r_joint
+    400040: ke_adult:skin_neck_joint
+    400042: ke_adult:skin_nose_joint
+    400044: ke_adult:skin_shoulder_l_joint
+    400046: ke_adult:skin_shoulder_r_joint
+    400048: ke_adult:skin_spine_1_joint
+    400050: ke_adult:skin_spine_2_joint
+    400052: ke_adult:skin_spine_3_joint
+    400054: ke_adult:skin_spine_4_joint
+    400056: ke_adult:skin_spine_5_joint
+    400058: ke_adult:skin_spine_6_joint
+    400060: ke_adult:skin_spine_7_joint
+    400062: ke_adult:skin_wrist_l_joint
+    400064: ke_adult:skin_wrist_r_joint
+    4300000: ke_adult:body
+    4300002: ke_adult:hair
+    4300004: ke_adult:bow
+    9500000: //RootNode
+    13700000: ke_adult:body
+    13700002: ke_adult:bow
+    13700004: ke_adult:hair
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: ke_adult:skin_cog_joint
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_hip_l_joint
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_hip_r_joint
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_knee_l_joint
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_knee_r_joint
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_spine_2_joint
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_spine_4_joint
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_head_joint
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_clavicle_l_joint
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_clavicle_r_joint
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_shoulder_l_joint
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_shoulder_r_joint
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_elbow_l_joint
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_elbow_r_joint
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_hair_1_joint
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ke_adult:skin_nose_joint
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: ke_adult(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:body
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:bow
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:hair
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_cog_joint
+      position: {x: 0, y: .449999988, z: 2.1684732e-20}
+      rotation: {x: -6.12323426e-17, y: 1, z: 6.12323426e-17, w: -6.12323426e-17}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_spine_1_joint
+      position: {x: -3.9331512e-33, y: .0334157757, z: -9.10729796e-20}
+      rotation: {x: -.000906797126, y: -6.11767892e-17, z: -6.12878431e-17, w: .999999583}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_spine_2_joint
+      position: {x: 1.92438656e-17, y: .0532508902, z: 6.52256025e-18}
+      rotation: {x: -.00593403261, y: -6.07560984e-17, z: -6.17049076e-17, w: .999982417}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_spine_3_joint
+      position: {x: 8.63146756e-18, y: .086666666, z: 5.31796825e-16}
+      rotation: {x: -6.17181226e-17, y: .99996829, z: -.00796513725, w: -6.07426716e-17}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_spine_4_joint
+      position: {x: -1.94039962e-17, y: .086666666, z: 5.35127464e-16}
+      rotation: {x: .00847622752, y: -1.22402045e-16, z: 3.82602011e-18, w: .999964118}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_spine_5_joint
+      position: {x: -1.92438656e-17, y: .086666666, z: 4.75175425e-16}
+      rotation: {x: .00755367335, y: -1.22324991e-16, z: 5.78755775e-18, w: .999971509}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_spine_6_joint
+      position: {x: -1.94039962e-17, y: .086666666, z: 5.3290702e-16}
+      rotation: {x: .00599979144, y: -1.22235298e-16, z: 7.44491585e-18, w: .999981999}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_spine_7_joint
+      position: {x: 9.62193231e-17, y: .086666666, z: 5.3290702e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_clavicle_l_joint
+      position: {x: -.0927363262, y: .0907407552, z: .0272699371}
+      rotation: {x: .423149556, y: -.533049524, z: .573841393, w: .455531299}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_shoulder_l_joint
+      position: {x: 1.7763568e-17, y: .122325428, z: -8.10018709e-15}
+      rotation: {x: -2.98023153e-08, y: -4.47034729e-08, z: -.073146835, w: .997321248}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_elbow_l_joint
+      position: {x: 2.42028611e-15, y: .164266303, z: -1.44950715e-14}
+      rotation: {x: -1.19209247e-07, y: 0, z: -.0818573534, w: .99664408}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_wrist_l_joint
+      position: {x: 7.99360543e-17, y: .155437097, z: -9.66338131e-15}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_neck_joint
+      position: {x: -8.87546004e-17, y: .140010521, z: -.0150748026}
+      rotation: {x: .412578821, y: -1.07929984e-16, z: 5.78620316e-17, w: .910921931}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_head_joint
+      position: {x: 3.70605581e-16, y: .0269423667, z: -4.26325632e-16}
+      rotation: {x: -.31223616, y: 0, z: -0, w: .950004578}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_nose_joint
+      position: {x: 1.34498138e-16, y: .216877207, z: .238042578}
+      rotation: {x: .718539596, y: 0, z: -0, w: .695486128}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_hair_1_joint
+      position: {x: 1.77389359e-16, y: .422206104, z: -.195359305}
+      rotation: {x: .998636246, y: -0, z: 0, w: -.0522084944}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_hair_2_joint
+      position: {x: 3.41189239e-16, y: .428740948, z: 5.68434176e-16}
+      rotation: {x: .00296665612, y: 0, z: -0, w: .999995589}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_hair_3_joint
+      position: {x: -2.26536378e-15, y: .278785139, z: 2.84217088e-16}
+      rotation: {x: -.0963600129, y: 0, z: -0, w: .995346546}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_hair_4_joint
+      position: {x: -2.83899715e-15, y: .293844551, z: -2.13162816e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_clavicle_r_joint
+      position: {x: .0927362964, y: .0907409042, z: .0272699445}
+      rotation: {x: -.455531299, y: .573841393, z: .533049524, w: .423149556}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_shoulder_r_joint
+      position: {x: 7.29919236e-08, y: -.122325383, z: 8.9528384e-15}
+      rotation: {x: 2.98023153e-08, y: -1.49011576e-08, z: -.073146522, w: .997321248}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_elbow_r_joint
+      position: {x: -9.42360003e-08, y: -.164266869, z: 4.89556085e-09}
+      rotation: {x: 2.98023117e-08, y: 2.98023117e-08, z: -.0818576515, w: .99664402}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_wrist_r_joint
+      position: {x: -1.15811547e-08, y: -.155436605, z: 1.03058451e-08}
+      rotation: {x: -1.75249762e-15, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_hip_l_joint
+      position: {x: .141689658, y: -.0199999996, z: 1.73736632e-17}
+      rotation: {x: -5.88413804e-17, y: -.0383131616, z: .99926579, w: -6.3533387e-17}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_knee_l_joint
+      position: {x: 1.7763568e-17, y: .191178963, z: -1.11022302e-16}
+      rotation: {x: .0810280368, y: 6.30413271e-17, z: -5.93682613e-17, w: .99671185}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_ankle_l_joint
+      position: {x: -1.42108544e-16, y: .240261152, z: 1.29896089e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_hip_r_joint
+      position: {x: -.141690001, y: -.0199999996, z: -1.73303355e-17}
+      rotation: {x: -6.3533387e-17, y: .99926579, z: .0383131653, w: 5.88413804e-17}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_knee_r_joint
+      position: {x: 3.5527136e-17, y: -.191178963, z: -3.4411439e-08}
+      rotation: {x: .0810280442, y: -6.30413271e-17, z: 5.93682613e-17, w: .99671185}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ke_adult:skin_ankle_r_joint
+      position: {x: -7.1054272e-17, y: -.240261123, z: 3.45873303e-08}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  additionalBone: 0
+  userData: 

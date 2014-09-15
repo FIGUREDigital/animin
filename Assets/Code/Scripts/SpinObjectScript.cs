@@ -15,7 +15,8 @@ public class SpinObjectScript : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 
 		rotationAngle += Time.deltaTime * rotaitonSpeed;
 

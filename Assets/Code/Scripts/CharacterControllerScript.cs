@@ -602,7 +602,7 @@ public class CharacterControllerScript : MonoBehaviour
 
 			}
 
-			else if(itemType == PopupItemType.Food && this.GetComponent<CharacterProgressScript>().Hungry < CharacterProgressScript.ConsideredHungryLevels)
+			else if(itemType == PopupItemType.Food && PersistentData.Singleton.Hungry < CharacterProgressScript.ConsideredHungryLevels)
 			{
 				this.GetComponent<CharacterProgressScript>().PickupItem(hit.gameObject);
 				this.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EatItem;

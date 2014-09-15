@@ -31,6 +31,77 @@ public class OscillationUpDownScript : MonoBehaviour
 	}
 }
 
+
+public class QuickScaleOscillationScript : MonoBehaviour
+{
+	private float Timer;
+	private float Speed = 1;
+	private float SavedScaleY;
+	
+	void Start()
+	{
+		SavedScaleY = transform.localScale.y;
+	}
+	
+	void Update()
+	{
+		Timer += Time.deltaTime * Speed * 7;
+		Debug.Log("TIMER: " + Timer.ToString());
+		if(Timer >= 1)
+		{
+			Timer = 1;
+			Speed *= -1;
+		}
+		else if(Timer <= 0)
+		{
+			Timer = 0;
+			Speed *= -1;
+			Destroy(this);
+		}
+
+		Vector3 scale = this.transform.localScale;
+		scale.y = Mathf.Lerp(SavedScaleY, 5.3f, Timer);
+		
+		this.transform.localScale = scale;
+	}
+}
+
+public class EnemyRespawnScript : MonoBehaviour
+{
+	private float Timer;
+
+	void Start()
+	{
+		Timer = 3;
+	}
+	
+	void Update()
+	{
+		//this.transform.localPosition = this.transform.localPosition - new Vector3(0, Time.deltaTime * Speed, 0);
+		Timer -= Time.deltaTime;
+		if(Timer <= 0)
+		{
+			this.GetComponent<BoxCollider>().enabled = true;
+
+			for(int i=0;i<this.transform.childCount;++i)
+			{
+				if(this.transform.GetChild(i).name == "Sphere")
+					this.transform.GetChild(i).gameObject.SetActive(false);
+				else
+					this.transform.GetChild(i).gameObject.SetActive(true);
+			}
+
+			EvilCharacterPatternMovementScript movementScript = gameObject.GetComponent<EvilCharacterPatternMovementScript>();
+			if(movementScript != null) 
+				movementScript.enabled = true;
+
+			this.gameObject.AddComponent<QuickScaleOscillationScript>();
+
+			Destroy(this);
+		}
+	}
+}
+
 public class EnemyDeathAnimationScript : MonoBehaviour
 {
 	private float Timer;
@@ -60,7 +131,7 @@ public class EnemyDeathAnimationScript : MonoBehaviour
 		Timer -= Time.deltaTime;
 		if(Timer <= 0)
 		{
-
+			this.gameObject.AddComponent<EnemyRespawnScript>();
 			Destroy(this);
 			//this.gameObject.SetActive(false);
 		}

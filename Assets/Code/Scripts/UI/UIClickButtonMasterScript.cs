@@ -37,8 +37,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
 
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript> ().PressedJumb = true;
-				if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowJumb)
-					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
+					
+					if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowJumb)
+						UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
 
 
 					break;
@@ -82,7 +83,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 	public static void HandleClick(UIFunctionalityId id, GameObject sender)
 	{
-		GameObject mainMenuPopupRef = UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef;
+
 		Debug.Log("BUTTON: " + id.ToString());
 		switch(id)
 		{
@@ -96,6 +97,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		case UIFunctionalityId.OpenCloseItems:
 		case UIFunctionalityId.OpenCloseMedicine:
 		{
+			GameObject mainMenuPopupRef = UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef;
 			if(mainMenuPopupRef.activeInHierarchy && UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef != sender)
 			{
 
@@ -131,6 +133,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 		case UIFunctionalityId.SetActiveItemOnBottomBarAndClose:
 		{
+			GameObject mainMenuPopupRef = UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef;
 			mainMenuPopupRef.SetActive(false);
 
 			Debug.Log("BUTTON CLICL!!!");
@@ -210,7 +213,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = UIClickButtonMasterScript.SavedRadius;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
-						
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().Forces.Clear();			
+
 			HandleClick(UIFunctionalityId.BackFromMinigames, sender);
 			Camera.main.GetComponent<MusicScript>().Stop();
 
@@ -411,7 +415,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.ShowAchievements:
 		{
-			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.AchievementsScreenRef.SetActive(true);
 
 			break;
@@ -419,7 +423,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.CloseAchivements:
 		{
-			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(true);
+			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.AchievementsScreenRef.SetActive(false);
 			break;
 		}

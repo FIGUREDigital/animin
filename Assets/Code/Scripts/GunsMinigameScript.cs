@@ -169,7 +169,7 @@ public class GunsMinigameScript : MonoBehaviour
 			case GameStateId.Completed:
 			{
 				State = GameStateId.PrepareToExit;
-			GameObject.Find("GunfireLoop").GetComponent<AudioSource>().Stop();
+				GameObject.Find("GunfireLoop").GetComponent<AudioSource>().Stop();
 
 				break;
 			}
@@ -178,6 +178,17 @@ public class GunsMinigameScript : MonoBehaviour
 			{
 				
 				UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
+
+				if(Points >= 10000)
+					AchievementsScript.Singleton.Show(AchievementTypeId.Gold, Points);
+				else if(Points >= 5000)
+				AchievementsScript.Singleton.Show(AchievementTypeId.Silver, Points);
+				else 
+				AchievementsScript.Singleton.Show(AchievementTypeId.Bronze, Points);
+				
+			CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+			progressScript.CurrentAction = ActionId.ExitPortalMainStage;
 
 				break;
 			}

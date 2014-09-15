@@ -6,6 +6,7 @@ public enum PortalStageId
 	ARscene,
 	NonARScene,
 	MinigameCuberRunners,
+	GunGame,
 }
 
 public class PortalScript : MonoBehaviour {
@@ -35,6 +36,10 @@ public class PortalScript : MonoBehaviour {
 		else if(stageId == PortalStageId.MinigameCuberRunners)
 		{
 			this.transform.parent = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
+		}
+		else if(stageId == PortalStageId.GunGame)
+		{
+			this.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
 		}
 
 		this.transform.rotation = Quaternion.identity;

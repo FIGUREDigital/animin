@@ -63,10 +63,13 @@
      <Compile Include="Assets\Chickens Shader Bundle\Shaders\OutlineGlow\OutlineGlowRenderer.cs" />
      <Compile Include="Assets\Chickens Shader Bundle\Shaders\Screen Space Subsurface Scattering\ScreenSpaceSubsurfaceScattering.cs" />
      <Compile Include="Assets\Chickens Shader Bundle\Shaders\ToonPack.cs" />
+     <Compile Include="Assets\Code\ChestScript.cs" />
      <Compile Include="Assets\Code\Enumerations\UIFunctionalityId.cs" />
      <Compile Include="Assets\Code\Helpers.cs" />
      <Compile Include="Assets\Code\PrefabPool.cs" />
+     <Compile Include="Assets\Code\Scripts\AchievementsScript.cs" />
      <Compile Include="Assets\Code\Scripts\AnimateCharacterOutPortalScript.cs" />
+     <Compile Include="Assets\Code\Scripts\AnimateChestObjectOutScript.cs" />
      <Compile Include="Assets\Code\Scripts\AnimationControllerScript.cs" />
      <Compile Include="Assets\Code\Scripts\BarrelCollisionScript.cs" />
      <Compile Include="Assets\Code\Scripts\BlinkingScript.cs" />
@@ -126,6 +129,7 @@
      <Compile Include="Assets\Code\Scripts\UI\UIGlobalVariablesScript.cs" />
      <Compile Include="Assets\Code\Scripts\UI\UIPopupItemScript.cs" />
      <Compile Include="Assets\Code\TestScript.cs" />
+     <Compile Include="Assets\Code\UI\SelectCharacterClickScript.cs" />
      <Compile Include="Assets\Kamcord\ExampleScripts\CaptureFrame.cs" />
      <Compile Include="Assets\Kamcord\ExampleScripts\RecordingGUI.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />

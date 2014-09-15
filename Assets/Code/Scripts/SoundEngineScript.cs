@@ -5,7 +5,7 @@ public class SoundEngineScript : MonoBehaviour
 {
 	//private AudioClip[] MinigameCubeRunners;
 	private AudioClip[] GenericSounds;
-	private AudioClip[,] CreatureSounds;
+	private AudioClip[,,] CreatureSounds;
 	public AudioSource SoundFxLooper1;
 	public AudioClip[] FartSounds;
 
@@ -52,59 +52,59 @@ public class SoundEngineScript : MonoBehaviour
 		GenericSounds[(int)GenericSoundId.CollectStar5] = Resources.Load("Sounds/Minigame01_Platform/Star_Collect_note5") as AudioClip;
 
 
-		CreatureSounds = new AudioClip[(int)CreatureTypeId.Count, (int)CreatureSoundId.Count];
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Celebrate] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@celebrate") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.EatPill] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@eat_pill") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.FeedFood] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@feed_food") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.FeedDrink] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@feed_drink") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Happy1] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_01") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Happy2] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_02") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Happy3] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_03") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Happy4] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_04") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Happy5] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_05") as AudioClip;
+		CreatureSounds = new AudioClip[(int)AniminId.Count, (int)AniminEvolutionStageId.Count, (int)CreatureSoundId.Count];
+		CreatureSounds[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Celebrate] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@celebrate") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.EatPill] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@eat_pill") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.FeedFood] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@feed_food") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.FeedDrink] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@feed_drink") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Happy1] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_01") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Happy2] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_02") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Happy3] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_03") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Happy4] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_04") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Happy5] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@happy_05") as AudioClip;
 
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Hungry] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@Hungry") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Hungry] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@Hungry") as AudioClip;
 
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.JumbInPortal] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@jump_in_portal") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.JumbOutPortal] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@jump_out_portal") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.No] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@No") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad1] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sad01") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad2] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sad02") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad3] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sad03") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Sad4] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sad04") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.JumbInPortal] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@jump_in_portal") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.JumbOutPortal] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@jump_out_portal") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.No] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@No") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Sad1] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sad01") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Sad2] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sad02") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Sad3] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sad03") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Sad4] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sad04") as AudioClip;
 
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.SleepToIdle] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sleep_to_idle_stand") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Throw] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@Throw") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Tickle] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@Tickle") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Tickle2] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@tickle_02") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Tickle3] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@tickle_03") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.SnoringSleeping] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sleep_snoring_loop") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.SleepToIdle] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sleep_to_idle_stand") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Throw] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@Throw") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Tickle] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@Tickle") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Tickle2] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@tickle_02") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Tickle3] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@tickle_03") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.SnoringSleeping] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@sleep_snoring_loop") as AudioClip;
 
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.Unwell] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@Unwell") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.InjectionReact] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@injection_react") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.PatReact] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@pat_react") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.IdleWave] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@idle_wave") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk1] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_01") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk2] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_02") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk3] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_03") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk4] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_04") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk5] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_05") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk6] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_06") as AudioClip;
-		CreatureSounds[(int)CreatureTypeId.TBOBaby, (int)CreatureSoundId.RandomTalk7] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_07") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.Unwell] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@Unwell") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.InjectionReact] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@injection_react") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.PatReact] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@pat_react") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.IdleWave] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@idle_wave") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.RandomTalk1] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_01") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.RandomTalk2] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_02") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.RandomTalk3] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_03") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.RandomTalk4] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_04") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.RandomTalk5] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_05") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.RandomTalk6] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_06") as AudioClip;
+		CreatureSounds[(int)AniminId.Tbo,(int)AniminEvolutionStageId.Baby, (int)CreatureSoundId.RandomTalk7] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_07") as AudioClip;
 
 
 	}
 
 	public void PlayFart()
 	{
-		if(!CharacterProgressScript.IsSoundOn) return;
+		//if(!PersistentData.Singleton.IsSoundOn) return;
 
 		this.audio.PlayOneShot( FartSounds[Random.Range(0, FartSounds.Length)] );
 	}
 
-	public void PlayLoop(CreatureTypeId creatureId, CreatureSoundId soundId)
+	public void PlayLoop(AniminId animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
 	{
-		SoundFxLooper1.clip = CreatureSounds[(int)creatureId, (int)soundId];
+		SoundFxLooper1.clip = CreatureSounds[(int)animin, (int)creatureId, (int)soundId];
 		SoundFxLooper1.Play();
 	}
 
@@ -115,15 +115,15 @@ public class SoundEngineScript : MonoBehaviour
 
 	public void Play(GenericSoundId id)
 	{
-		if(!CharacterProgressScript.IsSoundOn) return;
+		//if(!PersistentData.Singleton.IsSoundOn) return;
 		this.audio.PlayOneShot(GenericSounds[(int)id]);
 	}
 
-	public void Play(CreatureTypeId creatureId, CreatureSoundId soundId)
+	public void Play(AniminId animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
 	{
-		if(!CharacterProgressScript.IsSoundOn) return;
+		//if(!PersistentData.Singleton.IsSoundOn) return;
 
-		this.audio.PlayOneShot(CreatureSounds[(int)creatureId, (int)soundId]);
+		this.audio.PlayOneShot(CreatureSounds[(int)animin, (int)creatureId, (int)soundId]);
 	}
 	
 	// Update is called once per frame

@@ -19,6 +19,26 @@ public class ItemPickupSavedData
 	}
 }
 
+public enum AniminSubevolutionStageId
+{
+	First = 0,
+	Second,
+	Third,
+	Fourth,
+	Fifth,
+	Sixth,
+	Seventh,
+	Eighth,
+
+	Count,
+}
+
+public class AniminSubevolutionStageData
+{
+	public static float[] Stages = new float[] { 10, 20, 30, 40, 50, 60, 70, 80};
+
+}
+
 public class HappyStateRange
 {
 	public static HappyStateRange[] HappyStates = new HappyStateRange[] 
@@ -39,20 +59,30 @@ public class HappyStateRange
 	public AnimationHappyId Id;
 }
 
-public class CharacterProgressScript : MonoBehaviour 
+public class PersistentData
 {
-	public CreatureTypeId CreaturePlayerId;
+	public static PersistentData Singleton = new PersistentData();
+
+	static PersistentData()
+	{
+	}
+
+	public AniminId PlayerAniminId;
+	public AniminEvolutionStageId AniminEvolutionId;
 	public const float MaxHappy = 125.0f;
 	public const float MaxHungry = 100;
 	public const float MaxFitness = 100;
 	public const float MaxHealth = 100;
+	public int ZefTokens;
+	public List<AniminSubevolutionStageId> SubstagesCompleted = new List<AniminSubevolutionStageId>(); 
 
+	private bool audioIsOn;
 	private float happy;
 	private float hungry;
 	private float fitness;
 	private float evolution;
 	private float health;
-
+	
 	public float Happy
 	{
 		get
@@ -118,20 +148,71 @@ public class CharacterProgressScript : MonoBehaviour
 			if(health < 0) health = 0;
 		}
 	}
-	
 
-	public int EvolutionStage;
-	public int ZefTokens;
-	public List<AchievementId> Achievements = new List<AchievementId>();
+	public void SetDefault()
+	{
+		SubstagesCompleted.Clear();
+		PlayerAniminId = AniminId.Tbo;
+		AniminEvolutionId = AniminEvolutionStageId.Baby;
+		
+		Happy = MaxHappy;
+		Hungry = MaxHungry;
+		Fitness = MaxFitness;
+		Health = MaxHealth;
+		ZefTokens = 0;
+	}
+
+	public void Save()
+	{
+
+		PlayerPrefs.SetFloat("Hungry", Hungry);
+		PlayerPrefs.SetFloat("Fitness", Fitness);
+		PlayerPrefs.SetFloat("Evolution", Evolution);
+		PlayerPrefs.SetInt("AniminId", (int)PlayerAniminId);
+		PlayerPrefs.SetInt("EvolutionStage", (int)AniminEvolutionId);
+		PlayerPrefs.SetInt("ZefTokens", ZefTokens);
+		PlayerPrefs.SetString("Audio", audioIsOn.ToString());
+	}
+	
+	public void Load()
+	{
+		if(PlayerPrefs.HasKey("Hungry"))
+			Hungry = PlayerPrefs.GetFloat("Hungry");
+		
+		if(PlayerPrefs.HasKey("Fitness"))
+			Fitness = PlayerPrefs.GetFloat("Fitness");
+		
+		if(PlayerPrefs.HasKey("Evolution"))
+			Evolution = PlayerPrefs.GetFloat("Evolution");
+
+		if(PlayerPrefs.HasKey("AniminId"))
+			PlayerAniminId = (AniminId) PlayerPrefs.GetInt("AniminId");
+
+		if(PlayerPrefs.HasKey("AniminEvolutionId"))
+			AniminEvolutionId = (AniminEvolutionStageId) PlayerPrefs.GetInt("AniminEvolutionId");
+
+
+		if(PlayerPrefs.HasKey("Audio"))
+			audioIsOn = bool.Parse( PlayerPrefs.GetString("Audio"));
+
+		if(PlayerPrefs.HasKey("ZefTokens"))
+			ZefTokens = PlayerPrefs.GetInt("ZefTokens");
+		
+	}
+}
+
+public class CharacterProgressScript : MonoBehaviour 
+{
+	//public List<AchievementId> Achievements = new List<AchievementId>();
 	public DateTime NextHappynBonusTimeAt;
 	public DateTime LastSavePerformed;
 	public DateTime LastTimeToilet;
-	public int StarsOwned = 10;
+
 	private bool IsDetectingSwipeRight;
 	private int SwipesDetectedCount;
 	private bool AtLeastOneSwipeDetected;
 	private List<GameObject> TouchesObjcesWhileSwiping = new List<GameObject>();
-	private Vector3 lastMousePosition;
+	//private Vector3 lastMousePosition;
 
 	private List<GameObject> groundItemsOnARscene = new List<GameObject>();
 	private List<GameObject> groundItemsOnNonARScene = new List<GameObject>();
@@ -170,7 +251,7 @@ public class CharacterProgressScript : MonoBehaviour
 	//public TextMesh TextTest;
 	public AnimationControllerScript animationController;
 	public bool IsMovingTowardsLocation;
-	public GameObject ObjectCarryAttachmentBone;
+	//public GameObject ObjectCarryAttachmentBone;
 	private GameObject DragableObject;
 	public GameObject ObjectHolding;
 	private float LastTapClick;
@@ -213,17 +294,13 @@ public class CharacterProgressScript : MonoBehaviour
 	// Use this for initialization
 	void Awake () 
 	{
-		CreaturePlayerId = CreatureTypeId.TBOBaby;
-
-		Happy = MaxHappy;
-		Hungry = MaxHungry;
-		Fitness = MaxFitness;
-		Health = MaxHealth;
-
 		LastSavePerformed = DateTime.Now;
 		LastTimeToilet = DateTime.Now;
 
-		Load();
+	
+		PersistentData.Singleton.SetDefault();
+		PersistentData.Singleton.Load();
+
 
 		//TextTest.color = new Color(1, 1, 1, 0.0f);
 
@@ -234,12 +311,20 @@ public class CharacterProgressScript : MonoBehaviour
 
 		CurrentAction = ActionId.EnterSleep;
 
+
 		animationController = GetComponent<AnimationControllerScript>();
 		//animationController.IsSleeping = true;
 		//CurrentAction = ActionId.Sleep;
 		//SleepBoundingBox.SetActive(true);
 
 
+	}
+
+	void Start()
+	{
+		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
+
+		//SpawnChests();	
 	}
 
 	void OnApplicationPause(bool pauseStatus)
@@ -256,6 +341,21 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 	}
 
+	public GameObject SpawnZef(Vector3 position)
+	{
+		CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+		GameObject resource = Resources.Load<GameObject>(@"Prefabs/ZefToken");
+		
+		GameObject gameObject = GameObject.Instantiate(resource) as GameObject;
+		gameObject.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
+		
+		gameObject.transform.localPosition = position;
+		//gameObject.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(-180, 180), 0);
+		
+		script.GroundItems.Add(gameObject);
+		return gameObject;
+	}
 
 
 	public GameObject GetRandomItem()
@@ -297,8 +397,8 @@ public class CharacterProgressScript : MonoBehaviour
 		if(maxDistance >= 160) maxDistance = 160;
 		
 		throwScript.Begin(throwdirection, maxDistance);
-		
-		UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.Throw);
+
+		UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Throw);
 		//ObjectHolding.transform.position = this.transform.position;
 		
 		
@@ -344,27 +444,39 @@ public class CharacterProgressScript : MonoBehaviour
 		return closestFood;
 	}
 
+	public void SpawnChests()
+	{
+		GameObject resource = Resources.Load<GameObject>("Prefabs/chest_gold");
+
+		GameObject instance = Instantiate(resource) as GameObject;
+		instance.transform.parent = ActiveWorld.transform;
+		instance.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(170, 190), 0);
+		instance.transform.position = Vector3.zero;
+		instance.transform.localPosition = new Vector3(UnityEngine.Random.Range(-0.67f, 0.67f), this.transform.localPosition.y, UnityEngine.Random.Range(-0.67f, 0.67f));
+		instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+	}
+
 	private float EatAlphaTimer;
 	private bool PlayedEatingSound;
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		Hungry -= Time.deltaTime * 0.2f;
-		Fitness -= Time.deltaTime * 0.2f;
-		Health -= Time.deltaTime * 0.2f;
+		PersistentData.Singleton.Hungry -= Time.deltaTime * 0.2f;
+		PersistentData.Singleton.Fitness -= Time.deltaTime * 0.2f;
+		PersistentData.Singleton.Health -= Time.deltaTime * 0.2f;
 	
 		//TextTest.color = new Color(1,1,1, TextTest.color.a - Time.deltaTime * 0.6f);
 		//if(TextTest.color.a < 0)
 		//	TextTest.color = new Color(1,1,1, 0);
 
 
-		Happy = ((
-			(Hungry / 100.0f) + 
-			(Fitness / 100.0f) + 
-			(Health / 100.0f)) 
+		PersistentData.Singleton.Happy = ((
+			(PersistentData.Singleton.Hungry / 100.0f) + 
+			(PersistentData.Singleton.Fitness / 100.0f) + 
+			(PersistentData.Singleton.Health / 100.0f)) 
 		         / 3.0f) 
-			* MaxHappy;
+			* PersistentData.MaxHappy;
 
 
 		//Debug.Log("Hungry: " + (Hungry / 100.0f).ToString());
@@ -376,7 +488,7 @@ public class CharacterProgressScript : MonoBehaviour
 			//Evolution += (Happy / MaxHappy) * Time.deltaTime * 0.1f;
 			//if(Evolution >= 100) Evolution = 100;
 
-			float percentage = ((Evolution / 100.0f));
+			float percentage = ((PersistentData.Singleton.Evolution / 100.0f));
 			
 			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * percentage);
 			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.uvRect = new Rect(0, 0, percentage, 1);
@@ -512,9 +624,9 @@ public class CharacterProgressScript : MonoBehaviour
 
 						PlayedEatingSound = true;
 						if(popup.SpecialId == SpecialFunctionalityId.Liquid)
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedDrink);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.FeedDrink);
 						else
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.FeedFood);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.FeedFood);
 
 					}
 				}
@@ -557,6 +669,29 @@ public class CharacterProgressScript : MonoBehaviour
 			break;
 		}
 
+
+		case ActionId.ExitPortalMainStage:
+		{
+			SpawnChests();	
+			
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
+
+			if(UIGlobalVariablesScript.Singleton.ARSceneRef.activeInHierarchy)
+				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.ARscene, false);
+			else
+				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, false);
+			
+			UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
+
+			animationController.IsExitPortal = true;
+
+			CurrentAction = ActionId.SmallCooldownPeriod;
+			SmallCooldownTimer = 0.5f;
+
+			break;
+		}
+
 		case ActionId.EnterPortalToAR:
 			{
 				//OnEnterARScene();
@@ -577,7 +712,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 					UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.ARscene, false);
 
-					UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.JumbOutPortal);
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
 			}
 
 
@@ -606,7 +741,7 @@ public class CharacterProgressScript : MonoBehaviour
 				animationController.IsSleeping = true;
 				CurrentAction = ActionId.Sleep;
 				SleepBoundingBox.SetActive(true);
-				UIGlobalVariablesScript.Singleton.SoundEngine.PlayLoop(CreaturePlayerId, CreatureSoundId.SnoringSleeping);
+			UIGlobalVariablesScript.Singleton.SoundEngine.PlayLoop(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.SnoringSleeping);
 
 				break;
 			}
@@ -622,7 +757,7 @@ public class CharacterProgressScript : MonoBehaviour
 						animationController.IsSleeping = false;
 						CurrentAction = ActionId.None;
 						SleepBoundingBox.SetActive(false);
-						UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.SleepToIdle);
+					UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.SleepToIdle);
 						UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
 						
 					}
@@ -859,7 +994,7 @@ public class CharacterProgressScript : MonoBehaviour
 							Stop(true);
 							animationController.IsTickled = true;
 
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, 
+						UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, 
 						                                                   (CreatureSoundId)((int)CreatureSoundId.Tickle + UnityEngine.Random.Range(0, 3)));
 							
 							
@@ -940,7 +1075,7 @@ public class CharacterProgressScript : MonoBehaviour
 								animationController.IsPat = true;
 								//Debug.Log("IS TICKLED");
 								
-								UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.PatReact);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.PatReact);
 							}
 						}
 
@@ -1073,7 +1208,7 @@ public class CharacterProgressScript : MonoBehaviour
 				}
 				else
 				{
-					if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && Hungry <= ConsideredHungryLevels && !animationController.IsTickled)
+				if(!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && PersistentData.Singleton.Hungry <= ConsideredHungryLevels && !animationController.IsTickled)
 					{
 						FeedMyselfTimer += Time.deltaTime;
 
@@ -1219,16 +1354,16 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 		 
 
-		UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Hungry / 100.0f), UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition.y, 0);
-		UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Health / 100.0f), UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition.y, 0);
+		UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, PersistentData.Singleton.Hungry / 100.0f), UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition.y, 0);
+		UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, PersistentData.Singleton.Health / 100.0f), UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition.y, 0);
 		UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, 
-		                                                                                                         Happy / MaxHappy), UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition.y, 0);
-		UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, Fitness / 100.0f), UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition.y, 0);
+		                                                                                                         PersistentData.Singleton.Happy / PersistentData.MaxHappy), UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition.y, 0);
+		UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, PersistentData.Singleton.Fitness / 100.0f), UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition.y, 0);
 		//UIGlobalVariablesScript.Singleton.EvolutionControlBarRef.GetComponent<UISlider>().value = Evolution / 100.0f;
 
 		if((DateTime.Now - LastSavePerformed).TotalSeconds >= 1)
 		{
-			Save();
+			PersistentData.Singleton.Save();
 		}
 
 		if(Input.GetButtonDown("Fire1"))
@@ -1247,7 +1382,7 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 	
 	
-		lastMousePosition = Input.mousePosition;
+		//lastMousePosition = Input.mousePosition;
 		DragedObjectedFromUIToWorld = false;
 		lastActionId = CurrentAction;
 		HadUITouchLastFrame = hadUItouch;
@@ -1259,76 +1394,11 @@ public class CharacterProgressScript : MonoBehaviour
 //		TextTest.color = new Color(1,1,1,1);
 //	}
 
-	public void Save()
-	{
-		PlayerPrefs.SetFloat("Happy", Happy);
-		PlayerPrefs.SetFloat("Hungry", Hungry);
-		PlayerPrefs.SetFloat("Fitness", Fitness);
-		PlayerPrefs.SetFloat("Evolution", Evolution);
-		PlayerPrefs.SetInt("EvolutionStage", EvolutionStage);
-		PlayerPrefs.SetInt("ZefTokens", ZefTokens);
-
-	}
-
-	public static bool IsSoundOn
-	{
-		get
-		{
-			return true;
-			//return bool.Parse(PlayerPrefs.GetString("Sound"));
-		}
-
-		set
-		{
-			PlayerPrefs.SetString("Sound", value.ToString());
-		}
-	}
-
-	public static bool IsMusicOn
-	{
-		get
-		{
-			return true;
-			//return bool.Parse(PlayerPrefs.GetString("Music"));
-		}
-		
-		set
-		{
-			PlayerPrefs.SetString("Music", value.ToString());
-		}
-	}
 
 
 
-	public void ResetAnimin()
-	{
-		Happy = MaxHappy;
-		Hungry = MaxHungry;
-		Fitness = MaxFitness;
-		Health = MaxHealth;
-	}
 
-	public void Load()
-	{
-		if(PlayerPrefs.HasKey("Happy"))
-			Happy = PlayerPrefs.GetFloat("Happy");
 
-		if(PlayerPrefs.HasKey("Hungry"))
-			Hungry = PlayerPrefs.GetFloat("Hungry");
-
-		if(PlayerPrefs.HasKey("Fitness"))
-			Fitness = PlayerPrefs.GetFloat("Fitness");
-
-		//if(PlayerPrefs.HasKey("Evolution"))
-		//	Evolution = PlayerPrefs.GetFloat("Evolution");
-
-		if(PlayerPrefs.HasKey("EvolutionStage"))
-			EvolutionStage = PlayerPrefs.GetInt("EvolutionStage");
-
-		if(PlayerPrefs.HasKey("ZefTokens"))
-			ZefTokens = PlayerPrefs.GetInt("ZefTokens");
-
-	}
 
 	public void PickupItem(GameObject item)
 	{
@@ -1348,8 +1418,10 @@ public class CharacterProgressScript : MonoBehaviour
 		//item.GetComponent<BoxCollider>().enabled = false;
 		//if(item.collider.gameObject.activeInHierarchy)
 
+
+
 		item.layer = LayerMask.NameToLayer("IgnoreCollisionWithCharacter");
-		item.transform.parent = ObjectCarryAttachmentBone.transform;
+		item.transform.parent = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>().ObjectCarryAttachmentBone.transform;
 		animationController.IsHoldingItem = true;
 		ObjectHolding = item;
 		
@@ -1364,14 +1436,36 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public bool OnInteractWithPopupItem(UIPopupItemScript item)
 	{
-
-
 		switch(item.Type)
 		{
 			case PopupItemType.Token:
 			{
 				//Stop(true);
-				Evolution += item.Points;
+			PersistentData.Singleton.Evolution += item.Points;
+
+				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
+				{
+				if(PersistentData.Singleton.Evolution >= AniminSubevolutionStageData.Stages[i])
+					{
+					if(!PersistentData.Singleton.SubstagesCompleted.Contains((AniminSubevolutionStageId)i))
+						{
+						PersistentData.Singleton.SubstagesCompleted.Add((AniminSubevolutionStageId)i);
+							AchievementsScript.Singleton.Show(AchievementTypeId.Evolution, 0);
+						}
+					}
+
+				}
+
+			if(PersistentData.Singleton.Evolution >= 100)
+				{
+				if(PersistentData.Singleton.AniminEvolutionId != AniminEvolutionStageId.Adult)
+					{
+					PersistentData.Singleton.Evolution = 0;
+					PersistentData.Singleton.AniminEvolutionId = (AniminEvolutionStageId)((int)PersistentData.Singleton.AniminEvolutionId + 1);
+						UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
+
+					}
+				}
 
 
 				//UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
@@ -1390,7 +1484,7 @@ public class CharacterProgressScript : MonoBehaviour
 			else
 			{*/
 				//ShowText("yum yum");
-				Hungry += item.Points;
+			PersistentData.Singleton.Hungry += item.Points;
 				//Stop(true);
 						
 
@@ -1416,14 +1510,14 @@ public class CharacterProgressScript : MonoBehaviour
 			else
 			{*/
 				//ShowText("I feel good");
-				Health += item.Points;
+			PersistentData.Singleton.Health += item.Points;
 				Stop(true);
 				animationController.IsTakingPill = true;
 
 			if(item.SpecialId == SpecialFunctionalityId.Injection)
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.InjectionReact);
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.InjectionReact);
 			else
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(CreaturePlayerId, CreatureSoundId.EatPill);
+				UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.EatPill);
 
 			//}
 				break;
@@ -1502,6 +1596,7 @@ public enum ActionId
 	EatItem,
 	WaitEatingFinish,
 	ThrowItemAfterPickup,
+	ExitPortalMainStage,
 }
 
 public enum HungrySadUnwellLoopId

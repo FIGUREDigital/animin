@@ -5,12 +5,12 @@ public class CameraFacingBillboardScript : MonoBehaviour
 {
 	public float Alpha;
 	public bool IsShowing;
-	public Camera CameraRef;
+	//public Camera CameraRef;
 
 	void Update()
 	{
 
-		transform.LookAt(CameraRef.transform.position/* + CameraRef.transform.rotation * Vector3.back,
+		transform.LookAt(Camera.main.transform.position/* + CameraRef.transform.rotation * Vector3.back,
 		                 CameraRef.transform.rotation * Vector3.up*/);
 
 		//transform.LookAt(CameraRef.transform.rotation * Vector3.back,
