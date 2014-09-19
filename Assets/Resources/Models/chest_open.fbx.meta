@@ -11,6 +11,8 @@ ModelImporter:
     100010: chest:skin_cog_joint
     100012: chest:skin_lid_joint
     100014: //RootNode
+    100016: chest:model:base
+    100018: chest:model:lid
     400000: chest:actor_grp
     400002: chest:base
     400004: chest:chest
@@ -19,12 +21,18 @@ ModelImporter:
     400010: chest:skin_cog_joint
     400012: chest:skin_lid_joint
     400014: //RootNode
+    400016: chest:model:base
+    400018: chest:model:lid
     4300000: chest:lid
     4300002: chest:base
+    4300004: chest:model:lid
+    4300006: chest:model:base
     7400000: Take 001
     9500000: //RootNode
     13700000: chest:base
     13700002: chest:lid
+    13700004: chest:model:base
+    13700006: chest:model:lid
   materials:
     importMaterials: 1
     materialName: 0

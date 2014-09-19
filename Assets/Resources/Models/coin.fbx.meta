@@ -4,21 +4,17 @@ ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
-    100002: coin_01_joint
-    100004: geo
-    100006: zef
-    100008: coin_01_geo
+    100002: coin_01_geo
+    100004: coin_01_joint
+    100006: geo
     400000: //RootNode
-    400002: coin_01_joint
-    400004: geo
-    400006: zef
-    400008: coin_01_geo
-    4300000: zef
-    4300002: coin_01_geo
+    400002: coin_01_geo
+    400004: coin_01_joint
+    400006: geo
+    4300000: coin_01_geo
     7400000: Take 001
     9500000: //RootNode
-    13700000: zef
-    13700002: coin_01_geo
+    13700000: coin_01_geo
   materials:
     importMaterials: 1
     materialName: 0
@@ -34,41 +30,7 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 150
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: coin_01_joint
-        weight: 1
-      - path: geo
-        weight: 1
-      - path: geo/zef
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []

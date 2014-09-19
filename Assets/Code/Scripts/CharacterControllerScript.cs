@@ -50,7 +50,7 @@ public class CharacterControllerScript : MonoBehaviour
 	
 	public float jumpHeight = 0.5F;
 	
-	public AnimationControllerScript animationController;
+	//public AnimationControllerScript animationController;
 	
 	// The gravity for the character
 	
@@ -163,7 +163,7 @@ public class CharacterControllerScript : MonoBehaviour
 	//public float VerticalDirection;
 	public bool IsResetFalling;
 	
-	public MinigameCollectorScript MinigameRef;
+	//public MinigameCollectorScript MinigameRef;
 	
 	// Use this for initialization
 	
@@ -545,7 +545,7 @@ public class CharacterControllerScript : MonoBehaviour
 			}
 		}
 
-		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsJumbing = IsJumping();
+		this.GetComponent<AnimationControllerScript>().IsJumbing = IsJumping();
 	
 		/*if(IsJumping())
 		{
@@ -572,7 +572,7 @@ public class CharacterControllerScript : MonoBehaviour
 
 		if(hit.gameObject.tag == "EnemyGunGame")
 		{
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(hit.gameObject);
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(hit.gameObject, this.gameObject);
 			//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(hit.gameObject);
 			//Destroy(hit.gameObject);
 		}

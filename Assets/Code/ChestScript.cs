@@ -71,24 +71,8 @@ public class ChestScript : MonoBehaviour
 			{
 				this.GetComponent<Animator>().SetBool("Open", true);
 				State = AnimationStateId.OpeningLid;
-				
-				for(int i=0;i<Coins.Length;++i)
-				{
-					//GameObject resource = Resources.Load<GameObject>(@"Prefabs/Lightbulb");
-					
-					GameObject zef = /*Instantiate(resource) as GameObject;//*/ UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().SpawnZef(Vector3.zero);
-					
-					zef.transform.parent = Coins[i].transform.GetChild(0).transform;
-					zef.transform.localPosition = Vector3.zero;	
-					zef.transform.localRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-					zef.transform.localScale *= 0.8f;
-					
-					
-					//zef.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-					
-					Coins[i].GetComponent<Animator>().SetBool("play", true);
-					
-				}
+				Timer = 1.2f;
+
 			}
 
 			break;
@@ -97,25 +81,31 @@ public class ChestScript : MonoBehaviour
 
 			case AnimationStateId.OpeningLid:
 			{
-			Timer -= Time.deltaTime;
-			if(Timer <= 0)
-			{
-				for(int i=0;i<Coins.Length;++i)
+				Timer -= Time.deltaTime;
+				if(Timer <= 0)
 				{
-					Coins[i].transform.GetChild(0).transform.GetChild(0).GetComponent<SpinObjectScript>().enabled = true;
-					Coins[i].transform.GetChild(0).transform.GetChild(0).transform.parent = 
-						UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
 					
+					for(int i=0;i<Coins.Length;++i)
+					{
+						GameObject zef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().SpawnZef(Vector3.zero);
+
+						zef.GetComponent<SpinObjectScript>().enabled = false;
+						
+						zef.transform.parent = Coins[i].transform.GetChild(0).transform;
+						zef.transform.localPosition = Vector3.zero;	
+						zef.transform.localScale *= 0.8f;
+						Coins[i].transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+						Coins[i].GetComponent<Animator>().SetBool("play", true);
+						Coins[i] = zef;
+						//Coins[i].transform.localScale = new Vector3(12, 12, 12);
+						
+					}
+
+					Timer = 4;
+					State = AnimationStateId.LidOpened;
 				}
 
-				Destroy(this.gameObject);
-			}
-
-//				for(int i=0;i<Coins.Length;++i)
-//				{
-//					Coins[i].GetComponent<Animator>().SetBool("play", false);
-//					
-//				}
+				
 
 				break;
 			}
@@ -127,21 +117,69 @@ public class ChestScript : MonoBehaviour
 			}
 			case AnimationStateId.LidOpened:
 			{
-				for(int i=0;i<6;++i)
+				Timer -= Time.deltaTime;
+				if(Timer <= 0)
 				{
-					GameObject zef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().SpawnZef(this.transform.localPosition);
-					int sign1 = 1;
-					int sign2 = 1;
-					if(Random.Range(0, 2) == 0) sign1 = -1;
-					if(Random.Range(0, 2) == 0) sign2 = -1;
-					zef.AddComponent<AnimateChestObjectOutScript>().Destination = zef.transform.localPosition + new Vector3(Random.Range(2.5f, 4.8f) * sign1 , 0, Random.Range(2.5f, 4.8f) * sign2);
+					for(int i=0;i<Coins.Length;++i)
+					{
+						Coins[i].GetComponent<SpinObjectScript>().enabled = true;
+						Coins[i].transform.parent = 
+							UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
+					}
+					
+					State = AnimationStateId.ThrowItemsOut;
+					BeginFadeOut = true;
 				}
-
-				State = AnimationStateId.ThrowItemsOut;
-			Timer = 3;
+	
 				break;
 			}
 		}
 	
+
+		UpdateFading();
+	}
+
+	private void RecurviseSetAlpha(GameObject gameObject, Color alphaColor)
+	{
+		if(gameObject.renderer != null)
+		{
+			gameObject.renderer.material.shader = Shader.Find("Transparent/Diffuse"); 
+			gameObject.renderer.material.color = alphaColor;
+		}
+
+		for(int i=0;i<gameObject.transform.childCount;++i)
+		{
+			RecurviseSetAlpha(gameObject.transform.GetChild(i).gameObject, alphaColor);
+		}
+	}
+
+	private float Alpha = 1;
+	private bool BeginFadeOut;
+	private void UpdateFading()
+	{
+		if(BeginFadeOut)
+		{
+			bool destroy = false;
+
+
+			Alpha -= Time.deltaTime *  3;
+			if(Alpha <= 0) 
+				{
+				Alpha = 0;
+					destroy = true;
+				}
+
+				RecurviseSetAlpha(this.gameObject, new Color(
+					1,
+					1,
+					1,
+				Alpha));
+
+
+			if(destroy)
+			{
+				Destroy(this.gameObject);
+			}
+		}
 	}
 }

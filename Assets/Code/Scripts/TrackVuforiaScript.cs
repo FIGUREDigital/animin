@@ -228,7 +228,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
 			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
-
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(false);
 			//CubeGamePosition.ValueNext = Vector3.zero;
 			//CubeGameRotation.ValueNext = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent.rotation.eulerAngles;
 		}
@@ -242,7 +242,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
 			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
-
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(true);
 			//CubeGameRotation.ValueNext = new Vector3(0,0,0);
 			//CubeGamePosition.ValueNext = new Vector3(0,-0.3f,-0.1f);
 		}

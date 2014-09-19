@@ -48,7 +48,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			{
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
 				
-				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ShootBulletForward();
+				//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ShootBulletForward();
 				break;
 			}
 			}
@@ -206,7 +206,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = true;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<ObjectLookAtDeviceScript>().enabled = true;
-			
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(true);
+
 			//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);	
 			UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(false);	
@@ -252,6 +253,13 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(true);
 			
+			break;
+		}
+
+		case UIFunctionalityId.BackToStatsFromAchievement:
+		{
+			UIGlobalVariablesScript.Singleton.AchievementsScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(true);
 			break;
 		}
 			
@@ -305,8 +313,13 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
 
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = false;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<ObjectLookAtDeviceScript>().enabled = false;
+//
+//			UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>();
+//			UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
+
 
 			//UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.JumbButton.SetActive(false);
@@ -340,7 +353,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				
 				//UIGlobalVariablesScript.Singleton.ShootButton.SetActive(true);
 
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
+				//UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
 				
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
 				Camera.main.GetComponent<MusicScript>().PlayGun();
@@ -359,6 +372,12 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 					UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
 					UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
+
+
+				UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>();
+				UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
+
+
 					//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
 
 					UIGlobalVariablesScript.Singleton.JumbButton.SetActive(true);
@@ -401,6 +420,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		}
 		case UIFunctionalityId.OpenSettings:
 		{
+			UIGlobalVariablesScript.Singleton.AchievementsScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.SettingsScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(false);
 			break;
@@ -423,7 +443,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.CloseAchivements:
 		{
-			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(true);
+			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.AchievementsScreenRef.SetActive(false);
 			break;
 		}

@@ -10,7 +10,7 @@ public class SpinObjectScript : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		rotationAngle = Random.Range(0, 360);
+		rotationAngle = Random.Range(0, 360) + this.transform.rotation.eulerAngles.y;
 		rotaitonSpeed = Random.Range(45, 55);
 	}
 	

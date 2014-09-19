@@ -111,7 +111,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 			Weight = Mathf.Lerp(Weight, 0.0f, Time.deltaTime * 7);
 		}
 
-		HeadReferenceScript head = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>();
+		HeadReferenceScript head = this.GetComponent<AnimationControllerScript>().CharacterModel.GetComponent<HeadReferenceScript>();
 
 		head.HeadBoneToRotate.transform.rotation = Quaternion.Slerp(head.HeadBoneToRotate.transform.rotation, rotation * Quaternion.Euler(Angles), Weight);
 	}

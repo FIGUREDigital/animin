@@ -78,6 +78,16 @@ public class CharacterSwapManagementScript : MonoBehaviour
 //		}
 	}
 
+	public string GetModelPath(AniminId animinId, AniminEvolutionStageId id)
+	{
+		return Models[(int)animinId, (int)id];
+	}
+
+	public AnimatorOverrideController GetAnimationControlller(AniminId animinId, AniminEvolutionStageId id)
+	{
+		return AnimationLists[(int)animinId, (int)id];
+	}
+
 	public void LoadCharacter(AniminId animinId, AniminEvolutionStageId id)
 	{
 		Object resource = Resources.Load(Models[(int)animinId, (int)id]);
@@ -115,38 +125,6 @@ public class CharacterSwapManagementScript : MonoBehaviour
 
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().SetCharacter(instance);
 
-	}
-
-	/*private void LoadAnimations(CreatureTypeId creatureId, string basePath, string animPrefix)
-	{
-		for(int i=0;i<(int)CreatureAnimationId.Count;++i)
-		{
-			string animName = ((CreatureAnimationId)i).ToString();
-			animName = animName.Substring(1);
-
-			string finalPath = basePath + animPrefix + animName;
-			//Debug.Log(finalPath);
-			Object clip = Resources.Load(finalPath);
-			if(clip == null) 
-			{
-				Debug.Log("ANIMATION MISSING: " + finalPath);
-				continue;
-			}
-
-			AnimationsPerModel[(int)creatureId, i] = clip as AnimationClip;
-		}
-	}*/
-
-	// Use this for initialization
-	void Start () 
-	{
-
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }
 

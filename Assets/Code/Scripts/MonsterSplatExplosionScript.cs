@@ -15,14 +15,14 @@ public class MonsterSplatExplosionScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(this.transform.localPosition.y <= -0.2f)
+		if(this.transform.localPosition.y <= 0.0f)
 		{
 			if(SplatPrefab != null)
 			{
-
 				GameObject instance = (GameObject)Instantiate(SplatPrefab);
 				instance.transform.parent = this.transform.parent;
-				instance.transform.position = this.transform.position;
+				instance.transform.localPosition = new Vector3(this.transform.localPosition.x, 0, this.transform.localPosition.z);
+				//instance.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z);
 				instance.transform.rotation = Quaternion.Euler(
 					instance.transform.rotation.eulerAngles.x, 
 					instance.transform.rotation.eulerAngles.y,

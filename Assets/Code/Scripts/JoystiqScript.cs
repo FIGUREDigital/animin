@@ -58,193 +58,16 @@ public class JoystiqScript : MonoBehaviour {
 	
 	private bool enable;                // VJR external control.
 	
-	
+
+
+	public AnimationControllerScript CharacterAnimationRef;
 	public CharacterControllerScript CharacterControllerRef;
-	//
+
 	
 	
-	
-	/*public void DisableJoystick() 
+	private void Awake() 
 	{
-
-		joystick.enabled = false;
-		background.enabled = false;
-		backOBJ.SetActive(false);
-		enable = false; 
-		ResetJoystick();
-	}
 	
-	public void EnableJoystick() 
-	{
-		//joystick.enabled = true;
-		background.enabled = true;
-		backOBJ.SetActive(true);
-		enable = true;
-		ResetJoystick();
-	}*/
-	
-	
-	
-	//
-	/*
-	public void DisableJoystick() 
-	{
-		enable = false; 
-		ResetJoystick();
-	}
-	public void EnableJoystick() 
-	{
-		enable = true; 
-		ResetJoystick();
-	}
-	
-	public void ResetJoystick() 
-	{
-		
-		VJRvector = new Vector2(0,0); VJRnormals = VJRvector;
-		lastID = fingerID; fingerID = -1; tapTimer = 0.150f;
-		//joystick.color = inactiveColor; position = origin; gotPosition = false;
-		
-	}
-	*/
-	
-	
-	/*private Vector2 GetRadius(Vector2 midPoint, Vector2 endPoint, float maxDistance) {
-		
-		Vector2 distance = endPoint;
-		
-		if (Vector2.Distance(midPoint,endPoint) > maxDistance) {
-			
-			distance = endPoint-midPoint; distance.Normalize();
-			
-			return (distance*maxDistance)+midPoint;
-			
-		}
-		
-		return distance;
-		
-	}
-	
-	
-	
-	private void GetPosition() {
-		
-		foreach (Touch touch in Input.touches) 
-		{	
-			fingerID = touch.fingerId;
-			
-			if (fingerID >= 0 && fingerID < Input.touchCount) 
-			{
-
-				if(Input.GetTouch(fingerID).position.x < Screen.width/3 && Input.GetTouch(fingerID).position.y < Screen.height/3 && Input.GetTouch(fingerID).phase == TouchPhase.Began)
-				{
-					
-					position = Input.GetTouch(fingerID).position;
-
-					origin = position;
-
-					//Debug.Log("GET POSITION@:" + position.ToString());
-					
-//					joystick.texture = joystick2D; 
-//					joystick.color = activeColor;
-//					
-//					background.texture = background2D; 
-//					background.color = activeColor;
-					
-					if (fingerID == lastID && tapTimer > 0) 
-					{
-						VJRdoubleTap = true;
-					} 
-
-					gotPosition = true;
-					
-				}
-			}
-		}
-	}*/
-	
-	
-	/*
-	private void GetConstraints() {
-		
-		if (origin.x < (ThumbpadBack.transform.position.x)) 
-		{
-			origin.x = ThumbpadBack.transform.position.x;
-		}
-		
-		if (origin.y < (ThumbpadBack.transform.position.y)) 
-		{
-			origin.y = (ThumbpadBack.transform.position.y);
-		}
-		
-		if (origin.x > (ThumbpadBack.transform.position.x + ThumbpadBack.width)) 
-		{
-			origin.x = (ThumbpadBack.transform.position.x + ThumbpadBack.width);
-		}
-		
-		if (origin.y > (ThumbpadBack.transform.position.y + ThumbpadBack.height)) 
-		{
-			origin.y = (ThumbpadBack.transform.position.y + ThumbpadBack.height);
-		}
-		
-	}
-	
-	
-	
-	private Vector2 GetControls(Vector2 pos, Vector2 ori) {
-		
-		Vector2 vector = new Vector2();
-		
-		if (Vector2.Distance(pos,ori) > 0)
-		{
-			vector = new Vector2(pos.x-ori.x,pos.y-ori.y);
-		}
-		
-		return vector;
-	}
-	
-	
-	*/
-	//
-	
-	
-	
-	private void Awake() {
-		
-		/*gameObject.transform.localScale = new Vector3(0,0,0);
-		gameObject.transform.position = new Vector3(0,0,999);
-
-		if (Screen.width > Screen.height) 
-		{
-			size = Screen.height;
-		} 
-		else 
-		{
-			size = Screen.width;
-		} 
-
-		VJRvector = new Vector2(0,0);*/
-
-		/*
-		joystick = gameObject.AddComponent("GUITexture") as GUITexture;
-		joystick.texture = joystick2D; joystick.color = inactiveColor;
-
-		backOBJ = new GameObject("VJR-Joystick Back");
-		backOBJ.transform.parent = this.transform;
-		backOBJ.transform.localScale = new Vector3(0,0,0);
-		background = backOBJ.AddComponent("GUITexture") as GUITexture;
-		background.texture = background2D; background.color = inactiveColor;
-
-
-		jumbOBJ = new GameObject("jumb button");
-		jumbOBJ.transform.parent = this.transform;
-		jumbOBJ.transform.localScale = new Vector3(0,0,0);
-		jumbTexture = jumbOBJ.AddComponent("GUITexture") as GUITexture;
-
-		jumbTexture.texture = jumb2D; 
-		jumbTexture.color = Color.white;
-
-		*/
 
 		fingerID = -1; 
 		lastID = -1; 
@@ -252,10 +75,7 @@ public class JoystiqScript : MonoBehaviour {
 		tapTimer = 0; 
 		length = 140;
 
-		//position = new Vector2(ThumbpadBack.transform.position.x + ThumbpadBack.width / 2, ThumbpadBack.transform.position.y + ThumbpadBack.height / 2); //new Vector2((Screen.width/3)/2,(Screen.height/3)/2);; 
-
-		//origin = position;
-		//gotPosition = false; EnableJoystick(); enable = true;
+	
 	}
 
 	void Start()
@@ -269,7 +89,8 @@ public class JoystiqScript : MonoBehaviour {
 
 	private Vector2 finalMovementDirection = Vector2.zero;
 	
-	private void Update() {
+	private void Update() 
+	{
 
 		/*if(Input.GetKey(KeyCode.A))
 		{
@@ -404,102 +225,6 @@ public class JoystiqScript : MonoBehaviour {
 			ThumbpadFront.bottomAnchor.Set(ThumbpadFront.bottomAnchor.relative, BottomAnchorPosition);
 		}
 
-		//Debug.Log(finalMovementDirection.ToString());
-		/*
-		if (tapTimer > 0) 
-		{
-			tapTimer -= Time.deltaTime;
-		}
-		
-		if (fingerID > -1 && fingerID >= Input.touchCount) 
-		{
-			ResetJoystick();
-		}
-		
-		if (enable == true) 
-		{
-			
-			if (Input.touchCount > 0 && gotPosition == false) 
-			{
-				GetPosition(); 
-				GetConstraints();
-			}
-			
-			if (Input.touchCount > 0 && fingerID > -1 && fingerID < Input.touchCount && gotPosition == true) {
-				
-				foreach (Touch touch in Input.touches) {
-					
-					if (touch.fingerId == fingerID) {
-						
-						position = touch.position; 
-						//Debug.Log("position1:" + position.ToString());
-						position = GetRadius(origin, position,length);
-						//Debug.Log("position2:" + position.ToString());
-
-						VJRvector = GetControls(position,origin); 
-						//Debug.Log("VJRVECTOR:" + VJRvector.ToString());
-						VJRnormals = new Vector2(VJRvector.x/length,VJRvector.y/length);
-						
-						if (Input.GetTouch(fingerID).position.x > (ThumbpadBack.transform.position.x + ThumbpadBack.width)
-						    || Input.GetTouch(fingerID).position.y > (ThumbpadBack.transform.position.y + ThumbpadBack.height)) 
-						{
-							ResetJoystick();
-						}
-						//Debug.Log("Joystick Axis:: "+VJRnormals); //<-- Delete this line | (X,Y), from -1.0 to +1.0 | Use this value "VJRnormals" in your scripts.
-					}
-				}
-				
-
-				Debug.Log(VJRnormals.ToString());
-				
-			}
-			
-			if (gotPosition == true && Input.touchCount > 0 && fingerID > -1 && fingerID < Input.touchCount) {
-				
-				if (Input.GetTouch(fingerID).phase == TouchPhase.Ended || Input.GetTouch(fingerID).phase == TouchPhase.Canceled) 
-				{
-					ResetJoystick();
-				}
-				
-			}
-			
-			/*if (gotPosition == false && fingerID == -1 && tapTimer <= 0) 
-			{
-				if (background.color != inactiveColor) 
-				{
-					background.color = inactiveColor;
-				}
-			}*/
-
-			//background.pixelInset = new Rect(origin.x-(background.pixelInset.width/2),origin.y-(background.pixelInset.height/2),size/4,size/4);
-			//joystick.pixelInset = new Rect(position.x-(joystick.pixelInset.width/2),position.y-(joystick.pixelInset.height/2),size/4,size/4);
-		
-
-
-		 
-
-			//Vector2 jumbPosition = new Vector2((Screen.width/3)/2,(Screen.height/3)/2);;
-			//jumbTexture.pixelInset = new Rect(Screen.width-(jumbTexture.pixelInset.width) * 1.3f, (jumbTexture.pixelInset.height/2),size/6,size/6);
-			//Debug.Log("background.pixelInset: " + background.pixelInset.ToString());
-			///Debug.Log("origin: " + origin.ToString());
-			//Debug.Log("joystick.pixelInset:" + joystick.pixelInset.ToString());
-			//*
-
-			//Debug.Log(ThumbpadBack.rightAnchor.rect.ToString());
-			//Debug.Log(ThumbpadBack.leftAnchor.rect.ToString());
-		//}
-		/*else if (background.pixelInset.width > 0) 
-		{
-			background.pixelInset = new Rect(0,0,0,0); 
-			joystick.pixelInset = new Rect(0,0,0,0);
-
-			//Debug.Log("pixel inset 0");
-		}*/
-	
-
-		//Vector3 vectorA = new Vector3(UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.x, 0, UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position.z);
-		//Vector3 vectorB = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
-
 
 		if(CharacterControllerRef != null)
 		{
@@ -511,21 +236,22 @@ public class JoystiqScript : MonoBehaviour {
 			{
 				if(movementSpeed < 0.5f)
 				{
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsRunning = false;
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsWalking = true;
+
+					CharacterAnimationRef.IsRunning = false;
+					CharacterAnimationRef.IsWalking = true;
 				}
 				else
 				{
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsRunning = true;
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsWalking = false;
+					CharacterAnimationRef.IsRunning = true;
+					CharacterAnimationRef.IsWalking = false;
 				}
 				CharacterControllerRef.walkSpeed =  movementSpeed * 150.0f;
 				CharacterControllerRef.RotateToLookAtPoint(CharacterControllerRef.transform.position + CharacterControllerRef.MovementDirection * 6);
 			}
 			else
 			{
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsRunning = false;
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsWalking = false;
+				CharacterAnimationRef.IsRunning = false;
+				CharacterAnimationRef.IsWalking = false;
 				CharacterControllerRef.MovementDirection = Vector3.zero;
 			}
 		}

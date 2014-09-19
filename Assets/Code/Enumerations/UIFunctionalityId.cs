@@ -64,4 +64,5 @@ public enum UIFunctionalityId
 	HomeGame,
 	RestartGame,
 	AudioOnOffGame,
+	BackToStatsFromAchievement,
 }

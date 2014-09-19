@@ -20,7 +20,7 @@ public class GunGameEnemyScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		GameObject mainCharacter = UIGlobalVariablesScript.Singleton.MainCharacterRef;
+		//GameObject mainCharacter = UIGlobalVariablesScript.Singleton.MainCharacterRef;
 		GunsMinigameScript minigame = UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>();
 
 		if(HasMerged) 
@@ -61,7 +61,7 @@ public class GunGameEnemyScript : MonoBehaviour
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.GunGame_monsters_merge);
 
 			}
-			else if(radius <= 0.6f && enemyScript.TargetToFollow == mainCharacter)
+			else if(radius <= 0.6f && minigame.PlayersCharacters.Contains(TargetToFollow ))
 			{
 				this.TargetToFollow = allEnemies[i];
 				enemyScript.TargetToFollow = this.gameObject;
@@ -69,7 +69,7 @@ public class GunGameEnemyScript : MonoBehaviour
 			}
 			else
 			{
-				this.TargetToFollow = mainCharacter;
+				this.TargetToFollow = minigame.PlayersCharacters[Random.Range(0, minigame.PlayersCharacters.Count)];
 			}
 		}
 
@@ -98,6 +98,8 @@ public class GunGameEnemyScript : MonoBehaviour
 	void OnCollisionEnter(Collision collision)
 	{
 //		Debug.Log("COLLISION DETECTED: " + collision.gameObject.name + "_" + this.name);
+
+		GunsMinigameScript gunGame = UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>();
 		
 		if(collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Player")
 		{
@@ -127,15 +129,14 @@ public class GunGameEnemyScript : MonoBehaviour
 					Debug.Log("TargetToFollow != null: " + TargetToFollow.name);
 				}
 
-				if(TargetToFollow != null && TargetToFollow != UIGlobalVariablesScript.Singleton.MainCharacterRef)
+				if(TargetToFollow != null && !gunGame.PlayersCharacters.Contains(TargetToFollow ))
 				{
-					Debug.Log("the new code works");
-
 					GunGameEnemyScript script = TargetToFollow.GetComponent<GunGameEnemyScript>();
+					if(script == null) Debug.Log(TargetToFollow.name);
 
 					if(script.TargetToFollow == this.gameObject)
 					{
-						script.TargetToFollow = UIGlobalVariablesScript.Singleton.MainCharacterRef;
+						script.TargetToFollow = gunGame.PlayersCharacters[Random.Range(0, gunGame.PlayersCharacters.Count)];
 					}
 				}
 

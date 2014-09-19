@@ -14,6 +14,7 @@ public class BarrelCollisionScript : MonoBehaviour
 
 	public GameObject[] BulletPrefabs;
 	public Texture2D BarFrontTexture;
+	public Texture2D BuletIcon;
 	public string BarBackgroundTexture;
 	public GameObject DestroyedPrefab;
 
@@ -64,11 +65,13 @@ public class BarrelCollisionScript : MonoBehaviour
 		if(collision.gameObject.tag == "Bullet")
 		{
 			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().MeterBar.mainTexture = BarFrontTexture;
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().MeterBar.width = 1346;
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().MeterBar.height = 122;
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().BulletIcon.mainTexture = BuletIcon;
+
+			//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().MeterBar.width = 1346;
+			//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().MeterBar.height = 122;
 
 
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().MeterBarBackground.spriteName = BarBackgroundTexture;
+//			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().MeterBarBackground.spriteName = BarBackgroundTexture;
 			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnBulletHitBarrel(this.gameObject);
 			if(!BeginDestroy)
 			{

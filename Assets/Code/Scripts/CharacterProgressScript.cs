@@ -63,8 +63,11 @@ public class PersistentData
 {
 	public static PersistentData Singleton = new PersistentData();
 
+
+
 	static PersistentData()
 	{
+
 	}
 
 	public AniminId PlayerAniminId;
@@ -75,7 +78,8 @@ public class PersistentData
 	public const float MaxHealth = 100;
 	public int ZefTokens;
 	public List<AniminSubevolutionStageId> SubstagesCompleted = new List<AniminSubevolutionStageId>(); 
-
+	public string Username;
+	
 	private bool audioIsOn;
 	private float happy;
 	private float hungry;
@@ -164,7 +168,7 @@ public class PersistentData
 
 	public void Save()
 	{
-
+	
 		PlayerPrefs.SetFloat("Hungry", Hungry);
 		PlayerPrefs.SetFloat("Fitness", Fitness);
 		PlayerPrefs.SetFloat("Evolution", Evolution);

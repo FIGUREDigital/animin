@@ -79,28 +79,28 @@ public class ProjectileScript : MonoBehaviour
 				this.transform.localPosition.y - Time.deltaTime * TimerForArc,
 					this.transform.localPosition.z);
 
-				if(this.transform.localPosition.y <= -0.2f)
+			if(this.transform.localPosition.y <= 0.0f)
+			{
+				if(SplatPrefab != null)
 				{
-					if(SplatPrefab != null)
-					{
-						GameObject instance = (GameObject)Instantiate(SplatPrefab);
-							instance.transform.parent = this.transform.parent;
-							instance.transform.position = this.transform.position;
-						instance.transform.rotation = Quaternion.Euler(instance.transform.rotation.eulerAngles.x, instance.transform.rotation.eulerAngles.y, Random.Range(0, 360));
-							
-						UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
-					}
-
-					UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
-					Destroy(this.gameObject);
+					GameObject instance = (GameObject)Instantiate(SplatPrefab);
+						instance.transform.parent = this.transform.parent;
+					instance.transform.localPosition = new Vector3(this.transform.localPosition.x, 0, this.transform.localPosition.z);
+					instance.transform.rotation = Quaternion.Euler(instance.transform.rotation.eulerAngles.x, instance.transform.rotation.eulerAngles.y, Random.Range(0, 360));
+						
+					UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
 				}
+
+				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
+				Destroy(this.gameObject);
+			}
 
 		}
 	}
 
 	void OnCollisionEnter(Collision collision)
 	{
-//		Debug.Log("COLLISION DETECTED: " + collision.gameObject.tag);
+		Debug.Log("COLLISION DETECTED: " + collision.gameObject.name);
 		BeginFadeOut = true;
 
 		if(renderer != null) 
