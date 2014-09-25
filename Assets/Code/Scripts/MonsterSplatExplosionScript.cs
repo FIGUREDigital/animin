@@ -4,7 +4,7 @@ using System.Collections;
 public class MonsterSplatExplosionScript : MonoBehaviour 
 {
 	float myGravity = 400;
-	public GameObject SplatPrefab;
+	public string SplatPrefab;
 
 	// Use this for initialization
 	void Start () 
@@ -19,7 +19,9 @@ public class MonsterSplatExplosionScript : MonoBehaviour
 		{
 			if(SplatPrefab != null)
 			{
-				GameObject instance = (GameObject)Instantiate(SplatPrefab);
+				GameObject resourceLoad = Resources.Load(SplatPrefab) as GameObject;
+
+				GameObject instance = (GameObject)Instantiate(resourceLoad);
 				instance.transform.parent = this.transform.parent;
 				instance.transform.localPosition = new Vector3(this.transform.localPosition.x, 0, this.transform.localPosition.z);
 				//instance.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z);

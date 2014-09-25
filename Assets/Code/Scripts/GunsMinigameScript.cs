@@ -20,12 +20,15 @@ public class GunsMinigameScript : MonoBehaviour
 	}
 
 	//public GameObject GunPrefab;
-	public GameObject[] BulletPrefab;
-	public GameObject[] Barrels;
-	public GameObject[] EnemyPrefabs;
+	public string[] BulletPrefab;
+	public string[] Barrels;
+	public string[] EnemyPrefabs;
+	public string[] SpecialBarrels;
+	public string[] BulletSplats;
+
 	public UITexture MeterBar;
 	//public UISprite MeterBarBackground;
-	public List<GameObject> CurrentBullets = new List<GameObject>();
+	public List<string> CurrentBullets = new List<string>();
 	private GameStateId State;
 	private float AmmoTimer;
 	private float NextBarrelSpawnTimer;
@@ -36,8 +39,6 @@ public class GunsMinigameScript : MonoBehaviour
 	public GameObject[] MonsterSplatPrefabs;
 	//public Texture2D[] BarTextures;
 	public UITexture FrontBar;
-	public GameObject[] SpecialBarrels;
-	public GameObject[] BulletSplats;
 
 	private const float BarrelSpawnMinTime = 2;
 	private const float BarrelSpawnMaxTime = 5;
@@ -86,7 +87,10 @@ public class GunsMinigameScript : MonoBehaviour
 				RandomCubeTimer = Random.Range(8, 20);
 				Points = 0;
 
-				SpawnAnimin(AniminId.Tbo, AniminEvolutionStageId.Baby);
+			//if(GameController.instance.gameType == GameType.SOLO || PhotonNetwork.isMasterClient)
+				SpawnAniminStart(AniminId.Tbo, AniminEvolutionStageId.Baby);
+
+
 				//SpawnAnimin(AniminId.Tbo, AniminEvolutionStageId.Baby);
 				Go321Sprite.gameObject.SetActive(true);
 				Go321Sprite.mainTexture = Go321Textures[0];
@@ -185,65 +189,69 @@ public class GunsMinigameScript : MonoBehaviour
 				//if(Input.GetButtonDown("Fire1"))
 				//	ShootBulletForward();
 
-				NextBarrelSpawnTimer -= Time.deltaTime;
-				if(NextBarrelSpawnTimer <= 0)
+				if(GameController.instance.gameType == GameType.SOLO || PhotonNetwork.isMasterClient)
 				{
-					NextBarrelSpawnTimer = Random.Range(BarrelSpawnMinTime, BarrelSpawnMaxTime);
-					if(Random.Range(0, 10) == 0)
-						SpawnBarrel(true);
-					else
-						SpawnBarrel(false);
-				}
 
-				RandomCubeTimer -= Time.deltaTime;
-				if(RandomCubeTimer <= 0)
-				{
-					SpawnRandomCube();
-				RandomCubeTimer = Random.Range(8, 20);
-				}
-
-				AmmoTimer -= Time.deltaTime * 0.03f;
-				if(AmmoTimer <= 0.001f)
-				{
-					AmmoTimer = 0.001f;
-					State = GameStateId.Completed;
-				}
-				
-
-				MeterBar.width = (int)(1679 * AmmoTimer);
-				MeterBar.uvRect = new Rect(0, 0, AmmoTimer, 1);
-				MeterBar.MarkAsChanged();
-				//MeterBar.material.mainTextureOffset = new Vector2( AmmoTimer, 0);
-
-				WaveTimerForNext -= Time.deltaTime;
-				if(WaveTimerForNext <= 0)
-				{
-					Wave++;
-					if(Wave == WaveTimers.Length)
-					{
-						State = GameStateId.Completed;
-					}
-					else
-					{
-						WaveTimerForNext = WaveTimers[Wave];
-						int enemyCount = Random.Range(WaveMinEnemies[Wave], WaveMaxEnemies[Wave]);
-						for(int a=0;a<enemyCount;++a)
+						NextBarrelSpawnTimer -= Time.deltaTime;
+						if(NextBarrelSpawnTimer <= 0)
 						{
-							SpawnEnemy(0);
+							NextBarrelSpawnTimer = Random.Range(BarrelSpawnMinTime, BarrelSpawnMaxTime);
+							if(Random.Range(0, 10) == 0)
+								SpawnBarrel(true);
+							else
+								SpawnBarrel(false);
 						}
+
+						RandomCubeTimer -= Time.deltaTime;
+						if(RandomCubeTimer <= 0)
+						{
+							SpawnRandomCube();
+						RandomCubeTimer = Random.Range(8, 20);
+						}
+
+						AmmoTimer -= Time.deltaTime * 0.03f;
+						if(AmmoTimer <= 0.001f)
+						{
+							AmmoTimer = 0.001f;
+							State = GameStateId.Completed;
+						}
+						
+
+						MeterBar.width = (int)(1679 * AmmoTimer);
+						MeterBar.uvRect = new Rect(0, 0, AmmoTimer, 1);
+						MeterBar.MarkAsChanged();
+						//MeterBar.material.mainTextureOffset = new Vector2( AmmoTimer, 0);
+
+						WaveTimerForNext -= Time.deltaTime;
+						if(WaveTimerForNext <= 0)
+						{
+							Wave++;
+							if(Wave == WaveTimers.Length)
+							{
+								State = GameStateId.Completed;
+							}
+							else
+							{
+								WaveTimerForNext = WaveTimers[Wave];
+								int enemyCount = Random.Range(WaveMinEnemies[Wave], WaveMaxEnemies[Wave]);
+								for(int a=0;a<enemyCount;++a)
+								{
+									SpawnEnemyStart(0);
+								}
+							}
+
+						}
+
+					AutoShootCooldown -= Time.deltaTime;
+					if(AutoShootCooldown <= 0)
+					{
+						AutoShootCooldown = 0.18f;
+						//UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
+
+						for(int a=0;a<PlayersCharacters.Count;++a)
+							ShootBulletForward(PlayersCharacters[a]);
 					}
-
 				}
-
-			AutoShootCooldown -= Time.deltaTime;
-			if(AutoShootCooldown <= 0)
-			{
-				AutoShootCooldown = 0.18f;
-				//UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
-
-				for(int a=0;a<PlayersCharacters.Count;++a)
-					ShootBulletForward(PlayersCharacters[a]);
-			}
 
 				//MeterBar.renderer.set = (int)((AmmoTimer) * MeterBarBackground.width);
 
@@ -343,7 +351,7 @@ public class GunsMinigameScript : MonoBehaviour
 		//Destroy(barrel);
 		AmmoTimer += 0.07f;
 		if(AmmoTimer >= 1) AmmoTimer = 1;
-		GameObject[] prefabs = barrel.GetComponent<BarrelCollisionScript>().BulletPrefabs;
+		string[] prefabs = barrel.GetComponent<BarrelCollisionScript>().BulletPrefabs;
 		CurrentBullets.Clear();
 		CurrentBullets.AddRange(prefabs);
 
@@ -352,10 +360,10 @@ public class GunsMinigameScript : MonoBehaviour
 		UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.GunGame_barrel_destroy);
 	}
 
-	public void SpawnAnimin(AniminId animinid, AniminEvolutionStageId evolution)
+	public void SpawnAniminStart(AniminId animinid, AniminEvolutionStageId evolution)
 	{
-		string modelPath = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().GetModelPath(animinid, evolution);
-		RuntimeAnimatorController controller = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().GetAnimationControlller(animinid, evolution);
+		//string modelPath = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().GetModelPath(animinid, evolution);
+		//RuntimeAnimatorController controller = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().GetAnimationControlller(animinid, evolution);
 
 		//Object resource1 = Resources.Load("Prefabs/tbo_baby_multi");
 	//	Object resource = Resources.Load(modelPath);
@@ -366,22 +374,19 @@ public class GunsMinigameScript : MonoBehaviour
 		if (GameController.instance.gameType == GameType.SOLO) {
 			Object resource1 = Resources.Load("Prefabs/tbo_baby_multi");
 			instance = GameObject.Instantiate(resource1) as GameObject;
-		} else 
+		} 
+		else 
 		{
 			instance = PhotonNetwork.Instantiate("Prefabs/tbo_baby_multi", Vector3.zero, Quaternion.identity, 0);
 		}
+
 		instance.GetComponent<CharacterControllerScript>().SetLocal(true);
-
-		//childModel.GetComponent<Animator>().runtimeAnimatorController = controller;
-
-		PlayersCharacters.Add(instance);
-		
 		UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = instance.GetComponent<AnimationControllerScript>();
 		UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = instance.GetComponent<CharacterControllerScript>();
 
 	}
 
-	public void SetSpawnedAniminSettings(GameObject instance)
+	public void SpawnAniminEnd(GameObject instance)
 	{
 		Vector3 scale = instance.transform.localScale;
 		
@@ -398,44 +403,65 @@ public class GunsMinigameScript : MonoBehaviour
 				childGun.SetActive(true);
 			}
 		}
+
+		
+		PlayersCharacters.Add(instance);
 	}
 
-	public GameObject SpawnEnemy(int level)
+	public GameObject SpawnEnemyStart(int level)
 	{
 		if(level >= EnemyPrefabs.Length) level = EnemyPrefabs.Length - 1;
 
+		GameObject resourceLoad = Resources.Load(EnemyPrefabs[level]) as GameObject;
+
+		GameObject newEnemy = null;
+		if (GameController.instance.gameType == GameType.SOLO) 
+		{
+			newEnemy = Instantiate( resourceLoad ) as GameObject;
+		} 
+		else 
+		{
+			newEnemy = PhotonNetwork.Instantiate(EnemyPrefabs[level], Vector3.zero, Quaternion.identity, 0, new object[] { level });
+		}
+
+		newEnemy.GetComponent<GunGameEnemyScript>().SetLocal(true);
+
+	
+		return newEnemy;
+	}
+
+	public void SpawnEnemyEnd(GameObject newEnemy, int level)
+	{	
 		Texture2D[] textures = SlimeTextures;
 		if(level == 1) textures = SlimeLevel2Textures;
-
+		
 		float scale = 1;
 		if(level == 1) scale = 3;
 
-		GameObject newProjectile = Instantiate( EnemyPrefabs[level] ) as GameObject;
-		newProjectile.transform.parent = this.transform;
-		newProjectile.transform.position = new Vector3(0, 0, 0);
-		newProjectile.transform.rotation = Quaternion.identity;
-		newProjectile.transform.localScale = new Vector3(0.06f * scale, 0.06f * scale, 0.06f * scale);
-		newProjectile.transform.localPosition = new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f));
-
+		newEnemy.transform.parent = this.transform;
+		newEnemy.transform.position = new Vector3(0, 0, 0);
+		newEnemy.transform.rotation = Quaternion.identity;
+		newEnemy.transform.localScale = new Vector3(0.06f * scale, 0.06f * scale, 0.06f * scale);
+		newEnemy.transform.localPosition = new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f));
+		
 		//if(level == 1)
 		//	newProjectile.transform.rotation = Quaternion.Euler(15, 0, 0);
-
+		
 		int textureIndex = Random.Range(0, textures.Length);
 		Texture2D texture = textures[textureIndex];
-
-		for(int i=0;i<newProjectile.transform.childCount;++i)
-			if(newProjectile.transform.GetChild(i).renderer != null)
-				newProjectile.transform.GetChild(i).renderer.material.mainTexture = texture;
-
-		newProjectile.GetComponent<GunGameEnemyScript>().BulletSplat = BulletSplats[textureIndex];
-		newProjectile.GetComponent<GunGameEnemyScript>().SkinColor = SlimeColors[textureIndex];
-		newProjectile.GetComponent<GunGameEnemyScript>().Speed = Random.Range(0.05f, 0.11f) * (level + 1);
-		newProjectile.GetComponent<GunGameEnemyScript>().Splat = MonsterSplatPrefabs[textureIndex];
-		newProjectile.GetComponent<GunGameEnemyScript>().Level = level;
-		newProjectile.GetComponent<GunGameEnemyScript>().TargetToFollow = PlayersCharacters[Random.Range(0, PlayersCharacters.Count)];
-		newProjectile.name = texture.name;
-		SpawnedObjects.Add(newProjectile);
-		return newProjectile;
+		
+		for(int i=0;i<newEnemy.transform.childCount;++i)
+			if(newEnemy.transform.GetChild(i).renderer != null)
+				newEnemy.transform.GetChild(i).renderer.material.mainTexture = texture;
+		
+		newEnemy.GetComponent<GunGameEnemyScript>().BulletSplat = BulletSplats[textureIndex];
+		newEnemy.GetComponent<GunGameEnemyScript>().SkinColor = SlimeColors[textureIndex];
+		newEnemy.GetComponent<GunGameEnemyScript>().Speed = Random.Range(0.05f, 0.11f) * (level + 1);
+		newEnemy.GetComponent<GunGameEnemyScript>().Splat = MonsterSplatPrefabs[textureIndex];
+		newEnemy.GetComponent<GunGameEnemyScript>().Level = level;
+		newEnemy.GetComponent<GunGameEnemyScript>().TargetToFollow = PlayersCharacters[Random.Range(0, PlayersCharacters.Count)];
+		newEnemy.name = texture.name;
+		SpawnedObjects.Add(newEnemy);
 	}
 
 	public void SpawnBarrel(bool special)
@@ -444,11 +470,15 @@ public class GunsMinigameScript : MonoBehaviour
 
 		if(special)
 		{
-			newProjectile = Instantiate( SpecialBarrels[Random.Range(0, SpecialBarrels.Length)] ) as GameObject;
+			GameObject resourceLoad = Resources.Load(SpecialBarrels[Random.Range(0, SpecialBarrels.Length)]) as GameObject;
+
+			newProjectile = Instantiate( resourceLoad ) as GameObject;
 		}
 		else
 		{
-			newProjectile = Instantiate( Barrels[Random.Range(0, Barrels.Length)] ) as GameObject;
+			GameObject resourceLoad = Resources.Load(Barrels[Random.Range(0, Barrels.Length)]) as GameObject;
+
+			newProjectile = Instantiate( resourceLoad) as GameObject;
 		}
 
 		newProjectile.transform.parent = this.transform;
@@ -475,7 +505,9 @@ public class GunsMinigameScript : MonoBehaviour
 
 	public void ShootBulletForward(GameObject playerCharacter)
 	{
-		GameObject newProjectile = Instantiate( CurrentBullets[Random.Range(0,  CurrentBullets.Count)] ) as GameObject;
+		GameObject resourceLoad = Resources.Load(CurrentBullets[Random.Range(0,  CurrentBullets.Count)]) as GameObject;
+
+		GameObject newProjectile = Instantiate( resourceLoad ) as GameObject;
 		newProjectile.transform.parent = this.transform;
 		newProjectile.transform.position = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position;
 		newProjectile.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0,360), Random.Range(0,360));
@@ -492,7 +524,9 @@ public class GunsMinigameScript : MonoBehaviour
 
 	public void ShootBulletLost(float speedVariationFactor, GameObject character)
 	{
-		GameObject newProjectile = Instantiate( CurrentBullets[Random.Range(0,  CurrentBullets.Count)] ) as GameObject;
+		GameObject resourceLoad = Resources.Load(CurrentBullets[Random.Range(0,  CurrentBullets.Count)]) as GameObject;
+
+		GameObject newProjectile = Instantiate( resourceLoad ) as GameObject;
 		newProjectile.transform.parent = this.transform;
 		newProjectile.transform.position = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position;
 		newProjectile.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0,360), Random.Range(0,360));
@@ -513,7 +547,7 @@ public class GunsMinigameScript : MonoBehaviour
 	}
 
 
-	public void ShootEnemyDestroyedEffects(float speedVariationFactor, Vector3 position, Color color, GameObject bulletSplat)
+	public void ShootEnemyDestroyedEffects(float speedVariationFactor, Vector3 position, Color color, string bulletSplat)
 	{
 		GameObject newProjectile = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 		newProjectile.transform.parent = this.transform;

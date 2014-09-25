@@ -19,7 +19,10 @@ public class PlayerNetworkHandler : Photon.MonoBehaviour {
 		__playerController = GetComponent<CharacterControllerScript>();
 		__animationController = GetComponent<AnimationControllerScript>();
 
-		UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SetSpawnedAniminSettings(this.gameObject);
+	
+
+
+		UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnAniminEnd(this.gameObject);
 
 	}
 
@@ -43,6 +46,8 @@ public class PlayerNetworkHandler : Photon.MonoBehaviour {
 
 	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
 		//Debug.Log("OnPhotonSerializeView\t:\t" + stream.isWriting);
+
+
 
 		if (stream.isWriting) {
 			// OUR PLAYER, SEND OTHERS OUR DATA

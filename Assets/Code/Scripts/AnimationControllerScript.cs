@@ -510,7 +510,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetBool("IsRunning", value);
+			return animator.GetBool("IsRunning");
 		}
 
 		set
@@ -523,7 +523,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetBool("IsWalking", value);
+			return animator.GetBool("IsWalking");
 		}
 
 		set

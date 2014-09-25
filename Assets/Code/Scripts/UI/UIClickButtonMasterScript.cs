@@ -235,6 +235,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().Forces.Clear();			
 
+			GameController.instance.StopGame();
+
 			HandleClick(UIFunctionalityId.BackFromMinigames, sender);
 			Camera.main.GetComponent<MusicScript>().Stop();
 

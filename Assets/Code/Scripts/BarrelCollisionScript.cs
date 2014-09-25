@@ -12,7 +12,7 @@ public class BarrelCollisionScript : MonoBehaviour
 	float sign = 1;
 	float lerpSpeed = 10;
 
-	public GameObject[] BulletPrefabs;
+	public string[] BulletPrefabs;
 	public Texture2D BarFrontTexture;
 	public Texture2D BuletIcon;
 	public string BarBackgroundTexture;
