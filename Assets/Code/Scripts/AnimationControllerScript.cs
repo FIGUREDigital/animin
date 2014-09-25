@@ -29,6 +29,8 @@ public class AnimationControllerScript : MonoBehaviour
 
 	public void SetAnimationFromEnum(Animations newAnimation)
 	{
+		Debug.Log("SetAnimationFromEnum: " + newAnimation.ToString());
+
 		if (newAnimation == Animations.Idle) {
 			//Debug.Log ("IDLE");
 			
@@ -146,6 +148,8 @@ public class AnimationControllerScript : MonoBehaviour
 		
 		set
 		{
+			if(GetComponent<ObjectLookAtDeviceScript>() == null) return;
+
 			if(value)
 				GetComponent<ObjectLookAtDeviceScript>().IsActiveTimer = UnityEngine.Random.Range(4.0f, 6.0f);
 			else
@@ -506,7 +510,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("run");
+			return animator.GetBool("IsRunning", value);
 		}
 
 		set
@@ -519,7 +523,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetCurrentAnimatorStateInfo(0).IsName("walk");
+			return animator.GetBool("IsWalking", value);
 		}
 
 		set

@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerNetworkHandler : Photon.MonoBehaviour {
 
 	private 	CharacterControllerScript 		__playerController;
+	private 	AnimationControllerScript 		__animationController;
 
 	private 	Vector3 				__characterPosition;
 	private		Quaternion 				__characterRotation;
@@ -16,6 +17,7 @@ public class PlayerNetworkHandler : Photon.MonoBehaviour {
 	public void Start () 
 	{
 		__playerController = GetComponent<CharacterControllerScript>();
+		__animationController = GetComponent<AnimationControllerScript>();
 
 		UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SetSpawnedAniminSettings(this.gameObject);
 
@@ -48,14 +50,16 @@ public class PlayerNetworkHandler : Photon.MonoBehaviour {
 			stream.SendNext(transform.rotation);
 
 			//if (Application.loadedLevelName == "shaun") {
-				//if (__playerController) stream.SendNext((int)__playerController.GetComponent<AnimationControllerScript>().GetAnimationEnum());
+			if (__animationController) 
+				stream.SendNext((int)__animationController.GetAnimationEnum());
 			//}
 		} else {
 			// OTHER (NETWORK) PLAYER, RECEIVE DATA
 			__characterPosition = (Vector3)stream.ReceiveNext();
 			__characterRotation = (Quaternion)stream.ReceiveNext();
 			//if (Application.loadedLevelName == "shaun") {
-				//if (__playerController) __playerController.GetComponent<AnimationControllerScript>().SetAnimationFromEnum((Animations)stream.ReceiveNext());
+			if (__animationController)
+				__animationController.SetAnimationFromEnum((Animations)stream.ReceiveNext());
 			//}
 		}
 	}
