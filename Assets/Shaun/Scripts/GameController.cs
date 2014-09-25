@@ -7,7 +7,7 @@ public enum GameType { SOLO, NETWORK }
 public enum MultiplayerType { FRIEND_START, FRIEND_JOIN, RANDOM }
 
 
-public class GameController : MonoBehaviour {
+public class GameController : Photon.MonoBehaviour {
 
 	public static 	GameController		instance;					// SINGLETON, STORE REFERENCE
 
@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour {
 		SetGameType(GameType.SOLO);
 		EnterGame();
 	}
+
 
 	public void SetMultiplayer()
 	{
@@ -136,5 +137,16 @@ public class GameController : MonoBehaviour {
 			Debug.Log("PhotonNetwork.ConnectUsingSettings();");
 			PhotonNetwork.ConnectUsingSettings("0.1");
 		}
+	}
+
+	[RPC]
+	public void ReceiveTest(float level)
+	{
+		Debug.Log("received: level: " + level.ToString());
+	}
+
+	public void SendTest(float level)
+	{
+		GetComponent<PhotonView>().RPC("ReceiveTest", PhotonTargets.All, level);
 	}
 }

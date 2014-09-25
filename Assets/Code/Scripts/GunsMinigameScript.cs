@@ -215,6 +215,8 @@ public class GunsMinigameScript : MonoBehaviour
 							AmmoTimer = 0.001f;
 							State = GameStateId.Completed;
 						}
+
+				GameController.instance.SendTest(AmmoTimer);
 						
 
 						MeterBar.width = (int)(1679 * AmmoTimer);
