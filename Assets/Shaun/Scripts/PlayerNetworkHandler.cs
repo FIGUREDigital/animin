@@ -13,10 +13,12 @@ public class PlayerNetworkHandler : Photon.MonoBehaviour {
 	// CORE
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public void Start () {
+	public void Start () 
+	{
 		__playerController = GetComponent<CharacterControllerScript>();
 
-		__characterRotation = Quaternion.identity;
+		UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SetSpawnedAniminSettings(this.gameObject);
+
 	}
 
 	public void Update () {
@@ -44,15 +46,16 @@ public class PlayerNetworkHandler : Photon.MonoBehaviour {
 			// OUR PLAYER, SEND OTHERS OUR DATA
 			stream.SendNext(transform.position);
 			stream.SendNext(transform.rotation);
+
 			//if (Application.loadedLevelName == "shaun") {
-				//if (__playerController) stream.SendNext((int)__playerController.currentAnimation);
+				//if (__playerController) stream.SendNext((int)__playerController.GetComponent<AnimationControllerScript>().GetAnimationEnum());
 			//}
 		} else {
 			// OTHER (NETWORK) PLAYER, RECEIVE DATA
 			__characterPosition = (Vector3)stream.ReceiveNext();
 			__characterRotation = (Quaternion)stream.ReceiveNext();
 			//if (Application.loadedLevelName == "shaun") {
-			//	if (__playerController) __playerController.UpdateAnimation((Animations)stream.ReceiveNext());
+				//if (__playerController) __playerController.GetComponent<AnimationControllerScript>().SetAnimationFromEnum((Animations)stream.ReceiveNext());
 			//}
 		}
 	}

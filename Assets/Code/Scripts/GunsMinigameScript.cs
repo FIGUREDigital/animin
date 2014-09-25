@@ -366,27 +366,11 @@ public class GunsMinigameScript : MonoBehaviour
 		if (GameController.instance.gameType == GameType.SOLO) {
 			Object resource1 = Resources.Load("Prefabs/tbo_baby_multi");
 			instance = GameObject.Instantiate(resource1) as GameObject;
-		} else {
+		} else 
+		{
 			instance = PhotonNetwork.Instantiate("Prefabs/tbo_baby_multi", Vector3.zero, Quaternion.identity, 0);
 		}
 		instance.GetComponent<CharacterControllerScript>().SetLocal(true);
-
-
-		Vector3 scale = instance.transform.localScale;
-
-		instance.transform.parent = this.transform;
-		instance.transform.localPosition = new Vector3(0, 0.1f, 0);
-		instance.transform.localScale = scale;
-		instance.transform.localRotation = Quaternion.identity;
-
-		for(int i=0;i<instance.transform.childCount;++i)
-		{
-			GameObject childGun = instance.transform.GetChild(i).gameObject;
-			if(childGun.name == "gun")
-			{
-				childGun.SetActive(true);
-			}
-		}
 
 		//childModel.GetComponent<Animator>().runtimeAnimatorController = controller;
 
@@ -395,6 +379,25 @@ public class GunsMinigameScript : MonoBehaviour
 		UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = instance.GetComponent<AnimationControllerScript>();
 		UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = instance.GetComponent<CharacterControllerScript>();
 
+	}
+
+	public void SetSpawnedAniminSettings(GameObject instance)
+	{
+		Vector3 scale = instance.transform.localScale;
+		
+		instance.transform.parent = this.transform;
+		instance.transform.localPosition = new Vector3(0, 0.1f, 0);
+		instance.transform.localScale = scale;
+		instance.transform.localRotation = Quaternion.identity;
+		
+		for(int i=0;i<instance.transform.childCount;++i)
+		{
+			GameObject childGun = instance.transform.GetChild(i).gameObject;
+			if(childGun.name == "gun")
+			{
+				childGun.SetActive(true);
+			}
+		}
 	}
 
 	public GameObject SpawnEnemy(int level)

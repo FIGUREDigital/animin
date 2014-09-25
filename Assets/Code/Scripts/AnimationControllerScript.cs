@@ -17,6 +17,34 @@ public enum AnimationHappyId
 
 public class AnimationControllerScript : MonoBehaviour 
 {
+	public Animations GetAnimationEnum()
+	{
+		if(this.IsWalking) 
+			return Animations.IsWalking;
+		else if(this.IsRunning) 
+			return Animations.IsRunning;
+
+		return Animations.Idle;
+	}
+
+	public void SetAnimationFromEnum(Animations newAnimation)
+	{
+		if (newAnimation == Animations.Idle) {
+			//Debug.Log ("IDLE");
+			
+			IsWalking = false;
+			IsRunning = false;
+			
+
+		} else if (newAnimation == Animations.IsWalking) {
+			IsWalking = true;
+			IsRunning = false;
+		} else if (newAnimation == Animations.IsRunning) {
+			IsWalking = false;
+			IsRunning = true;
+		}
+	}
+
 	protected Animator animator;
 	private float TimeInIdleState;
 	private bool HoldingWeightAnimationUp;
@@ -476,6 +504,11 @@ public class AnimationControllerScript : MonoBehaviour
 
 	public bool IsRunning
 	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("run");
+		}
+
 		set
 		{
 			animator.SetBool("IsRunning", value);
@@ -484,6 +517,11 @@ public class AnimationControllerScript : MonoBehaviour
 
 	public bool IsWalking
 	{
+		get
+		{
+			return animator.GetCurrentAnimatorStateInfo(0).IsName("walk");
+		}
+
 		set
 		{
 			animator.SetBool("IsWalking", value);
