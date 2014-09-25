@@ -10,6 +10,31 @@ public class CharacterForces
 
 public class CharacterControllerScript : MonoBehaviour 
 {
+	
+	// SHAUN START
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	private		bool	__local;
+	
+	public bool local { get { return __local;} }
+	//public Animations currentAnimation { get { return __currentAnimation;} }
+	//public Animations currentAnimation { get { return this.GetComponent<AnimationControllerScript>().currentAnimation;} }
+	
+	public void SetLocal(bool local) { __local = local; }
+	
+	public void UpdatePositionRemotely(Vector3 position) {
+		transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 5);
+	}
+	
+	public void UpdateRotationRemotely(Quaternion rotation) {
+		transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * 5);
+	}
+	
+	// SHAUN END
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------
+	
+
+
 	public Camera CameraRef;
 
 	enum CharacterState {
@@ -414,8 +439,10 @@ public class CharacterControllerScript : MonoBehaviour
 
 	public bool FreezeCollisionDetection;
 	
-	void  Update (){
-		
+	void  Update ()
+	{
+		if(!__local) return;
+
 		if(FreezeCollisionDetection) return;
 		
 		if (!isControllable)
@@ -459,41 +486,43 @@ public class CharacterControllerScript : MonoBehaviour
 		
 
 		// Calculate actual motion
-		
-		Vector3 movement= MovementDirection * moveSpeed + new Vector3 (0, verticalSpeed, 0) + inAirVelocity;
-		
-		movement *= Time.deltaTime;
+
+	
+			Vector3 movement= MovementDirection * moveSpeed + new Vector3 (0, verticalSpeed, 0) + inAirVelocity;
+			
+			movement *= Time.deltaTime;
 
 
-		if(IsResetFalling)
-		{
-			movement.x = 0;
-			movement.z = 0;
-			speedSmoothing = 10000;
-		}
-		else
-		{
-			speedSmoothing = 90;
-		}
-
-
-		for(int i=0; i<Forces.Count;++i)
-		{
-			Forces[i].Speed = Mathf.Lerp(Forces[i].Speed, 0, Time.deltaTime * 6);
-			Vector3 totalForce = Forces[i].Direction * Forces[i].Speed * Time.deltaTime;
-			movement += totalForce;
-			Forces[i].Length -= Time.deltaTime;
-			if(Forces[i].Length <= 0)
+			if(IsResetFalling)
 			{
-				Forces.RemoveAt(i);
-				i--;
+				movement.x = 0;
+				movement.z = 0;
+				speedSmoothing = 10000;
 			}
-		}
+			else
+			{
+				speedSmoothing = 90;
+			}
+
+
+			for(int i=0; i<Forces.Count;++i)
+			{
+				Forces[i].Speed = Mathf.Lerp(Forces[i].Speed, 0, Time.deltaTime * 6);
+				Vector3 totalForce = Forces[i].Direction * Forces[i].Speed * Time.deltaTime;
+				movement += totalForce;
+				Forces[i].Length -= Time.deltaTime;
+				if(Forces[i].Length <= 0)
+				{
+					Forces.RemoveAt(i);
+					i--;
+				}
+			}
+			
+			
+			// Move the controller
+			CharacterController controller = GetComponent<CharacterController>();
+			collisionFlags = controller.Move(movement);
 		
-		
-		// Move the controller
-		CharacterController controller = GetComponent<CharacterController>();
-		collisionFlags = controller.Move(movement);
 
 		
 		// Set rotation to the move direction

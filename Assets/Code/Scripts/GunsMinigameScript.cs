@@ -174,7 +174,8 @@ public class GunsMinigameScript : MonoBehaviour
 			{
 				State = GameStateId.Playing;
 
-				GameObject.Find("GunfireLoop").GetComponent<AudioSource>().Play();
+			UIGlobalVariablesScript.Singleton.SoundEngine.PlayLoop(GenericSoundId.GunLoop);
+				//GameObject.Find("GunfireLoop").GetComponent<AudioSource>().Play();
 
 				break;
 			}
@@ -257,7 +258,8 @@ public class GunsMinigameScript : MonoBehaviour
 			case GameStateId.Completed:
 			{
 				State = GameStateId.PrepareToExit;
-				GameObject.Find("GunfireLoop").GetComponent<AudioSource>().Stop();
+			UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
+				//GameObject.Find("GunfireLoop").GetComponent<AudioSource>().Stop();
 
 				break;
 			}
@@ -355,11 +357,21 @@ public class GunsMinigameScript : MonoBehaviour
 		string modelPath = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().GetModelPath(animinid, evolution);
 		RuntimeAnimatorController controller = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().GetAnimationControlller(animinid, evolution);
 
-		Object resource1 = Resources.Load("Prefabs/DummyCharacter");
+		//Object resource1 = Resources.Load("Prefabs/tbo_baby_multi");
 	//	Object resource = Resources.Load(modelPath);
 		//GameObject childModel = GameObject.Instantiate(resource) as GameObject;
 		
-		GameObject instance = GameObject.Instantiate(resource1) as GameObject;
+		GameObject instance = null;//GameObject.Instantiate(resource1) as GameObject;
+
+		if (GameController.instance.gameType == GameType.SOLO) {
+			Object resource1 = Resources.Load("Prefabs/tbo_baby_multi");
+			instance = GameObject.Instantiate(resource1) as GameObject;
+		} else {
+			instance = PhotonNetwork.Instantiate("Prefabs/tbo_baby_multi", Vector3.zero, Quaternion.identity, 0);
+		}
+		instance.GetComponent<CharacterControllerScript>().SetLocal(true);
+
+
 		Vector3 scale = instance.transform.localScale;
 
 		instance.transform.parent = this.transform;

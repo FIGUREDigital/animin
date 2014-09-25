@@ -138,6 +138,7 @@
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_outline_transparent_sharp.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_sharp.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Bumped_Diffuse_Detail.shader" />
+     <None Include="Assets\Photon Unity Networking\changelog.txt" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Mobile\Mobile_DSpec_unmod.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_cutout_sharp.shader" />
      <None Include="Assets\TunnelingExample\Shaders\DepthMask.shader" />
@@ -243,6 +244,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cook-Torrance-Parallax_Shaded_Specular.shader" />
      <None Include="Assets\Plugins\Android\kamcord\res\values-zh-rCN\kamcord_strings.xml" />
+     <None Include="Assets\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Skinshader 1.3_sspec.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Cartoony_outline_transparent_sepspec.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 1.shader" />
@@ -306,6 +308,7 @@
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Cartoony_outline_transparent.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Monster\Default\Monster_rough_lite_opt_trans.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Translucent.shader" />
+     <None Include="Assets\Photon Unity Networking\readme.txt" />
      <None Include="Assets\Plugins\Android\kamcord\res\values-fr\kamcord_strings.xml" />
      <None Include="Assets\StreamingAssets\QCAR\unity.txt" />
      <None Include="Assets\Fresnel\Shaders\Fresnel - Transparent Rim.shader" />
@@ -376,6 +379,9 @@
      <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_share_icon.xml" />
  <Reference Include="Qualcomm.Vuforia.UnityExtensions">
  <HintPath>/Users/Drive/Git/animin/Assets/Qualcomm Augmented Reality/Scripts/Internal/Qualcomm.Vuforia.UnityExtensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Photon3Unity3D">
+ <HintPath>/Users/Drive/Git/animin/Assets/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

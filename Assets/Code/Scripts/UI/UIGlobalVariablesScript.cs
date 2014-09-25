@@ -41,6 +41,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject EvolutionControlBarRef;
 	public GameObject ARPortal;
 	public GameObject Shadow;
+	public GameObject SoundSprite;
 
 	//public AnimationControllerScript MainCharacterAnimationControllerRef;
 	public GameObject MainCharacterRef;

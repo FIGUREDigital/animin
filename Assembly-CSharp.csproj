@@ -63,9 +63,12 @@
      <Compile Include="Assets\Chickens Shader Bundle\Shaders\OutlineGlow\OutlineGlowRenderer.cs" />
      <Compile Include="Assets\Chickens Shader Bundle\Shaders\Screen Space Subsurface Scattering\ScreenSpaceSubsurfaceScattering.cs" />
      <Compile Include="Assets\Chickens Shader Bundle\Shaders\ToonPack.cs" />
+     <Compile Include="Assets\Code\AniminProfileData.cs" />
      <Compile Include="Assets\Code\ChestScript.cs" />
+     <Compile Include="Assets\Code\CreateProfileNameScript.cs" />
      <Compile Include="Assets\Code\Enumerations\UIFunctionalityId.cs" />
      <Compile Include="Assets\Code\Helpers.cs" />
+     <Compile Include="Assets\Code\PlayerProfileData.cs" />
      <Compile Include="Assets\Code\PrefabPool.cs" />
      <Compile Include="Assets\Code\Scripts\AchievementsScript.cs" />
      <Compile Include="Assets\Code\Scripts\AnimateCharacterOutPortalScript.cs" />
@@ -108,6 +111,7 @@
      <Compile Include="Assets\Code\Scripts\PortalAnimationScript.cs" />
      <Compile Include="Assets\Code\Scripts\PortalScript.cs" />
      <Compile Include="Assets\Code\Scripts\PresentationEventScript.cs" />
+     <Compile Include="Assets\Code\Scripts\ProfilesManagementScript.cs" />
      <Compile Include="Assets\Code\Scripts\ProgressBarUVScript.cs" />
      <Compile Include="Assets\Code\Scripts\ProjectileScript.cs" />
      <Compile Include="Assets\Code\Scripts\ReferencedObjectScript.cs" />
@@ -125,6 +129,12 @@
      <Compile Include="Assets\Code\Scripts\TrackSongIndexScript.cs" />
      <Compile Include="Assets\Code\Scripts\TrackVuforiaScript.cs" />
      <Compile Include="Assets\Code\Scripts\TurdRotationScript.cs" />
+     <Compile Include="Assets\Code\Scripts\UI\Menu\BackToProfilesClickScript.cs" />
+     <Compile Include="Assets\Code\Scripts\UI\Menu\FacebookClickScript.cs" />
+     <Compile Include="Assets\Code\Scripts\UI\Menu\GoogleClickScript.cs" />
+     <Compile Include="Assets\Code\Scripts\UI\Menu\SelectAniminToPlayClickScript.cs" />
+     <Compile Include="Assets\Code\Scripts\UI\Menu\TwitterClickScript.cs" />
+     <Compile Include="Assets\Code\Scripts\UI\Menu\YoutubeClickScript.cs" />
      <Compile Include="Assets\Code\Scripts\UI\UIClickButtonMasterScript.cs" />
      <Compile Include="Assets\Code\Scripts\UI\UIGlobalVariablesScript.cs" />
      <Compile Include="Assets\Code\Scripts\UI\UIPopupItemScript.cs" />
@@ -266,6 +276,37 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\CustomTypes.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\Enums.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\Extensions.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\FriendInfo.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\LoadbalancingPeer.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonClasses.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonLagSimulationGui.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonPlayer.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonStatsGui.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonView.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PingCloudRegions.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\RPC.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\Room.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\RoomInfo.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\RpcIndexComponent.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\ServerSettings.cs" />
+     <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\SocketUdp.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\ConnectAndJoinRandom.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\DontDestroyOnLoad.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\InputToEvent.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\ManualPhotonViewAllocator.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\OnAwakeUsePhotonView.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\OnClickDestroy.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\OnClickInstantiate.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\OnClickLoadSomething.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\PointedAtGameObjectInfo.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\ServerTime.cs" />
+     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\TimeKeeper.cs" />
      <Compile Include="Assets\Qualcomm Augmented Reality\Scripts\CloudRecoBehaviour.cs" />
      <Compile Include="Assets\Qualcomm Augmented Reality\Scripts\CylinderTargetBehaviour.cs" />
      <Compile Include="Assets\Qualcomm Augmented Reality\Scripts\DataSetLoadBehaviour.cs" />
@@ -290,6 +331,13 @@
      <Compile Include="Assets\Qualcomm Augmented Reality\Scripts\VirtualButtonBehaviour.cs" />
      <Compile Include="Assets\Qualcomm Augmented Reality\Scripts\WebCamBehaviour.cs" />
      <Compile Include="Assets\Qualcomm Augmented Reality\Scripts\WordBehaviour.cs" />
+     <Compile Include="Assets\Shaun\Scripts\GameController.cs" />
+     <Compile Include="Assets\Shaun\Scripts\Globals.cs" />
+     <Compile Include="Assets\Shaun\Scripts\Joystick.cs" />
+     <Compile Include="Assets\Shaun\Scripts\NetworkMatchmaker.cs" />
+     <Compile Include="Assets\Shaun\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Shaun\Scripts\PlayerNetworkHandler.cs" />
+     <Compile Include="Assets\Shaun\Scripts\ShaunScene.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Mobile\Free\SHOnly.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Cartoony_outline_cutout.shader" />
@@ -371,6 +419,7 @@
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_outline_transparent_sharp.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_sharp.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Bumped_Diffuse_Detail.shader" />
+     <None Include="Assets\Photon Unity Networking\changelog.txt" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Mobile\Mobile_DSpec_unmod.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_cutout_sharp.shader" />
      <None Include="Assets\TunnelingExample\Shaders\DepthMask.shader" />
@@ -476,6 +525,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cook-Torrance-Parallax_Shaded_Specular.shader" />
      <None Include="Assets\Plugins\Android\kamcord\res\values-zh-rCN\kamcord_strings.xml" />
+     <None Include="Assets\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Skinshader 1.3_sspec.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Cartoony_outline_transparent_sepspec.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 1.shader" />
@@ -539,6 +589,7 @@
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Cartoony_outline_transparent.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Monster\Default\Monster_rough_lite_opt_trans.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Translucent.shader" />
+     <None Include="Assets\Photon Unity Networking\readme.txt" />
      <None Include="Assets\Plugins\Android\kamcord\res\values-fr\kamcord_strings.xml" />
      <None Include="Assets\StreamingAssets\QCAR\unity.txt" />
      <None Include="Assets\Fresnel\Shaders\Fresnel - Transparent Rim.shader" />
@@ -609,6 +660,9 @@
      <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_share_icon.xml" />
  <Reference Include="Qualcomm.Vuforia.UnityExtensions">
  <HintPath>/Users/Drive/Git/animin/Assets/Qualcomm Augmented Reality/Scripts/Internal/Qualcomm.Vuforia.UnityExtensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Photon3Unity3D">
+ <HintPath>/Users/Drive/Git/animin/Assets/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

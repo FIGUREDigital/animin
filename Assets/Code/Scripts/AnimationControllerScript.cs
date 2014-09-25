@@ -111,6 +111,8 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
+			if(GetComponent<ObjectLookAtDeviceScript>() == null) return false;
+
 			return GetComponent<ObjectLookAtDeviceScript>().IsActiveTimer > 0;
 		}
 		
@@ -748,7 +750,7 @@ public class AnimationControllerScript : MonoBehaviour
 
 			if(TimeToPlayIdleSoundFX <= 0)
 			{
-				int randomId = UnityEngine.Random.Range(0, 7);
+				int randomId = UnityEngine.Random.Range(0, 19);
 
 				CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(

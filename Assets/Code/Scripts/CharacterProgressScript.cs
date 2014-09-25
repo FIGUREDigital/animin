@@ -59,151 +59,6 @@ public class HappyStateRange
 	public AnimationHappyId Id;
 }
 
-public class PersistentData
-{
-	public static PersistentData Singleton = new PersistentData();
-
-
-
-	static PersistentData()
-	{
-
-	}
-
-	public AniminId PlayerAniminId;
-	public AniminEvolutionStageId AniminEvolutionId;
-	public const float MaxHappy = 125.0f;
-	public const float MaxHungry = 100;
-	public const float MaxFitness = 100;
-	public const float MaxHealth = 100;
-	public int ZefTokens;
-	public List<AniminSubevolutionStageId> SubstagesCompleted = new List<AniminSubevolutionStageId>(); 
-	public string Username;
-	
-	private bool audioIsOn;
-	private float happy;
-	private float hungry;
-	private float fitness;
-	private float evolution;
-	private float health;
-	
-	public float Happy
-	{
-		get
-		{
-			return happy;
-		}
-		set
-		{
-			happy = value;
-			if(happy > MaxHappy) happy = MaxHappy;
-			if(happy < 0) happy = 0;
-		}
-	}
-	public float Hungry
-	{
-		get
-		{
-			return hungry;
-		}
-		set
-		{
-			hungry = value;
-			if(hungry > 100) hungry = 100;
-			if(hungry < 0) hungry = 0;
-		}
-	}
-	public float Fitness
-	{
-		get
-		{
-			return fitness;
-		}
-		set
-		{
-			fitness = value;
-			if(fitness > 100) fitness = 100;
-			if(fitness < 0) fitness = 0;
-		}
-	}
-	public float Evolution
-	{
-		get
-		{
-			return evolution;
-		}
-		set
-		{
-			evolution = value;
-			if(evolution > 100) evolution = 100;
-			if(evolution < 0) evolution = 0;
-		}
-	}
-	public float Health
-	{
-		get
-		{
-			return health;
-		}
-		set
-		{
-			health = value;
-			if(health > 100) health = 100;
-			if(health < 0) health = 0;
-		}
-	}
-
-	public void SetDefault()
-	{
-		SubstagesCompleted.Clear();
-		PlayerAniminId = AniminId.Tbo;
-		AniminEvolutionId = AniminEvolutionStageId.Baby;
-		
-		Happy = MaxHappy;
-		Hungry = MaxHungry;
-		Fitness = MaxFitness;
-		Health = MaxHealth;
-		ZefTokens = 0;
-	}
-
-	public void Save()
-	{
-	
-		PlayerPrefs.SetFloat("Hungry", Hungry);
-		PlayerPrefs.SetFloat("Fitness", Fitness);
-		PlayerPrefs.SetFloat("Evolution", Evolution);
-		PlayerPrefs.SetInt("AniminId", (int)PlayerAniminId);
-		PlayerPrefs.SetInt("EvolutionStage", (int)AniminEvolutionId);
-		PlayerPrefs.SetInt("ZefTokens", ZefTokens);
-		PlayerPrefs.SetString("Audio", audioIsOn.ToString());
-	}
-	
-	public void Load()
-	{
-		if(PlayerPrefs.HasKey("Hungry"))
-			Hungry = PlayerPrefs.GetFloat("Hungry");
-		
-		if(PlayerPrefs.HasKey("Fitness"))
-			Fitness = PlayerPrefs.GetFloat("Fitness");
-		
-		if(PlayerPrefs.HasKey("Evolution"))
-			Evolution = PlayerPrefs.GetFloat("Evolution");
-
-		if(PlayerPrefs.HasKey("AniminId"))
-			PlayerAniminId = (AniminId) PlayerPrefs.GetInt("AniminId");
-
-		if(PlayerPrefs.HasKey("AniminEvolutionId"))
-			AniminEvolutionId = (AniminEvolutionStageId) PlayerPrefs.GetInt("AniminEvolutionId");
-
-
-		if(PlayerPrefs.HasKey("Audio"))
-			audioIsOn = bool.Parse( PlayerPrefs.GetString("Audio"));
-
-		if(PlayerPrefs.HasKey("ZefTokens"))
-			ZefTokens = PlayerPrefs.GetInt("ZefTokens");
-		
-	}
-}
 
 public class CharacterProgressScript : MonoBehaviour 
 {
@@ -282,7 +137,7 @@ public class CharacterProgressScript : MonoBehaviour
 	bool IsDetectingMouseMoveForDrag;
 	bool IsDetectFlick;
 	float FeedMyselfTimer;
-	private bool HadUITouchLastFrame;
+	public bool HadUITouchLastFrame;
 	private GameObject LastKnownObjectWithMenuUp;
 	public const float ConsideredHungryLevels = 70;
 
@@ -302,8 +157,15 @@ public class CharacterProgressScript : MonoBehaviour
 		LastTimeToilet = DateTime.Now;
 
 	
-		PersistentData.Singleton.SetDefault();
-		PersistentData.Singleton.Load();
+		//PersistentData.Singleton.SetDefault();
+		//PersistentData.Singleton.Load();
+
+		if(PlayerProfileData.ActiveProfile == null)
+		{
+			PlayerProfileData.ActiveProfile = ProfilesManagementScript.CreateNewProfile("buildintest");
+			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Tbo];
+		}
+
 
 
 		//TextTest.color = new Color(1, 1, 1, 0.0f);
@@ -325,7 +187,9 @@ public class CharacterProgressScript : MonoBehaviour
 	}
 
 	void Start()
-	{
+	{		
+		GetComponent<CharacterControllerScript>().SetLocal(true);
+		UIClickButtonMasterScript.SetSoundSprite();
 		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
 
 		//SpawnChests();	
@@ -1365,9 +1229,9 @@ public class CharacterProgressScript : MonoBehaviour
 		UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, PersistentData.Singleton.Fitness / 100.0f), UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition.y, 0);
 		//UIGlobalVariablesScript.Singleton.EvolutionControlBarRef.GetComponent<UISlider>().value = Evolution / 100.0f;
 
-		if((DateTime.Now - LastSavePerformed).TotalSeconds >= 1)
+		if((DateTime.Now - LastSavePerformed).TotalSeconds >= 4)
 		{
-			PersistentData.Singleton.Save();
+			PlayerProfileData.ActiveProfile.Save();
 		}
 
 		if(Input.GetButtonDown("Fire1"))
@@ -1429,13 +1293,14 @@ public class CharacterProgressScript : MonoBehaviour
 		animationController.IsHoldingItem = true;
 		ObjectHolding = item;
 		
-		item.transform.localPosition = new Vector3(2.137475f, 
+		/*item.transform.localPosition = new Vector3(2.137475f, 
 		                                           -1.834323f, 
 		                                           0.3105991f);
 		
 		item.transform.localRotation = Quaternion.Euler(44.08633f,
 		                                                159.2195f,
 		                                                -100.7192f);
+		*/
 	}
 
 	public bool OnInteractWithPopupItem(UIPopupItemScript item)
@@ -1445,7 +1310,7 @@ public class CharacterProgressScript : MonoBehaviour
 			case PopupItemType.Token:
 			{
 				//Stop(true);
-			PersistentData.Singleton.Evolution += item.Points;
+				PersistentData.Singleton.Evolution += item.Points;
 
 				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
 				{

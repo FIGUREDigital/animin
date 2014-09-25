@@ -81,6 +81,14 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		}
 	}
 
+	public static void SetSoundSprite()
+	{
+		if(PlayerProfileData.ActiveProfile.Settings.AudioEnabled)
+			UIGlobalVariablesScript.Singleton.SoundSprite.GetComponent<UISprite>().spriteName = "pauseScreenSound";
+		else
+			UIGlobalVariablesScript.Singleton.SoundSprite.GetComponent<UISprite>().spriteName = "soundOff";
+	}
+
 	public static void HandleClick(UIFunctionalityId id, GameObject sender)
 	{
 
@@ -90,6 +98,17 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		case UIFunctionalityId.None:
 		{
 			Debug.Log("You clicked on a button that does nothing. ");
+			break;
+		}
+
+		case UIFunctionalityId.AudioOnOffGame:
+		{
+			PlayerProfileData.ActiveProfile.Settings.AudioEnabled = !PlayerProfileData.ActiveProfile.Settings.AudioEnabled;
+
+			SetSoundSprite();
+
+			PlayerProfileData.ActiveProfile.Save();
+
 			break;
 		}
 			
@@ -241,10 +260,28 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		case UIFunctionalityId.PlayMinigameUnknown:
 		{
 			UIGlobalVariablesScript.SelectedMinigameToPlay = sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId;
+
 			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(true);
 			UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(false);
 
+
+			break;
+		}
+
+		case UIFunctionalityId.PlaySinglePlayer:
+		{
+			GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetSinglePlayer();
 			HandleClick(UIFunctionalityId.StartSelectedMinigame, sender);
+			break;
+		}
+		case UIFunctionalityId.PlayMultiplayer:
+		{
+			GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetMultiplayer();
+			//HandleClick(UIFunctionalityId.StartSelectedMinigame, sender);
+			break;
+		}
+		case UIFunctionalityId.ShowLeaderboards:
+		{
 			break;
 		}
 			

@@ -43,8 +43,8 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		Models[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = "Prefabs/tbo_adult";
 
 		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ke_baby";
-		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ke_baby";
-		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_baby";
+		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ke_kid";
+		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_adult";
 
 
 
@@ -54,10 +54,9 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"TBOAdultAnimations");
 	
 		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"KelsiBabyAnimations");
-		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"KelsiBabyAnimations");
-		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"KelsiBabyAnimations");
+		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"KelsyKidAnimations");
+		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"KelsiAdultAnimations");
 
-		
 	}
 
 	void OnGUI()
@@ -111,7 +110,9 @@ public class CharacterSwapManagementScript : MonoBehaviour
 
 		//AnimatorOverrideController overrideController = new AnimatorOverrideController();
 		CurrentModel.GetComponent<Animator>().runtimeAnimatorController = AnimationLists[(int)animinId, (int)id];
-		
+
+
+		UIGlobalVariablesScript.Singleton.SoundEngine.LoadSoundsForAnimin(animinId, id);
 		/*for(int i=0;i<TBOAdultAnimations.clips.Length;++i)
 		{
 			CurrentModel.GetComponent<Animator>().runtimeAnimatorController

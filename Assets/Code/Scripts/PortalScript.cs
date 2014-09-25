@@ -24,6 +24,7 @@ public class PortalScript : MonoBehaviour {
 		this.gameObject.SetActive(true);
 
 	
+		this.transform.GetChild(0).GetComponent<PortalAnimationScript>().IsShowing = true;
 
 		if(stageId == PortalStageId.ARscene)
 		{
@@ -61,7 +62,7 @@ public class PortalScript : MonoBehaviour {
 
 		if(Timer >= 3)
 		{
-			this.gameObject.SetActive(false);
+			this.transform.GetChild(0).GetComponent<PortalAnimationScript>().IsHiding = true;
 		}
 
 		/*if (Input.GetButtonDown("Fire1")) 

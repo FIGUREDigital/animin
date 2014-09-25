@@ -90,7 +90,6 @@ public class ChestScript : MonoBehaviour
 						GameObject zef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().SpawnZef(Vector3.zero);
 
 						zef.GetComponent<SpinObjectScript>().enabled = false;
-						
 						zef.transform.parent = Coins[i].transform.GetChild(0).transform;
 						zef.transform.localPosition = Vector3.zero;	
 						zef.transform.localScale *= 0.8f;
@@ -117,14 +116,22 @@ public class ChestScript : MonoBehaviour
 			}
 			case AnimationStateId.LidOpened:
 			{
+
+//			for(int i=0;i<Coins.Length;++i)
+//			{
+//				if(Coins[i] == null) continue;
+//
+//				//if(Coins[i].GetComponent<Animator>().
+//			}
+
 				Timer -= Time.deltaTime;
 				if(Timer <= 0)
 				{
 					for(int i=0;i<Coins.Length;++i)
 					{
 						Coins[i].GetComponent<SpinObjectScript>().enabled = true;
-						Coins[i].transform.parent = 
-							UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
+						Coins[i].transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
+
 					}
 					
 					State = AnimationStateId.ThrowItemsOut;

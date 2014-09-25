@@ -63,7 +63,7 @@ ModelImporter:
     400054: ke_adult:skin_wrist_l_joint
     400056: ke_adult:skin_wrist_r_joint
     400058: //RootNode
-    7400000: Take 001
+    7400000: run
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -80,7 +80,93 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: run
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 17
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ke_adult:skin_cog_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_hip_l_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_hip_l_joint/ke_adult:skin_knee_l_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_hip_l_joint/ke_adult:skin_knee_l_joint/ke_adult:skin_ankle_l_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_hip_r_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_hip_r_joint/ke_adult:skin_knee_r_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_hip_r_joint/ke_adult:skin_knee_r_joint/ke_adult:skin_ankle_r_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_clavicle_l_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_clavicle_l_joint/ke_adult:skin_shoulder_l_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_clavicle_l_joint/ke_adult:skin_shoulder_l_joint/ke_adult:skin_elbow_l_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_clavicle_l_joint/ke_adult:skin_shoulder_l_joint/ke_adult:skin_elbow_l_joint/ke_adult:skin_wrist_l_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_clavicle_r_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_clavicle_r_joint/ke_adult:skin_shoulder_r_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_clavicle_r_joint/ke_adult:skin_shoulder_r_joint/ke_adult:skin_elbow_r_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_clavicle_r_joint/ke_adult:skin_shoulder_r_joint/ke_adult:skin_elbow_r_joint/ke_adult:skin_wrist_r_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_neck_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_neck_joint/ke_adult:skin_head_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_neck_joint/ke_adult:skin_head_joint/ke_adult:skin_hair_1_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_neck_joint/ke_adult:skin_head_joint/ke_adult:skin_hair_1_joint/ke_adult:skin_hair_2_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_neck_joint/ke_adult:skin_head_joint/ke_adult:skin_hair_1_joint/ke_adult:skin_hair_2_joint/ke_adult:skin_hair_3_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_neck_joint/ke_adult:skin_head_joint/ke_adult:skin_hair_1_joint/ke_adult:skin_hair_2_joint/ke_adult:skin_hair_3_joint/ke_adult:skin_hair_4_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_neck_joint/ke_adult:skin_head_joint/ke_adult:skin_nose_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint/ke_adult:skin_spine_2_joint/ke_adult:skin_spine_3_joint/ke_adult:skin_spine_4_joint/ke_adult:skin_spine_5_joint/ke_adult:skin_spine_6_joint/ke_adult:skin_spine_7_joint
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

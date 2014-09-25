@@ -65,4 +65,7 @@ public enum UIFunctionalityId
 	RestartGame,
 	AudioOnOffGame,
 	BackToStatsFromAchievement,
+	PlaySinglePlayer,
+	PlayMultiplayer,
+	ShowLeaderboards,
 }
