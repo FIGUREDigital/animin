@@ -163,7 +163,7 @@ public class CharacterProgressScript : MonoBehaviour
 		if(PlayerProfileData.ActiveProfile == null)
 		{
 			PlayerProfileData.ActiveProfile = ProfilesManagementScript.CreateNewProfile("buildintest");
-			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Tbo];
+			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Kelsi];
 		}
 
 
@@ -1292,6 +1292,9 @@ public class CharacterProgressScript : MonoBehaviour
 		item.transform.parent = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>().ObjectCarryAttachmentBone.transform;
 		animationController.IsHoldingItem = true;
 		ObjectHolding = item;
+
+		item.transform.localPosition = Vector3.zero;
+		item.transform.localRotation = Quaternion.identity;
 		
 		/*item.transform.localPosition = new Vector3(2.137475f, 
 		                                           -1.834323f, 
@@ -1310,7 +1313,7 @@ public class CharacterProgressScript : MonoBehaviour
 			case PopupItemType.Token:
 			{
 				//Stop(true);
-				PersistentData.Singleton.Evolution += item.Points;
+				PersistentData.Singleton.Evolution += item.Points + 100;
 
 				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
 				{
