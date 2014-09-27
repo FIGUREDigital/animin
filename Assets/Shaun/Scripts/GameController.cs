@@ -142,7 +142,7 @@ public class GameController : Photon.MonoBehaviour {
 	[RPC]
 	public void ReceiveTest(float level)
 	{
-		Debug.Log("received: level: " + level.ToString());
+//		Debug.Log("received: level: " + level.ToString());
 	}
 
 	public void SendTest(float level)

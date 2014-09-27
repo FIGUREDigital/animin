@@ -536,13 +536,13 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.ShowAlbum:
 		{
-			GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().ShowVideos();
+			//GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().ShowVideos();
 			break;
 		}
 
 		case UIFunctionalityId.RecordVideo:
 		{
-			GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().StartRecording();
+//			GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().StartRecording();
 			sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.StopRecordVideo;
 			sender.GetComponent<UISprite>().spriteName = "stopvideo";
 			sender.GetComponent<UIButton>().normalSprite = "stopvideo";
@@ -551,7 +551,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.StopRecordVideo:
 		{
-			GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().StopRecording();
+			//GameObject.Find("KamcordPrefab").GetComponent<RecordingGUI>().StopRecording();
 			sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId = UIFunctionalityId.RecordVideo;
 			sender.GetComponent<UISprite>().spriteName = "video 1";
 			sender.GetComponent<UIButton>().normalSprite = "video 1";

@@ -4,7 +4,9 @@ using System.Collections;
 public class CreateProfileNameScript : MonoBehaviour 
 {
 	string playerName;
+#if UNITY_ANDROID || UNITY_IPHONE
 	TouchScreenKeyboard keyboard;
+#endif
 	public UILabel PlayerNameLabel;
 
 	// Use this for initialization
@@ -21,6 +23,7 @@ public class CreateProfileNameScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+#if UNITY_ANDROID || UNITY_IPHONE
 		if(keyboard != null)
 		{
 			playerName = keyboard.text;
@@ -37,12 +40,15 @@ public class CreateProfileNameScript : MonoBehaviour
 			}
 
 		}
+#endif
 	
 	}
 
 	public void ShowKeyboard()
 	{
+#if UNITY_ANDROID || UNITY_IPHONE
 		keyboard = TouchScreenKeyboard.Open(playerName, TouchScreenKeyboardType.Default, false, false, false, false, "Enter Name");
+#endif
 	}
 }
 

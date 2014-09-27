@@ -7,6 +7,18 @@ public class ProjectileScript : MonoBehaviour
 	private float TimerForArc = -0.6f;
 	public GameObject SplatPrefab;
 
+    // SHAUN START
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------
+
+    private bool __local;
+
+    //public bool local { get { return __local;} }
+    public void SetLocal(bool local) { __local = local; }
+
+    // SHAUN END
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------
+	
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -22,11 +34,22 @@ public class ProjectileScript : MonoBehaviour
 		Physics.IgnoreLayerCollision(
 			LayerMask.NameToLayer("Floor"),  
 			LayerMask.NameToLayer("Projectiles"));
+
+        GunsMinigameScript miniGame = UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>();
+
+        if (GameController.instance.gameType == GameType.NETWORK)
+        {
+          
+            int playerIndex = int.Parse(GetComponent<PhotonView>().instantiationData[0].ToString());
+
+            UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ShootBulletForwardEnd(this.gameObject, miniGame.PlayersCharacters[playerIndex]);
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+        // BULLET HAS BOUNCED ON ENEMY, BEGIN FADE OUT AND DESTROY
 		if(BeginFadeOut)
 		{
 			bool destroy = false;
@@ -71,6 +94,8 @@ public class ProjectileScript : MonoBehaviour
 				Destroy(this.gameObject);
 			}
 		}
+
+        // DO ARC MOVEMENT STYLE AND DESTROY ON GROUND IMPACT
 		else
 		{
 			TimerForArc += Time.deltaTime * 2.8f;
@@ -100,7 +125,9 @@ public class ProjectileScript : MonoBehaviour
 
 	void OnCollisionEnter(Collision collision)
 	{
-		Debug.Log("COLLISION DETECTED: " + collision.gameObject.name);
+        if (!__local) return;
+
+//		Debug.Log("COLLISION DETECTED: " + collision.gameObject.name);
 		BeginFadeOut = true;
 
 		if(renderer != null) 
