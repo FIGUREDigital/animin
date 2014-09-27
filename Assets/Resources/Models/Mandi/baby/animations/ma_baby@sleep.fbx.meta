@@ -65,7 +65,7 @@ ModelImporter:
     400056: ma_baby:skin_bn_spine_08
     400058: ma_baby:skin_bn_spine_09
     400060: //RootNode
-    7400000: Take 001
+    7400000: sleep
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -82,7 +82,95 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: sleep
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_l_leg_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_l_leg_01/ma_baby:skin_bn_l_leg_02
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_r_reg_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_r_reg_01/ma_baby:skin_bn_r_reg_02
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_l_shoulder_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_l_shoulder_01/ma_baby:skin_bn_l_arm_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_l_shoulder_01/ma_baby:skin_bn_l_arm_01/ma_baby:skin_bn_l_arm_02
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_l_shoulder_01/ma_baby:skin_bn_l_arm_01/ma_baby:skin_bn_l_arm_02/ma_baby:skin_bn_l_arm_03
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_l_shoulder_01/ma_baby:skin_bn_l_arm_01/ma_baby:skin_bn_l_arm_02/ma_baby:skin_bn_l_arm_03/ma_baby:skin_bn_l_arm_04
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_r_shourder_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_r_shourder_01/ma_baby:skin_bn_r_arm_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_r_shourder_01/ma_baby:skin_bn_r_arm_01/ma_baby:skin_bn_r_arm_02
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_r_shourder_01/ma_baby:skin_bn_r_arm_01/ma_baby:skin_bn_r_arm_02/ma_baby:skin_bn_r_arm_03
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_r_shourder_01/ma_baby:skin_bn_r_arm_01/ma_baby:skin_bn_r_arm_02/ma_baby:skin_bn_r_arm_03/ma_baby:skin_bn_r_arm_04
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01/ma_baby:skin_bn_hair_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01/ma_baby:skin_bn_hair_01/ma_baby:skin_bn_hair_02
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01/ma_baby:skin_bn_hair_01/ma_baby:skin_bn_hair_02/ma_baby:skin_bn_hair_03
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01/ma_baby:skin_bn_hair_01/ma_baby:skin_bn_hair_02/ma_baby:skin_bn_hair_03/ma_baby:skin_bn_hair_04
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01/ma_baby:skin_bn_head_end_01
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -105,7 +193,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 1
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     human: []
     skeleton: []
@@ -117,7 +205,8 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b42cc2e770a70b04c82312413533a4b2,
+    type: 3}
   animationType: 2
   additionalBone: 0
   userData: 

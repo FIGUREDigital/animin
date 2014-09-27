@@ -83,7 +83,7 @@ ModelImporter:
     400074: pi_baby:skin_joint2_joint
     400076: pi_baby:skin_joint3_joint
     400078: //RootNode
-    7400000: Take 001
+    7400000: run
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -100,7 +100,113 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: run
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 17
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_bn_l_leg_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_bn_l_leg_01_joint/pi_baby:skin_bn_l_shin_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_bn_l_leg_01_joint/pi_baby:skin_bn_l_shin_01_joint/pi_baby:skin_bn_l_leg_end_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_bn_r_reg_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_bn_r_reg_01_joint/pi_baby:skin_bn_r_shin_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_bn_r_reg_01_joint/pi_baby:skin_bn_r_shin_01_joint/pi_baby:skin_bn_r_reg_end_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_l_shoulder_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_l_shoulder_01_joint/pi_baby:skin_bn_l_arm_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_l_shoulder_01_joint/pi_baby:skin_bn_l_arm_01_joint/pi_baby:skin_bn_l_arm_02_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_l_shoulder_01_joint/pi_baby:skin_bn_l_arm_01_joint/pi_baby:skin_bn_l_arm_02_joint/pi_baby:skin_bn_l_arm_03_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_l_shoulder_01_joint/pi_baby:skin_bn_l_arm_01_joint/pi_baby:skin_bn_l_arm_02_joint/pi_baby:skin_bn_l_arm_03_joint/pi_baby:skin_bn_l_arm_04_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_bn_head_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_bn_head_01_joint/pi_baby:skin_bn_head_midtip_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_bn_head_01_joint/pi_baby:skin_bn_head_midtip_01_joint/pi_baby:skin_bn_head_midtip_end_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_bn_head_01_joint/pi_baby:skin_bn_l_ear_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_bn_head_01_joint/pi_baby:skin_bn_l_ear_01_joint/pi_baby:skin_bn_l_ear_tip_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_bn_head_01_joint/pi_baby:skin_bn_r_ear_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_bn_head_01_joint/pi_baby:skin_bn_r_ear_01_joint/pi_baby:skin_bn_r_ear_tip_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_bn_head_01_joint/pi_baby:skin_joint2_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_bn_head_01_joint/pi_baby:skin_joint2_joint/pi_baby:skin_joint3_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_collar_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_collar_01_joint/pi_baby:skin_collar_02_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_collar_01_joint/pi_baby:skin_collar_03_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_collar_01_joint/pi_baby:skin_collar_04_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_neck_01_joint/pi_baby:skin_collar_01_joint/pi_baby:skin_collar_05_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_r_shoulder_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_r_shoulder_01_joint/pi_baby:skin_bn_r_arm_01_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_r_shoulder_01_joint/pi_baby:skin_bn_r_arm_01_joint/pi_baby:skin_bn_r_arm_02_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_r_shoulder_01_joint/pi_baby:skin_bn_r_arm_01_joint/pi_baby:skin_bn_r_arm_02_joint/pi_baby:skin_bn_r_arm_03_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_r_shoulder_01_joint/pi_baby:skin_bn_r_arm_01_joint/pi_baby:skin_bn_r_arm_02_joint/pi_baby:skin_bn_r_arm_03_joint/pi_baby:skin_bn_r_arm_04_joint
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -123,7 +229,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 1
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     human: []
     skeleton: []
@@ -135,7 +241,8 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: a0c50a99615dc9f488483455fa941ded,
+    type: 3}
   animationType: 2
   additionalBone: 0
   userData: 
