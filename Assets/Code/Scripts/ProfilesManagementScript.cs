@@ -9,12 +9,17 @@ public class ProfilesManagementScript : MonoBehaviour
 	public GameObject ProfilesScreen;
 	public GameObject AniminsScreen;
 	public GameObject LoadingScreen;
+	public GameObject CreateUsernameScreen;
+	public GameObject CreateAccessCodeScreen;
 	public bool BeginLoadLevel;
+	public GameObject[] AniminSprites;
 
 	public UILabel PiAge;
 	public UILabel TBOAge;
 	public UILabel KelsiAge;
 	public UILabel MandiAge;
+
+	public AniminId AniminToUnlockId;
 
 	void Awake()
 	{
@@ -24,10 +29,26 @@ public class ProfilesManagementScript : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		PlayerProfileData newprof = CreateNewProfile("TEST");
-		newprof.Save();
+		//PlayerProfileData.ActiveProfile = PlayerProfileData.GetDefaultProfile();
+		//if(PlayerProfileData.ActiveProfile == null)
+		//{
+			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("DefaultProfile");
+		//}
 
-	 	PlayerProfileData[] profiles = PlayerProfileData.GetAllProfiles();
+		//ServerManager.Register("serverProfile");
+		//AppDataManager.SetUsername("serverProfile");
+
+		//RefreshProfiles();
+
+		//ServerManager.Access("BB3449XV");
+
+		//ServerManager.AddLeaderboardScore(15, 1);
+		//ServerManager.GetLeaderboardScores(1);
+	}
+
+	private void RefreshProfiles()
+	{
+		PlayerProfileData[] profiles = PlayerProfileData.GetAllProfiles();
 		if(profiles != null)
 		{
 			Debug.Log(profiles.Length.ToString());
@@ -35,17 +56,51 @@ public class ProfilesManagementScript : MonoBehaviour
 			{
 				GameObject newProfile = (GameObject)Instantiate(PrefabProfile);
 				newProfile.transform.parent = ProfilesRoot.transform;
-
+				
 				newProfile.transform.localScale = new Vector3(1,1,1);
-				newProfile.transform.GetChild(3).GetComponent<UILabel>().text = profiles[i].ProfileName;
-				newProfile.transform.localPosition = new Vector3(0, i * -300, 0);
-				newProfile.transform.GetChild(1).GetComponent<SelectAniminToPlayClickScript>().ProfileRef = profiles[i];
+				newProfile.transform.GetChild(1).GetComponent<UILabel>().text = profiles[i].ProfileName;
+				newProfile.transform.localPosition = new Vector3(i * 180 + 180, 0, 0);
+				newProfile.GetComponent<SelectAniminToPlayClickScript>().ProfileRef = profiles[i];
 			}
 		}
 		else
 		{
 			Debug.Log("No profiles found");
 		}
+	}
+
+	public void OnAccessCodeResult(string resultId)
+	{
+		if(resultId == "1")
+		{
+		}
+		else if(resultId == "2")
+		{
+		}
+		else if(resultId == "3")
+		{
+		}
+		else
+		{
+
+		}
+	}
+
+	public void OnAllowCreateProfile(string name)
+	{
+//		ProfilesManagementScript.Singleton.CreateUsernameScreen.SetActive(false);
+//		ProfilesManagementScript.Singleton.ProfilesScreen.SetActive(true);
+//
+//		PlayerProfileData newprof = CreateNewProfile(name);
+//		newprof.Save();
+//		RefreshProfiles();
+
+
+	}
+
+	public void OnRejectedProfile()
+	{
+		Debug.Log("NO PROFILE FOR YOU");
 	}
 	
 	// Update is called once per frame
@@ -73,18 +128,5 @@ public class ProfilesManagementScript : MonoBehaviour
 		}       
 	}
 	
-	public static PlayerProfileData CreateNewProfile(string name)
-	{
-		PlayerProfileData profile = new PlayerProfileData();
-		profile.ProfileName = name;
-		for(int i=0;i<profile.Characters.Length;++i)
-		{
-			profile.Characters[i] = new PersistentData();
-			profile.Characters[i].SetDefault();
-			profile.Characters[i].AniminEvolutionId = AniminEvolutionStageId.Baby;
-			profile.Characters[i].PlayerAniminId = (AniminId)i;
-		}
 
-		return profile;
-	}
 }

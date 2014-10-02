@@ -54,6 +54,17 @@ ModelImporter:
     100096: ke_baby:skin_bn_spine_05_joint
     100098: ke_baby:skin_bn_spine_06_joint
     100100: ke_baby:skin_bn_spine_07_joint
+    100102: ke_baby:ke_baby_1
+    100104: ke_baby:ke_baby_10
+    100106: ke_baby:ke_baby_2
+    100108: ke_baby:ke_baby_3
+    100110: ke_baby:ke_baby_4
+    100112: ke_baby:ke_baby_5
+    100114: ke_baby:ke_baby_6
+    100116: ke_baby:ke_baby_7
+    100118: ke_baby:ke_baby_8
+    100120: ke_baby:ke_baby_9
+    100122: ke_baby:skin_object_joint
     400000: //RootNode
     400002: ke_baby:Body
     400004: ke_baby:ke_baby:hair1
@@ -105,6 +116,17 @@ ModelImporter:
     400096: ke_baby:skin_bn_spine_05_joint
     400098: ke_baby:skin_bn_spine_06_joint
     400100: ke_baby:skin_bn_spine_07_joint
+    400102: ke_baby:ke_baby_1
+    400104: ke_baby:ke_baby_10
+    400106: ke_baby:ke_baby_2
+    400108: ke_baby:ke_baby_3
+    400110: ke_baby:ke_baby_4
+    400112: ke_baby:ke_baby_5
+    400114: ke_baby:ke_baby_6
+    400116: ke_baby:ke_baby_7
+    400118: ke_baby:ke_baby_8
+    400120: ke_baby:ke_baby_9
+    400122: ke_baby:skin_object_joint
     4300000: ke_baby:RightLeg
     4300002: ke_baby:LeftLeg
     4300004: ke_baby:Nappy
@@ -113,6 +135,16 @@ ModelImporter:
     4300010: ke_baby:RightArm
     4300012: ke_baby:ke_baby:hair1
     4300014: ke_baby:pSphere2
+    4300016: ke_baby:ke_baby_1
+    4300018: ke_baby:ke_baby_2
+    4300020: ke_baby:ke_baby_3
+    4300022: ke_baby:ke_baby_4
+    4300024: ke_baby:ke_baby_5
+    4300026: ke_baby:ke_baby_6
+    4300028: ke_baby:ke_baby_7
+    4300030: ke_baby:ke_baby_8
+    4300032: ke_baby:ke_baby_9
+    4300034: ke_baby:ke_baby_10
     9500000: //RootNode
     13700000: ke_baby:Body
     13700002: ke_baby:ke_baby:hair1
@@ -122,6 +154,16 @@ ModelImporter:
     13700010: ke_baby:pSphere2
     13700012: ke_baby:RightArm
     13700014: ke_baby:RightLeg
+    13700016: ke_baby:ke_baby_1
+    13700018: ke_baby:ke_baby_10
+    13700020: ke_baby:ke_baby_2
+    13700022: ke_baby:ke_baby_3
+    13700024: ke_baby:ke_baby_4
+    13700026: ke_baby:ke_baby_5
+    13700028: ke_baby:ke_baby_6
+    13700030: ke_baby:ke_baby_7
+    13700032: ke_baby:ke_baby_8
+    13700034: ke_baby:ke_baby_9
   materials:
     importMaterials: 1
     materialName: 0

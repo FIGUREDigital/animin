@@ -7,13 +7,16 @@ public class HeadReferenceScript : MonoBehaviour {
 	public GameObject Indicator;
 	public GameObject ObjectCarryAttachmentBone;
 
+
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 	
 	}
 }

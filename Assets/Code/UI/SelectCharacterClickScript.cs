@@ -5,6 +5,7 @@ public class SelectCharacterClickScript : MonoBehaviour
 {
 	public AniminId Animin;
 	private bool BeginLoadLevel;
+	public GameObject UnlockButton;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,8 @@ public class SelectCharacterClickScript : MonoBehaviour
 
 
 
-		if(!ProfilesManagementScript.Singleton.BeginLoadLevel)	ProfilesManagementScript.Singleton.BeginLoadLevel = true;
+		if(!ProfilesManagementScript.Singleton.BeginLoadLevel)	
+			ProfilesManagementScript.Singleton.BeginLoadLevel = true;
 		//AsyncOperation asyncOp = Application.LoadLevelAsync("VuforiaTest");
 		//yield return asyncOp;
 		//Debug.Log("Loading complete");

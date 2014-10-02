@@ -63,8 +63,9 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
         {
             int level = int.Parse(GetComponent<PhotonView>().instantiationData[0].ToString());
             int textureIndex = int.Parse(GetComponent<PhotonView>().instantiationData[1].ToString());
+			Vector3 positino = (Vector3)GetComponent<PhotonView>().instantiationData[2];
             //		Debug.Log("RECEIVED level: " + level.ToString());
-            UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnEnemyEnd(this.gameObject, level, textureIndex);
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnEnemyEnd(this.gameObject, level, textureIndex, positino);
         }
     }
 
@@ -93,7 +94,7 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
 
             if (HasMerged)
             {
-                minigame.SpawnedObjects.Remove(this.gameObject);
+               // minigame.SpawnedObjects.Remove(this.gameObject);
 
                 if (GameController.instance.gameType == GameType.NETWORK)
                     PhotonNetwork.Destroy(this.gameObject);
@@ -249,14 +250,15 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
     protected void ReceiveEventBulletHitEnemy()
     {
         UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().Points += 200;// * (Level + 1);
-        UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
+        //UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
+
 
         GameObject instance = (GameObject)Instantiate(SplatSetByCode);
-        instance.transform.parent = this.transform.parent;
+		instance.transform.parent =  UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjectsAllOthers.transform;
         instance.transform.position = this.transform.position;
         instance.transform.rotation = Quaternion.Euler(instance.transform.rotation.eulerAngles.x, instance.transform.rotation.eulerAngles.y, Random.Range(0, 360));
 
-        UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
+        //UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
 
         for (int i = 0; i < 20; ++i)
         {

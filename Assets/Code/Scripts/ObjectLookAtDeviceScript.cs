@@ -113,7 +113,10 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 
 		HeadReferenceScript head = this.GetComponent<AnimationControllerScript>().CharacterModel.GetComponent<HeadReferenceScript>();
 
-		head.HeadBoneToRotate.transform.rotation = Quaternion.Slerp(head.HeadBoneToRotate.transform.rotation, rotation * Quaternion.Euler(Angles), Weight);
+		head.HeadBoneToRotate.transform.rotation = Quaternion.Slerp(head.HeadBoneToRotate.transform.rotation, rotation/* * Quaternion.Euler(Angles)*/, Weight);
+	
+	
+		//head.HeadBoneToRotate.transform.rotation = rotation;
 	}
 
 	void OnAnimatorIK()

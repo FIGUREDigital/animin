@@ -30,12 +30,12 @@ public class MonsterSplatExplosionScript : MonoBehaviour
 					instance.transform.rotation.eulerAngles.y,
 					Random.Range(0, 360));
 				
-				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
+				//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
 
 			}
 
 
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
+			//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
 			Destroy(this.gameObject);
 		}
 	}

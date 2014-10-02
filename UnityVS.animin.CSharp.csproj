@@ -46,6 +46,9 @@
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="P31RestKit">
+      <HintPath>Assets\Plugins\P31RestKit.dll</HintPath>
+    </Reference>
     <Reference Include="Photon3Unity3D">
       <HintPath>Assets\Plugins\Photon3Unity3D.dll</HintPath>
     </Reference>
@@ -63,13 +66,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Aperture\Sample\Scripts\MenuGUI.cs" />
-    <Compile Include="Assets\Aperture\Sample\Scripts\TestGUI.cs" />
-    <Compile Include="Assets\Aperture\Scripts\Aperture.cs" />
-    <Compile Include="Assets\Aperture\Scripts\ApertureEditor.cs" />
-    <Compile Include="Assets\Aperture\Scripts\ApertureEvents.cs" />
-    <Compile Include="Assets\Aperture\Scripts\ApertureiOS.cs" />
-    <Compile Include="Assets\Aperture\Scripts\IAperture.cs" />
     <Compile Include="Assets\Chickens Shader Bundle\Examples\CSB_RotateScript.cs" />
     <Compile Include="Assets\Chickens Shader Bundle\Examples\CSB_ScrollInScript.cs" />
     <Compile Include="Assets\Chickens Shader Bundle\Shaders\CSB_SHLightHelper.cs" />
@@ -82,7 +78,6 @@
     <Compile Include="Assets\Chickens Shader Bundle\Shaders\ToonPack.cs" />
     <Compile Include="Assets\Code\AniminProfileData.cs" />
     <Compile Include="Assets\Code\ChestScript.cs" />
-    <Compile Include="Assets\Code\CreateProfileNameScript.cs" />
     <Compile Include="Assets\Code\Enumerations\UIFunctionalityId.cs" />
     <Compile Include="Assets\Code\Helpers.cs" />
     <Compile Include="Assets\Code\PlayerProfileData.cs" />
@@ -106,6 +101,7 @@
     <Compile Include="Assets\Code\Scripts\DeviceCameraScript.cs" />
     <Compile Include="Assets\Code\Scripts\DragDrop3DItemScript.cs" />
     <Compile Include="Assets\Code\Scripts\DragDropMainBarItem.cs" />
+    <Compile Include="Assets\Code\Scripts\EnterFriendsNameSubmitScript.cs" />
     <Compile Include="Assets\Code\Scripts\EvilCharacterPatternMovementScript.cs" />
     <Compile Include="Assets\Code\Scripts\FlashObjectScript.cs" />
     <Compile Include="Assets\Code\Scripts\FlatScalerScript.cs" />
@@ -143,7 +139,9 @@
     <Compile Include="Assets\Code\Scripts\TestVuforiaScript.cs" />
     <Compile Include="Assets\Code\Scripts\ThrowAnimationScript.cs" />
     <Compile Include="Assets\Code\Scripts\ThumbstickControlsScript.cs" />
+    <Compile Include="Assets\Code\Scripts\TrackMusicOnTickScript.cs" />
     <Compile Include="Assets\Code\Scripts\TrackSongIndexScript.cs" />
+    <Compile Include="Assets\Code\Scripts\TrackSoundEffectOnTickScript.cs" />
     <Compile Include="Assets\Code\Scripts\TrackVuforiaScript.cs" />
     <Compile Include="Assets\Code\Scripts\TurdRotationScript.cs" />
     <Compile Include="Assets\Code\Scripts\UI\Menu\BackToProfilesClickScript.cs" />
@@ -156,9 +154,15 @@
     <Compile Include="Assets\Code\Scripts\UI\UIGlobalVariablesScript.cs" />
     <Compile Include="Assets\Code\Scripts\UI\UIPopupItemScript.cs" />
     <Compile Include="Assets\Code\TestScript.cs" />
+    <Compile Include="Assets\Code\UI\CancelCreateAccessCodeScript.cs" />
+    <Compile Include="Assets\Code\UI\CreateUsernameButtonClickScript.cs" />
+    <Compile Include="Assets\Code\UI\CreateUsernameFromTextboxClickScript.cs" />
+    <Compile Include="Assets\Code\UI\OpenSettingsInMainMenuScript.cs" />
     <Compile Include="Assets\Code\UI\SelectCharacterClickScript.cs" />
-    <Compile Include="Assets\Kamcord\ExampleScripts\CaptureFrame.cs" />
-    <Compile Include="Assets\Kamcord\ExampleScripts\RecordingGUI.cs" />
+    <Compile Include="Assets\Code\UI\SendAccesCodeFromChatboxClickScript.cs" />
+    <Compile Include="Assets\Code\UI\SendAccessCodeToServerButtonClickScript.cs" />
+    <Compile Include="Assets\Code\UI\StartCreateProfileButtonScript.cs" />
+    <Compile Include="Assets\Code\UI\UnlockCharacterButtonClickScript.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -348,12 +352,15 @@
     <Compile Include="Assets\Qualcomm Augmented Reality\Scripts\VirtualButtonBehaviour.cs" />
     <Compile Include="Assets\Qualcomm Augmented Reality\Scripts\WebCamBehaviour.cs" />
     <Compile Include="Assets\Qualcomm Augmented Reality\Scripts\WordBehaviour.cs" />
+    <Compile Include="Assets\Shaun\Scripts\AppDataManager.cs" />
+    <Compile Include="Assets\Shaun\Scripts\DebugManager.cs" />
     <Compile Include="Assets\Shaun\Scripts\GameController.cs" />
     <Compile Include="Assets\Shaun\Scripts\Globals.cs" />
     <Compile Include="Assets\Shaun\Scripts\Joystick.cs" />
     <Compile Include="Assets\Shaun\Scripts\NetworkMatchmaker.cs" />
     <Compile Include="Assets\Shaun\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Shaun\Scripts\PlayerNetworkHandler.cs" />
+    <Compile Include="Assets\Shaun\Scripts\ServerManager.cs" />
     <Compile Include="Assets\Shaun\Scripts\ShaunScene.cs" />
     <None Include="Assets\Chickens Shader Bundle\Readme.txt" />
     <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Bumped_Detail.shader" />
@@ -601,64 +608,6 @@
     <None Include="Assets\Photon Unity Networking\changelog.txt" />
     <None Include="Assets\Photon Unity Networking\readme.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\AndroidManifest.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\color\kamcord_share_widget_text.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_background_gradient.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_button_background.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_profile_icon.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_rounded_bottom_left_selector.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_rounded_bottom_right_selector.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_rounded_top_left_selector.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_rounded_top_right_selector.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_seekbar_background.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_seekbar_buffer.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_seekbar_progress.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_seekbar_progress_style.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_seekbar_thumb.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_seekbar_thumb_style.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_share_edit_background.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_share_gradient.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_share_grid_background.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_share_icon.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_tabbar_back_selector.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_title_gradient.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_toggle_selector.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\drawable\kamcord_watch_icon.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_activity.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_activity_login.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_fragment_change_creds.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_fragment_create_profile.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_fragment_edit_profile.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_fragment_forgot_password.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_fragment_player.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_fragment_profile_settings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_fragment_share.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_fragment_sign_in.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_fragment_web.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout\z_kamcord_media_controller.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout-land\z_kamcord_activity.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout-land\z_kamcord_fragment_share.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout-sw600dp\z_kamcord_activity.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout-sw600dp\z_kamcord_activity_login.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\layout-sw600dp\z_kamcord_fragment_share.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-ar\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-ar\kamcord_styles.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-de\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-es\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-fr\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-fr\kamcord_styles.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-it\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-ja\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-ja\kamcord_styles.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-ko\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-pt\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-pt-rPT\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-ru\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-sw600dp\kamcord_styles.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-tr\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-zh-rCN\kamcord_strings.xml" />
-    <None Include="Assets\Plugins\Android\kamcord\res\values-zh-rTW\kamcord_strings.xml" />
     <None Include="Assets\Plugins\Photon3Unity3D.xml" />
     <None Include="Assets\Qualcomm Augmented Reality\Shaders\BrightTexture.shader" />
     <None Include="Assets\Qualcomm Augmented Reality\Shaders\DepthMask.shader" />
@@ -672,6 +621,7 @@
     <None Include="Assets\Resources\Shaders\VuforaSamplerShader.shader" />
     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
     <None Include="Assets\StreamingAssets\QCAR\animinVuforia.xml" />
+    <None Include="Assets\StreamingAssets\QCAR\democard.xml" />
     <None Include="Assets\StreamingAssets\QCAR\newscientist.xml" />
     <None Include="Assets\StreamingAssets\QCAR\unity.txt" />
     <None Include="Assets\TunnelingExample\Shaders\DepthMask.shader" />

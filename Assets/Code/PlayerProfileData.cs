@@ -134,17 +134,52 @@ public class PlayerProfileSettings
 	}
 }
 
+/// <summary>No Description</summary>
 public class PlayerProfileData
 {
+	/// <summary>No Description</summary>
 	public static PlayerProfileData ActiveProfile;
 
+	/// <summary>No Description</summary>
 	private int FileVersion = 1;
-	public string ProfileName;
-	public AniminId ActiveAnimin;
-	
+
+	/// <summary>No Description</summary>
 	public PersistentData[] Characters = new PersistentData[(int)AniminId.Count];
 	public PlayerProfileSettings Settings = new PlayerProfileSettings();
+	public string ProfileName;
+	public AniminId ActiveAnimin;
+	public List<AniminId> UnlockAnimins = new List<AniminId>();
 
+	/// <summary>No Description</summary>
+	public static PlayerProfileData GetDefaultProfile()
+	{
+		if(!Directory.Exists(Application.persistentDataPath + "/Profiles"))
+			return null;
+
+		if(!File.Exists(Application.persistentDataPath + "/Profiles/DefaultProfile"))
+			return null;
+
+		PlayerProfileData profile = new PlayerProfileData();
+		profile.Load("DefaultProfile");
+		return profile;
+	}
+
+	/// <summary>No Description</summary>
+	public static PlayerProfileData CreateNewProfile(string name)
+	{
+		PlayerProfileData profile = new PlayerProfileData();
+		profile.ProfileName = name;
+		for(int i=0;i<profile.Characters.Length;++i)
+		{
+			profile.Characters[i] = new PersistentData();
+			profile.Characters[i].SetDefault((AniminId)i);
+			profile.Characters[i].AniminEvolutionId = AniminEvolutionStageId.Baby;
+		}
+		
+		return profile;
+	}
+
+	/// <summary>No Description</summary>
 	public static PlayerProfileData[] GetAllProfiles()
 	{
 		if(!Directory.Exists(Application.persistentDataPath + "/Profiles"))
@@ -164,6 +199,7 @@ public class PlayerProfileData
 		return allProfiles.ToArray();
 	}
 
+	/// <summary>No Description</summary>
 	public void Save()
 	{
 		if(!Directory.Exists(Application.persistentDataPath + "/Profiles"))
@@ -176,6 +212,13 @@ public class PlayerProfileData
 			using(BinaryWriter binaryWriter = new BinaryWriter(writer))
 			{
 				binaryWriter.Write(FileVersion);
+
+				binaryWriter.Write(UnlockAnimins.Count);
+			
+				for(int i=0;i<UnlockAnimins.Count;++i)
+				{
+					binaryWriter.Write((int)UnlockAnimins[i]);
+				}
 
 				SaveLoadDictionary settingsdictionary = new SaveLoadDictionary();
 				Settings.Write(settingsdictionary);
@@ -192,6 +235,7 @@ public class PlayerProfileData
 		}
 	}
 
+	/// <summary>No Description</summary>
 	public void Load(string profileName)
 	{
 		ProfileName = profileName;
@@ -202,6 +246,12 @@ public class PlayerProfileData
 			using(BinaryReader binaryReader = new BinaryReader(reader))
 			{
 				int fileversion = binaryReader.ReadInt32();
+
+				int unlockedAnimins = binaryReader.ReadInt32();
+				for(int i=0;i<unlockedAnimins;++i)
+				{
+					UnlockAnimins.Add((AniminId)binaryReader.ReadInt32());
+				}
 
 				SaveLoadDictionary settingsdictionary = new SaveLoadDictionary(binaryReader);
 				Settings.Load(settingsdictionary);

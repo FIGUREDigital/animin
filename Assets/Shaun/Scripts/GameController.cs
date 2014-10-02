@@ -7,8 +7,8 @@ public enum GameType { SOLO, NETWORK }
 public enum MultiplayerType { FRIEND_START, FRIEND_JOIN, RANDOM }
 
 
-public class GameController : Photon.MonoBehaviour {
-
+public class GameController : MonoBehaviour 
+{
 	public static 	GameController		instance;					// SINGLETON, STORE REFERENCE
 
 	private  		GameState			__gameState;
@@ -17,6 +17,8 @@ public class GameController : Photon.MonoBehaviour {
 	private  		string				__username;
 	private  		string				__friendUsername;
 
+
+
 	// CORE
 
 	public void Awake() {
@@ -24,8 +26,22 @@ public class GameController : Photon.MonoBehaviour {
 
 		__username = "shaun";
 
+		SetFriendUsername("shaun");
+		
 		if (Application.loadedLevelName == "shaun") __gameState = GameState.GAME_MENU;
 	}
+
+//	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+//	{
+//		if (stream.isWriting)
+//		{
+//
+//		}
+//		else
+//		{
+//
+//		}
+//	}
 
 	public void OnEnable() {}
 
@@ -40,12 +56,26 @@ public class GameController : Photon.MonoBehaviour {
 	}
 
 
-	public void SetMultiplayer()
+	public void SetMultiplayerJoinRandom()
 	{
 		Debug.Log("STARTING MULTIPLAYER");
 
 		SetGameType(GameType.NETWORK);
 		SetMultiplayerType(MultiplayerType.RANDOM);
+		EnterGame();
+	}
+
+	public void SetMultiplayerStartFriendGame()
+	{
+		SetGameType(GameType.NETWORK);
+		SetMultiplayerType(MultiplayerType.FRIEND_START);
+		EnterGame();
+	}
+
+	public void SetMultiplayerJoinFriend()
+	{
+		SetGameType(GameType.NETWORK);
+		SetMultiplayerType(MultiplayerType.FRIEND_JOIN);
 		EnterGame();
 	}
 
@@ -110,7 +140,9 @@ public class GameController : Photon.MonoBehaviour {
 	}
 
 	public void StopGame() {
-		if (PhotonNetwork.connected) PhotonNetwork.Disconnect();
+
+		if (PhotonNetwork.connected) 
+			PhotonNetwork.Disconnect();
 		
 		/*if (Application.loadedLevelName == "shaun") {
 			__gameState = GameState.GAME_MENU;
@@ -139,14 +171,14 @@ public class GameController : Photon.MonoBehaviour {
 		}
 	}
 
-	[RPC]
-	public void ReceiveTest(float level)
-	{
-//		Debug.Log("received: level: " + level.ToString());
-	}
-
-	public void SendTest(float level)
-	{
-		GetComponent<PhotonView>().RPC("ReceiveTest", PhotonTargets.All, level);
-	}
+//	[RPC]
+//	public void ReceiveTest(float level)
+//	{
+////		Debug.Log("received: level: " + level.ToString());
+//	}
+//
+//	public void SendTest(float level)
+//	{
+//		GetComponent<PhotonView>().RPC("ReceiveTest", PhotonTargets.All, level);
+//	}
 }

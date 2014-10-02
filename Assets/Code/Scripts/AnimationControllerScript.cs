@@ -31,17 +31,20 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		Debug.Log("SetAnimationFromEnum: " + newAnimation.ToString());
 
-		if (newAnimation == Animations.Idle) {
+		if (newAnimation == Animations.Idle) 
+		{
 			//Debug.Log ("IDLE");
 			
 			IsWalking = false;
 			IsRunning = false;
-			
-
-		} else if (newAnimation == Animations.IsWalking) {
+		} 
+		else if (newAnimation == Animations.IsWalking) 
+		{
 			IsWalking = true;
 			IsRunning = false;
-		} else if (newAnimation == Animations.IsRunning) {
+		} 
+		else if (newAnimation == Animations.IsRunning) 
+		{
 			IsWalking = false;
 			IsRunning = true;
 		}
@@ -450,7 +453,6 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-
 			return animator.GetLayerWeight(1) > 0;
 		}
 		
@@ -550,9 +552,11 @@ public class AnimationControllerScript : MonoBehaviour
 			animator.SetBool("ExtraLayerPortal", true);
 		}*/
 
+		//IsHoldingItem = true;
+
 		if(HoldingWeightAnimationUp && animator.GetLayerWeight(1) >= 1)
 		{
-
+			//animator.GetNextAnimatorStateInfo(0).
 		}
 		else if(!HoldingWeightAnimationUp && animator.GetLayerWeight(1) <= 0)
 		{

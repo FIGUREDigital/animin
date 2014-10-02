@@ -8,7 +8,7 @@ public class CharacterForces
 	public float Length;
 }
 
-public class CharacterControllerScript : MonoBehaviour 
+public class CharacterControllerScript : Photon.MonoBehaviour 
 {
 	
 	// SHAUN START
@@ -522,41 +522,11 @@ public class CharacterControllerScript : MonoBehaviour
 			// Move the controller
 			CharacterController controller = GetComponent<CharacterController>();
 			collisionFlags = controller.Move(movement);
-		
-
-		
-		// Set rotation to the move direction
-		
-		/*if (IsGrounded())
-		{
-
-			//transform.rotation = Quaternion.LookRotation(moveDirection);
-		}   
-		
-		else
-			
-		{
-			
-			Vector3 xzMove= movement;
-			
-			xzMove.y = 0;
-			
-			if (xzMove.sqrMagnitude > 0.001f)
 				
-			{
-				
-				transform.rotation = Quaternion.LookRotation(xzMove);
-				
-			}
-			
-		}   */
-		
-		
 		
 		// We are in jump mode but just became grounded
 		
 		if (IsGrounded())
-			
 		{
 			
 			lastGroundedTime = Time.time;
@@ -584,6 +554,22 @@ public class CharacterControllerScript : MonoBehaviour
 	
 		PressedJumb = false;
 	}
+
+	[RPC]
+	protected void ReceiveHitByEnemy(int enemyViewId, int playerCharacterViewId)
+	{
+		GameObject hitenemy = PhotonView.Find(enemyViewId).gameObject;
+		GameObject playerCharacter = PhotonView.Find(playerCharacterViewId).gameObject;
+		if(hitenemy != null && playerCharacter != null)
+		{
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(hitenemy, playerCharacter);
+		}
+	}
+	
+	public void SendEventHitByEnemy(GameObject hit, GameObject player)
+	{
+		GetComponent<PhotonView>().RPC("ReceiveHitByEnemy", PhotonTargets.All, hit.GetComponent<PhotonView>().viewID, player.GetComponent<PhotonView>().viewID);
+	}
 	
 	void  OnControllerColliderHit ( ControllerColliderHit hit   )
 	{
@@ -601,16 +587,21 @@ public class CharacterControllerScript : MonoBehaviour
 
 		if(hit.gameObject.tag == "EnemyGunGame")
 		{
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(hit.gameObject, this.gameObject);
-			//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(hit.gameObject);
-			//Destroy(hit.gameObject);
+			if(GameController.instance.gameType == GameType.NETWORK)
+			{
+				SendEventHitByEnemy(hit.gameObject, this.gameObject);
+			}
+			else
+			{
+				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(hit.gameObject, this.gameObject);
+			}
 		}
 
 		if(hit.gameObject.tag == "RandomCubeGunGame")
 		{
 			UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.GunGame_bonus_box);
 			//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(hit.gameObject);
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(hit.gameObject);
+			//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(hit.gameObject);
 			Destroy(hit.gameObject);
 		}
 

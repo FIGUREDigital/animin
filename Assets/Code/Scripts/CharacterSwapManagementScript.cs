@@ -44,7 +44,6 @@ public class CharacterSwapManagementScript : MonoBehaviour
 
 		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ke_baby";
 		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ke_kid";
-<<<<<<< HEAD
 		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_adult";
 
         Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ma_baby";
@@ -54,19 +53,6 @@ public class CharacterSwapManagementScript : MonoBehaviour
         Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Baby] = "Prefabs/pi_baby";
         Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Kid] = "Prefabs/pi_kid";
         Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = "Prefabs/pi_adult";
-=======
-		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_adult";
-
-        Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ma_baby";
-        Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ma_baby";
-        Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ma_baby";
-
-        Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Baby] = "Prefabs/pi_baby";
-        Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Kid] = "Prefabs/pi_baby";
-        Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = "Prefabs/pi_baby";
-
-
->>>>>>> FETCH_HEAD
 
 		AnimationLists = new AnimatorOverrideController[(int)AniminId.Count, (int)AniminEvolutionStageId.Count];
 		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"TBOBabyAnimations");

@@ -83,7 +83,7 @@ ModelImporter:
     400074: ma_adult:skin_bn_upMask_02
     400076: ma_adult:skin_root
     400078: //RootNode
-    7400000: Take 001
+    7400000: pick_up_object_idle
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -100,7 +100,113 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: pick_up_object_idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ma_adult:skin_root
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_l_leg_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_l_leg_01/ma_adult:skin_bn_l_leg_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_r_reg_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_r_reg_01/ma_adult:skin_bn_r_reg_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_l_shoulder_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_l_shoulder_01/ma_adult:skin_bn_l_arm_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_l_shoulder_01/ma_adult:skin_bn_l_arm_01/ma_adult:skin_bn_l_arm_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_l_shoulder_01/ma_adult:skin_bn_l_arm_01/ma_adult:skin_bn_l_arm_02/ma_adult:skin_bn_l_arm_03
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_r_shoulder_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_r_shoulder_01/ma_adult:skin_bn_r_arm_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_r_shoulder_01/ma_adult:skin_bn_r_arm_01/ma_adult:skin_bn_r_arm_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_r_shoulder_01/ma_adult:skin_bn_r_arm_01/ma_adult:skin_bn_r_arm_02/ma_adult:skin_bn_r_arm_03
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_head_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_head_01/ma_adult:skin_bn_head_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_l_ear_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_l_ear_01/ma_adult:skin_bn_l_ear_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_l_ear_01/ma_adult:skin_bn_l_ear_02/ma_adult:skin_bn_l_ear_03
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_l_ear_01/ma_adult:skin_bn_l_ear_02/ma_adult:skin_bn_l_ear_03/ma_adult:skin_bn_l_ear_04
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_l_ear_01/ma_adult:skin_bn_l_ear_02/ma_adult:skin_bn_l_ear_03/ma_adult:skin_bn_l_ear_04/ma_adult:skin_bn_l_ear_05
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_l_ear_01/ma_adult:skin_bn_l_ear_02/ma_adult:skin_bn_l_ear_03/ma_adult:skin_bn_l_ear_04/ma_adult:skin_bn_l_ear_05/ma_adult:skin_bn_l_ear_06
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_lowMask_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_lowMask_01/ma_adult:skin_bn_lowMask_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_maskHead_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_r_ear_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_r_ear_01/ma_adult:skin_bn_r_ear_02
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_r_ear_01/ma_adult:skin_bn_r_ear_02/ma_adult:skin_bn_r_ear_03
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_r_ear_01/ma_adult:skin_bn_r_ear_02/ma_adult:skin_bn_r_ear_03/ma_adult:skin_bn_r_ear_04
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_r_ear_01/ma_adult:skin_bn_r_ear_02/ma_adult:skin_bn_r_ear_03/ma_adult:skin_bn_r_ear_04/ma_adult:skin_bn_r_ear_05
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_r_ear_01/ma_adult:skin_bn_r_ear_02/ma_adult:skin_bn_r_ear_03/ma_adult:skin_bn_r_ear_04/ma_adult:skin_bn_r_ear_05/ma_adult:skin_bn_r_ear_06
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_upMask_01
+        weight: 1
+      - path: ma_adult:skin_root/ma_adult:skin_bn_spine_02/ma_adult:skin_bn_spine_03/ma_adult:skin_bn_spine_04/ma_adult:skin_bn_spine_05/ma_adult:skin_bn_spine_06/ma_adult:skin_bn_spine_07/ma_adult:skin_bn_maskHead_01/ma_adult:skin_bn_upMask_01/ma_adult:skin_bn_upMask_02
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

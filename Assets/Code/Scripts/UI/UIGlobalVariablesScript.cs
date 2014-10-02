@@ -87,6 +87,9 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject JumbButton;
 	public GameObject PauseGameButton;
 	public GameObject PausedScreen;
+	public GameObject MultiplayerOptionsScreen;
+	public GameObject EnterFriendsNameChat;
+	public UILabel ZefTokensUI;
 
 	void Awake()
 	{

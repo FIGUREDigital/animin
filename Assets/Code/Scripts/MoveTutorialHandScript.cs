@@ -5,6 +5,7 @@ public class MoveTutorialHandScript : MonoBehaviour {
 
 	float Lerp = 0;
 	float Cooldown;
+	int SwipesPerformed;
 
 	// Use this for initialization
 	void Start () 
@@ -29,6 +30,8 @@ public class MoveTutorialHandScript : MonoBehaviour {
 		{
 			Cooldown = -1;
 			Lerp = 0;
+			if(SwipesPerformed >= 2)
+				this.transform.parent.gameObject.SetActive(false);
 		}
 		else
 		{
@@ -37,10 +40,13 @@ public class MoveTutorialHandScript : MonoBehaviour {
 			{
 				Lerp = 1;
 				Cooldown = 0.6f;
+				SwipesPerformed++;
 			}
 			//this.GetComponent<UISprite>().enabled = true;
 
 			this.transform.localPosition = new Vector3(Mathf.Lerp(-376, 530, Lerp), -209.999f, 0);
+
+		
 		}
 	}
 }

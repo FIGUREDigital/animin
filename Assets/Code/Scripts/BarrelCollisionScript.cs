@@ -17,9 +17,23 @@ public class BarrelCollisionScript : Photon.MonoBehaviour
     {
         if (GameController.instance.gameType == GameType.NETWORK)
         {
-            UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnBarrelEnd(this.gameObject);
+			Vector3 position = (Vector3)GetComponent<PhotonView>().instantiationData[0];
+
+			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnBarrelEnd(this.gameObject, position);
         }
     }
+
+	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+	{
+		if (stream.isWriting)
+		{
+			
+		}
+		else
+		{
+			
+		}
+	}
 
     void Update()
     {

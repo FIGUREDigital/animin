@@ -33,7 +33,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
     private GameStateId State;
     private float AmmoTimer;
     private float NextBarrelSpawnTimer;
-    public List<GameObject> SpawnedObjects = new List<GameObject>();
+   // public List<GameObject> SpawnedObjects = new List<GameObject>();
     public Texture2D[] SlimeTextures;
     public Texture2D[] SlimeLevel2Textures;
     public Color[] SlimeColors;
@@ -58,6 +58,10 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
     public GameObject LocalPlayerCharacter;
     public List<GameObject> PlayersCharacters = new List<GameObject>();
+
+	public GameObject SpawnedObjectsEnemies;
+	public GameObject SpawnedObjectsAllOthers;
+
     public UITexture Go321Sprite;
     public Texture[] Go321Textures;
     private float FillUpTimer;
@@ -67,6 +71,8 @@ public class GunsMinigameScript : Photon.MonoBehaviour
     {
         CurrentBullets.Clear();
         CurrentBullets.Add(BulletPrefab[Random.Range(0, BulletPrefab.Length)]);
+
+
     }
 
 
@@ -120,19 +126,20 @@ public class GunsMinigameScript : Photon.MonoBehaviour
                 {
                     if (PhotonNetwork.countOfPlayers == 2)
                     {
-                        List<GameObject> animinsSpawned = new List<GameObject>();
+                       // List<GameObject> animinsSpawned = new List<GameObject>();
 
-                        for (int i = 0; i < PhotonNetwork.countOfPlayers; ++i)
-                        {
-                            GameObject animin = SpawnAniminStart(AniminId.Tbo, AniminEvolutionStageId.Baby);
-                            animinsSpawned.Add(animin);
-                            //GetComponent<PhotonView>().RPC("ReceiveEventAcquireControlOfCharacter", PhotonNetwork.playerList[i], i);
-                        }
+                //for (int i = 0; i < PhotonNetwork.countOfPlayers; ++i)
+               // {
+                   		//GameObject animin = SpawnAniminStart(AniminId.Tbo, AniminEvolutionStageId.Baby);
+                    	//animinsSpawned.Add(animin);
+                    //GetComponent<PhotonView>().RPC("ReceiveEventAcquireControlOfCharacter", PhotonNetwork.playerList[i], i);
+               // }
 
-                        UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = animinsSpawned[0].GetComponent<AnimationControllerScript>();
-                        UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = animinsSpawned[1].GetComponent<CharacterControllerScript>();
+						//UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = animin.GetComponent<AnimationControllerScript>();
+						//UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = animin.GetComponent<CharacterControllerScript>();
 
-                        SendEventBeginGame();
+               	 		SendEventBeginGame();
+						State = GameStateId.PrepareToStart3;
                     }
                     break;
                 }
@@ -369,6 +376,10 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         GetComponent<PhotonView>().RPC("ReceiveBeginGame", PhotonTargets.All);
     }
 
+
+
+
+
     public void Reset()
     {
         State = GameStateId.Initialize;
@@ -376,18 +387,20 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
     public void CloseGame()
     {
+		UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
+
         //GunPrefab.SetActive(false);
         this.gameObject.SetActive(false);
 
-        for (int i = 0; i < SpawnedObjects.Count; ++i)
-            Destroy(SpawnedObjects[i]);
+		for (int i = 0; i < SpawnedObjectsAllOthers.transform.childCount; ++i)
+			Destroy(SpawnedObjectsAllOthers.transform.GetChild(i).gameObject);
 
         for (int i = 0; i < PlayersCharacters.Count; ++i)
             Destroy(PlayersCharacters[i]);
 
         PlayersCharacters.Clear();
 
-        SpawnedObjects.Clear();
+       // SpawnedObjects.Clear();
     }
 
     public void OnHitByEnemy(GameObject enemy, GameObject character)
@@ -401,7 +414,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         );
 
 
-        Debug.Log("OnHitByEnemy");
+        //Debug.Log("OnHitByEnemy");
 
      /*   int randomCount = Random.Range(5, 8);
         for (int i = 0; i < randomCount; ++i)
@@ -417,7 +430,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         //		instance.transform.rotation = Quaternion.Euler(instance.transform.rotation.eulerAngles.x, instance.transform.rotation.eulerAngles.y, Random.Range(0, 360));
         //		
         //		UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
-    }
+	}
 
     public void OnBulletHitBarrel(BarrelCollisionScript barrel)
     {
@@ -438,15 +451,16 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         if (barrel.DestroyedPrefab != null)
         {
             GameObject newProjectile = Instantiate(barrel.DestroyedPrefab) as GameObject;
-            newProjectile.transform.parent = barrel.transform.parent;
+			newProjectile.transform.parent = SpawnedObjectsAllOthers.transform;
             newProjectile.transform.position = Vector3.zero;
             newProjectile.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
             newProjectile.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
             newProjectile.transform.localPosition = barrel.transform.localPosition;
-            UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(newProjectile);
-        }
+            //UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(newProjectile);
+        
+		}
 
-        UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
+        //UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
         Destroy(barrel.gameObject);
     }
 
@@ -473,6 +487,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
         instance.GetComponent<CharacterControllerScript>().SetLocal(true);
         LocalPlayerCharacter = instance;
+
         return instance;
     }
 
@@ -480,7 +495,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
     {
         Vector3 scale = instance.transform.localScale;
 
-        instance.transform.parent = this.transform;
+		instance.transform.parent = SpawnedObjectsAllOthers.transform;
         instance.transform.localPosition = new Vector3(0, 0.1f, 0);
         instance.transform.localScale = scale;
         instance.transform.localRotation = Quaternion.identity;
@@ -507,6 +522,8 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         if (level == 1) textures = SlimeLevel2Textures;
         int textureIndex = Random.Range(0, textures.Length);
 
+		Vector3 position = new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f));
+
         GameObject newEnemy = null;
         if (GameController.instance.gameType == GameType.SOLO)
         {
@@ -514,7 +531,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         }
         else
         {
-            newEnemy = PhotonNetwork.Instantiate(EnemyPrefabs[level], Vector3.zero, Quaternion.identity, 0, new object[] { level, textureIndex });
+			newEnemy = PhotonNetwork.Instantiate(EnemyPrefabs[level], Vector3.zero, Quaternion.identity, 0, new object[] { level, textureIndex, position });
         }
 
         newEnemy.GetComponent<GunGameEnemyScript>().SetLocal(true);
@@ -522,14 +539,14 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
         if (GameController.instance.gameType == GameType.SOLO)
         {
-            SpawnEnemyEnd(newEnemy, level, textureIndex);
+			SpawnEnemyEnd(newEnemy, level, textureIndex, position);
         }
 
 
         return newEnemy;
     }
 
-    public void SpawnEnemyEnd(GameObject newEnemy, int level, int textureIndex)
+    public void SpawnEnemyEnd(GameObject newEnemy, int level, int textureIndex, Vector3 position)
     {
         Texture2D[] textures = SlimeTextures;
         if (level == 1) textures = SlimeLevel2Textures;
@@ -537,11 +554,11 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         float scale = 1;
         if (level == 1) scale = 3;
 
-        newEnemy.transform.parent = this.transform;
+		newEnemy.transform.parent = SpawnedObjectsAllOthers.transform;
         newEnemy.transform.position = new Vector3(0, 0, 0);
         newEnemy.transform.rotation = Quaternion.identity;
         newEnemy.transform.localScale = new Vector3(0.06f * scale, 0.06f * scale, 0.06f * scale);
-        newEnemy.transform.localPosition = new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f));
+        newEnemy.transform.localPosition = position;
 
         //if(level == 1)
         //	newProjectile.transform.rotation = Quaternion.Euler(15, 0, 0);
@@ -560,12 +577,14 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         newEnemy.GetComponent<GunGameEnemyScript>().Level = level;
         newEnemy.GetComponent<GunGameEnemyScript>().TargetToFollow = PlayersCharacters[Random.Range(0, PlayersCharacters.Count)];
         newEnemy.name = texture.name;
-        SpawnedObjects.Add(newEnemy);
+        //SpawnedObjects.Add(newEnemy);
     }
 
     public void SpawnBarrelStart(bool special)
     {
         GameObject newProjectile = null;
+
+		Vector3 randomPosition = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
 
         if (GameController.instance.gameType == GameType.SOLO)
         {
@@ -584,42 +603,42 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         {
             if (special)
             {
-                newProjectile = PhotonNetwork.Instantiate(SpecialBarrels[Random.Range(0, SpecialBarrels.Length)], Vector3.zero, Quaternion.identity, 0) as GameObject;
+				newProjectile = PhotonNetwork.Instantiate(SpecialBarrels[Random.Range(0, SpecialBarrels.Length)], Vector3.zero, Quaternion.identity, 0, new object[] { randomPosition }) as GameObject;
             }
             else
             {
-                newProjectile = PhotonNetwork.Instantiate(Barrels[Random.Range(0, Barrels.Length)], Vector3.zero, Quaternion.identity, 0) as GameObject;
+				newProjectile = PhotonNetwork.Instantiate(Barrels[Random.Range(0, Barrels.Length)], Vector3.zero, Quaternion.identity, 0, new object[] { randomPosition }) as GameObject;
             }
         }
 
         newProjectile.GetComponent<BarrelCollisionScript>().SetLocal(true);
 
         if (GameController.instance.gameType == GameType.SOLO)
-            SpawnBarrelEnd(newProjectile);
+			SpawnBarrelEnd(newProjectile, randomPosition);
     }
 
-    public void SpawnBarrelEnd(GameObject newProjectile)
+    public void SpawnBarrelEnd(GameObject newProjectile, Vector3 position)
     {
-        newProjectile.transform.parent = this.transform;
+		newProjectile.transform.parent = SpawnedObjectsAllOthers.transform;
         newProjectile.transform.position = Vector3.zero;
         newProjectile.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
         newProjectile.transform.localScale = new Vector3(0.19f, 0.19f, 0.19f);
-        newProjectile.transform.localPosition = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
+		newProjectile.transform.localPosition = position;
 
-        SpawnedObjects.Add(newProjectile);
+       // SpawnedObjects.Add(newProjectile);
     }
 
     public void SpawnRandomCube()
     {
         GameObject newProjectile = Instantiate(RandomCubePrefab) as GameObject;
 
-        newProjectile.transform.parent = this.transform;
+		newProjectile.transform.parent = SpawnedObjectsAllOthers.transform;
         newProjectile.transform.position = Vector3.zero;
         newProjectile.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
         newProjectile.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
         newProjectile.transform.localPosition = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
 
-        SpawnedObjects.Add(newProjectile);
+       // SpawnedObjects.Add(newProjectile);
     }
 
     public void ShootBulletForwardStart(int playerIndex)
@@ -653,7 +672,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
     public void ShootBulletForwardEnd(GameObject newProjectile, GameObject characterShooting)
     {
-        newProjectile.transform.parent = this.transform;
+		newProjectile.transform.parent = SpawnedObjectsAllOthers.transform;
         newProjectile.transform.position = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position;
         newProjectile.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
         newProjectile.transform.localScale = new Vector3(0.116f, 0.116f, 0.116f);
@@ -662,7 +681,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         //newProjectile.velocity = transform.TransformDirection( Vector3( 0, 0, speed) );
         //newProjectile.AddComponent<MeshCollider>();
         newProjectile.GetComponent<Rigidbody>().AddForce(characterShooting.transform.forward * 20000);
-        SpawnedObjects.Add(newProjectile);
+       // SpawnedObjects.Add(newProjectile);
     }
 
 
@@ -673,7 +692,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
         GameObject newProjectile = Instantiate(resourceLoad) as GameObject;
        // Destroy(newProjectile.GetComponent<ProjectileScript>());
-        newProjectile.transform.parent = this.transform;
+		newProjectile.transform.parent = SpawnedObjectsAllOthers.transform;
         newProjectile.transform.position = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position;
         newProjectile.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
         newProjectile.transform.localScale = new Vector3(0.116f, 0.116f, 0.116f) * Random.Range(0.80f, 1.0f);
@@ -689,14 +708,14 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
         newProjectile.GetComponent<Rigidbody>().AddForce((character.transform.up + direction) * 20000 * speedVariationFactor);
 
-        SpawnedObjects.Add(newProjectile);
+       // SpawnedObjects.Add(newProjectile);
     }
 
 
     public void ShootEnemyDestroyedEffects(float speedVariationFactor, Vector3 position, Color color, string bulletSplat)
     {
         GameObject newProjectile = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        newProjectile.transform.parent = this.transform;
+        newProjectile.transform.parent = SpawnedObjectsAllOthers.transform;
         newProjectile.transform.position = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position;
         newProjectile.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
         newProjectile.transform.localScale = new Vector3(0.116f, 0.116f, 0.116f) * Random.Range(0.20f, 0.70f);
@@ -721,6 +740,6 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         //newProjectile.GetComponent<Rigidbody>().AddExplosionForce(10, position + new Vector3(0,1,0), 1);
 
 
-        SpawnedObjects.Add(newProjectile);
+        //SpawnedObjects.Add(newProjectile);
     }
 }

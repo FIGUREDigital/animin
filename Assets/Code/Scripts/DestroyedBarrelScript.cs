@@ -60,7 +60,7 @@ public class DestroyedBarrelScript : MonoBehaviour
 			
 			if(destroy)
 			{
-				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
+				//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
 				Destroy(this.gameObject);
 			}
 		}

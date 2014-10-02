@@ -24,7 +24,7 @@ public class SplatFadeScript : MonoBehaviour
 			if(alpha <= 0)
 			{
 				alpha = 0;
-				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
+				//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
 				Destroy(this.gameObject);
 			}
 

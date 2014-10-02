@@ -20,6 +20,7 @@ public class PersistentData
 	public int ZefTokens;
 	public List<AniminSubevolutionStageId> SubstagesCompleted = new List<AniminSubevolutionStageId>(); 
 	public string Username;
+	public System.DateTime CreatedOn;
 	
 	private bool audioIsOn;
 	private float happy;
@@ -94,11 +95,12 @@ public class PersistentData
 		}
 	}
 	
-	public void SetDefault()
+	public void SetDefault(AniminId animin)
 	{
 		SubstagesCompleted.Clear();
-		PlayerAniminId = AniminId.Tbo;
+		PlayerAniminId = animin;
 		AniminEvolutionId = AniminEvolutionStageId.Baby;
+		CreatedOn = System.DateTime.Now;
 		
 		Happy = MaxHappy;
 		Hungry = MaxHungry;

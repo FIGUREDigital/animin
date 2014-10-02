@@ -37,19 +37,23 @@ public class NetworkMatchmaker : MonoBehaviour {
 		if (__doTraces) Debug.Log("OnConnectionFail" + "\n");
 	}
 
-	public void OnCreatedRoom() {
+	public void OnCreatedRoom() 
+	{
 		if (__doTraces) Debug.Log("OnCreatedRoom" + "\n");
 	}
 
-	public void OnCustomAuthenticationFailed() {
+	public void OnCustomAuthenticationFailed() 
+	{
 		if (__doTraces) Debug.Log("OnCustomAuthenticationFailed" + "\n");
 	}
 
-	public void OnDisconnectedFromPhoton() {
+	public void OnDisconnectedFromPhoton() 
+	{
 		if (__doTraces) Debug.Log("OnDisconnectedFromPhoton" + "\n");
 	}
 
-	public void OnFailedToConnectToPhoton() {
+	public void OnFailedToConnectToPhoton() 
+	{
 		if (__doTraces) Debug.Log("OnFailedToConnectToPhoton" + "\n");
 	}
 
@@ -58,16 +62,17 @@ public class NetworkMatchmaker : MonoBehaviour {
 
 		if (GameController.instance.multiplayerType == MultiplayerType.FRIEND_START) {
 			if (__doTraces) Debug.Log ("GameController.instance.username\t:\t"	+	GameController.instance.username + "\n");
-			PhotonNetwork.CreateRoom(GameController.instance.username);
+			PhotonNetwork.CreateRoom(PlayerProfileData.ActiveProfile.ProfileName);
 		} else if (GameController.instance.multiplayerType == MultiplayerType.FRIEND_JOIN) {
 			Debug.Log ("GameController.instance.friendUsername\t:\t"+	GameController.instance.friendUsername);
-			//PhotonNetwork.JoinRoom(GameController.instance.friendUsername);
+			PhotonNetwork.JoinRoom(GameController.instance.friendUsername);
 		} else if (GameController.instance.multiplayerType == MultiplayerType.RANDOM) {
 			PhotonNetwork.JoinRandomRoom();
 		}
 	}
 
-	public void OnJoinedRoom() {
+	public void OnJoinedRoom()
+	{
 		if (__doTraces) Debug.Log("OnJoinedRoom" + "\n");
 
 		if (__doTraces) Debug.Log("PhotonNetwork.playerList.Length\t:\t"	+	PhotonNetwork.playerList.Length + "\n");
@@ -99,8 +104,15 @@ public class NetworkMatchmaker : MonoBehaviour {
 		if (__doTraces) Debug.Log("OnPhotonInstantiate" + "\n");
 	}
 
-	public void OnPhotonJoinRoomFailed() {
+	public void OnPhotonJoinRoomFailed() 
+	{
 		if (__doTraces) Debug.Log("OnPhotonJoinRoomFailed" + "\n");
+
+		if(GameController.instance.multiplayerType == MultiplayerType.FRIEND_JOIN)
+		{
+			UIGlobalVariablesScript.Singleton.EnterFriendsNameChat.GetComponent<EnterFriendsNameSubmitScript>().ReportingLabel.text = "Failed to find friend";
+			UIGlobalVariablesScript.Singleton.EnterFriendsNameChat.SetActive(true);
+		}
 
 
 		//

@@ -101,6 +101,13 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			break;
 		}
 
+		case UIFunctionalityId.GoToMainMenuFromGame:
+		{
+			Application.LoadLevel("Menu");
+
+			break;
+		}
+
 		case UIFunctionalityId.AudioOnOffGame:
 		{
 			PlayerProfileData.ActiveProfile.Settings.AudioEnabled = !PlayerProfileData.ActiveProfile.Settings.AudioEnabled;
@@ -108,6 +115,13 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			SetSoundSprite();
 
 			PlayerProfileData.ActiveProfile.Save();
+
+			break;
+		}
+		case UIFunctionalityId.ResetAnimin:
+		{
+			PersistentData.Singleton.SetDefault(PersistentData.Singleton.PlayerAniminId);
+			Application.LoadLevel("VuforiaTest");
 
 			break;
 		}
@@ -235,6 +249,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().Forces.Clear();			
 
+			Debug.Log ("CloseCurrentMinigame");
 			GameController.instance.StopGame();
 
 			HandleClick(UIFunctionalityId.BackFromMinigames, sender);
@@ -274,14 +289,42 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetSinglePlayer();
 			HandleClick(UIFunctionalityId.StartSelectedMinigame, sender);
+
+
 			break;
 		}
 		case UIFunctionalityId.PlayMultiplayer:
 		{
-			GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetMultiplayer();
+			UIGlobalVariablesScript.Singleton.MultiplayerOptionsScreen.SetActive(true);
+			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(false);
+
 			//HandleClick(UIFunctionalityId.StartSelectedMinigame, sender);
 			break;
 		}
+		case UIFunctionalityId.BackFromStartGameOptions:
+		{
+			UIGlobalVariablesScript.Singleton.MultiplayerOptionsScreen.SetActive(false);
+			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(true);
+			
+			//HandleClick(UIFunctionalityId.StartSelectedMinigame, sender);
+			break;
+		}
+		case UIFunctionalityId.JoinRandomGame:
+		{
+			GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetMultiplayerJoinRandom();
+			break;
+		}
+		case UIFunctionalityId.StartFriendGame:
+		{
+			GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetMultiplayerStartFriendGame();
+			break;
+		}
+		case UIFunctionalityId.JoinFriendGame:
+		{
+			UIGlobalVariablesScript.Singleton.EnterFriendsNameChat.SetActive(true);
+			break;
+		}
+
 		case UIFunctionalityId.ShowLeaderboards:
 		{
 			break;
@@ -496,10 +539,10 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.TakePicture:
 		{
-			if (Application.platform == RuntimePlatform.IPhonePlayer) 
-			{
-				GameObject.Find("Aperture").GetComponent<Aperture>().Photo();
-			}
+//			if (Application.platform == RuntimePlatform.IPhonePlayer) 
+//			{
+//				GameObject.Find("Aperture").GetComponent<Aperture>().Photo();
+//			}
 
 			break;
 		}

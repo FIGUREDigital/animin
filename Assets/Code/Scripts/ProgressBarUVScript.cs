@@ -6,7 +6,7 @@ public class ProgressBarUVScript : MonoBehaviour
 	public GameObject ZefToken;
 
 	float HappyAverage;
-	const float SamplesPerTrigger = 60.0f;
+	const float SamplesPerTrigger = 60.0f * 15;
 	private float Accumulator;
 	private float Timer;
 	private int SamplesTaken;
@@ -34,7 +34,8 @@ public class ProgressBarUVScript : MonoBehaviour
 
 			if(SamplesTaken >= SamplesPerTrigger)
 			{
-				int TokensPerHappyAverage = (int)((Accumulator / (PersistentData.MaxHappy * SamplesTaken)) * 6);
+				int TokensPerHappyAverage = (int)((Accumulator / (PersistentData.MaxHappy * SamplesTaken)) * 3);
+
 				for(int i=0;i<TokensPerHappyAverage;++i)
 				{
 					Vector3 position = new Vector3(

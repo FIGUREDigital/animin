@@ -17,7 +17,17 @@ public class ProjectileScript : MonoBehaviour
 
     // SHAUN END
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
-	
+	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+	{
+		if (stream.isWriting)
+		{
+
+		}
+		else
+		{
+		
+		}
+	}
 
 	// Use this for initialization
 	void Start () 
@@ -81,6 +91,7 @@ public class ProjectileScript : MonoBehaviour
 					alpha = 0;
 					destroy = true;
 				}
+
 				transform.GetChild(a).renderer.material.color = new Color(
 					transform.GetChild(a).renderer.material.color.r,
 					transform.GetChild(a).renderer.material.color.g,
@@ -90,7 +101,7 @@ public class ProjectileScript : MonoBehaviour
 			
 			if(destroy)
 			{
-				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
+				//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
 				Destroy(this.gameObject);
 			}
 		}
@@ -109,14 +120,16 @@ public class ProjectileScript : MonoBehaviour
 				if(SplatPrefab != null)
 				{
 					GameObject instance = (GameObject)Instantiate(SplatPrefab);
-						instance.transform.parent = this.transform.parent;
+					//if(instance == null) Debug.Log("GameObject instance = (GameObject)Instantiate(SplatPrefab);");
+					instance.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjectsAllOthers.transform;
+
 					instance.transform.localPosition = new Vector3(this.transform.localPosition.x, 0, this.transform.localPosition.z);
 					instance.transform.rotation = Quaternion.Euler(instance.transform.rotation.eulerAngles.x, instance.transform.rotation.eulerAngles.y, Random.Range(0, 360));
 						
-					UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
+					//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Add(instance);
 				}
 
-				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
+				//UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnedObjects.Remove(this.gameObject);
 				Destroy(this.gameObject);
 			}
 

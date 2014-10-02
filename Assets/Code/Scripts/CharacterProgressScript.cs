@@ -162,7 +162,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 		if(PlayerProfileData.ActiveProfile == null)
 		{
-			PlayerProfileData.ActiveProfile = ProfilesManagementScript.CreateNewProfile("buildintest");
+			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("buildintest");
 			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Kelsi];
 		}
 
@@ -1249,6 +1249,8 @@ public class CharacterProgressScript : MonoBehaviour
 			TouchesObjcesWhileSwiping.Clear();
 		}
 	
+
+		UIGlobalVariablesScript.Singleton.ZefTokensUI.text = PersistentData.Singleton.ZefTokens.ToString();
 	
 		//lastMousePosition = Input.mousePosition;
 		DragedObjectedFromUIToWorld = false;
@@ -1302,8 +1304,8 @@ public class CharacterProgressScript : MonoBehaviour
 		
 		item.transform.localRotation = Quaternion.Euler(44.08633f,
 		                                                159.2195f,
-		                                                -100.7192f);
-		*/
+		                                                -100.7192f);*/
+
 	}
 
 	public bool OnInteractWithPopupItem(UIPopupItemScript item)
@@ -1313,7 +1315,8 @@ public class CharacterProgressScript : MonoBehaviour
 			case PopupItemType.Token:
 			{
 				//Stop(true);
-				PersistentData.Singleton.Evolution += item.Points + 100;
+				PersistentData.Singleton.Evolution += item.Points;
+			PersistentData.Singleton.ZefTokens ++;
 
 				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
 				{

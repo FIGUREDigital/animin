@@ -68,4 +68,11 @@ public enum UIFunctionalityId
 	PlaySinglePlayer,
 	PlayMultiplayer,
 	ShowLeaderboards,
+	StartFriendGame,
+	JoinFriendGame,
+	JoinRandomGame,
+	BackFromStartGameOptions,
+	GoToMainMenuFromGame,
+	ShowCredits,
+	ResetAnimin,
 }

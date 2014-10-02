@@ -11,6 +11,7 @@ public class ChestScript : MonoBehaviour
 		LidOpened,
 		ThrowItemsOut,
 		FadeOut,
+		Completed,
 	}
 
 	private AnimationStateId State;
@@ -92,10 +93,11 @@ public class ChestScript : MonoBehaviour
 						zef.GetComponent<SpinObjectScript>().enabled = false;
 						zef.transform.parent = Coins[i].transform.GetChild(0).transform;
 						zef.transform.localPosition = Vector3.zero;	
-						zef.transform.localScale *= 0.8f;
+						//zef.transform.localScale *= 0.8f;
 						Coins[i].transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
 						Coins[i].GetComponent<Animator>().SetBool("play", true);
 						Coins[i] = zef;
+					Coins[i].tag = "Untagged";
 						//Coins[i].transform.localScale = new Vector3(12, 12, 12);
 						
 					}
@@ -111,6 +113,13 @@ public class ChestScript : MonoBehaviour
 			case AnimationStateId.ThrowItemsOut:
 			{
 
+			Timer -= Time.deltaTime;
+
+			if(Timer <= 0)
+			{
+				BeginFadeOut = true;
+				State = AnimationStateId.Completed;
+			}
 
 				break;
 			}
@@ -124,18 +133,41 @@ public class ChestScript : MonoBehaviour
 //				//if(Coins[i].GetComponent<Animator>().
 //			}
 
-				Timer -= Time.deltaTime;
-				if(Timer <= 0)
+				//Timer -= Time.deltaTime;
+				//if(Timer <= 0)
 				{
+				int counter = 0;
 					for(int i=0;i<Coins.Length;++i)
 					{
-						Coins[i].GetComponent<SpinObjectScript>().enabled = true;
-						Coins[i].transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
+						if(Coins[i] == null) 
+					{
+						counter++;
+						continue;
+					}
 
+					AnimatorStateInfo stateInfo = Coins[i].transform.parent.transform.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+
+					if(stateInfo.length == 0) continue;
+
+					//Debug.Log(stateInfo.normalizedTime.ToString());
+					//Debug.Log(stateInfo.length.ToString());
+
+					if(Coins[i].transform.parent.transform.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+						{
+							Coins[i].GetComponent<SpinObjectScript>().enabled = true;
+						Coins[i].transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;	
+						Coins[i].GetComponent<SpinObjectScript>().SetRotationAngle();
+						Coins[i].tag = "Items";
+							Coins[i] = null;
+						}
 					}
 					
+				if(counter == 5)
+				{
 					State = AnimationStateId.ThrowItemsOut;
-					BeginFadeOut = true;
+					Timer = 3;
+				
+				}
 				}
 	
 				break;
