@@ -64,7 +64,7 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -97,51 +97,51 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: ke_kid:world_root
+      - path: ke_kid:skin_jCOG
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jHip_L
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jHip_L
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jHip_L/ke_kid:skin_jKnee_L
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jHip_L/ke_kid:skin_jKnee_L
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jHip_L/ke_kid:skin_jKnee_L/ke_kid:skin_jAnkle_L
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jHip_L/ke_kid:skin_jKnee_L/ke_kid:skin_jAnkle_L
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jHip_R
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jHip_R
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jHip_R/ke_kid:skin_jKnee_R
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jHip_R/ke_kid:skin_jKnee_R
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jHip_R/ke_kid:skin_jKnee_R/ke_kid:skin_jAnkle_R
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jHip_R/ke_kid:skin_jKnee_R/ke_kid:skin_jAnkle_R
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_L
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_L
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_L/ke_kid:skin_jShoulder_L
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_L/ke_kid:skin_jShoulder_L
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_L/ke_kid:skin_jShoulder_L/ke_kid:skin_jElbow_L
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_L/ke_kid:skin_jShoulder_L/ke_kid:skin_jElbow_L
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_R
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_R
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_R/ke_kid:skin_jShoulder_R
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_R/ke_kid:skin_jShoulder_R
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_R/ke_kid:skin_jShoulder_R/ke_kid:skin_jElbow_R
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jCalvicle_R/ke_kid:skin_jShoulder_R/ke_kid:skin_jElbow_R
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jNeck
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jNeck
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jNeck/ke_kid:skin_jHead
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jNeck/ke_kid:skin_jHead
+      - path: ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jNeck/ke_kid:skin_jHead/ke_kid:skin_jNose
         weight: 1
-      - path: ke_kid:world_root/ke_kid:skin_jCOG/ke_kid:skin_jSpine_1/ke_kid:skin_jSpine_2/ke_kid:skin_jSpine_3/ke_kid:skin_jSpine_4/ke_kid:skin_jSpine_5/ke_kid:skin_jShoulders/ke_kid:skin_jNeck/ke_kid:skin_jHead/ke_kid:skin_jNose
+      - path: ke_kid:skin_jCOG/ke_kid:skin_object_joint
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}

@@ -64,20 +64,20 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"KelsiAdultAnimations");
 
         AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
-        AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
-        AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
+		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiKidAnimations");
+		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiAdultAnimations");
 
         AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
-        AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
-        AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
+		AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiKidAnimations");
+		AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiAdultAnimations");
 
         AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
-        AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
-        AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
+		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiKidAnimations");
+		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiAdultAnimations");
 
         AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
-        AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
-        AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
+		AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiKidAnimations");
+		AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiAdultAnimations");
 
 	}
 

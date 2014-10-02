@@ -15,6 +15,22 @@ public enum AnimationHappyId
 	Happy5,
 }
 
+public enum ModelAnimationLayerId
+{
+	KelsiBaby= 0,
+	KelsiKid,
+	KelsiAdult,
+	PiBaby,
+	PiKid,
+	PiAdult,
+	TboBaby,
+	TboKid,
+	TboAdult,
+	MandiBaby,
+	MandiKid,
+	MandiAdult,
+}
+
 public class AnimationControllerScript : MonoBehaviour 
 {
 	public Animations GetAnimationEnum()
@@ -443,8 +459,11 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			
-			return animator.GetLayerWeight(1) >= 1;
+			GameObject currentMode = this.GetComponent<AnimationControllerScript>().CharacterModel;
+			int layerIndex = 1 + (int)currentMode.GetComponent<HeadReferenceScript>().PickupAnimationLayer;
+
+
+			return animator.GetLayerWeight(layerIndex) >= 1;
 		}
 	
 	}
@@ -453,7 +472,10 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			return animator.GetLayerWeight(1) > 0;
+			GameObject currentMode = this.GetComponent<AnimationControllerScript>().CharacterModel;
+			int layerIndex = 1 + (int)currentMode.GetComponent<HeadReferenceScript>().PickupAnimationLayer;
+
+			return animator.GetLayerWeight(layerIndex) > 0;
 		}
 		
 		set
@@ -554,26 +576,29 @@ public class AnimationControllerScript : MonoBehaviour
 
 		//IsHoldingItem = true;
 
-		if(HoldingWeightAnimationUp && animator.GetLayerWeight(1) >= 1)
+		GameObject currentMode = this.GetComponent<AnimationControllerScript>().CharacterModel;
+		int layerIndex = 1 + (int)currentMode.GetComponent<HeadReferenceScript>().PickupAnimationLayer;
+
+		
+		if(HoldingWeightAnimationUp && animator.GetLayerWeight(layerIndex) >= 1)
 		{
 			//animator.GetNextAnimatorStateInfo(0).
 		}
-		else if(!HoldingWeightAnimationUp && animator.GetLayerWeight(1) <= 0)
+		else if(!HoldingWeightAnimationUp && animator.GetLayerWeight(layerIndex) <= 0)
 		{
 
 		}
 		else if(HoldingWeightAnimationUp)
 		{
-			float value = animator.GetLayerWeight(1) + Time.deltaTime * 3;
+			float value = animator.GetLayerWeight(layerIndex) + Time.deltaTime * 3;
 			if(value >= 1) value = 1;
-			animator.SetLayerWeight(1, value);
+			animator.SetLayerWeight(layerIndex, value);
 		}
 		else 
 		{
-		
-			float value = animator.GetLayerWeight(1) - Time.deltaTime * 3;
+			float value = animator.GetLayerWeight(layerIndex) - Time.deltaTime * 3;
 			if(value <= 0) value = 0;
-			animator.SetLayerWeight(1, value);
+			animator.SetLayerWeight(layerIndex, value);
 
 		}
 

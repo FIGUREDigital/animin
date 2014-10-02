@@ -440,6 +440,7 @@
     <None Include="Assets\Qualcomm Augmented Reality\Shaders\RenderVideoBackground.shader" />
     <None Include="Assets\Qualcomm Augmented Reality\Shaders\Text3D.shader" />
     <None Include="Assets\readme_SDK.txt" />
+    <None Include="Assets\Resources\Shaders\DiffuseNoCull.shader" />
     <None Include="Assets\Resources\Shaders\ItemShader.shader" />
     <None Include="Assets\Resources\Shaders\SignalFlashshader.shader" />
     <None Include="Assets\Resources\Shaders\SplatShader.shader" />

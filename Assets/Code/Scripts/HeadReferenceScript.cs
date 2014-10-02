@@ -6,6 +6,7 @@ public class HeadReferenceScript : MonoBehaviour {
 	public GameObject HeadBoneToRotate;
 	public GameObject Indicator;
 	public GameObject ObjectCarryAttachmentBone;
+	public ModelAnimationLayerId PickupAnimationLayer;
 
 
 	// Use this for initialization

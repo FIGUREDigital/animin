@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c975ce1ef7bafd942acafde1b9ba4221
+guid: 8b33544d3455945ad9cd6563eb83afd3
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -68,18 +68,19 @@ ModelImporter:
     100124: pi_kid_rig:skin_neck_joint
     100126: pi_kid_rig:skin_nose_joint
     100128: pi_kid_rig:skin_noseTip_joint
-    100130: pi_kid_rig:skin_shoulder_l_joint
-    100132: pi_kid_rig:skin_shoulder_r_joint
-    100134: pi_kid_rig:skin_spine_1_joint
-    100136: pi_kid_rig:skin_spine_2_joint
-    100138: pi_kid_rig:skin_spine_3_joint
-    100140: pi_kid_rig:skin_spine_4_joint
-    100142: pi_kid_rig:skin_spine_5_joint
-    100144: pi_kid_rig:skin_spine_6_joint
-    100146: pi_kid_rig:skin_spine_7_joint
-    100148: pi_kid_rig:skin_spine_8_joint
-    100150: pi_kid_rig:skin_wrist_l_joint
-    100152: pi_kid_rig:skin_wrist_r_joint
+    100130: pi_kid_rig:skin_object_joint
+    100132: pi_kid_rig:skin_shoulder_l_joint
+    100134: pi_kid_rig:skin_shoulder_r_joint
+    100136: pi_kid_rig:skin_spine_1_joint
+    100138: pi_kid_rig:skin_spine_2_joint
+    100140: pi_kid_rig:skin_spine_3_joint
+    100142: pi_kid_rig:skin_spine_4_joint
+    100144: pi_kid_rig:skin_spine_5_joint
+    100146: pi_kid_rig:skin_spine_6_joint
+    100148: pi_kid_rig:skin_spine_7_joint
+    100150: pi_kid_rig:skin_spine_8_joint
+    100152: pi_kid_rig:skin_wrist_l_joint
+    100154: pi_kid_rig:skin_wrist_r_joint
     400000: //RootNode
     400002: pi_kid_rig:skin_bn_l_leg_01
     400004: pi_kid_rig:skin_bn_l_leg_02
@@ -145,18 +146,19 @@ ModelImporter:
     400124: pi_kid_rig:skin_neck_joint
     400126: pi_kid_rig:skin_nose_joint
     400128: pi_kid_rig:skin_noseTip_joint
-    400130: pi_kid_rig:skin_shoulder_l_joint
-    400132: pi_kid_rig:skin_shoulder_r_joint
-    400134: pi_kid_rig:skin_spine_1_joint
-    400136: pi_kid_rig:skin_spine_2_joint
-    400138: pi_kid_rig:skin_spine_3_joint
-    400140: pi_kid_rig:skin_spine_4_joint
-    400142: pi_kid_rig:skin_spine_5_joint
-    400144: pi_kid_rig:skin_spine_6_joint
-    400146: pi_kid_rig:skin_spine_7_joint
-    400148: pi_kid_rig:skin_spine_8_joint
-    400150: pi_kid_rig:skin_wrist_l_joint
-    400152: pi_kid_rig:skin_wrist_r_joint
+    400130: pi_kid_rig:skin_object_joint
+    400132: pi_kid_rig:skin_shoulder_l_joint
+    400134: pi_kid_rig:skin_shoulder_r_joint
+    400136: pi_kid_rig:skin_spine_1_joint
+    400138: pi_kid_rig:skin_spine_2_joint
+    400140: pi_kid_rig:skin_spine_3_joint
+    400142: pi_kid_rig:skin_spine_4_joint
+    400144: pi_kid_rig:skin_spine_5_joint
+    400146: pi_kid_rig:skin_spine_6_joint
+    400148: pi_kid_rig:skin_spine_7_joint
+    400150: pi_kid_rig:skin_spine_8_joint
+    400152: pi_kid_rig:skin_wrist_l_joint
+    400154: pi_kid_rig:skin_wrist_r_joint
     7400000: Take 001
     9500000: //RootNode
   materials:

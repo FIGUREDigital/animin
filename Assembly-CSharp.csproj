@@ -405,6 +405,7 @@
      <None Include="Assets\Resources\Shaders\TransparentUnlitDoubleSided.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_outline_cutout.shader" />
+     <None Include="Assets\Resources\Shaders\DiffuseNoCull.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Cartoony_outline_transparent_sepspec_sharp.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_outline_transparent_sharp.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Cartoony_sharp.shader" />

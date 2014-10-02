@@ -1,6 +1,6 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/AnimationControllerScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../Downloads/builtin_shaders-4.6.0b17/DefaultResourcesExtra/Mobile/Mobile-Diffuse.shader">
     <Files>
       <File FileName="Assets/Code/UI/StartCreateProfileButtonScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/ProfilesManagementScript.cs" Line="1" Column="1" />
@@ -9,7 +9,7 @@
       <File FileName="Assets/Code/UI/SendAccessCodeToServerButtonClickScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/UI/UnlockCharacterButtonClickScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/UI/SelectCharacterClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/AniminProfileData.cs" Line="103" Column="35" />
+      <File FileName="Assets/Code/AniminProfileData.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/PlayerProfileData.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/UI/CreateUsernameButtonClickScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/UI/CreateUsernameFromTextboxClickScript.cs" Line="1" Column="1" />
@@ -17,22 +17,30 @@
       <File FileName="Assets/Code/UI/OpenSettingsInMainMenuScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Shaun/Scripts/GameController.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Enumerations/UIFunctionalityId.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="457" Column="32" />
+      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="166" Column="90" />
       <File FileName="Assets/Code/Scripts/GunsMinigameScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="45" Column="28" />
       <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/ProgressBarUVScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/AnimateChestObjectOutScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/ChestScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="553" Column="24" />
+      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="29" Column="12" />
       <File FileName="Assets/Code/Scripts/SpinObjectScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/MoveTutorialHandScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/TrackSoundEffectOnTickScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/TrackMusicOnTickScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/BlinkingScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/ObjectLookAtDeviceScript.cs" Line="110" Column="4" />
-      <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="79" Column="2" />
+      <File FileName="Assets/Code/Scripts/ObjectLookAtDeviceScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/HeadReferenceScript.cs" Line="9" Column="25" />
+      <File FileName="Assets/Code/Scripts/CharacterSwapManagementScript.cs" Line="62" Column="66" />
+      <File FileName="Assets/Resources/Shaders/TransparentUnlitDoubleSided.shader" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Shaders/SplatShader.shader" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Shaders/SignalFlashshader.shader" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Shaders/ItemShader.shader" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Shaders/VuforaSamplerShader.shader" Line="1" Column="1" />
+      <File FileName="../../Downloads/builtin_shaders-4.6.0b17/DefaultResourcesExtra/Mobile/Mobile-Diffuse.shader" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

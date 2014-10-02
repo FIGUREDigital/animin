@@ -163,7 +163,7 @@ public class CharacterProgressScript : MonoBehaviour
 		if(PlayerProfileData.ActiveProfile == null)
 		{
 			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("buildintest");
-			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Kelsi];
+			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Pi];
 		}
 
 
@@ -1315,7 +1315,7 @@ public class CharacterProgressScript : MonoBehaviour
 			case PopupItemType.Token:
 			{
 				//Stop(true);
-				PersistentData.Singleton.Evolution += item.Points;
+				PersistentData.Singleton.Evolution += item.Points + 100;
 			PersistentData.Singleton.ZefTokens ++;
 
 				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
