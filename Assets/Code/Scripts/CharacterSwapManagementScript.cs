@@ -46,7 +46,7 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ke_kid";
 		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_adult";
 
-        Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ma_baby";
+		Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ma_baby";
         Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ma_kid";
         Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ma_adult";
 
@@ -116,21 +116,22 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		GameObject instance = GameObject.Instantiate(resource) as GameObject;
 		Vector3 scale = instance.transform.localScale;
 		//RuntimeAnimatorController controller = CurrentModel.GetComponent<Animator>().runtimeAnimatorController;
-		instance.transform.parent = CurrentModel.transform.parent;
+		instance.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform;
 
-		CurrentModel.transform.parent = null;
-		//CurrentModel.SetActive(false);
-		Destroy(CurrentModel);
+		if(CurrentModel != null)
+		{
+		
+			CurrentModel.transform.parent = null;
+			Destroy(CurrentModel);
+		}
 
 		instance.transform.localPosition = Vector3.zero;
 		instance.transform.localScale = scale;
-		//instance.transform.position = Vector3.zero;
-		instance.transform.localRotation = Quaternion.identity;
-		//CurrentModel.GetComponent<Animator>().runtimeAnimatorController = controller;
-		CurrentModel = instance;
-//		TBOAdultAnimations.runtimeAnimatorController = CurrentModel.GetComponent<Animator>().runtimeAnimatorController;
 
-		//AnimatorOverrideController overrideController = new AnimatorOverrideController();
+		instance.transform.localRotation = Quaternion.identity;
+
+		CurrentModel = instance;
+
 		CurrentModel.GetComponent<Animator>().runtimeAnimatorController = AnimationLists[(int)animinId, (int)id];
 
 

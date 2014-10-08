@@ -90,6 +90,10 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject MultiplayerOptionsScreen;
 	public GameObject EnterFriendsNameChat;
 	public UILabel ZefTokensUI;
+	public UILabel ItemsFoodMedicineLabel;
+	public GameObject EDMBoxUI;
+	public GameObject JunoUI;
+	public GameObject PianoUI;
 
 	void Awake()
 	{

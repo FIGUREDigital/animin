@@ -31,3 +31,6 @@ Cmd: compileSnippet
   api=5 type=1 insize=3987 outsize=6 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF HDR_LIGHT_PREPASS_ON ok=1
 Cmd: compileSnippet
   api=9 type=1 insize=3987 outsize=7 kw=LIGHTMAP_ON DIRLIGHTMAP_ON HDR_LIGHT_PREPASS_ON ok=1
+End of pipe
+
+Quitting shader compiler process

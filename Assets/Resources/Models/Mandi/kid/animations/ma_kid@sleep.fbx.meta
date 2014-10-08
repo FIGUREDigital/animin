@@ -63,7 +63,7 @@ ModelImporter:
     400054: ma_kid:skin_wrist_l_joint
     400056: ma_kid:skin_wrist_r_joint
     400058: //RootNode
-    7400000: Take 001
+    7400000: sleep
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -80,7 +80,93 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: sleep
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 76
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ma_kid:skin_cog_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_clavicle_l_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_clavicle_l_joint/ma_kid:skin_shoulder_l_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_clavicle_l_joint/ma_kid:skin_shoulder_l_joint/ma_kid:skin_elbow_l_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_clavicle_l_joint/ma_kid:skin_shoulder_l_joint/ma_kid:skin_elbow_l_joint/ma_kid:skin_wrist_l_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_clavicle_r_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_clavicle_r_joint/ma_kid:skin_shoulder_r_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_clavicle_r_joint/ma_kid:skin_shoulder_r_joint/ma_kid:skin_elbow_r_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_clavicle_r_joint/ma_kid:skin_shoulder_r_joint/ma_kid:skin_elbow_r_joint/ma_kid:skin_wrist_r_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_head_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_head_joint/ma_kid:skin_ear_l_1_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_head_joint/ma_kid:skin_ear_l_1_joint/ma_kid:skin_ear_l_2_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_head_joint/ma_kid:skin_ear_l_1_joint/ma_kid:skin_ear_l_2_joint/ma_kid:skin_ear_l_3_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_head_joint/ma_kid:skin_ear_r_1_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_head_joint/ma_kid:skin_ear_r_1_joint/ma_kid:skin_ear_r_2_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_head_joint/ma_kid:skin_ear_r_1_joint/ma_kid:skin_ear_r_2_joint/ma_kid:skin_ear_r_3_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint/ma_kid:skin_spine_3_joint/ma_kid:skin_spine_4_joint/ma_kid:skin_spine_5_joint/ma_kid:skin_spine_6_joint/ma_kid:skin_spine_7_joint/ma_kid:skin_chest_joint/ma_kid:skin_head_joint/ma_kid:skin_headOnly_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_thigh_l_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_thigh_l_joint/ma_kid:skin_ankle_l_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_thigh_r_joint
+        weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_thigh_r_joint/ma_kid:skin_ankle_r_joint
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

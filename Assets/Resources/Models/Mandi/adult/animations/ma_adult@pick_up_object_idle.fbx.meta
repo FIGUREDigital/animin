@@ -43,6 +43,8 @@ ModelImporter:
     100074: ma_adult:skin_bn_upMask_02
     100076: ma_adult:skin_root
     100078: //RootNode
+    100080: ma_adult:skin_bn_spine_01
+    100082: ma_adult:skin_object_joint
     400000: ma_adult:skin_bn_head_01
     400002: ma_adult:skin_bn_head_02
     400004: ma_adult:skin_bn_l_arm_01
@@ -83,6 +85,8 @@ ModelImporter:
     400074: ma_adult:skin_bn_upMask_02
     400076: ma_adult:skin_root
     400078: //RootNode
+    400080: ma_adult:skin_bn_spine_01
+    400082: ma_adult:skin_object_joint
     7400000: pick_up_object_idle
     9500000: //RootNode
   materials:

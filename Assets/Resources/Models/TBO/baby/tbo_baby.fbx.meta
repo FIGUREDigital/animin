@@ -42,6 +42,72 @@ ModelImporter:
     100072: tbo_baby:tbo_baby
     100074: tbo_baby:tbo_characterNode_01
     100076: tbo_baby:tbo_mesh_grp
+    100078: tbo_baby:Belly_cc_01
+    100080: tbo_baby:Global_cc_01
+    100082: tbo_baby:Head_cc_01
+    100084: tbo_baby:Hips_cc_01
+    100086: tbo_baby:Hips_Rot_cc_01
+    100088: tbo_baby:L_Forearm_cc_01
+    100090: tbo_baby:L_UpperArm_cc_01
+    100092: tbo_baby:LeftEar1_cc_01
+    100094: tbo_baby:LeftEar2_cc_01
+    100096: tbo_baby:LeftShoulder_cc_01
+    100098: tbo_baby:loc_L_arm_01
+    100100: tbo_baby:loc_L_arm_02
+    100102: tbo_baby:loc_L_arm_03
+    100104: tbo_baby:loc_L_Forearm_01
+    100106: tbo_baby:MoveScaleRotate_cc_01
+    100108: tbo_baby:Neck_cc_01
+    100110: tbo_baby:Nose_cc_01
+    100112: tbo_baby:object_anim
+    100114: tbo_baby:object_joint
+    100116: tbo_baby:object_offset_anim
+    100118: tbo_baby:R_Forearm_cc_01
+    100120: tbo_baby:R_UpperArm_cc_01
+    100122: tbo_baby:RightEar1_cc_01
+    100124: tbo_baby:RightEar2_cc_01
+    100126: tbo_baby:RightShoulder_cc_01
+    100128: tbo_baby:skin_belly_end_joint
+    100130: tbo_baby:skin_belly_joint
+    100132: tbo_baby:skin_head_end_joint
+    100134: tbo_baby:skin_head_joint
+    100136: tbo_baby:skin_hips_joint
+    100138: tbo_baby:skin_left_arm_01_joint
+    100140: tbo_baby:skin_left_arm_02_joint
+    100142: tbo_baby:skin_left_arm_03_joint
+    100144: tbo_baby:skin_left_clavicle_01_joint
+    100146: tbo_baby:skin_left_ear_01_joint
+    100148: tbo_baby:skin_left_ear_02_joint
+    100150: tbo_baby:skin_left_ear_end_joint
+    100152: tbo_baby:skin_left_leg_01_joint
+    100154: tbo_baby:skin_left_leg_02_joint
+    100156: tbo_baby:skin_left_leg_03_joint
+    100158: tbo_baby:skin_neck_joint
+    100160: tbo_baby:skin_nose_end_joint
+    100162: tbo_baby:skin_nose_joint
+    100164: tbo_baby:skin_object_joint
+    100166: tbo_baby:skin_right_arm_01_joint
+    100168: tbo_baby:skin_right_arm_02_joint
+    100170: tbo_baby:skin_right_arm_03_joint
+    100172: tbo_baby:skin_right_clavicle_01_joint
+    100174: tbo_baby:skin_right_ear_01_joint
+    100176: tbo_baby:skin_right_ear_02_joint
+    100178: tbo_baby:skin_right_ear_end_joint
+    100180: tbo_baby:skin_right_leg_01_joint
+    100182: tbo_baby:skin_right_leg_02_joint
+    100184: tbo_baby:skin_right_leg_03_joint
+    100186: tbo_baby:skin_spine_01_joint
+    100188: tbo_baby:skin_spine_02_joint
+    100190: tbo_baby:skin_spine_03_joint
+    100192: tbo_baby:skin_spine_04_joint
+    100194: tbo_baby:skin_spine_05_joint
+    100196: tbo_baby:skin_world_root
+    100198: tbo_baby:Spine1_cc_01
+    100200: tbo_baby:Spine2_cc_01
+    100202: tbo_baby:Spine3_cc_01
+    100204: tbo_baby:Spine4_cc_01
+    100206: tbo_baby:tbo_baby_skeleton
+    100208: tbo_baby:transform1
     400000: //RootNode
     400002: tbo_baby:belly_end_joint
     400004: tbo_baby:belly_joint
@@ -81,6 +147,72 @@ ModelImporter:
     400072: tbo_baby:tbo_baby
     400074: tbo_baby:tbo_characterNode_01
     400076: tbo_baby:tbo_mesh_grp
+    400078: tbo_baby:Belly_cc_01
+    400080: tbo_baby:Global_cc_01
+    400082: tbo_baby:Head_cc_01
+    400084: tbo_baby:Hips_cc_01
+    400086: tbo_baby:Hips_Rot_cc_01
+    400088: tbo_baby:L_Forearm_cc_01
+    400090: tbo_baby:L_UpperArm_cc_01
+    400092: tbo_baby:LeftEar1_cc_01
+    400094: tbo_baby:LeftEar2_cc_01
+    400096: tbo_baby:LeftShoulder_cc_01
+    400098: tbo_baby:loc_L_arm_01
+    400100: tbo_baby:loc_L_arm_02
+    400102: tbo_baby:loc_L_arm_03
+    400104: tbo_baby:loc_L_Forearm_01
+    400106: tbo_baby:MoveScaleRotate_cc_01
+    400108: tbo_baby:Neck_cc_01
+    400110: tbo_baby:Nose_cc_01
+    400112: tbo_baby:object_anim
+    400114: tbo_baby:object_joint
+    400116: tbo_baby:object_offset_anim
+    400118: tbo_baby:R_Forearm_cc_01
+    400120: tbo_baby:R_UpperArm_cc_01
+    400122: tbo_baby:RightEar1_cc_01
+    400124: tbo_baby:RightEar2_cc_01
+    400126: tbo_baby:RightShoulder_cc_01
+    400128: tbo_baby:skin_belly_end_joint
+    400130: tbo_baby:skin_belly_joint
+    400132: tbo_baby:skin_head_end_joint
+    400134: tbo_baby:skin_head_joint
+    400136: tbo_baby:skin_hips_joint
+    400138: tbo_baby:skin_left_arm_01_joint
+    400140: tbo_baby:skin_left_arm_02_joint
+    400142: tbo_baby:skin_left_arm_03_joint
+    400144: tbo_baby:skin_left_clavicle_01_joint
+    400146: tbo_baby:skin_left_ear_01_joint
+    400148: tbo_baby:skin_left_ear_02_joint
+    400150: tbo_baby:skin_left_ear_end_joint
+    400152: tbo_baby:skin_left_leg_01_joint
+    400154: tbo_baby:skin_left_leg_02_joint
+    400156: tbo_baby:skin_left_leg_03_joint
+    400158: tbo_baby:skin_neck_joint
+    400160: tbo_baby:skin_nose_end_joint
+    400162: tbo_baby:skin_nose_joint
+    400164: tbo_baby:skin_object_joint
+    400166: tbo_baby:skin_right_arm_01_joint
+    400168: tbo_baby:skin_right_arm_02_joint
+    400170: tbo_baby:skin_right_arm_03_joint
+    400172: tbo_baby:skin_right_clavicle_01_joint
+    400174: tbo_baby:skin_right_ear_01_joint
+    400176: tbo_baby:skin_right_ear_02_joint
+    400178: tbo_baby:skin_right_ear_end_joint
+    400180: tbo_baby:skin_right_leg_01_joint
+    400182: tbo_baby:skin_right_leg_02_joint
+    400184: tbo_baby:skin_right_leg_03_joint
+    400186: tbo_baby:skin_spine_01_joint
+    400188: tbo_baby:skin_spine_02_joint
+    400190: tbo_baby:skin_spine_03_joint
+    400192: tbo_baby:skin_spine_04_joint
+    400194: tbo_baby:skin_spine_05_joint
+    400196: tbo_baby:skin_world_root
+    400198: tbo_baby:Spine1_cc_01
+    400200: tbo_baby:Spine2_cc_01
+    400202: tbo_baby:Spine3_cc_01
+    400204: tbo_baby:Spine4_cc_01
+    400206: tbo_baby:tbo_baby_skeleton
+    400208: tbo_baby:transform1
     4300000: tbo_baby:tbo_baby_geo
     4300002: tbo_baby:tbo_baby
     9500000: //RootNode

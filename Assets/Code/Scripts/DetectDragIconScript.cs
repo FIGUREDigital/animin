@@ -19,14 +19,10 @@ public class DetectDragIconScript : MonoBehaviour {
 	{
 		UIGlobalVariablesScript.Singleton.DragableUI3DObject.GetComponent<CameraModelScript>().SpriteRef = this.gameObject;
 
-
-
-
-
 		ReferencedObjectScript refScript = this.GetComponent<ReferencedObjectScript>();
-		UIPopupItemScript popScript = refScript.Reference.GetComponent<UIPopupItemScript>();
+		InterfaceItemLinkToModelScript popScript = refScript.Reference.GetComponent<InterfaceItemLinkToModelScript>();
 		
-		GameObject child = (GameObject)GameObject.Instantiate(popScript.Model3D);
+		GameObject child = (GameObject)GameObject.Instantiate(popScript.Item3D);
 
 		child.GetComponent<BoxCollider>().enabled = false;
 

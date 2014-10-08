@@ -163,7 +163,7 @@ public class CharacterProgressScript : MonoBehaviour
 		if(PlayerProfileData.ActiveProfile == null)
 		{
 			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("buildintest");
-			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Pi];
+			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Tbo];
 		}
 
 
@@ -182,16 +182,15 @@ public class CharacterProgressScript : MonoBehaviour
 		//animationController.IsSleeping = true;
 		//CurrentAction = ActionId.Sleep;
 		//SleepBoundingBox.SetActive(true);
-
-
 	}
 
 	void Start()
 	{		
 		GetComponent<CharacterControllerScript>().SetLocal(true);
 		UIClickButtonMasterScript.SetSoundSprite();
-		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
 
+		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(
+			PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
 		//SpawnChests();	
 	}
 
@@ -205,8 +204,26 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 		else
 		{
-			Stop(true);
+			//Stop(true);
 		}
+	}
+
+	public GameObject SpawnStageItem(string prefabId, Vector3 position)
+	{
+		CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+		
+		GameObject resource = Resources.Load<GameObject>(prefabId);
+		
+		GameObject gameObject = GameObject.Instantiate(resource) as GameObject;
+		gameObject.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
+		
+		gameObject.transform.localPosition = position;
+		//gameObject.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(-180, 180), 0);
+		gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+		gameObject.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(130, 230), 0);
+
+		script.GroundItems.Add(gameObject);
+		return gameObject;
 	}
 
 	public GameObject SpawnZef(Vector3 position)
@@ -232,9 +249,11 @@ public class CharacterProgressScript : MonoBehaviour
 		
 		for(int i=0;i<GroundItems.Count;++i)
 		{
-			if(GroundItems[i].GetComponent<ReferencedObjectScript>() == null) continue;
+			//if(GroundItems[i].GetComponent<ReferencedObjectScript>() == null) continue;
 			
-			UIPopupItemScript itemData = GroundItems[i].GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+			UIPopupItemScript itemData = GroundItems[i]/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>();
+			if(itemData == null) continue;
+
 			if(itemData.Type == PopupItemType.Item)
 			{
 				list.Add(GroundItems[i]);
@@ -282,6 +301,15 @@ public class CharacterProgressScript : MonoBehaviour
 		//CurrentAction = ActionId.None;
 	}
 
+	public void HidePopupMenus()
+	{
+		UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
+		UIGlobalVariablesScript.Singleton.StereoUI.SetActive(false);
+		UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(false);
+		UIGlobalVariablesScript.Singleton.EDMBoxUI.SetActive(false);
+		UIGlobalVariablesScript.Singleton.JunoUI.SetActive(false);
+	}
+	
 	private GameObject GetClosestFoodToEat()
 	{
 		GameObject closestFood = null;
@@ -467,11 +495,11 @@ public class CharacterProgressScript : MonoBehaviour
 			if(!animationController.IsEating)
 			{
 
-				PopupItemType itemType = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type;
+				PopupItemType itemType = ObjectHolding./*GetComponent<ReferencedObjectScript>().Reference.*/GetComponent<UIPopupItemScript>().Type;
 
 				Debug.Log("FINISHED EATING");
 
-				OnInteractWithPopupItem(ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>());
+				OnInteractWithPopupItem(ObjectHolding./*GetComponent<ReferencedObjectScript>().Reference.*/GetComponent<UIPopupItemScript>());
 				this.GetComponent<CharacterProgressScript>().GroundItems.Remove(ObjectHolding);
 				Destroy(ObjectHolding);
 				
@@ -488,7 +516,7 @@ public class CharacterProgressScript : MonoBehaviour
 				{
 					if(!PlayedEatingSound)
 					{
-						UIPopupItemScript popup = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+						UIPopupItemScript popup = ObjectHolding/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>();
 
 						PlayedEatingSound = true;
 						if(popup.SpecialId == SpecialFunctionalityId.Liquid)
@@ -840,10 +868,8 @@ public class CharacterProgressScript : MonoBehaviour
 									Destroy(TouchesObjcesWhileSwiping[i]);
 									TouchesObjcesWhileSwiping.RemoveAt(i);
 
-									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
-									UIGlobalVariablesScript.Singleton.StereoUI.SetActive(false);
-									UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(false);
-									
+									HidePopupMenus();
+
 									if(ObjectHolding == hitInfo.collider.gameObject)
 									{
 										ObjectHolding = null;
@@ -909,11 +935,11 @@ public class CharacterProgressScript : MonoBehaviour
 						{
 							//Debug.Log("HIT THE CHARACTER FOR INTERACTION");
 
-							if(ObjectHolding != null && !ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
+							if(ObjectHolding != null && !ObjectHolding./*GetComponent<ReferencedObjectScript>().Reference.*/GetComponent<UIPopupItemScript>().NonInteractable)
 							{
 								//Debug.Log("HIT THE CHARACTER FOR INTERACTION 2");
 
-								UIPopupItemScript item = ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+								UIPopupItemScript item = ObjectHolding./*GetComponent<ReferencedObjectScript>().Reference.*/GetComponent<UIPopupItemScript>();
 
 
 								if(item.Type == PopupItemType.Food)
@@ -931,7 +957,7 @@ public class CharacterProgressScript : MonoBehaviour
 								}
 
 							}
-							else if(ObjectHolding != null && ObjectHolding.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().NonInteractable)
+							else if(ObjectHolding != null && ObjectHolding/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().NonInteractable)
 							{
 							//Debug.Log("HIT THE CHARACTER FOR INTERACTION 3");
 								UIGlobalVariablesScript.Singleton.SoundEngine.PlayFart();
@@ -947,9 +973,9 @@ public class CharacterProgressScript : MonoBehaviour
 							}
 						}
 
-						else if((hitInfo.collider.tag == "Items") && hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
+						else if((hitInfo.collider.tag == "Items") && hitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
 						{
-							OnInteractWithPopupItem(hitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>());
+							OnInteractWithPopupItem(hitInfo.collider./*GetComponent<ReferencedObjectScript>().Reference.*/GetComponent<UIPopupItemScript>());
 							this.GetComponent<CharacterProgressScript>().GroundItems.Remove(hitInfo.collider.gameObject);
 							Destroy(hitInfo.collider.gameObject);
 						}
@@ -1012,32 +1038,68 @@ public class CharacterProgressScript : MonoBehaviour
 							bool isItemAlreadyOn = false;
 							if((UIGlobalVariablesScript.Singleton.Item3DPopupMenu.activeInHierarchy 
 						    || UIGlobalVariablesScript.Singleton.StereoUI.activeInHierarchy
+						    || UIGlobalVariablesScript.Singleton.JunoUI.activeInHierarchy
+						    || UIGlobalVariablesScript.Singleton.EDMBoxUI.activeInHierarchy
+						    || UIGlobalVariablesScript.Singleton.PianoUI.activeInHierarchy
 						    || UIGlobalVariablesScript.Singleton.LightbulbUI.activeInHierarchy) 
 						   && (LastKnownObjectWithMenuUp == moveHitInfo.collider.gameObject))
 							{
 								isItemAlreadyOn = true;
 							}
 
-							if(RequestedToMoveToCounter == 1 && !isItemAlreadyOn && (moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu != MenuFunctionalityUI.None))
+							if(RequestedToMoveToCounter == 1 && !isItemAlreadyOn && (moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu != MenuFunctionalityUI.None))
 							{
-								if( moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Clock)
+								if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Clock)
 								{
+									HidePopupMenus();
 									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
 									//TriggeredHoldAction = true;
 									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
 									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
 									preventMovingTo = true;
 								}
-								else if( moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Mp3Player)
+								else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.EDMBox)
 								{
+								HidePopupMenus();
+								hitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.EDMBoxUI);
+								UIGlobalVariablesScript.Singleton.EDMBoxUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+									UIGlobalVariablesScript.Singleton.EDMBoxUI.SetActive(true);
+									
+									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+									preventMovingTo = true;
+								}
+							else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Juno)
+							{
+								HidePopupMenus();
+								hitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.JunoUI);
+								UIGlobalVariablesScript.Singleton.JunoUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+								UIGlobalVariablesScript.Singleton.JunoUI.SetActive(true);
+								
+								LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+								preventMovingTo = true;
+							}
+							else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Piano)
+							{
+								HidePopupMenus();
+								hitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.JunoUI);
+								UIGlobalVariablesScript.Singleton.JunoUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+								UIGlobalVariablesScript.Singleton.JunoUI.SetActive(true);
+								
+								LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+								preventMovingTo = true;
+							}
+								else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Mp3Player)
+								{
+								HidePopupMenus();
 									UIGlobalVariablesScript.Singleton.StereoUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
 									UIGlobalVariablesScript.Singleton.StereoUI.SetActive(true);
 
 									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
 									preventMovingTo = true;
 								}
-								else if( moveHitInfo.collider.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Lightbulb)
+								else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Lightbulb)
 								{
+								HidePopupMenus();
 									UIGlobalVariablesScript.Singleton.LightbulbUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
 									UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(true);
 									
@@ -1060,9 +1122,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 						if(!preventMovingTo)
 						{
-							UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
-							UIGlobalVariablesScript.Singleton.StereoUI.SetActive(false);
-							UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(false);
+							HidePopupMenus();
 
 							if(RequestedToMoveToCounter > 1)
 								MoveTo(point, true);

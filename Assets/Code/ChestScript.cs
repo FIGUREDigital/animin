@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class ChestScript : MonoBehaviour 
 {
@@ -18,12 +18,17 @@ public class ChestScript : MonoBehaviour
 	private float Timer = 6.0f;
 
 	public GameObject[] Coins;
+	private List<string> FoodItems = new List<string>();
+
 
 	// Use this for initialization
 	void Start () 
 	{
 		//State = AnimationStateId.StartingUp;
-
+		FoodItems.Add("Prefabs/almondMilk");
+		FoodItems.Add("Prefabs/avocado");
+		FoodItems.Add("Prefabs/blueberry");
+		FoodItems.Add("Prefabs/carrot");
 	}
 
 //	void LateUpdate()
@@ -85,19 +90,33 @@ public class ChestScript : MonoBehaviour
 				Timer -= Time.deltaTime;
 				if(Timer <= 0)
 				{
+					CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 					
 					for(int i=0;i<Coins.Length;++i)
 					{
-						GameObject zef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().SpawnZef(Vector3.zero);
+					GameObject zef = null;
 
-						zef.GetComponent<SpinObjectScript>().enabled = false;
+					if(i == 0)
+					{
+						zef = progressScript.SpawnStageItem(FoodItems[Random.Range(0, FoodItems.Count)], Vector3.zero);
+					}
+					else
+					{
+						zef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().SpawnZef(Vector3.zero);
+					}
+
+					SpinObjectScript spinScript = zef.GetComponent<SpinObjectScript>();
+					if(spinScript != null)
+					{
+						spinScript.enabled = false;
+					}
 						zef.transform.parent = Coins[i].transform.GetChild(0).transform;
 						zef.transform.localPosition = Vector3.zero;	
 						//zef.transform.localScale *= 0.8f;
 						Coins[i].transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
 						Coins[i].GetComponent<Animator>().SetBool("play", true);
 						Coins[i] = zef;
-					Coins[i].tag = "Untagged";
+						Coins[i].tag = "Untagged";
 						//Coins[i].transform.localScale = new Vector3(12, 12, 12);
 						
 					}
@@ -113,13 +132,13 @@ public class ChestScript : MonoBehaviour
 			case AnimationStateId.ThrowItemsOut:
 			{
 
-			Timer -= Time.deltaTime;
+				Timer -= Time.deltaTime;
 
-			if(Timer <= 0)
-			{
-				BeginFadeOut = true;
-				State = AnimationStateId.Completed;
-			}
+				if(Timer <= 0)
+				{
+					BeginFadeOut = true;
+					State = AnimationStateId.Completed;
+				}
 
 				break;
 			}
@@ -152,12 +171,19 @@ public class ChestScript : MonoBehaviour
 					//Debug.Log(stateInfo.normalizedTime.ToString());
 					//Debug.Log(stateInfo.length.ToString());
 
-					if(Coins[i].transform.parent.transform.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+						if(Coins[i].transform.parent.transform.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
 						{
-							Coins[i].GetComponent<SpinObjectScript>().enabled = true;
-						Coins[i].transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;	
-						Coins[i].GetComponent<SpinObjectScript>().SetRotationAngle();
-						Coins[i].tag = "Items";
+							SpinObjectScript spinScript = Coins[i].GetComponent<SpinObjectScript>();
+							if(spinScript != null)
+							{
+								spinScript.enabled = true;
+								Coins[i].GetComponent<SpinObjectScript>().SetRotationAngle();
+							}
+
+							
+							Coins[i].transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;	
+							
+							Coins[i].tag = "Items";
 							Coins[i] = null;
 						}
 					}

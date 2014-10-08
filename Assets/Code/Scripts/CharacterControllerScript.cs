@@ -575,9 +575,9 @@ public class CharacterControllerScript : Photon.MonoBehaviour
 	{
 		CharacterProgressScript script = this.GetComponent<CharacterProgressScript>();
 
-		if(hit.gameObject.tag == "Items" && hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
+		if(hit.gameObject.tag == "Items" && hit.gameObject/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
 		{
-			if(this.GetComponent<CharacterProgressScript>().OnInteractWithPopupItem(hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>()))
+			if(this.GetComponent<CharacterProgressScript>().OnInteractWithPopupItem(hit.gameObject/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>()))
 			{
 				this.GetComponent<CharacterProgressScript>().GroundItems.Remove(hit.gameObject);
 				Destroy(hit.gameObject);
@@ -607,7 +607,7 @@ public class CharacterControllerScript : Photon.MonoBehaviour
 
 		if(hit.gameObject.tag == "Items" && this.GetComponent<CharacterProgressScript>().IsGoingToPickUpObject == hit.gameObject)
 		{
-			PopupItemType itemType = hit.gameObject.GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>().Type;
+			PopupItemType itemType = hit.gameObject/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Type;
 
 
 			if(script.InteractWithItemOnPickup && hit.gameObject.GetComponent<LighbulbSwitchOnOffScript>() != null)

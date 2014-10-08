@@ -36,7 +36,7 @@ public class DragDropMainBarItem : UIDragDropItem
 			if (dds != null)
 			{
 				ReferencedObjectScript refScript = this.GetComponent<ReferencedObjectScript>();
-				UIPopupItemScript popScript = refScript.Reference.GetComponent<UIPopupItemScript>();
+				InterfaceItemLinkToModelScript modelLink = refScript.Reference.GetComponent<InterfaceItemLinkToModelScript>();
 
 				// its a character drag and drop
 				if(dds.GetComponent<CharacterProgressScript>() != null)
@@ -46,8 +46,8 @@ public class DragDropMainBarItem : UIDragDropItem
 				}
 				else
 				{
-					GameObject child = (GameObject)GameObject.Instantiate(popScript.Model3D);
-
+					GameObject child = (GameObject)GameObject.Instantiate(modelLink.Item3D);
+					UIPopupItemScript popScript = child.GetComponent<UIPopupItemScript>();
 
 					child.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
 

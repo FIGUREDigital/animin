@@ -75,6 +75,7 @@ ModelImporter:
     100138: tbo_kid:skin_jSpine_4
     100140: tbo_kid:skin_jSpine_5
     100142: tbo_kid:tbo_kid_body
+    100144: tbo_kid:skin_object_joint
     400000: //RootNode
     400002: tbo_kid:_characterNode
     400004: tbo_kid:grp_geo
@@ -147,6 +148,7 @@ ModelImporter:
     400138: tbo_kid:skin_jSpine_4
     400140: tbo_kid:skin_jSpine_5
     400142: tbo_kid:tbo_kid_body
+    400144: tbo_kid:skin_object_joint
     4300000: tbo_kid:tbo_kid_body
     9500000: //RootNode
     13700000: tbo_kid:tbo_kid_body

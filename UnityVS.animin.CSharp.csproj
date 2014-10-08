@@ -101,6 +101,8 @@
     <Compile Include="Assets\Code\Scripts\DeviceCameraScript.cs" />
     <Compile Include="Assets\Code\Scripts\DragDrop3DItemScript.cs" />
     <Compile Include="Assets\Code\Scripts\DragDropMainBarItem.cs" />
+    <Compile Include="Assets\Code\Scripts\EDMBoxScript.cs" />
+    <Compile Include="Assets\Code\Scripts\EDMMixerScript.cs" />
     <Compile Include="Assets\Code\Scripts\EnterFriendsNameSubmitScript.cs" />
     <Compile Include="Assets\Code\Scripts\EvilCharacterPatternMovementScript.cs" />
     <Compile Include="Assets\Code\Scripts\FlashObjectScript.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Assets\Code\Scripts\GunGameEnemyScript.cs" />
     <Compile Include="Assets\Code\Scripts\GunsMinigameScript.cs" />
     <Compile Include="Assets\Code\Scripts\HeadReferenceScript.cs" />
+    <Compile Include="Assets\Code\Scripts\InterfaceItemLinkToModelScript.cs" />
     <Compile Include="Assets\Code\Scripts\JoystiqScript.cs" />
     <Compile Include="Assets\Code\Scripts\LighbulbSwitchOnOffScript.cs" />
     <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
@@ -158,6 +161,7 @@
     <Compile Include="Assets\Code\UI\CreateUsernameButtonClickScript.cs" />
     <Compile Include="Assets\Code\UI\CreateUsernameFromTextboxClickScript.cs" />
     <Compile Include="Assets\Code\UI\OpenSettingsInMainMenuScript.cs" />
+    <Compile Include="Assets\Code\UI\PressEdmBoxKeyScript.cs" />
     <Compile Include="Assets\Code\UI\SelectCharacterClickScript.cs" />
     <Compile Include="Assets\Code\UI\SendAccesCodeFromChatboxClickScript.cs" />
     <Compile Include="Assets\Code\UI\SendAccessCodeToServerButtonClickScript.cs" />

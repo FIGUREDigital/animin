@@ -15,6 +15,9 @@ public enum MenuFunctionalityUI
 	Mp3Player,
 	Clock,
 	Lightbulb,
+	EDMBox,
+	Juno,
+	Piano,
 }
 
 public enum SpecialFunctionalityId
@@ -29,7 +32,7 @@ public class UIPopupItemScript : MonoBehaviour
 {
 	public int Points;
 	public PopupItemType Type;
-	public GameObject Model3D;
+	//public GameObject Model3D;
 	public bool NonInteractable;
 	public MenuFunctionalityUI Menu;
 	public SpecialFunctionalityId SpecialId;

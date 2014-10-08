@@ -33,6 +33,7 @@ ModelImporter:
     100054: ma_kid:skin_wrist_l_joint
     100056: ma_kid:skin_wrist_r_joint
     100058: //RootNode
+    100060: ma_kid:skin_object_joint
     400000: ma_kid:skin_ankle_l_joint
     400002: ma_kid:skin_ankle_r_joint
     400004: ma_kid:skin_chest_joint
@@ -63,6 +64,7 @@ ModelImporter:
     400054: ma_kid:skin_wrist_l_joint
     400056: ma_kid:skin_wrist_r_joint
     400058: //RootNode
+    400060: ma_kid:skin_object_joint
     7400000: pick_up_object_idle
     9500000: //RootNode
   materials:

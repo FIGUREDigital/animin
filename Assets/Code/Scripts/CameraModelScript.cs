@@ -106,18 +106,19 @@ public class CameraModelScript : MonoBehaviour
 		if(SpriteRef != null)
 		{
 			ReferencedObjectScript refScript = SpriteRef.GetComponent<ReferencedObjectScript>();
-			UIPopupItemScript popScript = refScript.Reference.GetComponent<UIPopupItemScript>();
+			InterfaceItemLinkToModelScript modelItem = refScript.Reference.GetComponent<InterfaceItemLinkToModelScript>();
 			
 
-			GameObject child = (GameObject)GameObject.Instantiate(popScript.Model3D);
-			
+			GameObject child = (GameObject)GameObject.Instantiate(modelItem.Item3D);
+
+			UIPopupItemScript popScript = child.GetComponent<UIPopupItemScript>();
 			
 			child.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
 			
 			child.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 			child.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(130, 230), 0);
 			
-			child.GetComponent<ReferencedObjectScript>().Reference = refScript.Reference;
+//			child.GetComponent<ReferencedObjectScript>().Reference = refScript.Reference;
 			
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().DragedObjectedFromUIToWorld = true;
 			
@@ -142,7 +143,7 @@ public class CameraModelScript : MonoBehaviour
 			//					}
 
 
-			CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+			//CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().GroundItems.Add(child);
 			if(holdInHands)

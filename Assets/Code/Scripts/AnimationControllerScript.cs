@@ -506,7 +506,7 @@ public class AnimationControllerScript : MonoBehaviour
 	
 	void Awake()
 	{
-		SetCharacter(CharacterModel);
+
 
 	}
 

@@ -175,6 +175,8 @@ public class PlayerProfileData
 			profile.Characters[i].SetDefault((AniminId)i);
 			profile.Characters[i].AniminEvolutionId = AniminEvolutionStageId.Baby;
 		}
+
+		profile.Settings.AudioEnabled = true;
 		
 		return profile;
 	}

@@ -1,47 +1,49 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../Downloads/builtin_shaders-4.6.0b17/DefaultResourcesExtra/Mobile/Mobile-Diffuse.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/UI/PressEdmBoxKeyScript.cs">
     <Files>
-      <File FileName="Assets/Code/UI/StartCreateProfileButtonScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/ProfilesManagementScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Shaun/Scripts/ServerManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/SendAccesCodeFromChatboxClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/SendAccessCodeToServerButtonClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/UnlockCharacterButtonClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/SelectCharacterClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/AniminProfileData.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/PlayerProfileData.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/CreateUsernameButtonClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/CreateUsernameFromTextboxClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/CancelCreateAccessCodeScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/OpenSettingsInMainMenuScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Shaun/Scripts/GameController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Enumerations/UIFunctionalityId.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="166" Column="90" />
-      <File FileName="Assets/Code/Scripts/GunsMinigameScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="45" Column="28" />
-      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="186" Column="36" />
+      <File FileName="Assets/NGUI/Scripts/Interaction/UICenterOnChild.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/EDMBoxScript.cs" Line="24" Column="30" />
+      <File FileName="Assets/Code/Scripts/SoundEngineScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="1058" Column="52" />
+      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="35" Column="4" />
+      <File FileName="Assets/Code/UI/PressEdmBoxKeyScript.cs" Line="34" Column="17" />
+      <File FileName="Assets/Code/PlayerProfileData.cs" Line="171" Column="10" />
+      <File FileName="Assets/Code/AniminProfileData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/SelectCharacterClickScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CharacterSwapManagementScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="295" Column="1" />
+      <File FileName="Assets/Code/Scripts/ProfilesManagementScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/ProgressBarUVScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AnimateChestObjectOutScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/ChestScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="29" Column="12" />
+      <File FileName="Assets/Code/ChestScript.cs" Line="103" Column="10" />
       <File FileName="Assets/Code/Scripts/SpinObjectScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/MoveTutorialHandScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/TrackSoundEffectOnTickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/TrackMusicOnTickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/BlinkingScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/ObjectLookAtDeviceScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/HeadReferenceScript.cs" Line="9" Column="25" />
-      <File FileName="Assets/Code/Scripts/CharacterSwapManagementScript.cs" Line="62" Column="66" />
-      <File FileName="Assets/Resources/Shaders/TransparentUnlitDoubleSided.shader" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Shaders/SplatShader.shader" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Shaders/SignalFlashshader.shader" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Shaders/ItemShader.shader" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Shaders/VuforaSamplerShader.shader" Line="1" Column="1" />
-      <File FileName="../../Downloads/builtin_shaders-4.6.0b17/DefaultResourcesExtra/Mobile/Mobile-Diffuse.shader" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/BarrelCollisionScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/BulletAmmoLostScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CameraModelScript.cs" Line="121" Column="3" />
+      <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="616" Column="27" />
+      <File FileName="Assets/Code/Scripts/DetectDragIconScript.cs" Line="30" Column="29" />
+      <File FileName="Assets/Code/Scripts/InterfaceItemLinkToModelScript.cs" Line="8" Column="1" />
+      <File FileName="Assets/Code/Scripts/DragDropMainBarItem.cs" Line="60" Column="6" />
+      <File FileName="Assets/Code/Scripts/EDMMixerScript.cs" Line="69" Column="32" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Code" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="UI" expanded="True" />
+              </Node>
+              <Node name="UI" expanded="True">
+                <Node name="PressEdmBoxKeyScript.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
