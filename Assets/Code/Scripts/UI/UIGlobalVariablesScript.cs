@@ -94,6 +94,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject EDMBoxUI;
 	public GameObject JunoUI;
 	public GameObject PianoUI;
+	public GameObject ItemScrollView;
 
 	void Awake()
 	{

@@ -317,6 +317,8 @@
     <None Include="Assets\Resources\Shaders\TransparentUnlitDoubleSided.shader" />
     <None Include="Assets\Resources\Shaders\VuforaSamplerShader.shader" />
     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+    <None Include="Assets\StreamingAssets\QCAR\Animin_release_mandi.xml" />
+    <None Include="Assets\StreamingAssets\QCAR\Animin_release_targets.xml" />
     <None Include="Assets\StreamingAssets\QCAR\animinVuforia.xml" />
     <None Include="Assets\StreamingAssets\QCAR\democard.xml" />
     <None Include="Assets\StreamingAssets\QCAR\newscientist.xml" />

@@ -46,7 +46,8 @@ public class DragDropMainBarItem : UIDragDropItem
 				}
 				else
 				{
-					GameObject child = (GameObject)GameObject.Instantiate(modelLink.Item3D);
+					GameObject resourceLoaded = (GameObject)Resources.Load(modelLink.Item3DPrefab);
+					GameObject child = (GameObject)GameObject.Instantiate(resourceLoaded);
 					UIPopupItemScript popScript = child.GetComponent<UIPopupItemScript>();
 
 					child.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;

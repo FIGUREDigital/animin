@@ -307,6 +307,7 @@
      <None Include="Assets\Resources\Shaders\SplatShader.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Bumped_Diffuse_Detail.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
+     <None Include="Assets\StreamingAssets\QCAR\Animin_release_targets.xml" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Mobile\Free\MobileToon_mod_lightmapped.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\VertexDetail\Parallax_Detail_shaded.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Relief_Detail_SC.shader" />
@@ -406,6 +407,7 @@
      <None Include="Assets\Chickens Shader Bundle\Shaders\3.5\Relief_Mapping_Shaded_Specular.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Screen Space Subsurface Scattering\S5_mix.shader" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\Mobile\Rim_Trans_unlit_doublesided.shader" />
+     <None Include="Assets\StreamingAssets\QCAR\Animin_release_mandi.xml" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\ForceField_1side.shader" />
  <Reference Include="Qualcomm.Vuforia.UnityExtensions.Editor">
  <HintPath>/Users/Drive/Git/animin/Assets/Editor/QCAR/Scripts/Qualcomm.Vuforia.UnityExtensions.Editor.dll</HintPath>

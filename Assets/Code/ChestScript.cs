@@ -29,6 +29,12 @@ public class ChestScript : MonoBehaviour
 		FoodItems.Add("Prefabs/avocado");
 		FoodItems.Add("Prefabs/blueberry");
 		FoodItems.Add("Prefabs/carrot");
+		FoodItems.Add("Prefabs/chips");
+		FoodItems.Add("Prefabs/noodles");
+		FoodItems.Add("Prefabs/spinach");
+		FoodItems.Add("Prefabs/strawberry2");
+		FoodItems.Add("Prefabs/toast");
+		FoodItems.Add("Prefabs/watermelon");
 	}
 
 //	void LateUpdate()

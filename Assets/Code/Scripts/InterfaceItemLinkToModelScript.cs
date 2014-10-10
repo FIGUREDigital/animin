@@ -3,5 +3,6 @@ using System.Collections;
 
 public class InterfaceItemLinkToModelScript : MonoBehaviour 
 {
-	public GameObject Item3D;
+	public string Item3DPrefab;
+	public InventoryItemId ItemID;
 }

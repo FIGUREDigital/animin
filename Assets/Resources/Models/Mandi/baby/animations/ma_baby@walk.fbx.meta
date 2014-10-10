@@ -36,6 +36,7 @@ ModelImporter:
     100060: //RootNode
     100062: ma_baby:skin_object_joint
     100064: ma_baby:skin_r_reg_01
+    100066: ma_baby:skin_world_root
     400000: ma_baby:skin_bn_hair_01
     400002: ma_baby:skin_bn_hair_02
     400004: ma_baby:skin_bn_hair_03
@@ -69,6 +70,7 @@ ModelImporter:
     400060: //RootNode
     400062: ma_baby:skin_object_joint
     400064: ma_baby:skin_r_reg_01
+    400066: ma_baby:skin_world_root
     7400000: walk
     9500000: //RootNode
   materials:
@@ -119,10 +121,6 @@ ModelImporter:
         weight: 1
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_l_leg_01/ma_baby:skin_bn_l_leg_02
         weight: 1
-      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_r_reg_01
-        weight: 1
-      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_r_reg_01/ma_baby:skin_bn_r_reg_02
-        weight: 1
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02
         weight: 1
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03
@@ -172,6 +170,12 @@ ModelImporter:
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01/ma_baby:skin_bn_hair_01/ma_baby:skin_bn_hair_02/ma_baby:skin_bn_hair_03/ma_baby:skin_bn_hair_04
         weight: 1
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01/ma_baby:skin_bn_head_end_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_object_joint
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_r_reg_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_r_reg_01/ma_baby:skin_bn_r_reg_02
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}

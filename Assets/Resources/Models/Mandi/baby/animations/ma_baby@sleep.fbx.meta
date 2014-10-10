@@ -119,10 +119,6 @@ ModelImporter:
         weight: 1
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_l_leg_01/ma_baby:skin_bn_l_leg_02
         weight: 1
-      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_r_reg_01
-        weight: 1
-      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_r_reg_01/ma_baby:skin_bn_r_reg_02
-        weight: 1
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02
         weight: 1
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03
@@ -172,6 +168,12 @@ ModelImporter:
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01/ma_baby:skin_bn_hair_01/ma_baby:skin_bn_hair_02/ma_baby:skin_bn_hair_03/ma_baby:skin_bn_hair_04
         weight: 1
       - path: ma_baby:skin_bn_spine_01/ma_baby:skin_bn_spine_02/ma_baby:skin_bn_spine_03/ma_baby:skin_bn_spine_04/ma_baby:skin_bn_spine_05/ma_baby:skin_bn_spine_06/ma_baby:skin_bn_spine_07/ma_baby:skin_bn_spine_08/ma_baby:skin_bn_spine_09/ma_baby:skin_bn_neck_01/ma_baby:skin_bn_head_01/ma_baby:skin_bn_head_end_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_object_joint
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_r_reg_01
+        weight: 1
+      - path: ma_baby:skin_bn_spine_01/ma_baby:skin_r_reg_01/ma_baby:skin_bn_r_reg_02
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}

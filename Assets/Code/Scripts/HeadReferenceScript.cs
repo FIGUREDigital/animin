@@ -3,6 +3,7 @@ using System.Collections;
 
 public class HeadReferenceScript : MonoBehaviour {
 
+	public Vector3 HeadRotationOffset;
 	public GameObject HeadBoneToRotate;
 	public GameObject Indicator;
 	public GameObject ObjectCarryAttachmentBone;

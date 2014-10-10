@@ -36,6 +36,7 @@ public class UIPopupItemScript : MonoBehaviour
 	public bool NonInteractable;
 	public MenuFunctionalityUI Menu;
 	public SpecialFunctionalityId SpecialId;
+	public InventoryItemId Id;
 
 	// Use this for initialization
 	void Start () 

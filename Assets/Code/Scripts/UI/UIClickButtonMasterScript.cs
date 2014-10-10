@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Linq;
 
@@ -12,6 +12,68 @@ public class UIClickButtonMasterScript : MonoBehaviour
 	public UIFunctionalityId FunctionalityId;
 	private static float SavedRadius;
 	//private Vector3 SavedScale;
+
+	public static void PopulateInterfaceItems(PopupItemType typeToLoad, List<GameObject> allSprites)
+	{
+		List<GameObject> subItems = new List<GameObject>();
+		GameObject itemsPanel = UIGlobalVariablesScript.Singleton.PanelItems;
+		for(int i=0;i<itemsPanel.transform.childCount;++i)
+		{
+			GameObject lister = itemsPanel.transform.GetChild(i).gameObject;
+			lister.SetActive(false);
+			subItems.Add(lister);
+		}
+		
+		List<InventoryItemData> inventoryItems = new List<InventoryItemData>();
+		for(int i=0;i<PersistentData.Singleton.Inventory.Count;++i)
+		{
+//			Debug.Log(PersistentData.Singleton.Inventory[i].Id.ToString());
+			if(InventoryItemData.Items[(int)PersistentData.Singleton.Inventory[i].Id].ItemType != typeToLoad) continue;
+			inventoryItems.Add(PersistentData.Singleton.Inventory[i]);
+		}
+		
+		
+		
+		int panelCount = 0;
+		for(int i=0;i<inventoryItems.Count;i+=2)
+		{
+			subItems[panelCount].SetActive(true);
+			subItems[panelCount].transform.GetChild(0).gameObject.SetActive(false);
+			subItems[panelCount].transform.GetChild(1).gameObject.SetActive(false);
+
+			GameObject sprite0 = subItems[panelCount].transform.GetChild(0).gameObject;
+			Debug.Log(sprite0.name);
+
+			subItems[panelCount].transform.GetChild(0).gameObject.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)inventoryItems[i + 0].Id].SpriteName;
+			subItems[panelCount].transform.GetChild(0).gameObject.GetComponent<InterfaceItemLinkToModelScript>().Item3DPrefab = InventoryItemData.Items[(int)inventoryItems[i + 0].Id].PrefabId;
+			subItems[panelCount].transform.GetChild(0).gameObject.GetComponent<InterfaceItemLinkToModelScript>().ItemID = InventoryItemData.Items[(int)inventoryItems[i + 0].Id].Id;
+			subItems[panelCount].transform.GetChild(0).gameObject.SetActive(true);
+			sprite0.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = inventoryItems[i + 0].Count.ToString();
+
+			if(allSprites != null)
+			{
+				allSprites.Add(subItems[panelCount].transform.GetChild(0).gameObject);
+			}
+
+			if(inventoryItems.Count > i+1)
+			{
+				GameObject sprite1 = subItems[panelCount].transform.GetChild(1).gameObject;
+
+				subItems[panelCount].transform.GetChild(1).gameObject.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)inventoryItems[i + 1].Id].SpriteName;
+				subItems[panelCount].transform.GetChild(1).gameObject.GetComponent<InterfaceItemLinkToModelScript>().Item3DPrefab = InventoryItemData.Items[(int)inventoryItems[i + 1].Id].PrefabId;
+				subItems[panelCount].transform.GetChild(1).gameObject.GetComponent<InterfaceItemLinkToModelScript>().ItemID = InventoryItemData.Items[(int)inventoryItems[i + 1].Id].Id;
+				subItems[panelCount].transform.GetChild(1).gameObject.SetActive(true);
+				sprite1.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = inventoryItems[i + 1].Count.ToString();
+
+				if(allSprites != null)
+				{
+					allSprites.Add(subItems[panelCount].transform.GetChild(1).gameObject);
+				}
+			}
+			
+			panelCount++;
+		}
+	}
 
 
 	void OnDoubleClick()
@@ -67,12 +129,21 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 			for(int i=0;i<script.GroundItems.Count;++i)
 			{
+				if(script.GroundItems[i].GetComponent<UIPopupItemScript>() != null)
+				{
+					PersistentData.Singleton.AddItemToInventory(script.GroundItems[i].GetComponent<UIPopupItemScript>().Id, 1);
+				}
 				Destroy(script.GroundItems[i]);
 			}
 			
 			script.GroundItems.Clear();
 			UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CleanPooPiss);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().HidePopupMenus();
+
+			for(int i=0;i<EDMMixerScript.Singleton.KeysOn.Length;++i)
+			{
+				EDMMixerScript.Singleton.KeysOn[i] = false;
+			}
 
 			break;
 		}
@@ -129,6 +200,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		case UIFunctionalityId.OpenCloseMedicine:
 		{
 			GameObject mainMenuPopupRef = UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef;
+
 			if(mainMenuPopupRef.activeInHierarchy && UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef != sender)
 			{
 
@@ -139,28 +211,37 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			}
 			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef = sender;
 
-			UIGlobalVariablesScript.Singleton.PanelFoods.SetActive(false);
-			UIGlobalVariablesScript.Singleton.PanelMedicine.SetActive(false);
-			UIGlobalVariablesScript.Singleton.PanelItems.SetActive(false);
+			//UIGlobalVariablesScript.Singleton.PanelFoods.SetActive(false);
+			//UIGlobalVariablesScript.Singleton.PanelMedicine.SetActive(false);
+			UIGlobalVariablesScript.Singleton.PanelItems.SetActive(true);
+			PopupItemType typeToLoad = PopupItemType.Food;
 
 			if(id == UIFunctionalityId.OpenCloseFoods) 
 			{
+				typeToLoad = PopupItemType.Food;
 				UIGlobalVariablesScript.Singleton.ItemsFoodMedicineLabel.text = "Foods";
-				UIGlobalVariablesScript.Singleton.PanelFoods.SetActive(true);
+				//UIGlobalVariablesScript.Singleton.PanelFoods.SetActive(true);
 				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(-266, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
 			}
 			else if(id == UIFunctionalityId.OpenCloseMedicine) 
 			{
+				typeToLoad = PopupItemType.Medicine;
 				UIGlobalVariablesScript.Singleton.ItemsFoodMedicineLabel.text = "Medicine";
-				UIGlobalVariablesScript.Singleton.PanelMedicine.SetActive(true);
+				//UIGlobalVariablesScript.Singleton.PanelMedicine.SetActive(true);
 				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(266, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
 			}
 			else if(id == UIFunctionalityId.OpenCloseItems) 
 			{
+				typeToLoad = PopupItemType.Item;
 				UIGlobalVariablesScript.Singleton.ItemsFoodMedicineLabel.text = "Items";
-				UIGlobalVariablesScript.Singleton.PanelItems.SetActive(true);
+				//UIGlobalVariablesScript.Singleton.PanelItems.SetActive(true);
 				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(0, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
 			}
+
+			UIGlobalVariablesScript.Singleton.ItemScrollView.GetComponent<UIScrollView>().ResetPosition();
+
+
+			PopulateInterfaceItems(typeToLoad, null);
 
 			break;
 		}
@@ -170,9 +251,14 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			GameObject mainMenuPopupRef = UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef;
 			mainMenuPopupRef.SetActive(false);
 
-			Debug.Log("BUTTON CLICL!!!");
+		//	Debug.Log("BUTTON CLICL!!!");
 
-			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<ReferencedObjectScript>().Reference = sender;
+			//InventoryItemId itemId = UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<InterfaceItemLinkToModelScript>().ItemID;
+
+
+
+			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<InterfaceItemLinkToModelScript>().ItemID = 
+				sender.GetComponent<InterfaceItemLinkToModelScript>().ItemID;
 			
 			//string spriteName = UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<UISprite>().spriteName;
 			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<UISprite>().atlas = sender.GetComponent<UISprite>().atlas;
@@ -226,7 +312,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			// Disable Scenes
 			UIGlobalVariablesScript.Singleton.SpaceshipMinigameSceneRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().CloseGame();
+
+			if(UIGlobalVariablesScript.SelectedMinigameToPlay == UIFunctionalityId.PlayMinigameGunFighters)
+				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().CloseGame();
 
 			//Debug.Log("SavedScale: " + SavedScale.ToString());
 //			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.035f, 0.035f, 0.035f);
@@ -279,8 +367,11 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			UIGlobalVariablesScript.SelectedMinigameToPlay = sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId;
 
-			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(true);
-			UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(false);
+			GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetSinglePlayer();
+			HandleClick(UIFunctionalityId.StartSelectedMinigame, sender);
+
+			//UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(true);
+			//UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(false);
 
 
 			break;
@@ -396,7 +487,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
 
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(false);
+			//UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = false;
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<ObjectLookAtDeviceScript>().enabled = false;
 //
@@ -429,16 +520,21 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				//UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().HardcoreReset();
 				UIGlobalVariablesScript.Singleton.GunGameScene.transform.localPosition = Vector3.zero;
 				UIClickButtonMasterScript.SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
+				//UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
 				
 				UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
 				UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
+
+				
+				UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>();
+				UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
+
 				
 				//UIGlobalVariablesScript.Singleton.ShootButton.SetActive(true);
 
-				//UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
+				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
 				
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
+				//UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
 				Camera.main.GetComponent<MusicScript>().PlayGun();
 
 				break;
@@ -457,8 +553,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
 
 
-				UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>();
-				UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
+					UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>();
+					UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
 
 
 					//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
@@ -468,7 +564,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
 					
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
-				Camera.main.GetComponent<MusicScript>().PlayCube();
+					Camera.main.GetComponent<MusicScript>().PlayCube();
 				
 					break;
 				}

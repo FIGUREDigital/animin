@@ -10,7 +10,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 	float radius=5;
 	//public Transform ObjectTrasnform;
 
-	public Vector3 Angles;
+	//public Vector3 Angles;
 	public float Weight;
 	private float IdleTimer;
 	private float TimeStartingAwayFromCamera;
@@ -113,7 +113,7 @@ public class ObjectLookAtDeviceScript : MonoBehaviour
 
 		HeadReferenceScript head = this.GetComponent<AnimationControllerScript>().CharacterModel.GetComponent<HeadReferenceScript>();
 
-		head.HeadBoneToRotate.transform.rotation = Quaternion.Slerp(head.HeadBoneToRotate.transform.rotation, rotation/* * Quaternion.Euler(Angles)*/, Weight);
+		head.HeadBoneToRotate.transform.rotation = Quaternion.Slerp(head.HeadBoneToRotate.transform.rotation, Quaternion.Euler(head.HeadRotationOffset + new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y, rotation.eulerAngles.z)), Weight);
 	
 	
 		//head.HeadBoneToRotate.transform.rotation = rotation;

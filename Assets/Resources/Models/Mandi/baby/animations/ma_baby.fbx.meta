@@ -116,6 +116,7 @@ ModelImporter:
     100220: ma_baby:shoulderCtrl
     100222: ma_baby:skin_object_joint
     100224: ma_baby:skin_r_reg_01
+    100226: ma_baby:skin_world_root
     400000: //RootNode
     400002: ma_baby:mandi
     400004: ma_baby:skin_bn_hair_01
@@ -229,6 +230,7 @@ ModelImporter:
     400220: ma_baby:shoulderCtrl
     400222: ma_baby:skin_object_joint
     400224: ma_baby:skin_r_reg_01
+    400226: ma_baby:skin_world_root
     4300000: ma_baby:mandi
     4300002: ma_baby:head
     4300004: ma_baby:body

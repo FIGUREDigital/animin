@@ -49,6 +49,12 @@ public class EDMBoxScript : MonoBehaviour
 		}*/
 	}
 
+	public void Stop()
+	{
+		for(int i=0;i<8;++i)
+			SetKeyOn(i, false);
+	}
+
 	public void SetInterface(GameObject InterfaceUI)
 	{
 

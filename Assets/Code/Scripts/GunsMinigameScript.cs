@@ -112,10 +112,22 @@ public class GunsMinigameScript : Photon.MonoBehaviour
                         State = GameStateId.PrepareToStart3;
                     }
 
-                    GameObject animin = SpawnAniminStart(AniminId.Tbo, AniminEvolutionStageId.Baby);
+					LocalPlayerCharacter = UIGlobalVariablesScript.Singleton.MainCharacterRef;
+					PlayersCharacters.Add(UIGlobalVariablesScript.Singleton.MainCharacterRef);
 
-                    UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = animin.GetComponent<AnimationControllerScript>();
-                    UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = animin.GetComponent<CharacterControllerScript>();
+					for (int i = 0; i < LocalPlayerCharacter.transform.childCount; ++i)
+					{
+						GameObject childGun = LocalPlayerCharacter.transform.GetChild(i).gameObject;
+						if (childGun.name == "gun")
+						{
+							childGun.SetActive(true);
+						}
+					}
+
+                   // GameObject animin = SpawnAniminStart(AniminId.Tbo, AniminEvolutionStageId.Baby);
+
+                   // UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = animin.GetComponent<AnimationControllerScript>();
+                   // UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = animin.GetComponent<CharacterControllerScript>();
 
 
                     break;
@@ -389,16 +401,26 @@ public class GunsMinigameScript : Photon.MonoBehaviour
     {
 		UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
 
+		for (int i = 0; i < LocalPlayerCharacter.transform.childCount; ++i)
+		{
+			GameObject childGun = LocalPlayerCharacter.transform.GetChild(i).gameObject;
+			if (childGun.name == "gun")
+			{
+				childGun.SetActive(false);
+			}
+		}
+
         //GunPrefab.SetActive(false);
         this.gameObject.SetActive(false);
 
 		for (int i = 0; i < SpawnedObjectsAllOthers.transform.childCount; ++i)
 			Destroy(SpawnedObjectsAllOthers.transform.GetChild(i).gameObject);
 
-        for (int i = 0; i < PlayersCharacters.Count; ++i)
-            Destroy(PlayersCharacters[i]);
+        //for (int i = 0; i < PlayersCharacters.Count; ++i)
+        //    Destroy(PlayersCharacters[i]);
 
         PlayersCharacters.Clear();
+		LocalPlayerCharacter = null;
 
        // SpawnedObjects.Clear();
     }

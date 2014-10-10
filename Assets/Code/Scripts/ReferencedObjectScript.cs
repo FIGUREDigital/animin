@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ReferencedObjectScript : MonoBehaviour {
+public class ReferencedObjectScript : MonoBehaviour 
+{
 
 	public GameObject Reference;
+	public string ItemPrefabId;
 
 	// Use this for initialization
 	void Start () {

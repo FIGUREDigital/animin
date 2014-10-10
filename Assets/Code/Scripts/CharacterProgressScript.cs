@@ -19,6 +19,98 @@ public class ItemPickupSavedData
 	}
 }
 
+
+public enum InventoryItemId
+{
+	None = 0,
+
+	Strawberry,
+	Blueberry,
+	Spinach,
+	AlmondMilk,
+	Avocado,
+	//Noodles,
+	Carrot,
+	Chips,
+	Toast,
+	watermelon,
+	//Banana,
+
+	Boombox,
+	Clock,
+	EDMJuno,
+	EDM808,
+	EDMKsynth,
+	Lightbulb,
+	//mintclock,
+	paperCalendar,
+	woodSword,
+	woodFrame,
+	Camera,
+	FartButton,
+
+
+	Pill,
+	Syringe,
+	Plaster,
+
+	Count,
+}
+
+
+public class InventoryItemBankData
+{
+	public InventoryItemId Id;
+	public string PrefabId;
+	public string SpriteName;
+	public PopupItemType ItemType;
+}
+
+public class InventoryItemData
+{
+	public static InventoryItemBankData[] Items;
+
+	public static void Initialize()
+	{
+		Items = new InventoryItemBankData[(int)InventoryItemId.Count];
+		Items[(int)InventoryItemId.Strawberry] = new InventoryItemBankData() { Id = InventoryItemId.Strawberry, PrefabId = "Prefabs/strawberry2", SpriteName = "strawberry", ItemType = PopupItemType.Food };
+		Items[(int)InventoryItemId.Spinach] = new InventoryItemBankData() { Id = InventoryItemId.Spinach, PrefabId = "Prefabs/spinach", SpriteName = "spinach_icon", ItemType = PopupItemType.Food };
+		Items[(int)InventoryItemId.Blueberry] = new InventoryItemBankData() { Id = InventoryItemId.Blueberry, PrefabId = "Prefabs/blueberry", SpriteName = "blueberry_icon", ItemType = PopupItemType.Food };
+		Items[(int)InventoryItemId.AlmondMilk] = new InventoryItemBankData() { Id = InventoryItemId.AlmondMilk, PrefabId = "Prefabs/almondMilk", SpriteName = "almondmilk_icon", ItemType = PopupItemType.Food };
+		Items[(int)InventoryItemId.Avocado] = new InventoryItemBankData() { Id = InventoryItemId.Avocado, PrefabId = "Prefabs/avocado", SpriteName = "avocado_icon", ItemType = PopupItemType.Food };
+		//Items[(int)InventoryItemId.Noodles] = new InventoryItemBankData() { Id = InventoryItemId.Blueberry, PrefabId = "Prefabs/blueberry", SpriteName = "blueberry_icon", ItemType = PopupItemType.Food };
+		Items[(int)InventoryItemId.Carrot] = new InventoryItemBankData() { Id = InventoryItemId.Carrot, PrefabId = "Prefabs/carrot", SpriteName = "carrot_icon", ItemType = PopupItemType.Food };
+		Items[(int)InventoryItemId.Chips] = new InventoryItemBankData() { Id = InventoryItemId.Chips, PrefabId = "Prefabs/chips", SpriteName = "chips_icon", ItemType = PopupItemType.Food };
+		Items[(int)InventoryItemId.Toast] = new InventoryItemBankData() { Id = InventoryItemId.Toast, PrefabId = "Prefabs/toast", SpriteName = "jam_icon", ItemType = PopupItemType.Food };
+		Items[(int)InventoryItemId.watermelon] = new InventoryItemBankData() { Id = InventoryItemId.watermelon, PrefabId = "Prefabs/watermelon", SpriteName = "watermelon_icon", ItemType = PopupItemType.Food };
+		//Items[(int)InventoryItemId.Noodles] = new InventoryItemBankData() { Id = InventoryItemId.Noodles, PrefabId = "Prefabs/Noodles", SpriteName = "blueberry_icon", ItemType = PopupItemType.Food };
+		Items[(int)InventoryItemId.Carrot] = new InventoryItemBankData() { Id = InventoryItemId.Carrot, PrefabId = "Prefabs/Carrot", SpriteName = "carrot_icon", ItemType = PopupItemType.Food };
+		//Items[(int)InventoryItemId.Banana] = new InventoryItemBankData() { Id = InventoryItemId.Banana, PrefabId = "Prefabs/banana", SpriteName = "banana_icon", ItemType = PopupItemType.Food };
+
+		Items[(int)InventoryItemId.Boombox] = new InventoryItemBankData() { Id = InventoryItemId.Boombox, PrefabId = "Prefabs/boombox", SpriteName = "boombox_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.Clock] = new InventoryItemBankData() { Id = InventoryItemId.Clock, PrefabId = "Prefabs/mintclock", SpriteName = "mintclock_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.EDMJuno] = new InventoryItemBankData() { Id = InventoryItemId.EDMJuno, PrefabId = "Prefabs/juno", SpriteName = "juno_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.EDM808] = new InventoryItemBankData() { Id = InventoryItemId.EDM808, PrefabId = "Prefabs/808", SpriteName = "juno_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.EDMKsynth] = new InventoryItemBankData() { Id = InventoryItemId.EDMKsynth, PrefabId = "Prefabs/ksynth", SpriteName = "ksynth_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.Lightbulb] = new InventoryItemBankData() { Id = InventoryItemId.Lightbulb, PrefabId = "Prefabs/Lightbulb", SpriteName = "lightbulb_icon", ItemType = PopupItemType.Item };
+		//Items[(int)InventoryItemId.mintclock] = new InventoryItemBankData() { Id = InventoryItemId.mintclock, PrefabId = "Prefabs/mintclock", SpriteName = "mintclock_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.paperCalendar] = new InventoryItemBankData() { Id = InventoryItemId.paperCalendar, PrefabId = "Prefabs/paperCalendar", SpriteName = "calendar_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.Camera] = new InventoryItemBankData() { Id = InventoryItemId.Camera, PrefabId = "Prefabs/camera", SpriteName = "camera_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.FartButton] = new InventoryItemBankData() { Id = InventoryItemId.FartButton, PrefabId = "Prefabs/fartbutton", SpriteName = "fartbutton_icon", ItemType = PopupItemType.Item };
+
+		Items[(int)InventoryItemId.woodSword] = new InventoryItemBankData() { Id = InventoryItemId.woodSword, PrefabId = "Prefabs/woodSword", SpriteName = "woodSword_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.woodFrame] = new InventoryItemBankData() { Id = InventoryItemId.woodFrame, PrefabId = "Prefabs/woodFrame", SpriteName = "woodFrame_icon", ItemType = PopupItemType.Item };
+
+
+		Items[(int)InventoryItemId.Pill] = new InventoryItemBankData() { Id = InventoryItemId.Pill, PrefabId = "Prefabs/capsule", SpriteName = "mediumpill_icon", ItemType = PopupItemType.Medicine };
+		Items[(int)InventoryItemId.Syringe] = new InventoryItemBankData() { Id = InventoryItemId.Syringe, PrefabId = "Prefabs/syringe", SpriteName = "syringe_icon", ItemType = PopupItemType.Medicine };
+		Items[(int)InventoryItemId.Plaster] = new InventoryItemBankData() { Id = InventoryItemId.Plaster, PrefabId = "Prefabs/plaster", SpriteName = "plaster_icon", ItemType = PopupItemType.Medicine };
+	}
+
+	public InventoryItemId Id;
+	public int Count;
+}
+
 public enum AniminSubevolutionStageId
 {
 	First = 0,
@@ -155,6 +247,8 @@ public class CharacterProgressScript : MonoBehaviour
 	{
 		LastSavePerformed = DateTime.Now;
 		LastTimeToilet = DateTime.Now;
+
+		InventoryItemData.Initialize();
 
 	
 		//PersistentData.Singleton.SetDefault();
@@ -864,7 +958,17 @@ public class CharacterProgressScript : MonoBehaviour
 								{
 									if(TouchesObjcesWhileSwiping[i].tag == "Shit") cleanedShit = true;
 
-									GroundItems.Remove(TouchesObjcesWhileSwiping[i]);
+									if(TouchesObjcesWhileSwiping[i].GetComponent<UIPopupItemScript>() != null)
+									{
+										PersistentData.Singleton.AddItemToInventory(TouchesObjcesWhileSwiping[i].GetComponent<UIPopupItemScript>().Id, 1);
+									}
+
+									if(TouchesObjcesWhileSwiping[i].GetComponent<EDMBoxScript>() != null)
+									{
+										TouchesObjcesWhileSwiping[i].GetComponent<EDMBoxScript>().Stop();
+									}
+							   
+							  		GroundItems.Remove(TouchesObjcesWhileSwiping[i]);
 									Destroy(TouchesObjcesWhileSwiping[i]);
 									TouchesObjcesWhileSwiping.RemoveAt(i);
 
@@ -1052,46 +1156,57 @@ public class CharacterProgressScript : MonoBehaviour
 								if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Clock)
 								{
 									HidePopupMenus();
-									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+								UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
 									//TriggeredHoldAction = true;
 									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
-									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+								LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
 									preventMovingTo = true;
 								}
 								else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.EDMBox)
 								{
-								HidePopupMenus();
-								hitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.EDMBoxUI);
-								UIGlobalVariablesScript.Singleton.EDMBoxUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
-									UIGlobalVariablesScript.Singleton.EDMBoxUI.SetActive(true);
+									EDMBoxScript edmScript = moveHitInfo.collider.gameObject.GetComponent<EDMBoxScript>();
+									HidePopupMenus();
+
+									if(edmScript != null)
+									{
+										edmScript.SetInterface(UIGlobalVariablesScript.Singleton.EDMBoxUI);
+									UIGlobalVariablesScript.Singleton.EDMBoxUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
+										UIGlobalVariablesScript.Singleton.EDMBoxUI.SetActive(true);
+									}
+									else
+									{
+										Debug.Log("edmScript is null");
+									}
 									
 									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
 									preventMovingTo = true;
 								}
-							else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Juno)
-							{
-								HidePopupMenus();
-								hitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.JunoUI);
-								UIGlobalVariablesScript.Singleton.JunoUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
-								UIGlobalVariablesScript.Singleton.JunoUI.SetActive(true);
-								
-								LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
-								preventMovingTo = true;
-							}
-							else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Piano)
-							{
-								HidePopupMenus();
-								hitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.JunoUI);
-								UIGlobalVariablesScript.Singleton.JunoUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
-								UIGlobalVariablesScript.Singleton.JunoUI.SetActive(true);
-								
-								LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
-								preventMovingTo = true;
-							}
+								else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Juno)
+								{
+
+									HidePopupMenus();
+									moveHitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.JunoUI);
+								UIGlobalVariablesScript.Singleton.JunoUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
+									UIGlobalVariablesScript.Singleton.JunoUI.SetActive(true);
+									
+									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+									preventMovingTo = true;
+								}
+								else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Piano)
+								{
+									HidePopupMenus();
+
+									moveHitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.JunoUI);
+								UIGlobalVariablesScript.Singleton.JunoUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
+									UIGlobalVariablesScript.Singleton.JunoUI.SetActive(true);
+									
+									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+									preventMovingTo = true;
+								}
 								else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Mp3Player)
 								{
-								HidePopupMenus();
-									UIGlobalVariablesScript.Singleton.StereoUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+									HidePopupMenus();
+									UIGlobalVariablesScript.Singleton.StereoUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
 									UIGlobalVariablesScript.Singleton.StereoUI.SetActive(true);
 
 									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
@@ -1099,8 +1214,8 @@ public class CharacterProgressScript : MonoBehaviour
 								}
 								else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Lightbulb)
 								{
-								HidePopupMenus();
-									UIGlobalVariablesScript.Singleton.LightbulbUI.GetComponent<UIWidget>().SetAnchor(hitInfo.collider.gameObject);
+									HidePopupMenus();
+									UIGlobalVariablesScript.Singleton.LightbulbUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
 									UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(true);
 									
 									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
@@ -1375,7 +1490,7 @@ public class CharacterProgressScript : MonoBehaviour
 			case PopupItemType.Token:
 			{
 				//Stop(true);
-				PersistentData.Singleton.Evolution += item.Points + 100;
+				PersistentData.Singleton.Evolution += item.Points;
 			PersistentData.Singleton.ZefTokens ++;
 
 				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
@@ -1391,7 +1506,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 				}
 
-			if(PersistentData.Singleton.Evolution >= 100)
+			/*if(PersistentData.Singleton.Evolution >= 100)
 				{
 				if(PersistentData.Singleton.AniminEvolutionId != AniminEvolutionStageId.Adult)
 					{
@@ -1400,7 +1515,7 @@ public class CharacterProgressScript : MonoBehaviour
 						UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
 
 					}
-				}
+				}*/
 
 
 				//UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));

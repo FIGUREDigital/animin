@@ -334,7 +334,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 	}
 
 
-	private void OnTrackingFound()
+	public void OnTrackingFound()
 	{
 		IsTracking = true;
 		bool isPlayingMinigame = false;

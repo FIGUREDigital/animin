@@ -11,6 +11,7 @@ public class PersistentData
 		
 	}
 
+	public List<InventoryItemData> Inventory = new List<InventoryItemData>();
 	public AniminId PlayerAniminId;
 	public AniminEvolutionStageId AniminEvolutionId;
 	public const float MaxHappy = 125.0f;
@@ -107,6 +108,96 @@ public class PersistentData
 		Fitness = MaxFitness;
 		Health = MaxHealth;
 		ZefTokens = 0;
+
+		AddItemToInventory(InventoryItemId.AlmondMilk, 3);
+		AddItemToInventory(InventoryItemId.Avocado, 1);
+		//AddItemToInventory(InventoryItemId.Banana, 1);
+		AddItemToInventory(InventoryItemId.Blueberry, 1);
+		AddItemToInventory(InventoryItemId.Boombox, 1);
+		AddItemToInventory(InventoryItemId.Camera, 1);
+		AddItemToInventory(InventoryItemId.Carrot, 1);
+		AddItemToInventory(InventoryItemId.Chips, 1);
+		AddItemToInventory(InventoryItemId.Clock, 4);
+		AddItemToInventory(InventoryItemId.EDM808, 1);
+		AddItemToInventory(InventoryItemId.EDMJuno, 1);
+		AddItemToInventory(InventoryItemId.EDMKsynth, 1);
+		AddItemToInventory(InventoryItemId.FartButton, 1);
+		AddItemToInventory(InventoryItemId.Lightbulb, 1);
+		//AddItemToInventory(InventoryItemId.mintclock, 1);
+		//AddItemToInventory(InventoryItemId.Noodles, 1);
+		AddItemToInventory(InventoryItemId.paperCalendar, 1);
+		AddItemToInventory(InventoryItemId.Pill, 1);
+		AddItemToInventory(InventoryItemId.Plaster, 1);
+		AddItemToInventory(InventoryItemId.Spinach, 1);
+		AddItemToInventory(InventoryItemId.Strawberry, 1);
+		AddItemToInventory(InventoryItemId.Syringe, 1);
+		AddItemToInventory(InventoryItemId.Toast, 1);
+		AddItemToInventory(InventoryItemId.watermelon, 1);
+		AddItemToInventory(InventoryItemId.woodFrame, 1);
+		AddItemToInventory(InventoryItemId.woodSword, 1);
+	}
+
+	public void AddItemToInventory(InventoryItemId id, int count)
+	{
+		for(int i=0;i<Inventory.Count;++i)
+		{
+			if(Inventory[i].Id == id)
+			{
+				Inventory[i].Count += count;
+				return;
+			}
+		}
+
+		Inventory.Add(new InventoryItemData() { Id = id, Count = count });
+	}
+
+	public bool HasItem(InventoryItemId id)
+	{
+		for(int i=0;i<Inventory.Count;++i)
+		{
+			if(Inventory[i].Id == id)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public InventoryItemData GetNextItemType(PopupItemType type)
+	{
+		for(int i=0;i<Inventory.Count;++i)
+		{
+			if(InventoryItemData.Items[(int)Inventory[i].Id].ItemType == type)
+			{
+				return Inventory[i];
+			}
+		}
+		
+		return null;
+	}
+
+	public bool RemoveItemFromInventory(InventoryItemId id, int count)
+	{
+		for(int i=0;i<Inventory.Count;++i)
+		{
+			if(Inventory[i].Id == id)
+			{
+				Inventory[i].Count -= count;
+				if(Inventory[i].Count <= 0)
+				{
+					Inventory.RemoveAt(i);
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+
+			}
+		}
+
+		return false;
 	}
 	
 	public void Save(SaveLoadDictionary dictionary)

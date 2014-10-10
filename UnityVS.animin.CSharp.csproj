@@ -80,6 +80,7 @@
     <Compile Include="Assets\Code\ChestScript.cs" />
     <Compile Include="Assets\Code\Enumerations\UIFunctionalityId.cs" />
     <Compile Include="Assets\Code\Helpers.cs" />
+    <Compile Include="Assets\Code\MultipleCardTrackerScript.cs" />
     <Compile Include="Assets\Code\PlayerProfileData.cs" />
     <Compile Include="Assets\Code\PrefabPool.cs" />
     <Compile Include="Assets\Code\Scripts\AchievementsScript.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Assets\Code\Scripts\JoystiqScript.cs" />
     <Compile Include="Assets\Code\Scripts\LighbulbSwitchOnOffScript.cs" />
     <Compile Include="Assets\Code\Scripts\MediaPlayerPluginScript.cs" />
+    <Compile Include="Assets\Code\Scripts\MinigameAnimationControllerScript.cs" />
     <Compile Include="Assets\Code\Scripts\MinigameCollectorScript.cs" />
     <Compile Include="Assets\Code\Scripts\MonsterSplatExplosionScript.cs" />
     <Compile Include="Assets\Code\Scripts\MoveTutorialHandScript.cs" />
@@ -625,6 +627,8 @@
     <None Include="Assets\Resources\Shaders\TransparentUnlitDoubleSided.shader" />
     <None Include="Assets\Resources\Shaders\VuforaSamplerShader.shader" />
     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+    <None Include="Assets\StreamingAssets\QCAR\Animin_release_mandi.xml" />
+    <None Include="Assets\StreamingAssets\QCAR\Animin_release_targets.xml" />
     <None Include="Assets\StreamingAssets\QCAR\animinVuforia.xml" />
     <None Include="Assets\StreamingAssets\QCAR\democard.xml" />
     <None Include="Assets\StreamingAssets\QCAR\newscientist.xml" />

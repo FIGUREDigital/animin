@@ -17,12 +17,16 @@ public class DetectDragIconScript : MonoBehaviour {
 
 	void OnDragStart ()
 	{
-		UIGlobalVariablesScript.Singleton.DragableUI3DObject.GetComponent<CameraModelScript>().SpriteRef = this.gameObject;
+		InterfaceItemLinkToModelScript refScript = this.GetComponent<InterfaceItemLinkToModelScript>();
+		if(refScript.ItemID == InventoryItemId.None) return;
 
-		ReferencedObjectScript refScript = this.GetComponent<ReferencedObjectScript>();
-		InterfaceItemLinkToModelScript popScript = refScript.Reference.GetComponent<InterfaceItemLinkToModelScript>();
-		
-		GameObject child = (GameObject)GameObject.Instantiate(popScript.Item3D);
+		UIGlobalVariablesScript.Singleton.DragableUI3DObject.GetComponent<CameraModelScript>().SpriteRef = this.gameObject;
+		//InterfaceItemLinkToModelScript popScript = refScript.Reference.GetComponent<InterfaceItemLinkToModelScript>();
+
+
+
+		GameObject resourceLoaded = (GameObject)Resources.Load(InventoryItemData.Items[(int)refScript.ItemID].PrefabId);
+		GameObject child = (GameObject)GameObject.Instantiate(resourceLoaded);
 
 		child.GetComponent<BoxCollider>().enabled = false;
 
