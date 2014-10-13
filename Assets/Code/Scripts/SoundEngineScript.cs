@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SoundEngineScript : MonoBehaviour 
@@ -89,9 +89,9 @@ public class SoundEngineScript : MonoBehaviour
 		if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "tbo_baby");
 		else if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "tbo_kid");
 		else if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "tbo_adult");
-		else if(id == AniminId.Kelsi && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "ke_baby");
-		else if(id == AniminId.Kelsi && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "ke_kid");
-		else if(id == AniminId.Kelsi && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "ke_kelsi");
+		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "ke_baby");
+		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "ke_kid");
+		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "ke_kelsi");
 
 		/*if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Baby)
 		{

@@ -1,34 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/TrackVuforiaScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/UI/SendAccesCodeFromChatboxClickScript.cs">
     <Files>
-      <File FileName="Assets/Code/Scripts/DetectDragIconScript.cs" Line="28" Column="113" />
-      <File FileName="Assets/Code/AniminProfileData.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="1169" Column="10" />
-      <File FileName="Assets/Code/Scripts/CameraModelScript.cs" Line="124" Column="7" />
-      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/InterfaceItemLinkToModelScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/DragDropMainBarItem.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/DragDrop3DItemScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="894" Column="3" />
-      <File FileName="Assets/Code/Scripts/AnimateChestObjectOutScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AchievementsScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/HeadReferenceScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/ObjectLookAtDeviceScript.cs" Line="117" Column="2" />
-      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/MinigameAnimationControllerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/MinigameCollectorScript.cs" Line="887" Column="7" />
-      <File FileName="Assets/Code/Scripts/GunsMinigameScript.cs" Line="403" Column="1" />
-      <File FileName="Assets/Code/Scripts/ProgressBarUVScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/ReferencedObjectScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/EDMMixerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/EDMBoxScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/ImageTargetBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/DefaultTrackableEventHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/TrackVuforiaScript.cs" Line="456" Column="2" />
+      <File FileName="Assets/CharacterChoiceItem.cs" Line="62" Column="3" />
+      <File FileName="Assets/Code/UI/UnlockCharacterButtonClickScript.cs" Line="22" Column="45" />
+      <File FileName="Assets/Code/UI/CancelCreateAccessCodeScript.cs" Line="18" Column="37" />
+      <File FileName="Assets/Code/UI/SendAccessCodeToServerButtonClickScript.cs" Line="21" Column="20" />
+      <File FileName="Assets/Code/UI/SendAccesCodeFromChatboxClickScript.cs" Line="47" Column="2" />
+      <File FileName="Assets/Shaun/Scripts/ServerManager.cs" Line="75" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -37,11 +16,16 @@
             <Node name="Code" expanded="True">
               <Node name="Scripts" expanded="True">
                 <Node name="UI" expanded="True" />
-                <Node name="TrackVuforiaScript.cs" selected="True" />
+              </Node>
+              <Node name="UI" expanded="True">
+                <Node name="SendAccesCodeFromChatboxClickScript.cs" selected="True" />
               </Node>
             </Node>
             <Node name="Plugins" expanded="True" />
             <Node name="Qualcomm Augmented Reality" expanded="True">
+              <Node name="Scripts" expanded="True" />
+            </Node>
+            <Node name="Shaun" expanded="True">
               <Node name="Scripts" expanded="True" />
             </Node>
           </Node>
