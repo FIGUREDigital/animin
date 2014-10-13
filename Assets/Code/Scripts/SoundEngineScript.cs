@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class SoundEngineScript : MonoBehaviour 
@@ -89,9 +89,9 @@ public class SoundEngineScript : MonoBehaviour
 		if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "tbo_baby");
 		else if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "tbo_kid");
 		else if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "tbo_adult");
-		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "ke_baby");
-		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "ke_kid");
-		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "ke_kelsi");
+		else if(id == AniminId.Kelsi && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "ke_baby");
+		else if(id == AniminId.Kelsi && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "ke_kid");
+		else if(id == AniminId.Kelsi && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "ke_kelsi");
 
 		/*if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Baby)
 		{
@@ -152,6 +152,7 @@ public class SoundEngineScript : MonoBehaviour
 
 	private void LoadCreatureHelper(int id, int evolution, string name)
 	{
+		/*
 		CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Celebrate] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@celebrate") as AudioClip;
 		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.EatPill] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@eat_pill") as AudioClip;
 		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.FeedFood] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@feed_food") as AudioClip;
@@ -202,6 +203,7 @@ public class SoundEngineScript : MonoBehaviour
 		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk17] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_17") as AudioClip;
 		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk18] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_18") as AudioClip;
 		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk18] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_19") as AudioClip;
+		*/
 	}
 	
 	public void PlayFart()

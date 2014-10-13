@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_5_1;UNITY_4_5;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_1;UNITY_4_5;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_PRO_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CharacterChoiceItem.cs" />
      <Compile Include="Assets\Chickens Shader Bundle\Examples\CSB_RotateScript.cs" />
      <Compile Include="Assets\Chickens Shader Bundle\Examples\CSB_ScrollInScript.cs" />
      <Compile Include="Assets\Chickens Shader Bundle\Shaders\CSB_SHLightHelper.cs" />
@@ -60,6 +59,9 @@
      <Compile Include="Assets\Code\AniminProfileData.cs" />
      <Compile Include="Assets\Code\ChestScript.cs" />
      <Compile Include="Assets\Code\Enumerations\UIFunctionalityId.cs" />
+     <Compile Include="Assets\Code\Harrys\BoxGameTemp.cs" />
+     <Compile Include="Assets\Code\Harrys\CreateDummyProfile.cs" />
+     <Compile Include="Assets\Code\Harrys\TrackVuforiaMinigame.cs" />
      <Compile Include="Assets\Code\Helpers.cs" />
      <Compile Include="Assets\Code\MultipleCardTrackerScript.cs" />
      <Compile Include="Assets\Code\PlayerProfileData.cs" />
@@ -616,13 +618,13 @@
      <None Include="Assets\StreamingAssets\QCAR\Animin_release_mandi.xml" />
      <None Include="Assets\Chickens Shader Bundle\Shaders\ForceField_1side.shader" />
  <Reference Include="P31RestKit">
- <HintPath>/Users/Drive/Documents/animin/Assets/Plugins/P31RestKit.dll</HintPath>
+ <HintPath>/Users/Drive/Git/animin/Assets/Plugins/P31RestKit.dll</HintPath>
  </Reference>
  <Reference Include="Photon3Unity3D">
- <HintPath>/Users/Drive/Documents/animin/Assets/Plugins/Photon3Unity3D.dll</HintPath>
+ <HintPath>/Users/Drive/Git/animin/Assets/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
  <Reference Include="Qualcomm.Vuforia.UnityExtensions">
- <HintPath>/Users/Drive/Documents/animin/Assets/Qualcomm Augmented Reality/Scripts/Internal/Qualcomm.Vuforia.UnityExtensions.dll</HintPath>
+ <HintPath>/Users/Drive/Git/animin/Assets/Qualcomm Augmented Reality/Scripts/Internal/Qualcomm.Vuforia.UnityExtensions.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

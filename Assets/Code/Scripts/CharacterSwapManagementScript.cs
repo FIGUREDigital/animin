@@ -42,9 +42,9 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		Models[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Kid] = "Prefabs/tbo_kid";
 		Models[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = "Prefabs/tbo_adult";
 
-		Models[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Baby] = "Prefabs/ke_baby";
-		Models[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Kid] = "Prefabs/ke_kid";
-		Models[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_adult";
+		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ke_baby";
+		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ke_kid";
+		Models[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_adult";
 
 		Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ma_baby";
         Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ma_kid";
@@ -59,9 +59,9 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"TBOKidAnimations");
 		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"TBOAdultAnimations");
 	
-		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"KelsiBabyAnimations");
-		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"KelsyKidAnimations");
-		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"KelsiAdultAnimations");
+		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"KelsiBabyAnimations");
+		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"KelsyKidAnimations");
+		AnimationLists[(int)AniminId.Kelsi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"KelsiAdultAnimations");
 
         AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
 		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiKidAnimations");
@@ -116,6 +116,13 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		GameObject instance = GameObject.Instantiate(resource) as GameObject;
 		Vector3 scale = instance.transform.localScale;
 		//RuntimeAnimatorController controller = CurrentModel.GetComponent<Animator>().runtimeAnimatorController;
+
+		Debug.Log("instance.transform = " + instance.transform);
+		Debug.Log("instance.transform.parent = " + instance.transform.parent);
+
+		if (UIGlobalVariablesScript.Singleton == null)
+			Debug.Log("PANIC");
+
 		instance.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform;
 
 		if(CurrentModel != null)
@@ -146,8 +153,8 @@ public class CharacterSwapManagementScript : MonoBehaviour
 */
 
 
-
-		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().SetCharacter(instance);
+		if (UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>()!=null)
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().SetCharacter(instance);
 
 	}
 }
@@ -155,7 +162,7 @@ public class CharacterSwapManagementScript : MonoBehaviour
 public enum AniminId
 {
 	Tbo = 0,
-	Kelsey,
+	Kelsi,
 	Mandi,
 	Pi,
 	Count,

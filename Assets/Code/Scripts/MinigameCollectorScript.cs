@@ -235,7 +235,7 @@ public class MinigameCollectorScript : MonoBehaviour
 	
 	private void ExitMinigame(bool succesfullyCompleted)
 	{
-		CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+		//CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().Forces.Clear();
 
@@ -251,10 +251,10 @@ public class MinigameCollectorScript : MonoBehaviour
 		//else
 		{
 			UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
-			progressScript.Stop(true);
+			//progressScript.Stop(true);
 			//progressScript.CurrentAction = ActionId.SmallCooldownPeriod;
 			//progressScript.SmallCooldownTimer = 0.5f;
-			progressScript.CurrentAction = ActionId.ExitPortalMainStage;
+			//progressScript.CurrentAction = ActionId.ExitPortalMainStage;
 
 			/*
 			UIGlobalVariablesScript.Singleton.MainCharacterAnimationControllerRef.IsExitPortal = true;
@@ -273,12 +273,13 @@ public class MinigameCollectorScript : MonoBehaviour
 			*/
 		}
 
-		if(Points >= 10000)
+		/*if(Points >= 10000)
 			AchievementsScript.Singleton.Show(AchievementTypeId.Gold, Points);
 		else if(Points >= 5000)
 			AchievementsScript.Singleton.Show(AchievementTypeId.Silver, Points);
 		else 
 			AchievementsScript.Singleton.Show(AchievementTypeId.Bronze, Points);
+			*/
 	}
 	
 	
@@ -580,8 +581,10 @@ public class MinigameCollectorScript : MonoBehaviour
 
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 
-		TemporaryDisableCollisionEvent collisionEvent = new TemporaryDisableCollisionEvent(gameObject);
-		PresentationEventManager.Create(collisionEvent);
+		gameObject.AddComponent<TemporaryDisableCollisionEvent>();
+
+		//TemporaryDisableCollisionEvent collisionEvent = new TemporaryDisableCollisionEvent(gameObject);
+		//PresentationEventManager.Create(collisionEvent);
 		UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Bump_Into_Baddy);
 
 		Debug.Log("ADDING FORCE");

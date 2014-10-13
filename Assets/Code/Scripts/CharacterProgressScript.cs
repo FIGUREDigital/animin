@@ -262,6 +262,8 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 
+
+
 		//TextTest.color = new Color(1, 1, 1, 0.0f);
 
 		Physics.IgnoreLayerCollision(
@@ -285,6 +287,33 @@ public class CharacterProgressScript : MonoBehaviour
 
 		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(
 			PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
+
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.AlmondMilk, 3);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Avocado, 1);
+		//AddItemToInventory(InventoryItemId.Banana, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Blueberry, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Boombox, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Camera, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Carrot, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Chips, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Clock, 4);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.EDM808, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.EDMJuno, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.EDMKsynth, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.FartButton, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Lightbulb, 1);
+		//AddItemToInventory(InventoryItemId.mintclock, 1);
+		//AddItemToInventory(InventoryItemId.Noodles, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.paperCalendar, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Pill, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Plaster, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Spinach, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Strawberry, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Syringe, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Toast, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.watermelon, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodFrame, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodSword, 1);
 		//SpawnChests();	
 	}
 
@@ -1156,10 +1185,11 @@ public class CharacterProgressScript : MonoBehaviour
 								if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.Clock)
 								{
 									HidePopupMenus();
-								UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
+									
+									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
 									//TriggeredHoldAction = true;
 									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
-								LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
+									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
 									preventMovingTo = true;
 								}
 								else if( moveHitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Menu == MenuFunctionalityUI.EDMBox)
@@ -1170,7 +1200,7 @@ public class CharacterProgressScript : MonoBehaviour
 									if(edmScript != null)
 									{
 										edmScript.SetInterface(UIGlobalVariablesScript.Singleton.EDMBoxUI);
-									UIGlobalVariablesScript.Singleton.EDMBoxUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
+										UIGlobalVariablesScript.Singleton.EDMBoxUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
 										UIGlobalVariablesScript.Singleton.EDMBoxUI.SetActive(true);
 									}
 									else

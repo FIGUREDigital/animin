@@ -109,32 +109,7 @@ public class PersistentData
 		Health = MaxHealth;
 		ZefTokens = 0;
 
-		AddItemToInventory(InventoryItemId.AlmondMilk, 3);
-		AddItemToInventory(InventoryItemId.Avocado, 1);
-		//AddItemToInventory(InventoryItemId.Banana, 1);
-		AddItemToInventory(InventoryItemId.Blueberry, 1);
-		AddItemToInventory(InventoryItemId.Boombox, 1);
-		AddItemToInventory(InventoryItemId.Camera, 1);
-		AddItemToInventory(InventoryItemId.Carrot, 1);
-		AddItemToInventory(InventoryItemId.Chips, 1);
-		AddItemToInventory(InventoryItemId.Clock, 4);
-		AddItemToInventory(InventoryItemId.EDM808, 1);
-		AddItemToInventory(InventoryItemId.EDMJuno, 1);
-		AddItemToInventory(InventoryItemId.EDMKsynth, 1);
-		AddItemToInventory(InventoryItemId.FartButton, 1);
-		AddItemToInventory(InventoryItemId.Lightbulb, 1);
-		//AddItemToInventory(InventoryItemId.mintclock, 1);
-		//AddItemToInventory(InventoryItemId.Noodles, 1);
-		AddItemToInventory(InventoryItemId.paperCalendar, 1);
-		AddItemToInventory(InventoryItemId.Pill, 1);
-		AddItemToInventory(InventoryItemId.Plaster, 1);
-		AddItemToInventory(InventoryItemId.Spinach, 1);
-		AddItemToInventory(InventoryItemId.Strawberry, 1);
-		AddItemToInventory(InventoryItemId.Syringe, 1);
-		AddItemToInventory(InventoryItemId.Toast, 1);
-		AddItemToInventory(InventoryItemId.watermelon, 1);
-		AddItemToInventory(InventoryItemId.woodFrame, 1);
-		AddItemToInventory(InventoryItemId.woodSword, 1);
+
 	}
 
 	public void AddItemToInventory(InventoryItemId id, int count)
@@ -149,6 +124,33 @@ public class PersistentData
 		}
 
 		Inventory.Add(new InventoryItemData() { Id = id, Count = count });
+
+		if(InventoryItemData.Items[(int)id].ItemType == PopupItemType.Food)
+		{
+			if(UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIButton>().normalSprite == "empty_icon")
+			{
+				UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)id].SpriteName;
+				UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = id;
+
+			}
+		}
+		else if(InventoryItemData.Items[(int)id].ItemType == PopupItemType.Item)
+		{
+			if(UIGlobalVariablesScript.Singleton.ItemsButton.GetComponent<UIButton>().normalSprite == "empty_icon")
+			{
+				UIGlobalVariablesScript.Singleton.ItemsButton.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)id].SpriteName;
+				UIGlobalVariablesScript.Singleton.ItemsButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = id;
+				
+			}
+		}
+		else if(InventoryItemData.Items[(int)id].ItemType == PopupItemType.Medicine)
+		{
+			if(UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<UIButton>().normalSprite == "empty_icon")
+			{
+				UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<UISprite>().spriteName = InventoryItemData.Items[(int)id].SpriteName;
+				UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = id;
+			}
+		}
 	}
 
 	public bool HasItem(InventoryItemId id)

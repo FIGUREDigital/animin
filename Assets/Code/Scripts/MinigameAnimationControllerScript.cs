@@ -3,6 +3,8 @@ using System.Collections;
 
 public class MinigameAnimationControllerScript : MonoBehaviour {
 
+	//public GameObject CharacterModel;
+
 	public Animations GetAnimationEnum()
 	{
 		if(this.IsWalking) 
@@ -49,7 +51,8 @@ public class MinigameAnimationControllerScript : MonoBehaviour {
 		
 		set
 		{
-			animator.SetBool("IsJumbing", value );
+			if (animator !=null)
+				animator.SetBool("IsJumbing", value );
 		}
 	}
 
@@ -64,7 +67,12 @@ public class MinigameAnimationControllerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		
+
+	}
+
+	public void LoadAnimator(GameObject gameObject)
+	{
+		animator = gameObject.GetComponent<Animator>();
 	}
 	
 	public void SetMovementNormalized(float speed)
@@ -103,7 +111,7 @@ public class MinigameAnimationControllerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		animator = this.GetComponent<AnimationControllerScript>().CharacterModel.GetComponent<Animator>();
+		//animator = GetComponent<Animator>();
 	}
 	
 		

@@ -17,15 +17,9 @@ public class UnlockCharacterButtonClickScript : MonoBehaviour
 
 	void OnClick()
 	{
-		UnlockCharacter();
 		ProfilesManagementScript.Singleton.AniminToUnlockId = Id;
+
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
 		ProfilesManagementScript.Singleton.CreateAccessCodeScreen.SetActive(true);
-	}
-
-	void UnlockCharacter()
-	{
-		CharacterChoiceItem character = GameObject.Find(Id.ToString()).GetComponent<CharacterChoiceItem>();
-		character.ChangeLockedState(true);
 	}
 }

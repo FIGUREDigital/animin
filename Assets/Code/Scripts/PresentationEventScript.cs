@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-
+/*
 public enum PresentationLayerId
 {
 	Default = 0,
@@ -70,20 +70,23 @@ public abstract class PresentationEvent
 	
 	public abstract void Update();
 }
-
-public class TemporaryDisableCollisionEvent : PresentationEvent
+*/
+public class TemporaryDisableCollisionEvent : MonoBehaviour
 {
 	private GameObject GameObjectRef;
 	private float Timer;
 	
-	public TemporaryDisableCollisionEvent(GameObject gameObject)
+	void  Start()
 	{
-		LayerId = PresentationLayerId.Default;
+		//LayerId = PresentationLayerId.Default;
 		GameObjectRef = gameObject;
 		Timer = 2.0f;
+		BoxCollider colliderScript = GameObjectRef.GetComponent<BoxCollider>();
+		colliderScript.enabled = false;
+
 	}
 	
-	public override void Update()
+	 void Update()
 	{
 		Timer -= Time.deltaTime;
 		if(Timer <= 0)
@@ -97,8 +100,9 @@ public class TemporaryDisableCollisionEvent : PresentationEvent
 			{
 				Debug.Log("No Box Collider found!");
 			}
-			
-			PresentationEventManager.Remove(this);
+
+			Destroy(this);
+			//PresentationEventManager.Remove(this);
 		}
 	}
 }

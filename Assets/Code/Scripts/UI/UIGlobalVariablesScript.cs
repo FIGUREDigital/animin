@@ -95,6 +95,9 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject JunoUI;
 	public GameObject PianoUI;
 	public GameObject ItemScrollView;
+	public GameObject FoodButton;
+	public GameObject MedicineButton;
+	public GameObject ItemsButton;
 
 	void Awake()
 	{

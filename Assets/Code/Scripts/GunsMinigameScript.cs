@@ -372,7 +372,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
     [RPC]
     protected void ReceiveEventAcquireControlOfCharacter(int playerIndex)
     {
-        UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = PlayersCharacters[playerIndex].GetComponent<AnimationControllerScript>();
+        UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = PlayersCharacters[playerIndex].GetComponent<MinigameAnimationControllerScript>();
         UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = PlayersCharacters[playerIndex].GetComponent<CharacterControllerScript>();
     }
 

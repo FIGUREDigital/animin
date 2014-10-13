@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class ValueSmoother
 {
 	public float ValueNow;
 	public float ValueNext;
-
+	
 	public void Update()
 	{
 		if(Mathf.Abs(ValueNow - ValueNext) >= 0.15f)
@@ -24,7 +25,6 @@ public class ValueSmootherVector3
 			ValueNow = Vector3.Lerp(ValueNow, ValueNext, Time.deltaTime * 6);
 	}
 }
-
 
 public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 {
@@ -193,7 +193,8 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 			Vector3 cameraPoint = new Vector3(0, 233.1f, -198.3f);
 			Transform target = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
-			
+
+			/*
 			if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy)
 			{
 				cameraPoint = new Vector3(0, 500.6f, -250.63f);
@@ -203,7 +204,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			{
 
 			}
-
+			*/
 			Camera.main.transform.localPosition = cameraPoint + newPosition2 + newPosition;
 			Camera.main.transform.LookAt(target);
 		}
@@ -218,7 +219,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 	// CHANGES THAT HAVE TO HAPPEN WHEN AR CHANGES
 	public void OnARChanged()
 	{
-		if(TrackVuforiaScript.IsTracking)
+		if(IsTracking)
 		{
 			//UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (false);
 			//UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
@@ -226,9 +227,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(true);
 			UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(false);
 
-			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
-			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(false);
+//			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
+//			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
+//			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(false);
 			//CubeGamePosition.ValueNext = Vector3.zero;
 			//CubeGameRotation.ValueNext = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent.rotation.eulerAngles;
 		}
@@ -240,9 +241,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(false);
 			UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(true);
 
-			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
-			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
-			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(true);
+//			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
+//			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
+//			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(true);
 			//CubeGameRotation.ValueNext = new Vector3(0,0,0);
 			//CubeGamePosition.ValueNext = new Vector3(0,-0.3f,-0.1f);
 		}
@@ -336,25 +337,29 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 	public void OnTrackingFound()
 	{
+
 		IsTracking = true;
+		/*
 		bool isPlayingMinigame = false;
 
 		if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy || 
 		   UIGlobalVariablesScript.Singleton.GunGameScene.activeInHierarchy)
 			isPlayingMinigame = true;
 
-
+*/
 		OnARChanged();
 
 		CharacterProgressScript progress = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
-
+/*
 		if(isPlayingMinigame)
 		{
 			Debug.Log("OnTrackingFound: playing mini game");
 			UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (false);
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
 		}
-		else  if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.Sleep ||
+		else
+*/
+	if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.Sleep ||
 		   UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.EnterSleep)
 		{
 			Debug.Log("OnTrackingFound: sleeping");
@@ -397,22 +402,23 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 	public void OnTrackingLost()
 	{
 		IsTracking = false;
-
+		/*
 		bool isPlayingMinigame = false;
+
 
 		if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy || 
 		   UIGlobalVariablesScript.Singleton.GunGameScene.activeInHierarchy)
 			isPlayingMinigame = true;
-
+*/
 		OnARChanged();
 		UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (true);
 		UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 
-		if(isPlayingMinigame)
+//		if(isPlayingMinigame)
 		{
-			Debug.Log("OnTrackingLost: playing mini game");
+//			Debug.Log("OnTrackingLost: playing mini game");
 		}
-		else
+//		else
 		{
 			OnCharacterEnterNonARScene();
 

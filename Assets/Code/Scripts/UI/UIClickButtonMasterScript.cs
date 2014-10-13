@@ -50,6 +50,12 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			subItems[panelCount].transform.GetChild(0).gameObject.SetActive(true);
 			sprite0.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = inventoryItems[i + 0].Count.ToString();
 
+			if(inventoryItems[i + 0].Count == 1)
+				sprite0.transform.GetChild(0).gameObject.SetActive(false);
+			else
+				sprite0.transform.GetChild(0).gameObject.SetActive(true);
+
+
 			if(allSprites != null)
 			{
 				allSprites.Add(subItems[panelCount].transform.GetChild(0).gameObject);
@@ -64,6 +70,12 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				subItems[panelCount].transform.GetChild(1).gameObject.GetComponent<InterfaceItemLinkToModelScript>().ItemID = InventoryItemData.Items[(int)inventoryItems[i + 1].Id].Id;
 				subItems[panelCount].transform.GetChild(1).gameObject.SetActive(true);
 				sprite1.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = inventoryItems[i + 1].Count.ToString();
+
+				
+				if(inventoryItems[i + 1].Count == 1)
+					sprite1.transform.GetChild(0).gameObject.SetActive(false);
+				else
+					sprite1.transform.GetChild(0).gameObject.SetActive(true);
 
 				if(allSprites != null)
 				{
@@ -302,10 +314,13 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.CloseCurrentMinigame:
 		{
+			Application.LoadLevel("VuforiaTest");
+			return;
+
 
 			// Disable UI
 			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);         //HOME BUTTON ERROR
 			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.GunGameInterface.SetActive(false);
 			
@@ -476,6 +491,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			//SavedScale = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale;
 			//Debug.Log("SavedScale 1:" + SavedScale.ToString());
 
+			Application.LoadLevel("VuforiaTestMinigame1");
+			break;
+
 			UIGlobalVariablesScript.Singleton.ARWorldRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.NonARWorldRef.SetActive(false);
 
@@ -526,7 +544,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
 
 				
-				UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>();
+				UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<MinigameAnimationControllerScript>();
 				UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
 
 				
@@ -535,7 +553,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
 				
 				//UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
-				Camera.main.GetComponent<MusicScript>().PlayGun();
+//				Camera.main.GetComponent<MusicScript>().PlayGun();
 
 				break;
 			}
@@ -553,7 +571,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
 
 
-					UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>();
+					UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<MinigameAnimationControllerScript>();
 					UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
 
 
@@ -564,7 +582,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
 					
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
-					Camera.main.GetComponent<MusicScript>().PlayCube();
+//					Camera.main.GetComponent<MusicScript>().PlayCube();
 				
 					break;
 				}

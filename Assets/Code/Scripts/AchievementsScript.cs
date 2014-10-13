@@ -127,10 +127,6 @@ public class AchievementsScript : MonoBehaviour
 			}
 			
 		}
-
-
-
-	
 	}
 }
 

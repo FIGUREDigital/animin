@@ -59,8 +59,8 @@ public class JoystiqScript : MonoBehaviour {
 	private bool enable;                // VJR external control.
 	
 
-
-	public AnimationControllerScript CharacterAnimationRef;
+	
+	public MinigameAnimationControllerScript CharacterAnimationRef;
 	public CharacterControllerScript CharacterControllerRef;
 
 	
@@ -225,12 +225,12 @@ public class JoystiqScript : MonoBehaviour {
 			ThumbpadFront.bottomAnchor.Set(ThumbpadFront.bottomAnchor.relative, BottomAnchorPosition);
 		}
 
-
 		if(CharacterControllerRef != null)
 		{
 			CharacterControllerRef.MovementDirection = Camera.main.transform.right * finalMovementDirection.x;//new Vector3(VJRnormals.x, 0, VJRnormals.y);
 			CharacterControllerRef.MovementDirection += Vector3.Normalize(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.transform.forward.z)) * finalMovementDirection.y;
 			CharacterControllerRef.MovementDirection.y = 0;
+
 
 			if(finalMovementDirection != Vector2.zero)
 			{

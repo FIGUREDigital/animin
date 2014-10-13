@@ -4,11 +4,11 @@ using System.Collections;
 public class MusicScript : MonoBehaviour 
 {
 	public AudioClip CubeMusic;
-	public AudioClip GunMusic;
+
 
 	// Use this for initialization
 	void Start () {
-	
+		LooperPlaying=true;
 	}
 	
 	// Update is called once per frame
@@ -27,18 +27,6 @@ public class MusicScript : MonoBehaviour
 	}
 
 	private bool LooperPlaying;
-
-	public void PlayCube()
-	{
-		this.GetComponent<AudioSource>().clip = CubeMusic;
-		LooperPlaying = true;
-	}
-
-	public void PlayGun()
-	{
-		this.GetComponent<AudioSource>().clip = GunMusic;
-		LooperPlaying = true;
-	}
 
 	public void Stop()
 	{
