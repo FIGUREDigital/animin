@@ -26,39 +26,38 @@ public class UnlockCharacterButtonClickScript : MonoBehaviour
 	void OnClick()
 	{
 		OpenShop ();
-		SelectCharacter ();
-		ShopManager.Instance.BuyItem (mBuyItem);
+		BuyCharacter (true);
 		StartCoroutine ("ClosePopup");
 	}
 
-	void SelectCharacter()
+	void BuyCharacter(bool free)
 	{
 		switch(Id)
 		{
 		case AniminId.Pi:
-			mBuyItem = PI_UNLOCK;
+			mBuyItem = free ? PI_UNLOCK : PI_PURCHASE;
 			break;
 		case AniminId.Kelsey:
-			mBuyItem = KELSEY_UNLOCK;
+			mBuyItem = free ? KELSEY_UNLOCK : KELSEY_PURCHASE;
 			break;
 		case AniminId.Mandi:
-			mBuyItem = MANDI_UNLOCK;
+			mBuyItem = free ? MANDI_UNLOCK : MANDI_PURCHASE;
 			break;
 		default:
-			mBuyItem = PI_PURCHASE;
 			break;
 
 		}
+		ShopManager.Instance.BuyItem (mBuyItem);
 	}
 	void OpenShop()
 	{
-		string[] shopItems = new string[6];
+		string[] shopItems = new string[1];
 		shopItems [0] = PI_UNLOCK;
-		shopItems [1] = KELSEY_UNLOCK;
-		shopItems [2] = MANDI_UNLOCK;
-		shopItems [3] = PI_PURCHASE;
-		shopItems [4] = KELSEY_PURCHASE;
-		shopItems [5] = MANDI_PURCHASE;
+//		shopItems [1] = KELSEY_UNLOCK;
+//		shopItems [2] = MANDI_UNLOCK;
+//		shopItems [3] = PI_PURCHASE;
+//		shopItems [4] = KELSEY_PURCHASE;
+//		shopItems [5] = MANDI_PURCHASE;
 		ShopManager.Instance.StartStore (shopItems);
 
 	}

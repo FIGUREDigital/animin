@@ -59,35 +59,9 @@ public class CharacterChoiceItem : MonoBehaviour
 			}
 		}
 
-		ChangeLockedState(mUnlocked || CheckCharacterPurchased());
+		ChangeLockedState(mUnlocked || UnlockCharacterManager.Instance.CheckCharacterPurchased(mId));
 
 
-	}
-
-	private bool CheckCharacterPurchased()
-	{
-		string s1 = "";
-		string s2 = "";
-		switch(mId)
-		{
-		case AniminId.Pi:
-			s1 = "com.apples.animin.characterunlock1";
-			s2 = "com.apples.animin.characterpurchase1";
-			break;
-		case AniminId.Kelsey:
-			s1 = "com.apples.animin.characterunlock2";
-			s2 = "com.apples.animin.characterpurchase2";
-			break;
-		case AniminId.Mandi:
-			s1 = "com.apples.animin.characterunlock3";
-			s2 = "com.apples.animin.characterpurchase3";
-			break;
-
-		default:
-		case AniminId.Tbo:
-			break;
-		}
-		return ShopManager.Instance.HasBought(s1) || ShopManager.Instance.HasBought(s2);
 	}
 
 	public void ChangeLockedState(bool unlocked)
@@ -96,5 +70,10 @@ public class CharacterChoiceItem : MonoBehaviour
 		mSprite.SetActive(mUnlocked);
 		mDisabledSprite.SetActive(!mUnlocked);
 		mLockedButton.SetActive(!mUnlocked);
+	}
+	public void UnlockCharacter()
+	{
+		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
+		character.ChangeLockedState(true);
 	}
 }
