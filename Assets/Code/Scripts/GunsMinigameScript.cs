@@ -337,14 +337,14 @@ public class GunsMinigameScript : Photon.MonoBehaviour
             case GameStateId.PrepareToExit:
                 {
                     UIClickButtonMasterScript.HandleClick(UIFunctionalityId.CloseCurrentMinigame, null);
-
+					/*
                     if (Points >= 10000)
                         AchievementsScript.Singleton.Show(AchievementTypeId.Gold, Points);
                     else if (Points >= 5000)
                         AchievementsScript.Singleton.Show(AchievementTypeId.Silver, Points);
                     else
                         AchievementsScript.Singleton.Show(AchievementTypeId.Bronze, Points);
-
+					*/
                     CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
                     progressScript.CurrentAction = ActionId.ExitPortalMainStage;
 

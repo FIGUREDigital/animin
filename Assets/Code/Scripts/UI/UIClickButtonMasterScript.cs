@@ -490,106 +490,17 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			//SavedScale = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale;
 			//Debug.Log("SavedScale 1:" + SavedScale.ToString());
-
-			Application.LoadLevel("VuforiaTestMinigame1");
-			break;
-
-			UIGlobalVariablesScript.Singleton.ARWorldRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.NonARWorldRef.SetActive(false);
-
-			UIGlobalVariablesScript.Singleton.PauseGameButton.SetActive(true);
-			UIGlobalVariablesScript.Singleton.PausedScreen.SetActive(false);
-
-			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(true);
-			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
-
-			//UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = false;
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<ObjectLookAtDeviceScript>().enabled = false;
-//
-//			UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>();
-//			UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
-
-
-			//UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.JumbButton.SetActive(false);
-			UIGlobalVariablesScript.Singleton.ShootButton.SetActive(false);
-
-			UIGlobalVariablesScript.Singleton.Shadow.transform.localScale = new Vector3(0.79f, 0.79f, 0.79f);
-
+			
 			switch(UIGlobalVariablesScript.SelectedMinigameToPlay)
 			{
-				case UIFunctionalityId.PlayMinigameSpaceship:
-				{
-					UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(true);
-					UIGlobalVariablesScript.Singleton.SpaceshipMinigameSceneRef.SetActive(true);
-					
+				case UIFunctionalityId.PlayMinigameCubeRunners:
+					Application.LoadLevel("VuforiaTestMinigame1");
 					break;
-				}
-
-			case UIFunctionalityId.PlayMinigameGunFighters:
-			{
-				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().Reset();
-				//UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(true);
-				UIGlobalVariablesScript.Singleton.GunGameScene.SetActive(true);
-				UIGlobalVariablesScript.Singleton.GunGameInterface.SetActive(true);
-				//UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().HardcoreReset();
-				UIGlobalVariablesScript.Singleton.GunGameScene.transform.localPosition = Vector3.zero;
-				UIClickButtonMasterScript.SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
-				//UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
-				
-				UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
-				UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
-
-				
-				UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<MinigameAnimationControllerScript>();
-				UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
-
-				
-				//UIGlobalVariablesScript.Singleton.ShootButton.SetActive(true);
-
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
-				
-				//UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
-//				Camera.main.GetComponent<MusicScript>().PlayGun();
-
+				case UIFunctionalityId.PlayMinigameGunFighters:
+					Application.LoadLevel("VuforiaTestMinigame2");
+					break;
 				break;
 			}
-
-				case UIFunctionalityId.PlayMinigameCubeRunners:
-				{
-					UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(true);
-					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(true);
-					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().HardcoreReset();
-
-					UIClickButtonMasterScript.SavedRadius = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius;
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = 0.51f;
-
-					UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(true);	
-					UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(true);	
-
-
-					UIGlobalVariablesScript.Singleton.Joystick.CharacterAnimationRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<MinigameAnimationControllerScript>();
-					UIGlobalVariablesScript.Singleton.Joystick.CharacterControllerRef = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>();
-
-
-					//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
-
-					UIGlobalVariablesScript.Singleton.JumbButton.SetActive(true);
-
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
-					
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
-//					Camera.main.GetComponent<MusicScript>().PlayCube();
-				
-					break;
-				}
-			}
-
-
-			
 			break;
 		}
 

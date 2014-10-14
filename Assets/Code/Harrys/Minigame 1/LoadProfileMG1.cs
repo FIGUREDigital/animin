@@ -1,31 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CreateDummyProfile : MonoBehaviour {
+public class LoadProfileMG1 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () 
 	{
 
-		//From UIFunctionalityId.OpenMinigamesScreen:
-		
-		//UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
-		
-		//UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
-		//UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(false);
-		
-		
-		
-		//From case UIFunctionalityId.PlayMinigameCubeRunners:
-		UIGlobalVariablesScript.SelectedMinigameToPlay = UIFunctionalityId.PlayMinigameCubeRunners;
-		
-		GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetSinglePlayer();
-		
-		
-		
-		
-		
-		
 		//From UIFunctionalityId.StartSelectedMinigame
 		
 		//		UIGlobalVariablesScript.Singleton.ARWorldRef.SetActive(false);

@@ -91,7 +91,7 @@ public class JoystiqScript : MonoBehaviour {
 	
 	private void Update() 
 	{
-
+		Debug.Log ("Joystick Update");
 		/*if(Input.GetKey(KeyCode.A))
 		{
 			Debug.Log("DOING A: " + ThumbpadBack.leftAnchor.relative.ToString() + "_" + ThumbpadBack.leftAnchor.absolute.ToString() + "_" + ThumbpadFront.width.ToString());
@@ -163,10 +163,10 @@ public class JoystiqScript : MonoBehaviour {
 			//Debug.Log("bottomLeftWorld: " + bottomLeftWorld.ToString());
 			//Debug.Log("topRightWorld: " + topRightWorld.ToString());
 
-			
+/*			
 			if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowMovement)
 				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
-
+*/
 
 			Vector3 middle = bottomLeftWorld + (topRightWorld - bottomLeftWorld) / 2;
 
@@ -210,6 +210,8 @@ public class JoystiqScript : MonoBehaviour {
 				
 					finalMovementDirection.x = directionVector.x;
 					finalMovementDirection.y = directionVector.y;
+
+					Debug.Log("finalMovementDirection = "+finalMovementDirection);
 				}
 			}
 		}

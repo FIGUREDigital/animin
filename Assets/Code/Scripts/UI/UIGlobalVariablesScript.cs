@@ -99,6 +99,49 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject MedicineButton;
 	public GameObject ItemsButton;
 
+
+	public enum ActiveState {Collecting,Gun, None};
+	public ActiveState CurrentlyActive{
+		get
+		{
+			if (CubeRunnerMinigameSceneRef != null)
+				return ActiveState.Collecting;
+			else if (GunGameScene != null)
+				return ActiveState.Gun;
+			else{
+				Debug.Log("Harry's CurrentlyActive Method doesn't work");
+				return ActiveState.None;
+			}
+		}
+	}
+
+	public GameObject CurrentMiniGameSceneRef{
+		get
+		{
+			if (CubeRunnerMinigameSceneRef != null)
+				return CubeRunnerMinigameSceneRef;
+			else if (GunGameScene != null)
+				return GunGameScene;
+			else{
+				Debug.Log("Harry's CurrentMiniGameSceneRef Method doesn't work");
+				return null;
+			}
+		}
+	}
+	public GameObject CurrentUIScreenRef{
+		get
+		{
+			if (CuberunnerGamesScreenRef != null)
+				return CuberunnerGamesScreenRef;
+			else if (GunGameInterface != null)
+				return GunGameInterface;
+			else{
+				Debug.Log("Harry's CurrentUIScreenRef Method doesn't work");
+				return null;
+			}
+		}
+	}
+
 	void Awake()
 	{
 		Singleton = this;
