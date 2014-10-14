@@ -1,61 +1,36 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/TrackVuforiaScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs">
     <Files>
-      <File FileName="Assets/Code/Harrys/CreateDummyProfile.cs" Line="100" Column="2" />
-      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="605" Column="27" />
-      <File FileName="Assets/Code/Scripts/AnimateChestObjectOutScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/AchievementsScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/HeadReferenceScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/ObjectLookAtDeviceScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="21" Column="25" />
+      <File FileName="Assets/Code/Harrys/Minigame 2/LoadProfileMG2.cs" Line="51" Column="3" />
+      <File FileName="Assets/Code/Harrys/Minigame 2/TrackVFMG2.cs" Line="21" Column="27" />
+      <File FileName="Assets/Code/Scripts/GunsMinigameScript.cs" Line="340" Column="6" />
+      <File FileName="Assets/Code/Scripts/JoystiqScript.cs" Line="94" Column="33" />
+      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="113" Column="28" />
       <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="444" Column="1" />
-      <File FileName="Assets/Code/Scripts/MinigameAnimationControllerScript.cs" Line="53" Column="4" />
-      <File FileName="Assets/Code/Scripts/MinigameCollectorScript.cs" Line="584" Column="49" />
-      <File FileName="Assets/Code/Scripts/GunsMinigameScript.cs" Line="375" Column="128" />
-      <File FileName="Assets/Code/Scripts/ProgressBarUVScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/ReferencedObjectScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/EDMMixerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/EDMBoxScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/ImageTargetBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/DefaultTrackableEventHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/TrackVuforiaScript.cs" Line="207" Column="4" />
-      <File FileName="Assets/Code/MultipleCardTrackerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/ChestScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Qualcomm Augmented Reality/Scripts/TurnOffBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/BlinkingScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/EvilCharacterPatternMovementScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/FlashObjectScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/PortalScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/DeviceCameraScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/MoveTutorialHandScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/MusicScript.cs" Line="6" Column="28" />
-      <File FileName="Assets/Code/UI/StartCreateProfileButtonScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/SwipeDragScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Harrys/BoxGameTemp.cs" Line="19" Column="3" />
-      <File FileName="Assets/Code/Scripts/UI/Menu/BackToProfilesClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Harrys/TrackVuforiaMinigame.cs" Line="131" Column="2" />
-      <File FileName="Assets/Code/Scripts/SoundEngineScript.cs" Line="155" Column="1" />
-      <File FileName="Assets/Code/Scripts/JoystiqScript.cs" Line="249" Column="12" />
-      <File FileName="Assets/Code/Scripts/CharacterSwapManagementScript.cs" Line="114" Column="53" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="260" Column="93" />
-      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="318" Column="11" />
-      <File FileName="Assets/Code/Scripts/MediaPlayerPluginScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/PlayerProfileData.cs" Line="168" Column="34" />
-      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/PresentationEventScript.cs" Line="85" Column="3" />
+      <File FileName="Assets/Code/Harrys/Minigame 1/TrackVFMG1.cs" Line="119" Column="31" />
+      <File FileName="Assets/Code/Harrys/Minigame 1/LoadProfileMG1.cs" Line="50" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="500" Column="52" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Code" expanded="True">
-              <Node name="Harrys" expanded="True" />
-              <Node name="Scripts" expanded="True">
-                <Node name="UI" expanded="True" />
-                <Node name="TrackVuforiaScript.cs" selected="True" />
+              <Node name="Harrys" expanded="True">
+                <Node name="Minigame 1" expanded="True" />
+                <Node name="Minigame 2" expanded="True" />
               </Node>
+              <Node name="Scripts" expanded="True">
+                <Node name="UI" expanded="True">
+                  <Node name="Menu" expanded="True" />
+                  <Node name="UIClickButtonMasterScript.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="UI" expanded="True" />
+            </Node>
+            <Node name="Qualcomm Augmented Reality" expanded="True">
+              <Node name="Scripts" expanded="True" />
             </Node>
           </Node>
         </State>

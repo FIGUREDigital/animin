@@ -79,9 +79,10 @@
     <Compile Include="Assets\Code\AniminProfileData.cs" />
     <Compile Include="Assets\Code\ChestScript.cs" />
     <Compile Include="Assets\Code\Enumerations\UIFunctionalityId.cs" />
-    <Compile Include="Assets\Code\Harrys\BoxGameTemp.cs" />
-    <Compile Include="Assets\Code\Harrys\CreateDummyProfile.cs" />
-    <Compile Include="Assets\Code\Harrys\TrackVuforiaMinigame.cs" />
+    <Compile Include="Assets\Code\Harrys\Minigame 1\LoadProfileMG1.cs" />
+    <Compile Include="Assets\Code\Harrys\Minigame 1\TrackVFMG1.cs" />
+    <Compile Include="Assets\Code\Harrys\Minigame 2\LoadProfileMG2.cs" />
+    <Compile Include="Assets\Code\Harrys\Minigame 2\TrackVFMG2.cs" />
     <Compile Include="Assets\Code\Helpers.cs" />
     <Compile Include="Assets\Code\MultipleCardTrackerScript.cs" />
     <Compile Include="Assets\Code\PlayerProfileData.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\Code\Scripts\BulletAmmoLostScript.cs" />
     <Compile Include="Assets\Code\Scripts\CameraFacingBillboardScript.cs" />
     <Compile Include="Assets\Code\Scripts\CameraModelScript.cs" />
+    <Compile Include="Assets\Code\Scripts\CharacterChoiceItem.cs" />
     <Compile Include="Assets\Code\Scripts\CharacterControllerScript.cs" />
     <Compile Include="Assets\Code\Scripts\CharacterProgressScript.cs" />
     <Compile Include="Assets\Code\Scripts\CharacterSwapManagementScript.cs" />
