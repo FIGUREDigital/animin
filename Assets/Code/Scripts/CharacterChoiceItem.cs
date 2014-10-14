@@ -11,6 +11,8 @@ public class CharacterChoiceItem : MonoBehaviour
 	private GameObject mLockedButton;
 	[SerializeField]
 	private bool mUnlocked;
+	[SerializeField]
+	private AniminId mId;
 
 	// Use this for initialization
 	void Start () 
@@ -57,8 +59,35 @@ public class CharacterChoiceItem : MonoBehaviour
 			}
 		}
 
-		ChangeLockedState(mUnlocked);
+		ChangeLockedState(mUnlocked || CheckCharacterPurchased());
 
+
+	}
+
+	private bool CheckCharacterPurchased()
+	{
+		string s1 = "";
+		string s2 = "";
+		switch(mId)
+		{
+		case AniminId.Pi:
+			s1 = "com.apples.animin.characterunlock1";
+			s2 = "com.apples.animin.characterpurchase1";
+			break;
+		case AniminId.Kelsey:
+			s1 = "com.apples.animin.characterunlock2";
+			s2 = "com.apples.animin.characterpurchase2";
+			break;
+		case AniminId.Mandi:
+			s1 = "com.apples.animin.characterunlock3";
+			s2 = "com.apples.animin.characterpurchase3";
+			break;
+
+		default:
+		case AniminId.Tbo:
+			break;
+		}
+		return ShopManager.Instance.HasBought(s1) || ShopManager.Instance.HasBought(s2);
 	}
 
 	public void ChangeLockedState(bool unlocked)
