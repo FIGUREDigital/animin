@@ -32,11 +32,6 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 	Vector3 SavedARPosition;
 
-	//public GameObject ARSceneRef;
-	//public GameObject UIGlobalVariablesScript.Singleton.NonSceneRef;
-	//public GameObject UIGlobalVariablesScript.Singleton.ARSceneRef;
-	//public GameObject UIGlobalVariablesScript.Singleton.MainCharacterRef;
-
 	public static bool IsTracking;
 
 
@@ -52,11 +47,6 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		{
 			mTrackableBehaviour.RegisterTrackableEventHandler(this);
 		}
-
-
-
-
-		//this.renderer.enabled = false;
 		SavedARPosition = new Vector3(0, 0.0f, 0);
 		Input.gyro.enabled = true;
 	}
@@ -65,6 +55,8 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		TrackableBehaviour.Status previousStatus,
 		TrackableBehaviour.Status newStatus)
 	{
+		Debug.Log("OnTrackableStateChanged!");
+
 		if (newStatus == TrackableBehaviour.Status.DETECTED ||
 		    newStatus == TrackableBehaviour.Status.TRACKED ||
 		    newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
@@ -104,65 +96,14 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 	void Update()
 	{
-		//Debug.Log("GYOR: " + Input.gyro.attitude.eulerAngles.ToString());
 
-//		UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.localPosition = CubeGamePosition.ValueNext;
-		//UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.rotation = Quaternion.Euler(CubeGameRotation.ValueNow);
-
-//		if(UIGlobalVariablesScript.Singleton.NonSceneRef.activeInHierarchy)
-//		{
-//			Camera.main.transform.position = CameraPositionSmoother.ValueNow;
-//			Camera.main.transform.rotation = Quaternion.Euler(CameraRotationSmoother.ValueNow);
-//		}
-//
-//		CameraPositionSmoother.Update();
-//		CameraRotationSmoother.Update();
 	}
 
 
 	void LateUpdate()
 	{
-
 		if(UIGlobalVariablesScript.Singleton.NonSceneRef.activeInHierarchy)
 		{
-//			if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy)
-//			{
-//				CameraPositionSmoother.ValueNext = new Vector3(0, 123.1f, -198.3f);
-//				CameraRotationSmoother.ValueNext = new Vector3(14.73474f, 0.0f, 0.0f);
-//			}
-//			else
-//			{
-//				CameraPositionSmoother.ValueNext = new Vector3(0, 123.1f, -198.3f);
-//				CameraRotationSmoother.ValueNext = new Vector3(14.73474f, 0.0f, 0.0f);
-//			}
-
-
-			/*float gyroAngle = 270 - Input.gyro.attitude.eulerAngles.z;
-			if(gyroAngle >= 30) gyroAngle = 30;
-			if(gyroAngle <= -30) gyroAngle = -30;
-
-			gyroAngle += 30;
-			gyroAngle /= 60;*/
-			
-			//float xAngle = Mathf.Lerp(15.5f, -15.5f, (Input.acceleration.x + 1) / 2);
-			
-			
-			//Debug.Log("GYRO: " + Input.gyro.attitude.eulerAngles.ToString());
-			
-			//UIGlobalVariablesScript.Singleton.NonSceneRef.transform.localRotation = Quaternion.Euler(gyroAngleY, 0, 0);
-			
-			//Debug.Log("Acceleration: " + Input.acceleration.ToString() + "_" + ((Input.acceleration.x + 1) / 2).ToString());
-			//Debug.Log("Gravity: " + Input.gyro.gravity.ToString());
-			
-			//0.0f to -0.5f to -1.0f
-			//Debug.Log((Mathf.Lerp(-50, 50, (Input.acceleration.x + 1) / 2)).ToString());
-			//Camera.main.transform.rotation = Quaternion.Euler(14.73474f + (Input.acceleration.y) * 10, -(Input.acceleration.x) * 10, 0);
-			//Camera.main.transform.localPosition = new Vector3(Mathf.Lerp(200, -200, (Input.acceleration.x + 1) / 2), Camera.main.transform.localPosition.y, Camera.main.transform.localPosition.z);
-			
-			
-			//Debug.Log(	GetQuadraticCoordinates(((Camera.main.transform.localPosition.x + 200) / 1)).ToString());
-			
-			
 			float stableAccelerationX = (float)System.Math.Round(Input.acceleration.x, 2);
 			float stableAccelerationY = (float)System.Math.Round(Input.acceleration.y, 2);
 			
@@ -194,17 +135,6 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			Vector3 cameraPoint = new Vector3(0, 233.1f, -198.3f);
 			Transform target = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
 
-			/*
-			if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy)
-			{
-				cameraPoint = new Vector3(0, 500.6f, -250.63f);
-				target = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
-			}
-			else
-			{
-
-			}
-			*/
 			Camera.main.transform.localPosition = cameraPoint + newPosition2 + newPosition;
 			Camera.main.transform.LookAt(target);
 		}
@@ -214,41 +144,6 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		SmootherAxisY.Update();
 
 	}
-
-
-	// CHANGES THAT HAVE TO HAPPEN WHEN AR CHANGES
-	public void OnARChanged()
-	{
-		if(IsTracking)
-		{
-			//UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (false);
-			//UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
-
-			UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(true);
-			UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(false);
-
-//			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
-//			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
-//			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(false);
-			//CubeGamePosition.ValueNext = Vector3.zero;
-			//CubeGameRotation.ValueNext = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent.rotation.eulerAngles;
-		}
-		else
-		{
-			//UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (true);
-			//UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
-
-			UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(false);
-			UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(true);
-
-//			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
-//			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
-//			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(true);
-			//CubeGameRotation.ValueNext = new Vector3(0,0,0);
-			//CubeGamePosition.ValueNext = new Vector3(0,-0.3f,-0.1f);
-		}
-	}
-
 	public static void EnableDisableMinigamesBasedOnARStatus()
 	{
 		GameObject sprite = GameObject.Find("SpriteCubeWorld");
@@ -337,17 +232,13 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 	public void OnTrackingFound()
 	{
+		
+		Debug.Log("OnTrackingFound called");
 
 		IsTracking = true;
-		/*
-		bool isPlayingMinigame = false;
-
-		if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy || 
-		   UIGlobalVariablesScript.Singleton.GunGameScene.activeInHierarchy)
-			isPlayingMinigame = true;
-
-*/
-		OnARChanged();
+		
+		UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(true);
+		UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(false);
 
 		CharacterProgressScript progress = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 /*
@@ -362,7 +253,10 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 	if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.Sleep ||
 		   UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.EnterSleep)
 		{
-			Debug.Log("OnTrackingFound: sleeping");
+			Debug.Log("OnTrackingFound: SLEEPING");
+
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().exitSleep();
+
 			UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (false);
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
 			OnCharacterEnterARScene();
@@ -410,7 +304,10 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 		   UIGlobalVariablesScript.Singleton.GunGameScene.activeInHierarchy)
 			isPlayingMinigame = true;
 */
-		OnARChanged();
+		
+		UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(false);
+		UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(true);
+
 		UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (true);
 		UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 
@@ -427,13 +324,13 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			   UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.EnterSleep)
 			{
 
-				Debug.Log("OnTrackingLost: sleeping");
+//				Debug.Log("OnTrackingLost: sleeping");
 			}
 			else
 			{
 				CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
-				Debug.Log("OnTrackingLost: caring screen");
+//				Debug.Log("OnTrackingLost: caring screen");
 				//UIGlobalVariablesScript.Singleton.MainUIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().PortalTimer = 0;
 				//Debug.Log("ENTERING NON AR STATE ");
 				//UIGlobalVariablesScript.Singleton.MainUIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Stop(true);

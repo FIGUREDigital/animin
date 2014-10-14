@@ -771,13 +771,7 @@ public class CharacterProgressScript : MonoBehaviour
 				{
 					if (!hadUItouch && hadRayCollision && hitInfo.collider.gameObject == SleepBoundingBox)
 					{
-						LastTimeToilet = DateTime.Now;
-						Debug.Log("exit sleep");
-						animationController.IsSleeping = false;
-						CurrentAction = ActionId.None;
-						SleepBoundingBox.SetActive(false);
-					UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.SleepToIdle);
-						UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
+					exitSleep();
 						
 					}
 				}
@@ -1470,7 +1464,15 @@ public class CharacterProgressScript : MonoBehaviour
 //	}
 
 
-
+	public void exitSleep(){
+		LastTimeToilet = DateTime.Now;
+		Debug.Log("exit sleep");
+		animationController.IsSleeping = false;
+		CurrentAction = ActionId.None;
+		SleepBoundingBox.SetActive(false);
+		UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.SleepToIdle);
+		UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
+	}
 
 
 
@@ -1616,7 +1618,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public void MoveTo(Vector3 location, bool run)
 	{
-		Debug.Log("Moving to point: " + location.ToString());
+//		Debug.Log("Moving to point: " + location.ToString());
 		IsMovingTowardsLocation = true;
 	
 		DestinationLocation = location;

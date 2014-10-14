@@ -91,7 +91,6 @@ public class JoystiqScript : MonoBehaviour {
 	
 	private void Update() 
 	{
-		Debug.Log ("Joystick Update");
 		/*if(Input.GetKey(KeyCode.A))
 		{
 			Debug.Log("DOING A: " + ThumbpadBack.leftAnchor.relative.ToString() + "_" + ThumbpadBack.leftAnchor.absolute.ToString() + "_" + ThumbpadFront.width.ToString());

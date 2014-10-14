@@ -100,7 +100,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject ItemsButton;
 
 
-	public enum ActiveState {Collecting,Gun, None};
+	public enum ActiveState {Caring, Collecting,Gun, None};
 	public ActiveState CurrentlyActive{
 		get
 		{
@@ -108,37 +108,62 @@ public class UIGlobalVariablesScript : MonoBehaviour
 				return ActiveState.Collecting;
 			else if (GunGameScene != null)
 				return ActiveState.Gun;
-			else{
-				Debug.Log("Harry's CurrentlyActive Method doesn't work");
-				return ActiveState.None;
+			else
+				return ActiveState.Caring;
+		}
+	}
+
+	public System.Type CurrentVFType{
+		get
+		{
+			switch(UIGlobalVariablesScript.Singleton.CurrentlyActive){
+			case UIGlobalVariablesScript.ActiveState.Caring:
+				return typeof(TrackVuforiaScript);
+				break;
+			case UIGlobalVariablesScript.ActiveState.Collecting:
+				return typeof(TrackVFMG1);
+				break;
+			case UIGlobalVariablesScript.ActiveState.Gun:
+				return typeof(TrackVFMG2);
+				break;
 			}
+			return null;
 		}
 	}
 
 	public GameObject CurrentMiniGameSceneRef{
 		get
 		{
-			if (CubeRunnerMinigameSceneRef != null)
+			switch(UIGlobalVariablesScript.Singleton.CurrentlyActive){
+			case UIGlobalVariablesScript.ActiveState.Caring:
+				return GardenSceneRef;
+				break;
+			case UIGlobalVariablesScript.ActiveState.Collecting:
 				return CubeRunnerMinigameSceneRef;
-			else if (GunGameScene != null)
+				break;
+			case UIGlobalVariablesScript.ActiveState.Gun:
 				return GunGameScene;
-			else{
-				Debug.Log("Harry's CurrentMiniGameSceneRef Method doesn't work");
-				return null;
+				break;
 			}
+			return null;
 		}
 	}
 	public GameObject CurrentUIScreenRef{
 		get
 		{
-			if (CuberunnerGamesScreenRef != null)
+			
+			switch(UIGlobalVariablesScript.Singleton.CurrentlyActive){
+			case UIGlobalVariablesScript.ActiveState.Caring:
+				return CaringScreenRef;
+				break;
+			case UIGlobalVariablesScript.ActiveState.Collecting:
 				return CuberunnerGamesScreenRef;
-			else if (GunGameInterface != null)
+				break;
+			case UIGlobalVariablesScript.ActiveState.Gun:
 				return GunGameInterface;
-			else{
-				Debug.Log("Harry's CurrentUIScreenRef Method doesn't work");
-				return null;
+				break;
 			}
+			return null;
 		}
 	}
 
@@ -156,6 +181,6 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	
+		Debug.Log ("According to the scientific method, wer are in the state: "+CurrentlyActive+";");
 	}
 }

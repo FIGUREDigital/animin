@@ -30,6 +30,8 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 		TrackableBehaviour.Status previousStatus,
 		TrackableBehaviour.Status newStatus)
 	{
+		Debug.Log("OnTrackableStateChanged!");
+
 		if (newStatus == TrackableBehaviour.Status.DETECTED ||
 		    newStatus == TrackableBehaviour.Status.TRACKED ||
 		    newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
@@ -103,18 +105,11 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 				Mathf.Cos(SmootherAxisY.ValueNow* Mathf.Deg2Rad ) * 90,
 				(Mathf.Sin(SmootherAxisY.ValueNow* Mathf.Deg2Rad ) * 90) * 0.2f);
 
-			Vector3 cameraPoint = new Vector3(0, 233.1f, -198.3f);
-			Transform target = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
+	//		Vector3 cameraPoint = new Vector3(0, 233.1f, -198.3f);
+	//		Transform target = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
 			
-			if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy)
-			{
-				cameraPoint = new Vector3(0, 500.6f, -250.63f);
-				target = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
-			}
-			else
-			{
-
-			}
+			Vector3 cameraPoint = new Vector3(0, 500.6f, -250.63f);
+			Transform target = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
 
 			Camera.main.transform.localPosition = cameraPoint + newPosition2 + newPosition;
 			Camera.main.transform.LookAt(target);
@@ -125,31 +120,6 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 		SmootherAxisY.Update();
 
 	}
-
-
-	// CHANGES THAT HAVE TO HAPPEN WHEN AR CHANGES
-	public void OnARChanged()
-	{
-		if(IsTracking)
-		{
-//			UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(true);
-//			UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(false);
-
-			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
-//			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
-//			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(false);
-		}
-		else
-		{
-//			UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(false);
-//			UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(true);
-
-			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
-//			UIGlobalVariablesScript.Singleton.GunGameScene.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
-//			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().ArenaStage.SetActive(true);
-		}
-	}
-
 	public static void EnableDisableMinigamesBasedOnARStatus()
 	{
 		GameObject sprite = GameObject.Find("SpriteCubeWorld");
@@ -216,7 +186,7 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 	{
 		if(IsTracking)
 			SavedARPosition = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition;
-		
+
 		Camera.main.transform.position = new Vector3(0, 123.1f, -198.3f);
 		Camera.main.transform.rotation = Quaternion.Euler(14.73474f, 0.0f, 0.0f);
 
@@ -239,16 +209,12 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 
 	public void OnTrackingFound()
 	{
+		Debug.Log ("Minigame OnTrackingFound");
+
 		IsTracking = true;
 		bool isPlayingMinigame = false;
 
-//		if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy || 
-//		   UIGlobalVariablesScript.Singleton.GunGameScene.activeInHierarchy)
-//		if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy)
-//			isPlayingMinigame = true;
-
-
-		OnARChanged();
+		UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
 
 //		CharacterProgressScript progress = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
@@ -292,13 +258,15 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 	
 	public void OnTrackingLost()
 	{
+		Debug.Log ("Minigame OnTrackingLost");
 		IsTracking = false;
 
 		bool isPlayingMinigame = false;
 		if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.activeInHierarchy)
 			isPlayingMinigame = true;
+		
+		UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
 
-		OnARChanged();
 		UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (true);
 		UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 

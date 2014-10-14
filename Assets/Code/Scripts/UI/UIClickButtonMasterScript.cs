@@ -316,63 +316,6 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			Application.LoadLevel("VuforiaTest");
 			return;
-
-
-			// Disable UI
-			UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.SpaceshipGameScreenRef.SetActive(false);         //HOME BUTTON ERROR
-			UIGlobalVariablesScript.Singleton.CuberunnerGamesScreenRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.GunGameInterface.SetActive(false);
-			
-			// Disable Scenes
-			UIGlobalVariablesScript.Singleton.SpaceshipMinigameSceneRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.SetActive(false);
-
-			if(UIGlobalVariablesScript.SelectedMinigameToPlay == UIFunctionalityId.PlayMinigameGunFighters)
-				UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().CloseGame();
-
-			//Debug.Log("SavedScale: " + SavedScale.ToString());
-//			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.035f, 0.035f, 0.035f);
-//			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.position = Vector3.zero;
-//			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition = new Vector3(0, 0.01f, 0);
-//			UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
-
-
-			UIGlobalVariablesScript.Singleton.NonARWorldRef.SetActive(true);
-			UIGlobalVariablesScript.Singleton.ARWorldRef.SetActive(true);
-
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().enabled = true;
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<ObjectLookAtDeviceScript>().enabled = true;
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(true);
-
-			//UIGlobalVariablesScript.Singleton.Joystick.ResetJoystick();
-			UIGlobalVariablesScript.Singleton.Joystick.gameObject.SetActive(false);	
-			UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(false);	
-
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterController>().radius = UIClickButtonMasterScript.SavedRadius;
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = false;
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().Forces.Clear();			
-
-			Debug.Log ("CloseCurrentMinigame");
-			GameController.instance.StopGame();
-
-			HandleClick(UIFunctionalityId.BackFromMinigames, sender);
-			Camera.main.GetComponent<MusicScript>().Stop();
-
-			if(TrackVuforiaScript.IsTracking)
-			{
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
-				UIGlobalVariablesScript.Singleton.Vuforia.OnCharacterEnterARScene();
-			}
-			else
-			{
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
-				UIGlobalVariablesScript.Singleton.Vuforia.OnCharacterEnterNonARScene();
-			}
-
-
-	
-			break;
 		}
 			
 		case UIFunctionalityId.PlayMinigameSpaceship:

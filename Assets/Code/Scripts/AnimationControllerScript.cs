@@ -712,7 +712,7 @@ public class AnimationControllerScript : MonoBehaviour
 					else
 					{
 
-						Debug.Log("HAPPY: " + PersistentData.Singleton.Happy.ToString());
+//						Debug.Log("HAPPY: " + PersistentData.Singleton.Happy.ToString());
 						List<AnimationHappyId> animationList = new List<AnimationHappyId>();
 						for(int a=0;a<HappyStateRange.HappyStates.Length;++a)
 						{
@@ -723,7 +723,7 @@ public class AnimationControllerScript : MonoBehaviour
 						}
 						
 						AnimationHappyId finalAnimationId = animationList[Random.Range(0, animationList.Count)];
-						Debug.Log("finalAnimationId: " + finalAnimationId.ToString());
+//						Debug.Log("finalAnimationId: " + finalAnimationId.ToString());
 
 						if(finalAnimationId == AnimationHappyId.Happy5) 
 						{

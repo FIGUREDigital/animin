@@ -441,11 +441,8 @@ public class CharacterControllerScript : Photon.MonoBehaviour
 	
 	void  Update ()
 	{
-		Debug.Log("aaaa");
 		if(!__local) return;
-		Debug.Log("bbbb");
 		if(FreezeCollisionDetection) return;
-		Debug.Log("ccccc");
 		if (!isControllable)
 			
 		{
@@ -523,8 +520,6 @@ public class CharacterControllerScript : Photon.MonoBehaviour
 			// Move the controller
 			CharacterController controller = GetComponent<CharacterController>();
 			collisionFlags = controller.Move(movement);
-
-		Debug.Log("MOVEMENT : "+movement);
 				
 		
 		// We are in jump mode but just became grounded

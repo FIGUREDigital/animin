@@ -83,7 +83,5 @@ public class LoadProfileMG1 : MonoBehaviour {
 
 		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
 		this.GetComponent<MinigameAnimationControllerScript>().LoadAnimator(this.GetComponent<CharacterSwapManagementScript>().CurrentModel);
-
-		Debug.Log("Awake");
 	}
 }
