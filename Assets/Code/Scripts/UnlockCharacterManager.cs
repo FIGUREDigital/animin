@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnlockCharacterManager : MonoBehaviour 
+public class UnlockCharacterManager
 {
 	public const string PI_UNLOCK = "com.apples.animin.characterunlock1";
 	public const string KELSEY_UNLOCK = "com.apples.animin.characterunlock2";
@@ -11,6 +11,7 @@ public class UnlockCharacterManager : MonoBehaviour
 	public const string MANDI_PURCHASE = "com.apples.animin.characterpurchase3";
 	private static string mBuyItem;
 	private static AniminId mId;
+
 
 	#region Singleton
 	
@@ -30,8 +31,7 @@ public class UnlockCharacterManager : MonoBehaviour
 	
 	#endregion
 
-
-	static void BuyCharacter(AniminId Id, bool free)
+	public void BuyCharacter(AniminId Id, bool free)
 	{
 		mId = Id;
 		switch(Id)
@@ -55,9 +55,11 @@ public class UnlockCharacterManager : MonoBehaviour
 		}
 		ShopManager.Instance.BuyItem (mBuyItem);
 	}
-	static void OpenShop()
+
+	public void OpenShop()
 	{
-		string[] shopItems = new string[1];
+		Debug.Log("Opening Shop");
+		string[] shopItems = new string[6];
 		shopItems [0] = PI_UNLOCK;
 		shopItems [1] = KELSEY_UNLOCK;
 		shopItems [2] = MANDI_UNLOCK;
@@ -67,8 +69,8 @@ public class UnlockCharacterManager : MonoBehaviour
 		ShopManager.Instance.StartStore (shopItems);
 		
 	}
-	
-	IEnumerator ClosePopup()
+
+	private IEnumerator WaitForResponse()
 	{
 		bool complete = false;
 		while(!complete)
@@ -77,7 +79,7 @@ public class UnlockCharacterManager : MonoBehaviour
 			switch(ShopManager.CurrentPurchaseStatus)
 			{
 			case ShopManager.PurchaseStatus.Success:
-				UnlockCharacter();
+				UnlockCharacter ();
 				complete = true;
 				break;
 			case ShopManager.PurchaseStatus.Fail:
@@ -90,6 +92,7 @@ public class UnlockCharacterManager : MonoBehaviour
 			}
 		}
 		Debug.Log ("Finish Coroutine!");
+		
 		yield return true;
 	}
 
@@ -119,7 +122,7 @@ public class UnlockCharacterManager : MonoBehaviour
 		return ShopManager.Instance.HasBought(s1) || ShopManager.Instance.HasBought(s2);
 	}
 
-	private static void UnlockCharacter()
+	private void UnlockCharacter()
 	{
 		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
 		character.ChangeLockedState(true);

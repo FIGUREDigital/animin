@@ -27,7 +27,7 @@ public class SendAccesCodeFromChatboxClickScript : MonoBehaviour {
 		
 		if (!string.IsNullOrEmpty(text))
 		{
-			ServerManager.Access("BB3449XV");
+			ServerManager.Access(text);
 
 			//ServerManager.Register(text);
 			mInput.enabled = false;
