@@ -5,6 +5,6 @@ public class TwitterClickScript : MonoBehaviour {
 
 	void OnClick()
 	{
-		Application.OpenURL("http://www.google.com");
+		Application.OpenURL("https://twitter.com/animinofficial");
 	}
 }
