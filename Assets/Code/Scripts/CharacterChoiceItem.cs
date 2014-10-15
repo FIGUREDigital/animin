@@ -58,10 +58,11 @@ public class CharacterChoiceItem : MonoBehaviour
 				Debug.Log("Lock button found!");
 			}
 		}
+	}
 
+	void OnEnable()
+	{
 		ChangeLockedState(mUnlocked || UnlockCharacterManager.Instance.CheckCharacterPurchased(mId));
-
-
 	}
 
 	public void ChangeLockedState(bool unlocked)

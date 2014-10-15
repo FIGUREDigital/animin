@@ -7,17 +7,45 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		RegisterListeners();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnClick()
 	{
 		SubmitFunction.OnSubmit();
+		if(Application.isEditor)
+		{ 
+			ProfilesManagementScript.Singleton.CreateAccessCodeScreen.SetActive(false);
+			ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+			return; 
+		}
+		ProfilesManagementScript.Singleton.CreateAccessCodeScreen.SetActive(false);
+		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
+	}
+
+	void purchaseSuccessful( StoreKitTransaction transaction )
+	{
+		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+		UnregisterListeners();
+	}
+	void purchaseUnsuccessful( string transaction )
+	{
+		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+		UnregisterListeners();
+	}
+	void RegisterListeners()
+	{
+		if(Application.isEditor){ return; }
+		StoreKitManager.purchaseSuccessfulEvent += purchaseSuccessful;
+		StoreKitManager.purchaseFailedEvent += purchaseUnsuccessful;
+	}
+	void UnregisterListeners()
+	{
+		if(Application.isEditor){ return; }
+		StoreKitManager.purchaseSuccessfulEvent -= purchaseSuccessful;
+		StoreKitManager.purchaseFailedEvent -= purchaseUnsuccessful;
 	}
 }
