@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/UI/UnlockCharacterButtonClickScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/UI/BuyWithAnimin.cs">
     <Files>
-      <File FileName="Assets/Code/UI/UnlockCharacterButtonClickScript.cs" Line="99" Column="1" />
+      <File FileName="Assets/Code/UI/UnlockCharacterButtonClickScript.cs" Line="20" Column="46" />
       <File FileName="Assets/Code/Scripts/AnimateCharacterOutPortalScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/AnimateChestObjectOutScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/AchievementsScript.cs" Line="1" Column="1" />
@@ -10,11 +10,35 @@
       <File FileName="Assets/Code/Enumerations/UIFunctionalityId.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/GunsMinigameScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/MinigameCollectorScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Terrahard/ShopManager.cs" Line="306" Column="41" />
-      <File FileName="Assets/Code/Scripts/CharacterSwapManagementScript.cs" Line="165" Column="9" />
-      <File FileName="Assets/Code/Scripts/CharacterChoiceItem.cs" Line="63" Column="3" />
-      <File FileName="Assets/Code/UI/UnlockCharacterButtonClickScript.cs" Line="58" Column="33" />
+      <File FileName="Assets/Code/Terrahard/ShopManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CharacterSwapManagementScript.cs" Line="168" Column="7" />
+      <File FileName="Assets/Code/Scripts/CharacterChoiceItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UnlockCharacterManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/ProfilesManagementScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/CancelCreateAccessCodeScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/SendAccessCodeToServerButtonClickScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/SendAccesCodeFromChatboxClickScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Shaun/Scripts/ServerManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/SelectCharacterClickScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/BuyWithAnimin.cs" Line="12" Column="1" />
+      <File FileName="Assets/Code/UI/BuyWithCode.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/CancelPurchaseScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/ItunesButtonUpdate.cs" Line="78" Column="3" />
+      <File FileName="Assets/Code/PlayerProfileData.cs" Line="147" Column="73" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Code" expanded="True">
+              <Node name="UI" expanded="True">
+                <Node name="BuyWithAnimin.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
