@@ -191,12 +191,12 @@ public class ShopManager
 
         for( int i = 0; i < purchases.Count; i++ )
         {
-            GUIDebug.Log( "purchases " + purchases[ i ] );
+            //GUIDebug.Log( "purchases " + purchases[ i ] );
         }
         
         for( int i = 0; i < skus.Count; i++ )
         {
-            GUIDebug.Log( "skus " + skus[ i ].productId );
+            //GUIDebug.Log( "skus " + skus[ i ].productId );
         }
     }
 

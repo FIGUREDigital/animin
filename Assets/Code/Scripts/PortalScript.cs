@@ -34,20 +34,13 @@ public class PortalScript : MonoBehaviour {
 		{
 			this.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
 		}
-		else if(stageId == PortalStageId.MinigameCuberRunners)
-		{
-			this.transform.parent = UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform;
-		}
-		else if(stageId == PortalStageId.GunGame)
-		{
-			this.transform.parent = UIGlobalVariablesScript.Singleton.GunGameScene.transform;
-		}
-
 		this.transform.rotation = Quaternion.identity;
 		this.transform.localPosition = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition;
 		if(isJumbingIn)
 		{
-			this.transform.localPosition += new Vector3(0, 0, 0.1f);
+
+            //[PTLP] HARRY'S MINE : PORTALPOSITION
+			this.transform.localPosition += new Vector3(0, 0, 0.5f);
 		}
 		//this.transform.position = Vector3.zero;
 

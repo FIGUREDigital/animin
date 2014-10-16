@@ -33,7 +33,6 @@ ModelImporter:
     100054: ma_kid:skin_wrist_l_joint
     100056: ma_kid:skin_wrist_r_joint
     100058: //RootNode
-    100060: ma_kid:skin_object_joint
     400000: ma_kid:skin_ankle_l_joint
     400002: ma_kid:skin_ankle_r_joint
     400004: ma_kid:skin_chest_joint
@@ -64,7 +63,6 @@ ModelImporter:
     400054: ma_kid:skin_wrist_l_joint
     400056: ma_kid:skin_wrist_r_joint
     400058: //RootNode
-    400060: ma_kid:skin_object_joint
     7400000: Take 001
     9500000: //RootNode
   materials:
@@ -105,7 +103,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 1
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
@@ -117,8 +115,7 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: a191cd792d68b16468c54de2c94672ce,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   additionalBone: 0
   userData: 

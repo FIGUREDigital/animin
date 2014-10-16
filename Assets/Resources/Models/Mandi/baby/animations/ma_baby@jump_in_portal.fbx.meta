@@ -21,21 +21,20 @@ ModelImporter:
     100030: ma_baby:skin_bn_r_arm_02
     100032: ma_baby:skin_bn_r_arm_03
     100034: ma_baby:skin_bn_r_arm_04
-    100036: ma_baby:skin_bn_r_reg_01
-    100038: ma_baby:skin_bn_r_reg_02
-    100040: ma_baby:skin_bn_r_shourder_01
-    100042: ma_baby:skin_bn_spine_01
-    100044: ma_baby:skin_bn_spine_02
-    100046: ma_baby:skin_bn_spine_03
-    100048: ma_baby:skin_bn_spine_04
-    100050: ma_baby:skin_bn_spine_05
-    100052: ma_baby:skin_bn_spine_06
-    100054: ma_baby:skin_bn_spine_07
-    100056: ma_baby:skin_bn_spine_08
-    100058: ma_baby:skin_bn_spine_09
-    100060: //RootNode
-    100062: ma_baby:skin_object_joint
-    100064: ma_baby:skin_r_reg_01
+    100036: ma_baby:skin_bn_r_reg_02
+    100038: ma_baby:skin_bn_r_shourder_01
+    100040: ma_baby:skin_bn_spine_01
+    100042: ma_baby:skin_bn_spine_02
+    100044: ma_baby:skin_bn_spine_03
+    100046: ma_baby:skin_bn_spine_04
+    100048: ma_baby:skin_bn_spine_05
+    100050: ma_baby:skin_bn_spine_06
+    100052: ma_baby:skin_bn_spine_07
+    100054: ma_baby:skin_bn_spine_08
+    100056: ma_baby:skin_bn_spine_09
+    100058: ma_baby:skin_object_joint
+    100060: ma_baby:skin_r_reg_01
+    100062: //RootNode
     400000: ma_baby:skin_bn_hair_01
     400002: ma_baby:skin_bn_hair_02
     400004: ma_baby:skin_bn_hair_03
@@ -54,21 +53,20 @@ ModelImporter:
     400030: ma_baby:skin_bn_r_arm_02
     400032: ma_baby:skin_bn_r_arm_03
     400034: ma_baby:skin_bn_r_arm_04
-    400036: ma_baby:skin_bn_r_reg_01
-    400038: ma_baby:skin_bn_r_reg_02
-    400040: ma_baby:skin_bn_r_shourder_01
-    400042: ma_baby:skin_bn_spine_01
-    400044: ma_baby:skin_bn_spine_02
-    400046: ma_baby:skin_bn_spine_03
-    400048: ma_baby:skin_bn_spine_04
-    400050: ma_baby:skin_bn_spine_05
-    400052: ma_baby:skin_bn_spine_06
-    400054: ma_baby:skin_bn_spine_07
-    400056: ma_baby:skin_bn_spine_08
-    400058: ma_baby:skin_bn_spine_09
-    400060: //RootNode
-    400062: ma_baby:skin_object_joint
-    400064: ma_baby:skin_r_reg_01
+    400036: ma_baby:skin_bn_r_reg_02
+    400038: ma_baby:skin_bn_r_shourder_01
+    400040: ma_baby:skin_bn_spine_01
+    400042: ma_baby:skin_bn_spine_02
+    400044: ma_baby:skin_bn_spine_03
+    400046: ma_baby:skin_bn_spine_04
+    400048: ma_baby:skin_bn_spine_05
+    400050: ma_baby:skin_bn_spine_06
+    400052: ma_baby:skin_bn_spine_07
+    400054: ma_baby:skin_bn_spine_08
+    400056: ma_baby:skin_bn_spine_09
+    400058: ma_baby:skin_object_joint
+    400060: ma_baby:skin_r_reg_01
+    400062: //RootNode
     7400000: Take 001
     9500000: //RootNode
   materials:
@@ -109,7 +107,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 1
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
@@ -121,8 +119,7 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b42cc2e770a70b04c82312413533a4b2,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   additionalBone: 0
   userData: 

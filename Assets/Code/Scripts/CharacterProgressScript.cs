@@ -285,8 +285,16 @@ public class CharacterProgressScript : MonoBehaviour
 		GetComponent<CharacterControllerScript>().SetLocal(true);
 		UIClickButtonMasterScript.SetSoundSprite();
 
+
+        //HARRY: REMEMEBR TO REMOVE THESE COMMENTS, FOR CHRIST'S SAKE.
+        /*
 		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(
 			PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
+
+         */
+
+        this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(
+            AniminId.Tbo, AniminEvolutionStageId.Baby);
 
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.AlmondMilk, 3);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Avocado, 1);
@@ -475,12 +483,52 @@ public class CharacterProgressScript : MonoBehaviour
 		instance.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 	}
 
+    public void AnimateJumpOutOfPortal()
+    {
+        //Harry copied this from OnTrackingLost
+        CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
+
+        UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsExitPortal = true;
+        UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.rotation = Quaternion.Euler(0, 180, 0);
+        UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
+
+        UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
+        UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
+        UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
+        //UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
+        progressScript.CurrentAction = ActionId.SmallCooldownPeriod;
+        progressScript.SmallCooldownTimer = 0.5f;
+
+        //End Guesswork
+    }
+
 	private float EatAlphaTimer;
 	private bool PlayedEatingSound;
+
+    public Color ShaderColor
+    {
+        get
+        {
+            //For simplicity's sake this just returns the first colour it can find. However, because the set method changes all materials, it should all be the same. Regardless, let that be known.
+            return this.GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color;
+        }
+        set
+        {
+            SkinnedMeshRenderer[] Meshes = this.GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponentsInChildren<SkinnedMeshRenderer>();
+            for (int i = 0; i < Meshes.Length; i++)
+            {
+                Meshes[i].material.color = value;
+            }
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () 
 	{
+
+
+
+
 		PersistentData.Singleton.Hungry -= Time.deltaTime * 0.2f;
 		PersistentData.Singleton.Fitness -= Time.deltaTime * 0.2f;
 		PersistentData.Singleton.Health -= Time.deltaTime * 0.2f;
@@ -711,29 +759,53 @@ public class CharacterProgressScript : MonoBehaviour
 			break;
 		}
 
+
+
 		case ActionId.EnterPortalToAR:
-			{
+        {
+            const float StopAt = 0.5f;
+            const float StartFade = 0.2f;
 				//OnEnterARScene();
 				PortalTimer += Time.deltaTime;
 
-				if(PortalTimer >= 1.10f)
-			   	{
-					Debug.Log("EnterPortalToAR finished");
-					CurrentAction = ActionId.None;
+                Debug.Log("Portal Timer : [" + PortalTimer + "];");
 
-					UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (false);
-					UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
-					UIGlobalVariablesScript.Singleton.Vuforia.OnCharacterEnterARScene();
-					
+                if (PortalTimer >= StopAt)
+                {
+                    //[PTM1] Harry's Mine: Timer to transition to AR Scene
+                    Debug.Log("EnterPortalToAR finished");
+                    CurrentAction = ActionId.None;
 
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
-					UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
+                    UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive(false);
+                    UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
+                    UIGlobalVariablesScript.Singleton.Vuforia.OnCharacterEnterARScene();
 
-					UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.ARscene, false);
 
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
-			}
+                    //UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
+                    //UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
 
+                    UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.ARscene, false);
+
+                    UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
+
+                    ShaderColor = Color.white;
+                }
+                else if (PortalTimer >= StartFade)
+                {
+                    /*
+                    Color c = ShaderColor;
+
+                    float diff = PortalTimer * (1 / (StopAt - StartFade));
+                    float alpha = 1 - diff;
+                    c.a = alpha;
+
+
+                    Debug.Log("Diff : [" + diff + "]; Alpha : [" + alpha + "];");
+
+                    ShaderColor = c;
+                     */
+                    ShaderColor = Color.Lerp(ShaderColor, Color.clear, 0.5f);
+                }
 
 				break;
 			}

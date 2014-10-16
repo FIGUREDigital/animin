@@ -142,15 +142,15 @@ public class PersistentData
 				UIGlobalVariablesScript.Singleton.ItemsButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = id;
 				
 			}
-		}
-		else if(InventoryItemData.Items[(int)id].ItemType == PopupItemType.Medicine)
-		{
-			if(UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<UIButton>().normalSprite == "empty_icon")
-			{
-				UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<UISprite>().spriteName = InventoryItemData.Items[(int)id].SpriteName;
-				UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = id;
-			}
-		}
+        }
+        else if (InventoryItemData.Items[(int)id].ItemType == PopupItemType.Medicine)
+        {
+            if (UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<UIButton>().normalSprite == "empty_icon")
+            {
+                UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)id].SpriteName;
+                UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = id;
+            }
+        }
 	}
 
 	public bool HasItem(InventoryItemId id)
