@@ -80,8 +80,8 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiAdultAnimations");
 
 	}
-    #region OnGUI nonsense
-    void OnGUI()
+
+	void OnGUI()
 	{
 //		if(GUI.Button(new Rect(0, 0, 200, 100), "TBOBaby"))
 //		{
@@ -98,9 +98,8 @@ public class CharacterSwapManagementScript : MonoBehaviour
 //			LoadCharacter(CreatureTypeId.TBOAdult);
 //		}
 	}
-    #endregion
 
-    public string GetModelPath(AniminId animinId, AniminEvolutionStageId id)
+	public string GetModelPath(AniminId animinId, AniminEvolutionStageId id)
 	{
 		return Models[(int)animinId, (int)id];
 	}
@@ -120,6 +119,9 @@ public class CharacterSwapManagementScript : MonoBehaviour
 
 		Debug.Log("instance.transform = " + instance.transform);
 		Debug.Log("instance.transform.parent = " + instance.transform.parent);
+
+		if (UIGlobalVariablesScript.Singleton == null)
+			Debug.Log("PANIC");
 
 		instance.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform;
 
