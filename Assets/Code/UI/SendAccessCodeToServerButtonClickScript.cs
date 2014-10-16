@@ -24,12 +24,14 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
 	}
 
+#if UNITY_IOS
 	void purchaseSuccessful( StoreKitTransaction transaction )
 	{
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		UnregisterListeners();
 	}
+#endif
 	void purchaseUnsuccessful( string transaction )
 	{
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);

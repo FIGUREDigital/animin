@@ -99,12 +99,15 @@ public class ItunesButtonUpdate : MonoBehaviour
 		mCharacterTitle.text = mName;
 	}
 
+#if UNITY_IOS
 	void purchaseSuccessful( StoreKitTransaction transaction )
 	{
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		UnregisterListeners();
 	}
+#endif
+
 	void purchaseUnsuccessful( string response )
 	{
 		Debug.Log("Purchase Unsuccessful, response: " + response);
