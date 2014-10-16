@@ -159,10 +159,10 @@ public class CharacterSwapManagementScript : MonoBehaviour
 
 public enum AniminId
 {
-	Tbo = 0,
-	Kelsey,
-	Mandi,
-	Pi,
+	Pi = 0,
+	Tbo = 1,
+	Kelsey = 2,
+	Mandi = 3,
 	Count,
 }
 
