@@ -10,7 +10,9 @@ public class ProfilesManagementScript : MonoBehaviour
 	public GameObject AniminsScreen;
 	public GameObject LoadingScreen;
 	public GameObject CreateUsernameScreen;
+	public GameObject PurchaseChoiceScreen;
 	public GameObject CreateAccessCodeScreen;
+	public GameObject LoadingSpinner;
 	public bool BeginLoadLevel;
 	public GameObject[] AniminSprites;
 
@@ -73,6 +75,7 @@ public class ProfilesManagementScript : MonoBehaviour
 	{
 		if(resultId == "1")
 		{
+			UnlockCharacterManager.Instance.BuyCharacter(AniminToUnlockId, true);
 		}
 		else if(resultId == "2")
 		{

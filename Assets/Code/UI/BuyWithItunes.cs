@@ -1,27 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
-
-	public SendAccesCodeFromChatboxClickScript SubmitFunction;
-
-
-	// Use this for initialization
-	void Start () 
+public class BuyWithItunes : MonoBehaviour 
+{
+	void Start()
 	{
 		RegisterListeners();
 	}
 	void OnClick()
 	{
-		SubmitFunction.OnSubmit();
+		Debug.Log("Buying with itunes \n Opening IAP");
+		UnlockCharacterManager.Instance.BuyCharacter(ProfilesManagementScript.Singleton.AniminToUnlockId, false);
 		if(Application.isEditor)
-		{ 
-			ProfilesManagementScript.Singleton.CreateAccessCodeScreen.SetActive(false);
+		{
+			ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
 			ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-			return; 
+			return;
 		}
-		ProfilesManagementScript.Singleton.CreateAccessCodeScreen.SetActive(false);
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
+		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
 	}
 
 	void purchaseSuccessful( StoreKitTransaction transaction )
@@ -30,8 +27,9 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		UnregisterListeners();
 	}
-	void purchaseUnsuccessful( string transaction )
+	void purchaseUnsuccessful( string response )
 	{
+		Debug.Log("Purchase Unsuccessful, response: " + response);
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		UnregisterListeners();

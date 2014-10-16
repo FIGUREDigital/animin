@@ -5,6 +5,6 @@ public class GoogleClickScript : MonoBehaviour {
 
 	void OnClick()
 	{
-		Application.OpenURL("http://www.google.com");
+		Application.OpenURL("https://plus.google.com/110305942429033404905/posts");
 	}
 }

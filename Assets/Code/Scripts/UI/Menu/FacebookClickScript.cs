@@ -5,6 +5,6 @@ public class FacebookClickScript : MonoBehaviour {
 
 	void OnClick()
 	{
-		Application.OpenURL("http://www.google.com");
+		Application.OpenURL("https://www.facebook.com/pages/Animin/163619440515018");
 	}
 }
