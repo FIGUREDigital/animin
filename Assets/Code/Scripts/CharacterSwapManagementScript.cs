@@ -120,9 +120,6 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		Debug.Log("instance.transform = " + instance.transform);
 		Debug.Log("instance.transform.parent = " + instance.transform.parent);
 
-		if (UIGlobalVariablesScript.Singleton == null)
-			Debug.Log("PANIC");
-
 		instance.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform;
 
 		if(CurrentModel != null)

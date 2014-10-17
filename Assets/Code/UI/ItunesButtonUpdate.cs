@@ -106,9 +106,16 @@ public class ItunesButtonUpdate : MonoBehaviour
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		UnregisterListeners();
 	}
+#elif UNITY_ANDROID
+    void purchaseSuccessful( GooglePurchase transaction)
+	{
+		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+		UnregisterListeners();
+	}
 #endif
 
-	void purchaseUnsuccessful( string response )
+    void purchaseUnsuccessful( string response )
 	{
 		Debug.Log("Purchase Unsuccessful, response: " + response);
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
@@ -118,13 +125,25 @@ public class ItunesButtonUpdate : MonoBehaviour
 	void RegisterListeners()
 	{
 		if(Application.isEditor){ return; }
+        
+#if UNITY_IOS
 		StoreKitManager.purchaseSuccessfulEvent += purchaseSuccessful;
 		StoreKitManager.purchaseFailedEvent += purchaseUnsuccessful;
-	}
+#elif UNITY_ANDROID
+        GoogleIABManager.purchaseSucceededEvent += purchaseSuccessful;
+		GoogleIABManager.purchaseFailedEvent += purchaseUnsuccessful;
+#endif
+    }
 	void UnregisterListeners()
 	{
+#if UNITY_IOS
 		if(Application.isEditor){ return; }
 		StoreKitManager.purchaseSuccessfulEvent -= purchaseSuccessful;
 		StoreKitManager.purchaseFailedEvent -= purchaseUnsuccessful;
-	}
+#elif UNITY_ANDROID
+		if(Application.isEditor){ return; }
+        GoogleIABManager.purchaseSucceededEvent -= purchaseSuccessful;
+		GoogleIABManager.purchaseFailedEvent -= purchaseUnsuccessful;
+#endif
+    }
 }

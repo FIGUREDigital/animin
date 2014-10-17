@@ -215,7 +215,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
         if (IsTracking)
             SavedARPosition = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition;
 
-        Camera.main.transform.position = new Vector3(0, 123.1f, -198.3f);
+        //Camera.main.transform.position = new Vector3(0, 123.1f, -198.3f);
         Camera.main.transform.rotation = Quaternion.Euler(14.73474f, 0.0f, 0.0f);
 
         UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;

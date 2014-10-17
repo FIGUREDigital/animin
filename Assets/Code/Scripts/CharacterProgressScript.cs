@@ -768,12 +768,12 @@ public class CharacterProgressScript : MonoBehaviour
 				//OnEnterARScene();
 				PortalTimer += Time.deltaTime;
 
-                Debug.Log("Portal Timer : [" + PortalTimer + "];");
+                //Debug.Log("Portal Timer : [" + PortalTimer + "];");
 
                 if (PortalTimer >= StopAt)
                 {
                     //[PTM1] Harry's Mine: Timer to transition to AR Scene
-                    Debug.Log("EnterPortalToAR finished");
+                    //Debug.Log("EnterPortalToAR finished");
                     CurrentAction = ActionId.None;
 
                     UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive(false);
