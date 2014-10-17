@@ -217,7 +217,7 @@ public class UIDragDropItem : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("No valid container under the mou");
+				Debug.Log("No valid container under the mouse");
 				// No valid container under the mouse -- revert the item's parent
 				mTrans.parent = mParent;
 			}
