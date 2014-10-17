@@ -59,7 +59,11 @@ public class SoundEngineScript : MonoBehaviour
 
 		GenericSounds[(int)GenericSoundId.GunLoop] = Resources.Load("Sounds/Minigame02_Gun_Game/gun_firing_loop") as AudioClip;
 
-		CreatureSounds = new AudioClip[(int)AniminId.Count, (int)AniminEvolutionStageId.Count, (int)CreatureSoundId.Count];
+        if (CreatureSounds == null)
+        {
+            CreatureSounds = new AudioClip[(int)AniminId.Count, (int)AniminEvolutionStageId.Count, (int)CreatureSoundId.Count];
+        }
+
 	}
 
 	void Update()
@@ -93,7 +97,80 @@ public class SoundEngineScript : MonoBehaviour
 		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "ke_kid");
 		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "ke_kelsi");
 
-		/*if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Baby)
+        string sname =
+        id == AniminId.Tbo ? "Tbo" :
+        id == AniminId.Pi ? "Pi" :
+        id == AniminId.Mandi ? "Ma" :
+        id == AniminId.Kelsey ? "Ke" :
+        "";
+        string sevo =
+            evolution == AniminEvolutionStageId.Baby ? "baby" :
+            evolution == AniminEvolutionStageId.Kid ? "kid" :
+            evolution == AniminEvolutionStageId.Adult ? "Adult" :
+            "";
+
+        string pathname = "Sounds/" + sname + "_" + sevo + "_sfx/" + (sname.ToLower()) + "_" + sevo + "_";
+
+
+        if (CreatureSounds == null)
+        {
+            CreatureSounds = new AudioClip[(int)AniminId.Count, (int)AniminEvolutionStageId.Count, (int)CreatureSoundId.Count];
+        }
+
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Celebrate] =   Resources.Load(pathname + "celebrate") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.EatPill] =     Resources.Load(pathname + "eat_pill") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.FeedFood] =    Resources.Load(pathname + "feed_food") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.FeedDrink] =   Resources.Load(pathname + "feed_drink") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Happy1] =      Resources.Load(pathname + "happy_01") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Happy2] =      Resources.Load(pathname + "happy_02") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Happy3] =      Resources.Load(pathname + "happy_03") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Happy4] =      Resources.Load(pathname + "happy_04") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Happy5] =      Resources.Load(pathname + "happy_05") as AudioClip;
+
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Hungry] =      Resources.Load(pathname + "Hungry") as AudioClip;
+
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.JumbInPortal] =Resources.Load(pathname + "jump_in_portal") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.JumbOutPortal]=Resources.Load(pathname + "jump_out_portal") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.No] =          Resources.Load(pathname + "No") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Sad1] =        Resources.Load(pathname + "sad01") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Sad2] =        Resources.Load(pathname + "sad02") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Sad3] =        Resources.Load(pathname + "sad03") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Sad4] =        Resources.Load(pathname + "sad04") as AudioClip;
+
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.SleepToIdle] = Resources.Load(pathname + "sleep_to_idle_stand") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Throw] =       Resources.Load(pathname + "Throw") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Tickle] =      Resources.Load(pathname + "Tickle") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Tickle2] =      Resources.Load(pathname + "tickle_02") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Tickle3] =      Resources.Load(pathname + "tickle_03") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.SnoringSleeping] =      Resources.Load(pathname + "sleep_snoring_loop") as AudioClip;
+
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Unwell] =      Resources.Load(pathname + "Unwell") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.InjectionReact] = Resources.Load(pathname + "injection_react") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.PatReact] = Resources.Load(pathname + "pat_react") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.IdleWave] = Resources.Load(pathname + "idle_wave") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk1] = Resources.Load(pathname + "talk_01") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk2] = Resources.Load(pathname + "talk_02") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk3] = Resources.Load(pathname + "talk_03") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk4] = Resources.Load(pathname + "talk_04") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk5] = Resources.Load(pathname + "talk_05") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk6] = Resources.Load(pathname + "talk_06") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk7] = Resources.Load(pathname + "talk_07") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk8] = Resources.Load(pathname + "talk_08") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk9] = Resources.Load(pathname + "talk_09") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk10] = Resources.Load(pathname + "talk_10") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk11] = Resources.Load(pathname + "talk_11") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk12] = Resources.Load(pathname + "talk_12") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk13] = Resources.Load(pathname + "talk_13") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk14] = Resources.Load(pathname + "talk_14") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk15] = Resources.Load(pathname + "talk_15") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk16] = Resources.Load(pathname + "talk_16") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk17] = Resources.Load(pathname + "talk_17") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk18] = Resources.Load(pathname + "talk_18") as AudioClip;
+        CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.RandomTalk19] = Resources.Load(pathname + "talk_19") as AudioClip;
+
+        #region Old Code specifically for loading Tbo Sounds
+        /*
+		if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Baby)
 		{
 			CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Celebrate] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@celebrate") as AudioClip;
 			CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.EatPill] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby@eat_pill") as AudioClip;
@@ -146,64 +223,14 @@ public class SoundEngineScript : MonoBehaviour
 			CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk18] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_18") as AudioClip;
 			CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk18] = Resources.Load("Sounds/Tbo_baby_sfx/tbo_baby_talk_19") as AudioClip;
 
-		}*/
-
-	}
+		}
+        */
+        #endregion
+    }
 
 	private void LoadCreatureHelper(int id, int evolution, string name)
 	{
-		/*
-		CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Celebrate] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@celebrate") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.EatPill] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@eat_pill") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.FeedFood] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@feed_food") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.FeedDrink] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@feed_drink") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Happy1] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@happy_01") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Happy2] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@happy_02") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Happy3] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@happy_03") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Happy4] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@happy_04") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Happy5] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@happy_05") as AudioClip;
 		
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Hungry] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@Hungry") as AudioClip;
-		
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.JumbInPortal] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@jump_in_portal") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.JumbOutPortal] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@jump_out_portal") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.No] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@No") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Sad1] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@sad01") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Sad2] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@sad02") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Sad3] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@sad03") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Sad4] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@sad04") as AudioClip;
-		
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.SleepToIdle] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@sleep_to_idle_stand") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Throw] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@Throw") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Tickle] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@Tickle") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Tickle2] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@tickle_02") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Tickle3] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@tickle_03") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.SnoringSleeping] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@sleep_snoring_loop") as AudioClip;
-		
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.Unwell] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@Unwell") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.InjectionReact] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@injection_react") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.PatReact] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@pat_react") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.IdleWave] = Resources.Load("Sounds/" + name + "_sfx/" + name + "@idle_wave") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk1] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_01") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk2] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_02") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk3] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_03") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk4] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_04") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk5] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_05") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk6] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_06") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk7] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_07") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk8] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_08") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk9] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_09") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk10] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_10") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk11] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_11") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk12] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_12") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk13] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_13") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk14] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_14") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk15] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_15") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk16] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_16") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk17] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_17") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk18] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_18") as AudioClip;
-		CreatureSounds[(int)id,(int)evolution, (int)CreatureSoundId.RandomTalk18] = Resources.Load("Sounds/" + name + "_sfx/" + name + "_talk_19") as AudioClip;
-		*/
 	}
 	
 	public void PlayFart()
@@ -249,6 +276,8 @@ public class SoundEngineScript : MonoBehaviour
 	public void Play(AniminId animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
 	{
 		if(!PlayerProfileData.ActiveProfile.Settings.AudioEnabled) return;
+
+       // Debug.Log("Play Sound : [" + animin + "|" + creatureId + "|" + soundId + "]");
 
 		this.audio.PlayOneShot(CreatureSounds[(int)animin, (int)creatureId, (int)soundId]);
 	}

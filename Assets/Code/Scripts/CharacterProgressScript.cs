@@ -322,7 +322,13 @@ public class CharacterProgressScript : MonoBehaviour
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.watermelon, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodFrame, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodSword, 1);
-		//SpawnChests();	
+
+        Debug.Log("Character Start");
+        BetweenSceneData.Instance.DoCelebration();
+        if (BetweenSceneData.Instance.MiniGameCelebration)
+        {
+		SpawnChests();
+        }
 	}
 
 	void OnApplicationPause(bool pauseStatus)
@@ -863,12 +869,12 @@ public class CharacterProgressScript : MonoBehaviour
 							
 				if(lastActionId != ActionId.None)
 				{
-					Debug.Log("if(lastActionId != ActionId.None)");
+					//Debug.Log("if(lastActionId != ActionId.None)");
 				}
 			   
 				else if(HadUITouchLastFrame || hadUItouch || DragedObjectedFromUIToWorld)
 				{
-					Debug.Log("UI TOUCH");
+					//Debug.Log("UI TOUCH");
 
 					break;
 				}
@@ -891,7 +897,7 @@ public class CharacterProgressScript : MonoBehaviour
 							//CurrentAction = ActionId.DetectMouseMoveAndDrag;
 							MousePositionAtDragIfMouseMoves = Input.mousePosition;
 							detectDragHit = hitInfo;
-							Debug.Log("DetectMouseMoveAndDrag");
+							//Debug.Log("DetectMouseMoveAndDrag");
 						}
 					}
 
@@ -911,7 +917,7 @@ public class CharacterProgressScript : MonoBehaviour
 				}*/
 				else if(IsDetectFlick && !Input.GetButton("Fire1") && (Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves)> 25) && ObjectHolding != null)
 				{
-					Debug.Log("IsDetectFlick");
+					//Debug.Log("IsDetectFlick");
 
 					Vector3 throwdirection = Vector3.Normalize(Input.mousePosition - MousePositionAtDragIfMouseMoves);
 					throwdirection.z = throwdirection.y;
@@ -922,7 +928,7 @@ public class CharacterProgressScript : MonoBehaviour
 				}
 				else if(IsDetectingMouseMoveForDrag && Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) >= 5 && Input.GetButton("Fire1"))
 				{
-					Debug.Log("IsDetectingMouseMoveForDrag");
+					//Debug.Log("IsDetectingMouseMoveForDrag");
 					pickupItemSavedData.WasInHands = false;
 					
 					// DRAG ITEM FROM CHARACTER AWAY FROM HIM
@@ -973,7 +979,7 @@ public class CharacterProgressScript : MonoBehaviour
 					
 					
 					
-					Debug.Log("SELECTED OBJECT:" + detectDragHit.collider.name);
+					//Debug.Log("SELECTED OBJECT:" + detectDragHit.collider.name);
 					
 					DragableObject.GetComponent<BoxCollider>().enabled = false;
 				}
@@ -1041,7 +1047,7 @@ public class CharacterProgressScript : MonoBehaviour
 						if(SwipesDetectedCount >= 3)
 						{
 							AtLeastOneSwipeDetected = true;
-							Debug.Log("SWIPE DETECTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+							//Debug.Log("SWIPE DETECTED");
 							IsDetectingSwipeRight = !IsDetectingSwipeRight;
 							SwipesDetectedCount = 0;
 							
@@ -1100,7 +1106,6 @@ public class CharacterProgressScript : MonoBehaviour
 				if(SwipeHistoryPositions.Count >= 100)
 				{
 					SwipeHistoryPositions.RemoveAt(0);
-					Debug.Log("TOO MANY!!");
 				}
 
 
@@ -1119,7 +1124,6 @@ public class CharacterProgressScript : MonoBehaviour
 				{
 					if(hadRayCollision && (hitInfo.collider.tag == "Items" || hitInfo.collider.tag == "Shit") && GroundItems.Contains(hitInfo.collider.gameObject))
 					{
-						Debug.Log("DOES IT EVER GET HERE");
 
 
 

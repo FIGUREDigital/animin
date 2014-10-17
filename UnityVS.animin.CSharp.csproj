@@ -79,6 +79,7 @@
     <Compile Include="Assets\Code\AniminProfileData.cs" />
     <Compile Include="Assets\Code\ChestScript.cs" />
     <Compile Include="Assets\Code\Enumerations\UIFunctionalityId.cs" />
+    <Compile Include="Assets\Code\Harrys\BetweenSceneData.cs" />
     <Compile Include="Assets\Code\Harrys\Minigame 1\LoadProfileMG1.cs" />
     <Compile Include="Assets\Code\Harrys\Minigame 1\TrackVFMG1.cs" />
     <Compile Include="Assets\Code\Harrys\Minigame 2\LoadProfileMG2.cs" />

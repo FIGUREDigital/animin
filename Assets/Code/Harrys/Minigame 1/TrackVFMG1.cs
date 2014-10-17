@@ -30,7 +30,6 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 		TrackableBehaviour.Status previousStatus,
 		TrackableBehaviour.Status newStatus)
 	{
-		Debug.Log("OnTrackableStateChanged!");
 
 		if (newStatus == TrackableBehaviour.Status.DETECTED ||
 		    newStatus == TrackableBehaviour.Status.TRACKED ||
@@ -204,14 +203,12 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 
 	public void OnTrackingFound()
 	{
-		Debug.Log ("Minigame OnTrackingFound");
 
 		IsTracking = true;
 		bool isPlayingMinigame = false;
 
 		UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
 
-        Debug.Log("OnTrackingFound: playing mini game");
 			UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (false);
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
 	}
@@ -219,7 +216,6 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 	
 	public void OnTrackingLost()
 	{
-		Debug.Log ("Minigame OnTrackingLost");
 		IsTracking = false;
 
 		bool isPlayingMinigame = false;
@@ -233,7 +229,6 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 
 		if(isPlayingMinigame)
 		{
-			Debug.Log("OnTrackingLost: playing mini game");
 		}
 		else
 		{
@@ -245,13 +240,11 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 			   UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.EnterSleep) */
 			if(false){
 
-				Debug.Log("OnTrackingLost: sleeping");
 			}
 			else
 			{
 		//		CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
-				Debug.Log("OnTrackingLost: caring screen");
 //				progressScript.CurrentAction = ActionId.None;
 //				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, false);
 

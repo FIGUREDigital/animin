@@ -117,9 +117,6 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		Vector3 scale = instance.transform.localScale;
 		//RuntimeAnimatorController controller = CurrentModel.GetComponent<Animator>().runtimeAnimatorController;
 
-		Debug.Log("instance.transform = " + instance.transform);
-		Debug.Log("instance.transform.parent = " + instance.transform.parent);
-
 		instance.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform;
 
 		if(CurrentModel != null)

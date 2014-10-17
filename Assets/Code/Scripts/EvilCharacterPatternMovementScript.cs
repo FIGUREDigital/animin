@@ -10,6 +10,15 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 	public bool ApplyRotation;
 	private Quaternion RotateDirectionLookAt;
 
+    private bool m_Paused;
+    public bool Paused {
+        get { return m_Paused; }
+        set {
+            m_Paused = value;
+            this.GetComponent<Animator>().enabled = !value;
+        }
+    }
+
 
 	// Use this for initialization
 	void Start () 
@@ -20,6 +29,7 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+        if (Paused) return;
 
 		float currentRelativeSpeed = Vector3.Distance(Pattern[Index], Pattern[Index + 1]);
 		

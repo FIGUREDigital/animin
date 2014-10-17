@@ -57,7 +57,13 @@ public class JoystiqScript : MonoBehaviour {
 	private float tapTimer;             // Double-tap's timer.
 	
 	private bool enable;                // VJR external control.
-	
+
+    private bool m_Paused;
+    public bool Paused
+    {
+        get { return m_Paused; }
+        set { m_Paused = value; }
+    }
 
 	
 	public MinigameAnimationControllerScript CharacterAnimationRef;
@@ -153,7 +159,7 @@ public class JoystiqScript : MonoBehaviour {
 
 		bool fingerTouchValid = false;
 
-		if(isButtonDown)
+		if(isButtonDown && !Paused)
 		{
 			//float ffff = (ThumbpadBack.worldCorners[2].x - ThumbpadBack.worldCorners[0].x) * ThumbpadBack.width;
 			fingerTouchValid = true;

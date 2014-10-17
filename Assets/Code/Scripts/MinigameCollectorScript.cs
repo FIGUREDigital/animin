@@ -291,8 +291,29 @@ public class MinigameCollectorScript : MonoBehaviour
 	private float TimeStartedSwipe;
 	private float SnapAngleDifference;
 	// Update is called once per frame
+
+    private bool m_Paused;
+    public bool Paused
+    {
+        set
+        {
+            m_Paused = value;
+
+            UIGlobalVariablesScript.Singleton.Joystick.GetComponent<JoystiqScript>().Paused = value;                                //Disable the joystick
+            UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<Animator>().enabled = !value;                           //Pause the character's Animation
+            EvilCharacterPatternMovementScript[] evilScripts = this.GetComponentsInChildren<EvilCharacterPatternMovementScript>();
+            for (int i = 0; i < evilScripts.Length; i++)
+            {
+                evilScripts[i].Paused = value;                                                                                      //Pause each enemy individually
+            }
+        }
+        get { return m_Paused; }
+    }
+
 	void Update () 
 	{
+        if (Paused) return;
+
 		PointsLabel.GetComponent<UILabel>().text = Points.ToString() + " pts";
 		CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 

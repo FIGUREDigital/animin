@@ -314,8 +314,10 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.CloseCurrentMinigame:
 		{
+            BetweenSceneData.Instance.MiniGameCelebration = true;
 			Application.LoadLevel("VuforiaTest");
-			return;
+            break;
+
 		}
 			
 		case UIFunctionalityId.PlayMinigameSpaceship:
@@ -452,6 +454,12 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			UIGlobalVariablesScript.Singleton.PauseGameButton.SetActive(false);
 			UIGlobalVariablesScript.Singleton.PausedScreen.SetActive(true);
+
+            if (UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef != null)
+            {
+                UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().Paused = true;
+            }
+
 			break;
 		}
 
