@@ -6,8 +6,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public static UIGlobalVariablesScript Singleton;
 
 	// Set from the Editor
-    public GameObject ARCamera;
-
+	public GameObject ARCamera;
 	public GameObject MainMenuPopupObjectRef;
 	public GameObject MinigamesMenuMasterScreenRef;
 	public GameObject CaringScreenRef;
@@ -183,5 +182,6 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log ("According to the scientific method, we're are in the state: "+CurrentlyActive+";");
 	}
 }
