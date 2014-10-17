@@ -56,19 +56,16 @@ public class MultipleCardTrackerScript : MonoBehaviour, ITrackableEventHandler
 		switch(UIGlobalVariablesScript.Singleton.CurrentlyActive){
 			case UIGlobalVariablesScript.ActiveState.Caring:
 			{
-			Debug.Log ("TrackVuforiaScript.OnTrackingFound");
 				TrackVuforiaScript script = GameObject.FindObjectOfType<TrackVuforiaScript>();
 				script.OnTrackingFound();
 				break;
 			}
 			case UIGlobalVariablesScript.ActiveState.Collecting:
 		{
-			Debug.Log ("TrackVFMG1.OnTrackingFound");
 				TrackVFMG1 script = GameObject.FindObjectOfType<TrackVFMG1>();
 				script.OnTrackingFound();
 				break;
 		}
-			Debug.Log ("TrackVFMG2.OnTrackingFound");
 			case UIGlobalVariablesScript.ActiveState.Gun:
 			{
 				TrackVFMG2 script = GameObject.FindObjectOfType<TrackVFMG2>();
@@ -81,13 +78,9 @@ public class MultipleCardTrackerScript : MonoBehaviour, ITrackableEventHandler
 	
 	public void OnTrackingLost()
 	{
-
-
-
 		switch(UIGlobalVariablesScript.Singleton.CurrentlyActive){
 			case UIGlobalVariablesScript.ActiveState.Caring:
 		{
-			Debug.Log ("TrackVuforiaScript.OnTrackingFound");
 				TrackVuforiaScript.IsTracking = false;
 				TrackVuforiaScript script = GameObject.FindObjectOfType<TrackVuforiaScript>();
 				script.OnTrackingLost();
@@ -95,13 +88,11 @@ public class MultipleCardTrackerScript : MonoBehaviour, ITrackableEventHandler
 			}
 			case UIGlobalVariablesScript.ActiveState.Collecting:
 		{
-			Debug.Log ("TrackVFMG1.OnTrackingFound");
 				TrackVFMG1.IsTracking = false;
 				TrackVFMG1 script = GameObject.FindObjectOfType<TrackVFMG1>();
 				script.OnTrackingLost();
 				break;
 		}
-			Debug.Log ("TrackVFMG2.OnTrackingFound");
 			case UIGlobalVariablesScript.ActiveState.Gun:
 			{
 			TrackVFMG2.IsTracking = false;

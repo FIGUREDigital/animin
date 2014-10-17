@@ -21,18 +21,19 @@ ModelImporter:
     100030: ke_adult:skin_knee_r_joint
     100032: ke_adult:skin_neck_joint
     100034: ke_adult:skin_nose_joint
-    100036: ke_adult:skin_shoulder_l_joint
-    100038: ke_adult:skin_shoulder_r_joint
-    100040: ke_adult:skin_spine_1_joint
-    100042: ke_adult:skin_spine_2_joint
-    100044: ke_adult:skin_spine_3_joint
-    100046: ke_adult:skin_spine_4_joint
-    100048: ke_adult:skin_spine_5_joint
-    100050: ke_adult:skin_spine_6_joint
-    100052: ke_adult:skin_spine_7_joint
-    100054: ke_adult:skin_wrist_l_joint
-    100056: ke_adult:skin_wrist_r_joint
-    100058: //RootNode
+    100036: ke_adult:skin_object_joint
+    100038: ke_adult:skin_shoulder_l_joint
+    100040: ke_adult:skin_shoulder_r_joint
+    100042: ke_adult:skin_spine_1_joint
+    100044: ke_adult:skin_spine_2_joint
+    100046: ke_adult:skin_spine_3_joint
+    100048: ke_adult:skin_spine_4_joint
+    100050: ke_adult:skin_spine_5_joint
+    100052: ke_adult:skin_spine_6_joint
+    100054: ke_adult:skin_spine_7_joint
+    100056: ke_adult:skin_wrist_l_joint
+    100058: ke_adult:skin_wrist_r_joint
+    100060: //RootNode
     400000: ke_adult:skin_ankle_l_joint
     400002: ke_adult:skin_ankle_r_joint
     400004: ke_adult:skin_clavicle_l_joint
@@ -51,18 +52,19 @@ ModelImporter:
     400030: ke_adult:skin_knee_r_joint
     400032: ke_adult:skin_neck_joint
     400034: ke_adult:skin_nose_joint
-    400036: ke_adult:skin_shoulder_l_joint
-    400038: ke_adult:skin_shoulder_r_joint
-    400040: ke_adult:skin_spine_1_joint
-    400042: ke_adult:skin_spine_2_joint
-    400044: ke_adult:skin_spine_3_joint
-    400046: ke_adult:skin_spine_4_joint
-    400048: ke_adult:skin_spine_5_joint
-    400050: ke_adult:skin_spine_6_joint
-    400052: ke_adult:skin_spine_7_joint
-    400054: ke_adult:skin_wrist_l_joint
-    400056: ke_adult:skin_wrist_r_joint
-    400058: //RootNode
+    400036: ke_adult:skin_object_joint
+    400038: ke_adult:skin_shoulder_l_joint
+    400040: ke_adult:skin_shoulder_r_joint
+    400042: ke_adult:skin_spine_1_joint
+    400044: ke_adult:skin_spine_2_joint
+    400046: ke_adult:skin_spine_3_joint
+    400048: ke_adult:skin_spine_4_joint
+    400050: ke_adult:skin_spine_5_joint
+    400052: ke_adult:skin_spine_6_joint
+    400054: ke_adult:skin_spine_7_joint
+    400056: ke_adult:skin_wrist_l_joint
+    400058: ke_adult:skin_wrist_r_joint
+    400060: //RootNode
     7400000: Take 001
     9500000: //RootNode
   materials:
@@ -103,7 +105,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 1
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
@@ -115,8 +117,7 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b634f315b006a4f5b81880cb4c11c8fc,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   additionalBone: 0
   userData: 

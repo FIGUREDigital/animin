@@ -187,6 +187,8 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 		if(IsTracking)
 			SavedARPosition = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition;
 
+
+        //HARRYS POSSIBILITY
 		Camera.main.transform.position = new Vector3(0, 123.1f, -198.3f);
 		Camera.main.transform.rotation = Quaternion.Euler(14.73474f, 0.0f, 0.0f);
 
@@ -196,14 +198,7 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.035f, 0.035f, 0.035f);
 		UIGlobalVariablesScript.Singleton.Shadow.transform.localScale = new Vector3(0.46f, 0.46f, 0.46f);
 
-		/*
-		if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction != ActionId.Sleep &&
-		   UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction != ActionId.EnterSleep)
-		{
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().ResetRotation();
-			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
-		}
-*/
+
 	}
 
 
@@ -216,43 +211,9 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 
 		UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.transform.parent = UIGlobalVariablesScript.Singleton.ARSceneRef.transform;
 
-//		CharacterProgressScript progress = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
-
-		//if(isPlayingMinigame)
-		{
-			Debug.Log("OnTrackingFound: playing mini game");
+        Debug.Log("OnTrackingFound: playing mini game");
 			UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (false);
 			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
-		}
-		/*
-		else  if(UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.Sleep ||
-		   UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().CurrentAction == ActionId.EnterSleep)
-		{
-			Debug.Log("OnTrackingFound: sleeping");
-			UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive (false);
-			UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(true);
-			OnCharacterEnterARScene();
-		}
-		else
-		{
-			Debug.Log("OnTrackingFound: caring screen");
-			{
-				//return;
-				UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbInPortal);
-				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsEnterPortal = true;
-				progress.CurrentAction = ActionId.EnterPortalToAR;
-
-//				UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(PortalStageId.NonARScene, true);
-				progress.Stop(true);
-				progress.PortalTimer = 0;
-				Debug.Log("ENTERING AR STATE ");
-
-
-//				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
-//				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.JumbIn;
-			}
-		}
-		*/
 	}
 
 	

@@ -145,7 +145,7 @@ ModelImporter:
     400136: tbo_adult:skin_jSpine_4
     400138: tbo_adult:skin_jSpine_5
     400140: //RootNode
-    7400000: jump_out_portal
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -162,175 +162,7 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: jump_out_portal
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 2
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: tbo_adult:skin_jCOG
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05/tbo_adult:skin_bn_l_leg_06
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05/tbo_adult:skin_bn_l_leg_06/tbo_adult:skin_bn_l_leg_07
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05/tbo_adult:skin_bn_l_leg_06/tbo_adult:skin_bn_l_leg_07/tbo_adult:skin_bn_l_shin_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05/tbo_adult:skin_bn_l_leg_06/tbo_adult:skin_bn_l_leg_07/tbo_adult:skin_bn_l_shin_01/tbo_adult:skin_bn_l_shin_02
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05/tbo_adult:skin_bn_l_leg_06/tbo_adult:skin_bn_l_leg_07/tbo_adult:skin_bn_l_shin_01/tbo_adult:skin_bn_l_shin_02/tbo_adult:skin_bn_l_shin_03
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05/tbo_adult:skin_bn_l_leg_06/tbo_adult:skin_bn_l_leg_07/tbo_adult:skin_bn_l_shin_01/tbo_adult:skin_bn_l_shin_02/tbo_adult:skin_bn_l_shin_03/tbo_adult:skin_bn_l_shin_04
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05/tbo_adult:skin_bn_l_leg_06/tbo_adult:skin_bn_l_leg_07/tbo_adult:skin_bn_l_shin_01/tbo_adult:skin_bn_l_shin_02/tbo_adult:skin_bn_l_shin_03/tbo_adult:skin_bn_l_shin_04/tbo_adult:skin_bn_l_shin_05
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05/tbo_adult:skin_bn_l_leg_06/tbo_adult:skin_bn_l_leg_07/tbo_adult:skin_bn_l_shin_01/tbo_adult:skin_bn_l_shin_02/tbo_adult:skin_bn_l_shin_03/tbo_adult:skin_bn_l_shin_04/tbo_adult:skin_bn_l_shin_05/tbo_adult:skin_bn_l_shin_06
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_l_leg_01/tbo_adult:skin_bn_l_leg_02/tbo_adult:skin_bn_l_leg_03/tbo_adult:skin_bn_l_leg_04/tbo_adult:skin_bn_l_leg_05/tbo_adult:skin_bn_l_leg_06/tbo_adult:skin_bn_l_leg_07/tbo_adult:skin_bn_l_shin_01/tbo_adult:skin_bn_l_shin_02/tbo_adult:skin_bn_l_shin_03/tbo_adult:skin_bn_l_shin_04/tbo_adult:skin_bn_l_shin_05/tbo_adult:skin_bn_l_shin_06/tbo_adult:skin_bn_l_shin_07
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05/tbo_adult:skin_bn_r_reg_06
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05/tbo_adult:skin_bn_r_reg_06/tbo_adult:skin_bn_r_reg_07
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05/tbo_adult:skin_bn_r_reg_06/tbo_adult:skin_bn_r_reg_07/tbo_adult:skin_bn_r_shin_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05/tbo_adult:skin_bn_r_reg_06/tbo_adult:skin_bn_r_reg_07/tbo_adult:skin_bn_r_shin_01/tbo_adult:skin_bn_r_shin_02
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05/tbo_adult:skin_bn_r_reg_06/tbo_adult:skin_bn_r_reg_07/tbo_adult:skin_bn_r_shin_01/tbo_adult:skin_bn_r_shin_02/tbo_adult:skin_bn_r_shin_03
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05/tbo_adult:skin_bn_r_reg_06/tbo_adult:skin_bn_r_reg_07/tbo_adult:skin_bn_r_shin_01/tbo_adult:skin_bn_r_shin_02/tbo_adult:skin_bn_r_shin_03/tbo_adult:skin_bn_r_shin_04
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05/tbo_adult:skin_bn_r_reg_06/tbo_adult:skin_bn_r_reg_07/tbo_adult:skin_bn_r_shin_01/tbo_adult:skin_bn_r_shin_02/tbo_adult:skin_bn_r_shin_03/tbo_adult:skin_bn_r_shin_04/tbo_adult:skin_bn_r_shin_05
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05/tbo_adult:skin_bn_r_reg_06/tbo_adult:skin_bn_r_reg_07/tbo_adult:skin_bn_r_shin_01/tbo_adult:skin_bn_r_shin_02/tbo_adult:skin_bn_r_shin_03/tbo_adult:skin_bn_r_shin_04/tbo_adult:skin_bn_r_shin_05/tbo_adult:skin_bn_r_shin_06
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_bn_r_reg_01/tbo_adult:skin_bn_r_reg_02/tbo_adult:skin_bn_r_reg_03/tbo_adult:skin_bn_r_reg_04/tbo_adult:skin_bn_r_reg_05/tbo_adult:skin_bn_r_reg_06/tbo_adult:skin_bn_r_reg_07/tbo_adult:skin_bn_r_shin_01/tbo_adult:skin_bn_r_shin_02/tbo_adult:skin_bn_r_shin_03/tbo_adult:skin_bn_r_shin_04/tbo_adult:skin_bn_r_shin_05/tbo_adult:skin_bn_r_shin_06/tbo_adult:skin_bn_r_shin_07
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03/tbo_adult:skin_bn_l_arm_04
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03/tbo_adult:skin_bn_l_arm_04/tbo_adult:skin_bn_l_arm_05
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03/tbo_adult:skin_bn_l_arm_04/tbo_adult:skin_bn_l_arm_05/tbo_adult:skin_bn_l_arm_06
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03/tbo_adult:skin_bn_l_arm_04/tbo_adult:skin_bn_l_arm_05/tbo_adult:skin_bn_l_arm_06/tbo_adult:skin_bn_l_arm_07
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03/tbo_adult:skin_bn_l_arm_04/tbo_adult:skin_bn_l_arm_05/tbo_adult:skin_bn_l_arm_06/tbo_adult:skin_bn_l_arm_07/tbo_adult:skin_bn_l_arm_08
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03/tbo_adult:skin_bn_l_arm_04/tbo_adult:skin_bn_l_arm_05/tbo_adult:skin_bn_l_arm_06/tbo_adult:skin_bn_l_arm_07/tbo_adult:skin_bn_l_arm_08/tbo_adult:skin_bn_l_arm_09
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03/tbo_adult:skin_bn_l_arm_04/tbo_adult:skin_bn_l_arm_05/tbo_adult:skin_bn_l_arm_06/tbo_adult:skin_bn_l_arm_07/tbo_adult:skin_bn_l_arm_08/tbo_adult:skin_bn_l_arm_09/tbo_adult:skin_bn_l_arm_10
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03/tbo_adult:skin_bn_l_arm_04/tbo_adult:skin_bn_l_arm_05/tbo_adult:skin_bn_l_arm_06/tbo_adult:skin_bn_l_arm_07/tbo_adult:skin_bn_l_arm_08/tbo_adult:skin_bn_l_arm_09/tbo_adult:skin_bn_l_arm_10/tbo_adult:skin_bn_l_arm_11
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_l_shoulder_01/tbo_adult:skin_bn_l_arm_01/tbo_adult:skin_bn_l_arm_02/tbo_adult:skin_bn_l_arm_03/tbo_adult:skin_bn_l_arm_04/tbo_adult:skin_bn_l_arm_05/tbo_adult:skin_bn_l_arm_06/tbo_adult:skin_bn_l_arm_07/tbo_adult:skin_bn_l_arm_08/tbo_adult:skin_bn_l_arm_09/tbo_adult:skin_bn_l_arm_10/tbo_adult:skin_bn_l_arm_11/tbo_adult:skin_bn_l_arm_12
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03/tbo_adult:skin_bn_r_arm_04
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03/tbo_adult:skin_bn_r_arm_04/tbo_adult:skin_bn_r_arm_05
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03/tbo_adult:skin_bn_r_arm_04/tbo_adult:skin_bn_r_arm_05/tbo_adult:skin_bn_r_arm_06
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03/tbo_adult:skin_bn_r_arm_04/tbo_adult:skin_bn_r_arm_05/tbo_adult:skin_bn_r_arm_06/tbo_adult:skin_bn_r_arm_07
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03/tbo_adult:skin_bn_r_arm_04/tbo_adult:skin_bn_r_arm_05/tbo_adult:skin_bn_r_arm_06/tbo_adult:skin_bn_r_arm_07/tbo_adult:skin_bn_r_arm_08
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03/tbo_adult:skin_bn_r_arm_04/tbo_adult:skin_bn_r_arm_05/tbo_adult:skin_bn_r_arm_06/tbo_adult:skin_bn_r_arm_07/tbo_adult:skin_bn_r_arm_08/tbo_adult:skin_bn_r_arm_09
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03/tbo_adult:skin_bn_r_arm_04/tbo_adult:skin_bn_r_arm_05/tbo_adult:skin_bn_r_arm_06/tbo_adult:skin_bn_r_arm_07/tbo_adult:skin_bn_r_arm_08/tbo_adult:skin_bn_r_arm_09/tbo_adult:skin_bn_r_arm_10
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03/tbo_adult:skin_bn_r_arm_04/tbo_adult:skin_bn_r_arm_05/tbo_adult:skin_bn_r_arm_06/tbo_adult:skin_bn_r_arm_07/tbo_adult:skin_bn_r_arm_08/tbo_adult:skin_bn_r_arm_09/tbo_adult:skin_bn_r_arm_10/tbo_adult:skin_bn_r_arm_11
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_bn_r_shourder_01/tbo_adult:skin_bn_r_arm_01/tbo_adult:skin_bn_r_arm_02/tbo_adult:skin_bn_r_arm_03/tbo_adult:skin_bn_r_arm_04/tbo_adult:skin_bn_r_arm_05/tbo_adult:skin_bn_r_arm_06/tbo_adult:skin_bn_r_arm_07/tbo_adult:skin_bn_r_arm_08/tbo_adult:skin_bn_r_arm_09/tbo_adult:skin_bn_r_arm_10/tbo_adult:skin_bn_r_arm_11/tbo_adult:skin_bn_r_arm_12
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders/tbo_adult:skin_jNeck
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders/tbo_adult:skin_jNeck/tbo_adult:skin_jHead
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders/tbo_adult:skin_jNeck/tbo_adult:skin_jHead/tbo_adult:skin_bn_l_ear_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders/tbo_adult:skin_jNeck/tbo_adult:skin_jHead/tbo_adult:skin_bn_l_ear_01/tbo_adult:skin_bn_l_ear_02
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders/tbo_adult:skin_jNeck/tbo_adult:skin_jHead/tbo_adult:skin_bn_l_ear_01/tbo_adult:skin_bn_l_ear_02/tbo_adult:skin_bn_l_ear_end
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders/tbo_adult:skin_jNeck/tbo_adult:skin_jHead/tbo_adult:skin_bn_r_ear_01
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders/tbo_adult:skin_jNeck/tbo_adult:skin_jHead/tbo_adult:skin_bn_r_ear_01/tbo_adult:skin_bn_r_ear_02
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders/tbo_adult:skin_jNeck/tbo_adult:skin_jHead/tbo_adult:skin_bn_r_ear_01/tbo_adult:skin_bn_r_ear_02/tbo_adult:skin_bn_r_ear_end
-        weight: 1
-      - path: tbo_adult:skin_jCOG/tbo_adult:skin_jSpine_1/tbo_adult:skin_jSpine_2/tbo_adult:skin_jSpine_3/tbo_adult:skin_jSpine_4/tbo_adult:skin_jSpine_5/tbo_adult:skin_jShoulders/tbo_adult:skin_jNeck/tbo_adult:skin_jHead/tbo_adult:skin_jNose
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -353,7 +185,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 1
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
@@ -365,8 +197,7 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: a263fb9eb017c4026974e11341f3ead3,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   additionalBone: 0
   userData: 

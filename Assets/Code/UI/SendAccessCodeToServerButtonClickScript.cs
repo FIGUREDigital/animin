@@ -31,6 +31,13 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		UnregisterListeners();
 	}
+#elif UNITY_ANDROID
+    void purchaseSuccessful(GooglePurchase transaction)
+	{
+		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+		UnregisterListeners();
+	}
 #endif
 	void purchaseUnsuccessful( string transaction )
 	{
@@ -41,13 +48,13 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 	void RegisterListeners()
 	{
 		if(Application.isEditor){ return; }
-		StoreKitManager.purchaseSuccessfulEvent += purchaseSuccessful;
-		StoreKitManager.purchaseFailedEvent += purchaseUnsuccessful;
+        GoogleIABManager.purchaseSucceededEvent += purchaseSuccessful;
+        GoogleIABManager.purchaseFailedEvent += purchaseUnsuccessful;
 	}
 	void UnregisterListeners()
 	{
 		if(Application.isEditor){ return; }
-		StoreKitManager.purchaseSuccessfulEvent -= purchaseSuccessful;
-		StoreKitManager.purchaseFailedEvent -= purchaseUnsuccessful;
+        GoogleIABManager.purchaseSucceededEvent -= purchaseSuccessful;
+        GoogleIABManager.purchaseFailedEvent -= purchaseUnsuccessful;
 	}
 }

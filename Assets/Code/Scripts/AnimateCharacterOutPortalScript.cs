@@ -28,10 +28,12 @@ public class AnimateCharacterOutPortalScript : MonoBehaviour {
 				Timer += Time.deltaTime;
 
 				if(Timer >= 0.5f)
-					this.transform.position -= this.transform.forward * Time.deltaTime * 120;
+					//this.transform.position -= this.transform.forward * Time.deltaTime * 120;
 
-				if(Timer >= 0.9f)
-				{
+				if(Timer >= 1.3f)
+                {
+                    //This bit doesn't actually run. The scene changes before this thing gets a chance.
+                    Debug.Log("JumBBBBBBBBBing finished");
 					JumbId = JumbStateId.None;
 				}
 
