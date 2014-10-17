@@ -6,6 +6,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public static UIGlobalVariablesScript Singleton;
 
 	// Set from the Editor
+	public GameObject ARCamera;
 	public GameObject MainMenuPopupObjectRef;
 	public GameObject MinigamesMenuMasterScreenRef;
 	public GameObject CaringScreenRef;
