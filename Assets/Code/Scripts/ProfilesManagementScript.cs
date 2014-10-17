@@ -37,15 +37,14 @@ public class ProfilesManagementScript : MonoBehaviour
 			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("DefaultProfile");
 		//}
 
-		//ServerManager.Register("serverProfile");
-		//AppDataManager.SetUsername("serverProfile");
+		ServerManager.Register("Profile11");
+		AppDataManager.SetUsername("Profile11");
 
-		//RefreshProfiles();
+		Debug.Log("-----Registered----");
+		RefreshProfiles();
 
-		//ServerManager.Access("BB3449XV");
-
-		//ServerManager.AddLeaderboardScore(15, 1);
-		//ServerManager.GetLeaderboardScores(1);
+		ServerManager.AddLeaderboardScore(15, 1);
+		ServerManager.GetLeaderboardScores(1);
 	}
 
 	private void RefreshProfiles()

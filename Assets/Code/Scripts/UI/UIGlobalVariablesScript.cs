@@ -181,6 +181,6 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("According to the scientific method, wer are in the state: "+CurrentlyActive+";");
+		//Debug.Log ("According to the scientific method, we're are in the state: "+CurrentlyActive+";");
 	}
 }

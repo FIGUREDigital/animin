@@ -21,7 +21,7 @@ public class CharacterControllerScript : Photon.MonoBehaviour
 	//public Animations currentAnimation { get { return this.GetComponent<AnimationControllerScript>().currentAnimation;} }
 	
 	public void SetLocal(bool local) { __local = local; }
-	
+
 	public void UpdatePositionRemotely(Vector3 position) {
 		transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 5);
 	}

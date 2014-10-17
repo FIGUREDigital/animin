@@ -16,11 +16,11 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 		SubmitFunction.OnSubmit();
 		if(Application.isEditor)
 		{ 
-			ProfilesManagementScript.Singleton.CreateAccessCodeScreen.SetActive(false);
+			ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
 			ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 			return; 
 		}
-		ProfilesManagementScript.Singleton.CreateAccessCodeScreen.SetActive(false);
+		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
 	}
 

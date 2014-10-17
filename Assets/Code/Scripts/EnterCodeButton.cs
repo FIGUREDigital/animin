@@ -6,6 +6,6 @@ public class EnterCodeButton : MonoBehaviour {
 	void OnClick()
 	{
 		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
-		ProfilesManagementScript.Singleton.CreateUsernameScreen.SetActive(true);
+		ProfilesManagementScript.Singleton.CreateAccessCodeScreen.SetActive(true);
 	}
 }
