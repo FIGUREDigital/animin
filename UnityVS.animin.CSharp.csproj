@@ -183,6 +183,7 @@
     <Compile Include="Assets\Code\UI\SendAccesCodeFromChatboxClickScript.cs" />
     <Compile Include="Assets\Code\UI\SendAccessCodeToServerButtonClickScript.cs" />
     <Compile Include="Assets\Code\UI\StartCreateProfileButtonScript.cs" />
+    <Compile Include="Assets\Code\UI\UIManager.cs" />
     <Compile Include="Assets\Code\UI\UnlockCharacterButtonClickScript.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />

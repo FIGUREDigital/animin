@@ -459,6 +459,10 @@ public class UIClickButtonMasterScript : MonoBehaviour
             {
                 UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().Paused = true;
             }
+            else if (UIGlobalVariablesScript.Singleton.GunGameScene != null)
+            {
+                UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().Paused = true;
+            }
 
 			break;
 		}
@@ -467,6 +471,16 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			UIGlobalVariablesScript.Singleton.PauseGameButton.SetActive(true);
 			UIGlobalVariablesScript.Singleton.PausedScreen.SetActive(false);
+
+            if (UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef != null)
+            {
+                UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().Paused = false;
+            }
+            else if (UIGlobalVariablesScript.Singleton.GunGameScene != null)
+            {
+                UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().Paused = false;
+            }
+
 			break;
 		}
 

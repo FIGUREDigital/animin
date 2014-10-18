@@ -11,6 +11,16 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
     public Color SkinColor;
     public string BulletSplat;
 
+    private bool m_Paused;
+    public bool Paused
+    {
+        get { return m_Paused; }
+        set
+        {
+            m_Paused = value;
+            this.GetComponent<Animator>().enabled = !value;
+        }
+    }
 
     // SHAUN START
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -72,6 +82,8 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Paused) return;
+
         if (GameController.instance.gameType == GameType.NETWORK)
         {
             if (!__local)

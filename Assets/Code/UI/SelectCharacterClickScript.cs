@@ -36,8 +36,5 @@ public class SelectCharacterClickScript : MonoBehaviour
 		//AsyncOperation asyncOp = Application.LoadLevelAsync("VuforiaTest");
 		//yield return asyncOp;
 		//Debug.Log("Loading complete");
-
-
 	}
-
 }

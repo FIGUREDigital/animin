@@ -66,6 +66,34 @@ public class GunsMinigameScript : Photon.MonoBehaviour
     public Texture[] Go321Textures;
     private float FillUpTimer;
 
+    private GameStateId m_StateBeforePaused = GameStateId.Paused;
+    private bool m_Paused;
+    public bool Paused
+    {
+        set
+        {
+            m_Paused = value;
+
+            UIGlobalVariablesScript.Singleton.Joystick.GetComponent<JoystiqScript>().Paused = value;                //Disable the joystick
+            UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponentInChildren<Animator>().enabled = !value; //Pause the character's Animation
+            GunGameEnemyScript[] evilScripts = this.GetComponentsInChildren<GunGameEnemyScript>();
+            for (int i = 0; i < evilScripts.Length; i++)
+            {
+                evilScripts[i].Paused = value;                                                                       //Pause each enemy individually
+            }
+            if (m_Paused)
+            {
+                m_StateBeforePaused = State;
+                State = GameStateId.Paused;
+            }
+            else
+            {
+                State = m_StateBeforePaused;
+            }
+        }
+        get { return m_Paused; }
+    }
+
     // Use this for initialization
     void Start()
     {
