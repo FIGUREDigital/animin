@@ -7,7 +7,6 @@ public class UIManager : MonoBehaviour
 	private const float tweenDelay = 0.1f;
 	private static float mClock;
 	private static GameObject mOldScreen;
-	private static MonoBehaviour mono;
 
 	#region Singleton
 	
@@ -26,12 +25,6 @@ public class UIManager : MonoBehaviour
 	}
 	
 	#endregion
-
-
-	private void Start()
-	{
-		mono = new MonoBehaviour();
-	}
 
 	public void UITransition(GameObject oldScreen, GameObject newScreen)
 	{
@@ -56,7 +49,6 @@ public class UIManager : MonoBehaviour
 		Destroy(tpNew, totalTime);
 
 		mOldScreen = oldScreen;
-		mono.Invoke ("DeactivateScreen", totalTime);
 	}
 
 	private void DeactivateScreen()
