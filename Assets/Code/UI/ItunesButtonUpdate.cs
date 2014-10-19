@@ -22,6 +22,12 @@ public class ItunesButtonUpdate : MonoBehaviour
 	void OnEnable()
 	{
 		SetCharacterIcons();
+		UnlockCharacterManager.Instance.OpenShop();
+	}
+	
+	void OnDisable()
+	{
+		ShopManager.Instance.EndStore();
 	}
 
 	void SetCharacterIcons()
@@ -52,6 +58,7 @@ public class ItunesButtonUpdate : MonoBehaviour
 		}
 		mId = (int)ProfilesManagementScript.Singleton.AniminToUnlockId;
 	}
+
 
 #if UNITY_IOS
 	void purchaseSuccessful( StoreKitTransaction transaction )

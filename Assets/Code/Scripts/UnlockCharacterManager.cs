@@ -124,7 +124,9 @@ public class UnlockCharacterManager
 
 	private void UnlockCharacter()
 	{
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
 		character.ChangeLockedState(true);
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
 	}
 }

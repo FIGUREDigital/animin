@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PurchaseBackButton : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+public class PurchaseBackButton : MonoBehaviour 
+{
+	void OnClick()
+	{
+		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 	}
 }
