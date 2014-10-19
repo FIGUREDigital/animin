@@ -324,10 +324,10 @@ public class CharacterProgressScript : MonoBehaviour
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodSword, 1);
 
         Debug.Log("Character Start");
-        BetweenSceneData.Instance.DoCelebration();
-        if (BetweenSceneData.Instance.MiniGameCelebration)
+        if (BetweenSceneData.Instance.ReturnFromMiniGame)
         {
-		SpawnChests();
+		    SpawnChests();
+            exitSleep();
         }
 	}
 

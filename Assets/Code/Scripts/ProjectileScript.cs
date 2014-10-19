@@ -140,6 +140,10 @@ public class ProjectileScript : MonoBehaviour
 	{
         if (!__local) return;
 
+ //       Debug.Log("Collision : [" + collision.gameObject + "];");
+
+        if (collision.gameObject == UIGlobalVariablesScript.Singleton.MainCharacterRef) return;
+
 //		Debug.Log("COLLISION DETECTED: " + collision.gameObject.name);
 		BeginFadeOut = true;
 

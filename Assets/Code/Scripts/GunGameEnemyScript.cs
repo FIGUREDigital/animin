@@ -11,6 +11,8 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
     public Color SkinColor;
     public string BulletSplat;
 
+
+    // Harry Start
     private bool m_Paused;
     public bool Paused
     {
@@ -21,6 +23,8 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
             this.GetComponent<Animator>().enabled = !value;
         }
     }
+    public bool PreventMerge;
+
 
     // SHAUN START
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,6 +80,8 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
 			Vector3 positino = (Vector3)GetComponent<PhotonView>().instantiationData[2];
             //		Debug.Log("RECEIVED level: " + level.ToString());
 			UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().SpawnEnemyEnd(this.gameObject, level, textureIndex, positino);
+
+            PreventMerge = true;
         }
     }
 
@@ -119,48 +125,64 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
             Vector3 direction = Vector3.Normalize(TargetToFollow.transform.localPosition - this.transform.localPosition);
             this.transform.localPosition += direction * Speed * Time.deltaTime;
 
-            //GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("EnemyGunGame");
-            //for (int i = 0; i < allEnemies.Length; ++i)
-            //{
-            //    if (allEnemies[i] == this.gameObject) continue;
-            //    GunGameEnemyScript enemyScript = allEnemies[i].GetComponent<GunGameEnemyScript>();
-            //    if (enemyScript.Level != this.Level) continue;
-            //    if (enemyScript.HasMerged) continue;
+            Debug.Log("Enemy : [" + this.name + "]; Speed : [" + Speed + "];");
 
-            //    float radius = Vector3.Distance(allEnemies[i].transform.localPosition, this.gameObject.transform.localPosition);
 
-            //    if (radius <= 0.06f)
-            //    {
-            //        Debug.Log("the enemy has been merged");
-            //        GameObject newObject = minigame.SpawnEnemyStart(Level + 1);
-            //        newObject.transform.localPosition = this.gameObject.transform.localPosition;
+            GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("EnemyGunGame");
+            for (int i = 0; i < allEnemies.Length; ++i)
+            {
+                if (allEnemies[i] == this.gameObject) continue;
+                GunGameEnemyScript enemyScript = allEnemies[i].GetComponent<GunGameEnemyScript>();
+                if (enemyScript.Level != this.Level) continue;
+                if (enemyScript.HasMerged) continue;
 
-            //        HasMerged = true;
-            //        enemyScript.HasMerged = true;
+                float radius = Vector3.Distance(allEnemies[i].transform.localPosition, this.gameObject.transform.localPosition);
+                
+                if (radius <= 0.06f)
+                {
+                    Debug.Log("the enemy has been merged");
+                    GameObject newObject = minigame.SpawnEnemyStart(Level + 1);
+                    newObject.transform.localPosition = this.gameObject.transform.localPosition;
 
-            //        //minigame.SpawnedObjects.Remove(this.gameObject);
-            //        //Destroy(this.gameObject);
+                    HasMerged = true;
+                    enemyScript.HasMerged = true;
 
-            //        //minigame.SpawnedObjects.Remove(allEnemies[i]);
-            //        //Destroy(allEnemies[i]);
+                    //minigame.SpawnedObjects.Remove(this.gameObject);
+                    //Destroy(this.gameObject);
 
-            //        if (GameController.instance.gameType == GameType.NETWORK)
-            //            SendEventHasMerged();
-            //        else
-            //            ReceiveEventMerged();
+                    //minigame.SpawnedObjects.Remove(allEnemies[i]);
+                    //Destroy(allEnemies[i]);
 
-            //    }
-            //    else if (radius <= 0.6f && minigame.PlayersCharacters.Contains(TargetToFollow))
-            //    {
-            //        this.TargetToFollow = allEnemies[i];
-            //        enemyScript.TargetToFollow = this.gameObject;
-            //        Speed += Speed * 1.10f * Time.deltaTime;
-            //    }
-            //    else
-            //    {
-            //        this.TargetToFollow = minigame.PlayersCharacters[Random.Range(0, minigame.PlayersCharacters.Count)];
-            //    }
-            //}
+                    if (GameController.instance.gameType == GameType.NETWORK)
+                        SendEventHasMerged();
+                    else
+                        ReceiveEventMerged();
+
+                }
+
+                    //if enemies are close and they are following the player...
+                else if (radius <= 0.6f && minigame.PlayersCharacters.Contains(TargetToFollow))
+                {
+                    Debug.Log("Target : [" + TargetToFollow.name + "];");
+
+                    if (PreventMerge) continue;
+                    if (enemyScript.PreventMerge) continue;
+
+                    this.TargetToFollow = allEnemies[i];
+                    enemyScript.TargetToFollow = this.gameObject;
+
+                    float newSpeed = Speed * 2f;
+                    Speed += newSpeed;
+                    enemyScript.Speed = newSpeed;
+
+                    PreventMerge = true;
+                    enemyScript.PreventMerge = true;
+                }
+                else
+                {
+                    //this.TargetToFollow = minigame.PlayersCharacters[Random.Range(0, minigame.PlayersCharacters.Count)]; //Commented out. Should already be following the player...
+                }
+            }
 
             RotateToLookAtPoint(TargetToFollow.transform.position);
 

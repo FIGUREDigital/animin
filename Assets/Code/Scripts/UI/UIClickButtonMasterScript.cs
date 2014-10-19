@@ -314,7 +314,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.CloseCurrentMinigame:
 		{
-            BetweenSceneData.Instance.MiniGameCelebration = true;
+            BetweenSceneData.Instance.ReturnFromMiniGame = true;
 			Application.LoadLevel("VuforiaTest");
             break;
 

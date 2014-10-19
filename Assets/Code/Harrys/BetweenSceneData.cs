@@ -4,29 +4,18 @@ using System.Collections;
 public class BetweenSceneData
 {
 
-    private bool m_MiniGameCelebration;
-    public bool MiniGameCelebration
+    private bool m_ReturnFromMiniGame;
+    public bool ReturnFromMiniGame
     {
         get
         {
-            return m_MiniGameCelebration;
+            return m_ReturnFromMiniGame;
         }
         set
         {
-            m_MiniGameCelebration = value;
+            m_ReturnFromMiniGame = value;
         }
     }
-
-    public void DoCelebration(){
-
-        Debug.Log("Minigame Celebration test : [" + m_MiniGameCelebration + "];");
-        if (m_MiniGameCelebration)
-        {
-            
-        }
-    }
-
-
     #region Singleton
     static BetweenSceneData m_Instance;
     public static BetweenSceneData Instance
