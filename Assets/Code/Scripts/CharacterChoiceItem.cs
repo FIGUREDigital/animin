@@ -10,6 +10,8 @@ public class CharacterChoiceItem : MonoBehaviour
 	[SerializeField]
 	private GameObject mLockedButton;
 	[SerializeField]
+	private GameObject mAgeLabel;
+	[SerializeField]
 	private bool mUnlocked;
 	[SerializeField]
 	private AniminId mId;
@@ -63,6 +65,12 @@ public class CharacterChoiceItem : MonoBehaviour
 	void OnEnable()
 	{
 		ChangeLockedState(mUnlocked || UnlockCharacterManager.Instance.CheckCharacterPurchased(mId));
+		UpdateAge();
+	}
+
+	private void UpdateAge()
+	{
+
 	}
 
 	public void ChangeLockedState(bool unlocked)
@@ -71,6 +79,7 @@ public class CharacterChoiceItem : MonoBehaviour
 		mSprite.SetActive(mUnlocked);
 		mDisabledSprite.SetActive(!mUnlocked);
 		mLockedButton.SetActive(!mUnlocked);
+		mAgeLabel.SetActive(mUnlocked);
 	}
 	public void UnlockCharacter()
 	{
