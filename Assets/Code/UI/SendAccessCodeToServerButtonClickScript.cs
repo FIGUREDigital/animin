@@ -50,9 +50,11 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 		if(Application.isEditor){ return; }
 		#if UNITY_IOS
 		StoreKitManager.purchaseSuccessfulEvent += purchaseSuccessful;
+		StoreKitManager.purchaseCancelledEvent += purchaseUnsuccessful;
 		StoreKitManager.purchaseFailedEvent += purchaseUnsuccessful;
 		#elif UNITY_ANDROID
         GoogleIABManager.purchaseSucceededEvent += purchaseSuccessful;
+		GoogleIABManager.purchaseCancelledEvent += purchaseUnsuccessful;
         GoogleIABManager.purchaseFailedEvent += purchaseUnsuccessful;
 		#endif
 	}
@@ -61,9 +63,11 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 		if(Application.isEditor){ return; }
 		#if UNITY_IOS
 		StoreKitManager.purchaseSuccessfulEvent -= purchaseSuccessful;
+		StoreKitManager.purchaseCancelledEvent -= purchaseUnsuccessful;
 		StoreKitManager.purchaseFailedEvent -= purchaseUnsuccessful;
 		#elif UNITY_ANDROID
         GoogleIABManager.purchaseSucceededEvent -= purchaseSuccessful;
+		GoogleIABManager.purchaseCancelledEvent -= purchaseUnsuccessful;
         GoogleIABManager.purchaseFailedEvent -= purchaseUnsuccessful;
 		#endif
 	}
