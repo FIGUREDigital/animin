@@ -216,7 +216,6 @@ public class JoystiqScript : MonoBehaviour {
 					finalMovementDirection.x = directionVector.x;
 					finalMovementDirection.y = directionVector.y;
 
-					Debug.Log("finalMovementDirection = "+finalMovementDirection);
 				}
 			}
 		}
