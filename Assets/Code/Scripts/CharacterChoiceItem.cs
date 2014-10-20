@@ -70,7 +70,7 @@ public class CharacterChoiceItem : MonoBehaviour
 
 	private void UpdateAge()
 	{
-
+		mAgeLabel.GetComponent<UILabel>().text = "Age " + PlayerProfileData.ActiveProfile.Characters[(int)mId].Age;
 	}
 
 	public void ChangeLockedState(bool unlocked)

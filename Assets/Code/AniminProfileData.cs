@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 
 public class PersistentData
@@ -22,14 +23,25 @@ public class PersistentData
 	public List<AniminSubevolutionStageId> SubstagesCompleted = new List<AniminSubevolutionStageId>(); 
 	public string Username;
 	public System.DateTime CreatedOn;
-	
+
+
+
+	private int age;
 	private bool audioIsOn;
 	private float happy;
 	private float hungry;
 	private float fitness;
 	private float evolution;
 	private float health;
-	
+
+	public int Age
+	{
+		get
+		{
+			CalcAge();
+			return age;
+		}
+	}
 	public float Happy
 	{
 		get
@@ -95,7 +107,13 @@ public class PersistentData
 			if(health < 0) health = 0;
 		}
 	}
-	
+
+	private void CalcAge()
+	{
+		System.TimeSpan realAge = System.DateTime.Now.Subtract(CreatedOn);
+		age = (int)Math.Floor(realAge.TotalDays / 3);
+	}
+
 	public void SetDefault(AniminId animin)
 	{
 		SubstagesCompleted.Clear();

@@ -156,6 +156,7 @@
     <Compile Include="Assets\Code\Scripts\TrackSoundEffectOnTickScript.cs" />
     <Compile Include="Assets\Code\Scripts\TrackVuforiaScript.cs" />
     <Compile Include="Assets\Code\Scripts\TurdRotationScript.cs" />
+    <Compile Include="Assets\Code\Scripts\UI\AniminNameSprite.cs" />
     <Compile Include="Assets\Code\Scripts\UI\Menu\BackToProfilesClickScript.cs" />
     <Compile Include="Assets\Code\Scripts\UI\Menu\FacebookClickScript.cs" />
     <Compile Include="Assets\Code\Scripts\UI\Menu\GoogleClickScript.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Assets\Code\UI\ItunesButtonUpdate.cs" />
     <Compile Include="Assets\Code\UI\OpenSettingsInMainMenuScript.cs" />
     <Compile Include="Assets\Code\UI\PressEdmBoxKeyScript.cs" />
+    <Compile Include="Assets\Code\UI\PurchaseChoiceScreen.cs" />
     <Compile Include="Assets\Code\UI\SelectCharacterClickScript.cs" />
     <Compile Include="Assets\Code\UI\SendAccesCodeFromChatboxClickScript.cs" />
     <Compile Include="Assets\Code\UI\SendAccessCodeToServerButtonClickScript.cs" />
