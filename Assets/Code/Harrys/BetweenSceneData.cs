@@ -16,6 +16,16 @@ public class BetweenSceneData
             m_ReturnFromMiniGame = value;
         }
     }
+
+
+    private int m_Points;
+    public int Points
+    {
+        get { return m_Points; }
+        set { m_Points = value; }
+    }
+    public void ResetPoints() { Points = 0; }
+
     #region Singleton
     static BetweenSceneData m_Instance;
     public static BetweenSceneData Instance

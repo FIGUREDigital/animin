@@ -287,15 +287,9 @@ public class CharacterProgressScript : MonoBehaviour
 
 
         //HARRY: REMEMEBR TO REMOVE THESE COMMENTS, FOR CHRIST'S SAKE.
+		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
+        //this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(AniminId.Pi   , AniminEvolutionStageId.Baby);
         
-		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(
-			PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
-
-         
-        /*
-        this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(
-            AniminId.Tbo, AniminEvolutionStageId.Baby);
-        */
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.AlmondMilk, 3);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Avocado, 1);
 		//AddItemToInventory(InventoryItemId.Banana, 1);
@@ -323,9 +317,19 @@ public class CharacterProgressScript : MonoBehaviour
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodFrame, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodSword, 1);
 
-        Debug.Log("Character Start");
+        Debug.ClearDeveloperConsole();
         if (BetweenSceneData.Instance.ReturnFromMiniGame)
         {
+            if (BetweenSceneData.Instance.Points >= 0)
+            {
+                if (BetweenSceneData.Instance.Points >= 10000)
+                    AchievementsScript.Singleton.Show(AchievementTypeId.Gold, BetweenSceneData.Instance.Points);
+                else if (BetweenSceneData.Instance.Points >= 5000)
+                    AchievementsScript.Singleton.Show(AchievementTypeId.Silver, BetweenSceneData.Instance.Points);
+                else
+                    AchievementsScript.Singleton.Show(AchievementTypeId.Bronze, BetweenSceneData.Instance.Points);
+                BetweenSceneData.Instance.ResetPoints();
+            }
 		    SpawnChests();
             exitSleep();
         }
