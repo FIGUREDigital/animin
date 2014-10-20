@@ -49,4 +49,12 @@ public class UIPopupItemScript : MonoBehaviour
 	{
 	
 	}
+
+	void Awake(){
+		//Physics.IgnoreCollision
+	}
+	void OnCollisionEnter(Collision collisionInfo)
+	{
+		Debug.Log ("BLARRRRRRRRRGH : "+collisionInfo.collider.name);
+	}
 }

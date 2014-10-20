@@ -221,6 +221,8 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public GameObject SleepBoundingBox;
 
+	public GameObject GroundPlane;
+
 	ItemPickupSavedData pickupItemSavedData = new ItemPickupSavedData();
 	RaycastHit moveHitInfo;
 	RaycastHit detectDragHit;
@@ -628,6 +630,7 @@ public class CharacterProgressScript : MonoBehaviour
 		if (Physics.Raycast(ray, out hitInfo))
 		{
 			hadRayCollision = true;
+			Debug.Log ("Ray Collision : ["+hitInfo.collider.gameObject.name+"];");
 		}
 
 
@@ -895,7 +898,7 @@ public class CharacterProgressScript : MonoBehaviour
 							//CurrentAction = ActionId.DetectFlickAndThrow;
 							MousePositionAtDragIfMouseMoves = Input.mousePosition;
 						}
-						else if(hitInfo.collider.tag == "Items")
+					else if(hitInfo.collider.tag == "Items" && hitInfo.collider.transform)
 						{
 							IsDetectingMouseMoveForDrag = true;
 							//CurrentAction = ActionId.DetectMouseMoveAndDrag;
@@ -1186,7 +1189,7 @@ public class CharacterProgressScript : MonoBehaviour
 							this.GetComponent<CharacterProgressScript>().GroundItems.Remove(hitInfo.collider.gameObject);
 							Destroy(hitInfo.collider.gameObject);
 						}
-						else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
+					else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || hitInfo.collider.name.StartsWith("Extended")|| (hitInfo.collider.tag == "Items"))
 						{
 							//float distane = Vector3.Distance(hitInfo.point, this.transform.position);
 							//MoveTo(hitInfo.point, distane > 220.0f ? true : false);
@@ -1421,7 +1424,11 @@ public class CharacterProgressScript : MonoBehaviour
 			case ActionId.DragItemAround:
 			{
 
-				if(hadRayCollision && hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
+
+
+
+			if(hadRayCollision && (hitInfo.collider.name.StartsWith("Invisible Ground Plane") || hitInfo.collider.name.StartsWith("Extended")))
+			//if(hadRayCollision && hitInfo.collider.name.StartsWith("SecondGroundPlane"))
 				{
 					Debug.Log("DRAGGING");
 					DragableObject.transform.position = hitInfo.point;
