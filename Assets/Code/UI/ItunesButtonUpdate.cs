@@ -67,8 +67,21 @@ public class ItunesButtonUpdate : MonoBehaviour
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		UnregisterListeners();
 	}
+
+	void purchaseCancelled( string response )
+	{
+		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+		UnregisterListeners();
+	}
 #elif UNITY_ANDROID
     void purchaseSuccessful( GooglePurchase transaction)
+	{
+		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+		UnregisterListeners();
+	}
+	void purchaseCancelled( string response )
 	{
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
@@ -89,9 +102,11 @@ public class ItunesButtonUpdate : MonoBehaviour
         
 #if UNITY_IOS
 		StoreKitManager.purchaseSuccessfulEvent += purchaseSuccessful;
+		StoreKitManager.purchaseCancelledEvent += purchaseCancelled;
 		StoreKitManager.purchaseFailedEvent += purchaseUnsuccessful;
 #elif UNITY_ANDROID
         GoogleIABManager.purchaseSucceededEvent += purchaseSuccessful;
+		GoogleIABManager.purchaseCancelledEvent += purchaseCancelled;
 		GoogleIABManager.purchaseFailedEvent += purchaseUnsuccessful;
 #endif
     }
@@ -100,10 +115,12 @@ public class ItunesButtonUpdate : MonoBehaviour
 #if UNITY_IOS
 		if(Application.isEditor){ return; }
 		StoreKitManager.purchaseSuccessfulEvent -= purchaseSuccessful;
+		StoreKitManager.purchaseCancelledEvent -= purchaseCancelled;
 		StoreKitManager.purchaseFailedEvent -= purchaseUnsuccessful;
 #elif UNITY_ANDROID
 		if(Application.isEditor){ return; }
         GoogleIABManager.purchaseSucceededEvent -= purchaseSuccessful;
+		GoogleIABManager.purchaseCancelledEvent -= purchaseCancelled;
 		GoogleIABManager.purchaseFailedEvent -= purchaseUnsuccessful;
 #endif
     }

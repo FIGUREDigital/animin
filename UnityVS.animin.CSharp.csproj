@@ -180,6 +180,7 @@
     <Compile Include="Assets\Code\UI\ItunesButtonUpdate.cs" />
     <Compile Include="Assets\Code\UI\OpenSettingsInMainMenuScript.cs" />
     <Compile Include="Assets\Code\UI\PressEdmBoxKeyScript.cs" />
+    <Compile Include="Assets\Code\UI\PurchaseChoiceScreen.cs" />
     <Compile Include="Assets\Code\UI\SelectCharacterClickScript.cs" />
     <Compile Include="Assets\Code\UI\SendAccesCodeFromChatboxClickScript.cs" />
     <Compile Include="Assets\Code\UI\SendAccessCodeToServerButtonClickScript.cs" />
