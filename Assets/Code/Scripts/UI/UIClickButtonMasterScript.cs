@@ -288,6 +288,9 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			
 		case UIFunctionalityId.OpenMinigamesScreen:
 		{
+            if (UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef.activeInHierarchy)
+                UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef.SetActive(false);
+
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().Stop(true);
 
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
@@ -315,6 +318,16 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		case UIFunctionalityId.CloseCurrentMinigame:
 		{
             BetweenSceneData.Instance.ReturnFromMiniGame = true;
+            if (UIGlobalVariablesScript.Singleton.LoadingScreenRef != null)
+            {
+                UIGlobalVariablesScript.Singleton.LoadingScreenRef.SetActive(true);
+                UIGlobalVariablesScript.Singleton.MinigameInterruptedMenu.SetActive(false);
+                UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(false);
+                UIGlobalVariablesScript.Singleton.InsideMinigamesMasterScreenRef.SetActive(false);
+
+                if (UIGlobalVariablesScript.Singleton.GunGameInterface != null)
+                    UIGlobalVariablesScript.Singleton.GunGameInterface.SetActive(false);
+            }
 			Application.LoadLevel("VuforiaTest");
             break;
 
@@ -435,6 +448,11 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			//SavedScale = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale;
 			//Debug.Log("SavedScale 1:" + SavedScale.ToString());
+
+            UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
+            UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(false);
+            UIGlobalVariablesScript.Singleton.LoadingScreenRef.SetActive(true);
+
 			
 			switch(UIGlobalVariablesScript.SelectedMinigameToPlay)
 			{
