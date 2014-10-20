@@ -34,6 +34,10 @@ public class EvolutionMarkerManager : MonoBehaviour
 	
 	#endregion
 
+	public void AddZef()
+	{
+		mZefProgress++;
+	}
 
 	// Use this for initialization
 	void Start () 
@@ -49,6 +53,7 @@ public class EvolutionMarkerManager : MonoBehaviour
 			mZefProgress = 0;
 			mReward = mMarkers[mCurrentMarker];
 			mCurrentMarker++;
+			AchievementsScript.Singleton.Show(AchievementTypeId.Evolution, 100);
 		}
 	}
 
