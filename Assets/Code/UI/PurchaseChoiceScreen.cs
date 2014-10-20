@@ -14,7 +14,7 @@ public class PurchaseChoiceScreen : MonoBehaviour {
 		mSocialButtons.SetActive(false);
 	}
 
-	void OnDiable()
+	void OnDisable()
 	{
 		mTitle.SetActive(true);
 		mSocialButtons.SetActive(true);
