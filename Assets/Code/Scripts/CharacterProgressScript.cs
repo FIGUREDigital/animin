@@ -319,7 +319,7 @@ public class CharacterProgressScript : MonoBehaviour
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodFrame, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodSword, 1);
 
-        Debug.ClearDeveloperConsole();
+
         if (BetweenSceneData.Instance.ReturnFromMiniGame)
         {
             if (BetweenSceneData.Instance.Points >= 0)
