@@ -30,8 +30,6 @@ public class DetectDragIconScript : MonoBehaviour {
 
 		child.GetComponent<BoxCollider>().enabled = false;
 
-		child.AddComponent<ItemColliderDetector> ();
-
 		child.transform.parent = UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform;
 		child.transform.position = Vector3.zero;
 		child.transform.rotation = Quaternion.identity;

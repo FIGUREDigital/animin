@@ -18,8 +18,6 @@ public enum UIFunctionalityId
 	BackToCaringFromStats,
 	Settings,
 
-    NextTutorialScreen,
-
 	TakePicture,
 	SharePicture,
 	ShowAlbum,
