@@ -65,12 +65,21 @@ public class CharacterChoiceItem : MonoBehaviour
 	void OnEnable()
 	{
 		ChangeLockedState(mUnlocked || UnlockCharacterManager.Instance.CheckCharacterPurchased(mId));
-		UpdateAge();
+		Invoke ("UpdateAge", 0.1f);
 	}
 
 	private void UpdateAge()
 	{
-		mAgeLabel.GetComponent<UILabel>().text = "Age " + PlayerProfileData.ActiveProfile.Characters[(int)mId].Age;
+		UILabel label = mAgeLabel.GetComponent<UILabel>();
+		if(PlayerProfileData.ActiveProfile != null)
+		{
+			PersistentData pd = PlayerProfileData.ActiveProfile.Characters[(int)mId];
+			label.text = "Age " + pd.Age;
+		}
+		else
+		{
+			label.text = "";
+		}
 	}
 
 	public void ChangeLockedState(bool unlocked)
