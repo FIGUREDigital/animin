@@ -7,6 +7,7 @@ public enum PopupItemType
 	Item,
 	Medicine,
 	Token,
+	Count
 }
 
 public enum MenuFunctionalityUI

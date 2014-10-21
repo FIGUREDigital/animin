@@ -13,6 +13,11 @@ public class UIClickButtonMasterScript : MonoBehaviour
 	private static float SavedRadius;
 	//private Vector3 SavedScale;
 
+	public static void RefreshUI(){
+
+
+	}
+
 	public static void PopulateInterfaceItems(PopupItemType typeToLoad, List<GameObject> allSprites)
 	{
 		List<GameObject> subItems = new List<GameObject>();
@@ -143,7 +148,11 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			{
 				if(script.GroundItems[i].GetComponent<UIPopupItemScript>() != null)
 				{
-					PersistentData.Singleton.AddItemToInventory(script.GroundItems[i].GetComponent<UIPopupItemScript>().Id, 1);
+					if (script.GroundItems[i].GetComponent<UIPopupItemScript>().Type == PopupItemType.Token){
+						script.OnInteractWithPopupItem(script.GroundItems[i].GetComponent<UIPopupItemScript>());
+					} else {
+					    PersistentData.Singleton.AddItemToInventory(script.GroundItems[i].GetComponent<UIPopupItemScript>().Id, 1);
+					}
 				}
 				Destroy(script.GroundItems[i]);
 			}
@@ -320,6 +329,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
             BetweenSceneData.Instance.ReturnFromMiniGame = true;
             if (UIGlobalVariablesScript.Singleton.LoadingScreenRef != null)
             {
+				Debug.Log("LoadingScreenActive");
                 UIGlobalVariablesScript.Singleton.LoadingScreenRef.SetActive(true);
                 UIGlobalVariablesScript.Singleton.MinigameInterruptedMenu.SetActive(false);
                 UIGlobalVariablesScript.Singleton.JoystickArt.SetActive(false);

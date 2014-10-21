@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class LoadProfileMG1 : MonoBehaviour {
-
+	
 	// Use this for initialization
 	void Start () 
 	{
-
+		
 		//From UIFunctionalityId.StartSelectedMinigame
 		
 		//		UIGlobalVariablesScript.Singleton.ARWorldRef.SetActive(false);
@@ -66,21 +66,21 @@ public class LoadProfileMG1 : MonoBehaviour {
 		
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localScale = new Vector3(0.026f, 0.026f, 0.025f);
 		//		Camera.main.GetComponent<MusicScript>().PlayCube();
-
+		
 		//this.GetComponent<CharacterSwapManagementScript>().CurrentModel.transform.parent = this.transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 	}
 	void Awake(){
-
+		
 		PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("Dummy");
 		if (PlayerProfileData.ActiveProfile == null)
 			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Pi];
-
-
+		
+		
 		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
 		this.GetComponent<MinigameAnimationControllerScript>().LoadAnimator(this.GetComponent<CharacterSwapManagementScript>().CurrentModel);
 	}
