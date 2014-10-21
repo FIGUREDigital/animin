@@ -1620,8 +1620,7 @@ public class CharacterProgressScript : MonoBehaviour
 			{
 				//Stop(true);
 				PersistentData.Singleton.Evolution += item.Points;
-				PersistentData.Singleton.ZefTokens ++;
-				EvolutionMarkerManager.Instance.AddZef();
+				EvolutionManager.Instance.AddZef();
 
 				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
 				{

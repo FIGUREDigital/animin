@@ -41,12 +41,35 @@ public class DebugCheats : MonoBehaviour
 			AchievementsScript.Singleton.Show(AchievementTypeId.EvolutionMarkerTwo, 0);
 			break;
 		case CheatButtons.Evolve:
+			switch(PersistentData.Singleton.AniminEvolutionId)
+			{
+			case AniminEvolutionStageId.Baby:
+				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold + 50;
+				break;
+			case AniminEvolutionStageId.Kid:
+				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold + 50;
+				break;
+			case AniminEvolutionStageId.Adult:
+			default:
+				break;
+			}
 			break;
 		case CheatButtons.Devolve:
+			switch(PersistentData.Singleton.AniminEvolutionId)
+			{
+			case AniminEvolutionStageId.Baby:
+			default:
+				break;
+			case AniminEvolutionStageId.Kid:
+				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold - 50;
+				break;
+			case AniminEvolutionStageId.Adult:
+				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold - 50;
+				break;
+			}
 			break;
 		case CheatButtons.GiveZeff:
-			PersistentData.Singleton.ZefTokens++;
-			EvolutionMarkerManager.Instance.AddZef();
+			EvolutionManager.Instance.AddZef();
 			break;
 		case CheatButtons.TakeZeff:
 			PersistentData.Singleton.ZefTokens--;

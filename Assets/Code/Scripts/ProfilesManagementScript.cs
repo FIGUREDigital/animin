@@ -37,7 +37,7 @@ public class ProfilesManagementScript : MonoBehaviour
 			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("DefaultProfile");
 		//}
 		
-		EvolutionMarkerManager.Instance.Deserialize();
+		EvolutionManager.Instance.Deserialize();
 
 		//ServerManager.Register("ServerProfile");
 		//AppDataManager.SetUsername("ServerProfile");
