@@ -936,7 +936,8 @@ public class CharacterProgressScript : MonoBehaviour
 				else if(IsDetectingMouseMoveForDrag && Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) >= 5 && Input.GetButton("Fire1"))
 				{
 					//Debug.Log("IsDetectingMouseMoveForDrag");
-					pickupItemSavedData.WasInHands = false;
+
+				#region Some Commented Out Code
 					
 					// DRAG ITEM FROM CHARACTER AWAY FROM HIM
 					/*if(hit.collider.name.StartsWith("MainCharacter") && DragableObject == null && animationController.IsHoldingItem)
@@ -967,21 +968,27 @@ public class CharacterProgressScript : MonoBehaviour
 					
 					// GRAB FROM FLOOR
 					//else
+				#endregion
 					{
-						//Debug.Log("IT SHOULD GO AND DRAG NOW");
 
 						DragableObject = detectDragHit.collider.gameObject;
-						pickupItemSavedData.WasInHands = false;
 						
-						pickupItemSavedData.Position = DragableObject.transform.position;
-						pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
-						//Physics.IgnoreCollision(DragableObject.collider, this.collider, true);
-						//Debug.Log("DISABLING COLLISION");
-						
-						CurrentAction = ActionId.DragItemAround;
-						IsDetectingMouseMoveForDrag = false;
+						if (DragableObject.GetComponent<UIPopupItemScript>().Type != PopupItemType.Token){
 
-						DragableObject.layer = LayerMask.NameToLayer("IgnoreCollisionWithCharacter");
+							pickupItemSavedData.WasInHands = false;
+							//Debug.Log("IT SHOULD GO AND DRAG NOW");
+							pickupItemSavedData.WasInHands = false;
+							
+							pickupItemSavedData.Position = DragableObject.transform.position;
+							pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
+							//Physics.IgnoreCollision(DragableObject.collider, this.collider, true);
+							//Debug.Log("DISABLING COLLISION");
+							
+							CurrentAction = ActionId.DragItemAround;
+							IsDetectingMouseMoveForDrag = false;
+
+							DragableObject.layer = LayerMask.NameToLayer("IgnoreCollisionWithCharacter");
+						}
 					}
 					
 					

@@ -32,6 +32,7 @@ public class DroppedItemScript : MonoBehaviour {
 		
 		if (this.transform.position.y <= -350) {
 			PersistentData.Singleton.AddItemToInventory(m_ItemScript.Id,1);
+			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().GroundItems.Remove(this.gameObject);
 			UnityEngine.Object.Destroy(this.gameObject);
 		}
 	}
