@@ -1437,6 +1437,9 @@ public class CharacterProgressScript : MonoBehaviour
 
 				if(!Input.GetButton("Fire1"))
 				{
+					if(hitInfo.collider.name.StartsWith("Extended")){
+					DragableObject.AddComponent<DroppedItemScript>();
+					}
 					CurrentAction = ActionId.DropItem;
 				}
 				
