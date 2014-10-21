@@ -55,25 +55,58 @@ public class AchievementsScript : MonoBehaviour
 				break;
 			}
 		case AchievementTypeId.Achievement:
-		{
-			Title.text = "Achievement!";
-			BackgroundGradient.spriteName = "achievementGreen";
-			Description.text = "Congratulations, you got an achievement.";
-			MedalIcon.spriteName = @"achievementIconStar";
-			break;
-		}
+			{
+				Title.text = "Achievement!";
+				BackgroundGradient.spriteName = "achievementGreen";
+				Description.text = "Congratulations, you got an achievement.";
+				MedalIcon.spriteName = @"achievementIconStar";
+				break;
+			}
 
 		case AchievementTypeId.Evolution:
-		{
-			Title.text = "Your Animin has evolved!";
-			BackgroundGradient.spriteName = "achievementGreen";
-			Description.text = "Well done! Keep taking care of your Animin and training them up.";
-			MedalIcon.spriteName = @"achievementEvolution";
-			break;
-		}
+			{
+				Title.text = "Your Animin has evolved!";
+				BackgroundGradient.spriteName = "achievementGreen";
+				Description.text = "Well done! Keep taking care of your Animin and training them up.";
+				MedalIcon.spriteName = @"achievementEvolution";
+				break;
+			}
+
+		case AchievementTypeId.EvolutionMarkerOne:
+			{
+				Title.text = "Your animin has grown!";
+				BackgroundGradient.spriteName = "achievementGreen";
+				Description.text = "Well done! Keep taking care of your Animin and training them up.";
+				MedalIcon.spriteName = @"achievementMarker1";
+				break;
+			}
+		case AchievementTypeId.EvolutionMarkerTwo:
+			{
+				Title.text = "You unlocked a surprise!";
+				BackgroundGradient.spriteName = "achievementGreen";
+				Description.text = "Well done! Keep taking care of your Animin and training them up.";
+				MedalIcon.spriteName = @"achievementMarker2";
+				break;
+			}
+		case AchievementTypeId.Tutorial:
+			{
+				Title.text = "Yo!";
+				BackgroundGradient.spriteName = "achievementOrange";
+				Description.text = "Well done! Keep taking care of your Animin and training them up.";
+				MedalIcon.spriteName = @"achievementWorm";
+				break;
+			}
+		case AchievementTypeId.Birthday:
+			{
+				Title.text = "Happy Birthday!";
+				BackgroundGradient.spriteName = "achievementRed";
+				Description.text = "Well done! Keep taking care of your Animin and training them up.";
+				MedalIcon.spriteName = @"achievementBirthday";
+				break;
+			}
 		}
 	}
-
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -138,4 +171,8 @@ public enum AchievementTypeId
 	Bronze,
 	Evolution,
 	Achievement,
+	Tutorial,
+	EvolutionMarkerOne,
+	EvolutionMarkerTwo,
+	Birthday,
 }
