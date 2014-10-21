@@ -17,6 +17,7 @@ public class EvolutionManager : MonoBehaviour
 	private int mZefProgress;
 	private int mCurrentMarker;
 	private string mReward;
+	private AniminEvolutionStageId mCorrectStage;
 
 	public static List<string> mMarkers = new List<string>();
 
@@ -59,7 +60,9 @@ public class EvolutionManager : MonoBehaviour
 	}
 	
 	#endregion
-
+	public void Init()
+	{
+	}
 	public void AddZef()
 	{
 		PersistentData.Singleton.ZefTokens++;
@@ -83,14 +86,13 @@ public class EvolutionManager : MonoBehaviour
 		PersistentData.Singleton.ZefTokens -= amount;
 	}
 
-	void Update () 
+	public void UpdateEvo () 
 	{
 		if(PersistentData.Singleton.ZefTokens >= mNextMarker)
 		{
 			mNextMarker += MARKER_RATE;
-			mReward = mMarkers[mCurrentMarker];
+			//mReward = mMarkers[mCurrentMarker];
 			mCurrentMarker++;
-			AchievementsScript.Singleton.Show(AchievementTypeId.Evolution, 100);
 		}
 
 		CheckEvolution();
@@ -119,6 +121,7 @@ public class EvolutionManager : MonoBehaviour
 		}
 		if(stage != correctStage)
 		{
+			mCorrectStage = correctStage;
 			if(stage < correctStage)
 			{
 				Evolve();
@@ -131,9 +134,14 @@ public class EvolutionManager : MonoBehaviour
 	}
 	private void Evolve()
 	{
+		PersistentData.Singleton.AniminEvolutionId = mCorrectStage;
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, mCorrectStage);
+		AchievementsScript.Singleton.Show(AchievementTypeId.Evolution, 100);
 	}
 	private void Devolve()
 	{
+		PersistentData.Singleton.AniminEvolutionId = mCorrectStage;
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, mCorrectStage);
 	}
 
 	public List<string> Deserialize()

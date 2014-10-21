@@ -48,12 +48,20 @@ public class StoreKitManager : AbstractManager
 
     static StoreKitManager()
     {
-		AbstractManager.initialize( typeof( StoreKitManager ) );
-
-		// we ignore the results of this call because our only purpose is to trigger the creation of the required listener on the native side for transaction processing.
-		StoreKitBinding.canMakePayments();
+//		AbstractManager.initialize( typeof( StoreKitManager ) );
+//
+//		// we ignore the results of this call because our only purpose is to trigger the creation of the required listener on the native side for transaction processing.
+//		StoreKitBinding.canMakePayments();
     }
 
+
+	void Awake()
+	{
+		AbstractManager.initialize( typeof( StoreKitManager ) );
+		
+		// we ignore the results of this call because our only purpose is to trigger the creation of the required listener on the native side for transaction processing.
+		StoreKitBinding.canMakePayments();
+	}
 
 	public void transactionUpdated( string json )
 	{

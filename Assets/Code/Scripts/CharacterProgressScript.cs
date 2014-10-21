@@ -284,6 +284,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 	void Start()
 	{		
+		EvolutionManager.Instance.Init();
 		GetComponent<CharacterControllerScript>().SetLocal(true);
 		UIClickButtonMasterScript.SetSoundSprite();
 
@@ -557,7 +558,7 @@ public class CharacterProgressScript : MonoBehaviour
 	void Update () 
 	{
 
-
+		EvolutionManager.Instance.UpdateEvo();
 
 
 		PersistentData.Singleton.Hungry -= Time.deltaTime * 0.2f;
