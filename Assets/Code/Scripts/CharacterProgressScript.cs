@@ -90,7 +90,7 @@ public class InventoryItemData
 		Items[(int)InventoryItemId.Boombox] = new InventoryItemBankData() { Id = InventoryItemId.Boombox, PrefabId = "Prefabs/boombox", SpriteName = "boombox_icon", ItemType = PopupItemType.Item };
 		Items[(int)InventoryItemId.Clock] = new InventoryItemBankData() { Id = InventoryItemId.Clock, PrefabId = "Prefabs/mintclock", SpriteName = "mintclock_icon", ItemType = PopupItemType.Item };
 		Items[(int)InventoryItemId.EDMJuno] = new InventoryItemBankData() { Id = InventoryItemId.EDMJuno, PrefabId = "Prefabs/juno", SpriteName = "juno_icon", ItemType = PopupItemType.Item };
-		Items[(int)InventoryItemId.EDM808] = new InventoryItemBankData() { Id = InventoryItemId.EDM808, PrefabId = "Prefabs/808", SpriteName = "juno_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.EDM808] = new InventoryItemBankData() { Id = InventoryItemId.EDM808, PrefabId = "Prefabs/808", SpriteName = "808_icon", ItemType = PopupItemType.Item };
 		Items[(int)InventoryItemId.EDMKsynth] = new InventoryItemBankData() { Id = InventoryItemId.EDMKsynth, PrefabId = "Prefabs/ksynth", SpriteName = "ksynth_icon", ItemType = PopupItemType.Item };
 		Items[(int)InventoryItemId.Lightbulb] = new InventoryItemBankData() { Id = InventoryItemId.Lightbulb, PrefabId = "Prefabs/Lightbulb", SpriteName = "lightbulb_icon", ItemType = PopupItemType.Item };
 		//Items[(int)InventoryItemId.mintclock] = new InventoryItemBankData() { Id = InventoryItemId.mintclock, PrefabId = "Prefabs/mintclock", SpriteName = "mintclock_icon", ItemType = PopupItemType.Item };
@@ -319,6 +319,10 @@ public class CharacterProgressScript : MonoBehaviour
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodFrame, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodSword, 1);
 
+		//Adrian, please forgive me, but I couldn't think of where else in the labrynth to put this little UI update thingymaboodle.
+
+		//End Forgiveness
+
 
         if (BetweenSceneData.Instance.ReturnFromMiniGame)
         {
@@ -364,20 +368,7 @@ public class CharacterProgressScript : MonoBehaviour
 		gameObject.transform.localPosition = position;
 		//gameObject.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(-180, 180), 0);
 
-		UIPopupItemScript scriptRef = gameObject.GetComponent<UIPopupItemScript> ();
-
 		float scale = 0.1f;
-		if (scriptRef != null) {
-			Debug.Log ("ID is : [ "+scriptRef.Id+"];");
-						if (scriptRef.Id == InventoryItemId.woodSword)
-								scale = 1f;
-						else if (scriptRef.Id == InventoryItemId.woodFrame)
-								scale = 1f;
-						else
-								scale = 0.1f;
-				} else {
-						Debug.Log ("Script IS Null, dingus!");
-				}
 		gameObject.transform.localScale = new Vector3 (scale, scale, scale);
 		gameObject.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(130, 230), 0);
 
@@ -646,7 +637,7 @@ public class CharacterProgressScript : MonoBehaviour
 		if (Physics.Raycast(ray, out hitInfo))
 		{
 			hadRayCollision = true;
-			Debug.Log ("Ray Collision : ["+hitInfo.collider.gameObject.name+"];");
+			//Debug.Log ("Ray Collision : ["+hitInfo.collider.gameObject.name+"];");
 		}
 
 
@@ -1212,7 +1203,7 @@ public class CharacterProgressScript : MonoBehaviour
 							this.GetComponent<CharacterProgressScript>().GroundItems.Remove(hitInfo.collider.gameObject);
 							Destroy(hitInfo.collider.gameObject);
 						}
-					else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || hitInfo.collider.name.StartsWith("Extended")|| (hitInfo.collider.tag == "Items"))
+					else if(hitInfo.collider.name.StartsWith("Invisible Ground Plane") || (hitInfo.collider.tag == "Items"))
 						{
 							//float distane = Vector3.Distance(hitInfo.point, this.transform.position);
 							//MoveTo(hitInfo.point, distane > 220.0f ? true : false);

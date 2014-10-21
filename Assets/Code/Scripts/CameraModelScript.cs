@@ -42,7 +42,6 @@ public class CameraModelScript : MonoBehaviour
 				RaycastHit hitInfo;
 				if (Physics.Raycast(ray, out hitInfo))
 				{
-					Debug.Log(hitInfo.collider.name);
 
 					if(hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
 					{
@@ -103,7 +102,6 @@ public class CameraModelScript : MonoBehaviour
 
 				if(itemData != null)
 				{
-					Debug.Log(itemData.Id.ToString());
 					SpriteRef.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)itemData.Id].SpriteName;
 					SpriteRef.GetComponent<InterfaceItemLinkToModelScript>().ItemID = itemData.Id;
 				}
@@ -124,7 +122,6 @@ public class CameraModelScript : MonoBehaviour
 
 			float scale = 0.1f;
 			if (scriptRef != null) {
-				Debug.Log ("ID is : [ "+scriptRef.Id+"];");
 				if (scriptRef.Id == InventoryItemId.woodSword)
 					scale = 0.3f;
 				else if (scriptRef.Id == InventoryItemId.woodFrame)
@@ -132,7 +129,6 @@ public class CameraModelScript : MonoBehaviour
 				else
 					scale = 0.1f;
 			}  else {
-				Debug.Log ("Script IS Null, dingus!");
 			}
 			child.transform.localScale = new Vector3(scale,scale,scale);
 			child.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(130, 230), 0);

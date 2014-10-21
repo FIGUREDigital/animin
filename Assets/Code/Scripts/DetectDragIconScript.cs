@@ -44,7 +44,5 @@ public class DetectDragIconScript : MonoBehaviour {
 		if (refScript.ItemID == InventoryItemId.woodFrame)
 						child.transform.localScale *= 3f;
 
-		Debug.Log ("Willies");
-
 	}
 }
