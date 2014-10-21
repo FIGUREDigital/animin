@@ -39,5 +39,12 @@ public class DetectDragIconScript : MonoBehaviour {
 
 		child.transform.localRotation = Quaternion.Euler(0, 180, 0);
 
+		if (refScript.ItemID == InventoryItemId.woodSword)
+						child.transform.localScale *= 2.5f;
+		if (refScript.ItemID == InventoryItemId.woodFrame)
+						child.transform.localScale *= 3f;
+
+		Debug.Log ("Willies");
+
 	}
 }
