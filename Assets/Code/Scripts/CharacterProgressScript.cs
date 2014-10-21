@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 
@@ -357,8 +357,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public GameObject SpawnStageItem(string prefabId, Vector3 position)
 	{
-		Debug.Log ("Hello?");
-		CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>(); //what, you mean 'this'? *HNNNNNNGGGHNNNNNN*
+		CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 		
 		GameObject resource = Resources.Load<GameObject>(prefabId);
 		
@@ -368,7 +367,20 @@ public class CharacterProgressScript : MonoBehaviour
 		gameObject.transform.localPosition = position;
 		//gameObject.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(-180, 180), 0);
 
+		UIPopupItemScript scriptRef = gameObject.GetComponent<UIPopupItemScript> ();
+
 		float scale = 0.1f;
+		if (scriptRef != null) {
+			Debug.Log ("ID is : [ "+scriptRef.Id+"];");
+						if (scriptRef.Id == InventoryItemId.woodSword)
+								scale = 1f;
+						else if (scriptRef.Id == InventoryItemId.woodFrame)
+								scale = 1f;
+						else
+								scale = 0.1f;
+				} else {
+						Debug.Log ("Script IS Null, dingus!");
+				}
 		gameObject.transform.localScale = new Vector3 (scale, scale, scale);
 		gameObject.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(130, 230), 0);
 
@@ -1627,8 +1639,7 @@ public class CharacterProgressScript : MonoBehaviour
 			{
 				//Stop(true);
 				PersistentData.Singleton.Evolution += item.Points;
-				PersistentData.Singleton.ZefTokens ++;
-				EvolutionMarkerManager.Instance.AddZef();
+				EvolutionManager.Instance.AddZef();
 
 				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
 				{

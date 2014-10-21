@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class CameraModelScript : MonoBehaviour 
@@ -54,6 +54,29 @@ public class CameraModelScript : MonoBehaviour
 
 						CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
+
+						/*if(popScript.Type == PopupItemType.Food)
+						{
+							progressScript.OnInteractWithPopupItem(popScript);
+							DestroyChildModelAndHide();
+						}
+						else if(popScript.Type == PopupItemType.Item)
+						{
+							if(progressScript.ObjectHolding == null)
+							{
+								Spawn(true);
+							}
+							else
+							{
+								DestroyChildModelAndHide();
+							}
+						}
+						else if(popScript.Type == PopupItemType.Medicine)
+						{
+							progressScript.OnInteractWithPopupItem(popScript);
+							DestroyChildModelAndHide();
+						}*/
+
 						DestroyChildModelAndHide();
 					}
 					else
@@ -104,6 +127,44 @@ public class CameraModelScript : MonoBehaviour
 				{
 					SpriteRef.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)itemData.Id].SpriteName;
 					SpriteRef.GetComponent<InterfaceItemLinkToModelScript>().ItemID = itemData.Id;
+
+					//				List<GameObject> allSprites = new List<GameObject>();
+	//				UIClickButtonMasterScript.PopulateInterfaceItems(InventoryItemData.Items[(int)popScript.Id].ItemType, allSprites);
+	//
+	//				for(int i=0;i<allSprites.Count;++i)
+	//				{
+	//				
+	//					string prefabId = allSprites[i].GetComponent<InterfaceItemLinkToModelScript>().Item3DPrefab;
+	//					Debug.Log(prefabId);
+	//					if(prefabId == InventoryItemData.Items[(int)popScript.Id].PrefabId)
+	//					{
+	//						Debug.Log("FOUND!");
+	//						SpriteRef.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)popScript.Id].SpriteName;
+	//						SpriteRef.GetComponent<ReferencedObjectScript>().Reference  = allSprites[i];
+	//						break;
+	//					}
+	//				}
+
+					//subItems[panelCount].transform.GetChild(0).gameObject.GetComponent<InterfaceItemLinkToModelScript>().Item3DPrefab = InventoryItemData.Items[(int)inventoryItems[i + 0].Id].PrefabId;
+					//su
+				 	/*InventoryItemData itemData = PersistentData.Singleton.GetNextItemType(InventoryItemData.Items[(int)popScript.Id].ItemType);
+
+					if(itemData != null)
+					{
+						Debug.Log(itemData.Id.ToString());
+					}
+
+					//if(itemData == null)
+					{
+						SpriteRef.GetComponent<UIButton>().normalSprite = "empty_icon";
+						SpriteRef.GetComponent<ReferencedObjectScript>().Reference  = null;
+					}
+					//else
+					{
+					//	SpriteRef.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)popScript.Id].SpriteName;
+						//SpriteRef.GetComponent<ReferencedObjectScript>().Reference  = InventoryItemData.Items[(int)popScript.Id].PrefabId;
+
+					}*/
 				}
 				else
 				{
