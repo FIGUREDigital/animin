@@ -200,21 +200,21 @@ ModelImporter:
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_l_leg_01/tbo_kid:skin_bn_l_leg_02/tbo_kid:skin_bn_l_leg_03/tbo_kid:skin_bn_l_leg_04/tbo_kid:skin_bn_l_leg_05/tbo_kid:skin_bn_l_leg_06
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_l_leg_01/tbo_kid:skin_bn_l_leg_02/tbo_kid:skin_bn_l_leg_03/tbo_kid:skin_bn_l_leg_04/tbo_kid:skin_bn_l_leg_05/tbo_kid:skin_bn_l_leg_06/tbo_kid:skin_bn_l_leg_07
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_l_leg_01/tbo_kid:skin_bn_l_leg_02/tbo_kid:skin_bn_l_leg_03/tbo_kid:skin_bn_l_leg_04/tbo_kid:skin_bn_l_leg_05/tbo_kid:skin_bn_l_leg_06/tbo_kid:skin_bn_l_leg_07/tbo_kid:skin_bn_l_shin_01
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_l_leg_01/tbo_kid:skin_bn_l_leg_02/tbo_kid:skin_bn_l_leg_03/tbo_kid:skin_bn_l_leg_04/tbo_kid:skin_bn_l_leg_05/tbo_kid:skin_bn_l_leg_06/tbo_kid:skin_bn_l_leg_07/tbo_kid:skin_bn_l_shin_01/tbo_kid:skin_bn_l_shin_02
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_l_leg_01/tbo_kid:skin_bn_l_leg_02/tbo_kid:skin_bn_l_leg_03/tbo_kid:skin_bn_l_leg_04/tbo_kid:skin_bn_l_leg_05/tbo_kid:skin_bn_l_leg_06/tbo_kid:skin_bn_l_leg_07/tbo_kid:skin_bn_l_shin_01/tbo_kid:skin_bn_l_shin_02/tbo_kid:skin_bn_l_shin_03
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_l_leg_01/tbo_kid:skin_bn_l_leg_02/tbo_kid:skin_bn_l_leg_03/tbo_kid:skin_bn_l_leg_04/tbo_kid:skin_bn_l_leg_05/tbo_kid:skin_bn_l_leg_06/tbo_kid:skin_bn_l_leg_07/tbo_kid:skin_bn_l_shin_01/tbo_kid:skin_bn_l_shin_02/tbo_kid:skin_bn_l_shin_03/tbo_kid:skin_bn_l_shin_04
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_l_leg_01/tbo_kid:skin_bn_l_leg_02/tbo_kid:skin_bn_l_leg_03/tbo_kid:skin_bn_l_leg_04/tbo_kid:skin_bn_l_leg_05/tbo_kid:skin_bn_l_leg_06/tbo_kid:skin_bn_l_leg_07/tbo_kid:skin_bn_l_shin_01/tbo_kid:skin_bn_l_shin_02/tbo_kid:skin_bn_l_shin_03/tbo_kid:skin_bn_l_shin_04/tbo_kid:skin_bn_l_shin_05
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_l_leg_01/tbo_kid:skin_bn_l_leg_02/tbo_kid:skin_bn_l_leg_03/tbo_kid:skin_bn_l_leg_04/tbo_kid:skin_bn_l_leg_05/tbo_kid:skin_bn_l_leg_06/tbo_kid:skin_bn_l_leg_07/tbo_kid:skin_bn_l_shin_01/tbo_kid:skin_bn_l_shin_02/tbo_kid:skin_bn_l_shin_03/tbo_kid:skin_bn_l_shin_04/tbo_kid:skin_bn_l_shin_05/tbo_kid:skin_bn_l_shin_06
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_l_leg_01/tbo_kid:skin_bn_l_leg_02/tbo_kid:skin_bn_l_leg_03/tbo_kid:skin_bn_l_leg_04/tbo_kid:skin_bn_l_leg_05/tbo_kid:skin_bn_l_leg_06/tbo_kid:skin_bn_l_leg_07/tbo_kid:skin_bn_l_shin_01/tbo_kid:skin_bn_l_shin_02/tbo_kid:skin_bn_l_shin_03/tbo_kid:skin_bn_l_shin_04/tbo_kid:skin_bn_l_shin_05/tbo_kid:skin_bn_l_shin_06/tbo_kid:skin_bn_l_shin_07
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02
@@ -228,21 +228,21 @@ ModelImporter:
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02/tbo_kid:skin_bn_r_reg_03/tbo_kid:skin_bn_r_reg_04/tbo_kid:skin_bn_r_reg_05/tbo_kid:skin_bn_r_reg_06
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02/tbo_kid:skin_bn_r_reg_03/tbo_kid:skin_bn_r_reg_04/tbo_kid:skin_bn_r_reg_05/tbo_kid:skin_bn_r_reg_06/tbo_kid:skin_bn_r_reg_07
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02/tbo_kid:skin_bn_r_reg_03/tbo_kid:skin_bn_r_reg_04/tbo_kid:skin_bn_r_reg_05/tbo_kid:skin_bn_r_reg_06/tbo_kid:skin_bn_r_reg_07/tbo_kid:skin_bn_r_shin_01
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02/tbo_kid:skin_bn_r_reg_03/tbo_kid:skin_bn_r_reg_04/tbo_kid:skin_bn_r_reg_05/tbo_kid:skin_bn_r_reg_06/tbo_kid:skin_bn_r_reg_07/tbo_kid:skin_bn_r_shin_01/tbo_kid:skin_bn_r_shin_02
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02/tbo_kid:skin_bn_r_reg_03/tbo_kid:skin_bn_r_reg_04/tbo_kid:skin_bn_r_reg_05/tbo_kid:skin_bn_r_reg_06/tbo_kid:skin_bn_r_reg_07/tbo_kid:skin_bn_r_shin_01/tbo_kid:skin_bn_r_shin_02/tbo_kid:skin_bn_r_shin_03
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02/tbo_kid:skin_bn_r_reg_03/tbo_kid:skin_bn_r_reg_04/tbo_kid:skin_bn_r_reg_05/tbo_kid:skin_bn_r_reg_06/tbo_kid:skin_bn_r_reg_07/tbo_kid:skin_bn_r_shin_01/tbo_kid:skin_bn_r_shin_02/tbo_kid:skin_bn_r_shin_03/tbo_kid:skin_bn_r_shin_04
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02/tbo_kid:skin_bn_r_reg_03/tbo_kid:skin_bn_r_reg_04/tbo_kid:skin_bn_r_reg_05/tbo_kid:skin_bn_r_reg_06/tbo_kid:skin_bn_r_reg_07/tbo_kid:skin_bn_r_shin_01/tbo_kid:skin_bn_r_shin_02/tbo_kid:skin_bn_r_shin_03/tbo_kid:skin_bn_r_shin_04/tbo_kid:skin_bn_r_shin_05
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02/tbo_kid:skin_bn_r_reg_03/tbo_kid:skin_bn_r_reg_04/tbo_kid:skin_bn_r_reg_05/tbo_kid:skin_bn_r_reg_06/tbo_kid:skin_bn_r_reg_07/tbo_kid:skin_bn_r_shin_01/tbo_kid:skin_bn_r_shin_02/tbo_kid:skin_bn_r_shin_03/tbo_kid:skin_bn_r_shin_04/tbo_kid:skin_bn_r_shin_05/tbo_kid:skin_bn_r_shin_06
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_bn_r_reg_01/tbo_kid:skin_bn_r_reg_02/tbo_kid:skin_bn_r_reg_03/tbo_kid:skin_bn_r_reg_04/tbo_kid:skin_bn_r_reg_05/tbo_kid:skin_bn_r_reg_06/tbo_kid:skin_bn_r_reg_07/tbo_kid:skin_bn_r_shin_01/tbo_kid:skin_bn_r_shin_02/tbo_kid:skin_bn_r_shin_03/tbo_kid:skin_bn_r_shin_04/tbo_kid:skin_bn_r_shin_05/tbo_kid:skin_bn_r_shin_06/tbo_kid:skin_bn_r_shin_07
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2
@@ -272,13 +272,13 @@ ModelImporter:
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_l_shoulder_01/tbo_kid:skin_bn_l_arm_01/tbo_kid:skin_bn_l_arm_02/tbo_kid:skin_bn_l_arm_03/tbo_kid:skin_bn_l_arm_04/tbo_kid:skin_bn_l_arm_05/tbo_kid:skin_bn_l_arm_06/tbo_kid:skin_bn_l_arm_07/tbo_kid:skin_bn_l_arm_08
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_l_shoulder_01/tbo_kid:skin_bn_l_arm_01/tbo_kid:skin_bn_l_arm_02/tbo_kid:skin_bn_l_arm_03/tbo_kid:skin_bn_l_arm_04/tbo_kid:skin_bn_l_arm_05/tbo_kid:skin_bn_l_arm_06/tbo_kid:skin_bn_l_arm_07/tbo_kid:skin_bn_l_arm_08/tbo_kid:skin_bn_l_arm_09
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_l_shoulder_01/tbo_kid:skin_bn_l_arm_01/tbo_kid:skin_bn_l_arm_02/tbo_kid:skin_bn_l_arm_03/tbo_kid:skin_bn_l_arm_04/tbo_kid:skin_bn_l_arm_05/tbo_kid:skin_bn_l_arm_06/tbo_kid:skin_bn_l_arm_07/tbo_kid:skin_bn_l_arm_08/tbo_kid:skin_bn_l_arm_09/tbo_kid:skin_bn_l_arm_10
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_l_shoulder_01/tbo_kid:skin_bn_l_arm_01/tbo_kid:skin_bn_l_arm_02/tbo_kid:skin_bn_l_arm_03/tbo_kid:skin_bn_l_arm_04/tbo_kid:skin_bn_l_arm_05/tbo_kid:skin_bn_l_arm_06/tbo_kid:skin_bn_l_arm_07/tbo_kid:skin_bn_l_arm_08/tbo_kid:skin_bn_l_arm_09/tbo_kid:skin_bn_l_arm_10/tbo_kid:skin_bn_l_arm_11
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_l_shoulder_01/tbo_kid:skin_bn_l_arm_01/tbo_kid:skin_bn_l_arm_02/tbo_kid:skin_bn_l_arm_03/tbo_kid:skin_bn_l_arm_04/tbo_kid:skin_bn_l_arm_05/tbo_kid:skin_bn_l_arm_06/tbo_kid:skin_bn_l_arm_07/tbo_kid:skin_bn_l_arm_08/tbo_kid:skin_bn_l_arm_09/tbo_kid:skin_bn_l_arm_10/tbo_kid:skin_bn_l_arm_11/tbo_kid:skin_bn_l_arm_12
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_r_shourder_01
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_r_shourder_01/tbo_kid:skin_bn_r_arm_01
@@ -300,11 +300,11 @@ ModelImporter:
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_r_shourder_01/tbo_kid:skin_bn_r_arm_01/tbo_kid:skin_bn_r_arm_02/tbo_kid:skin_bn_r_arm_03/tbo_kid:skin_bn_r_arm_04/tbo_kid:skin_bn_r_arm_05/tbo_kid:skin_bn_r_arm_06/tbo_kid:skin_bn_r_arm_07/tbo_kid:skin_bn_r_arm_08/tbo_kid:skin_bn_r_arm_09
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_r_shourder_01/tbo_kid:skin_bn_r_arm_01/tbo_kid:skin_bn_r_arm_02/tbo_kid:skin_bn_r_arm_03/tbo_kid:skin_bn_r_arm_04/tbo_kid:skin_bn_r_arm_05/tbo_kid:skin_bn_r_arm_06/tbo_kid:skin_bn_r_arm_07/tbo_kid:skin_bn_r_arm_08/tbo_kid:skin_bn_r_arm_09/tbo_kid:skin_bn_r_arm_10
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_r_shourder_01/tbo_kid:skin_bn_r_arm_01/tbo_kid:skin_bn_r_arm_02/tbo_kid:skin_bn_r_arm_03/tbo_kid:skin_bn_r_arm_04/tbo_kid:skin_bn_r_arm_05/tbo_kid:skin_bn_r_arm_06/tbo_kid:skin_bn_r_arm_07/tbo_kid:skin_bn_r_arm_08/tbo_kid:skin_bn_r_arm_09/tbo_kid:skin_bn_r_arm_10/tbo_kid:skin_bn_r_arm_11
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_bn_r_shourder_01/tbo_kid:skin_bn_r_arm_01/tbo_kid:skin_bn_r_arm_02/tbo_kid:skin_bn_r_arm_03/tbo_kid:skin_bn_r_arm_04/tbo_kid:skin_bn_r_arm_05/tbo_kid:skin_bn_r_arm_06/tbo_kid:skin_bn_r_arm_07/tbo_kid:skin_bn_r_arm_08/tbo_kid:skin_bn_r_arm_09/tbo_kid:skin_bn_r_arm_10/tbo_kid:skin_bn_r_arm_11/tbo_kid:skin_bn_r_arm_12
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders/tbo_kid:skin_jNeck
@@ -314,11 +314,11 @@ ModelImporter:
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders/tbo_kid:skin_jNeck/tbo_kid:skin_jHead/tbo_kid:skin_bn_l_ear_01
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders/tbo_kid:skin_jNeck/tbo_kid:skin_jHead/tbo_kid:skin_bn_l_ear_01/tbo_kid:skin_bn_l_ear_02
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders/tbo_kid:skin_jNeck/tbo_kid:skin_jHead/tbo_kid:skin_bn_r_ear_01
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders/tbo_kid:skin_jNeck/tbo_kid:skin_jHead/tbo_kid:skin_bn_r_ear_01/tbo_kid:skin_bn_r_ear_02
-        weight: 0
+        weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders/tbo_kid:skin_jNeck/tbo_kid:skin_jHead/tbo_kid:skin_jNose
         weight: 1
       maskType: 0
@@ -345,7 +345,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 1
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
@@ -357,8 +357,7 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 8f9eabd9214e74810bd3de47a49bbad0,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   additionalBone: 0
   userData: 
