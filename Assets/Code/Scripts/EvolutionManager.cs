@@ -105,7 +105,10 @@ public class EvolutionManager : MonoBehaviour
 		if(PersistentData.Singleton.ZefTokens >= mNextMarker)
 		{
 			mNextMarker += MARKER_RATE;
-			//mReward = mMarkers[mCurrentMarker];
+			if(mMarkers.Count > 0)
+			{
+				mReward = mMarkers[mCurrentMarker];
+			}
 			mCurrentMarker++;
 		}
 
