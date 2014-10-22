@@ -74,6 +74,7 @@ ModelImporter:
     100136: tbo_adult:skin_jSpine_4
     100138: tbo_adult:skin_jSpine_5
     100140: //RootNode
+    100142: tbo_adult:skin_object_joint
     400000: tbo_adult:skin_bn_l_arm_01
     400002: tbo_adult:skin_bn_l_arm_02
     400004: tbo_adult:skin_bn_l_arm_03
@@ -145,6 +146,7 @@ ModelImporter:
     400136: tbo_adult:skin_jSpine_4
     400138: tbo_adult:skin_jSpine_5
     400140: //RootNode
+    400142: tbo_adult:skin_object_joint
     7400000: evolve_react
     9500000: //RootNode
   materials:

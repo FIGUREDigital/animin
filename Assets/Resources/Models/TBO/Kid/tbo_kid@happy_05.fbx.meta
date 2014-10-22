@@ -72,6 +72,7 @@ ModelImporter:
     100132: tbo_kid:skin_jSpine_4
     100134: tbo_kid:skin_jSpine_5
     100136: //RootNode
+    100138: tbo_kid:skin_object_joint
     400000: tbo_kid:skin_bn_l_arm_01
     400002: tbo_kid:skin_bn_l_arm_02
     400004: tbo_kid:skin_bn_l_arm_03
@@ -141,6 +142,7 @@ ModelImporter:
     400132: tbo_kid:skin_jSpine_4
     400134: tbo_kid:skin_jSpine_5
     400136: //RootNode
+    400138: tbo_kid:skin_object_joint
     7400000: happy_05
     9500000: //RootNode
   materials:
@@ -320,6 +322,8 @@ ModelImporter:
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders/tbo_kid:skin_jNeck/tbo_kid:skin_jHead/tbo_kid:skin_bn_r_ear_01/tbo_kid:skin_bn_r_ear_02
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders/tbo_kid:skin_jNeck/tbo_kid:skin_jHead/tbo_kid:skin_jNose
+        weight: 1
+      - path: tbo_kid:skin_jCOG/tbo_kid:skin_object_joint
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
