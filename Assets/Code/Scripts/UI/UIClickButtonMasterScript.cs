@@ -13,11 +13,6 @@ public class UIClickButtonMasterScript : MonoBehaviour
 	private static float SavedRadius;
 	//private Vector3 SavedScale;
 
-	public static void RefreshUI(){
-
-
-	}
-
 	public static void PopulateInterfaceItems(PopupItemType typeToLoad, List<GameObject> allSprites)
 	{
 		List<GameObject> subItems = new List<GameObject>();

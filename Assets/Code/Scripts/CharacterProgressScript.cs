@@ -342,6 +342,8 @@ public class CharacterProgressScript : MonoBehaviour
         }
 	}
 
+
+
 	void OnApplicationPause(bool pauseStatus)
 	{
 		//Debug.Log("pauseStatus:" + pauseStatus.ToString());
