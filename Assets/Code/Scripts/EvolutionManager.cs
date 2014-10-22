@@ -7,17 +7,31 @@ using System.Collections.Generic;
 
 public class EvolutionManager : MonoBehaviour 
 {
+	enum HappinessState
+	{
+		NotSet,
+		Failing,
+		Normal,
+		Winning,
+	}
 	[SerializeField]
 	private const string FILENAME = "Assets/Resources/MarkerGuide.xml";
 	private const int MARKER_RATE = 10;
 	private const int BABY_EVOLVE_THRESHOLD = 200;
 	private const int KID_EVOLVE_THRESHOLD = 600;
-	private const int ADULT_EVOLVE_THRESHOLD = 600;
+	private const int ADULT_EVOLVE_THRESHOLD = 1400;
+	private const int HAPPINESS_FAIL_THRESHOLD = 30;
+	private const int HAPPINESS_WIN_THRESHOLD = 80;
+	private const int HAPPINESS_BIG_WIN_THRESHOLD = 110;
+	private const float TIME_FOR_REWARD = 1200;
 	private int mNextMarker;
 	private int mZefProgress;
 	private int mCurrentMarker;
 	private string mReward;
 	private AniminEvolutionStageId mCorrectStage;
+	private HappinessState mHappinessState;
+	private HappinessState mPrevHappinessState;
+	private float mTimeInHappinessState;
 
 	public static List<string> mMarkers = new List<string>();
 
@@ -96,6 +110,55 @@ public class EvolutionManager : MonoBehaviour
 		}
 
 		CheckEvolution();
+
+	}
+
+	private void CheckHappiness()
+	{
+		float happiness = PersistentData.Singleton.Happy;
+		if(happiness < HAPPINESS_FAIL_THRESHOLD)
+		{
+			mHappinessState = HappinessState.Failing;
+		}
+		else if(happiness < HAPPINESS_WIN_THRESHOLD)
+		{
+			mHappinessState = HappinessState.NotSet;
+		}
+		else if(happiness < HAPPINESS_BIG_WIN_THRESHOLD)
+		{
+			mHappinessState = HappinessState.Normal;
+		}
+		else if(happiness > HAPPINESS_BIG_WIN_THRESHOLD)
+		{
+			mHappinessState = HappinessState.Winning;
+		}
+
+		if(mHappinessState != mPrevHappinessState)
+		{
+			mTimeInHappinessState = 0;
+		}
+		mTimeInHappinessState += Time.deltaTime;
+
+		if(mTimeInHappinessState > TIME_FOR_REWARD)
+		{
+			mTimeInHappinessState = 0;
+			switch(mHappinessState)
+			{
+			case HappinessState.Failing:
+				RemoveZef(1);
+				break;
+			case HappinessState.Normal:
+				AddZef(1);
+				break;
+			case HappinessState.Winning:
+				AddZef(3);
+				break;
+				
+			case HappinessState.NotSet:
+			default:
+				break;
+			}
+		}
 	}
 
 	private void CheckEvolution()
