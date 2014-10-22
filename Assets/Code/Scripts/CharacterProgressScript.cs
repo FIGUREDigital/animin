@@ -374,7 +374,6 @@ public class CharacterProgressScript : MonoBehaviour
 
 		float scale = 0.1f;
 		if (scriptRef != null) {
-			Debug.Log ("ID is : [ "+scriptRef.Id+"];");
 						if (scriptRef.Id == InventoryItemId.woodSword)
 								scale = 1f;
 						else if (scriptRef.Id == InventoryItemId.woodFrame)
@@ -473,6 +472,7 @@ public class CharacterProgressScript : MonoBehaviour
 		UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(false);
 		UIGlobalVariablesScript.Singleton.EDMBoxUI.SetActive(false);
 		UIGlobalVariablesScript.Singleton.JunoUI.SetActive(false);
+		UIGlobalVariablesScript.Singleton.PianoUI.SetActive(false);
 	}
 	
 	private GameObject GetClosestFoodToEat()
@@ -1332,9 +1332,9 @@ public class CharacterProgressScript : MonoBehaviour
 								{
 									HidePopupMenus();
 
-									moveHitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.JunoUI);
-								UIGlobalVariablesScript.Singleton.JunoUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
-									UIGlobalVariablesScript.Singleton.JunoUI.SetActive(true);
+									moveHitInfo.collider.gameObject.GetComponent<EDMBoxScript>().SetInterface(UIGlobalVariablesScript.Singleton.PianoUI);
+									UIGlobalVariablesScript.Singleton.PianoUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
+									UIGlobalVariablesScript.Singleton.PianoUI.SetActive(true);
 									
 									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
 									preventMovingTo = true;
