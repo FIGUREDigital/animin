@@ -23,6 +23,7 @@ class MyEditorScript {
 	{
 		string target_dir = APP_NAME;
 		GenericBuild (SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.Development);
+		CorrectBundleID ();
 	}
 	
 	private static string[] FindEnabledEditorScenes() {
