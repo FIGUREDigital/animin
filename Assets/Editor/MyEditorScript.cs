@@ -8,7 +8,7 @@ class MyEditorScript {
 	static string[] SCENES = FindEnabledEditorScenes();
 	
 	static string APP_NAME = "Animin";
-	static string TARGET_DIR = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/Documents/AniminBuild";
+	static string TARGET_DIR = "/AniminBuild";
 
 	[MenuItem ("Custom/Build iOS/Release")]
 	static void PerformiOSBuild()
@@ -23,6 +23,7 @@ class MyEditorScript {
 	{
 		string target_dir = APP_NAME;
 		GenericBuild (SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.Development);
+		CorrectBundleID ();
 	}
 	
 	private static string[] FindEnabledEditorScenes() {

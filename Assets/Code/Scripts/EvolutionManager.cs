@@ -5,7 +5,7 @@ using System.Xml;
 using System.IO;
 using System.Collections.Generic;
 
-public class EvolutionManager : MonoBehaviour 
+public class EvolutionManager 
 {
 	enum HappinessState
 	{
@@ -74,33 +74,36 @@ public class EvolutionManager : MonoBehaviour
 	}
 	
 	#endregion
-	public void Init()
+	public void UpdateEvo()
 	{
+		CheckHappiness();
 	}
 	public void AddZef()
 	{
-		PersistentData.Singleton.ZefTokens++;
+		AddZef(1);
 	}
 	public void AddZef(int amount)
 	{
 		PersistentData.Singleton.ZefTokens += amount;
+		ZefChanged();
 	}
 
 	public void RemoveZef()
 	{
-		PersistentData.Singleton.ZefTokens--;
-		if(PersistentData.Singleton.ZefTokens < 0)
-		{
-			PersistentData.Singleton.ZefTokens = 0;
-		}
+		RemoveZef(1);
 	}
 
 	public void RemoveZef(int amount)
 	{
 		PersistentData.Singleton.ZefTokens -= amount;
+		if(PersistentData.Singleton.ZefTokens < 0)
+		{
+			PersistentData.Singleton.ZefTokens = 0;
+		}
+		ZefChanged();
 	}
 
-	public void UpdateEvo () 
+	private void ZefChanged () 
 	{
 		if(PersistentData.Singleton.ZefTokens >= mNextMarker)
 		{
@@ -113,7 +116,40 @@ public class EvolutionManager : MonoBehaviour
 		}
 
 		CheckEvolution();
+		UpdateEvoBar();
 
+	}
+
+	private void UpdateEvoBar()
+	{
+		int min =0;
+		int max =0;
+		int curZef =0;
+		curZef = PersistentData.Singleton.ZefTokens;
+		AniminEvolutionStageId stage = PersistentData.Singleton.AniminEvolutionId;
+		switch(stage)
+		{
+		case AniminEvolutionStageId.Baby:
+			min = 0;
+			max = BABY_EVOLVE_THRESHOLD;
+			break;
+		case AniminEvolutionStageId.Kid:
+			min = BABY_EVOLVE_THRESHOLD;
+			max = KID_EVOLVE_THRESHOLD;
+			break;
+		case AniminEvolutionStageId.Adult:
+			min = KID_EVOLVE_THRESHOLD;
+			max = ADULT_EVOLVE_THRESHOLD;
+			break;
+		default:
+			break;
+		}
+
+		curZef -= min;
+		int diff = max - min;
+		float percentage = (curZef * 100f) / (diff * 100f);
+
+		PersistentData.Singleton.Evolution = percentage;
 	}
 
 	private void CheckHappiness()

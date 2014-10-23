@@ -283,8 +283,7 @@ public class CharacterProgressScript : MonoBehaviour
 	}
 
 	void Start()
-	{		
-		EvolutionManager.Instance.Init();
+	{	
 		GetComponent<CharacterControllerScript>().SetLocal(true);
 		UIClickButtonMasterScript.SetSoundSprite();
 
@@ -589,11 +588,17 @@ public class CharacterProgressScript : MonoBehaviour
 			//Evolution += (Happy / MaxHappy) * Time.deltaTime * 0.1f;
 			//if(Evolution >= 100) Evolution = 100;
 
-			float percentage = ((PersistentData.Singleton.Evolution / 100.0f));
-			
-			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * percentage);
-			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.uvRect = new Rect(0, 0, percentage, 1);
-			UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.MarkAsChanged();
+			float percentage = PersistentData.Singleton.Evolution;
+			UITexture EvoProgress = UIGlobalVariablesScript.Singleton.EvolutionProgressSprite;
+			float scale = UIGlobalVariablesScript.Singleton.gameObject.transform.localScale.x;
+			int screenWidth = 1330;
+			int width = (int)(screenWidth * percentage);
+			Vector3 pos = EvoProgress.transform.position;
+			pos.x = ((-screenWidth + width) * 0.5f) * scale;
+			EvoProgress.transform.position = pos;
+			EvoProgress.width = width;
+			EvoProgress.uvRect = new Rect(0, 0, percentage, 1);
+			EvoProgress.MarkAsChanged();
 
 
 			//UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
@@ -1641,21 +1646,20 @@ public class CharacterProgressScript : MonoBehaviour
 			case PopupItemType.Token:
 			{
 				//Stop(true);
-				PersistentData.Singleton.Evolution += item.Points;
 				EvolutionManager.Instance.AddZef();
 
-				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
-				{
-				if(PersistentData.Singleton.Evolution >= AniminSubevolutionStageData.Stages[i])
-					{
-					if(!PersistentData.Singleton.SubstagesCompleted.Contains((AniminSubevolutionStageId)i))
-						{
-						PersistentData.Singleton.SubstagesCompleted.Add((AniminSubevolutionStageId)i);
-							AchievementsScript.Singleton.Show(AchievementTypeId.Evolution, 0);
-						}
-					}
-
-				}
+//				for(int i=0;i<(int)AniminSubevolutionStageId.Count;++i)
+//				{
+//					if(PersistentData.Singleton.Evolution >= AniminSubevolutionStageData.Stages[i])
+//					{
+//					if(!PersistentData.Singleton.SubstagesCompleted.Contains((AniminSubevolutionStageId)i))
+//						{
+//						PersistentData.Singleton.SubstagesCompleted.Add((AniminSubevolutionStageId)i);
+//							AchievementsScript.Singleton.Show(AchievementTypeId.Evolution, 0);
+//						}
+//					}
+//
+//				}
 
 			/*if(PersistentData.Singleton.Evolution >= 100)
 				{
