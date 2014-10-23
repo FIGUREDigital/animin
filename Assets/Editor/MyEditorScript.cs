@@ -14,7 +14,7 @@ class MyEditorScript {
 	static void PerformiOSBuild()
 	{
 		string target_dir = APP_NAME;
-		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.AcceptExternalModificationsToPlayer);
+		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.None);
 		CorrectBundleID ();
 	}
 
@@ -22,7 +22,7 @@ class MyEditorScript {
 	static void PerformiOSBuildDev()
 	{
 		string target_dir = APP_NAME;
-		GenericBuild (SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.Development | BuildOptions.AcceptExternalModificationsToPlayer);
+		GenericBuild (SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.Development);
 		CorrectBundleID ();
 	}
 	
