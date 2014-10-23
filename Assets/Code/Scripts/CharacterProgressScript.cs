@@ -584,10 +584,10 @@ public class CharacterProgressScript : MonoBehaviour
 		//Debug.Log("Health: " + (Health / 100.0f).ToString());
 		//Debug.Log("Happy: " + (Happy / MaxHappy).ToString());
 		// EVOLUTION BAR
-		{
-			//Evolution += (Happy / MaxHappy) * Time.deltaTime * 0.1f;
-			//if(Evolution >= 100) Evolution = 100;
-
+//		{
+//			//Evolution += (Happy / MaxHappy) * Time.deltaTime * 0.1f;
+//			//if(Evolution >= 100) Evolution = 100;
+//
 			float percentage = PersistentData.Singleton.Evolution;
 			UITexture EvoProgress = UIGlobalVariablesScript.Singleton.EvolutionProgressSprite;
 			float scale = UIGlobalVariablesScript.Singleton.gameObject.transform.localScale.x;
@@ -595,19 +595,20 @@ public class CharacterProgressScript : MonoBehaviour
 			int width = (int)(screenWidth * percentage);
 			Vector3 pos = EvoProgress.transform.position;
 			pos.x = ((-screenWidth + width) * 0.5f) * scale;
+			pos.y = 275.0f * scale;
 			EvoProgress.transform.position = pos;
 			EvoProgress.width = width;
 			EvoProgress.uvRect = new Rect(0, 0, percentage, 1);
 			EvoProgress.MarkAsChanged();
-
-
-			//UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
-			
-			if(NextHappynBonusTimeAt >= DateTime.Now)
-			{
-				// do bonus of happyness
-			}
-		}
+//
+//
+//			//UIGlobalVariablesScript.Singleton.EvolutionProgressSprite.width = (int)(1330.0f * (Evolution / 100.0f));
+//			
+//			if(NextHappynBonusTimeAt >= DateTime.Now)
+//			{
+//				// do bonus of happyness
+//			}
+//		}
 
 		GameObject indicator = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>().Indicator;
 

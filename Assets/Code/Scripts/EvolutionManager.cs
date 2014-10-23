@@ -16,7 +16,7 @@ public class EvolutionManager
 	}
 	[SerializeField]
 	private const string FILENAME = "Assets/Resources/MarkerGuide.xml";
-	private const int MARKER_RATE = 10;
+	private const int MARKER_RATE = 20;
 	private const int BABY_EVOLVE_THRESHOLD = 200;
 	private const int KID_EVOLVE_THRESHOLD = 600;
 	private const int ADULT_EVOLVE_THRESHOLD = 1400;
@@ -24,14 +24,15 @@ public class EvolutionManager
 	private const int HAPPINESS_WIN_THRESHOLD = 80;
 	private const int HAPPINESS_BIG_WIN_THRESHOLD = 110;
 	private const float TIME_FOR_REWARD = 1200;
-	private int mNextMarker;
+	private int mNextMarker = (int)(MARKER_RATE * 0.5f);
 	private int mZefProgress;
-	private int mCurrentMarker;
+	private int mCurrentMarker = 0;
 	private string mReward;
 	private AniminEvolutionStageId mCorrectStage;
 	private HappinessState mHappinessState;
 	private HappinessState mPrevHappinessState;
 	private float mTimeInHappinessState;
+	private bool mEvoStar = false;
 
 	public static List<string> mMarkers = new List<string>();
 
@@ -54,6 +55,25 @@ public class EvolutionManager
 		get
 		{
 			return ADULT_EVOLVE_THRESHOLD;
+		}
+	}
+	public int MarkerRate
+	{
+		get
+		{
+			return MARKER_RATE;
+		}
+	}
+
+	public float HappinessStateTime
+	{
+		get
+		{
+			return mTimeInHappinessState;
+		}
+		set
+		{
+			mTimeInHappinessState = value;
 		}
 	}
 
@@ -108,10 +128,12 @@ public class EvolutionManager
 		if(PersistentData.Singleton.ZefTokens >= mNextMarker)
 		{
 			mNextMarker += MARKER_RATE;
-			if(mMarkers.Count > 0)
+			if(mMarkers.Count > mCurrentMarker)
 			{
 				mReward = mMarkers[mCurrentMarker];
 			}
+			AchievementsScript.Singleton.Show(mEvoStar?AchievementTypeId.EvolutionStar:AchievementTypeId.EvolutionExclamation, 0);
+			mEvoStar = !mEvoStar;
 			mCurrentMarker++;
 		}
 
@@ -175,6 +197,7 @@ public class EvolutionManager
 		if(mHappinessState != mPrevHappinessState)
 		{
 			mTimeInHappinessState = 0;
+			mPrevHappinessState = mHappinessState;
 		}
 		mTimeInHappinessState += Time.deltaTime;
 
@@ -185,12 +208,15 @@ public class EvolutionManager
 			{
 			case HappinessState.Failing:
 				RemoveZef(1);
+				Debug.Log("Happy Fail! Zef Removed");
 				break;
 			case HappinessState.Normal:
 				AddZef(1);
+				Debug.Log("Happy Normal, Zef Added");
 				break;
 			case HappinessState.Winning:
 				AddZef(3);
+				Debug.Log("Happy Win! 3 Zef Added");
 				break;
 				
 			case HappinessState.NotSet:
