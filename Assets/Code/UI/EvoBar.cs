@@ -15,6 +15,9 @@ public class EvoBar : MonoBehaviour
 	private int mNumBabyMarkers;
 	private int mNumKidMarkers;
 	private int mNumAdultMarkers;
+	private AniminEvolutionStageId mEvoID;
+	private AniminEvolutionStageId mPrevEvoID;
+	private bool initial = true;
 
 	void OnEnable()
 	{
@@ -23,6 +26,14 @@ public class EvoBar : MonoBehaviour
 	
 	private void PlaceMarkers()
 	{
+		mEvoID = PersistentData.Singleton.AniminEvolutionId;
+		if(mEvoID == mPrevEvoID && !initial)
+		{
+			return;
+		}
+		mPrevEvoID = PersistentData.Singleton.AniminEvolutionId;
+		initial = false;
+
 		if(mMarkers.Count > 0)
 		{
 			foreach(GameObject go in mMarkers)
