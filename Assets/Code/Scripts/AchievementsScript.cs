@@ -72,20 +72,20 @@ public class AchievementsScript : MonoBehaviour
 				break;
 			}
 
-		case AchievementTypeId.EvolutionMarkerOne:
+		case AchievementTypeId.EvolutionExclamation:
 			{
 				Title.text = "Your animin has grown!";
 				BackgroundGradient.spriteName = "achievementGreen";
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
-				MedalIcon.spriteName = @"achievementMarker1";
+				MedalIcon.spriteName = @"achievementMarker2";
 				break;
 			}
-		case AchievementTypeId.EvolutionMarkerTwo:
+		case AchievementTypeId.EvolutionStar:
 			{
 				Title.text = "You unlocked a surprise!";
 				BackgroundGradient.spriteName = "achievementGreen";
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
-				MedalIcon.spriteName = @"achievementMarker2";
+				MedalIcon.spriteName = @"achievementMarker3";
 				break;
 			}
 		case AchievementTypeId.Tutorial:
@@ -172,7 +172,7 @@ public enum AchievementTypeId
 	Evolution,
 	Achievement,
 	Tutorial,
-	EvolutionMarkerOne,
-	EvolutionMarkerTwo,
+	EvolutionExclamation,
+	EvolutionStar,
 	Birthday,
 }
