@@ -33,6 +33,7 @@ ModelImporter:
     100054: ke_adult:skin_wrist_l_joint
     100056: ke_adult:skin_wrist_r_joint
     100058: //RootNode
+    100060: ke_adult:skin_object_joint
     400000: ke_adult:skin_ankle_l_joint
     400002: ke_adult:skin_ankle_r_joint
     400004: ke_adult:skin_clavicle_l_joint
@@ -63,6 +64,7 @@ ModelImporter:
     400054: ke_adult:skin_wrist_l_joint
     400056: ke_adult:skin_wrist_r_joint
     400058: //RootNode
+    400060: ke_adult:skin_object_joint
     7400000: walk
     9500000: //RootNode
   materials:
@@ -120,6 +122,8 @@ ModelImporter:
       - path: ke_adult:skin_cog_joint/ke_adult:skin_hip_r_joint/ke_adult:skin_knee_r_joint
         weight: 1
       - path: ke_adult:skin_cog_joint/ke_adult:skin_hip_r_joint/ke_adult:skin_knee_r_joint/ke_adult:skin_ankle_r_joint
+        weight: 1
+      - path: ke_adult:skin_cog_joint/ke_adult:skin_object_joint
         weight: 1
       - path: ke_adult:skin_cog_joint/ke_adult:skin_spine_1_joint
         weight: 1
