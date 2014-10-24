@@ -59,7 +59,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 
 	public TrackVuforiaScript Vuforia;
 	//public GameObject IndicatorAboveHead;
-	public GameObject Item3DPopupMenu;
+	public GameObject AlarmUI;
 	public SoundEngineScript SoundEngine;
 	public JoystiqScript Joystick;
 	public GameObject JoystickArt;
