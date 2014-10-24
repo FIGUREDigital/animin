@@ -8,7 +8,13 @@ public class BackToProfilesClickScript : MonoBehaviour
 
 	void OnClick()
 	{
-		AniminScreen.SetActive(false);
-		ProfilesScreen.SetActive(true);
+		if (ProfilesScreen.activeInHierarchy){
+			AniminScreen.SetActive(true);
+			ProfilesScreen.SetActive(false);
+		}
+		else {
+			AniminScreen.SetActive(false);
+			ProfilesScreen.SetActive(true);
+		}
 	}
 }
