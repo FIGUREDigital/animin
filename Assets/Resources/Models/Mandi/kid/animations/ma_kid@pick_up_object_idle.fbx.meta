@@ -111,6 +111,8 @@ ModelImporter:
         weight: 1
       - path: ma_kid:skin_cog_joint
         weight: 1
+      - path: ma_kid:skin_cog_joint/ma_kid:skin_object_joint
+        weight: 1
       - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint
         weight: 1
       - path: ma_kid:skin_cog_joint/ma_kid:skin_spine_1_joint/ma_kid:skin_spine_2_joint

@@ -80,6 +80,7 @@ ModelImporter:
     100148: pi_kid_rig:skin_spine_8_joint
     100150: pi_kid_rig:skin_wrist_l_joint
     100152: pi_kid_rig:skin_wrist_r_joint
+    100154: pi_kid_rig:skin_object_joint
     400000: //RootNode
     400002: pi_kid_rig:skin_bn_l_leg_01
     400004: pi_kid_rig:skin_bn_l_leg_02
@@ -157,6 +158,7 @@ ModelImporter:
     400148: pi_kid_rig:skin_spine_8_joint
     400150: pi_kid_rig:skin_wrist_l_joint
     400152: pi_kid_rig:skin_wrist_r_joint
+    400154: pi_kid_rig:skin_object_joint
     7400000: sleep
     9500000: //RootNode
   materials:
@@ -258,6 +260,8 @@ ModelImporter:
       - path: pi_kid_rig:skin_cog_joint/pi_kid_rig:skin_bn_r_leg_01/pi_kid_rig:skin_bn_r_leg_02/pi_kid_rig:skin_bn_r_leg_03/pi_kid_rig:skin_bn_r_leg_04/pi_kid_rig:skin_bn_r_leg_05/pi_kid_rig:skin_bn_r_leg_06/pi_kid_rig:skin_bn_r_leg_07/pi_kid_rig:skin_bn_r_shin_01/pi_kid_rig:skin_bn_r_shin_02/pi_kid_rig:skin_bn_r_shin_03/pi_kid_rig:skin_bn_r_shin_04/pi_kid_rig:skin_bn_r_shin_05/pi_kid_rig:skin_bn_r_shin_06
         weight: 1
       - path: pi_kid_rig:skin_cog_joint/pi_kid_rig:skin_bn_r_leg_01/pi_kid_rig:skin_bn_r_leg_02/pi_kid_rig:skin_bn_r_leg_03/pi_kid_rig:skin_bn_r_leg_04/pi_kid_rig:skin_bn_r_leg_05/pi_kid_rig:skin_bn_r_leg_06/pi_kid_rig:skin_bn_r_leg_07/pi_kid_rig:skin_bn_r_shin_01/pi_kid_rig:skin_bn_r_shin_02/pi_kid_rig:skin_bn_r_shin_03/pi_kid_rig:skin_bn_r_shin_04/pi_kid_rig:skin_bn_r_shin_05/pi_kid_rig:skin_bn_r_shin_06/pi_kid_rig:skin_bn_r_shin_07
+        weight: 1
+      - path: pi_kid_rig:skin_cog_joint/pi_kid_rig:skin_object_joint
         weight: 1
       - path: pi_kid_rig:skin_cog_joint/pi_kid_rig:skin_spine_1_joint
         weight: 1

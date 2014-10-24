@@ -207,6 +207,8 @@ ModelImporter:
         weight: 1
       - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_r_shoulder_01_joint/pi_baby:skin_bn_r_arm_01_joint/pi_baby:skin_bn_r_arm_02_joint/pi_baby:skin_bn_r_arm_03_joint/pi_baby:skin_bn_r_arm_04_joint
         weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_object_joint
+        weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
     isReadable: 1

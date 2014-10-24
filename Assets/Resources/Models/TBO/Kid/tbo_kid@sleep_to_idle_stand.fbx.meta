@@ -323,6 +323,8 @@ ModelImporter:
         weight: 1
       - path: tbo_kid:skin_jCOG/tbo_kid:skin_jSpine_1/tbo_kid:skin_jSpine_2/tbo_kid:skin_jSpine_3/tbo_kid:skin_jSpine_4/tbo_kid:skin_jSpine_5/tbo_kid:skin_jShoulders/tbo_kid:skin_jNeck/tbo_kid:skin_jHead/tbo_kid:skin_jNose
         weight: 1
+      - path: tbo_kid:skin_jCOG/tbo_kid:skin_object_joint
+        weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
     isReadable: 1

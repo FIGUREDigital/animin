@@ -43,6 +43,7 @@ ModelImporter:
     100074: pi_baby:skin_joint2_joint
     100076: pi_baby:skin_joint3_joint
     100078: //RootNode
+    100080: pi_baby:skin_object_joint
     400000: pi_baby:skin_bn_COG_joint
     400002: pi_baby:skin_bn_head_01_joint
     400004: pi_baby:skin_bn_head_midtip_01_joint
@@ -83,6 +84,7 @@ ModelImporter:
     400074: pi_baby:skin_joint2_joint
     400076: pi_baby:skin_joint3_joint
     400078: //RootNode
+    400080: pi_baby:skin_object_joint
     7400000: sleep
     9500000: //RootNode
   materials:
@@ -204,6 +206,8 @@ ModelImporter:
       - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_r_shoulder_01_joint/pi_baby:skin_bn_r_arm_01_joint/pi_baby:skin_bn_r_arm_02_joint/pi_baby:skin_bn_r_arm_03_joint
         weight: 1
       - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_joint1_seg_1_joint/pi_baby:skin_joint1_seg_2_joint/pi_baby:skin_joint1_seg_3_joint/pi_baby:skin_joint1_seg_4_joint/pi_baby:skin_joint1_seg_5_joint/pi_baby:skin_joint1_seg_6_joint/pi_baby:skin_joint1_seg_7_joint/pi_baby:skin_bn_r_shoulder_01_joint/pi_baby:skin_bn_r_arm_01_joint/pi_baby:skin_bn_r_arm_02_joint/pi_baby:skin_bn_r_arm_03_joint/pi_baby:skin_bn_r_arm_04_joint
+        weight: 1
+      - path: pi_baby:skin_bn_COG_joint/pi_baby:skin_object_joint
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
