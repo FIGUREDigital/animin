@@ -8,7 +8,7 @@ class MyEditorScript {
 	static string[] SCENES = FindEnabledEditorScenes();
 	
 	static string APP_NAME = "Animin";
-	static string TARGET_DIR = "/AniminBuild";
+	static string TARGET_DIR = "target";
 
 	[MenuItem ("Custom/Build iOS/Release")]
 	static void PerformiOSBuild()
