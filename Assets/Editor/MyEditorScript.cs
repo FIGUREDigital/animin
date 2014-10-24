@@ -15,7 +15,6 @@ class MyEditorScript {
 	{
 		string target_dir = APP_NAME;
 		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.None);
-		CorrectBundleID ();
 	}
 
 	[MenuItem ("Custom/Build iOS/Dev")]
@@ -23,7 +22,6 @@ class MyEditorScript {
 	{
 		string target_dir = APP_NAME;
 		GenericBuild (SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.Development);
-		CorrectBundleID ();
 	}
 	
 	private static string[] FindEnabledEditorScenes() {
@@ -37,11 +35,19 @@ class MyEditorScript {
 	
 	static void GenericBuild(string[] scenes, string target_dir, BuildTarget build_target, BuildOptions build_options)
 	{
+		if(!Directory.Exists(target_dir))
+		{
+			Debug.Log("Creating folder: " + target_dir);
+			Directory.CreateDirectory(target_dir);
+		}
 		EditorUserBuildSettings.SwitchActiveBuildTarget(build_target);
 		string res = BuildPipeline.BuildPlayer(scenes,target_dir,build_target,build_options);
 		if (res.Length > 0) {
 			throw new Exception("BuildPlayer failure: " + res);
 		}
+		CorrectBundleID ();
+		Debug.Log("BUILD SUCCEEDED!");
+		Debug.Log("Output: " + target_dir);
 	}
 
 	static void CorrectBundleID()
