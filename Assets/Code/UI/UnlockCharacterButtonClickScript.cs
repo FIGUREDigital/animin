@@ -18,7 +18,7 @@ public class UnlockCharacterButtonClickScript : MonoBehaviour
 		//UIManager.Instance.UITransition(ProfilesManagementScript.Singleton.AniminsScreen, ProfilesManagementScript.Singleton.PurchaseChoiceScreen);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
 		UnlockCharacterManager.Instance.OpenShop();
-		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
+		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(true);
 	}
 
 }
