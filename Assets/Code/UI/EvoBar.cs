@@ -18,10 +18,33 @@ public class EvoBar : MonoBehaviour
 	private AniminEvolutionStageId mEvoID;
 	private AniminEvolutionStageId mPrevEvoID;
 	private bool initial = true;
+	public GameObject overlay1;
+	public GameObject overlay2;
+	public GameObject overlay3;
 
 	void OnEnable()
 	{
-		PlaceMarkers();
+		//PlaceMarkers();
+		AniminEvolutionStageId id = PersistentData.Singleton.AniminEvolutionId;
+		overlay1.SetActive(false);
+		overlay2.SetActive(false);
+		overlay3.SetActive(false);
+
+		switch(id)
+		{
+		case AniminEvolutionStageId.Baby:
+			overlay1.SetActive(true);
+			break;
+		case AniminEvolutionStageId.Kid:
+			overlay2.SetActive(true);
+			break;
+		case AniminEvolutionStageId.Adult:
+			overlay3.SetActive(true);
+			break;
+		case AniminEvolutionStageId.Count:
+		default:
+			break;
+		}
 	}
 	
 	private void PlaceMarkers()

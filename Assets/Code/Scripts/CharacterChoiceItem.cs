@@ -19,6 +19,23 @@ public class CharacterChoiceItem : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+
+		switch(mId)
+		{
+		case AniminId.Pi:
+			mUnlocked = PlayerPrefs.GetInt("piUnlocked")==1?true:false;
+			break;
+		case AniminId.Kelsey:
+			mUnlocked = PlayerPrefs.GetInt("kelseyUnlocked")==1?true:false;
+			break;
+		case AniminId.Mandi:
+			mUnlocked = PlayerPrefs.GetInt("mandiUnlocked")==1?true:false;
+			break;
+		case AniminId.Tbo:
+			break;
+		default:
+			break;
+		}
 		if(mSprite == null)
 		{
 			Debug.LogWarning("CANNOT FIND SPRITE FOR CHARACTER. ATTEMPTING TO RESOLVE.");

@@ -77,7 +77,7 @@ public class AchievementsScript : MonoBehaviour
 				Title.text = "Your animin has grown!";
 				BackgroundGradient.spriteName = "achievementGreen";
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
-				MedalIcon.spriteName = @"achievementMarker2";
+				MedalIcon.spriteName = @"achievementMarker3";
 				break;
 			}
 		case AchievementTypeId.EvolutionStar:
@@ -85,7 +85,7 @@ public class AchievementsScript : MonoBehaviour
 				Title.text = "You unlocked a surprise!";
 				BackgroundGradient.spriteName = "achievementGreen";
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
-				MedalIcon.spriteName = @"achievementMarker3";
+				MedalIcon.spriteName = @"achievementMarker1";
 				break;
 			}
 		case AchievementTypeId.Tutorial:
