@@ -86,6 +86,10 @@ public class UnlockCharacterManager
 				Debug.Log("Purchase Failed!");
 				complete = true;
 				break;
+			case ShopManager.PurchaseStatus.Cancel:
+				Debug.Log("Purchase Failed!");
+				complete = true;
+				break;
 			default:
 				yield return new WaitForSeconds(0.2f);
 				break;
@@ -124,6 +128,21 @@ public class UnlockCharacterManager
 
 	private void UnlockCharacter()
 	{
+		switch(mId)
+		{
+		case AniminId.Pi:
+			PlayerPrefs.SetInt("piUnlocked", 1);
+			break;
+		case AniminId.Kelsey:
+			PlayerPrefs.SetInt("kelseyUnlocked", 1);
+			break;
+		case AniminId.Mandi:
+			PlayerPrefs.SetInt("mandiUnlocked", 1);
+			break;
+		case AniminId.Tbo:
+		default:
+			break;
+		}
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
 		character.ChangeLockedState(true);

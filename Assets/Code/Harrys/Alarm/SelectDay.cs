@@ -3,7 +3,6 @@ using System.Collections;
 
 public class SelectDay : MonoBehaviour {
 
-	public Alarm AlarmScript;
 	private int my_i;
 	private bool m_clicked;
 

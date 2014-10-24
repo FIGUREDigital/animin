@@ -466,7 +466,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public void HidePopupMenus()
 	{
-		UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(false);
+		UIGlobalVariablesScript.Singleton.AlarmUI.SetActive(false);
 		UIGlobalVariablesScript.Singleton.StereoUI.SetActive(false);
 		UIGlobalVariablesScript.Singleton.LightbulbUI.SetActive(false);
 		UIGlobalVariablesScript.Singleton.EDMBoxUI.SetActive(false);
@@ -1281,7 +1281,7 @@ public class CharacterProgressScript : MonoBehaviour
 							
 
 							bool isItemAlreadyOn = false;
-							if((UIGlobalVariablesScript.Singleton.Item3DPopupMenu.activeInHierarchy 
+							if((UIGlobalVariablesScript.Singleton.AlarmUI.activeInHierarchy 
 						    || UIGlobalVariablesScript.Singleton.StereoUI.activeInHierarchy
 						    || UIGlobalVariablesScript.Singleton.JunoUI.activeInHierarchy
 						    || UIGlobalVariablesScript.Singleton.EDMBoxUI.activeInHierarchy
@@ -1298,9 +1298,9 @@ public class CharacterProgressScript : MonoBehaviour
 								{
 									HidePopupMenus();
 									
-									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
+									UIGlobalVariablesScript.Singleton.AlarmUI.GetComponent<UIWidget>().SetAnchor(moveHitInfo.collider.gameObject);
 									//TriggeredHoldAction = true;
-									UIGlobalVariablesScript.Singleton.Item3DPopupMenu.SetActive(true);
+									UIGlobalVariablesScript.Singleton.AlarmUI.SetActive(true);
 									LastKnownObjectWithMenuUp = moveHitInfo.collider.gameObject;
 									preventMovingTo = true;
 								}

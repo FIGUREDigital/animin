@@ -59,7 +59,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 
 	public TrackVuforiaScript Vuforia;
 	//public GameObject IndicatorAboveHead;
-	public GameObject Item3DPopupMenu;
+	public GameObject AlarmUI;
 	public SoundEngineScript SoundEngine;
 	public JoystiqScript Joystick;
 	public GameObject JoystickArt;
@@ -184,5 +184,14 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		//Debug.Log ("According to the scientific method, we're are in the state: "+CurrentlyActive+";");
+	}
+
+	void OnApplicationPause()
+	{
+
+	}
+
+	void OnApplicationResume()
+	{
 	}
 }

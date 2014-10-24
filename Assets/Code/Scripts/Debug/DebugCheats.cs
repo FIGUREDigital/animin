@@ -50,9 +50,11 @@ public class DebugCheats : MonoBehaviour
 			{
 			case AniminEvolutionStageId.Baby:
 				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold + 50;
+				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			case AniminEvolutionStageId.Kid:
 				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold + 50;
+				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			case AniminEvolutionStageId.Adult:
 			default:
@@ -68,9 +70,11 @@ public class DebugCheats : MonoBehaviour
 				break;
 			case AniminEvolutionStageId.Kid:
 				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold - 50;
+				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			case AniminEvolutionStageId.Adult:
 				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold - 50;
+				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			}
 			break;
@@ -80,7 +84,7 @@ public class DebugCheats : MonoBehaviour
 			break;
 
 		case CheatButtons.TakeZeff:
-			PersistentData.Singleton.ZefTokens--;
+			EvolutionManager.Instance.RemoveZef();
 			break;
 
 		case CheatButtons.AddTime:
