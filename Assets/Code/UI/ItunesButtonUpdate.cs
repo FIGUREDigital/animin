@@ -14,6 +14,7 @@ public class ItunesButtonUpdate : MonoBehaviour
 	private GameObject mMandiHeader;
 
 	private int mId;
+	private bool mRegistered;
 
 	void Start()
 	{
@@ -27,7 +28,6 @@ public class ItunesButtonUpdate : MonoBehaviour
 	
 	void OnDisable()
 	{
-		ShopManager.Instance.EndStore();
 	}
 
 	void SetCharacterIcons()
@@ -64,33 +64,20 @@ public class ItunesButtonUpdate : MonoBehaviour
 	{
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-		UnregisterListeners();
+		//UnregisterListeners();
 	}
 
 #if UNITY_IOS
 	void purchaseSuccessful( StoreKitTransaction transaction )
 	{
 		Debug.Log(string.Format("Purchase of {0} Successful",transaction.productIdentifier));
+		UnlockCharacterManager.Instance.UnlockCharacter();
 		ReturnToMainScreen();
 	}
 
 	void purchaseCancelled( string response )
 	{
 		Debug.Log("Purchase Cancelled. Response "+ response);
-		ReturnToMainScreen();
-	}
-
-	void productListReceivedEvent( List<StoreKitProduct> productList )
-	{
-		Debug.Log("Product List Recieved");
-		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
-		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(true);
-		UnregisterListeners();
-	}
-
-	void productListRequestFailedEvent( string error )
-	{
-		Debug.Log("Product List Request Failed. Error "+ error);
 		ReturnToMainScreen();
 	}
 
@@ -114,11 +101,15 @@ public class ItunesButtonUpdate : MonoBehaviour
 		Debug.Log("Purchase Unsuccessful, response: " + response);
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-		UnregisterListeners();
+		//UnregisterListeners();
 	}
 	void RegisterListeners()
 	{
-		
+		if(mRegistered)
+		{
+			return;
+		}
+		mRegistered = true;
 		Debug.Log("Register Itunes Listeners");
 		if(Application.isEditor){ return; }
         
@@ -126,8 +117,6 @@ public class ItunesButtonUpdate : MonoBehaviour
 		StoreKitManager.purchaseSuccessfulEvent += purchaseSuccessful;
 		StoreKitManager.purchaseCancelledEvent += purchaseCancelled;
 		StoreKitManager.purchaseFailedEvent += purchaseUnsuccessful;
-		StoreKitManager.productListReceivedEvent += productListReceivedEvent;
-		StoreKitManager.productListRequestFailedEvent += productListRequestFailedEvent;
 #elif UNITY_ANDROID
         GoogleIABManager.purchaseSucceededEvent += purchaseSuccessful;
 		GoogleIABManager.purchaseCancelledEvent += purchaseCancelled;
@@ -136,14 +125,17 @@ public class ItunesButtonUpdate : MonoBehaviour
     }
 	void UnregisterListeners()
 	{
+		if(!mRegistered)
+		{
+			return;
+		}
+		mRegistered = false;
 		Debug.Log("Unregister Itunes Listeners");
 #if UNITY_IOS
 		if(Application.isEditor){ return; }
 		StoreKitManager.purchaseSuccessfulEvent -= purchaseSuccessful;
 		StoreKitManager.purchaseCancelledEvent -= purchaseCancelled;
 		StoreKitManager.purchaseFailedEvent -= purchaseUnsuccessful;
-		StoreKitManager.productListReceivedEvent -= productListReceivedEvent;
-		StoreKitManager.productListRequestFailedEvent -= productListRequestFailedEvent;
 #elif UNITY_ANDROID
 		if(Application.isEditor){ return; }
         GoogleIABManager.purchaseSucceededEvent -= purchaseSuccessful;

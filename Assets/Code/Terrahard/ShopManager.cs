@@ -39,6 +39,17 @@ public class ShopManager
 
     public string Error;
 
+	private bool mShopReady;
+	public bool ShopReady
+	{
+		get 
+		{
+			return mShopReady;
+		}
+	}
+
+	private List<Item> mItems = new List<Item>();
+
     public class Item
     {
         public string ID;
@@ -64,6 +75,7 @@ public class ShopManager
 		StoreKitManager.purchaseCancelledEvent += purchaseCancelled;
 		StoreKitManager.purchaseFailedEvent += purchaseFailed;
 		StoreKitManager.productListReceivedEvent += productListReceivedEvent;
+		StoreKitManager.productListRequestFailedEvent += productListRequestFailedEvent;
 		StoreKitManager.restoreTransactionsFailedEvent += restoreTransactionsFailed;
 		StoreKitManager.restoreTransactionsFinishedEvent += restoreTransactionsFinished;
 		StoreKitManager.restoreTransactionsFailedEvent += restoreTransactionsFailed;
@@ -129,8 +141,18 @@ public class ShopManager
         // print the products to the console
         foreach( StoreKitProduct product in productList )
             Debug.Log( product.ToString() + "\n" );
-		
+
+		if(productList.Count > 0)
+		{
+			mShopReady = true;
+		}
     }
+
+	private void productListRequestFailedEvent( string error)
+	{
+		Debug.Log( "productListRequestFailedEvent. Result: " + error );
+		StartStore(mItems);
+	}
 #endif
 
 	void purchaseFailed( string error )
@@ -288,6 +310,9 @@ public class ShopManager
 
     public void BuyItem( string productID = "" )
     {
+
+		Debug.Log( "AAAAAAAAAAAAAAAAAAAAAAAAAA " + CurrentPurchaseStatus + " " + productID );
+
         if( CurrentPurchaseStatus == PurchaseStatus.Idle )
         {
             CurrentPurchaseStatus = PurchaseStatus.InProgress;
@@ -353,11 +378,14 @@ public class ShopManager
 
     public void StartStore(string[] shopItems)
     {
+		mShopReady = false;
+		mItems.Clear();
         //m_CurrentShopState = ShopState.InShop;
         string[] ids = new string[ shopItems.Length ];
         for( int i = 0; i < ids.Length; i++ )
         {
             ids[ i ] = shopItems[ i ];
+			mItems.Add(new Item(ids[i]));
         }
 #if UNITY_IOS
 		StoreKitBinding.requestProductData( ids );
@@ -365,10 +393,27 @@ public class ShopManager
         GoogleIAB.queryInventory( ids );
 #endif
     }
+	public void StartStore(List<Item> shopItems)
+	{
+		mShopReady = false;
+		//m_CurrentShopState = ShopState.InShop;
+		string[] ids = new string[ shopItems.Count ];
+		for( int i = 0; i < ids.Length; i++ )
+		{
+			ids[ i ] = shopItems[ i ].ID;
+		}
+		#if UNITY_IOS
+		StoreKitBinding.requestProductData( ids );
+		#elif UNITY_ANDROID
+		GoogleIAB.queryInventory( ids );
+		#endif
+	}
 
     public void EndStore()
     {
-        m_CurrentShopState = ShopState.Idle;
+		Debug.Log("Close Shop");
+		mShopReady = false;
+        CurrentPurchaseStatus = PurchaseStatus.Idle;
     }
 }
 //#endif
