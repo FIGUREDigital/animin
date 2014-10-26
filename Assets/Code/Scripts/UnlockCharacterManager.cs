@@ -67,11 +67,11 @@ public class UnlockCharacterManager
 		shopItems [4] = KELSEY_PURCHASE;
 		shopItems [5] = MANDI_PURCHASE;
 		ShopManager.Instance.StartStore (shopItems);
-		
 	}
 
 	private IEnumerator WaitForResponse()
 	{
+		Debug.Log ("Start Coroutine!");
 		bool complete = false;
 		while(!complete)
 		{
@@ -94,6 +94,10 @@ public class UnlockCharacterManager
 				yield return new WaitForSeconds(0.2f);
 				break;
 			}
+		}
+		if(ShopManager.CurrentPurchaseStatus == ShopManager.PurchaseStatus.Success)
+		{
+			ShopManager.CurrentPurchaseStatus = ShopManager.PurchaseStatus.Idle;
 		}
 		Debug.Log ("Finish Coroutine!");
 		
@@ -126,7 +130,7 @@ public class UnlockCharacterManager
 		return ShopManager.Instance.HasBought(s1) || ShopManager.Instance.HasBought(s2);
 	}
 
-	private void UnlockCharacter()
+	public void UnlockCharacter()
 	{
 		switch(mId)
 		{
@@ -147,5 +151,17 @@ public class UnlockCharacterManager
 		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
 		character.ChangeLockedState(true);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
+		Debug.Log("Unlock Character " + mId);
+		ShopManager.Instance.EndStore();
+		OpenShop();
+	}
+
+	void OnApplicationPause()
+	{
+		ShopManager.Instance.EndStore();
+	}
+	void OnApplicationResume()
+	{
+		OpenShop();
 	}
 }

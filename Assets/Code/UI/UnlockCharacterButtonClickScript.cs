@@ -16,9 +16,17 @@ public class UnlockCharacterButtonClickScript : MonoBehaviour
 	{
 		ProfilesManagementScript.Singleton.AniminToUnlockId = Id;
 		//UIManager.Instance.UITransition(ProfilesManagementScript.Singleton.AniminsScreen, ProfilesManagementScript.Singleton.PurchaseChoiceScreen);
-		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
-		UnlockCharacterManager.Instance.OpenShop();
-		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(true);
+		if(ShopManager.Instance.ShopReady || Application.isEditor)
+		{
+			ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
+			ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(true);
+		}
+		else
+		{
+			Debug.Log("Shop Unavalible");
+			ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
+			ProfilesManagementScript.Singleton.ErrorBox.SetActive(true);
+		}
 	}
 
 }

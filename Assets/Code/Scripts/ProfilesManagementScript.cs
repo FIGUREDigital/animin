@@ -13,6 +13,7 @@ public class ProfilesManagementScript : MonoBehaviour
 	public GameObject PurchaseChoiceScreen;
 	public GameObject CreateAccessCodeScreen;
 	public GameObject LoadingSpinner;
+	public GameObject ErrorBox;
 	public bool BeginLoadLevel;
 	public GameObject[] AniminSprites;
 

@@ -459,7 +459,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			GameObject currentMode = this.GetComponent<AnimationControllerScript>().CharacterModel;
+			GameObject currentMode = CharacterModel;
 			int layerIndex = 1 + (int)currentMode.GetComponent<HeadReferenceScript>().PickupAnimationLayer;
 
 
@@ -472,7 +472,7 @@ public class AnimationControllerScript : MonoBehaviour
 	{
 		get
 		{
-			GameObject currentMode = this.GetComponent<AnimationControllerScript>().CharacterModel;
+			GameObject currentMode = CharacterModel;
 			int layerIndex = 1 + (int)currentMode.GetComponent<HeadReferenceScript>().PickupAnimationLayer;
 
 			return animator.GetLayerWeight(layerIndex) > 0;
@@ -480,8 +480,16 @@ public class AnimationControllerScript : MonoBehaviour
 		
 		set
 		{
-			if(value == true) HoldingWeightAnimationUp = true;
-			else HoldingWeightAnimationUp = false;
+			int layerIndex = 1 + (int)CharacterModel.GetComponent<HeadReferenceScript>().PickupAnimationLayer;
+
+			//return animator.GetLayerWeight(layerIndex) > 0;
+
+			if(value == true){
+				HoldingWeightAnimationUp = true;
+			}
+			else{
+				HoldingWeightAnimationUp = false;
+			}
 
 			animator.SetBool("IsHoldingItem", value );
 		}
@@ -578,6 +586,8 @@ public class AnimationControllerScript : MonoBehaviour
 
 		GameObject currentMode = this.GetComponent<AnimationControllerScript>().CharacterModel;
 		int layerIndex = 1 + (int)currentMode.GetComponent<HeadReferenceScript>().PickupAnimationLayer;
+
+		Debug.Log ("Mask name : [" + animator.GetLayerName (layerIndex) + "]; Mask wieght : [" + animator.GetLayerWeight (layerIndex) + "];");
 
 		
 		if(HoldingWeightAnimationUp && animator.GetLayerWeight(layerIndex) >= 1)
