@@ -290,7 +290,7 @@ public class CharacterProgressScript : MonoBehaviour
 
         //HARRY: REMEMEBR TO REMOVE THESE COMMENTS, FOR CHRIST'S SAKE.
 		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
-        //this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(AniminId.Kelsey   , AniminEvolutionStageId.Adult);
+        //this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(AniminId.Pi   , AniminEvolutionStageId.Adult);
         
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.AlmondMilk, 3);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Avocado, 1);
@@ -441,6 +441,9 @@ public class CharacterProgressScript : MonoBehaviour
 		//pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
 		
 		ObjectHolding.transform.parent = ActiveWorld.transform;
+
+		
+		GetComponent<CharacterSwapManagementScript> ().CurrentModel.GetComponent<HeadReferenceScript> ().HoldingObject = null;
 		
 		ThrowAnimationScript throwScript = ObjectHolding.AddComponent<ThrowAnimationScript>();
 		float maxDistance = Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) * 0.35f;
@@ -1623,7 +1626,8 @@ public class CharacterProgressScript : MonoBehaviour
 
 
 		item.layer = LayerMask.NameToLayer("IgnoreCollisionWithCharacter");
-		item.transform.parent = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>().ObjectCarryAttachmentBone.transform;
+		//item.transform.parent = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>().ObjectCarryAttachmentBone.transform;
+		GetComponent<CharacterSwapManagementScript> ().CurrentModel.GetComponent<HeadReferenceScript> ().HoldingObject = item;
 		animationController.IsHoldingItem = true;
 		ObjectHolding = item;
 
