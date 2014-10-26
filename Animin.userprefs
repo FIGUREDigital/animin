@@ -1,9 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/UI/PurchaseBackButton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/AnimationControllerScript.cs">
     <Files>
-      <File FileName="Assets/Code/Scripts/CharacterChoiceItem.cs" Line="73" Column="101" />
-      <File FileName="Assets/Code/Scripts/CharacterChoiceItem.cs" Line="90" Column="1" />
+      <File FileName="Assets/Code/Scripts/CharacterChoiceItem.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/UI/UIManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/UI/SendAccessCodeToServerButtonClickScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/UI/SendAccesCodeFromChatboxClickScript.cs" Line="1" Column="1" />
@@ -11,13 +10,13 @@
       <File FileName="Assets/NGUI/Scripts/Tweening/UITweener.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/UI/ItunesButtonUpdate.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/ProfilesManagementScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/UnlockCharacterButtonClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/PlayerProfileData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/UnlockCharacterButtonClickScript.cs" Line="10" Column="50" />
+      <File FileName="Assets/Code/PlayerProfileData.cs" Line="147" Column="32" />
       <File FileName="Assets/Code/Harrys/Minigame 1/LoadProfileMG1.cs" Line="1" Column="1" />
       <File FileName="Assets/NGUI/Scripts/Editor/NGUIMenu.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/UI/BuyWithItunes.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/UnlockCharacterManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="46" Column="32" />
       <File FileName="Assets/Plugins/InAppBillingAndroid/GoogleIABManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/CharacterControllerScript.cs" Line="1" Column="1" />
@@ -27,17 +26,19 @@
       <File FileName="Assets/Code/Scripts/DetectDragIconScript.cs" Line="1" Column="1" />
       <File FileName="Assets/NGUI/Scripts/Interaction/UIDragResize.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/UI/PurchaseBackButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/UI/SelectCharacterClickScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/UI/SelectCharacterClickScript.cs" Line="30" Column="65" />
+      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="592" Column="14" />
       <File FileName="Assets/Code/AniminProfileData.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/CharacterSwapManagementScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/ChestScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/ProgressBarUVScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="226" Column="5" />
       <File FileName="Assets/NGUI/Scripts/UI/UISprite.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Scripts/UI/AniminNameSprite.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Terrahard/ShopManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/StoreKit/StoreKitManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="524" Column="8" />
+      <File FileName="Assets/Code/Scripts/AchievementsScript.cs" Line="12" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -45,17 +46,10 @@
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Code" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="UI" expanded="True">
-                  <Node name="PurchaseBackButton.cs" selected="True" />
-                </Node>
+                <Node name="UI" expanded="True" />
+                <Node name="AnimationControllerScript.cs" selected="True" />
               </Node>
-              <Node name="Terrahard" expanded="True" />
               <Node name="UI" expanded="True" />
-            </Node>
-          </Node>
-          <Node name="Assembly-CSharp-firstpass" expanded="True">
-            <Node name="Plugins" expanded="True">
-              <Node name="StoreKit" expanded="True" />
             </Node>
           </Node>
         </State>
