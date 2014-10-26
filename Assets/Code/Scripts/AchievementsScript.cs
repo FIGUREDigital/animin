@@ -35,7 +35,7 @@ public class AchievementsScript : MonoBehaviour
 				Title.text = "Gold Award!";
 				BackgroundGradient.spriteName = "achievementYellow";
 				Description.text = string.Format(@"Well done! you scored {0} points.", points);
-				MedalIcon.spriteName = @"achievementBGBronze";
+			MedalIcon.spriteName = @"achievementIconGold";
 				break;
 			}
 		case AchievementTypeId.Bronze:
@@ -43,7 +43,7 @@ public class AchievementsScript : MonoBehaviour
 				Title.text = "Bronze Award!";
 				BackgroundGradient.spriteName = "achievementYellow";
 				Description.text = string.Format(@"Well done! you scored {0} points.", points);
-				MedalIcon.spriteName = @"achievementIconGold";
+				MedalIcon.spriteName = @"achievementBGBronze";
 				break;
 			}
 		case AchievementTypeId.Silver:
@@ -68,7 +68,7 @@ public class AchievementsScript : MonoBehaviour
 				Title.text = "Your Animin has evolved!";
 				BackgroundGradient.spriteName = "achievementGreen";
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
-				MedalIcon.spriteName = @"achievementEvolution";
+				MedalIcon.spriteName = @"achievementMarker3";
 				break;
 			}
 
