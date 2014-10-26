@@ -564,6 +564,7 @@ public class AnimationControllerScript : MonoBehaviour
 		}
 	}
 
+	int test = 0;
 
 	// Update is called once per frame
 	void Update () 
@@ -584,10 +585,8 @@ public class AnimationControllerScript : MonoBehaviour
 
 		//IsHoldingItem = true;
 
-		GameObject currentMode = this.GetComponent<AnimationControllerScript>().CharacterModel;
+		GameObject currentMode = CharacterModel;
 		int layerIndex = 1 + (int)currentMode.GetComponent<HeadReferenceScript>().PickupAnimationLayer;
-
-		Debug.Log ("Mask name : [" + animator.GetLayerName (layerIndex) + "]; Mask wieght : [" + animator.GetLayerWeight (layerIndex) + "];");
 
 		
 		if(HoldingWeightAnimationUp && animator.GetLayerWeight(layerIndex) >= 1)
