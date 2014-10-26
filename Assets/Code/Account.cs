@@ -35,7 +35,7 @@ public class Account
 
     }
 
-    public IEnumerator WWWSendData( string name, string address = " ", string addressee = " " )
+    public IEnumerator WWWSendData( string name, string card = " ", string address = " ", string addressee = " " )
     {
         //if(PlayerPrefs.HasKey( "PLAYER_ID" )) yield break;
 
@@ -58,7 +58,7 @@ public class Account
         webForm.AddField( "Addressee", addressee );
 
         webForm.AddField( "Device", "" + Application.platform );
-        webForm.AddField( "Card", " " );
+        webForm.AddField( "Card", card );
 
         WWW w = new WWW( SERVER_SEND_URL, webForm );
 
