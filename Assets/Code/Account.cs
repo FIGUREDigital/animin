@@ -42,8 +42,8 @@ public class Account
         WWWForm webForm = new WWWForm();
 
         webForm.AddField( "Name", name );
-
-        if( address == " " )
+        bool newUser = address == " ";
+        if( newUser )
         {
             webForm.AddField( "NewUser", "1" );
         }
@@ -70,8 +70,11 @@ public class Account
         }
         else
         {
-            UniqueID = w.text;
-           // PlayerPrefs.SetString( "PLAYER_ID", UniqueID );
+            if( newUser )
+            {
+                UniqueID = w.text;
+                PlayerPrefs.SetString( "PLAYER_ID", UniqueID );
+            }
 
 
             Debug.Log( w.text );
