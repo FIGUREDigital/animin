@@ -104,6 +104,7 @@ public class CameraModelScript : MonoBehaviour
 
 	private void Spawn(bool holdInHands)
 	{
+		Debug.Log ("SpriteRef : ["+SpriteRef+"];");
 		if(SpriteRef != null)
 		{
 			InterfaceItemLinkToModelScript refScript = SpriteRef.GetComponent<InterfaceItemLinkToModelScript>();
@@ -128,7 +129,7 @@ public class CameraModelScript : MonoBehaviour
 					SpriteRef.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)itemData.Id].SpriteName;
 					SpriteRef.GetComponent<InterfaceItemLinkToModelScript>().ItemID = itemData.Id;
 
-					//				List<GameObject> allSprites = new List<GameObject>();
+	//				List<GameObject> allSprites = new List<GameObject>();
 	//				UIClickButtonMasterScript.PopulateInterfaceItems(InventoryItemData.Items[(int)popScript.Id].ItemType, allSprites);
 	//
 	//				for(int i=0;i<allSprites.Count;++i)
@@ -186,8 +187,6 @@ public class CameraModelScript : MonoBehaviour
 				if (scriptRef.Id == InventoryItemId.woodSword)
 					scale = 0.3f;
 				else if (scriptRef.Id == InventoryItemId.woodFrame)
-					scale = 0.3f;
-				else if (scriptRef.Id == InventoryItemId.Radio)
 					scale = 0.3f;
 				else
 					scale = 0.1f;

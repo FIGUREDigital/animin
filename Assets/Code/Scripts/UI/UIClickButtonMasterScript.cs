@@ -144,7 +144,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				if(script.GroundItems[i].GetComponent<UIPopupItemScript>() != null)
 				{
 					if (script.GroundItems[i].GetComponent<UIPopupItemScript>().Type == PopupItemType.Token){
-						script.OnInteractWithPopupItem(script.GroundItems[i].GetComponent<UIPopupItemScript>());
+						continue;
 					} else {
 					    PersistentData.Singleton.AddItemToInventory(script.GroundItems[i].GetComponent<UIPopupItemScript>().Id, 1);
 					}

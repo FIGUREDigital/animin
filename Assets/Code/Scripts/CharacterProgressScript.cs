@@ -48,8 +48,6 @@ public enum InventoryItemId
 	woodFrame,
 	Camera,
 	FartButton,
-	Radio,
-
 
 	Pill,
 	Syringe,
@@ -101,7 +99,6 @@ public class InventoryItemData
 
 		Items[(int)InventoryItemId.woodSword] = new InventoryItemBankData() { Id = InventoryItemId.woodSword, PrefabId = "Prefabs/woodSword", SpriteName = "woodSword_icon", ItemType = PopupItemType.Item };
 		Items[(int)InventoryItemId.woodFrame] = new InventoryItemBankData() { Id = InventoryItemId.woodFrame, PrefabId = "Prefabs/woodFrame", SpriteName = "woodFrame_icon", ItemType = PopupItemType.Item };
-		Items[(int)InventoryItemId.Radio] = new InventoryItemBankData() { Id = InventoryItemId.Radio, PrefabId = "Prefabs/radio", SpriteName = "radio_icon", ItemType = PopupItemType.Item };
 
 
 		Items[(int)InventoryItemId.Pill] = new InventoryItemBankData() { Id = InventoryItemId.Pill, PrefabId = "Prefabs/capsule", SpriteName = "mediumpill_icon", ItemType = PopupItemType.Medicine };
@@ -320,7 +317,6 @@ public class CharacterProgressScript : MonoBehaviour
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.watermelon, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodFrame, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodSword, 1);
-		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Radio, 1);
 
 		//Adrian, please forgive me, but I couldn't think of where else in the labrynth to put this little UI update thingymaboodle.
 

@@ -61,7 +61,7 @@ public class HeadReferenceScript : MonoBehaviour {
 				objpos -= new Vector3 (0,offset.y,0);
 
 
-				Debug.Log ("Before : ["+debugtmp+"]; After : ["+objpos+"]; Offset : ["+offset+"];");
+				//Debug.Log ("Before : ["+debugtmp+"]; After : ["+objpos+"]; Offset : ["+offset+"];");
 				Debug.DrawLine(debugtmp, objpos, Color.blue);
 
 			}

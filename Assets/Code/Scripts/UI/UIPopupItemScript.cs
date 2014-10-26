@@ -19,6 +19,7 @@ public enum MenuFunctionalityUI
 	EDMBox,
 	Juno,
 	Piano,
+	Alarm,
 }
 
 public enum SpecialFunctionalityId
