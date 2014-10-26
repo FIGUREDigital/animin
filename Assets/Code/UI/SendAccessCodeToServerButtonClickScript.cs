@@ -9,7 +9,7 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		RegisterListeners();
+		//RegisterListeners();
 	}
 	void OnClick()
 	{
@@ -20,8 +20,11 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 			ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 			return; 
 		}
-		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
-		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
+		else
+		{
+			ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
+			ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
+		}
 	}
 
 #if UNITY_IOS

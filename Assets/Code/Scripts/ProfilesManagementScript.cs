@@ -30,8 +30,12 @@ public class ProfilesManagementScript : MonoBehaviour
 	}
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
+	    StartCoroutine( Account.Instance.WWWSendData( "Aris", "Card2", "London", "testee" ) );
+	    //StartCoroutine( Account.Instance.WWWSendData( "Test") );
+
+
 		//PlayerProfileData.ActiveProfile = PlayerProfileData.GetDefaultProfile();
 		//if(PlayerProfileData.ActiveProfile == null)
 		//{
