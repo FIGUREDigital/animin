@@ -68,7 +68,7 @@ public class HeadReferenceScript : MonoBehaviour {
 			
 			t.position = objpos;
 			if (t.localPosition.y < 0){
-				t.localPosition = new Vector3(t.localPosition.x,0,t.localPosition.z);
+				t.localPosition = new Vector3 (t.localPosition.x,0,t.localPosition.z);
 			}
 		}
 	}

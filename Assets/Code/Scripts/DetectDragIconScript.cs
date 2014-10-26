@@ -41,8 +41,10 @@ public class DetectDragIconScript : MonoBehaviour {
 
 		if (refScript.ItemID == InventoryItemId.woodSword)
 						child.transform.localScale *= 2.5f;
-		if (refScript.ItemID == InventoryItemId.woodFrame)
+		else if (refScript.ItemID == InventoryItemId.woodFrame)
 						child.transform.localScale *= 3f;
-
+		
+		else if (refScript.ItemID == InventoryItemId.Radio)
+			child.transform.localScale *= 2f;
 	}
 }

@@ -187,6 +187,8 @@ public class CameraModelScript : MonoBehaviour
 					scale = 0.3f;
 				else if (scriptRef.Id == InventoryItemId.woodFrame)
 					scale = 0.3f;
+				else if (scriptRef.Id == InventoryItemId.Radio)
+					scale = 0.3f;
 				else
 					scale = 0.1f;
 			}  else {

@@ -48,6 +48,7 @@ public enum InventoryItemId
 	woodFrame,
 	Camera,
 	FartButton,
+	Radio,
 
 
 	Pill,
@@ -100,6 +101,7 @@ public class InventoryItemData
 
 		Items[(int)InventoryItemId.woodSword] = new InventoryItemBankData() { Id = InventoryItemId.woodSword, PrefabId = "Prefabs/woodSword", SpriteName = "woodSword_icon", ItemType = PopupItemType.Item };
 		Items[(int)InventoryItemId.woodFrame] = new InventoryItemBankData() { Id = InventoryItemId.woodFrame, PrefabId = "Prefabs/woodFrame", SpriteName = "woodFrame_icon", ItemType = PopupItemType.Item };
+		Items[(int)InventoryItemId.Radio] = new InventoryItemBankData() { Id = InventoryItemId.Radio, PrefabId = "Prefabs/radio", SpriteName = "radio_icon", ItemType = PopupItemType.Item };
 
 
 		Items[(int)InventoryItemId.Pill] = new InventoryItemBankData() { Id = InventoryItemId.Pill, PrefabId = "Prefabs/capsule", SpriteName = "mediumpill_icon", ItemType = PopupItemType.Medicine };
@@ -290,7 +292,7 @@ public class CharacterProgressScript : MonoBehaviour
 
         //HARRY: REMEMEBR TO REMOVE THESE COMMENTS, FOR CHRIST'S SAKE.
 		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
-        //this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(AniminId.Pi   , AniminEvolutionStageId.Adult);
+        //this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(AniminId.Pi   , AniminEvolutionStageId.Baby);
         
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.AlmondMilk, 3);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Avocado, 1);
@@ -318,6 +320,7 @@ public class CharacterProgressScript : MonoBehaviour
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.watermelon, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodFrame, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodSword, 1);
+		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Radio, 1);
 
 		//Adrian, please forgive me, but I couldn't think of where else in the labrynth to put this little UI update thingymaboodle.
 
@@ -359,6 +362,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public GameObject SpawnStageItem(string prefabId, Vector3 position)
 	{
+		//Argi, you're a cunt.
 		CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 		
 		GameObject resource = Resources.Load<GameObject>(prefabId);
@@ -372,16 +376,6 @@ public class CharacterProgressScript : MonoBehaviour
 		UIPopupItemScript scriptRef = gameObject.GetComponent<UIPopupItemScript> ();
 
 		float scale = 0.1f;
-		if (scriptRef != null) {
-						if (scriptRef.Id == InventoryItemId.woodSword)
-								scale = 1f;
-						else if (scriptRef.Id == InventoryItemId.woodFrame)
-								scale = 1f;
-						else
-								scale = 0.1f;
-				} else {
-						Debug.Log ("Script IS Null, dingus!");
-				}
 		gameObject.transform.localScale = new Vector3 (scale, scale, scale);
 		gameObject.transform.localRotation = Quaternion.Euler(0, UnityEngine.Random.Range(130, 230), 0);
 
