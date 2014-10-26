@@ -55,13 +55,13 @@ public class CharacterSwapManagementScript : MonoBehaviour
         Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = "Prefabs/pi_adult";
 
 		AnimationLists = new AnimatorOverrideController[(int)AniminId.Count, (int)AniminEvolutionStageId.Count];
-		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"TBOBabyAnimations");
-		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"TBOKidAnimations");
-		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"TBOAdultAnimations");
+		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/TBOBabyAnimations");
+		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/TBOKidAnimations");
+		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/TBOAdultAnimations");
 	
-		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"KelsiBabyAnimations");
-		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"KelsyKidAnimations");
-		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"KelsiAdultAnimations");
+		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/KelsiBabyAnimations");
+		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/KelsyKidAnimations");
+		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/KelsiAdultAnimations");
 
         AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
 		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiKidAnimations");

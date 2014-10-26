@@ -75,11 +75,12 @@ public class LoadProfileMG1 : MonoBehaviour {
 		
 	}
 	void Awake(){
-		
-		PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("Dummy");
-		if (PlayerProfileData.ActiveProfile == null)
-			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Pi];
-		
+
+		if (PlayerProfileData.ActiveProfile == null) {
+			Debug.Log ("PlayerProfileData.ActiveProfile = null!");
+			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("Dummy");
+			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters [(int)AniminId.Pi];
+		}
 		
 		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
 		this.GetComponent<MinigameAnimationControllerScript>().LoadAnimator(this.GetComponent<CharacterSwapManagementScript>().CurrentModel);
