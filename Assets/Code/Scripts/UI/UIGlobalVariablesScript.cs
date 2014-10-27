@@ -19,10 +19,11 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject CuberunnerGamesScreenRef;
 	public GameObject AROnIndicator;
 	public GameObject AROffIndicator;
-	public GameObject SettingsScreenRef;
-    public GameObject RequiresGamecardScreenRef;
+	public GameObject SettingsScreenRef;    
+	public GameObject RequiresGamecardScreenRef;
     public GameObject AchievementsScreenRef;
     public GameObject LoadingScreenRef;
+	public GameObject CreditsScreenRef;
 
 	public GameObject SpaceshipMinigameSceneRef;
 	public GameObject CubeRunnerMinigameSceneRef;

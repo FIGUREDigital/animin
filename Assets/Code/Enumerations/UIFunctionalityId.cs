@@ -74,5 +74,6 @@ public enum UIFunctionalityId
 	BackFromStartGameOptions,
 	GoToMainMenuFromGame,
 	ShowCredits,
+	HideCredits,
 	ResetAnimin,
 }

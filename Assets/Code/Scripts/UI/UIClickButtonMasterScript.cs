@@ -693,6 +693,19 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			break;
 		}
 
+		case UIFunctionalityId.ShowCredits:
+		{
+			UIGlobalVariablesScript.Singleton.SettingsScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.CreditsScreenRef.SetActive(true);
+			break;
+		}
+		case UIFunctionalityId.HideCredits:
+		{
+			UIGlobalVariablesScript.Singleton.CreditsScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.SettingsScreenRef.SetActive(true);
+			break;
+		}
+
 		}
 	}
 
