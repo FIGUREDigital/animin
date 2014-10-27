@@ -315,6 +315,7 @@ public class MinigameCollectorScript : MonoBehaviour
         if (Paused) return;
 
 		PointsLabel.GetComponent<UILabel>().text = Points.ToString() + " pts";
+		BetweenSceneData.Instance.Points = Points;
 		CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
 		if(State == MinigameStateId.ExitMinigame)
