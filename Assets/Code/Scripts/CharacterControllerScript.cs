@@ -376,7 +376,7 @@ public class CharacterControllerScript : Photon.MonoBehaviour
 			
 			// - With a timeout so you can press the button slightly before landing     
 			
-			if (canJump && Time.time < lastJumpButtonTime + jumpTimeout) {
+			if (canJump && Time.time < lastJumpButtonTime + jumpTimeout && !UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().Paused) {
 
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Jump);
 				
