@@ -3,15 +3,15 @@ using System.Collections;
 
 public class CameraChecker : MonoBehaviour {
 
-	private QCARBehaviour script;
+	private QCARBehaviour m_script;
 
 	// Use this for initialization
 	void Start () {
-		script = this.GetComponent<QCARBehaviour> ();
+		m_script = this.GetComponent<QCARBehaviour> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		script.enabled = (WebCamTexture.devices.Length != 0);
+		m_script.enabled = (WebCamTexture.devices.Length != 0);
 	}
 }
