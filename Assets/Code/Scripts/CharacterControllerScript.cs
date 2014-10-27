@@ -202,7 +202,8 @@ public class CharacterControllerScript : Photon.MonoBehaviour
 
 	public void  UpdateSmoothedMovementDirection ()
 	{
-		
+		if (UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef!= null && UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript> ().Paused)
+						return;
 
 		bool grounded = IsGrounded();
 
