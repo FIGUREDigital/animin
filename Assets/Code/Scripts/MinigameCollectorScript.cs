@@ -320,10 +320,7 @@ public class MinigameCollectorScript : MonoBehaviour
 
 		if(State == MinigameStateId.ExitMinigame)
 		{
-
 			progressScript.CurrentAction = ActionId.ExitPortalMainStage;
-
-		
 		}
 		else
 		{
@@ -352,7 +349,6 @@ public class MinigameCollectorScript : MonoBehaviour
 				if((Time.time - TimeStartedSwipe) <= 0.4f)
 				{
 					snapAngle -= SnapAngleDifference;
-
 
 					// rotate right
 					if(Input.mousePosition.x >= lastMousePosition.x)
@@ -412,34 +408,8 @@ public class MinigameCollectorScript : MonoBehaviour
 			{
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterControllerScript>().FreezeCollisionDetection = true;
 			}
-
-
-
-		
-			/*GameObject obj = GameObject.Find("TextureBufferCamera");
-			
-			GameObject hole = GameObject.Find("insideHole");
-
-			if(obj != null)
-			{
-				Texture texture = obj.GetComponent<Camera>().targetTexture;
-				hole.renderer.material.mainTexture = texture;*/
-			/*	
-				
-				hole.renderer.material.SetTextureScale (
-					"_MainTex", 
-					new Vector2(0.05f, 0.05f)
-					);
-				
-				hole.renderer.material.SetTextureOffset (
-					"_MainTex", 
-					new Vector2(0.5f, 0.5f)
-					);*/
-			//}
-
 			if(GameStartDelay.HasValue)
 			{
-	//			Debug.Log("DELAY: " + GameStartDelay.ToString());
 				GameStartDelay -= Time.deltaTime;
 
 				if(GameStartDelay <= 0)
@@ -450,15 +420,10 @@ public class MinigameCollectorScript : MonoBehaviour
 					if(oldLevelId != -1)
 					{
 						Stage.transform.GetChild(oldLevelId).gameObject.SetActive(false);
-
-
 					}
-
-
 					UIGlobalVariablesScript.Singleton.MainCharacterRef.SetActive(true);
 					GameStartDelay = null;
 					ResetCharacter();
-
 
 					Transform newTransform = Stage.transform.GetChild(currentLevelId);
 					
@@ -467,54 +432,24 @@ public class MinigameCollectorScript : MonoBehaviour
 						if(newTransform.GetChild(a).name.StartsWith("cubes"))
 						{
 							Transform cubes = newTransform.GetChild(a);
-							
-							for(int b=0;b<cubes.childCount;++b)
-							{
-//								EvilCharacterPatternMovementScript patternScript = cubes.GetChild(b).gameObject.GetComponent<EvilCharacterPatternMovementScript>();
-//								if(patternScript != null) 
-//								{
-//									patternScript.enabled = true;
-//									Debug.Log("found cube with animation script");
-//								}
-							}
 						}
 					}
-
-					//if(oldLevelId == -1)
-					//	EnterMinigame();
-
 				}
 			}
 			else
 			{
-			
 				CheckForPickupCollision ();
 
-				if (CharacterRef.transform.localPosition.y <= -1f) 
+				if (CharacterRef.transform.localPosition.y <= -1f) //This is for falling, I think.
 				{
 					UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Fall_Through_Levels);
 
-					//CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned -= 3;
-				//	if(CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned < 0 ) CharacterRef.GetComponent<CharacterProgressScript>().StarsOwned = 0;
-
 					LoseHeart(true);
 				}
-
-				//if(Input.GetKeyDown(KeyCode.F))
-				//	Reset();
 			}
-	//		if(CharacterRef.transform.localPosition.y <= -2)
-	//		{
-	//			CharacterRef.GetComponent<CharacterControllerScript>().IsResetFalling = true;
-	//		}
-
-
-
 			UIGlobalVariablesScript.Singleton.TextForStarsInMiniCollector.text = StarsCollected.ToString();
 		}
-	
 	}
-
 	private void LoseHeart(bool resetIfZero)
 	{
 		Hearts--;
