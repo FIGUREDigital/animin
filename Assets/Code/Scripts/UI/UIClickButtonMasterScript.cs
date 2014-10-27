@@ -237,14 +237,14 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				typeToLoad = PopupItemType.Food;
 				UIGlobalVariablesScript.Singleton.ItemsFoodMedicineLabel.text = "Foods";
 				//UIGlobalVariablesScript.Singleton.PanelFoods.SetActive(true);
-				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(-266, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
+				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(-312, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
 			}
 			else if(id == UIFunctionalityId.OpenCloseMedicine) 
 			{
 				typeToLoad = PopupItemType.Medicine;
 				UIGlobalVariablesScript.Singleton.ItemsFoodMedicineLabel.text = "Medicine";
 				//UIGlobalVariablesScript.Singleton.PanelMedicine.SetActive(true);
-				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(266, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
+				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(312, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
 			}
 			else if(id == UIFunctionalityId.OpenCloseItems) 
 			{
@@ -404,6 +404,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(true);
+			UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef.SetActive(false);
 			
 			break;
 		}

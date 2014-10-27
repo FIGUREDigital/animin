@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class EvolutionManager 
 {
-	enum HappinessState
+	public enum HappinessState
 	{
 		NotSet,
 		Failing,
@@ -36,6 +36,13 @@ public class EvolutionManager
 
 	public static List<string> mMarkers = new List<string>();
 
+	public HappinessState HappyState
+	{
+		get
+		{
+			return mHappinessState;
+		}
+	}
 	public int BabyEvolutionThreshold
 	{
 		get
