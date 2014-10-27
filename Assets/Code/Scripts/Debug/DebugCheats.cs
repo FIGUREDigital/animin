@@ -20,6 +20,19 @@ public enum CheatButtons
 public class DebugCheats : MonoBehaviour 
 {
 	public CheatButtons button = CheatButtons.NotSet;
+	private CheatDefs cheatDefs;
+	void Start()
+	{
+		cheatDefs = transform.parent.GetComponent<CheatDefs>();
+		if(cheatDefs == null)
+		{
+			cheatDefs = transform.parent.parent.GetComponent<CheatDefs>();
+		}
+		if(cheatDefs == null)
+		{
+			Debug.Log("Cannot find cheatdefs");
+		}
+	}
 	void OnClick()
 	{
 		switch(button)
@@ -81,14 +94,17 @@ public class DebugCheats : MonoBehaviour
 
 		case CheatButtons.GiveZeff:
 			EvolutionManager.Instance.AddZef();
+			cheatDefs.OutputText = "Zef: " + PersistentData.Singleton.ZefTokens;
 			break;
 
 		case CheatButtons.TakeZeff:
 			EvolutionManager.Instance.RemoveZef();
+			cheatDefs.OutputText = "Zef: " + PersistentData.Singleton.ZefTokens;
 			break;
 
 		case CheatButtons.AddTime:
 			EvolutionManager.Instance.HappinessStateTime += 1200;
+			cheatDefs.OutputText = "State:" + EvolutionManager.Instance.HappyState + ". Happy Time: " + EvolutionManager.Instance.HappinessStateTime;
 			break;
 
 		case CheatButtons.DebugToggle:
