@@ -147,6 +147,7 @@ public class UnlockCharacterManager
 		default:
 			break;
 		}
+		PlayerPrefs.Save();
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
 		character.ChangeLockedState(true);
@@ -159,6 +160,7 @@ public class UnlockCharacterManager
 	void OnApplicationPause()
 	{
 		ShopManager.Instance.EndStore();
+		PlayerPrefs.Save();
 	}
 	void OnApplicationResume()
 	{
