@@ -222,12 +222,14 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			else
 			{
 				mainMenuPopupRef.SetActive(!mainMenuPopupRef.activeInHierarchy);
+				UIGlobalVariablesScript.Singleton.StatsButton.SetActive(!mainMenuPopupRef.activeInHierarchy);
+				UIGlobalVariablesScript.Singleton.MinigamesButton.SetActive(!mainMenuPopupRef.activeInHierarchy);
+						
 			}
 			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef = sender;
 
 
-			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(false);
-			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(false);
+
 
 			//UIGlobalVariablesScript.Singleton.PanelFoods.SetActive(false);
 			//UIGlobalVariablesScript.Singleton.PanelMedicine.SetActive(false);
