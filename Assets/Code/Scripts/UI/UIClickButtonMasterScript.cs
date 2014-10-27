@@ -227,6 +227,10 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			}
 			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef = sender;
 
+
+			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(false);
+			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(false);
+
 			//UIGlobalVariablesScript.Singleton.PanelFoods.SetActive(false);
 			//UIGlobalVariablesScript.Singleton.PanelMedicine.SetActive(false);
 			UIGlobalVariablesScript.Singleton.PanelItems.SetActive(true);

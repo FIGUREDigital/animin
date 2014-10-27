@@ -100,6 +100,8 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject FoodButton;
 	public GameObject MedicineButton;
 	public GameObject ItemsButton;
+	public GameObject StatsButton;
+	public GameObject MinigamesButton;
 
 
 	public enum ActiveState {Caring, Collecting,Gun, None};

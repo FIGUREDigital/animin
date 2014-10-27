@@ -20,9 +20,7 @@ public class MultipleCardTrackerScript : MonoBehaviour, ITrackableEventHandler
 		TrackableBehaviour.Status previousStatus,
 		TrackableBehaviour.Status newStatus)
 	{
-		if (newStatus == TrackableBehaviour.Status.DETECTED ||
-		    newStatus == TrackableBehaviour.Status.TRACKED ||
-		    newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
+		if (WebCamTexture.devices.Length != 0 && (newStatus == TrackableBehaviour.Status.DETECTED || newStatus == TrackableBehaviour.Status.TRACKED || newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED))
 		{
 			OnTrackingFound();
 		}
@@ -83,6 +81,7 @@ public class MultipleCardTrackerScript : MonoBehaviour, ITrackableEventHandler
 		{
 				TrackVuforiaScript.IsTracking = false;
 				TrackVuforiaScript script = GameObject.FindObjectOfType<TrackVuforiaScript>();
+				if (script == null) break;
 				script.OnTrackingLost();
 				break;
 			}
@@ -90,14 +89,16 @@ public class MultipleCardTrackerScript : MonoBehaviour, ITrackableEventHandler
 		{
 				TrackVFMG1.IsTracking = false;
 				TrackVFMG1 script = GameObject.FindObjectOfType<TrackVFMG1>();
+				if (script == null) break;
 				script.OnTrackingLost();
 				break;
 		}
 			case UIGlobalVariablesScript.ActiveState.Gun:
 			{
-			TrackVFMG2.IsTracking = false;
-			TrackVFMG2 script = GameObject.FindObjectOfType<TrackVFMG2>();
-			script.OnTrackingLost();
+				TrackVFMG2.IsTracking = false;
+				TrackVFMG2 script = GameObject.FindObjectOfType<TrackVFMG2>();
+				if (script == null) break;
+				script.OnTrackingLost();
 				break;
 			}
 		}

@@ -56,11 +56,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
         TrackableBehaviour.Status newStatus)
     {
         //Debug.Log("OnTrackableStateChanged!");
-
-        if (newStatus == TrackableBehaviour.Status.DETECTED ||
-            newStatus == TrackableBehaviour.Status.TRACKED ||
-            newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
-        {
+		
+		if (WebCamTexture.devices.Length != 0 && (newStatus == TrackableBehaviour.Status.DETECTED || newStatus == TrackableBehaviour.Status.TRACKED || newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED))
+		{
             OnTrackingFound();
         }
         else
@@ -107,6 +105,8 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
             float stableAccelerationX = (float)System.Math.Round(Input.acceleration.x, 2);
             float stableAccelerationY = (float)System.Math.Round(Input.acceleration.y, 2);
 
+			Debug.Log("Input.acceleration : ["+Input.acceleration.x+":"+Input.acceleration.y+"];");
+
             float angle = Mathf.Lerp(180, 360, (stableAccelerationX + 1) / 2 /*(Mathf.Sin(Time.time) + 1) / 2*/);
             SmootherAxisX.ValueNext = (float)System.Math.Round(angle);
 
@@ -135,7 +135,9 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
             Vector3 cameraPoint = new Vector3(0, 233.1f, -198.3f);
             Transform target = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
 
-            Camera.main.transform.localPosition = cameraPoint + newPosition2 + newPosition;
+			Vector3 finalpos = cameraPoint + newPosition2 + newPosition;
+
+			Camera.main.transform.localPosition = finalpos;
             Camera.main.transform.LookAt(target);
         }
 
