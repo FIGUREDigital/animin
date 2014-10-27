@@ -11,7 +11,11 @@ public class NonARSceneReadout : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		bool isActive = UIGlobalVariablesScript.Singleton.NonARWorldRef.activeInHierarchy;
-		m_label.text = ("NonARScene : ["+ (isActive?"enabled":"disabled") + "]");
+		if (Debug.isDebugBuild) {
+			bool isActive = UIGlobalVariablesScript.Singleton.NonARWorldRef.activeInHierarchy;
+			m_label.text = ("NonARScene : [" + (isActive ? "enabled" : "disabled") + "]");
+		} else {
+			m_label.text = ("");
+		}
 	}
 }
