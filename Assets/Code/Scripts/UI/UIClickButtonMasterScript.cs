@@ -404,6 +404,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		{
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(false);
 			UIGlobalVariablesScript.Singleton.StatsScreenRef.SetActive(true);
+			UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef.SetActive(false);
 			
 			break;
 		}
