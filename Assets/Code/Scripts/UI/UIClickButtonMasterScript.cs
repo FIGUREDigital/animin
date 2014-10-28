@@ -275,7 +275,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 			//InventoryItemId itemId = UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<InterfaceItemLinkToModelScript>().ItemID;
 
-
+			UIGlobalVariablesScript.Singleton.StatsButton.SetActive(!mainMenuPopupRef.activeInHierarchy);
+			UIGlobalVariablesScript.Singleton.MinigamesButton.SetActive(!mainMenuPopupRef.activeInHierarchy);
 
 			UIGlobalVariablesScript.ButtonTriggeredMainMenuPopupRef.GetComponent<InterfaceItemLinkToModelScript>().ItemID = 
 				sender.GetComponent<InterfaceItemLinkToModelScript>().ItemID;
