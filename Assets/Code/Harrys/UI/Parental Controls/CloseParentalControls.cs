@@ -8,5 +8,7 @@ public class CloseParentalControls : MonoBehaviour {
 	// Update is called once per frame
 	void OnClick () {
 		controls.gameObject.SetActive (false);
+
+		UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive (true);
 	}
 }
