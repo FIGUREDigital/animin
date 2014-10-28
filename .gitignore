@@ -5,3 +5,5 @@ target/
 *.mdb
 *.csproj
 *.userprefs
+*.unityproj
+*.sln
