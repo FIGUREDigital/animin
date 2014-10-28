@@ -70,8 +70,10 @@ public class PortalAnimationScript : MonoBehaviour
         }
         else
         {
-
-            this.transform.LookAt(UIGlobalVariablesScript.Singleton.ARCamera.transform);
+            if( UIGlobalVariablesScript.Singleton.ARCamera != null )
+            {
+                transform.LookAt( UIGlobalVariablesScript.Singleton.ARCamera.transform );
+            }
             Debug.DrawLine(this.transform.position, Camera.main.transform.position, Color.green);
         }
 
