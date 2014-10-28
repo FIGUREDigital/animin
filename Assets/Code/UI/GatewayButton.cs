@@ -8,6 +8,11 @@ public class GatewayButton : MonoBehaviour {
 	private bool mActive;
 	private ParentalGateway gateway;
 
+	void Start()
+	{
+		gateway = gameObject.transform.parent.parent.parent.GetComponent<ParentalGateway>();
+	}
+
 	void OnClick()
 	{
 		if(mActive)
