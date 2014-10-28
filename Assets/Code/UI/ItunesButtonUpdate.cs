@@ -18,16 +18,17 @@ public class ItunesButtonUpdate : MonoBehaviour
 
 	void Start()
 	{
-		RegisterListeners();
 	}
 
 	void OnEnable()
 	{
+		RegisterListeners();
 		SetCharacterIcons();
 	}
 	
 	void OnDisable()
 	{
+		//UnregisterListeners();
 	}
 
 	void SetCharacterIcons()
@@ -64,7 +65,7 @@ public class ItunesButtonUpdate : MonoBehaviour
 	{
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-		//UnregisterListeners();
+		UnregisterListeners();
 	}
 
 #if UNITY_IOS
@@ -78,6 +79,7 @@ public class ItunesButtonUpdate : MonoBehaviour
 	void purchaseCancelled( string response )
 	{
 		Debug.Log("Purchase Cancelled. Response "+ response);
+		ShopManager.Instance.EndStore();
 		ReturnToMainScreen();
 	}
 
@@ -101,7 +103,8 @@ public class ItunesButtonUpdate : MonoBehaviour
 		Debug.Log("Purchase Unsuccessful, response: " + response);
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-		//UnregisterListeners();
+		ShopManager.Instance.EndStore();
+		UnregisterListeners();
 	}
 	void RegisterListeners()
 	{
