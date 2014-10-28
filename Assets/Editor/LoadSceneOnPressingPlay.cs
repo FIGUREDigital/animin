@@ -21,7 +21,9 @@ public static class LoadSceneOnPressingPlay
 				//We're in playmode, just about to change playmode to Editor
 				Debug.Log("Loading original level");
 				EditorApplication.OpenScene(oldScene);
-			}else{
+			}
+			else if(EditorApplication.currentScene != "Assets/Scenes/Menu.unity")
+			{
 				//We're in playmode, right after having pressed Play
 				oldScene = EditorApplication.currentScene;
 				Debug.Log("Loading first level");
