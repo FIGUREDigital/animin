@@ -9,7 +9,7 @@ public class BuyWithWebView : MonoBehaviour
 
     private void OnClick()
     {
-        StartCoroutine( Account.Instance.WWWSendData( FirstNameInput.GetComponent<UIInput>().guiText.text ) );
+        StartCoroutine( Account.Instance.WWWSendData( FirstNameInput.GetComponent<UIInput>().value ) );
 	    //StartCoroutine( Account.Instance.WWWSendData( "Test") );
 
         Debug.Log( "Buying with webview" );
