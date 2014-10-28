@@ -6,7 +6,7 @@ public class NonARSceneReadout : MonoBehaviour {
 	UILabel m_label;
 	// Use this for initialization
 	void Start () {
-		if (Debug.isDebugBuild) {
+		if (!Debug.isDebugBuild) {
 			gameObject.SetActive(false);
 		} else {
 			m_label = this.GetComponent<UILabel> ();
