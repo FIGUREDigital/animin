@@ -7,7 +7,7 @@ public class ProfileChecker : MonoBehaviour
 	void Start()
 	{
 		initialStartup = PlayerPrefs.GetString("First Login") == "true";
-		if(initialStartup)
+		if(initialStartup || Application.isEditor)
 		{
 			PlayerPrefs.SetString("First Login", "true");
 

@@ -15,6 +15,9 @@ public class ProfilesManagementScript : MonoBehaviour
 	public GameObject LoadingSpinner;
 	public GameObject ErrorBox;
 	public GameObject CloseWebview;
+	public GameObject SelectProfile;
+	public GameObject NewUser;
+	public GameObject LoginUser;
 	public bool BeginLoadLevel;
 	public GameObject[] AniminSprites;
 
