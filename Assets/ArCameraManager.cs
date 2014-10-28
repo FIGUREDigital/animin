@@ -25,6 +25,10 @@ public class ArCameraManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level) 
 	{
+		if(level == 0)
+		{
+			return;
+		}
 		UIGlobalVariablesScript.Singleton.ARCamera = Go;
 		UIGlobalVariablesScript.Singleton.DragableUI3DObject = Go.GetComponentInChildren<CameraModelScript>().gameObject;
 	}

@@ -8,6 +8,8 @@ public class BuyWithWebView : MonoBehaviour
         Debug.Log( "Buying with webview" );
 
 #if UNITY_IOS
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive( false );
+		ProfilesManagementScript.Singleton.CloseWebview.SetActive( true );
         int width = 260;
         int height = 300;
 
