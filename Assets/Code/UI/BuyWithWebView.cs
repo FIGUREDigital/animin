@@ -3,13 +3,15 @@ using System.Collections;
 
 public class BuyWithWebView : MonoBehaviour
 {
+    public GameObject ExitWebViewObject;
+
     private void OnClick()
     {
         Debug.Log( "Buying with webview" );
+        ExitWebViewObject.SetActive( true );
 
-
-		ProfilesManagementScript.Singleton.AniminsScreen.SetActive( false );
-		ProfilesManagementScript.Singleton.CloseWebview.SetActive( true );
+		//ProfilesManagementScript.Singleton.AniminsScreen.SetActive( false );
+		//ProfilesManagementScript.Singleton.CloseWebview.SetActive( true );
 #if UNITY_IOS
         int width = 360;
         int height = 300;
@@ -24,7 +26,7 @@ public class BuyWithWebView : MonoBehaviour
         EtceteraBinding.inlineWebViewSetUrl( "http://animin.me/shop" );
 #endif
 
-        UnlockCharacterManager.Instance.BuyCharacter( ProfilesManagementScript.Singleton.AniminToUnlockId, false );
+        //UnlockCharacterManager.Instance.BuyCharacter( ProfilesManagementScript.Singleton.AniminToUnlockId, false );
 
         if( Application.isEditor )
         {
