@@ -66,7 +66,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ArCameraManager.cs" />
     <Compile Include="Assets\Chickens Shader Bundle\Examples\CSB_RotateScript.cs" />
     <Compile Include="Assets\Chickens Shader Bundle\Examples\CSB_ScrollInScript.cs" />
     <Compile Include="Assets\Chickens Shader Bundle\Shaders\CSB_SHLightHelper.cs" />
@@ -79,6 +78,7 @@
     <Compile Include="Assets\Chickens Shader Bundle\Shaders\ToonPack.cs" />
     <Compile Include="Assets\Code\Account.cs" />
     <Compile Include="Assets\Code\AniminProfileData.cs" />
+    <Compile Include="Assets\Code\ArCameraManager.cs" />
     <Compile Include="Assets\Code\ChestScript.cs" />
     <Compile Include="Assets\Code\Enumerations\UIFunctionalityId.cs" />
     <Compile Include="Assets\Code\Harrys\Alarm\Alarm.cs" />
@@ -102,6 +102,7 @@
     <Compile Include="Assets\Code\Harrys\Tutorial\TutorialLoader.cs" />
     <Compile Include="Assets\Code\Helpers.cs" />
     <Compile Include="Assets\Code\MultipleCardTrackerScript.cs" />
+    <Compile Include="Assets\Code\ParentalGateway.cs" />
     <Compile Include="Assets\Code\PlayerProfileData.cs" />
     <Compile Include="Assets\Code\PrefabPool.cs" />
     <Compile Include="Assets\Code\Scripts\AchievementsScript.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Assets\Code\UI\CreateUsernameButtonClickScript.cs" />
     <Compile Include="Assets\Code\UI\CreateUsernameFromTextboxClickScript.cs" />
     <Compile Include="Assets\Code\UI\EvoBar.cs" />
+    <Compile Include="Assets\Code\UI\GatewayButton.cs" />
     <Compile Include="Assets\Code\UI\ItunesButtonUpdate.cs" />
     <Compile Include="Assets\Code\UI\OpenInGamePurchaseView.cs" />
     <Compile Include="Assets\Code\UI\OpenSettingsInMainMenuScript.cs" />

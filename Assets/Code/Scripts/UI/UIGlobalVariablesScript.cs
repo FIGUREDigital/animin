@@ -173,6 +173,12 @@ public class UIGlobalVariablesScript : MonoBehaviour
 		}
 	}
 
+	public void OpenParentalGateway(GameObject prev, GameObject next)
+	{
+		GameObject go = (GameObject)Instantiate(Resources.Load("Prefabs/Parental Gatway.prefab"));
+		go.GetComponent<ParentalGateway>().Open(prev, next);
+	}
+
 	void Awake()
 	{
 		Singleton = this;
