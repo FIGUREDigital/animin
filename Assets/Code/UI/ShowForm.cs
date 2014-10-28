@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class ShowForm : MonoBehaviour
-{ 
+{
+    public GameObject Parent;
     public GameObject Form;
 
     public void Start()
@@ -14,8 +15,7 @@ public class ShowForm : MonoBehaviour
     {
         Debug.Log( "Buying with webview" );
 
-        Form.SetActive( true );
-        UIGlobalVariablesScript.Singleton.OpenParentalGateway( gameObject, Form );
+        UIGlobalVariablesScript.Singleton.OpenParentalGateway( Parent, Form );
     }
 
 }

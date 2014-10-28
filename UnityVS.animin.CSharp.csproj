@@ -203,10 +203,15 @@
     <Compile Include="Assets\Code\UI\CreateUsernameFromTextboxClickScript.cs" />
     <Compile Include="Assets\Code\UI\EvoBar.cs" />
     <Compile Include="Assets\Code\UI\GatewayButton.cs" />
+    <Compile Include="Assets\Code\UI\InputSecretCode.cs" />
+    <Compile Include="Assets\Code\UI\InputUsername.cs" />
     <Compile Include="Assets\Code\UI\ItunesButtonUpdate.cs" />
+    <Compile Include="Assets\Code\UI\LoginUser.cs" />
+    <Compile Include="Assets\Code\UI\NewUser.cs" />
     <Compile Include="Assets\Code\UI\OpenInGamePurchaseView.cs" />
     <Compile Include="Assets\Code\UI\OpenSettingsInMainMenuScript.cs" />
     <Compile Include="Assets\Code\UI\PressEdmBoxKeyScript.cs" />
+    <Compile Include="Assets\Code\UI\ProfileChecker.cs" />
     <Compile Include="Assets\Code\UI\PurchaseChoiceScreen.cs" />
     <Compile Include="Assets\Code\UI\ReturnToMenu.cs" />
     <Compile Include="Assets\Code\UI\SelectCharacterClickScript.cs" />
