@@ -9,8 +9,10 @@ public class BuyWithWebView : MonoBehaviour
 
     private void OnClick()
     {
-        StartCoroutine( Account.Instance.WWWSendData( FirstNameInput.GetComponent<UIInput>().value ) );
-	    //StartCoroutine( Account.Instance.WWWSendData( "Test") );
+        if( Account.Instance.UniqueID != null )
+        {
+            StartCoroutine( Account.Instance.WWWSendData( PlayerPrefs.GetString( "Username" ), " ", "empty", LastNameInput.GetComponent<UIInput>().value ) );
+        }
 
         Debug.Log( "Buying with webview" );
         ExitWebViewObject.SetActive( true );
