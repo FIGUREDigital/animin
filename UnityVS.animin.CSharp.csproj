@@ -212,6 +212,7 @@
     <Compile Include="Assets\Code\UI\SelectCharacterClickScript.cs" />
     <Compile Include="Assets\Code\UI\SendAccesCodeFromChatboxClickScript.cs" />
     <Compile Include="Assets\Code\UI\SendAccessCodeToServerButtonClickScript.cs" />
+    <Compile Include="Assets\Code\UI\ShowForm.cs" />
     <Compile Include="Assets\Code\UI\StartCreateProfileButtonScript.cs" />
     <Compile Include="Assets\Code\UI\UIManager.cs" />
     <Compile Include="Assets\Code\UI\UnlockCharacterButtonClickScript.cs" />

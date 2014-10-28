@@ -3,10 +3,12 @@ using System.Collections;
 
 public class BuyWithWebView : MonoBehaviour
 {
+    public GameObject ExitWebViewObject;
+
     private void OnClick()
     {
         Debug.Log( "Buying with webview" );
-
+        ExitWebViewObject.SetActive( true );
 
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive( false );
 		ProfilesManagementScript.Singleton.CloseWebview.SetActive( true );
