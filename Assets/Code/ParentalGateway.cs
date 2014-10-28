@@ -18,13 +18,13 @@ public class ParentalGateway : MonoBehaviour
 
 	public void Pass()
 	{
-		Destroy(this, 1);
+		Destroy(this.gameObject, 0);
 		nextScreen.SetActive(true);
 	}
 
 	public void Fail()
 	{
-		Destroy(this, 1);
+		Destroy(this.gameObject, 0);
 		prevScreen.SetActive(true);
 	}
 }
