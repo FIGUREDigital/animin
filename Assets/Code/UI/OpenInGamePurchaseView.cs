@@ -18,5 +18,7 @@ public class OpenInGamePurchaseView : MonoBehaviour
 	{
 	    Debug.Log( "opening" + name );
         Parent.SetActive( true );
+		
+		UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive (false);
 	}
 }

@@ -2,19 +2,21 @@
 using System.Collections;
 
 public class Toggleable : MonoBehaviour {
-	
+
+	public delegate void Toggle(bool on);
+
+	private Toggle m_Toggle;
+
 	[SerializeField]
 	private string OnSpriteName = "alarm_active_on";
 	[SerializeField]
 	private string OffSpriteName = "alarm_active_off";
 
 	private bool m_On;
-	private UISprite m_Sprite;
 	private UIButton m_Button;
 
 	void Start(){
 		m_On = false;
-		m_Sprite = this.GetComponent<UISprite> ();
 		m_Button = this.GetComponent<UIButton> ();
 	}
 
@@ -23,17 +25,12 @@ public class Toggleable : MonoBehaviour {
 		m_On = !m_On;
 
 		string newSprite = (m_On ? OnSpriteName : OffSpriteName);
+
 		m_Button.normalSprite = newSprite;
 
-
-		/*
-		if (ToggleableOn.activeInHierarchy) {
-			ToggleableOn.SetActive (false);
-			ToggleableOff.SetActive (true);
-		} else  {
-			ToggleableOn.SetActive (true);
-			ToggleableOff.SetActive (false);
-		}
-		*/
+		if (m_Toggle != null) m_Toggle (m_On);
+	}
+	public void SetToggle(Toggle toggle){
+		m_Toggle = toggle;
 	}
 }
