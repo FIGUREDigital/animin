@@ -104,9 +104,6 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
         {
             float stableAccelerationX = (float)System.Math.Round(Input.acceleration.x, 2);
             float stableAccelerationY = (float)System.Math.Round(Input.acceleration.y, 2);
-
-			Debug.Log("Input.acceleration : ["+Input.acceleration.x+":"+Input.acceleration.y+"];");
-
             float angle = Mathf.Lerp(180, 360, (stableAccelerationX + 1) / 2 /*(Mathf.Sin(Time.time) + 1) / 2*/);
             SmootherAxisX.ValueNext = (float)System.Math.Round(angle);
 
