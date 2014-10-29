@@ -12,7 +12,10 @@ public class CloseWebView : MonoBehaviour
 			ProfilesManagementScript.Singleton.CloseWebview.SetActive (false);
 			ProfilesManagementScript.Singleton.AniminsScreen.SetActive (true);
 		} else if (Application.loadedLevelName == "VuforiaTest") {
-			transform.parent.gameObject.SetActive(false);
+			GetComponentInParent<OpenInGamePurchaseView>().Parent.SetActive( false );
+			GetComponentInParent<OpenInGamePurchaseView>().Form.SetActive( false );
+			GetComponentInParent<OpenInGamePurchaseView>().ExitWebview.SetActive( false );
+
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(true);
 		}
 #if UNITY_IOS
