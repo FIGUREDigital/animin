@@ -86,14 +86,13 @@ public class Account
     }
 	public IEnumerator WWWCheckLoginCode( string code )
 	{
-		//if(PlayerPrefs.HasKey( "PLAYER_ID" )) yield break;
 		
 		WWWForm webForm = new WWWForm();
-		
+
 		webForm.AddField( "Code", code );
 		
 		WWW w = new WWW( SERVER_CHECK_URL, webForm );
-		
+
 		yield return w;
 		
 		if( w.error != null )
@@ -105,7 +104,9 @@ public class Account
 			
 			Debug.Log( w.text );
 			Debug.Log( "Finished uploading data" );
-			ProfilesManagementScript.Singleton.SuccessfulLogin();
+			bool tempBool = bool.Parse(w.text);
+			
+			ProfilesManagementScript.Singleton.SuccessfulLogin(tempBool);
 		}
 		
 	}
