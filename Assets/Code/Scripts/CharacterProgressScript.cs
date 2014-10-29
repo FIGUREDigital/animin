@@ -690,7 +690,7 @@ public class CharacterProgressScript : MonoBehaviour
 			animationController.IsHoldingItem = false;
 			animationController.IsEating = true;
 			EatAlphaTimer = 0;
-
+			AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.EatFruit);
 
 			PlayedEatingSound = false;
 			break;
