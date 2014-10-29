@@ -64,13 +64,14 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	}
 
-	public void SuccessfulLogin(bool successful)
+	public void SuccessfulLogin(bool successful, string code)
 	{
 		ProfilesManagementScript.Singleton.LoginCheckingDialogue.SetActive(false);
 
 		if (successful) {
 						ProfilesManagementScript.Singleton.LoginUser.SetActive (false);
 						ProfilesManagementScript.Singleton.AniminsScreen.SetActive (true);
+			Account.Instance.UniqueID = code;
 				} 
 		else 
 		{
@@ -78,7 +79,6 @@ public class ProfilesManagementScript : MonoBehaviour
 		}
 
 	}
-
 
 
 

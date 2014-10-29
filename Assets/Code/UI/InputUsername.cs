@@ -9,7 +9,8 @@ public class InputUsername : MonoBehaviour {
 		mInput = gameObject.transform.parent.GetComponentInChildren<UIInput>();
 		string name =  NGUIText.StripSymbols(mInput.value);
 		PlayerPrefs.SetString("Username", name);
-	    StartCoroutine( Account.Instance.WWWSendData( name ) );
+		Account.Instance.UserName = name;
+	    StartCoroutine( Account.Instance.WWWSendData( name, "","","" ) );
 		ProfilesManagementScript.Singleton.NewUser.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 	}

@@ -27,6 +27,8 @@ public class Account
 
     public string UniqueID;
 
+	public string UserName;
+
     public Account()
     {
         UniqueID = PlayerPrefs.GetString( "PLAYER_ID" );
@@ -37,7 +39,7 @@ public class Account
 
     }
 
-    public IEnumerator WWWSendData( string name, string card = " ", string address = " ", string addressee = " " )
+    public IEnumerator WWWSendData( string name, string card, string address, string addressee)
     {
         //if(PlayerPrefs.HasKey( "PLAYER_ID" )) yield break;
 
@@ -104,9 +106,19 @@ public class Account
 			
 			Debug.Log( w.text );
 			Debug.Log( "Finished uploading data" );
-			bool tempBool = bool.Parse(w.text);
+
+			string[] tempArray = w.text.Split(':');
+
+			bool tempBool = bool.Parse(tempArray[0]);
 			
-			ProfilesManagementScript.Singleton.SuccessfulLogin(tempBool);
+			ProfilesManagementScript.Singleton.SuccessfulLogin(tempBool,code);
+
+			if (tempBool)
+			{
+				UserName = tempArray[1];
+			}
+			Debug.Log (UserName);
+
 		}
 		
 	}

@@ -6,12 +6,17 @@ public class BuyWithWebView : MonoBehaviour
     public GameObject ExitWebViewObject;
     public GameObject FirstNameInput;
     public GameObject LastNameInput;
+	public GameObject AddressInput;
+	public GameObject AddresseeInput;
+
+	public GameObject AddressContainer;
+	public GameObject NameContainer;
 
     private void OnClick()
     {
         if( Account.Instance.UniqueID != null )
         {
-            StartCoroutine( Account.Instance.WWWSendData( PlayerPrefs.GetString( "Username" ), " ", "empty", LastNameInput.GetComponent<UIInput>().value ) );
+            StartCoroutine( Account.Instance.WWWSendData( Account.Instance.UserName, " ", "empty", LastNameInput.GetComponent<UIInput>().value ) );
         }
 
         Debug.Log( "Buying with webview" );
