@@ -56,6 +56,19 @@ public class ProfilesManagementScript : MonoBehaviour
 		//ServerManager.GetLeaderboardScores(1);
 	}
 
+	public void CheckProfileLoginPasscode(string code)
+	{
+		
+
+	}
+
+	public void SuccessfulLogin()
+	{
+
+	}
+
+
+
 	private void RefreshProfiles()
 	{
 		PlayerProfileData[] profiles = PlayerProfileData.GetAllProfiles();

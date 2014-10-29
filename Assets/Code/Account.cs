@@ -23,6 +23,8 @@ public class Account
 
     private const string SERVER_SEND_URL = "http://animin.me/wp-admin/DatabaseAndScripts/AddData.php";
 
+	private const string SERVER_CHECK_URL = "http://animin.me/wp-admin/DatabaseAndScripts/CheckLoginData.php";
+
     public string UniqueID;
 
     public Account()
@@ -82,4 +84,29 @@ public class Account
         }
 
     }
+	public IEnumerator WWWCheckLoginCode( string code )
+	{
+		//if(PlayerPrefs.HasKey( "PLAYER_ID" )) yield break;
+		
+		WWWForm webForm = new WWWForm();
+		
+		webForm.AddField( "Code", code );
+		
+		WWW w = new WWW( SERVER_CHECK_URL, webForm );
+		
+		yield return w;
+		
+		if( w.error != null )
+		{
+			Debug.Log( w.error );
+		}
+		else
+		{			
+			
+			Debug.Log( w.text );
+			Debug.Log( "Finished uploading data" );
+			ProfilesManagementScript.Singleton.SuccessfulLogin();
+		}
+		
+	}
 }
