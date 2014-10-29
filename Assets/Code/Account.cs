@@ -88,11 +88,15 @@ public class Account
 	{
 		
 		WWWForm webForm = new WWWForm();
-		
+
+		Debug.Log (code);
+
 		webForm.AddField( "Code", code );
 		
 		WWW w = new WWW( SERVER_CHECK_URL, webForm );
-		
+
+		Debug.Log (webForm);
+
 		yield return w;
 		
 		if( w.error != null )
