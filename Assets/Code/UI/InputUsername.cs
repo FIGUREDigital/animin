@@ -10,7 +10,7 @@ public class InputUsername : MonoBehaviour {
 		string name =  NGUIText.StripSymbols(mInput.value);
 		PlayerPrefs.SetString("Username", name);
 		Account.Instance.UserName = name;
-	    StartCoroutine( Account.Instance.WWWSendData( name, "","","" ) );
+	    StartCoroutine( Account.Instance.WWWSendData( name, "","","", "","" ) );
 		ProfilesManagementScript.Singleton.NewUser.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 	}

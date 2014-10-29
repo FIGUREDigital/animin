@@ -29,6 +29,14 @@ public class Account
 
 	public string UserName;
 
+	public string FirstName;
+
+	public string LastName;
+
+	public string Address;
+
+	public string Addressee;
+
     public Account()
     {
         UniqueID = PlayerPrefs.GetString( "PLAYER_ID" );
@@ -39,7 +47,7 @@ public class Account
 
     }
 
-    public IEnumerator WWWSendData( string name, string card, string address, string addressee)
+    public IEnumerator WWWSendData( string name, string card, string address, string addressee, string firstname, string lastname)
     {
         //if(PlayerPrefs.HasKey( "PLAYER_ID" )) yield break;
 
@@ -60,6 +68,10 @@ public class Account
         webForm.AddField( "Address", address );
 
         webForm.AddField( "Addressee", addressee );
+
+		webForm.AddField( "FirstName", firstname );
+		
+		webForm.AddField( "LastName", lastname );
 
         webForm.AddField( "Device", "" + Application.platform );
         webForm.AddField( "Card", card );
