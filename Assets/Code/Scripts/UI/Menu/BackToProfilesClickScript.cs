@@ -8,13 +8,19 @@ public class BackToProfilesClickScript : MonoBehaviour
 
 	void OnClick()
 	{
-		if (ProfilesScreen.activeInHierarchy){
-			AniminScreen.SetActive(true);
-			ProfilesScreen.SetActive(false);
-		}
-		else {
-			AniminScreen.SetActive(false);
-			ProfilesScreen.SetActive(true);
-		}
+//		if (ProfilesManagementScript.Singleton.LoadingScreen.activeInHierarchy) 
+//		{
+
+			if (ProfilesManagementScript.Singleton.SelectProfile.activeInHierarchy) 
+			{
+				AniminScreen.SetActive (true);
+			ProfilesManagementScript.Singleton.SelectProfile.SetActive (false);
+			}
+			else 
+			{
+				AniminScreen.SetActive (false);
+			ProfilesManagementScript.Singleton.SelectProfile.SetActive (true);
+			}
+//		}
 	}
 }
