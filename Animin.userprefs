@@ -1,19 +1,19 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Scripts/HeadReferenceScript.cs">
     <Files>
       <File FileName="Assets/Code/Scripts/HeadReferenceScript.cs" Line="64" Column="7" />
-      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="523" Column="20" />
-      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="319" Column="77" />
-      <File FileName="Assets/Resources/Shaders/RevereCullShader.shader" Line="19" Column="20" />
-      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="244" Column="41" />
-      <File FileName="Assets/Code/AniminProfileData.cs" Line="150" Column="75" />
-      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="41" Column="12" />
-      <File FileName="Assets/Code/Scripts/DetectDragIconScript.cs" Line="45" Column="40" />
-      <File FileName="Assets/Code/Scripts/CameraModelScript.cs" Line="191" Column="5" />
-      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="99" Column="35" />
-      <File FileName="Assets/Code/Harrys/RefreshUI.cs" Line="23" Column="87" />
-      <File FileName="Assets/NGUI/Scripts/Editor/NGUIContextMenu.cs" Line="587" Column="34" />
+      <File FileName="Assets/Code/Scripts/AnimationControllerScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CharacterProgressScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Shaders/RevereCullShader.shader" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIClickButtonMasterScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/AniminProfileData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIPopupItemScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/DetectDragIconScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/CameraModelScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Scripts/UI/UIGlobalVariablesScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Harrys/RefreshUI.cs" Line="1" Column="1" />
+      <File FileName="Assets/NGUI/Scripts/Editor/NGUIContextMenu.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
