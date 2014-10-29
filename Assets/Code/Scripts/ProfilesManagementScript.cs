@@ -18,6 +18,8 @@ public class ProfilesManagementScript : MonoBehaviour
 	public GameObject SelectProfile;
 	public GameObject NewUser;
 	public GameObject LoginUser;
+	public GameObject LoginCheckingDialogue;
+	public GameObject NoSuchUserCodeDialogue;
 	public bool BeginLoadLevel;
 	public GameObject[] AniminSprites;
 
@@ -58,14 +60,25 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	public void CheckProfileLoginPasscode(string code)
 	{
-		
+		StartCoroutine( Account.Instance.WWWCheckLoginCode( code ) );
 
 	}
 
-	public void SuccessfulLogin()
+	public void SuccessfulLogin(bool successful)
 	{
+		ProfilesManagementScript.Singleton.LoginCheckingDialogue.SetActive(false);
+
+		if (successful) {
+						ProfilesManagementScript.Singleton.LoginUser.SetActive (false);
+						ProfilesManagementScript.Singleton.AniminsScreen.SetActive (true);
+				} 
+		else 
+		{
+			ProfilesManagementScript.Singleton.NoSuchUserCodeDialogue.SetActive(true);	
+		}
 
 	}
+
 
 
 
