@@ -25,6 +25,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
     public GameObject AchievementsScreenRef;
     public GameObject LoadingScreenRef;
 	public GameObject CreditsScreenRef;
+	public GameObject ExitWebviewButton;
 
 	public GameObject SpaceshipMinigameSceneRef;
 	public GameObject CubeRunnerMinigameSceneRef;
@@ -180,6 +181,28 @@ public class UIGlobalVariablesScript : MonoBehaviour
 		go.transform.parent = root.gameObject.transform;
 		go.transform.localScale = Vector3.one;
 		go.GetComponent<ParentalGateway>().Open(prev, next);
+	}
+
+	public void LaunchWebview()
+	{
+		Debug.Log( "Buying with webview" );
+//		StartCoroutine( Account.Instance.WWWSendData( Account.Instance.UserName, " ", Account.Instance.Address, Account.Instance.Addressee, Account.Instance.FirstName, Account.Instance.LastName ));
+		ExitWebviewButton.SetActive( true );
+		
+		#if UNITY_IOS
+		int width = 360;
+		int height = 300;
+		
+		if( Screen.width > 960 )
+		{
+			width *= 2;
+			height *= 2;
+		}
+		
+		EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
+		EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/AniminCart.html" );
+		#endif
+		
 	}
 
 	void Awake()
