@@ -8,7 +8,21 @@ public class AddressScreen : MonoBehaviour
 	private string address;
 
 
+	public void Send()
+	{
+		ReadAddress();
+		SendEmail();
+	}
 
+	void ReadAddress()
+	{ 
+		address = "";
+		UIInput[] text = GetComponentsInChildren<UIInput>();
+		foreach(UIInput line in text)
+		{
+			address += NGUIText.StripSymbols(line.value);
+		}
+	}
 
 
 
