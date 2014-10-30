@@ -69,15 +69,15 @@ public class TutorialHandler : MonoBehaviour {
 				}
 			}
 		} else if (!m_EndingTutorial){
-			if (!m_WaitingForInput){
-				string text = Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].TutEntries[m_Entry_i].text;
-				if (text.Length >= m_Letter_i){
+			if (m_Entry_i >= Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].TutEntries.Length) NextLesson();
+			string text = Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].TutEntries[m_Entry_i].text;
+			if (text.Length >= m_Letter_i){
 
-					TutorialText.text = text.Substring(0,m_Letter_i++);
-					NextButton.gameObject.SetActive(false);
-				} else {
+				TutorialText.text = text.Substring(0,m_Letter_i++);
+				NextButton.gameObject.SetActive(false);
+			} else {
+				if (!m_WaitingForInput)
 					NextButton.gameObject.SetActive(true);
-				}
 			}
 		} else {
 			if (WormAnimator.GetCurrentAnimatorStateInfo(0).IsName("worm_hidden")){
@@ -89,22 +89,40 @@ public class TutorialHandler : MonoBehaviour {
 				TutorialUIParent.SetActive (false);
 			}
 		}
+		
+		if (Debug.isDebugBuild && Input.GetKey (KeyCode.R)) {
+			ResetTutorials();
+		}
 	}
 
-	public void NextButtonPress(){
+
+
+	public void OnTutorialClick(GameObject go){
+		if (go == m_CurrentListening) {
+			UIEventListener.Get (m_CurrentListening).onClick -= OnTutorialClick;
+			m_WaitingForInput = false;
+			//NextLesson();
+			NextButtonPress(true);
+		}
+	}
+	public void NextButtonPress(bool ignoreCheck = false){
 
 		int maxEntries = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].TutEntries.Length;
 
 
 		//Debug.Log ("Testing Entry : ["+m_Entry_i+":"+maxEntries+"]; Lesson : ["+m_Lesson_i+":"+maxLessons+"];");
-
+		
+		Debug.Log ("Testing : ["+ (m_Entry_i + 1) + ":" + (maxEntries) + "];");
 		
 		m_Letter_i = 0;
+		m_Entry_i += 1;
+		string exitstr = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].ExitStr;
+		bool noNext = (exitstr != "None" && !ignoreCheck);
+		if (noNext) maxEntries -= 1;
 		
-		if (++m_Entry_i >= maxEntries) {
+		if (m_Entry_i >= maxEntries) {
 
-			string exitstr = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].ExitStr;
-			if (exitstr != "None") {
+			if (noNext) {
 
 				m_CurrentListening = GOFromString (exitstr);
 				UIWidget widget = m_CurrentListening.GetComponent<UIWidget> ();
@@ -121,19 +139,14 @@ public class TutorialHandler : MonoBehaviour {
 		}
 	}
 
-	public void OnTutorialClick(GameObject go){
-		if (go == m_CurrentListening) {
-			UIEventListener.Get (m_CurrentListening).onClick -= OnTutorialClick;
-			m_WaitingForInput = false;
-			NextLesson();
-		}
-	}
-
 	public void NextLesson(){
 		if (m_WaitingForInput) return;
-
-		int maxLessons = Tutorials [m_CurTutorial_i].Lessons.Length;
+		
+		m_Letter_i = 0;
 		m_Entry_i =0;
+		int maxLessons = Tutorials [m_CurTutorial_i].Lessons.Length;
+
+		Debug.Log ("maxLessons : [" + maxLessons + "];");
 
 		if (++m_Lesson_i >= maxLessons) {
 			WormAnimator.SetTrigger ("worm_GoIn");
@@ -172,6 +185,12 @@ public class TutorialHandler : MonoBehaviour {
 		default:
 			return false;
 			break;
+		}
+	}
+
+	public void ResetTutorials(){
+		for (int i = 0; i < Tutorials.Length; i++) {
+			PlayerPrefs.SetString(TutorialPlayerPrefID + i,"false");
 		}
 	}
 }
