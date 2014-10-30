@@ -16,6 +16,7 @@ public class AddressScreen : MonoBehaviour
 
 	void ReadAddress()
 	{ 
+		secretCode = Account.Instance.UniqueID;
 		address = "";
 		UIInput[] text = GetComponentsInChildren<UIInput>();
 		foreach(UIInput line in text)
@@ -29,11 +30,15 @@ public class AddressScreen : MonoBehaviour
 	void SendEmail()
 	{
 		MailMessage mail = new MailMessage("animinDev@animin.me", "hello@animin.me");
-		SmtpClient client = new SmtpClient();            
-		client.Port = 25;
+		SmtpClient client = new SmtpClient
+		{
+			Host = "smtp.gmail.com",
+			Port = 587,
+			EnableSsl = true,
+			UseDefaultCredentials = false,
+			Credentials = (System.Net.ICredentialsByHost)new System.Net.NetworkCredential("animindev@gmail.com", "Code1red")            
+		};
 		client.DeliveryMethod = SmtpDeliveryMethod.Network;
-		client.UseDefaultCredentials = false;
-		client.Host = "smtp.gmail.com";
 		mail.Subject = "Purchase by user " + secretCode;
 		mail.Body = @"
 New Purchase by user: " + secretCode + @"

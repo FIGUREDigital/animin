@@ -7,7 +7,7 @@ public class SendAddress : MonoBehaviour
 	{
 
 		AddressScreen screen = transform.parent.GetComponent<AddressScreen>();
-		screen.Send();
+		//screen.Send();
 		ProfilesManagementScript.Singleton.AddressInput.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 	}
