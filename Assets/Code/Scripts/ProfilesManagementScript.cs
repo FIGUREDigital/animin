@@ -20,6 +20,7 @@ public class ProfilesManagementScript : MonoBehaviour
 	public GameObject LoginUser;
 	public GameObject LoginCheckingDialogue;
 	public GameObject NoSuchUserCodeDialogue;
+	public GameObject AddressInput;
 	public bool BeginLoadLevel;
 	public GameObject[] AniminSprites;
 

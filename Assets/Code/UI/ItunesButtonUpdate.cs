@@ -68,12 +68,18 @@ public class ItunesButtonUpdate : MonoBehaviour
 		UnregisterListeners();
 	}
 
+	void GoToAddress()
+	{
+		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
+		ProfilesManagementScript.Singleton.AddressInput.SetActive(true);
+	}
+
 #if UNITY_IOS
 	void purchaseSuccessful( StoreKitTransaction transaction )
 	{
 		Debug.Log(string.Format("Purchase of {0} Successful",transaction.productIdentifier));
 		UnlockCharacterManager.Instance.UnlockCharacter();
-		ReturnToMainScreen();
+		GoToAddress();
 	}
 
 	void purchaseCancelled( string response )
