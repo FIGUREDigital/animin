@@ -6,7 +6,7 @@ public class ProfilesManagementScript : MonoBehaviour
 	public static ProfilesManagementScript Singleton;
 	public GameObject PrefabProfile;
 	public GameObject ProfilesRoot;
-	public GameObject ProfilesScreen;
+	public GameObject OLD_ProfilesScreen;
 	public GameObject AniminsScreen;
 	public GameObject LoadingScreen;
 	public GameObject CreateUsernameScreen;

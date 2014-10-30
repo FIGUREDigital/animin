@@ -17,7 +17,7 @@ public class SelectAniminToPlayClickScript : MonoBehaviour
 
 	void OnClick()
 	{
-		ProfilesManagementScript.Singleton.ProfilesScreen.SetActive(false);
+		ProfilesManagementScript.Singleton.OLD_ProfilesScreen.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 
 		PlayerProfileData.ActiveProfile = ProfileRef;
