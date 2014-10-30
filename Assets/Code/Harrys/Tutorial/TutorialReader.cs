@@ -62,12 +62,9 @@ public class TutorialReader{
 	
 	private const string FILENAME = "Assets/Resources/Tutorials.xml";
 
-	public TutorialReader(){
-		this.Deserialize();
-	}
-
 	public void Deserialize()
 	{
+		Debug.Log ("-DESERIALIZING---------------------------------------------------------------");
 		ArrayOfTutorials data = null;
 		
 		XmlSerializer serializer = new XmlSerializer(typeof(ArrayOfTutorials));
@@ -79,7 +76,6 @@ public class TutorialReader{
 		//return data;
 		
 		m_Tutorials = data;
-		Debug.Log ("You're a tool, Harry");
 		m_Finished = new bool[m_Tutorials.Tutorials.Length];
 	}
 
@@ -124,6 +120,7 @@ public class TutorialReader{
 		{
 			if ( s_Instance == null )
 			{
+				Debug.Log ("New Instance. I swear to God...");
 				s_Instance = new TutorialReader();
 			}
 			return s_Instance;
