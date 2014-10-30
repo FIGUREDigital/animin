@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class StartCreateProfileButtonScript : MonoBehaviour {
@@ -16,7 +16,7 @@ public class StartCreateProfileButtonScript : MonoBehaviour {
 	void Onclick()
 	{
 		ProfilesManagementScript.Singleton.CreateUsernameScreen.SetActive(true);
-		ProfilesManagementScript.Singleton.ProfilesScreen.SetActive(false);
+		ProfilesManagementScript.Singleton.OLD_ProfilesScreen.SetActive(false);
 
 	}
 }
