@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TutorialHandler : MonoBehaviour {
 
+	private Tutorial[] Tutorials{
+		get { return TutorialReader.Instance.Tutorials;}
+	}
 
 	[SerializeField]
 	private GameObject TutorialUIParent;
 	[SerializeField]
-	private GameObject Blocker;
+	private UIWidget Blocker;
 	[SerializeField]
 	private Animator WormAnimator;
 	[SerializeField]
@@ -15,20 +19,20 @@ public class TutorialHandler : MonoBehaviour {
 	[SerializeField]
 	private UIButton NextButton;
 
-	//[SerializeField]
-	//private GameObject[] ExitButtons;
+	[SerializeField]
+	private GameObject StatsButton;
 
 	private bool m_PlayingTutorial, m_EndingTutorial;
 	private int m_CurTutorial_i;
 	private int m_Letter_i, m_Lesson_i, m_Entry_i;
-
-	private Tutorial[] Tutorials{
-		get { return TutorialReader.Instance.Tutorials;}
-	}
+	
+	private int m_SavedDepth;
+	private GameObject m_CurrentListening;
+	private bool m_WaitingForInput;
 
 	// Use this for initialization
 	void Start () {
-		Blocker.SetActive (false);
+		Blocker.gameObject.SetActive (false);
 		WormAnimator.gameObject.SetActive(false);
 		TutorialUIParent.SetActive (false);
 
@@ -46,7 +50,7 @@ public class TutorialHandler : MonoBehaviour {
 				if (StartConditions (i)) {
 					TutorialUIParent.SetActive (true);
 					WormAnimator.gameObject.SetActive(true);
-					Blocker.SetActive(true);
+					Blocker.gameObject.SetActive(true);
 					WormAnimator.SetTrigger ("worm_GoOut");
 
 					m_CurTutorial_i = i;
@@ -59,13 +63,15 @@ public class TutorialHandler : MonoBehaviour {
 				}
 			}
 		} else if (!m_EndingTutorial){
-			string text = Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].TutEntries[m_Entry_i].text;
-			if (text.Length >= m_Letter_i){
+			if (!m_WaitingForInput){
+				string text = Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].TutEntries[m_Entry_i].text;
+				if (text.Length >= m_Letter_i){
 
-				TutorialText.text = text.Substring(0,m_Letter_i++);
-				NextButton.gameObject.SetActive(false);
-			} else {
-				NextButton.gameObject.SetActive(true);
+					TutorialText.text = text.Substring(0,m_Letter_i++);
+					NextButton.gameObject.SetActive(false);
+				} else {
+					NextButton.gameObject.SetActive(true);
+				}
 			}
 		} else {
 			if (WormAnimator.GetCurrentAnimatorStateInfo(0).IsName("worm_hidden")){
@@ -82,7 +88,6 @@ public class TutorialHandler : MonoBehaviour {
 	public void NextButtonPress(){
 
 		int maxEntries = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].TutEntries.Length;
-		int maxLessons = Tutorials [m_CurTutorial_i].Lessons.Length;
 
 
 		//Debug.Log ("Testing Entry : ["+m_Entry_i+":"+maxEntries+"]; Lesson : ["+m_Lesson_i+":"+maxLessons+"];");
@@ -91,19 +96,59 @@ public class TutorialHandler : MonoBehaviour {
 		m_Letter_i = 0;
 		
 		if (++m_Entry_i >= maxEntries) {
-			m_Entry_i =0;
-			if (++m_Lesson_i >= maxLessons) {
-				WormAnimator.SetTrigger ("worm_GoIn");
-				TutorialReader.Instance.TutorialFinished[m_CurTutorial_i] = true;
-				m_EndingTutorial = true;
+
+			string exitstr = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].ExitStr;
+			if (exitstr != "None") {
+
+				m_CurrentListening = GOFromString (exitstr);
+				UIWidget widget = m_CurrentListening.GetComponent<UIWidget> ();
+				m_SavedDepth = widget.depth;
+				widget.depth = Blocker.depth + 1;
+
+				UIEventListener.Get (m_CurrentListening).onClick += OnTutorialClick;
+				
 				NextButton.gameObject.SetActive(false);
+				m_WaitingForInput = true;
+			} else {
+				NextLesson ();
 			}
 		}
 	}
 
-	//public void CorrectButton(){
-	//}
+	public void OnTutorialClick(GameObject go){
+		if (go == m_CurrentListening) {
+			UIEventListener.Get (m_CurrentListening).onClick -= OnTutorialClick;
+			m_WaitingForInput = false;
+			NextLesson();
+		}
+	}
 
+	public void NextLesson(){
+		if (m_WaitingForInput) return;
+
+		int maxLessons = Tutorials [m_CurTutorial_i].Lessons.Length;
+		m_Entry_i =0;
+
+		if (++m_Lesson_i >= maxLessons) {
+			WormAnimator.SetTrigger ("worm_GoIn");
+			TutorialReader.Instance.TutorialFinished[m_CurTutorial_i] = true;
+			m_EndingTutorial = true;
+			NextButton.gameObject.SetActive(false);
+		}
+	}
+
+	private GameObject GOFromString(string str){
+		switch (str) {
+		case ("Stats"):
+			return StatsButton;
+			break;
+		default:
+			return null;
+		}
+	}
+
+
+	//This method test whether or not to start the tutorial.
 	private bool StartConditions(int id){
 		if (TutorialReader.Instance.TutorialFinished[id] == true) return false;
 
@@ -111,9 +156,6 @@ public class TutorialHandler : MonoBehaviour {
 		switch (id) {
 		case (0):
 			return true;
-			break;
-		case (1):
-			return false;
 			break;
 		default:
 			return false;
