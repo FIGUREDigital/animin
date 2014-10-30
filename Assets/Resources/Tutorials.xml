@@ -15,12 +15,6 @@
 	  		</TutEntries>
 	  		<Stamp exit = "Stats"/>
 	  	</Lesson>
-	  	<Lesson>
-		  	<TutEntries>
-		  		
-	  		</TutEntries>
-	  		<Stamp exit = "None"/>
-	  	</Lesson>
   	</Lessons>
   	
   </Tutorial>
