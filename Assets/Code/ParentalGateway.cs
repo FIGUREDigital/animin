@@ -19,8 +19,7 @@ public class ParentalGateway : MonoBehaviour
 	public void Pass()
 	{
 		Destroy(this.gameObject, 0);
-//		nextScreen.SetActive(true);
-		UIGlobalVariablesScript.Singleton.LaunchWebview ();
+		nextScreen.SetActive(true);
 	}
 
 	public void Fail()

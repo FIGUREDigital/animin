@@ -4,19 +4,18 @@ using System.Collections;
 public class ShowForm : MonoBehaviour
 {
     public GameObject Parent;
-    public GameObject Form;
-	public GameObject ExitWebViewObject;
+    public GameObject WebviewEnabler;
 
     public void Start()
     {
-        Form.SetActive( false );
+		WebviewEnabler.SetActive( false );
     }
 
     private void OnClick()
     {
 //        Debug.Log( "Buying with webview" );
 
-        UIGlobalVariablesScript.Singleton.OpenParentalGateway( Parent, Form );
+		UIGlobalVariablesScript.Singleton.OpenParentalGateway( Parent, WebviewEnabler );
 //		LaunchWebview ();
 
     }
