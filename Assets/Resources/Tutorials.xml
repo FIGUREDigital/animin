@@ -3,22 +3,20 @@
 <Tutorials>
 
 
-
-  <Tutorial id = "01">
-  <!---Description : This tutorial will play at the start, when the user first starts the app, telling them how to view Achievements-->
+  <Tutorial id = "00">
+  <!---Description : This tutorial will play at the start, when the user first starts the app, telling them how to view Stats-->
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
 		  		<TutEntry text = "Hello, I'm Andy Wormhole!"/>
 		  		<TutEntry text = "Press the Stats Button"/>
 		  		<TutEntry text = "Like now"/>
-		  		<TutEntry text = "More padding"/>
+		  		<TutEntry text = "Press the Stats Button now!"/>
 	  		</TutEntries>
 	  		<Stamp exit = "Stats"/>
 	  	</Lesson>
 	  	<Lesson>
 		  	<TutEntries>
-		  		<TutEntry text = "Well done"/>
 	  		</TutEntries>
 	  		<Stamp exit = "None"/>
 	  	</Lesson>
@@ -26,8 +24,8 @@
   	
   </Tutorial>
   
-  <Tutorial id = "02">
-  <!---Description : This tutorial tells -->
+  <Tutorial id = "01">
+  <!---Description : This tutorial tells the user to do something else-->
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>

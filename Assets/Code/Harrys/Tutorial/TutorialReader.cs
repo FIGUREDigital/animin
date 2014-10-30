@@ -61,7 +61,7 @@ public class TutorialReader{
 	private ArrayOfTutorials m_Tutorials;
 	public Tutorial[] Tutorials{ get { return m_Tutorials.Tutorials; } }
 	private bool[] m_Finished;
-	public bool[] TutorialFinished{ get { return m_Finished; } }
+	//public bool[] TutorialFinished{ get { return m_Finished; } }
 
 	
 	private const string FILENAME = "Assets/Resources/Tutorials.xml";
@@ -80,7 +80,7 @@ public class TutorialReader{
 		//return data;
 		
 		m_Tutorials = data;
-		m_Finished = new bool[m_Tutorials.Tutorials.Length];
+		//m_Finished = new bool[m_Tutorials.Tutorials.Length];
 
 		if (print) test ();
 	}
