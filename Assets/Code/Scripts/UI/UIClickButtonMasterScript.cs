@@ -348,6 +348,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 		case UIFunctionalityId.PlayMinigameGunFighters:
 		case UIFunctionalityId.PlayMinigameUnknown:
 		{
+
+			AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.PlayMinigames);
 			UIGlobalVariablesScript.SelectedMinigameToPlay = sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId;
 
 			GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetSinglePlayer();

@@ -131,6 +131,7 @@ public class AchievementManager
 
 	public void AddToAchievment(Achievements item)
 	{
+		Debug.Log("ACHIEVEMENT MANAGER: Added achievement part for " + item);
 		mCount[(int)item]++;
 		CheckAchievments();
 	}

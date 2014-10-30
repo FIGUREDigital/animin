@@ -690,7 +690,6 @@ public class CharacterProgressScript : MonoBehaviour
 			animationController.IsHoldingItem = false;
 			animationController.IsEating = true;
 			EatAlphaTimer = 0;
-			AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.EatFruit);
 
 			PlayedEatingSound = false;
 			break;
@@ -1685,6 +1684,8 @@ public class CharacterProgressScript : MonoBehaviour
 			{*/
 				//ShowText("yum yum");
 			PersistentData.Singleton.Hungry += item.Points;
+			
+			AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.EatFruit);
 				//Stop(true);
 						
 
@@ -1695,6 +1696,8 @@ public class CharacterProgressScript : MonoBehaviour
 
 			case PopupItemType.Item:
 			{
+			
+				AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.PlayMusic);
 				//ShowText("I can't use this item");
 				return false;
 				break;
@@ -1710,9 +1713,11 @@ public class CharacterProgressScript : MonoBehaviour
 			else
 			{*/
 				//ShowText("I feel good");
-			PersistentData.Singleton.Health += item.Points;
+				PersistentData.Singleton.Health += item.Points;
 				Stop(true);
 				animationController.IsTakingPill = true;
+				AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.Heal);
+
 
 			if(item.SpecialId == SpecialFunctionalityId.Injection)
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.InjectionReact);

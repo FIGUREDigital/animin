@@ -35,6 +35,10 @@ public class Lesson{
 	[XmlArray("TutEntries")]
 	[XmlArrayItem("TutEntry", typeof(TutEntry))]
 	public TutEntry[] TutEntries{ get; set; }
+
+	[XmlElement("Stamp", typeof(Stamp))]
+	public Stamp ExitStamp{ get; set; }
+	public string ExitStr { get { return ExitStamp.exit; } }
 }
 [Serializable()]
 public class TutEntry{
@@ -62,7 +66,7 @@ public class TutorialReader{
 	
 	private const string FILENAME = "Assets/Resources/Tutorials.xml";
 
-	public void Deserialize()
+	public void Deserialize(bool print = false)
 	{
 		Debug.Log ("-DESERIALIZING---------------------------------------------------------------");
 		ArrayOfTutorials data = null;
@@ -77,6 +81,8 @@ public class TutorialReader{
 		
 		m_Tutorials = data;
 		m_Finished = new bool[m_Tutorials.Tutorials.Length];
+
+		if (print) test ();
 	}
 
 
@@ -120,7 +126,6 @@ public class TutorialReader{
 		{
 			if ( s_Instance == null )
 			{
-				Debug.Log ("New Instance. I swear to God...");
 				s_Instance = new TutorialReader();
 			}
 			return s_Instance;
