@@ -13,6 +13,7 @@ public class AchievementManager
 		Count
 	}
 
+	private int mCompletedAchievements;
 	private int[] mCount = new int[(int)Achievements.Count];
 	private int[] mRequiredCount = new int[(int)Achievements.Count]{10,5,3,1,3};
 	private bool[] mAchievmentsFired = new bool[(int)Achievements.Count];
@@ -23,6 +24,14 @@ public class AchievementManager
 	private const string mArMode = "Use the AR card to unlesh your Animin on the world"; 
 	private const string mHeal = "Care for your Animin 3 times"; 
 
+
+	public int CompletedAchievements
+	{
+		get
+		{
+			return mCompletedAchievements;
+		}
+	}
 	public bool Achieved(int i)
 	{
 		return mAchievmentsFired[i];
@@ -80,6 +89,7 @@ public class AchievementManager
 	#endregion
 	private void ResetAchievments()
 	{
+		mCompletedAchievements = 0;
 		PlayerPrefs.SetString("AchievementsActive","false");
 		for(int i =0; i < (int)Achievements.Count; i++)
 		{
@@ -101,7 +111,9 @@ public class AchievementManager
 		for(int i =0; i < (int)Achievements.Count; i++)
 		{
 			mCount[i] = PlayerPrefs.GetInt("Achievment" + i);
-			mAchievmentsFired[i] = PlayerPrefs.GetInt("AchievmentFired" + i) == 1;
+			bool fired = PlayerPrefs.GetInt("AchievmentFired" + i) == 1;
+			mAchievmentsFired[i] = fired;
+			mCompletedAchievements += fired?1:0;
 		}
 
 	}
@@ -129,6 +141,7 @@ public class AchievementManager
 		{
 			if(mCount[i] >= mRequiredCount[i] && !mAchievmentsFired[i])
 			{
+				mCompletedAchievements++;
 				FireAchievment((Achievements)i);
 				mAchievmentsFired[i] = true;
 			}
