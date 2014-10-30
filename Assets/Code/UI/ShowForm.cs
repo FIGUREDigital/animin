@@ -20,7 +20,5 @@ public class ShowForm : MonoBehaviour
 //		LaunchWebview ();
 
     }
-
-	public void LaunchWebview()
 	
 }
