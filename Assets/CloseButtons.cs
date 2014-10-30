@@ -4,6 +4,7 @@ using System.Collections;
 public class CloseButtons : MonoBehaviour {
 
 	private UIButton[] mButtons;
+	private OpenInGamePurchaseView view;
 	// Use this for initialization
 	void Start () 
 	{
@@ -12,6 +13,7 @@ public class CloseButtons : MonoBehaviour {
 	void Init()
 	{
 		mButtons = GetComponentsInChildren<UIButton>();
+		view = GetComponentInChildren<OpenInGamePurchaseView>();
 	}
 	
 	// Update is called once per frame
@@ -41,5 +43,9 @@ public class CloseButtons : MonoBehaviour {
 		{
 			button.gameObject.SetActive(true);
 		}
+		view.gameObject.SetActive(true);
+		view.Parent.SetActive(false);
+		view.Form.SetActive(false);
+		view.ExitWebview.SetActive(false);
 	}
 }

@@ -14,6 +14,7 @@ public class CloseWebView : MonoBehaviour
 		} else if (Application.loadedLevelName == "VuforiaTest") {
 			transform.parent.gameObject.SetActive(false);
 			UIGlobalVariablesScript.Singleton.CaringScreenRef.SetActive(true);
+			UIGlobalVariablesScript.Singleton.CaringScreenRef.GetComponent<CloseButtons>().Open();
 		}
 #if UNITY_IOS
       EtceteraBinding.inlineWebViewClose();  
