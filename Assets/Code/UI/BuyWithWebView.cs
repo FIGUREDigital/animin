@@ -48,19 +48,19 @@ public class BuyWithWebView : MonoBehaviour
 
 		//ProfilesManagementScript.Singleton.AniminsScreen.SetActive( false );
 		//ProfilesManagementScript.Singleton.CloseWebview.SetActive( true );
-#if UNITY_IOS
-        int width = 360;
-        int height = 300;
-
-        if( Screen.width > 960 )
-        {
-            width *= 2;
-            height *= 2;
-        }
-
-        EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
-        EtceteraBinding.inlineWebViewSetUrl( "http://animin.me/shop" );
-#endif
+//#if UNITY_IOS
+//        int width = 360;
+//        int height = 300;
+//
+//        if( Screen.width > 960 )
+//        {
+//            width *= 2;
+//            height *= 2;
+//        }
+//
+//        EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
+//		EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/AniminCart.html" );
+//#endif
 
         //UnlockCharacterManager.Instance.BuyCharacter( ProfilesManagementScript.Singleton.AniminToUnlockId, false );
 
@@ -79,6 +79,20 @@ public class BuyWithWebView : MonoBehaviour
 		Debug.Log( "Buying with webview" );
 		StartCoroutine( Account.Instance.WWWSendData( Account.Instance.UserName, " ", Account.Instance.Address, Account.Instance.Addressee, Account.Instance.FirstName, Account.Instance.LastName ));
 		ExitWebViewObject.SetActive( true );
+
+		#if UNITY_IOS
+		int width = 360;
+		int height = 300;
+		
+		if( Screen.width > 960 )
+		{
+			width *= 2;
+			height *= 2;
+		}
+		
+		EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
+		EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/AniminCart.html" );
+		#endif
 
 		}
 
