@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTutorials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Tutorials>
+
+
+
+  <Tutorial id = "01">
+  <!---Description : This tutorial will play at the start, when the user first starts the app, telling them how to view Achievements-->
+  	<Lessons>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "Hello, I'm Andy Wormhole!"/>
+		  		<TutEntry text = "Press the Stats Button"/>
+		  		<TutEntry text = "Like now"/>
+		  		<TutEntry text = "More padding"/>
+	  		</TutEntries>
+	  		<Stamp exit = "Stats"/>
+	  	</Lesson>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "Well done"/>
+	  		</TutEntries>
+	  		<Stamp exit = "None"/>
+	  	</Lesson>
+  	</Lessons>
+  	
+  </Tutorial>
+  
+  <Tutorial id = "02">
+  <!---Description : This tutorial tells -->
+  	<Lessons>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "Another bit of nonsense"/>
+	  		</TutEntries>
+	  		<Stamp exit = "None"/>
+	  	</Lesson>
+  	</Lessons>
+  	
+  </Tutorial>
+  
+  
+  
+</Tutorials>
+</ArrayOfTutorials>
