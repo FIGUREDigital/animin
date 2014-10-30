@@ -11,13 +11,14 @@ public class TutorialHandler : MonoBehaviour {
 	[SerializeField]
 	private GameObject TutorialUIParent;
 	[SerializeField]
-	private UIWidget Blocker;
-	[SerializeField]
 	private Animator WormAnimator;
 	[SerializeField]
 	private UILabel TutorialText;
 	[SerializeField]
 	private UIButton NextButton;
+
+//	[SerializeField]
+//	private UIWidget Blocker;
 
 	[SerializeField]
 	private GameObject StatsButton;
@@ -34,7 +35,7 @@ public class TutorialHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Blocker.gameObject.SetActive (false);
+		//Blocker.gameObject.SetActive (false);
 		WormAnimator.gameObject.SetActive(false);
 		TutorialUIParent.SetActive (false);
 
@@ -54,9 +55,11 @@ public class TutorialHandler : MonoBehaviour {
 			//TutorialReader.Instance.test();
 			for (int i = 0; i < Tutorials.Length; i++) {
 				if (StartConditions (i)) {
+					if (TutorialUIParent == null) return;
 					TutorialUIParent.SetActive (true);
 					WormAnimator.gameObject.SetActive(true);
-					Blocker.gameObject.SetActive(true);
+					//Blocker.gameObject.SetActive(true);
+					Block(true);
 					WormAnimator.SetTrigger ("worm_GoOut");
 
 					m_CurTutorial_i = i;
@@ -93,6 +96,14 @@ public class TutorialHandler : MonoBehaviour {
 		if (Debug.isDebugBuild && Input.GetKey (KeyCode.R)) {
 			ResetTutorials();
 		}
+
+		/*
+		Debug.Log ("Argh : [" + UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().height+":"+UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().width+ "];");
+		Blocker.GetComponent<BoxCollider> ().size = new Vector3 (
+			UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().width, 
+			UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().height, 1);
+		*/
+
 	}
 
 
@@ -101,6 +112,8 @@ public class TutorialHandler : MonoBehaviour {
 		if (go == m_CurrentListening) {
 			UIEventListener.Get (m_CurrentListening).onClick -= OnTutorialClick;
 			m_WaitingForInput = false;
+			//go.GetComponent<UIWidget>().depth = m_SavedDepth;
+			go.GetComponent<BoxCollider>().enabled = false;
 			//NextLesson();
 			NextButtonPress(true);
 		}
@@ -127,7 +140,8 @@ public class TutorialHandler : MonoBehaviour {
 				m_CurrentListening = GOFromString (exitstr);
 				UIWidget widget = m_CurrentListening.GetComponent<UIWidget> ();
 				m_SavedDepth = widget.depth;
-				widget.depth = Blocker.depth + 1;
+				//widget.depth = Blocker.depth + 1;
+				m_CurrentListening.GetComponent<BoxCollider>().enabled = true;
 
 				UIEventListener.Get (m_CurrentListening).onClick += OnTutorialClick;
 				
@@ -153,7 +167,9 @@ public class TutorialHandler : MonoBehaviour {
 
 			PlayerPrefs.SetString(TutorialPlayerPrefID + m_CurTutorial_i,"true");
 			//TutorialReader.Instance.TutorialFinished[m_CurTutorial_i] = true;
-
+			
+			//Blocker.gameObject.SetActive(false);
+			Block(false);
 
 			m_EndingTutorial = true;
 			NextButton.gameObject.SetActive(false);
@@ -193,4 +209,43 @@ public class TutorialHandler : MonoBehaviour {
 			PlayerPrefs.SetString(TutorialPlayerPrefID + i,"false");
 		}
 	}
+
+	private UIButton[] m_Buttons;
+	private bool[] m_EnabledButtons;
+	private bool m_BoolArraySet;
+
+	private void Block (bool on){
+		if (on && !m_BoolArraySet) {
+			m_Buttons = UIGlobalVariablesScript.Singleton.UIRoot.GetComponentsInChildren<UIButton>(true);
+			m_EnabledButtons = new bool[m_Buttons.Length];
+			for (int i = 0; i < m_Buttons.Length; i++){
+				m_EnabledButtons[i] = m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled;
+				m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled = false;
+			}
+			m_BoolArraySet = true;
+		} else {
+			for (int i = 0; i < m_Buttons.Length; i++){
+				m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled = m_EnabledButtons[i];
+			}
+			m_Buttons = null;
+			m_BoolArraySet = false;
+		}
+		NextButton.GetComponent<BoxCollider> ().enabled = true;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -68,14 +68,31 @@ public class TutorialReader{
 
 	public void Deserialize(bool print = false)
 	{
+		string filename = "Tutorials";
+		TextAsset textAsset = (TextAsset)Resources.Load(filename, typeof(TextAsset));
+
+		if(textAsset == null)
+		{
+			Debug.LogError("Could not load text asset " + filename);
+		}
+
+		string ToString = textAsset.ToString ();
+		
 		Debug.Log ("-DESERIALIZING---------------------------------------------------------------");
 		ArrayOfTutorials data = null;
 		
 		XmlSerializer serializer = new XmlSerializer(typeof(ArrayOfTutorials));
 		
-		StreamReader reader = new StreamReader(FILENAME);
-		data = (ArrayOfTutorials)serializer.Deserialize(reader);
-		reader.Close();
+		//StreamReader reader = new StreamReader(ToString);
+		//data = (ArrayOfTutorials)serializer.Deserialize(reader);
+		//reader.Close();
+
+		StringReader stringReader = new StringReader(ToString);
+		XmlTextReader xmlReader = new XmlTextReader(stringReader);
+		data = (ArrayOfTutorials)serializer.Deserialize(xmlReader);
+
+		xmlReader.Close();
+		stringReader.Close();
 		
 		//return data;
 		
