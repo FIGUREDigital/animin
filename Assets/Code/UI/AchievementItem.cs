@@ -37,6 +37,10 @@ public class AchievementItem : MonoBehaviour
 
 	public void Description(string text)
 	{
+		if(mDescription == null)
+		{
+			Init();
+		}
 		mDescription.text = text;
 	}
 

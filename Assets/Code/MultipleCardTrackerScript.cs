@@ -45,6 +45,7 @@ public class MultipleCardTrackerScript : MonoBehaviour, ITrackableEventHandler
 			
 	private void OnTrackingFound()
 	{
+		AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.ArMode);
 		/*
 		 * I hate this switch statement. It's so ugly. Note to future developers. If you have more than a few days to update and work on this code, write some kind of handler
 		 * for all these different classes. Better than that, get rid of the classes and work out some way to work around the issues that caused those classes to exist.

@@ -22,7 +22,7 @@ public class AchievementPanel : MonoBehaviour
 
 	void OnEnable()
 	{
-		if(mItems.Length == 0)
+		if(mItems == null)
 		{
 			Init();
 		}
