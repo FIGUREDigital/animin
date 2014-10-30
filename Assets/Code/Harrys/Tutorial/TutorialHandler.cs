@@ -30,6 +30,8 @@ public class TutorialHandler : MonoBehaviour {
 	private GameObject m_CurrentListening;
 	private bool m_WaitingForInput;
 
+	private const string TutorialPlayerPrefID = "TUTORIALS_COMPLETED";
+
 	// Use this for initialization
 	void Start () {
 		Blocker.gameObject.SetActive (false);
@@ -37,6 +39,10 @@ public class TutorialHandler : MonoBehaviour {
 		TutorialUIParent.SetActive (false);
 
 		TutorialReader.Instance.Deserialize ();
+		for (int i = 0; i < Tutorials.Length; i++) {
+			if (PlayerPrefs.GetString(TutorialPlayerPrefID + i) == null)
+				PlayerPrefs.SetString(TutorialPlayerPrefID + i,"false");
+		}
 	}
 	
 	// Update is called once per frame
@@ -131,7 +137,11 @@ public class TutorialHandler : MonoBehaviour {
 
 		if (++m_Lesson_i >= maxLessons) {
 			WormAnimator.SetTrigger ("worm_GoIn");
-			TutorialReader.Instance.TutorialFinished[m_CurTutorial_i] = true;
+
+			PlayerPrefs.SetString(TutorialPlayerPrefID + m_CurTutorial_i,"true");
+			//TutorialReader.Instance.TutorialFinished[m_CurTutorial_i] = true;
+
+
 			m_EndingTutorial = true;
 			NextButton.gameObject.SetActive(false);
 		}
@@ -150,8 +160,10 @@ public class TutorialHandler : MonoBehaviour {
 
 	//This method test whether or not to start the tutorial.
 	private bool StartConditions(int id){
-		if (TutorialReader.Instance.TutorialFinished[id] == true) return false;
-
+		//if (TutorialReader.Instance.TutorialFinished[id] == true) return false;
+		if (PlayerPrefs.GetString (TutorialPlayerPrefID + id) == "true")
+						return false;
+		
 		//Maybe consider replacing int with an enum? So that they're easier to identify.
 		switch (id) {
 		case (0):
