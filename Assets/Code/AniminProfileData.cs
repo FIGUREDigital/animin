@@ -132,6 +132,12 @@ public class PersistentData
 
 	public void AddItemToInventory(InventoryItemId id, int count)
 	{
+		if ((InventoryItemData.Items [(int)id].ItemType != PopupItemType.Food) ||
+		    (InventoryItemData.Items [(int)id].ItemType != PopupItemType.Food) ||
+		    (InventoryItemData.Items [(int)id].ItemType != PopupItemType.Food))
+		    {
+			return;
+		}
 		for(int i=0;i<Inventory.Count;++i)
 		{
 			if(Inventory[i].Id == id)
