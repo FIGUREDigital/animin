@@ -499,6 +499,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 	public void SpawnChests()
 	{
+		Debug.Log ("Spawn Chests");
 		GameObject resource = Resources.Load<GameObject>("Prefabs/chest_gold");
 
 		GameObject instance = Instantiate(resource) as GameObject;
@@ -772,6 +773,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 		case ActionId.ExitPortalMainStage:
 		{
+			Debug.Log ("ExitPortalmainStage");
 			SpawnChests();	
 			
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;

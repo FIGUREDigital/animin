@@ -40,6 +40,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
     private ValueSmootherVector3 CameraPositionSmoother = new ValueSmootherVector3();
     private ValueSmootherVector3 CameraRotationSmoother = new ValueSmootherVector3();
 
+
     void Start()
     {
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
@@ -134,8 +135,10 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
 			Vector3 finalpos = cameraPoint + newPosition2 + newPosition;
 
-			Camera.main.transform.localPosition = finalpos;
-            Camera.main.transform.LookAt(target);
+			if (UIGlobalVariablesScript.Singleton.ARCameraComponent != null){
+			UIGlobalVariablesScript.Singleton.ARCameraComponent.transform.localPosition = finalpos;
+            UIGlobalVariablesScript.Singleton.ARCameraComponent.transform.LookAt(target);
+			}
         }
 
 
@@ -214,8 +217,8 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
         if (IsTracking)
             SavedARPosition = UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition;
 
-        //Camera.main.transform.position = new Vector3(0, 123.1f, -198.3f);
-        Camera.main.transform.rotation = Quaternion.Euler(14.73474f, 0.0f, 0.0f);
+        //UIGlobalVariablesScript.Singleton.ARCameraComponent.transform.position = new Vector3(0, 123.1f, -198.3f);
+		if (UIGlobalVariablesScript.Singleton.ARCameraComponent != null) UIGlobalVariablesScript.Singleton.ARCameraComponent.transform.rotation = Quaternion.Euler(14.73474f, 0.0f, 0.0f);
 
         UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.parent = UIGlobalVariablesScript.Singleton.NonSceneRef.transform;
         UIGlobalVariablesScript.Singleton.MainCharacterRef.transform.localPosition = new Vector3(0, 0.01f, 0);
@@ -290,11 +293,11 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
             isPlayingMinigame = true;
 */
 
-        UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(false);
-        UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(true);
+		if (UIGlobalVariablesScript.Singleton.AROnIndicator!=null)  UIGlobalVariablesScript.Singleton.AROnIndicator.SetActive(false);
+		if (UIGlobalVariablesScript.Singleton.AROffIndicator!=null) UIGlobalVariablesScript.Singleton.AROffIndicator.SetActive(true);
 
-        UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive(true);
-        UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
+		if (UIGlobalVariablesScript.Singleton.NonSceneRef != null) UIGlobalVariablesScript.Singleton.NonSceneRef.SetActive(true);
+		if (UIGlobalVariablesScript.Singleton.ARSceneRef != null)  UIGlobalVariablesScript.Singleton.ARSceneRef.SetActive(false);
 
         //		if(isPlayingMinigame)
         {
