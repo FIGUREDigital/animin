@@ -289,7 +289,7 @@ public class CharacterProgressScript : MonoBehaviour
 
         //HARRY: REMEMEBR TO REMOVE THESE COMMENTS, FOR CHRIST'S SAKE.
 		this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId);
-        //this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(AniminId.Pi   , AniminEvolutionStageId.Baby);
+        //this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(AniminId.Mandi   , AniminEvolutionStageId.Adult);
         
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.AlmondMilk, 3);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Avocado, 1);
