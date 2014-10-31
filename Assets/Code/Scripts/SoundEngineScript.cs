@@ -111,6 +111,8 @@ public class SoundEngineScript : MonoBehaviour
 
         string pathname = "Sounds/" + sname + "_" + sevo + "_sfx/" + (sname.ToLower()) + "_" + sevo + "_";
 
+		Debug.Log ("Filename : [" + pathname + "SFX];");
+
 
         if (CreatureSounds == null)
         {
@@ -276,10 +278,16 @@ public class SoundEngineScript : MonoBehaviour
 	public void Play(AniminId animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
 	{
 		if(!PlayerProfileData.ActiveProfile.Settings.AudioEnabled) return;
+		if (CreatureSounds [(int)animin, (int)creatureId, (int)soundId] == null) {
+			Debug.Log ("Panic! Sound : [" + animin + "|" + creatureId + "|" + soundId + "] is not valid");
+			return;
+		}
 
-       // Debug.Log("Play Sound : [" + animin + "|" + creatureId + "|" + soundId + "]");
+		//Debug.Log("Play Sound : [" + animin + "|" + creatureId + "|" + soundId + "];");
+		//Debug.Log ("CreatureSounds : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId] + "];");
+		//Debug.Log ("Is Ready to Play? : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId].isReadyToPlay + "];");
 
-		this.audio.PlayOneShot(CreatureSounds[(int)animin, (int)creatureId, (int)soundId]);
+		this.GetComponent<AudioSource>().PlayOneShot(CreatureSounds[(int)animin, (int)creatureId, (int)soundId]);
 	}
 }
 

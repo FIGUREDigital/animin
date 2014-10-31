@@ -37,15 +37,17 @@ public class EvilCharacterPatternMovementScript : MonoBehaviour
 
 		Vector3 charaPos = mainChara.transform.position;
 		float arb = 20f;
-		float dist = (this.transform.position - charaPos).magnitude;
-		Vector3 nearest = charaPos + ((this.collider.bounds.center - charaPos).normalized * Mathf.Min (mainChara.GetComponent<CharacterController> ().radius * arb, dist));
-		bool contains = this.collider.bounds.Contains (nearest);
-		if (contains) {
-			UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().OnEvilCharacterHit(this.gameObject);
+		Vector3 dist = this.transform.position - charaPos;
+		float dist_amt = (this.transform.position - charaPos).magnitude;
+		if (dist.y > -0.5f) {
+			Vector3 nearest = charaPos + ((this.collider.bounds.center - charaPos).normalized * Mathf.Min (mainChara.GetComponent<CharacterController> ().radius * arb, dist_amt));
+			bool contains = this.collider.bounds.Contains (nearest);
+			if (contains) {
+					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript> ().OnEvilCharacterHit (this.gameObject);
+			}
+			Debug.DrawLine (charaPos, nearest, Color.red);
+			Debug.DrawLine (charaPos, this.collider.bounds.center, Color.green);
 		}
-		Debug.DrawLine (charaPos, nearest, Color.red);
-		Debug.DrawLine (charaPos, this.collider.bounds.center, Color.green);
-
 		//End hatred
 
 		float currentRelativeSpeed = Vector3.Distance(Pattern[Index], Pattern[Index + 1]);
