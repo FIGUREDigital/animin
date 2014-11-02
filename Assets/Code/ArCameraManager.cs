@@ -4,7 +4,9 @@ using System.Collections;
 public class ArCameraManager : MonoBehaviour {
 
 	#region Singleton
-	
+
+	private GameObject Go;
+	private bool mInitialized;
 	private static ArCameraManager s_Instance;
 	
 	public static ArCameraManager Instance
@@ -20,16 +22,28 @@ public class ArCameraManager : MonoBehaviour {
 	}
 	
 	#endregion
-
-	public GameObject Go;
+	void Awake()
+	{
+		Init();
+	}
 
 	void OnLevelWasLoaded(int level) 
 	{
 		if(level == 0)
 		{
-			return;
 		}
 		UIGlobalVariablesScript.Singleton.ARCamera = Go;
 		UIGlobalVariablesScript.Singleton.DragableUI3DObject = Go.GetComponentInChildren<CameraModelScript>().gameObject;
+	}
+
+	void Init()
+	{
+		if(mInitialized)
+		{
+			return;
+		}
+		mInitialized = true;
+		Go = (GameObject)Instantiate(Resources.Load("Prefabs/ARCamera"));
+		this.transform.parent = Go.transform;
 	}
 }

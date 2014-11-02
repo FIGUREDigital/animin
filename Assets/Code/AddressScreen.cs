@@ -1,31 +1,65 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Net.Mail;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 public class AddressScreen : MonoBehaviour 
 {
+	private string userName;
+	private string realName;
 	private string secretCode;
 	private string address;
 
 
 	public void Send()
 	{
+		Debug.Log("Preparing email");
 		ReadAddress();
-		SendEmail();
+		PrepareEmail();
+		Debug.Log("Email sent!");
 	}
 
 	void ReadAddress()
 	{ 
+		userName = Account.Instance.UserName;
+		realName = Account.Instance.FirstName + " " + Account.Instance.LastName;
 		secretCode = Account.Instance.UniqueID;
 		address = "";
 		UIInput[] text = GetComponentsInChildren<UIInput>();
 		foreach(UIInput line in text)
 		{
-			address += NGUIText.StripSymbols(line.value);
+			address += NGUIText.StripSymbols(line.value) + "\n";
 		}
 	}
 
-
+	private void PrepareEmail() {
+		MailMessage mail = new MailMessage();
+		SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+		mail.From = new MailAddress("animindev@gmail.com");
+		mail.To.Add("hello@animin.me");
+		mail.Subject ="Purchase by user " + secretCode;
+		mail.Body = Body();
+		
+		SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
+		SmtpServer.Port = 587;
+		SmtpServer.Credentials = (ICredentialsByHost) new NetworkCredential("animindev@gmail.com","Code1red");
+		SmtpServer.EnableSsl = true;
+		SmtpServer.Timeout = 20000;
+		SmtpServer.UseDefaultCredentials = false;
+		ServicePointManager.ServerCertificateValidationCallback = delegate(object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors){
+			return true;
+		};
+		try {
+			SmtpServer.Send(mail);
+		} catch (SmtpException myEx) {
+			Debug.Log ("Expection: \n" + myEx.ToString());
+		}
+		
+		
+		
+	}
 
 	void SendEmail()
 	{
@@ -40,13 +74,22 @@ public class AddressScreen : MonoBehaviour
 		};
 		client.DeliveryMethod = SmtpDeliveryMethod.Network;
 		mail.Subject = "Purchase by user " + secretCode;
-		mail.Body = @"
-New Purchase by user: " + secretCode + @"
+		mail.Body = Body();
+		client.Send(mail);
+	}
 
-Address: " + address + @"
+	private string Body()
+	{
+		return string.Format(
+@"
+New Purchase by user: {0}
+Secret Code: {1}
+
+Name: {2}
+
+Address: {3}
 
 Lots of love, Ad xx
-";
-		client.Send(mail);
+", userName, secretCode, realName, address);
 	}
 }
