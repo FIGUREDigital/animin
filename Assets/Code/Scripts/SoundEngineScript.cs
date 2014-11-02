@@ -283,9 +283,9 @@ public class SoundEngineScript : MonoBehaviour
 			return;
 		}
 
-		//Debug.Log("Play Sound : [" + animin + "|" + creatureId + "|" + soundId + "];");
-		//Debug.Log ("CreatureSounds : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId] + "];");
-		//Debug.Log ("Is Ready to Play? : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId].isReadyToPlay + "];");
+		Debug.Log("Play Sound : [" + animin + "|" + creatureId + "|" + soundId + "];");
+		Debug.Log ("CreatureSounds : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId] + "];");
+		Debug.Log ("Is Ready to Play? : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId].isReadyToPlay + "];");
 
 		this.GetComponent<AudioSource>().PlayOneShot(CreatureSounds[(int)animin, (int)creatureId, (int)soundId]);
 	}

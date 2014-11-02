@@ -1229,7 +1229,10 @@ public class CharacterProgressScript : MonoBehaviour
 							if(ObjectHolding != null && (hitInfo.collider.tag == "Items"))
 							{
 								ObjectHolding.layer = LayerMask.NameToLayer("Default");
-							ObjectHolding.transform.parent = ActiveWorld.transform;
+								ObjectHolding.transform.parent = ActiveWorld.transform;
+
+								GetComponent<CharacterSwapManagementScript> ().CurrentModel.GetComponent<HeadReferenceScript> ().HoldingObject = null;
+
 								ObjectHolding.transform.localPosition = new Vector3(ObjectHolding.transform.localPosition.x, 0, ObjectHolding.transform.localPosition.z);
 
 								GroundItems.Add(ObjectHolding);
