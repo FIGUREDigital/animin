@@ -4,6 +4,7 @@ using System.Collections;
 public class ProfilesManagementScript : MonoBehaviour 
 {
 	public static ProfilesManagementScript Singleton;
+	public static bool Initialized;
 	public GameObject PrefabProfile;
 	public GameObject ProfilesRoot;
 	public GameObject OLD_ProfilesScreen;
@@ -34,6 +35,13 @@ public class ProfilesManagementScript : MonoBehaviour
 	void Awake()
 	{
 		Singleton = this;
+		if(!Initialized)
+		{
+			Initialized = true;
+			GameObject go = new GameObject();
+			go.name = "ArCameraManager";
+			go.AddComponent<ArCameraManager>();
+		}
 	}
 
 	// Use this for initialization
