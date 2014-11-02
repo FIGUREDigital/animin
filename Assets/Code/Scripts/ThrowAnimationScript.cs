@@ -35,7 +35,6 @@ public class ThrowAnimationScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
 		VerticalSpeed = VerticalSpeed + (Time.deltaTime * 600);
 
 		switch(State)

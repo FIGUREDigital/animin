@@ -6,6 +6,12 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public static UIGlobalVariablesScript Singleton;
 
 	public GameObject ARCamera;
+
+	public Camera ARCameraComponent {
+		get {
+			return UIGlobalVariablesScript.Singleton.ARCamera.GetComponent<Camera> ();
+		}
+	}
 	// Set from the Editor
 
 	public GameObject MainMenuPopupObjectRef;

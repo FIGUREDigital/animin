@@ -15,6 +15,7 @@ public enum CheatButtons
 	TakeZeff,
 	DebugToggle,
 	AddTime,
+	ResetTutorials,
 }
 
 public class DebugCheats : MonoBehaviour 
@@ -105,6 +106,10 @@ public class DebugCheats : MonoBehaviour
 		case CheatButtons.AddTime:
 			EvolutionManager.Instance.HappinessStateTime += 1200;
 			cheatDefs.OutputText = "State:" + EvolutionManager.Instance.HappyState + ". Happy Time: " + EvolutionManager.Instance.HappinessStateTime;
+			break;
+		case CheatButtons.ResetTutorials:
+			GameObject tuthandler = GameObject.Find("TutorialHandler");
+			tuthandler.GetComponent<TutorialHandler>().ResetTutorials();
 			break;
 
 		case CheatButtons.DebugToggle:

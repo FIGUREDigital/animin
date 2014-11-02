@@ -18,8 +18,9 @@ public class OpenInGamePurchaseView : MonoBehaviour
 	void OnClick()
 	{
 		mOpen = !mOpen;
-	    Debug.Log( "opening" + name );
-        Parent.SetActive( mOpen );
+		Debug.Log( "opening" + name );
+		Parent.SetActive( mOpen );
+		ExitWebview.SetActive( mOpen );
 		CloseButtons cb = UIGlobalVariablesScript.Singleton.CaringScreenRef.GetComponent<CloseButtons>();
 
 		if(mOpen)

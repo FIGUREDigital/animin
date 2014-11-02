@@ -74,7 +74,7 @@ public class PortalAnimationScript : MonoBehaviour
             {
                 transform.LookAt( UIGlobalVariablesScript.Singleton.ARCamera.transform );
             }
-            Debug.DrawLine(this.transform.position, Camera.main.transform.position, Color.green);
+            
         }
 
 

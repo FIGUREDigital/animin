@@ -24,6 +24,7 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 		{
 			ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
 			ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
+			RegisterListeners ();
 		}
 	}
 

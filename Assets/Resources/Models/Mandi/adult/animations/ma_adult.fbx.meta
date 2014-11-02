@@ -89,7 +89,10 @@ ModelImporter:
     400080: ma_adult:skin_root
     400082: ma_adult:skin_bn_spine_01
     400084: ma_adult:skin_object_joint
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: ma_adult:mandi_adult
+    4300002: mandi_adult
     9500000: //RootNode
     13700000: ma_adult:mandi_adult
   materials:
@@ -114,7 +117,7 @@ ModelImporter:
     globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
