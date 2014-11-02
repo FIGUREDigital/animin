@@ -15,12 +15,15 @@ public class RefreshUI : MonoBehaviour {
 			//Therefore we have to run the inventory type through the InventoryItemDataBank to find out its type.
 			if(InventoryItemData.Items[(int)PersistentData.Singleton.Inventory[i].Id].ItemType == PopupItemType.Food && !FoodIconSet){
 				UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)PersistentData.Singleton.Inventory[i].Id].SpriteName;
+				UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = PersistentData.Singleton.Inventory[i].Id;
 				FoodIconSet = true;
 			} else if(InventoryItemData.Items[(int)PersistentData.Singleton.Inventory[i].Id].ItemType == PopupItemType.Item && !ItemIconSet){
 				UIGlobalVariablesScript.Singleton.ItemsButton.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)PersistentData.Singleton.Inventory[i].Id].SpriteName;
+				UIGlobalVariablesScript.Singleton.ItemsButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = PersistentData.Singleton.Inventory[i].Id;
 				ItemIconSet = true;
 			} else if(InventoryItemData.Items[(int)PersistentData.Singleton.Inventory[i].Id].ItemType == PopupItemType.Medicine && !MediIconSet){
 				UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)PersistentData.Singleton.Inventory[i].Id].SpriteName;
+				UIGlobalVariablesScript.Singleton.MedicineButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = PersistentData.Singleton.Inventory[i].Id;
 				MediIconSet = true;
 			}
 		}
