@@ -25,7 +25,7 @@ public class AddressScreen : MonoBehaviour
 		UIInput[] text = GetComponentsInChildren<UIInput>();
 		foreach(UIInput line in text)
 		{
-			address += NGUIText.StripSymbols(line.value);
+			address += NGUIText.StripSymbols(line.value) + "\n";
 		}
 	}
 
