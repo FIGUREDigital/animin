@@ -315,11 +315,14 @@ public class ServerManager : MonoBehaviour {
 		DebugManager.ShowDebugLog("function", "Access		", __code);
 
 		WWWForm data = new WWWForm();
-		data.AddField("key", AppDataManager.serverCallKey);
-		//data.AddField("username", __username);
-		data.AddField("code", __code);
+		//data.AddField("key", AppDataManager.serverCallKey);
+		////data.AddField("username", __username);
+		//data.AddField("code", __code);
 
-		var request = new WWW("http://leaderboard.eu01.aws.af.cm/api/GET/access/", data);
+        data.AddField( "CardNumber", __code );
+        data.AddField( "UserID", Account.Instance.UniqueID );
+
+		var request = new WWW("http://terahard.org/Teratest/DatabaseAndScripts/CheckCardLegitimacy.php", data);//new WWW("http://leaderboard.eu01.aws.af.cm/api/GET/access/", data);
 		
 		yield return request;
 		
@@ -345,10 +348,18 @@ public class ServerManager : MonoBehaviour {
 			*/
 			
 			if (request.text != "") {
+                
+                Debug.Log( request.text );
+                if( request.text == "Card successfully activated" )
+                {
+                    success = true;
+                }
+                /*
 				Dictionary<string, object> responseDictionary = Prime31.Json.decode(request.text) as Dictionary<string, object>;
 				//DebugManager.ShowDebugLog("trace", "responseDictionary	", responseDictionary);
 				DebugManager.ShowDebugLog("trace", "responseDictionary	", responseDictionary.Count);
 				
+                
 				if (responseDictionary != null) 
 				{
 					if (responseDictionary.ContainsKey("status")) 
@@ -366,7 +377,7 @@ public class ServerManager : MonoBehaviour {
 							// Code not valid
 						}
 					}
-				}
+				}*/
 			}
 		}
 		
