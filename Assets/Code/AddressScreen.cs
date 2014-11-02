@@ -7,12 +7,15 @@ using System.Net.Security;
 
 public class AddressScreen : MonoBehaviour 
 {
+	private string userName;
+	private string realName;
 	private string secretCode;
 	private string address;
 
 
 	public void Send()
 	{
+		Debug.Log("Preparing email");
 		ReadAddress();
 		PrepareEmail();
 		Debug.Log("Email sent!");
@@ -20,6 +23,8 @@ public class AddressScreen : MonoBehaviour
 
 	void ReadAddress()
 	{ 
+		userName = Account.Instance.UserName;
+		realName = Account.Instance.FirstName + " " + Account.Instance.LastName;
 		secretCode = Account.Instance.UniqueID;
 		address = "";
 		UIInput[] text = GetComponentsInChildren<UIInput>();
@@ -78,10 +83,13 @@ public class AddressScreen : MonoBehaviour
 		return string.Format(
 @"
 New Purchase by user: {0}
+Secret Code: {1}
 
-Address: {1}
+Name: {2}
+
+Address: {3}
 
 Lots of love, Ad xx
-", secretCode, address);
+", userName, secretCode, realName, address);
 	}
 }
