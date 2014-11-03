@@ -21,9 +21,9 @@ public class Account
 
     #endregion
 
-    private const string SERVER_SEND_URL = "http://animin.me/wp-admin/DatabaseAndScripts/AddData.php";
+	private const string SERVER_SEND_URL = "http://terahard.org/Teratest/DatabaseAndScripts/AddData.php";
 
-	private const string SERVER_CHECK_URL = "http://animin.me/wp-admin/DatabaseAndScripts/CheckLoginData.php";
+	private const string SERVER_CHECK_URL = "http://terahard.org/Teratest/DatabaseAndScripts/CheckLoginData.php";
 
     public string UniqueID;
 

@@ -117,12 +117,21 @@ public class SaveAndLoad {
 
 	public void SaveAllData()
 	{
-//		savedGames.Add(Game.current);
-//		BinaryFormatter bf = new BinaryFormatter();
-//		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");
-//		bf.Serialize(file, SaveLoad.savedGames);
-//		file.Close();
+		ProfileData profileData = CollectData ();
+		BinaryFormatter bf = new BinaryFormatter();
+		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");
+		bf.Serialize(file, profileData);
+		file.Close();
 
+
+	}
+
+	public ProfileData CollectData()
+	{
+		ProfileData profileData = new ProfileData();
+
+
+		return profileData;
 
 	}
 
