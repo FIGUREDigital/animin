@@ -7,7 +7,6 @@ public class SoundEngineScript : MonoBehaviour
 	private AudioClip[] GenericSounds;
 	private AudioClip[,,] CreatureSounds;
 	public AudioSource SoundFxLooper1;
-	public AudioSource MusicLooper;
 	public AudioClip[] FartSounds;
 	public AudioClip[] MusicSounds;
 
@@ -111,7 +110,7 @@ public class SoundEngineScript : MonoBehaviour
 
         string pathname = "Sounds/" + sname + "_" + sevo + "_sfx/" + (sname.ToLower()) + "_" + sevo + "_";
 
-		Debug.Log ("Filename : [" + pathname + "SFX];");
+//		Debug.Log ("Filename : [" + pathname + "SFX];");
 
 
         if (CreatureSounds == null)
@@ -283,9 +282,9 @@ public class SoundEngineScript : MonoBehaviour
 			return;
 		}
 
-		Debug.Log("Play Sound : [" + animin + "|" + creatureId + "|" + soundId + "];");
-		Debug.Log ("CreatureSounds : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId] + "];");
-		Debug.Log ("Is Ready to Play? : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId].isReadyToPlay + "];");
+		//Debug.Log("Play Sound : [" + animin + "|" + creatureId + "|" + soundId + "];");
+		//Debug.Log ("CreatureSounds : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId] + "];");
+		//Debug.Log ("Is Ready to Play? : [" + CreatureSounds [(int)animin, (int)creatureId, (int)soundId].isReadyToPlay + "];");
 
 		this.GetComponent<AudioSource>().PlayOneShot(CreatureSounds[(int)animin, (int)creatureId, (int)soundId]);
 	}
