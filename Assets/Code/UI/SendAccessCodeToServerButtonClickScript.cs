@@ -14,19 +14,12 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 	void OnClick()
 	{
 		SubmitFunction.OnSubmit();
-		if(Application.isEditor)
-		{ 
-			ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
-			ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-			return; 
-		}
-		else
-		{
-			ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
-			ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
-			RegisterListeners ();
-		}
+		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
+		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
+		RegisterListeners ();
+
 	}
+
 
 #if UNITY_IOS
 	void purchaseSuccessful( StoreKitTransaction transaction )

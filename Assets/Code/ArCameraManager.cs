@@ -45,6 +45,9 @@ public class ArCameraManager : MonoBehaviour {
 		mInitialized = true;
 		Go = (GameObject)Instantiate(Resources.Load("Prefabs/ARCamera"));
 		this.transform.parent = Go.transform;
-		UIGlobalVariablesScript.Singleton.ARCamera = Go;
+		if(UIGlobalVariablesScript.Singleton != null)
+		{
+			UIGlobalVariablesScript.Singleton.ARCamera = Go;
+		}
 	}
 }
