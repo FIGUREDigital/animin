@@ -23,7 +23,7 @@ public class EvolutionManager
 	private const int HAPPINESS_FAIL_THRESHOLD = 30;
 	private const int HAPPINESS_WIN_THRESHOLD = 80;
 	private const int HAPPINESS_BIG_WIN_THRESHOLD = 110;
-	private const float TIME_FOR_REWARD = 1200;
+	private const float TIME_FOR_REWARD = 600;
 	private int mNextMarker = (int)(MARKER_RATE * 0.5f);
 	private int mZefProgress;
 	private int mCurrentMarker = 0;
