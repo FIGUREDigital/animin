@@ -35,6 +35,8 @@ public class SaveAndLoad {
 		
 	}
 
+	public ProfileData ProfileSavedData; 
+
 	[System.Serializable]
 	public class CharacterData
 	{
@@ -108,21 +110,36 @@ public class SaveAndLoad {
 		Adult		
 	}
 
+	public SaveAndLoad()
+	{
+		ProfileSavedData = new ProfileData ();
+
+	}
+
 	public void LoadAllData()
 	{
-
-
+		if(File.Exists(Application.persistentDataPath + "/savedGames.anidat")) 
+		{
+			BinaryFormatter bf = new BinaryFormatter();
+			FileStream file = File.Open(Application.persistentDataPath + "/savedGames.anidat", FileMode.Open);
+			ProfileSavedData = (ProfileData)bf.Deserialize(file);
+			file.Close();
+			Debug.Log ("Save data loaded");
+		}
+		else
+		{
+			Debug.Log ("No save data");
 
 		}
+	}
 
 	public void SaveAllData()
 	{
-		ProfileData profileData = CollectData ();
+		ProfileSavedData = CollectData ();
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");
-		bf.Serialize(file, profileData);
+		bf.Serialize(file, ProfileSavedData);
 		file.Close();
-
 
 	}
 
@@ -130,8 +147,21 @@ public class SaveAndLoad {
 	{
 		ProfileData profileData = new ProfileData();
 
+		profileData.TBO = new CharacterData (); 
+		profileData.TBO	= CollectCharacterData(profileData.TBO);		
 
 		return profileData;
+
+	}
+
+	private CharacterData CollectCharacterData(CharacterData character)
+	{
+		return character;
+	}
+
+	public void RepopulateData()
+	{
+
 
 	}
 

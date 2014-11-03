@@ -67,6 +67,13 @@ public class ProfilesManagementScript : MonoBehaviour
 		//ServerManager.GetLeaderboardScores(1);
 	}
 
+	public void NewUserProfileAdded()
+	{
+		ProfilesManagementScript.Singleton.NewUser.SetActive(false);
+		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+
+	}
+
 	public void CheckProfileLoginPasscode(string code)
 	{
 		StartCoroutine( Account.Instance.WWWCheckLoginCode( code ) );
