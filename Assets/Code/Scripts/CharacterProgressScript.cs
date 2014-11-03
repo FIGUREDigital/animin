@@ -607,7 +607,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 		GameObject indicator = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>().Indicator;
 
-		if(ObjectHolding != null)
+		if(ObjectHolding != null || animationController.IsSleeping == true)
 		{
 			indicator.SetActive(true);
 		}
