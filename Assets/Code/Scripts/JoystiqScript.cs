@@ -168,10 +168,10 @@ public class JoystiqScript : MonoBehaviour {
 			//Debug.Log("bottomLeftWorld: " + bottomLeftWorld.ToString());
 			//Debug.Log("topRightWorld: " + topRightWorld.ToString());
 
-/*			
-			if(UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowMovement)
-				UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
-*/
+			if (UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef!= null && UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>()!=null)
+				if( UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowMovement)
+					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
+
 
 			Vector3 middle = bottomLeftWorld + (topRightWorld - bottomLeftWorld) / 2;
 

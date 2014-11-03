@@ -991,33 +991,28 @@ public class CharacterProgressScript : MonoBehaviour
 					// GRAB FROM FLOOR
 					//else
 				#endregion
-					{
+					
 
-						DragableObject = detectDragHit.collider.gameObject;
+					DragableObject = detectDragHit.collider.gameObject;
+					
+					if (DragableObject.GetComponent<UIPopupItemScript>().Type != PopupItemType.Token){
+
+						pickupItemSavedData.WasInHands = false;
+						//Debug.Log("IT SHOULD GO AND DRAG NOW");
+						pickupItemSavedData.WasInHands = false;
 						
-						if (DragableObject.GetComponent<UIPopupItemScript>().Type != PopupItemType.Token){
+						pickupItemSavedData.Position = DragableObject.transform.position;
+						pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
+						//Physics.IgnoreCollision(DragableObject.collider, this.collider, true);
+						//Debug.Log("DISABLING COLLISION");
+						
+						CurrentAction = ActionId.DragItemAround;
+						IsDetectingMouseMoveForDrag = false;
 
-							pickupItemSavedData.WasInHands = false;
-							//Debug.Log("IT SHOULD GO AND DRAG NOW");
-							pickupItemSavedData.WasInHands = false;
-							
-							pickupItemSavedData.Position = DragableObject.transform.position;
-							pickupItemSavedData.Rotation = DragableObject.transform.rotation.eulerAngles;
-							//Physics.IgnoreCollision(DragableObject.collider, this.collider, true);
-							//Debug.Log("DISABLING COLLISION");
-							
-							CurrentAction = ActionId.DragItemAround;
-							IsDetectingMouseMoveForDrag = false;
-
-							DragableObject.layer = LayerMask.NameToLayer("IgnoreCollisionWithCharacter");
-						}
+						DragableObject.layer = LayerMask.NameToLayer("IgnoreCollisionWithCharacter");
+						DragableObject.GetComponent<BoxCollider>().enabled = false;
 					}
-					
-					
-					
-					//Debug.Log("SELECTED OBJECT:" + detectDragHit.collider.name);
-					
-					DragableObject.GetComponent<BoxCollider>().enabled = false;
+
 				}
 				else if(Input.GetButton("Fire1"))
 				{
