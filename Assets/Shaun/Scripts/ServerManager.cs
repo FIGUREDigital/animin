@@ -354,6 +354,9 @@ public class ServerManager : MonoBehaviour {
                 {
                     success = true;
                 }
+
+				returnCode = request.text;
+
                 /*
 				Dictionary<string, object> responseDictionary = Prime31.Json.decode(request.text) as Dictionary<string, object>;
 				//DebugManager.ShowDebugLog("trace", "responseDictionary	", responseDictionary);

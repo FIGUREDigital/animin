@@ -116,14 +116,14 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	public void OnAccessCodeResult(string resultId)
 	{
-		if(resultId == "1")
+		if(resultId == "Card successfully activated")
 		{
 			UnlockCharacterManager.Instance.BuyCharacter(AniminToUnlockId, true);
 		}
-		else if(resultId == "2")
+		else if(resultId == "Card number not valid")
 		{
 		}
-		else if(resultId == "3")
+		else if(resultId == "Card number already in use")
 		{
 		}
 		else
