@@ -11,12 +11,14 @@ public class ScreenshotScript : MonoBehaviour {
 	// Use this for initialization
 	void OnClick()
 	{
-		string path = "/private/var/mobile/Media/DCIM/screenshot" + DateTime.Now.ToString("s") + ".png";
 		if(Application.isEditor)
 		{
-			path = "screenshot.png";
+			Application.CaptureScreenshot("screenshot.png");
 		}
-		Application.CaptureScreenshot(path);
+		else
+		{
+			StartCoroutine("CaptureScreenshot");
+		}
 		if (PhotoSaved != null && PhotoSaved.GetComponent<PhotoFadeOut> () != null) {
 			PhotoSaved.gameObject.SetActive(true);
 		}
@@ -24,7 +26,6 @@ public class ScreenshotScript : MonoBehaviour {
 
 	IEnumerator CaptureScreenshot()
 	{
-
 		Texture2D screenshot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, true);
 		yield return new WaitForEndOfFrame();
 		screenshot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0, true);
