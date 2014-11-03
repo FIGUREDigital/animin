@@ -243,19 +243,19 @@ public class UIClickButtonMasterScript : MonoBehaviour
 				//UIGlobalVariablesScript.Singleton.PanelFoods.SetActive(true);
 				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(-312, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
 			}
-			else if(id == UIFunctionalityId.OpenCloseItems) 
-			{
-				typeToLoad = PopupItemType.Item;
-				UIGlobalVariablesScript.Singleton.ItemsFoodMedicineLabel.text = "Items";
-				//UIGlobalVariablesScript.Singleton.PanelItems.SetActive(true);
-				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(0, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
-			}
 			else if(id == UIFunctionalityId.OpenCloseMedicine) 
 			{
 				typeToLoad = PopupItemType.Medicine;
 				UIGlobalVariablesScript.Singleton.ItemsFoodMedicineLabel.text = "Medicine";
 				//UIGlobalVariablesScript.Singleton.PanelMedicine.SetActive(true);
 				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(312, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
+			}
+			else if(id == UIFunctionalityId.OpenCloseItems) 
+			{
+				typeToLoad = PopupItemType.Item;
+				UIGlobalVariablesScript.Singleton.ItemsFoodMedicineLabel.text = "Items";
+				//UIGlobalVariablesScript.Singleton.PanelItems.SetActive(true);
+				UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition = new Vector3(0, UIGlobalVariablesScript.Singleton.PopupIndicator.transform.localPosition.y, 0);
 			}
 
 			UIGlobalVariablesScript.Singleton.ItemScrollView.GetComponent<UIScrollView>().ResetPosition();
