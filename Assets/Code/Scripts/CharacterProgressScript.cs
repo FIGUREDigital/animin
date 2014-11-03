@@ -583,7 +583,7 @@ public class CharacterProgressScript : MonoBehaviour
 //			//if(Evolution >= 100) Evolution = 100;
 //
 			float percentage = PersistentData.Singleton.Evolution;
-			UITexture EvoProgress = UIGlobalVariablesScript.Singleton.EvolutionProgressSprite;
+			UISprite EvoProgress = UIGlobalVariablesScript.Singleton.EvolutionProgressSprite;
 			float scale = UIGlobalVariablesScript.Singleton.gameObject.transform.localScale.x;
 			int screenWidth = 1330;
 			int width = (int)(screenWidth * percentage);
@@ -592,7 +592,8 @@ public class CharacterProgressScript : MonoBehaviour
 			pos.y = 275.0f * scale;
 			EvoProgress.transform.position = pos;
 			EvoProgress.width = width;
-			EvoProgress.uvRect = new Rect(0, 0, percentage, 1);
+			EvoProgress.fillDirection = UIBasicSprite.FillDirection.Horizontal;
+			EvoProgress.fillAmount = percentage;
 			EvoProgress.MarkAsChanged();
 //
 //
@@ -606,7 +607,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 		GameObject indicator = GetComponent<CharacterSwapManagementScript>().CurrentModel.GetComponent<HeadReferenceScript>().Indicator;
 
-		if(ObjectHolding != null)
+		if(ObjectHolding != null || animationController.IsSleeping == true)
 		{
 			indicator.SetActive(true);
 		}

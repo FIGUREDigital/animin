@@ -5,14 +5,26 @@ using System;
 
 public class ScreenshotScript : MonoBehaviour {
 
+	[SerializeField]
+	private UISprite PhotoSaved;
+
 	// Use this for initialization
 	void OnClick()
 	{
-		StartCoroutine(CaptureScreenshot());
+		string path = "/private/var/mobile/Media/DCIM/screenshot" + DateTime.Now.ToString("s") + ".png";
+		if(Application.isEditor)
+		{
+			path = "screenshot.png";
+		}
+		Application.CaptureScreenshot(path);
+		if (PhotoSaved != null && PhotoSaved.GetComponent<PhotoFadeOut> () != null) {
+			PhotoSaved.gameObject.SetActive(true);
+		}
 	}
 
 	IEnumerator CaptureScreenshot()
 	{
+
 		Texture2D screenshot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, true);
 		yield return new WaitForEndOfFrame();
 		screenshot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0, true);

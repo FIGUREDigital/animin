@@ -33,15 +33,15 @@ public class AchievementsScript : MonoBehaviour
 		case AchievementTypeId.Gold:
 			{
 				Title.text = "Gold Award!";
-				BackgroundGradient.spriteName = "achievementYellow";
+				BackgroundGradient.color = new Color(247,255,38);
 				Description.text = string.Format(@"Well done! you scored {0} points.", points);
-			MedalIcon.spriteName = @"achievementIconGold";
+				MedalIcon.spriteName = @"achievementIconGold";
 				break;
 			}
 		case AchievementTypeId.Bronze:
 			{
 				Title.text = "Bronze Award!";
-				BackgroundGradient.spriteName = "achievementYellow";
+				BackgroundGradient.color = new Color(247,255,38);
 				Description.text = string.Format(@"Well done! you scored {0} points.", points);
 				MedalIcon.spriteName = @"achievementBGBronze";
 				break;
@@ -49,15 +49,15 @@ public class AchievementsScript : MonoBehaviour
 		case AchievementTypeId.Silver:
 			{
 				Title.text = "Silver Award!!";
-				BackgroundGradient.spriteName = "achievementYellow";
-			Description.text = string.Format(@"Well done! you scored {0} points.", points);
+				BackgroundGradient.color = new Color(247,255,38);
+				Description.text = string.Format(@"Well done! you scored {0} points.", points);
 				MedalIcon.spriteName = @"achievementIconSilver";
 				break;
 			}
 		case AchievementTypeId.Achievement:
 			{
 				Title.text = "Achievement!";
-				BackgroundGradient.spriteName = "achievementGreen";
+				BackgroundGradient.color = new Color(89,255,38);
 				Description.text = "Congratulations, you got an achievement.";
 				MedalIcon.spriteName = @"achievementIconStar";
 				break;
@@ -66,7 +66,7 @@ public class AchievementsScript : MonoBehaviour
 		case AchievementTypeId.Evolution:
 			{
 				Title.text = "Your Animin has evolved!";
-				BackgroundGradient.spriteName = "achievementGreen";
+				BackgroundGradient.color = new Color(89,255,38);
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
 				MedalIcon.spriteName = @"achievementMarker3";
 				break;
@@ -75,7 +75,7 @@ public class AchievementsScript : MonoBehaviour
 		case AchievementTypeId.EvolutionExclamation:
 			{
 				Title.text = "Your animin has grown!";
-				BackgroundGradient.spriteName = "achievementGreen";
+				BackgroundGradient.color = new Color(89,255,38);
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
 				MedalIcon.spriteName = @"achievementMarker3";
 				break;
@@ -83,7 +83,7 @@ public class AchievementsScript : MonoBehaviour
 		case AchievementTypeId.EvolutionStar:
 			{
 				Title.text = "You unlocked a surprise!";
-				BackgroundGradient.spriteName = "achievementGreen";
+				BackgroundGradient.color = new Color(89,255,38);
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
 				MedalIcon.spriteName = @"achievementMarker1";
 				break;
@@ -91,7 +91,7 @@ public class AchievementsScript : MonoBehaviour
 		case AchievementTypeId.Tutorial:
 			{
 				Title.text = "Yo!";
-				BackgroundGradient.spriteName = "achievementOrange";
+				BackgroundGradient.color = new Color(255,190,38);
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
 				MedalIcon.spriteName = @"achievementWorm";
 				break;
@@ -99,7 +99,7 @@ public class AchievementsScript : MonoBehaviour
 		case AchievementTypeId.Birthday:
 			{
 				Title.text = "Happy Birthday!";
-				BackgroundGradient.spriteName = "achievementRed";
+				BackgroundGradient.color = new Color(255,38,124);
 				Description.text = "Well done! Keep taking care of your Animin and training them up.";
 				MedalIcon.spriteName = @"achievementBirthday";
 				break;

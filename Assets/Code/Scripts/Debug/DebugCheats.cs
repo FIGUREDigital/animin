@@ -104,7 +104,7 @@ public class DebugCheats : MonoBehaviour
 			break;
 
 		case CheatButtons.AddTime:
-			EvolutionManager.Instance.HappinessStateTime += 1200;
+			EvolutionManager.Instance.HappinessStateTime += 600;
 			cheatDefs.OutputText = "State:" + EvolutionManager.Instance.HappyState + ". Happy Time: " + EvolutionManager.Instance.HappinessStateTime;
 			break;
 		case CheatButtons.ResetTutorials:

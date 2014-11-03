@@ -446,7 +446,7 @@ public class CharacterControllerScript : Photon.MonoBehaviour
 	{
 		if(!__local) return;
 		if(FreezeCollisionDetection) return;
-		//if (UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef == null || UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript> ().Paused) return;
+		if (UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef != null && UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript> ().Paused) return;
 		if (!isControllable)
 			
 		{
