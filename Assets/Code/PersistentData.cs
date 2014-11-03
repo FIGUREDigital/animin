@@ -12,6 +12,16 @@ public class PersistentData
 		
 	}
 
+	public enum TypesOfAnimin
+	{
+		TBo,
+		Kelsi,
+		Pi,
+		Mandi,
+
+		count
+	}
+
 	public List<InventoryItemData> Inventory = new List<InventoryItemData>();
 	public AniminId PlayerAniminId;
 	public AniminEvolutionStageId AniminEvolutionId;
