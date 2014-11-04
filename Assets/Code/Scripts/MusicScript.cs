@@ -3,9 +3,6 @@ using System.Collections;
 
 public class MusicScript : MonoBehaviour 
 {
-	public AudioClip CubeMusic;
-
-
 	// Use this for initialization
 	void Start () {
 		LooperPlaying=true;
