@@ -60,7 +60,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject PanelFoods;
 	public GameObject PanelItems;
 	public UILabel TextForStarsInMiniCollector;
-	public UISprite EvolutionProgressSprite;
+	public UITexture EvolutionProgressSprite;
 
 	public GameObject PopupIndicator;
 	public GameObject ImageTarget;
@@ -111,6 +111,10 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject ItemsButton;
 	public GameObject StatsButton;
 	public GameObject MinigamesButton;
+
+	[SerializeField]
+	private TutorialHandler TutorialHandler;
+	public TutorialHandler TutHandler{ get { return TutorialHandler; } }
 
 
 	public enum ActiveState {Caring, Collecting,Gun, None};

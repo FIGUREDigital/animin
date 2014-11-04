@@ -583,7 +583,7 @@ public class CharacterProgressScript : MonoBehaviour
 //			//if(Evolution >= 100) Evolution = 100;
 //
 			float percentage = PersistentData.Singleton.Evolution;
-			UISprite EvoProgress = UIGlobalVariablesScript.Singleton.EvolutionProgressSprite;
+			UITexture EvoProgress = UIGlobalVariablesScript.Singleton.EvolutionProgressSprite;
 			float scale = UIGlobalVariablesScript.Singleton.gameObject.transform.localScale.x;
 			int screenWidth = 1330;
 			int width = (int)(screenWidth * percentage);
@@ -592,8 +592,7 @@ public class CharacterProgressScript : MonoBehaviour
 			pos.y = 275.0f * scale;
 			EvoProgress.transform.position = pos;
 			EvoProgress.width = width;
-			EvoProgress.fillDirection = UIBasicSprite.FillDirection.Horizontal;
-			EvoProgress.fillAmount = percentage;
+			EvoProgress.uvRect = new Rect(0, 0, percentage, 1);
 			EvoProgress.MarkAsChanged();
 //
 //
