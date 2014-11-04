@@ -102,7 +102,6 @@ public class InventoryItemData
 
 
 		Items[(int)InventoryItemId.Pill] = new InventoryItemBankData() { Id = InventoryItemId.Pill, PrefabId = "Prefabs/capsule", SpriteName = "mediumpill_icon", ItemType = PopupItemType.Medicine };
-		Items[(int)InventoryItemId.Syringe] = new InventoryItemBankData() { Id = InventoryItemId.Syringe, PrefabId = "Prefabs/syringe", SpriteName = "syringe_icon", ItemType = PopupItemType.Medicine };
 		Items[(int)InventoryItemId.Plaster] = new InventoryItemBankData() { Id = InventoryItemId.Plaster, PrefabId = "Prefabs/plaster", SpriteName = "plaster_icon", ItemType = PopupItemType.Medicine };
 	}
 
