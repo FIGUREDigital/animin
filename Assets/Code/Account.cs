@@ -47,34 +47,41 @@ public class Account
 
     }
 
-    public IEnumerator WWWSendData( string name, string card, string address, string addressee, string firstname, string lastname)
+	public IEnumerator WWWSendData( bool newUser,string name, string character, string address, string addressee, string firstname, string lastname)
     {
         //if(PlayerPrefs.HasKey( "PLAYER_ID" )) yield break;
 
         WWWForm webForm = new WWWForm();
 
-        webForm.AddField( "Name", name );
-        bool newUser = address == " ";
+        webForm.AddField( "Name", name );        
         if( newUser )
         {
             webForm.AddField( "NewUser", "1" );
         }
         else
-        {
-            webForm.AddField( "NewUser", "0" );
+        {            
+			webForm.AddField( "NewUser", "0" );
             webForm.AddField( "ID", UniqueID );
+			Debug.Log ("test"+UniqueID+"test");
         }
 
         webForm.AddField( "Address", address );
+//		Debug.Log (address);
 
         webForm.AddField( "Addressee", addressee );
+//		Debug.Log (addressee);
 
 		webForm.AddField( "FirstName", firstname );
-		
+//		Debug.Log (firstname);
+
 		webForm.AddField( "LastName", lastname );
+//		Debug.Log (lastname);
 
         webForm.AddField( "Device", "" + Application.platform );
-        webForm.AddField( "Card", card );
+//		Debug.Log (Application.platform);
+
+        webForm.AddField( "Character", character );
+//		Debug.Log (character);
 
         WWW w = new WWW( SERVER_SEND_URL, webForm );
 
@@ -89,13 +96,19 @@ public class Account
             if( newUser )
             {
                 UniqueID = w.text;
+				UniqueID = UniqueID.Replace(System.Environment.NewLine, "");
+				Debug.Log("test"+UniqueID+"test");
                 PlayerPrefs.SetString( "PLAYER_ID", UniqueID );
             }
 
-
             Debug.Log( w.text );
-            Debug.Log( "Finished uploading data" );
+            Debug.Log( "Finished uploading name data" );
         }
+
+		if (newUser) 
+		{
+			ProfilesManagementScript.Singleton.NewUserProfileAdded();
+		}
 
     }
 	public IEnumerator WWWCheckLoginCode( string code )

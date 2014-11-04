@@ -60,27 +60,6 @@ public class BuyWithWebView : MonoBehaviour
         //ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
         //ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
     }
-
-	public void LaunchWebview()
-	{
-		Debug.Log( "Buying with webview" );
-		StartCoroutine( Account.Instance.WWWSendData( Account.Instance.UserName, " ", Account.Instance.Address, Account.Instance.Addressee, Account.Instance.FirstName, Account.Instance.LastName ));
-		ExitWebViewObject.SetActive( true );
-
-		#if UNITY_IOS
-		int width = 360;
-		int height = 300;
-		
-		if( Screen.width > 960 )
-		{
-			width *= 2;
-			height *= 2;
-		}
-		
-		EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
-		EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/AniminCart.html" );
-		#endif
-
-		}
+	
 
 }

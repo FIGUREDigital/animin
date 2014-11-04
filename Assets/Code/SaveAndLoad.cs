@@ -28,21 +28,23 @@ public class SaveAndLoad {
 	[System.Serializable]
 	public class ProfileData
 	{
-		public CharacterData TBO;
-		public CharacterData Kelsi;
-		public CharacterData Mandi;
-		public CharacterData Pi;	
+		public List<CharacterData> CharacterList;	
 		
 	}
+
+	public ProfileData ProfileSavedData; 
 
 	[System.Serializable]
 	public class CharacterData
 	{
+		public PersistentData.TypesOfAnimin Type;
+
 		public DateTime NextHappynBonusTimeAt;
 		public DateTime LastSavePerformed;
 		public DateTime LastTimeToilet;
 
-		public InventoryData Inventory;
+//		public InventoryData Inventory;
+		public List<ItemDetails> ItemList;
 		public EvolutionStage EvolutionLevel;
 		public HappinessData Happiness;
 		public AchievementData Achievements;
@@ -52,35 +54,10 @@ public class SaveAndLoad {
 	}
 
 	[System.Serializable]
-	public class InventoryData
+	public class ItemDetails
 	{
-		// Food
-		public int JuiceNumber;
-		public int BlueberryNumber;
-		public int ChipsNumber;
-		public int StrawberryNumber;
-		public int AvocadoNumber;
-		public int CarrotNumber;
-		public int SpinachNumber;
-		public int BreadJamNumber;
-
-
-		//items
-		public int BoomBoxNumber;
-		public int AlarmNumber;
-		public int CameraNumber;
-		public int SynthNumber;
-		public int JunoNumber;
-		public int EDMNumber;
-		public int FartButtonNumber;
-		public int LightbulbNumber;
-
-		//medicine
-
-		public int PillNumber;
-		public int SyringeNumber;
-		public int PlasterNumber;
-
+		public InventoryItemId ID;
+		public int Amount;
 	}
 
 	[System.Serializable]
@@ -108,21 +85,36 @@ public class SaveAndLoad {
 		Adult		
 	}
 
+	public SaveAndLoad()
+	{
+		ProfileSavedData = new ProfileData ();
+
+	}
+
 	public void LoadAllData()
 	{
-
-
+		if(File.Exists(Application.persistentDataPath + "/savedGames.anidat")) 
+		{
+			BinaryFormatter bf = new BinaryFormatter();
+			FileStream file = File.Open(Application.persistentDataPath + "/savedGames.anidat", FileMode.Open);
+			ProfileSavedData = (ProfileData)bf.Deserialize(file);
+			file.Close();
+			Debug.Log ("Save data loaded");
+		}
+		else
+		{
+			Debug.Log ("No save data");
 
 		}
+	}
 
 	public void SaveAllData()
 	{
-		ProfileData profileData = CollectData ();
+		ProfileSavedData = CollectData ();
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");
-		bf.Serialize(file, profileData);
+		bf.Serialize(file, ProfileSavedData);
 		file.Close();
-
 
 	}
 
@@ -130,8 +122,41 @@ public class SaveAndLoad {
 	{
 		ProfileData profileData = new ProfileData();
 
+		profileData.CharacterList = new List<CharacterData>();
+
+		for (int i = 0; i < PersistentData.TypesOfAnimin.count-1; i++) 
+		{
+			CharacterData tempCharacter = CollectCharacterData((PersistentData.TypesOfAnimin)i);
+			profileData.CharacterList.Add(tempCharacter);
+		}				
 
 		return profileData;
+
+	}
+
+	private CharacterData CollectCharacterData(PersistentData.TypesOfAnimin characterType)
+	{
+		CharacterData tempCharacter = new CharacterData ();
+
+		tempCharacter.ItemList = new List<ItemDetails> ();
+
+		for (int i = 0; i < InventoryItemId.Count-1; i++) 
+		{
+			ItemDetails tempItem = new ItemDetails();
+
+			tempItem.ID = InventoryItemId[i];
+			tempItem.Amount = PersistentData.Singleton.Inventory[i].Count;
+
+			tempCharacter.ItemList.Add(tempItem);
+
+		}
+
+		return tempCharacter;
+	}
+
+	public void RepopulateData()
+	{
+
 
 	}
 
