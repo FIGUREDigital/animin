@@ -150,11 +150,7 @@ public class SaveAndLoad {
         for (int i =0; i< ProfileList.Count; i++)
         {
             ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Add(ProfileList[i].PlayerData);
-            if (ProfilesManagementScript.Singleton.ListOfPlayerProfiles[i].ProfileName == "john")
-            {
-                UnlockCharacterManager.Instance.UnlockCharacter(PersistentData.TypesOfAnimin.Mandi);
-
-            }
+            
         }
 
 	}

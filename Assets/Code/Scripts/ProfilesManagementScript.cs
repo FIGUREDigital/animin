@@ -54,6 +54,7 @@ public class ProfilesManagementScript : MonoBehaviour
     void LoadProfileData()
     {
         CurrentProfile = new PlayerProfileData();
+				PlayerProfileData.ActiveProfile = CurrentProfile;
         ListOfPlayerProfiles = new List<PlayerProfileData>();
         SaveAndLoad.Instance.LoadAllData();
 
@@ -62,9 +63,6 @@ public class ProfilesManagementScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
-
-
 
 		//PlayerProfileData.ActiveProfile = PlayerProfileData.GetDefaultProfile();
 		//if(PlayerProfileData.ActiveProfile == null)

@@ -79,7 +79,7 @@ public class UnlockCharacterManager
 			switch(ShopManager.CurrentPurchaseStatus)
 			{
 			case ShopManager.PurchaseStatus.Success:
-                    UnlockCharacter ((PersistentData.TypesOfAnimin)mId);
+                    UnlockCharacter ();
 				complete = true;
 				break;
 			case ShopManager.PurchaseStatus.Fail:
@@ -130,11 +130,9 @@ public class UnlockCharacterManager
 		return ShopManager.Instance.HasBought(s1) || ShopManager.Instance.HasBought(s2);
 	}
 
-    public void UnlockCharacter(PersistentData.TypesOfAnimin typeOfAnimin)
-	{
-        mId = typeOfAnimin;
-
-        switch(typeOfAnimin)
+    public void UnlockCharacter()
+	{        
+		switch(mId)
 		{
             case PersistentData.TypesOfAnimin.Pi:
 			PlayerPrefs.SetInt("piUnlocked", 1);
@@ -151,13 +149,13 @@ public class UnlockCharacterManager
 		}
 		
         ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-        CharacterChoiceItem character = GameObject.Find(typeOfAnimin.ToString()).GetComponent<CharacterChoiceItem>();
+		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
         character.ChangeLockedState(true);
         ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
-        Debug.Log("Unlock Character " + typeOfAnimin);
+		Debug.Log("Unlock Character " + mId);
         ShopManager.Instance.EndStore();
         OpenShop();
-        ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Add(typeOfAnimin);
+		ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Add(mId);
         SaveAndLoad.Instance.SaveDataToProfile();
 
 	}
