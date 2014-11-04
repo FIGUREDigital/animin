@@ -28,8 +28,7 @@ public class SaveAndLoad {
 	[System.Serializable]
 	public class ProfilesToStore
 	{
-        public PlayerProfileData PlayerData;       	
-		
+        public PlayerProfileData PlayerData; 		
 	}
 
 	public List<ProfilesToStore> ProfileList; 
@@ -37,7 +36,6 @@ public class SaveAndLoad {
 	public SaveAndLoad()
 	{
 		ProfileList = new List<ProfilesToStore> ();
-
 	}
 
 	public void LoadAllData()

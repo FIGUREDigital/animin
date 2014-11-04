@@ -23,7 +23,7 @@ public class Account
 
 	private const string SERVER_SEND_URL = "http://terahard.org/Teratest/DatabaseAndScripts/AddData.php";
 
-	private const string SERVER_CHECK_URL = "http://terahard.org/Teratest/DatabaseAndScripts/CheckLoginData.php";
+	private const string SERVER_CHECK_URL = "http://terahard.org/Teratest/DatabaseAndScripts/CheckLoginData.php";   
 
     public string UniqueID;
 
@@ -135,16 +135,31 @@ public class Account
 			string[] tempArray = w.text.Split(':');
 
 			bool tempBool = bool.Parse(tempArray[0]);
-			
-			ProfilesManagementScript.Singleton.SuccessfulLogin(tempBool,code);
 
-			if (tempBool)
-			{
-				UserName = tempArray[1];
-			}
-			Debug.Log (UserName);
+            if (tempBool)
+            {
+                UserName = tempArray[1];
+            }
+			
+			ProfilesManagementScript.Singleton.SuccessfulLogin(tempBool,code);						
 
 		}
 		
 	}
+    public void ClearAccountClassData()
+    {
+
+        UniqueID = "";
+
+        UserName = "";
+
+        FirstName = "";
+
+        LastName = "";
+
+        Address = "";
+
+        Addressee = "";
+
+    }
 }
