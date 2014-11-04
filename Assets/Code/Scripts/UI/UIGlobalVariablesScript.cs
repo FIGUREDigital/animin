@@ -112,6 +112,10 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject StatsButton;
 	public GameObject MinigamesButton;
 
+	[SerializeField]
+	private TutorialHandler TutorialHandler;
+	public TutorialHandler TutHandler{ get { return TutorialHandler; } }
+
 
 	public enum ActiveState {Caring, Collecting,Gun, None};
 	public ActiveState CurrentlyActive{
