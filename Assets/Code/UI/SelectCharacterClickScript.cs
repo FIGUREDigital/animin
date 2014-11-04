@@ -30,7 +30,6 @@ public class SelectCharacterClickScript : MonoBehaviour
 		PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)Animin];
 
 
-
 		if (!ProfilesManagementScript.Singleton.BeginLoadLevel) {	
 			ProfilesManagementScript.Singleton.BeginLoadLevel = true;
 			FlurryLogger.Instance.StartMainScreenTimer();

@@ -96,11 +96,12 @@ public class SaveAndLoad {
 
         tempCharacter.ItemList = new List<PlayerProfileData.ItemDetails> ();
 
-		for (int i = 0; i < (int)InventoryItemId.Count-1; i++) 
+		for (int i = 0; i < PersistentData.Singleton.Inventory.Count; i++) 
 		{
             PlayerProfileData.ItemDetails tempItem = new PlayerProfileData.ItemDetails();
 
-			tempItem.ID = (InventoryItemId)i;
+			tempItem.ID = PersistentData.Singleton.Inventory[i].Id;
+
 			tempItem.Amount = PersistentData.Singleton.Inventory[i].Count;
 
 			tempCharacter.ItemList.Add(tempItem);
@@ -149,10 +150,8 @@ public class SaveAndLoad {
 
         for (int i =0; i< ProfileList.Count; i++)
         {
-            ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Add(ProfileList[i].PlayerData);
-            
+            ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Add(ProfileList[i].PlayerData);            
         }
-
 	}
 
 }
