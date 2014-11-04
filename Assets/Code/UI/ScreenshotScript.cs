@@ -17,8 +17,15 @@ public class ScreenshotScript : MonoBehaviour {
 		}
 		else
 		{
-			StartCoroutine("CaptureScreenshot");
+			string screenshotName = "screenshot"  + DateTime.Now.ToString("s") + ".png";
+			StartCoroutine( EtceteraBinding.takeScreenShot( screenshotName, imagePath =>
+			{EtceteraBinding.saveImageToPhotoAlbum (imagePath);}) );
 		}
+		Invoke("PopPhotoSaved",0.3f);
+	}
+
+	void PopPhotoSaved()
+	{
 		if (PhotoSaved != null && PhotoSaved.GetComponent<PhotoFadeOut> () != null) {
 			PhotoSaved.gameObject.SetActive(true);
 		}
