@@ -16,6 +16,7 @@ public class PlayerProfileData
     public PersistentData[] Characters = new PersistentData[(int)PersistentData.TypesOfAnimin.Count];
     public PlayerProfileSettings Settings = new PlayerProfileSettings();
     public string ProfileName;
+    public string UniqueID;
     public PersistentData.TypesOfAnimin ActiveAnimin;
     public List<PersistentData.TypesOfAnimin> UnlockedAnimins = new List<PersistentData.TypesOfAnimin>();
 

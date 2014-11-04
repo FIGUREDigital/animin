@@ -103,19 +103,26 @@ public class ProfilesManagementScript : MonoBehaviour
 	{
 		ProfilesManagementScript.Singleton.LoginCheckingDialogue.SetActive(false);
 
-		if (successful) {
-						ProfilesManagementScript.Singleton.LoginUser.SetActive (false);
-						ProfilesManagementScript.Singleton.AniminsScreen.SetActive (true);
+		if (successful) 
+        {
+			ProfilesManagementScript.Singleton.LoginUser.SetActive (false);
+			ProfilesManagementScript.Singleton.AniminsScreen.SetActive (true);
 			Account.Instance.UniqueID = code;
-				} 
+            NewUser.SetActive(false);
+            AniminsScreen.SetActive(true);
+            PlayerProfileData tempData = new PlayerProfileData();
+            tempData = PlayerProfileData.CreateNewProfile(Account.Instance.UserName);
+            tempData.UniqueID = code;
+            ListOfPlayerProfiles.Add(tempData);
+            SaveAndLoad.Instance.SaveAllData();
+            Debug.Log("Saved");
+		} 
 		else 
 		{
 			ProfilesManagementScript.Singleton.NoSuchUserCodeDialogue.SetActive(true);	
 		}
 
 	}
-
-
 
 	private void RefreshProfiles()
 	{
