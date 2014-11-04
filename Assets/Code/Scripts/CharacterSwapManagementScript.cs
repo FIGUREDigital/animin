@@ -37,47 +37,47 @@ public class CharacterSwapManagementScript : MonoBehaviour
 		//LoadAnimations(CreatureTypeId.TBOAdult, "Models/TBO/Adult", "/tbo_adult@");
 		//LoadAnimations(CreatureTypeId.TBOAdult, "Models/TBO/Kid", "/tbo_kid@");
 	
-		Models = new string[(int)AniminId.Count, (int)AniminEvolutionStageId.Count];
-		Models[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Baby] = "Prefabs/tbo_baby";
-		Models[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Kid] = "Prefabs/tbo_kid";
-		Models[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = "Prefabs/tbo_adult";
+        Models = new string[(int)PersistentData.TypesOfAnimin.Count, (int)AniminEvolutionStageId.Count];
+        Models[(int)PersistentData.TypesOfAnimin.Tbo, (int)AniminEvolutionStageId.Baby] = "Prefabs/tbo_baby";
+        Models[(int)PersistentData.TypesOfAnimin.Tbo, (int)AniminEvolutionStageId.Kid] = "Prefabs/tbo_kid";
+        Models[(int)PersistentData.TypesOfAnimin.Tbo, (int)AniminEvolutionStageId.Adult] = "Prefabs/tbo_adult";
 
-		Models[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Baby] = "Prefabs/ke_baby";
-		Models[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Kid] = "Prefabs/ke_kid";
-		Models[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_adult";
+        Models[(int)PersistentData.TypesOfAnimin.Kelsey, (int)AniminEvolutionStageId.Baby] = "Prefabs/ke_baby";
+        Models[(int)PersistentData.TypesOfAnimin.Kelsey, (int)AniminEvolutionStageId.Kid] = "Prefabs/ke_kid";
+        Models[(int)PersistentData.TypesOfAnimin.Kelsey, (int)AniminEvolutionStageId.Adult] = "Prefabs/ke_adult";
 
-		Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ma_baby";
-        Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ma_kid";
-        Models[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ma_adult";
+        Models[(int)PersistentData.TypesOfAnimin.Mandi, (int)AniminEvolutionStageId.Baby] = "Prefabs/ma_baby";
+        Models[(int)PersistentData.TypesOfAnimin.Mandi, (int)AniminEvolutionStageId.Kid] = "Prefabs/ma_kid";
+        Models[(int)PersistentData.TypesOfAnimin.Mandi, (int)AniminEvolutionStageId.Adult] = "Prefabs/ma_adult";
 
-        Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Baby] = "Prefabs/pi_baby";
-        Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Kid] = "Prefabs/pi_kid";
-        Models[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = "Prefabs/pi_adult";
+        Models[(int)PersistentData.TypesOfAnimin.Pi, (int)AniminEvolutionStageId.Baby] = "Prefabs/pi_baby";
+        Models[(int)PersistentData.TypesOfAnimin.Pi, (int)AniminEvolutionStageId.Kid] = "Prefabs/pi_kid";
+        Models[(int)PersistentData.TypesOfAnimin.Pi, (int)AniminEvolutionStageId.Adult] = "Prefabs/pi_adult";
 
-		AnimationLists = new AnimatorOverrideController[(int)AniminId.Count, (int)AniminEvolutionStageId.Count];
-		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/TBOBabyAnimations");
-		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/TBOKidAnimations");
-		AnimationLists[(int)AniminId.Tbo, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/TBOAdultAnimations");
+        AnimationLists = new AnimatorOverrideController[(int)PersistentData.TypesOfAnimin.Count, (int)AniminEvolutionStageId.Count];
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Tbo, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/TBOBabyAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Tbo, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/TBOKidAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Tbo, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/TBOAdultAnimations");
 	
-		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/KelsiBabyAnimations");
-		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/KelsyKidAnimations");
-		AnimationLists[(int)AniminId.Kelsey, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/KelsiAdultAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Kelsey, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/KelsiBabyAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Kelsey, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/KelsyKidAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Kelsey, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/KelsiAdultAnimations");
 
-        AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
-		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiKidAnimations");
-		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiAdultAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Mandi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiKidAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Mandi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiAdultAnimations");
 
-        AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
-		AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiKidAnimations");
-		AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiAdultAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Pi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Pi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiKidAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Pi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiAdultAnimations");
 
-        AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
-		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiKidAnimations");
-		AnimationLists[(int)AniminId.Mandi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiAdultAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Mandi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiBabyAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Mandi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiKidAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Mandi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/MandiAdultAnimations");
 
-        AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
-		AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiKidAnimations");
-		AnimationLists[(int)AniminId.Pi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiAdultAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Pi, (int)AniminEvolutionStageId.Baby] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiBabyAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Pi, (int)AniminEvolutionStageId.Kid] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiKidAnimations");
+        AnimationLists[(int)PersistentData.TypesOfAnimin.Pi, (int)AniminEvolutionStageId.Adult] = Resources.Load<AnimatorOverrideController>(@"AnimControllers/PiAdultAnimations");
 
 	}
 
@@ -99,17 +99,17 @@ public class CharacterSwapManagementScript : MonoBehaviour
 //		}
 	}
 
-	public string GetModelPath(AniminId animinId, AniminEvolutionStageId id)
+    public string GetModelPath(PersistentData.TypesOfAnimin animinId, AniminEvolutionStageId id)
 	{
 		return Models[(int)animinId, (int)id];
 	}
 
-	public AnimatorOverrideController GetAnimationControlller(AniminId animinId, AniminEvolutionStageId id)
+    public AnimatorOverrideController GetAnimationControlller(PersistentData.TypesOfAnimin animinId, AniminEvolutionStageId id)
 	{
 		return AnimationLists[(int)animinId, (int)id];
 	}
 
-	public void LoadCharacter(AniminId animinId, AniminEvolutionStageId id)
+    public void LoadCharacter(PersistentData.TypesOfAnimin animinId, AniminEvolutionStageId id)
 	{
 		Object resource = Resources.Load(Models[(int)animinId, (int)id]);
 
@@ -153,14 +153,14 @@ public class CharacterSwapManagementScript : MonoBehaviour
 	}
 }
 
-public enum AniminId
-{
-	Pi = 0,
-	Tbo = 1,
-	Kelsey = 2,
-	Mandi = 3,
-	Count,
-}
+//public enum AniminId
+//{
+//	Pi = 0,
+//	Tbo = 1,
+//	Kelsey = 2,
+//	Mandi = 3,
+//	Count,
+//}
 
 public enum AniminEvolutionStageId
 {

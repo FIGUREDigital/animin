@@ -78,7 +78,7 @@ public class LoadProfileMG2 : MonoBehaviour {
 		if (PlayerProfileData.ActiveProfile == null) {
 			Debug.Log ("PlayerProfileData.ActiveProfile = null!");
 			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("Dummy");
-			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters [(int)AniminId.Pi];
+            PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters [(int)PersistentData.TypesOfAnimin.Pi];
 		}
 
 

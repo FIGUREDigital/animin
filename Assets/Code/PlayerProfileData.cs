@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 
-
+[System.Serializable]
 public class PlayerProfileData
 {
     /// <summary>No Description</summary>
@@ -13,11 +13,11 @@ public class PlayerProfileData
     private int FileVersion = 1;
 
     /// <summary>No Description</summary>
-    public PersistentData[] Characters = new PersistentData[(int)AniminId.Count];
+    public PersistentData[] Characters = new PersistentData[(int)PersistentData.TypesOfAnimin.Count];
     public PlayerProfileSettings Settings = new PlayerProfileSettings();
     public string ProfileName;
-    public AniminId ActiveAnimin;
-    public List<AniminId> UnlockAnimins = new List<AniminId>();
+    public PersistentData.TypesOfAnimin ActiveAnimin;
+    public List<PersistentData.TypesOfAnimin> UnlockedAnimins = new List<PersistentData.TypesOfAnimin>();
 
     public List<CharacterData> ListOfDataForAnimin = new List<CharacterData>();
 
@@ -57,14 +57,17 @@ public class PlayerProfileData
     /// <summary>No Description</summary>
     public static PlayerProfileData GetDefaultProfile()
     {
-        if(!Directory.Exists(Application.persistentDataPath + "/Profiles"))
-            return null;
+//        if(!Directory.Exists(Application.persistentDataPath + "/Profiles"))
+//            return null;
+//
+//        if(!File.Exists(Application.persistentDataPath + "/Profiles/DefaultProfile"))
+//            return null;
+//
+//        PlayerProfileData profile = new PlayerProfileData();
+//        profile.Load("DefaultProfile");// ~TODO
 
-        if(!File.Exists(Application.persistentDataPath + "/Profiles/DefaultProfile"))
-            return null;
+        PlayerProfileData profile = new PlayerProfileData(); 
 
-        PlayerProfileData profile = new PlayerProfileData();
-        profile.Load("DefaultProfile");
         return profile;
     }
 
@@ -76,7 +79,7 @@ public class PlayerProfileData
         for(int i=0;i<profile.Characters.Length;++i)
         {
             profile.Characters[i] = new PersistentData();
-            profile.Characters[i].SetDefault((AniminId)i);
+            profile.Characters[i].SetDefault((PersistentData.TypesOfAnimin)i);
             profile.Characters[i].AniminEvolutionId = AniminEvolutionStageId.Baby;
         }
 
@@ -86,93 +89,93 @@ public class PlayerProfileData
     }
 
     /// <summary>No Description</summary>
-    public static PlayerProfileData[] GetAllProfiles()
-    {
-        if(!Directory.Exists(Application.persistentDataPath + "/Profiles"))
-            return null;
-
-        List<PlayerProfileData> allProfiles = new List<PlayerProfileData>();
-
-        string[] profileNames = Directory.GetFiles(Application.persistentDataPath + "/Profiles/");
-        for(int i=0;i<profileNames.Length;++i)
-        {
-            Debug.Log(profileNames[i]);
-            PlayerProfileData profile = new PlayerProfileData();
-            profile.Load(Helpers.ExtraFilename(profileNames[i]));
-            allProfiles.Add(profile);
-        }
-
-        return allProfiles.ToArray();
-    }
-
-    /// <summary>No Description</summary>
-    public void Save()
-    {
-        if(!Directory.Exists(Application.persistentDataPath + "/Profiles"))
-            Directory.CreateDirectory(Application.persistentDataPath + "/Profiles");
-
-        string fileName = Application.persistentDataPath + "/Profiles/" + ProfileName;
-
-        using (FileStream writer = new FileStream(fileName, FileMode.Create))
-        {
-            using(BinaryWriter binaryWriter = new BinaryWriter(writer))
-            {
-                binaryWriter.Write(FileVersion);
-
-                binaryWriter.Write(UnlockAnimins.Count);
-
-                for(int i=0;i<UnlockAnimins.Count;++i)
-                {
-                    binaryWriter.Write((int)UnlockAnimins[i]);
-                }
-
-                SaveLoadDictionary settingsdictionary = new SaveLoadDictionary();
-                Settings.Write(settingsdictionary);
-                settingsdictionary.WriteToBytes(binaryWriter);
-
-                binaryWriter.Write(Characters.Length);
-                for(int i=0;i<Characters.Length;++i)
-                {
-                    SaveLoadDictionary dictionary = new SaveLoadDictionary();
-                    Characters[i].Save(dictionary);
-                    dictionary.WriteToBytes(binaryWriter);
-                }
-            }
-        }
-    }
+//    public static PlayerProfileData[] GetAllProfiles()
+//    {
+//        if(!Directory.Exists(Application.persistentDataPath + "/Profiles"))
+//            return null;
+//
+//        List<PlayerProfileData> allProfiles = new List<PlayerProfileData>();
+//
+//        string[] profileNames = Directory.GetFiles(Application.persistentDataPath + "/Profiles/");
+//        for(int i=0;i<profileNames.Length;++i)
+//        {
+//            Debug.Log(profileNames[i]);
+//            PlayerProfileData profile = new PlayerProfileData();
+//            profile.Load(Helpers.ExtraFilename(profileNames[i]));
+//            allProfiles.Add(profile);
+//        }
+//
+//        return allProfiles.ToArray();
+//    }
 
     /// <summary>No Description</summary>
-    public void Load(string profileName)
-    {
-        ProfileName = profileName;
-        string fileName = Application.persistentDataPath + "/Profiles/" + profileName;
+//    public void Save()
+//    {
+//        if(!Directory.Exists(Application.persistentDataPath + "/Profiles"))
+//            Directory.CreateDirectory(Application.persistentDataPath + "/Profiles");
+//
+//        string fileName = Application.persistentDataPath + "/Profiles/" + ProfileName;
+//
+//        using (FileStream writer = new FileStream(fileName, FileMode.Create))
+//        {
+//            using(BinaryWriter binaryWriter = new BinaryWriter(writer))
+//            {
+//                binaryWriter.Write(FileVersion);
+//
+//                binaryWriter.Write(UnlockAnimins.Count);
+//
+//                for(int i=0;i<UnlockAnimins.Count;++i)
+//                {
+//                    binaryWriter.Write((int)UnlockAnimins[i]);
+//                }
+//
+//                SaveLoadDictionary settingsdictionary = new SaveLoadDictionary();
+//                Settings.Write(settingsdictionary);
+//                settingsdictionary.WriteToBytes(binaryWriter);
+//
+//                binaryWriter.Write(Characters.Length);
+//                for(int i=0;i<Characters.Length;++i)
+//                {
+//                    SaveLoadDictionary dictionary = new SaveLoadDictionary();
+//                    Characters[i].Save(dictionary);
+//                    dictionary.WriteToBytes(binaryWriter);
+//                }
+//            }
+//        }
+//    }
 
-        using (FileStream reader = new FileStream(fileName, FileMode.Open))
-        {
-            using(BinaryReader binaryReader = new BinaryReader(reader))
-            {
-                int fileversion = binaryReader.ReadInt32();
-
-                int unlockedAnimins = binaryReader.ReadInt32();
-                for(int i=0;i<unlockedAnimins;++i)
-                {
-                    UnlockAnimins.Add((AniminId)binaryReader.ReadInt32());
-                }
-
-                SaveLoadDictionary settingsdictionary = new SaveLoadDictionary(binaryReader);
-                Settings.Load(settingsdictionary);
-
-                int charactersLength = binaryReader.ReadInt32();
-
-                for(int i=0;i<charactersLength;++i)
-                {
-                    SaveLoadDictionary dictionary = new SaveLoadDictionary(binaryReader);
-                    Characters[i] = new PersistentData();
-                    Characters[i].Load(dictionary);
-                }
-            }
-        }
-    }
+    /// <summary>No Description</summary>
+//    public void Load(string profileName)
+//    {
+//        ProfileName = profileName;
+//        string fileName = Application.persistentDataPath + "/Profiles/" + profileName;
+//
+//        using (FileStream reader = new FileStream(fileName, FileMode.Open))
+//        {
+//            using(BinaryReader binaryReader = new BinaryReader(reader))
+//            {
+//                int fileversion = binaryReader.ReadInt32();
+//
+//                int unlockedAnimins = binaryReader.ReadInt32();
+//                for(int i=0;i<unlockedAnimins;++i)
+//                {
+//                    UnlockAnimins.Add((AniminId)binaryReader.ReadInt32());
+//                }
+//
+//                SaveLoadDictionary settingsdictionary = new SaveLoadDictionary(binaryReader);
+//                Settings.Load(settingsdictionary);
+//
+//                int charactersLength = binaryReader.ReadInt32();
+//
+//                for(int i=0;i<charactersLength;++i)
+//                {
+//                    SaveLoadDictionary dictionary = new SaveLoadDictionary(binaryReader);
+//                    Characters[i] = new PersistentData();
+//                    Characters[i].Load(dictionary);
+//                }
+//            }
+//        }
+//    }
 }
 
 public class SaveLoadDictionary
@@ -218,11 +221,11 @@ public class SaveLoadDictionary
 		Values.Add(key, value.ToString());
 	}
 
-	public bool ReadAniminId(string key, ref AniminId refValue)
+    public bool ReadAniminId(string key, ref PersistentData.TypesOfAnimin refValue)
 	{
 		int tempValue = 0;
 		if(ReadInt(key, ref tempValue))
-		   refValue = (AniminId)tempValue;
+            refValue = (PersistentData.TypesOfAnimin)tempValue;
 		
 		return false;
 	}
@@ -287,7 +290,7 @@ public class SaveLoadDictionary
 		return false;
 	}
 }
-
+[System.Serializable]
 public class PlayerProfileSettings
 {
 	public bool AudioEnabled;

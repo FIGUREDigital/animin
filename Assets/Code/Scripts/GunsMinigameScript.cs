@@ -513,7 +513,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         Destroy(barrel.gameObject);
     }
 
-    public GameObject SpawnAniminStart(AniminId animinid, AniminEvolutionStageId evolution)
+    public GameObject SpawnAniminStart(PersistentData.TypesOfAnimin animinid, AniminEvolutionStageId evolution)
     {
         //string modelPath = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().GetModelPath(animinid, evolution);
         //RuntimeAnimatorController controller = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().GetAnimationControlller(animinid, evolution);

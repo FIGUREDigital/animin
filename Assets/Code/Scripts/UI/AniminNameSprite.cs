@@ -22,16 +22,16 @@ public class AniminNameSprite : MonoBehaviour {
 		string name = "";
 		switch(PlayerProfileData.ActiveProfile.ActiveAnimin)
 		{
-		case AniminId.Pi:
+            case PersistentData.TypesOfAnimin.Pi:
 			name = mPiSprite;
 			break;
-		case AniminId.Tbo:
+            case PersistentData.TypesOfAnimin.Tbo:
 			name = mTboSprite;
 			break;
-		case AniminId.Kelsey:
+            case PersistentData.TypesOfAnimin.Kelsey:
 			name = mKelseySprite;
 			break;
-		case AniminId.Mandi:
+            case PersistentData.TypesOfAnimin.Mandi:
 			name = mMandiSprite;
 			break;
 		default:

@@ -32,7 +32,7 @@ public class ProfilesManagementScript : MonoBehaviour
 	public UILabel KelsiAge;
 	public UILabel MandiAge;
 
-	public AniminId AniminToUnlockId;
+    public PersistentData.TypesOfAnimin AniminToUnlockId;
 
     public List<PlayerProfileData> ListOfPlayerProfiles;
 
@@ -47,16 +47,25 @@ public class ProfilesManagementScript : MonoBehaviour
 			GameObject go = new GameObject();
 			go.name = "ArCameraManager";
 			go.AddComponent<ArCameraManager>();
+            LoadProfileData();
 		}
 	}
+
+    void LoadProfileData()
+    {
+        CurrentProfile = new PlayerProfileData();
+        ListOfPlayerProfiles = new List<PlayerProfileData>();
+        SaveAndLoad.Instance.LoadAllData();
+
+    }
 
 	// Use this for initialization
 	void Start ()
 	{
 
-        CurrentProfile = new PlayerProfileData();
 
-        ListOfPlayerProfiles = new List<PlayerProfileData>();
+
+
 		//PlayerProfileData.ActiveProfile = PlayerProfileData.GetDefaultProfile();
 		//if(PlayerProfileData.ActiveProfile == null)
 		//{
@@ -77,8 +86,12 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	public void NewUserProfileAdded()
 	{
-		ProfilesManagementScript.Singleton.NewUser.SetActive(false);
-		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+		NewUser.SetActive(false);
+		AniminsScreen.SetActive(true);
+        PlayerProfileData tempData = new PlayerProfileData();
+        tempData = PlayerProfileData.CreateNewProfile(Account.Instance.UserName);
+        ListOfPlayerProfiles.Add(tempData);
+        SaveAndLoad.Instance.SaveAllData();
 
 	}
 
@@ -108,15 +121,15 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	private void RefreshProfiles()
 	{
-		PlayerProfileData[] profiles = PlayerProfileData.GetAllProfiles();
+        List<PlayerProfileData> profiles = new List<PlayerProfileData>();
+
+        profiles = SaveAndLoad.Instance.LoadProfileData();
 
 		if(profiles != null)
 		{
-			Debug.Log(profiles.Length.ToString());
-			for(int i=0;i<profiles.Length;++i)
-			{
-				
-                ListOfPlayerProfiles.Add(profiles[i]);
+            Debug.Log(profiles.Count);
+            for(int i=0;i<profiles.Count;++i)
+			{	
 
                 GameObject newProfile = (GameObject)Instantiate(PrefabProfile);
 				newProfile.transform.parent = ProfilesRoot.transform;
@@ -174,18 +187,6 @@ public class ProfilesManagementScript : MonoBehaviour
 	{
 		Debug.Log("NO PROFILE FOR YOU");
 	}
-
-    public void SaveDataToProfile()
-    {
-
-    }
-
-
-
-    public void LoadDataForProfile()
-    {
-
-    }
 	
 	// Update is called once per frame
 	void Update () 

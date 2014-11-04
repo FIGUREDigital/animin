@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SelectCharacterClickScript : MonoBehaviour 
 {
-	public AniminId Animin;
+    public PersistentData.TypesOfAnimin Animin;
 	private bool BeginLoadLevel;
 	public GameObject UnlockButton;
 

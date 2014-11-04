@@ -22,8 +22,15 @@ public class ProfileChecker : MonoBehaviour
 		}
 		else
 		{
-			User.SetActive(true);
-			User.GetComponentInChildren<UILabel>().text = PlayerPrefs.GetString("Username");
+			User.SetActive(true);			
+            if (ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count > 0)
+            {
+                User.GetComponentInChildren<UILabel>().text = "Working "+ProfilesManagementScript.Singleton.ListOfPlayerProfiles[0].ProfileName+"";
+            }
+            else
+            {
+                User.GetComponentInChildren<UILabel>().text = "Default Dave";
+            }
 		}
 	}
 }

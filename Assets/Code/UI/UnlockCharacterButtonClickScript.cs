@@ -10,7 +10,7 @@ public class UnlockCharacterButtonClickScript : MonoBehaviour
 	private const string PI_PURCHASE = "com.apples.animin.characterpurchase1";
 	private const string KELSEY_PURCHASE = "com.apples.animin.characterpurchase2";
 	private const string MANDI_PURCHASE = "com.apples.animin.characterpurchase3";
-	public AniminId Id;
+    public PersistentData.TypesOfAnimin Id;
 
 	void OnClick()
 	{

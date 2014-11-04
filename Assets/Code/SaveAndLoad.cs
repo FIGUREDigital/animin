@@ -42,13 +42,17 @@ public class SaveAndLoad {
 
 	public void LoadAllData()
 	{
-		if(File.Exists(Application.persistentDataPath + "/savedGames.anidat")) 
+		
+//        File.Delete(Application.persistentDataPath + "/savedGames.anidat");
+
+        if(File.Exists(Application.persistentDataPath + "/savedGames.anidat")) 
 		{
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(Application.persistentDataPath + "/savedGames.anidat", FileMode.Open);
 			ProfileList = (List<ProfilesToStore>)bf.Deserialize(file);
 			file.Close();
 			Debug.Log ("Save data loaded");
+            RepopulateData();
 		}
 		else
 		{
@@ -73,14 +77,15 @@ public class SaveAndLoad {
 
 	}	
 
-    public void SaveDataToProfile(PlayerProfileData profile)
+    public void SaveDataToProfile()
     {
-        for (int i = 0; i < (int)PersistentData.TypesOfAnimin.count-1; i++) 
+        PlayerProfileData profile = PlayerProfileData.ActiveProfile;
+
+        for (int i = 0; i < (int)PersistentData.TypesOfAnimin.Count-1; i++) 
         {
             PlayerProfileData.CharacterData tempCharacter = CollectCharacterData((PersistentData.TypesOfAnimin)i);
             profile.ListOfDataForAnimin.Add(tempCharacter);
         }
-
     }
 
     private PlayerProfileData.CharacterData CollectCharacterData(PersistentData.TypesOfAnimin characterType)
@@ -126,9 +131,31 @@ public class SaveAndLoad {
 		return tempCharacter;
 	}
 
+    public List<PlayerProfileData> LoadProfileData()
+    {
+        List<PlayerProfileData>  tempProfile = new List<PlayerProfileData> ();
+
+        for (int i =0; i< ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count; i++)
+        {
+            tempProfile.Add(ProfileList[i].PlayerData);
+        }
+
+        return tempProfile;
+    }
+
 	public void RepopulateData()
 	{
+        ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Clear();
 
+        for (int i =0; i< ProfileList.Count; i++)
+        {
+            ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Add(ProfileList[i].PlayerData);
+            if (ProfilesManagementScript.Singleton.ListOfPlayerProfiles[i].ProfileName == "john")
+            {
+                UnlockCharacterManager.Instance.UnlockCharacter(PersistentData.TypesOfAnimin.Mandi);
+
+            }
+        }
 
 	}
 

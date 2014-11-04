@@ -14,7 +14,7 @@ public class CharacterChoiceItem : MonoBehaviour
 	[SerializeField]
 	private bool mUnlocked;
 	[SerializeField]
-	private AniminId mId;
+    private PersistentData.TypesOfAnimin mId;
 
 	// Use this for initialization
 	void Start () 
@@ -22,16 +22,16 @@ public class CharacterChoiceItem : MonoBehaviour
 
 		switch(mId)
 		{
-		case AniminId.Pi:
+            case PersistentData.TypesOfAnimin.Pi:
 			mUnlocked = PlayerPrefs.GetInt("piUnlocked")==1?true:false;
 			break;
-		case AniminId.Kelsey:
+            case PersistentData.TypesOfAnimin.Kelsey:
 			mUnlocked = PlayerPrefs.GetInt("kelseyUnlocked")==1?true:false;
 			break;
-		case AniminId.Mandi:
+            case PersistentData.TypesOfAnimin.Mandi:
 			mUnlocked = PlayerPrefs.GetInt("mandiUnlocked")==1?true:false;
 			break;
-		case AniminId.Tbo:
+            case PersistentData.TypesOfAnimin.Tbo:
 			break;
 		default:
 			break;

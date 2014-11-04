@@ -60,7 +60,7 @@ public class SoundEngineScript : MonoBehaviour
 
         if (CreatureSounds == null)
         {
-            CreatureSounds = new AudioClip[(int)AniminId.Count, (int)AniminEvolutionStageId.Count, (int)CreatureSoundId.Count];
+            CreatureSounds = new AudioClip[(int)PersistentData.TypesOfAnimin.Count, (int)AniminEvolutionStageId.Count, (int)CreatureSoundId.Count];
         }
 
 	}
@@ -82,25 +82,25 @@ public class SoundEngineScript : MonoBehaviour
 		}
 	}
 
-	public void UnLoadSoundsForAnimin(AniminId id, AniminEvolutionStageId evolution)
+    public void UnLoadSoundsForAnimin(PersistentData.TypesOfAnimin id, AniminEvolutionStageId evolution)
 	{
 
 	}
 
-	public void LoadSoundsForAnimin(AniminId id, AniminEvolutionStageId evolution)
+    public void LoadSoundsForAnimin(PersistentData.TypesOfAnimin id, AniminEvolutionStageId evolution)
 	{
-		if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "tbo_baby");
-		else if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "tbo_kid");
-		else if(id == AniminId.Tbo && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "tbo_adult");
-		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "ke_baby");
-		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "ke_kid");
-		else if(id == AniminId.Kelsey && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "ke_kelsi");
+        if(id == PersistentData.TypesOfAnimin.Tbo && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "tbo_baby");
+        else if(id == PersistentData.TypesOfAnimin.Tbo && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "tbo_kid");
+        else if(id == PersistentData.TypesOfAnimin.Tbo && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "tbo_adult");
+        else if(id == PersistentData.TypesOfAnimin.Kelsey && evolution == AniminEvolutionStageId.Baby) LoadCreatureHelper((int)id, (int)evolution, "ke_baby");
+        else if(id == PersistentData.TypesOfAnimin.Kelsey && evolution == AniminEvolutionStageId.Kid) LoadCreatureHelper((int)id, (int)evolution, "ke_kid");
+        else if(id == PersistentData.TypesOfAnimin.Kelsey && evolution == AniminEvolutionStageId.Adult) LoadCreatureHelper((int)id, (int)evolution, "ke_kelsi");
 
         string sname =
-        id == AniminId.Tbo ? "Tbo" :
-        id == AniminId.Pi ? "Pi" :
-        id == AniminId.Mandi ? "Ma" :
-        id == AniminId.Kelsey ? "Ke" :
+            id == PersistentData.TypesOfAnimin.Tbo ? "Tbo" :
+            id == PersistentData.TypesOfAnimin.Pi ? "Pi" :
+            id == PersistentData.TypesOfAnimin.Mandi ? "Ma" :
+            id == PersistentData.TypesOfAnimin.Kelsey ? "Ke" :
         "";
         string sevo =
             evolution == AniminEvolutionStageId.Baby ? "baby" :
@@ -115,7 +115,7 @@ public class SoundEngineScript : MonoBehaviour
 
         if (CreatureSounds == null)
         {
-            CreatureSounds = new AudioClip[(int)AniminId.Count, (int)AniminEvolutionStageId.Count, (int)CreatureSoundId.Count];
+            CreatureSounds = new AudioClip[(int)PersistentData.TypesOfAnimin.Count, (int)AniminEvolutionStageId.Count, (int)CreatureSoundId.Count];
         }
 
         CreatureSounds[(int)id, (int)evolution, (int)CreatureSoundId.Celebrate] =   Resources.Load(pathname + "celebrate") as AudioClip;
@@ -243,7 +243,7 @@ public class SoundEngineScript : MonoBehaviour
 
 
 	private bool LooperPlaying;
-	public void PlayLoop(AniminId animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
+    public void PlayLoop(PersistentData.TypesOfAnimin animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
 	{
 		//Debug.Log("LOOP: " + soundId.ToString());
 
@@ -274,7 +274,7 @@ public class SoundEngineScript : MonoBehaviour
 		this.audio.PlayOneShot(GenericSounds[(int)id]);
 	}
 
-	public void Play(AniminId animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
+    public void Play(PersistentData.TypesOfAnimin animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
 	{
 		if(!PlayerProfileData.ActiveProfile.Settings.AudioEnabled) return;
 		if (CreatureSounds [(int)animin, (int)creatureId, (int)soundId] == null) {

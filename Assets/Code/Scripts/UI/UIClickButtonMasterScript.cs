@@ -197,7 +197,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 			SetSoundSprite();
 
-			PlayerProfileData.ActiveProfile.Save();
+            SaveAndLoad.Instance.SaveDataToProfile();
 
 			break;
 		}

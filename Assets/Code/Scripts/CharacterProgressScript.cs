@@ -258,7 +258,7 @@ public class CharacterProgressScript : MonoBehaviour
 		if(PlayerProfileData.ActiveProfile == null)
 		{
 			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("buildintest");
-			PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)AniminId.Tbo];
+            PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)PersistentData.TypesOfAnimin.Tbo];
 		}
 
 
@@ -1547,7 +1547,7 @@ public class CharacterProgressScript : MonoBehaviour
 
 		if((DateTime.Now - LastSavePerformed).TotalSeconds >= 4)
 		{
-			PlayerProfileData.ActiveProfile.Save();
+            SaveAndLoad.Instance.SaveDataToProfile();
 		}
 
 		if(Input.GetButtonDown("Fire1"))

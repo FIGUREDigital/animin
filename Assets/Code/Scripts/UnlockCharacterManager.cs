@@ -10,7 +10,7 @@ public class UnlockCharacterManager
 	public const string KELSEY_PURCHASE = "com.apples.animin.characterpurchase2";
 	public const string MANDI_PURCHASE = "com.apples.animin.characterpurchase3";
 	private static string mBuyItem;
-	private static AniminId mId;
+    private static PersistentData.TypesOfAnimin mId;
 
 
 	#region Singleton
@@ -31,21 +31,21 @@ public class UnlockCharacterManager
 	
 	#endregion
 
-	public void BuyCharacter(AniminId Id, bool free)
+    public void BuyCharacter(PersistentData.TypesOfAnimin Id, bool free)
 	{
 		mId = Id;
 		switch(Id)
 		{
-		case AniminId.Pi:
+            case PersistentData.TypesOfAnimin.Pi:
 			mBuyItem = free ? PI_UNLOCK : PI_PURCHASE;
 			break;
-		case AniminId.Tbo:
+            case PersistentData.TypesOfAnimin.Tbo:
 			Debug.LogError("TBO should be unlocked initially. What are you changing?");
 			break;
-		case AniminId.Kelsey:
+            case PersistentData.TypesOfAnimin.Kelsey:
 			mBuyItem = free ? KELSEY_UNLOCK : KELSEY_PURCHASE;
 			break;
-		case AniminId.Mandi:
+            case PersistentData.TypesOfAnimin.Mandi:
 			mBuyItem = free ? MANDI_UNLOCK : MANDI_PURCHASE;
 			break;
 		default:
@@ -79,7 +79,7 @@ public class UnlockCharacterManager
 			switch(ShopManager.CurrentPurchaseStatus)
 			{
 			case ShopManager.PurchaseStatus.Success:
-				UnlockCharacter ();
+                    UnlockCharacter ((PersistentData.TypesOfAnimin)mId);
 				complete = true;
 				break;
 			case ShopManager.PurchaseStatus.Fail:
@@ -102,59 +102,64 @@ public class UnlockCharacterManager
 		Debug.Log ("Finish Coroutine!");
 		
 		yield return true;
-	}
+	}   
 
-	public bool CheckCharacterPurchased(AniminId Id)
+    public bool CheckCharacterPurchased(PersistentData.TypesOfAnimin Id)
 	{
 		string s1 = "";
 		string s2 = "";
 		switch(Id)
 		{
-		case AniminId.Pi:
+            case PersistentData.TypesOfAnimin.Pi:
 			s1 = "com.apples.animin.characterunlock1";
 			s2 = "com.apples.animin.characterpurchase1";
 			break;
-		case AniminId.Kelsey:
+            case PersistentData.TypesOfAnimin.Kelsey:
 			s1 = "com.apples.animin.characterunlock2";
 			s2 = "com.apples.animin.characterpurchase2";
 			break;
-		case AniminId.Mandi:
+            case PersistentData.TypesOfAnimin.Mandi:
 			s1 = "com.apples.animin.characterunlock3";
 			s2 = "com.apples.animin.characterpurchase3";
 			break;
 			
 		default:
-		case AniminId.Tbo:
+            case PersistentData.TypesOfAnimin.Tbo:
 			break;
 		}
 		return ShopManager.Instance.HasBought(s1) || ShopManager.Instance.HasBought(s2);
 	}
 
-	public void UnlockCharacter()
+    public void UnlockCharacter(PersistentData.TypesOfAnimin typeOfAnimin)
 	{
-		switch(mId)
+        mId = typeOfAnimin;
+
+        switch(typeOfAnimin)
 		{
-		case AniminId.Pi:
+            case PersistentData.TypesOfAnimin.Pi:
 			PlayerPrefs.SetInt("piUnlocked", 1);
 			break;
-		case AniminId.Kelsey:
+            case PersistentData.TypesOfAnimin.Kelsey:
 			PlayerPrefs.SetInt("kelseyUnlocked", 1);
 			break;
-		case AniminId.Mandi:
+            case PersistentData.TypesOfAnimin.Mandi:
 			PlayerPrefs.SetInt("mandiUnlocked", 1);
 			break;
-		case AniminId.Tbo:
+            case PersistentData.TypesOfAnimin.Tbo:
 		default:
 			break;
 		}
-		PlayerPrefs.Save();
-		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
-		character.ChangeLockedState(true);
-		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
-		Debug.Log("Unlock Character " + mId);
-		ShopManager.Instance.EndStore();
-		OpenShop();
+		
+        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+        CharacterChoiceItem character = GameObject.Find(typeOfAnimin.ToString()).GetComponent<CharacterChoiceItem>();
+        character.ChangeLockedState(true);
+        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
+        Debug.Log("Unlock Character " + typeOfAnimin);
+        ShopManager.Instance.EndStore();
+        OpenShop();
+        ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Add(typeOfAnimin);
+        SaveAndLoad.Instance.SaveDataToProfile();
+
 	}
 
 	void OnApplicationPause()

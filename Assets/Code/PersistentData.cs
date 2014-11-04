@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-
+[System.Serializable]
 public class PersistentData
 {
 	public static PersistentData Singleton = new PersistentData();
@@ -14,16 +14,15 @@ public class PersistentData
 
 	public enum TypesOfAnimin
 	{
-		TBo,
-		Kelsi,
-		Pi,
-		Mandi,
-
-		count
+        Pi = 0,
+        Tbo = 1,
+        Kelsey = 2,
+        Mandi = 3,
+        Count,
 	}
 
 	public List<InventoryItemData> Inventory = new List<InventoryItemData>();
-	public AniminId PlayerAniminId;
+    public TypesOfAnimin PlayerAniminId;
 	public AniminEvolutionStageId AniminEvolutionId;
 	public const float MaxHappy = 125.0f;
 	public const float MaxHungry = 100;
@@ -124,7 +123,7 @@ public class PersistentData
 		age = (int)Math.Floor(realAge.TotalDays / 3);
 	}
 
-	public void SetDefault(AniminId animin)
+    public void SetDefault(TypesOfAnimin animin)
 	{
 		SubstagesCompleted.Clear();
 		PlayerAniminId = animin;
