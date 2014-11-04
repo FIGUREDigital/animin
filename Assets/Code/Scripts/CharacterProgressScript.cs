@@ -310,7 +310,7 @@ public class CharacterProgressScript : MonoBehaviour
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Plaster, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Spinach, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Strawberry, 1);
-		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Syringe, 1);
+	//	PersistentData.Singleton.AddItemToInventory(InventoryItemId.Syringe, 1);	<< ADRIAN!!
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.Toast, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.watermelon, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodFrame, 1);

@@ -141,7 +141,10 @@ public class PersistentData
 
 	public void AddItemToInventory(InventoryItemId id, int count)
 	{
-
+		if (InventoryItemData.Items [(int)id] == null) {
+						Debug.Log ("Something has gone terribely wrong");
+						return;
+				}
 		if(!((InventoryItemData.Items [(int)id].ItemType == PopupItemType.Food) ||
 		     (InventoryItemData.Items [(int)id].ItemType == PopupItemType.Medicine) ||
 		     (InventoryItemData.Items [(int)id].ItemType == PopupItemType.Item)))
