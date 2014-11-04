@@ -60,7 +60,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject PanelFoods;
 	public GameObject PanelItems;
 	public UILabel TextForStarsInMiniCollector;
-	public UISprite EvolutionProgressSprite;
+	public UITexture EvolutionProgressSprite;
 
 	public GameObject PopupIndicator;
 	public GameObject ImageTarget;
