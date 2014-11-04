@@ -43,7 +43,6 @@ public class SaveAndLoad {
 		public DateTime LastSavePerformed;
 		public DateTime LastTimeToilet;
 
-//		public InventoryData Inventory;
 		public List<ItemDetails> ItemList;
 		public EvolutionStage EvolutionLevel;
 		public HappinessData Happiness;
@@ -124,7 +123,7 @@ public class SaveAndLoad {
 
 		profileData.CharacterList = new List<CharacterData>();
 
-		for (int i = 0; i < PersistentData.TypesOfAnimin.count-1; i++) 
+		for (int i = 0; i < (int)PersistentData.TypesOfAnimin.count-1; i++) 
 		{
 			CharacterData tempCharacter = CollectCharacterData((PersistentData.TypesOfAnimin)i);
 			profileData.CharacterList.Add(tempCharacter);
@@ -138,18 +137,30 @@ public class SaveAndLoad {
 	{
 		CharacterData tempCharacter = new CharacterData ();
 
+		tempCharacter.Type = characterType;
+
 		tempCharacter.ItemList = new List<ItemDetails> ();
 
-		for (int i = 0; i < InventoryItemId.Count-1; i++) 
+		for (int i = 0; i < (int)InventoryItemId.Count-1; i++) 
 		{
 			ItemDetails tempItem = new ItemDetails();
 
-			tempItem.ID = InventoryItemId[i];
+			tempItem.ID = (InventoryItemId)i;
 			tempItem.Amount = PersistentData.Singleton.Inventory[i].Count;
 
 			tempCharacter.ItemList.Add(tempItem);
-
 		}
+
+//		public DateTime NextHappynBonusTimeAt;
+//		public DateTime LastSavePerformed;
+//		public DateTime LastTimeToilet;
+//		
+//		public List<ItemDetails> ItemList;
+//		public EvolutionStage EvolutionLevel;
+//		public HappinessData Happiness;
+//		public AchievementData Achievements;
+//		tempcharacter.;
+//		public int ZEF;
 
 		return tempCharacter;
 	}
