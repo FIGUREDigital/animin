@@ -136,8 +136,22 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 			Vector3 finalpos = cameraPoint + newPosition2 + newPosition;
 
 			if (UIGlobalVariablesScript.Singleton.ARCameraComponent != null){
-			UIGlobalVariablesScript.Singleton.ARCameraComponent.transform.localPosition = finalpos;
-            UIGlobalVariablesScript.Singleton.ARCameraComponent.transform.LookAt(target);
+
+				Transform t = UIGlobalVariablesScript.Singleton.ARCameraComponent.transform;
+				t.localPosition = finalpos;
+
+				Vector3 up = Input.acceleration;
+				float tempX = up.x;
+				up.x=up.z;
+				up.z = tempX;
+
+				up.z = 0;
+
+				//up  = Quaternion.AngleAxis(Time.timeSinceLevelLoad,Vector3.forward) * up;
+
+				t.rotation = Quaternion.LookRotation(target.transform.position-t.position,Vector3.up);
+
+	            Debug.DrawRay(t.position,t.forward);
 			}
         }
 
