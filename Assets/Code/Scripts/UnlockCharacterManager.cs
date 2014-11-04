@@ -132,7 +132,9 @@ public class UnlockCharacterManager
 
     public void UnlockCharacter()
 	{        
-		switch(mId)
+		
+        Debug.Log("hi " + mId);
+        switch(mId)
 		{
             case PersistentData.TypesOfAnimin.Pi:
 			PlayerPrefs.SetInt("piUnlocked", 1);
@@ -167,6 +169,7 @@ public class UnlockCharacterManager
 
     public void UnlockInUIAndProfile(PersistentData.TypesOfAnimin typeToUnlock)
     {
+        Debug.Log("unlock");
         ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
         CharacterChoiceItem character = GameObject.Find(typeToUnlock.ToString()).GetComponent<CharacterChoiceItem>();
         character.ChangeLockedState(true);

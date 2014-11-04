@@ -82,6 +82,7 @@ public class CharacterChoiceItem : MonoBehaviour
 	void OnEnable()
 	{
 		ChangeLockedState(mUnlocked || UnlockCharacterManager.Instance.CheckCharacterPurchased(mId));
+        Debug.Log(mId);
 		Invoke ("UpdateAge", 0.1f);
 	}
 
