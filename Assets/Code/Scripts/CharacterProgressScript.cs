@@ -328,11 +328,11 @@ public class CharacterProgressScript : MonoBehaviour
         {
             if (BetweenSceneData.Instance.Points >= 0)
             {
-                if (BetweenSceneData.Instance.Points >= 10000)
+                if (BetweenSceneData.Instance.Points >= 3000)
                     AchievementsScript.Singleton.Show(AchievementTypeId.Gold, BetweenSceneData.Instance.Points);
-                else if (BetweenSceneData.Instance.Points >= 5000)
+                else if (BetweenSceneData.Instance.Points >= 2000)
                     AchievementsScript.Singleton.Show(AchievementTypeId.Silver, BetweenSceneData.Instance.Points);
-                else
+				else if (BetweenSceneData.Instance.Points >= 1000)
                     AchievementsScript.Singleton.Show(AchievementTypeId.Bronze, BetweenSceneData.Instance.Points);
                 BetweenSceneData.Instance.ResetPoints();
             }
