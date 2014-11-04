@@ -148,17 +148,31 @@ public class UnlockCharacterManager
 			break;
 		}
 		
-        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
-        character.ChangeLockedState(true);
-        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
-		Debug.Log("Unlock Character " + mId);
+        UnlockInUIAndProfile(mId);
+        ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Add(mId);
+        SaveAndLoad.Instance.SaveDataToProfile();
         ShopManager.Instance.EndStore();
         OpenShop();
-		ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Add(mId);
-        SaveAndLoad.Instance.SaveDataToProfile();
+	}
+
+	public void CheckInitialCharacterUnlock()
+	{
+
+        for (int i = 0; i < ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Count; i++)
+        {
+            UnlockInUIAndProfile(ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins[i]);
+        }
 
 	}
+
+    public void UnlockInUIAndProfile(PersistentData.TypesOfAnimin typeToUnlock)
+    {
+        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+        CharacterChoiceItem character = GameObject.Find(typeToUnlock.ToString()).GetComponent<CharacterChoiceItem>();
+        character.ChangeLockedState(true);
+        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(false);
+        Debug.Log("Unlock Character " + typeToUnlock);
+    }
 
 	void OnApplicationPause()
 	{

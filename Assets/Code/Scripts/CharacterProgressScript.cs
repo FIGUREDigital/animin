@@ -317,6 +317,8 @@ public class CharacterProgressScript : MonoBehaviour
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodFrame, 1);
 		PersistentData.Singleton.AddItemToInventory(InventoryItemId.woodSword, 1);
 
+
+
 		//Adrian, please forgive me, but I couldn't think of where else in the labrynth to put this little UI update thingymaboodle.
 
 		//End Forgiveness
