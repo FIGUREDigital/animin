@@ -31,8 +31,10 @@ public class SelectCharacterClickScript : MonoBehaviour
 
 
 
-		if(!ProfilesManagementScript.Singleton.BeginLoadLevel)	
+		if (!ProfilesManagementScript.Singleton.BeginLoadLevel) {	
 			ProfilesManagementScript.Singleton.BeginLoadLevel = true;
+			FlurryLogger.Instance.StartMainScreenTimer();
+		}
 		//AsyncOperation asyncOp = Application.LoadLevelAsync("VuforiaTest");
 		//yield return asyncOp;
 		//Debug.Log("Loading complete");

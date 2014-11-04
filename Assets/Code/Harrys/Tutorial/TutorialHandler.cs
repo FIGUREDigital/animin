@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -32,6 +33,14 @@ public class TutorialHandler : MonoBehaviour {
 	private bool m_WaitingForInput;
 
 	private const string TutorialPlayerPrefID = "TUTORIALS_COMPLETED";
+	
+	public bool IsPlaying
+	{
+		get
+		{
+			return (m_PlayingTutorial || m_EndingTutorial);
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
