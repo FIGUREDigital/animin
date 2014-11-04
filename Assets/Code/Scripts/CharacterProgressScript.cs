@@ -270,14 +270,10 @@ public class CharacterProgressScript : MonoBehaviour
 			LayerMask.NameToLayer( "IgnoreCollisionWithCharacter"),  
 			LayerMask.NameToLayer( "Character"));
 
-		if(!PlayerProfileData.ActiveProfile.ListOfDataForAnimin[(int)PlayerProfileData.ActiveProfile.ActiveAnimin].NotFirstTime)
-		{
-			PlayerProfileData.ActiveProfile.ListOfDataForAnimin[(int)PlayerProfileData.ActiveProfile.ActiveAnimin].NotFirstTime = true;
-			CurrentAction = ActionId.EnterSleep;
-		}
-
-
+		
 		animationController = GetComponent<AnimationControllerScript>();
+		CurrentAction = ActionId.EnterSleep;
+
 		//animationController.IsSleeping = true;
 		//CurrentAction = ActionId.Sleep;
 		//SleepBoundingBox.SetActive(true);
