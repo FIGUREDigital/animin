@@ -10,7 +10,7 @@ public class GatewayButton : MonoBehaviour {
 
 	void Start()
 	{
-		gateway = gameObject.transform.parent.parent.parent.GetComponent<ParentalGateway>();
+		gateway = GetComponentInParent<ParentalGateway>();
 	}
 
 	void OnClick()
