@@ -26,67 +26,17 @@ public class SaveAndLoad {
 	#endregion
 
 	[System.Serializable]
-	public class ProfileData
+	public class ProfilesToStore
 	{
-		public List<CharacterData> CharacterList;	
+        public PlayerProfileData PlayerData;       	
 		
 	}
 
-	public ProfileData ProfileSavedData; 
-
-	[System.Serializable]
-	public class CharacterData
-	{
-		public PersistentData.TypesOfAnimin Type;
-
-		public DateTime NextHappynBonusTimeAt;
-		public DateTime LastSavePerformed;
-		public DateTime LastTimeToilet;
-
-		public List<ItemDetails> ItemList;
-		public EvolutionStage EvolutionLevel;
-		public HappinessData Happiness;
-		public AchievementData Achievements;
-		public int Age;
-		public int ZEF;
-
-	}
-
-	[System.Serializable]
-	public class ItemDetails
-	{
-		public InventoryItemId ID;
-		public int Amount;
-	}
-
-	[System.Serializable]
-	public class HappinessData
-	{
-		public float MainHappiness;
-		public float Health;
-		public float Hunger;
-		public float Fitness;
-
-	}
-
-	[System.Serializable]
-	public class AchievementData
-	{
-		public float MainHappiness;
-		
-	}
-
-	[System.Serializable]
-	public enum EvolutionStage
-	{
-		Child,
-		Juvenile,
-		Adult		
-	}
+	public List<ProfilesToStore> ProfileList; 
 
 	public SaveAndLoad()
 	{
-		ProfileSavedData = new ProfileData ();
+		ProfileList = new List<ProfilesToStore> ();
 
 	}
 
@@ -96,7 +46,7 @@ public class SaveAndLoad {
 		{
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(Application.persistentDataPath + "/savedGames.anidat", FileMode.Open);
-			ProfileSavedData = (ProfileData)bf.Deserialize(file);
+			ProfileList = (List<ProfilesToStore>)bf.Deserialize(file);
 			file.Close();
 			Debug.Log ("Save data loaded");
 		}
@@ -109,58 +59,69 @@ public class SaveAndLoad {
 
 	public void SaveAllData()
 	{
-		ProfileSavedData = CollectData ();
+
+        ProfilesToStore tempProfile = new ProfilesToStore();
+        for (int i =0; i< ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count; i++)
+        {
+            tempProfile.PlayerData = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[i];
+            ProfileList.Add(tempProfile);
+        }
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");
-		bf.Serialize(file, ProfileSavedData);
+		bf.Serialize(file, ProfileList);
 		file.Close();
 
-	}
+	}	
 
-	public ProfileData CollectData()
+    public void SaveDataToProfile(PlayerProfileData profile)
+    {
+        for (int i = 0; i < (int)PersistentData.TypesOfAnimin.count-1; i++) 
+        {
+            PlayerProfileData.CharacterData tempCharacter = CollectCharacterData((PersistentData.TypesOfAnimin)i);
+            profile.ListOfDataForAnimin.Add(tempCharacter);
+        }
+
+    }
+
+    private PlayerProfileData.CharacterData CollectCharacterData(PersistentData.TypesOfAnimin characterType)
 	{
-		ProfileData profileData = new ProfileData();
-
-		profileData.CharacterList = new List<CharacterData>();
-
-		for (int i = 0; i < (int)PersistentData.TypesOfAnimin.count-1; i++) 
-		{
-			CharacterData tempCharacter = CollectCharacterData((PersistentData.TypesOfAnimin)i);
-			profileData.CharacterList.Add(tempCharacter);
-		}				
-
-		return profileData;
-
-	}
-
-	private CharacterData CollectCharacterData(PersistentData.TypesOfAnimin characterType)
-	{
-		CharacterData tempCharacter = new CharacterData ();
+        PlayerProfileData.CharacterData tempCharacter = new PlayerProfileData.CharacterData ();
 
 		tempCharacter.Type = characterType;
 
-		tempCharacter.ItemList = new List<ItemDetails> ();
+        tempCharacter.ItemList = new List<PlayerProfileData.ItemDetails> ();
 
 		for (int i = 0; i < (int)InventoryItemId.Count-1; i++) 
 		{
-			ItemDetails tempItem = new ItemDetails();
+            PlayerProfileData.ItemDetails tempItem = new PlayerProfileData.ItemDetails();
 
 			tempItem.ID = (InventoryItemId)i;
 			tempItem.Amount = PersistentData.Singleton.Inventory[i].Count;
 
 			tempCharacter.ItemList.Add(tempItem);
 		}
+		
+        tempCharacter.Achievements = new List<AchievementManager.AchievementDetails>();
+        for (int j=0; j < AchievementManager.Instance.ListOfAchievements.Count; j++)
+        {
+            tempCharacter.Achievements.Add(AchievementManager.Instance.ListOfAchievements[j]);
+        }   
+
+        tempCharacter.ZEF = PersistentData.Singleton.ZefTokens;
+        tempCharacter.Age = PersistentData.Singleton.Age;
+        tempCharacter.EvolutionLevel = PersistentData.Singleton.Evolution; 
+        tempCharacter.AnimEvolution = PersistentData.Singleton.AniminEvolutionId;
 
 //		public DateTime NextHappynBonusTimeAt;
-//		public DateTime LastSavePerformed;
-//		public DateTime LastTimeToilet;
-//		
-//		public List<ItemDetails> ItemList;
-//		public EvolutionStage EvolutionLevel;
-//		public HappinessData Happiness;
-//		public AchievementData Achievements;
-//		tempcharacter.;
-//		public int ZEF;
+        tempCharacter.LastSavePerformed = DateTime.Now;
+//		public DateTime LastTimeToilet;		
+
+        tempCharacter.Happiness = new PlayerProfileData.HappinessData();
+
+        tempCharacter.Happiness.Happiness = PersistentData.Singleton.Happy;
+        tempCharacter.Happiness.Fitness = PersistentData.Singleton.Fitness;
+        tempCharacter.Happiness.Health = PersistentData.Singleton.Health;
+        tempCharacter.Happiness.Hunger = PersistentData.Singleton.Hungry;
 
 		return tempCharacter;
 	}

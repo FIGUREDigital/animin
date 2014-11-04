@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 public class ProfilesManagementScript : MonoBehaviour 
 {
@@ -32,6 +34,10 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	public AniminId AniminToUnlockId;
 
+    public List<PlayerProfileData> ListOfPlayerProfiles;
+
+    public PlayerProfileData CurrentProfile;      
+
 	void Awake()
 	{
 		Singleton = this;
@@ -48,7 +54,9 @@ public class ProfilesManagementScript : MonoBehaviour
 	void Start ()
 	{
 
+        CurrentProfile = new PlayerProfileData();
 
+        ListOfPlayerProfiles = new List<PlayerProfileData>();
 		//PlayerProfileData.ActiveProfile = PlayerProfileData.GetDefaultProfile();
 		//if(PlayerProfileData.ActiveProfile == null)
 		//{
@@ -101,12 +109,16 @@ public class ProfilesManagementScript : MonoBehaviour
 	private void RefreshProfiles()
 	{
 		PlayerProfileData[] profiles = PlayerProfileData.GetAllProfiles();
+
 		if(profiles != null)
 		{
 			Debug.Log(profiles.Length.ToString());
 			for(int i=0;i<profiles.Length;++i)
 			{
-				GameObject newProfile = (GameObject)Instantiate(PrefabProfile);
+				
+                ListOfPlayerProfiles.Add(profiles[i]);
+
+                GameObject newProfile = (GameObject)Instantiate(PrefabProfile);
 				newProfile.transform.parent = ProfilesRoot.transform;
 				
 				newProfile.transform.localScale = new Vector3(1,1,1);
@@ -162,6 +174,18 @@ public class ProfilesManagementScript : MonoBehaviour
 	{
 		Debug.Log("NO PROFILE FOR YOU");
 	}
+
+    public void SaveDataToProfile()
+    {
+
+    }
+
+
+
+    public void LoadDataForProfile()
+    {
+
+    }
 	
 	// Update is called once per frame
 	void Update () 

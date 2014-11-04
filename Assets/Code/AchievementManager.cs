@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AchievementManager  
 {
@@ -13,6 +15,14 @@ public class AchievementManager
 		Count
 	}
 
+	public class AchievementDetails
+	{
+		public Achievements Type;
+		public bool Status;
+	}
+
+	public List<AchievementDetails> ListOfAchievements = new List<AchievementDetails>();
+
 	private int mCompletedAchievements;
 	private int[] mCount = new int[(int)Achievements.Count];
 	private int[] mRequiredCount = new int[(int)Achievements.Count]{10,5,3,1,3};
@@ -21,9 +31,8 @@ public class AchievementManager
 	private const string mFruit = "Devour 10 pieces of juicy fruit"; 
 	private const string mGames = "Push yourself to the limit with 5 games"; 
 	private const string mMusic = "Create experimental music 3 times"; 
-	private const string mArMode = "Use the AR card to unlesh your Animin on the world"; 
+	private const string mArMode = "Use the AR card to unleash your Animin on the world"; 
 	private const string mHeal = "Care for your Animin 3 times"; 
-
 
 	public int CompletedAchievements
 	{
@@ -90,11 +99,17 @@ public class AchievementManager
 	private void ResetAchievments()
 	{
 		mCompletedAchievements = 0;
+
 		PlayerPrefs.SetString("AchievementsActive","false");
 		for(int i =0; i < (int)Achievements.Count; i++)
 		{
-			PlayerPrefs.SetInt("Achievment" + i, 0);
-			PlayerPrefs.SetInt("AchievmentFired" + i, 0);
+			AchievementDetails tempAchievement = new AchievementDetails ();
+			tempAchievement.Type = (Achievements)i;
+			tempAchievement.Status = false;
+			ListOfAchievements.Add (tempAchievement);
+
+			PlayerPrefs.SetInt("Achievement" + i, 0);
+			PlayerPrefs.SetInt("AchievementFired" + i, 0);
 		}
 		PlayerPrefs.Save();
 	}
@@ -103,6 +118,8 @@ public class AchievementManager
 	{
 		bool po = "true" == PlayerPrefs.GetString("AchievementsActive");
 
+		ListOfAchievements.Clear ();
+
 		if(!po)
 		{
 			ResetAchievments();
@@ -110,10 +127,17 @@ public class AchievementManager
 
 		for(int i =0; i < (int)Achievements.Count; i++)
 		{
-			mCount[i] = PlayerPrefs.GetInt("Achievment" + i);
-			bool fired = PlayerPrefs.GetInt("AchievmentFired" + i) == 1;
+
+			mCount[i] = PlayerPrefs.GetInt("Achievement" + i);
+			bool fired = PlayerPrefs.GetInt("AchievementFired" + i) == 1;
 			mAchievmentsFired[i] = fired;
 			mCompletedAchievements += fired?1:0;
+
+			AchievementDetails tempAchievement = new AchievementDetails ();
+			tempAchievement.Type = (Achievements)i;
+			tempAchievement.Status = fired;
+			ListOfAchievements.Add (tempAchievement);
+
 		}
 
 	}
@@ -123,8 +147,8 @@ public class AchievementManager
 		PlayerPrefs.SetString("AchievementsActive","true");
 		for(int i =0; i < (int)Achievements.Count; i++)
 		{
-			PlayerPrefs.SetInt("Achievment" + i, mCount[i]);
-			PlayerPrefs.SetInt("AchievmentFired" + i, mAchievmentsFired[i]?1:0);
+			PlayerPrefs.SetInt("Achievement" + i, mCount[i]);
+			PlayerPrefs.SetInt("AchievementFired" + i, mAchievmentsFired[i]?1:0);
 		}
 		PlayerPrefs.Save();
 	}
