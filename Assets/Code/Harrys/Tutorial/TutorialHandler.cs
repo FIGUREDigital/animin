@@ -101,11 +101,6 @@ public class TutorialHandler : MonoBehaviour {
 				TutorialUIParent.SetActive (false);
 			}
 		}
-		
-		if (Debug.isDebugBuild && Input.GetKey (KeyCode.R)) {
-			ResetTutorials();
-		}
-
 		/*
 		Debug.Log ("Argh : [" + UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().height+":"+UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().width+ "];");
 		Blocker.GetComponent<BoxCollider> ().size = new Vector3 (
