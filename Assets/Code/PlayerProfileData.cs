@@ -28,6 +28,7 @@ public class PlayerProfileData
         public DateTime NextHappynBonusTimeAt;
         public DateTime LastSavePerformed;
         public DateTime LastTimeToilet;
+		public bool NotFirstTime;
 
         public List<ItemDetails> ItemList;
         public float EvolutionLevel;
