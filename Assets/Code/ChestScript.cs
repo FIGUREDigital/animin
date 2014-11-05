@@ -19,6 +19,7 @@ public class ChestScript : MonoBehaviour
 
 	public GameObject[] Coins;
 	private List<string> FoodItems = new List<string>();
+	private List<string> MedicalItems = new List<string>();
 
 
 	// Use this for initialization
@@ -34,6 +35,9 @@ public class ChestScript : MonoBehaviour
 		FoodItems.Add("Prefabs/strawberry2");
 		FoodItems.Add("Prefabs/toast");
 		FoodItems.Add("Prefabs/watermelon");
+
+		MedicalItems.Add("Prefabs/plaster");
+		MedicalItems.Add("Prefabs/capsule");
 	}
 
 //	void LateUpdate()
@@ -101,9 +105,13 @@ public class ChestScript : MonoBehaviour
 					{
 					GameObject zef = null;
 
-					if(i < 3)
+					if(i < 2)
 					{
 						zef = progressScript.SpawnStageItem(FoodItems[Random.Range(0, FoodItems.Count)], Vector3.zero);
+					}
+					else if(i < 3)
+					{
+						zef = progressScript.SpawnStageItem(MedicalItems[Random.Range(0, MedicalItems.Count)], Vector3.zero);
 					}
 					else
 					{
