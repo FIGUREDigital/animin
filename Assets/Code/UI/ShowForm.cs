@@ -14,7 +14,7 @@ public class ShowForm : MonoBehaviour
     {
 //        Debug.Log( "Buying with webview" );
 
-        UIGlobalVariablesScript.Singleton.OpenParentalGateway( Parent, UIGlobalVariablesScript.Singleton.PurchaseAniminViaPaypal );
+        UIGlobalVariablesScript.Singleton.OpenParentalGateway( Parent, UIGlobalVariablesScript.Singleton.PurchaseAniminViaPaypal, true );
 //		LaunchWebview ();
 
     }

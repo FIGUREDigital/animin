@@ -11,6 +11,13 @@ public class UnlockCharacterManager
 	public const string MANDI_PURCHASE = "com.apples.animin.characterpurchase3";
 	private static string mBuyItem;
     private static PersistentData.TypesOfAnimin mId;
+	public PersistentData.TypesOfAnimin ID
+	{
+		get
+		{
+			return mId;
+		}
+	}
 
 
 	#region Singleton

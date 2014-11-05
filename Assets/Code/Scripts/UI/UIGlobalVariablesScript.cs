@@ -193,14 +193,14 @@ public class UIGlobalVariablesScript : MonoBehaviour
         PurchaseAniminViaPaypal.SetActive( false );
     }
 
-	public void OpenParentalGateway(GameObject prev, GameObject next)
+	public void OpenParentalGateway(GameObject prev, GameObject next, bool LogPurchase = false)
 	{
         ParentalGateway = (GameObject)Instantiate(Resources.Load("Prefabs/Parental Gateway"));
 		UIRoot root = GameObject.FindObjectOfType<UIRoot>();
         ParentalGateway.transform.parent = root.gameObject.transform;
         ParentalGateway.transform.localScale = Vector3.one;
         ParentalGateway.transform.localPosition = Vector3.zero;
-        ParentalGateway.GetComponent<ParentalGateway>().Open(prev, next);
+        ParentalGateway.GetComponent<ParentalGateway>().Open(prev, next, LogPurchase);
 	}
 
     public void LaunchWebview(PersistentData.TypesOfAnimin type, decimal price)
