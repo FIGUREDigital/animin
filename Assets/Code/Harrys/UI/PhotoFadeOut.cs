@@ -31,7 +31,7 @@ public class PhotoFadeOut : MonoBehaviour {
 			m_Timer += Time.deltaTime;
 			if (m_Timer >= StopFadeoutAt){
 				m_Show = false;
-			} else if (m_Timer >= StartFadeoutAt){
+			} else if (m_Timer >= StartFadeoutAt && sprite!=null){
 				sprite.alpha -= (1.0f/(StopFadeoutAt - StartFadeoutAt))*Time.deltaTime;
 			}
 		}
