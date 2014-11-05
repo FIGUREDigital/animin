@@ -16,8 +16,11 @@ public class ParentalGateway : MonoBehaviour
 	[SerializeField]
 	UILabel Question;
 
-	public void Open(GameObject prev, GameObject next)
+	private bool mLogPurchase;
+
+	public void Open(GameObject prev, GameObject next, bool LogPurchase = false)
 	{
+		mLogPurchase = LogPurchase;
 		prevScreen = prev;
 		nextScreen = next;
 		prevScreen.SetActive(false);
@@ -48,6 +51,10 @@ public class ParentalGateway : MonoBehaviour
 
 	public void Pass()
 	{
+		if(mLogPurchase)
+		{
+			FlurryLogger.Instance.CharacterPurchasedWeb();
+		}
 		Destroy(this.gameObject, 0);
 		nextScreen.SetActive(true);
 	}
