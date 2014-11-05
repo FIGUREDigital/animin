@@ -163,11 +163,16 @@ public class ProfilesManagementScript : MonoBehaviour
 			LoadingSpinner.SetActive(false);
 			AniminsScreen.SetActive(true);
 		}
-		else if(resultId == "Card number already in use")
+		else if(resultId == "Card number already used")
 		{
 			LoadingSpinner.SetActive(false);
 			AniminsScreen.SetActive(true);
 		}
+        else if(resultId == "Animin already activated")
+        {
+            LoadingSpinner.SetActive(false);
+            AniminsScreen.SetActive(true);
+        }
 		else
 		{
 			Debug.Log("INVALID CODE RESPONSE");
