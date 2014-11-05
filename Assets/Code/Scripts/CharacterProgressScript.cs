@@ -657,10 +657,10 @@ public class CharacterProgressScript : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hitInfo))
 		{
-			Debug.Log("TUTORIAL PLAYING? : ["+UIGlobalVariablesScript.Singleton.TutHandler.IsPlaying+"]");
-			if (UIGlobalVariablesScript.Singleton.TutHandler.IsPlaying){
-				hadRayCollision = UIGlobalVariablesScript.Singleton.TutHandler.CheckCharacterProgress(this, hitInfo);
-			}  else 
+//			Debug.Log("TUTORIAL PLAYING? : ["+UIGlobalVariablesScript.Singleton.TutHandler.IsPlaying+"]");
+//			if (UIGlobalVariablesScript.Singleton.TutHandler.IsPlaying){
+//				hadRayCollision = UIGlobalVariablesScript.Singleton.TutHandler.CheckCharacterProgress(this, hitInfo);
+//			}  else 
 				hadRayCollision = true;
 			//Debug.Log ("Ray Collision : ["+hitInfo.collider.gameObject.name+"];");
 		}
@@ -1564,6 +1564,7 @@ public class CharacterProgressScript : MonoBehaviour
 		UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, PersistentData.Singleton.Fitness / 100.0f), UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition.y, 0);
 		//UIGlobalVariablesScript.Singleton.EvolutionControlBarRef.GetComponent<UISlider>().value = Evolution / 100.0f;
 
+		/*
 		if((DateTime.Now - LastSavePerformed).TotalSeconds >= 4)
 		{
 //            ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].;
@@ -1571,7 +1572,7 @@ public class CharacterProgressScript : MonoBehaviour
             LastSavePerformed = DateTime.Now;
             Debug.Log("just saved...");
 		}
-
+*/
 		if(Input.GetButtonDown("Fire1"))
 			hadButtonDownLastFrame = true;
 		else
