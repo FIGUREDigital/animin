@@ -211,7 +211,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 		}
 		
 		EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
-		EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/AniminCart.html" );
+		EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php" );
 		#endif
 		
 	}
