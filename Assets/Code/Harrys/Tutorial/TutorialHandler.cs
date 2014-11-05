@@ -271,6 +271,8 @@ public class TutorialHandler : MonoBehaviour {
 	//This method test whether or not to start the tutorial.
 	private bool StartConditions(int id){
 		//if (TutorialReader.Instance.TutorialFinished[id] == true) return false;
+		if (!IsPlaying)
+						return false;
 		if (PlayerPrefs.GetString (TutorialPlayerPrefID + id) == "true")
 						return false;
 		if (m_WaitingForSpecific != -1 && id != m_WaitingForSpecific)
