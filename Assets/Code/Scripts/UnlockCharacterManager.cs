@@ -168,7 +168,7 @@ public class UnlockCharacterManager
 	{
 
         for (int i = 0; i < ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Count; i++)
-        {
+        {            
             UnlockInUIAndProfile(ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins[i]);
         }
 
