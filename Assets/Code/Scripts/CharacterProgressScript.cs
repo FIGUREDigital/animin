@@ -701,6 +701,8 @@ public class CharacterProgressScript : MonoBehaviour
 			EatAlphaTimer = 0;
 
 			PlayedEatingSound = false;
+
+			UIGlobalVariablesScript.Singleton.TutHandler.EatStrawberry();
 			break;
 		}
 		case ActionId.WaitEatingFinish:
@@ -1409,7 +1411,8 @@ public class CharacterProgressScript : MonoBehaviour
 							FeedMyselfTimer = 0;
 						}
 					}
-				}
+			}
+
 				
 				
 

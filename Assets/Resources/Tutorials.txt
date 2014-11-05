@@ -9,14 +9,13 @@
 	  	<Lesson>
 		  	<TutEntries>
 		  		<TutEntry text = "Hello, I'm Andy Wormhole!"/>
-		  		<TutEntry text = "Press the Stats Button"/>
-		  		<TutEntry text = "Like now"/>
-		  		<TutEntry text = "Press the Stats Button now!"/>
+		  		<TutEntry text = "I was travelling through a portal and found this Animin."/>
+		  		<TutEntry text = "I wonder how he got here..."/>
+		  		<TutEntry text = "Why don’t you wake it up!"/>
 	  		</TutEntries>
-	  		<Stamp exit = "Stats"/>
+	  		<Stamp exit = "WakeUp"/>
 	  	</Lesson>
   	</Lessons>
-  	
   </Tutorial>
   
   <Tutorial id = "01">
@@ -24,14 +23,39 @@
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
-		  		<TutEntry text = "Another bit of nonsense"/>
+		  		<TutEntry text = "T-Bo looks hungry."/>
+		  		<TutEntry text = "Why don’t you feed him a strawberry?"/>
+		  		<TutEntry text = "Drag one out from the food menu."/>
+	  		</TutEntries>
+	  		<Stamp exit = "EatStrawberry"/>
+	  	</Lesson>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "Tasty! if you leave food out, he will eat them himself."/>
 	  		</TutEntries>
 	  		<Stamp exit = "None"/>
 	  	</Lesson>
   	</Lessons>
-  	
   </Tutorial>
   
+  <Tutorial id = "02">
+  <!---Description : This tutorial will play at the start, when the user first starts the app, telling them how to view Stats-->
+  	<Lessons>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "Animin need a lot of care and attention to grow into an adult! "/>
+		  		<TutEntry text = "See  how happy he is by looking in the stats"/>
+	  		</TutEntries>
+	  		<Stamp exit = "Stats"/>
+	  	</Lesson>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "If your Animin is happier it will evolve faster!"/>
+	  		</TutEntries>
+	  		<Stamp exit = "None"/>
+	  	</Lesson>
+  	</Lessons>
+  </Tutorial>
   
   
 </Tutorials>
