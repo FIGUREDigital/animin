@@ -53,7 +53,6 @@ public class ParentalGateway : MonoBehaviour
 	{
 		if(mLogPurchase)
 		{
-			FlurryLogger.Instance.CharacterPurchasedWeb();
 		}
 		Destroy(this.gameObject, 0);
 		nextScreen.SetActive(true);

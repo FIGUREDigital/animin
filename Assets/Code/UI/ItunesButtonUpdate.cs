@@ -79,7 +79,6 @@ public class ItunesButtonUpdate : MonoBehaviour
 	{
 		Debug.Log(string.Format("Purchase of {0} Successful",transaction.productIdentifier));
 		UnlockCharacterManager.Instance.UnlockCharacter();
-		FlurryLogger.Instance.CharacterPurchasedIAP();
 		GoToAddress();
 	}
 

@@ -339,7 +339,6 @@ public class UIClickButtonMasterScript : MonoBehaviour
                 if (UIGlobalVariablesScript.Singleton.GunGameInterface != null)
                     UIGlobalVariablesScript.Singleton.GunGameInterface.SetActive(false);
             }
-			FlurryLogger.Instance.EndMinigame();
 			Application.LoadLevel("VuforiaTest");
             break;
 
