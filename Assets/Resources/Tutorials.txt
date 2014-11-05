@@ -88,24 +88,33 @@
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
-		  		<TutEntry text = "Your Animin may be domesticated, but you still need to clean up after them"/>
-		  		<TutEntry text = "Use the broom to clear the garden, or double tap it for a full clean"/>
+		  		<TutEntry text = "Use the broom to clean away your Animin's mess"/>
+		  		<TutEntry text = "Double tap the broom icon to clear everything away"/>
 	  		</TutEntries>
 	  		<Stamp exit = "None"/>
 	  	</Lesson>
   	</Lessons>
   </Tutorial>
   
-<Tutorial id = "06">
+  <Tutorial id = "06">
+  <!---Description : Zef tutorial-->
+  	<Lessons>
+	  	<Lesson>
+		  	<TutEntries>
+		 	 	<TutEntry text = "Collect Zef coins to evolve your Animin"/>
+	  		</TutEntries>
+	  		<Stamp exit = "None"/>
+	  	</Lesson>
+  	</Lessons>
+  </Tutorial>
+  
+<Tutorial id = "07">
   <!---Description : Games tutorial-->
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
-		  		<TutEntry text = "Your Animin craves adventure and excitment! Why not play a game with them"/>
-		  		<TutEntry text = "Choose a game from the right hand tab"/>
-		  		<TutEntry text = "Playing games can be fun and rewarding!"/>
-		  		<TutEntry text = "But play too much and you might tire your Animin out"/>
-		  		<TutEntry text = "Use the medicine to get them back to playing all day long"/>
+		 	 	<TutEntry text = "Play the mini-games to keep your animin fit and win items and zef coins"/>
+		 	 	<TutEntry text = "You also need to play mini-games to keep your Animin fit"/>
 	  		</TutEntries>
 	  		<Stamp exit = "None"/>
 	  	</Lesson>
