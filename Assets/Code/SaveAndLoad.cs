@@ -68,6 +68,7 @@ public class SaveAndLoad {
         {
             tempProfile.PlayerData = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[i];
             ProfileList.Add(tempProfile);
+						Debug.Log ("i");
         }
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");

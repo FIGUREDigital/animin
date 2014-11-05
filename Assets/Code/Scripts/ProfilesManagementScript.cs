@@ -94,6 +94,7 @@ public class ProfilesManagementScript : MonoBehaviour
         tempData.UniqueID = Account.Instance.UniqueID;
         ListOfPlayerProfiles.Add(tempData);
         SaveAndLoad.Instance.SaveAllData();
+				Debug.Log("just saved...new");
 		CurrentProfile = tempData;
         AchievementManager.Instance.PopulateAchievements(true);
 		UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
@@ -130,12 +131,14 @@ public class ProfilesManagementScript : MonoBehaviour
             tempData = PlayerProfileData.CreateNewProfile(Account.Instance.UserName);
             tempData.UniqueID = code;
             ListOfPlayerProfiles.Add(tempData);
-            SaveAndLoad.Instance.SaveAllData();
-            Debug.Log("Saved");
+            
 			CurrentProfile = tempData;
             AchievementManager.Instance.PopulateAchievements(true);
 			UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
             CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
+
+			SaveAndLoad.Instance.SaveAllData();
+			Debug.Log("Saved succesful login");
 		} 
 		else 
 		{

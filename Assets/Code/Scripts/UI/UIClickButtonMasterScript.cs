@@ -198,6 +198,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			SetSoundSprite();
 
                     SaveAndLoad.Instance.SaveAllData();
+								Debug.Log("just saved...ui cllick");
 
 			break;
 		}

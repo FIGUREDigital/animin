@@ -160,6 +160,7 @@ public class UnlockCharacterManager
         UnlockInUIAndProfile(mId);
         ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Add(mId);
         SaveAndLoad.Instance.SaveAllData();
+				Debug.Log("just saved...unlock");
         ShopManager.Instance.EndStore();
         OpenShop();
 	}
