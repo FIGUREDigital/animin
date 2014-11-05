@@ -31,7 +31,7 @@
 	  	</Lesson>
 	  	<Lesson>
 		  	<TutEntries>
-		  		<TutEntry text = "Tasty! if you leave food out, he will eat them himself."/>
+		  		<TutEntry text = "Tasty! if you click on the food, they will eat it."/>
 	  		</TutEntries>
 	  		<Stamp exit = "None"/>
 	  	</Lesson>
@@ -44,13 +44,68 @@
 	  	<Lesson>
 		  	<TutEntries>
 		  		<TutEntry text = "Animin need a lot of care and attention to grow into an adult! "/>
-		  		<TutEntry text = "See  how happy he is by looking in the stats"/>
+		  		<TutEntry text = "See how happy he is by looking in the stats"/>
 	  		</TutEntries>
 	  		<Stamp exit = "Stats"/>
 	  	</Lesson>
 	  	<Lesson>
 		  	<TutEntries>
 		  		<TutEntry text = "If your Animin is happier it will evolve faster!"/>
+	  		</TutEntries>
+	  		<Stamp exit = "None"/>
+	  	</Lesson>
+  	</Lessons>
+  </Tutorial>
+
+<Tutorial id = "03">
+  <!---Description : Game card tutorial-->
+  	<Lessons>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "If you print the gamecard (found in the stats screen)"/>
+		  		<TutEntry text = "You'll be able to unleash your animin into the real world!"/>
+	  		</TutEntries>
+	  		<Stamp exit = "None"/>
+	  	</Lesson>
+  	</Lessons>
+  </Tutorial>
+  
+<Tutorial id = "04">
+  <!---Description : Meds tutorial -->
+  	<Lessons>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "If your Animin gets sick they will need you to look after them"/>
+		  		<TutEntry text = "Use bandages and vitamins to restore their vitality!"/>
+	  		</TutEntries>
+	  		<Stamp exit = "None"/>
+	  	</Lesson>
+  	</Lessons>
+  </Tutorial>
+
+<Tutorial id = "05">
+  <!---Description : Broom tutorial-->
+  	<Lessons>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "Your Animin may be domesticated, but you still need to clean up after them"/>
+		  		<TutEntry text = "Use the broom to clear the garden, or double tap it for a full clean"/>
+	  		</TutEntries>
+	  		<Stamp exit = "None"/>
+	  	</Lesson>
+  	</Lessons>
+  </Tutorial>
+  
+<Tutorial id = "06">
+  <!---Description : Games tutorial-->
+  	<Lessons>
+	  	<Lesson>
+		  	<TutEntries>
+		  		<TutEntry text = "Your Animin craves adventure and excitment! Why not play a game with them"/>
+		  		<TutEntry text = "Choose a game from the right hand tab"/>
+		  		<TutEntry text = "Playing games can be fun and rewarding!"/>
+		  		<TutEntry text = "But play too much and you might tire your Animin out"/>
+		  		<TutEntry text = "Use the medicine to get them back to playing all day long"/>
 	  		</TutEntries>
 	  		<Stamp exit = "None"/>
 	  	</Lesson>

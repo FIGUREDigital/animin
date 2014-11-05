@@ -201,7 +201,7 @@ public class ChestScript : MonoBehaviour
 						}
 					}
 					
-				if(counter == 5)
+				if(counter == Coins.Length)
 				{
 					State = AnimationStateId.ThrowItemsOut;
 					Timer = 3;

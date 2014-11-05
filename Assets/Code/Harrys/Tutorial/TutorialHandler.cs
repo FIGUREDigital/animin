@@ -253,6 +253,18 @@ public class TutorialHandler : MonoBehaviour {
 			case (1):
 				SetTimerOnTutorial(2,20f);
 				break;
+			case (2):
+				SetTimerOnTutorial(3,20f);
+				break;
+			case (3):
+				SetTimerOnTutorial(3,60f);
+				break;
+			case (4):
+				SetTimerOnTutorial(3,60f);
+				break;
+			case (5):
+				SetTimerOnTutorial(3,20f);
+				break;
 			}
 		}
 	}
@@ -286,7 +298,15 @@ public class TutorialHandler : MonoBehaviour {
 			return (m_Timer<0);
 		case (2):
 			return (m_Timer<0);
-
+		case (3):
+			return (m_Timer<0);
+		case (4):
+			return (m_Timer<0);
+		case (5):
+			return (m_Timer<0);
+		case (6):
+			return (m_Timer<0);
+			
 		default:
 			return false;
 		}
