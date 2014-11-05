@@ -101,7 +101,7 @@
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
-		 	 	<TutEntry text = "Collect Zef coins to evolve your Animin"/>
+		 	 	<TutEntry text = "Collect ZEF coins to evolve your Animin"/>
 	  		</TutEntries>
 	  		<Stamp exit = "None"/>
 	  	</Lesson>
@@ -113,7 +113,7 @@
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
-		 	 	<TutEntry text = "Play the mini-games to keep your animin fit and win items and zef coins"/>
+		 	 	<TutEntry text = "Play the mini-games to keep your Animin fit and win items and ZEF"/>
 		 	 	<TutEntry text = "You also need to play mini-games to keep your Animin fit"/>
 	  		</TutEntries>
 	  		<Stamp exit = "None"/>
