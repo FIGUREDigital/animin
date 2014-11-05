@@ -97,11 +97,11 @@ public class Account
             {
                 UniqueID = w.text;
 				UniqueID = UniqueID.Replace(System.Environment.NewLine, "");
-				Debug.Log("test"+UniqueID+"test");
+//				Debug.Log("test"+UniqueID+"test");
                 PlayerPrefs.SetString( "PLAYER_ID", UniqueID );
             }
 
-            Debug.Log( w.text );
+//            Debug.Log( w.text );
             Debug.Log( "Finished uploading name data" );
         }
 

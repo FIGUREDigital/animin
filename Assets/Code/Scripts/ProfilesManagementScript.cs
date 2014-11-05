@@ -132,7 +132,7 @@ public class ProfilesManagementScript : MonoBehaviour
 
 		if(profiles != null)
 		{
-            Debug.Log(profiles.Count);
+//            Debug.Log(profiles.Count);
             for(int i=0;i<profiles.Count;++i)
 			{	
 
