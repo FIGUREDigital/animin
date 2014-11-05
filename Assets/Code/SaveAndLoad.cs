@@ -41,7 +41,7 @@ public class SaveAndLoad {
 	public void LoadAllData()
 	{
 		
-        File.Delete(Application.persistentDataPath + "/savedGames.anidat");
+//        File.Delete(Application.persistentDataPath + "/savedGames.anidat");
 
         if(File.Exists(Application.persistentDataPath + "/savedGames.anidat")) 
 		{
