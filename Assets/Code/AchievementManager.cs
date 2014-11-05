@@ -89,13 +89,14 @@ public class AchievementManager
 			if ( s_Instance == null )
 			{
 				s_Instance = new AchievementManager();
-				s_Instance.PopulateAchievments();
+//				s_Instance.PopulateAchievements();
 			}
 			return s_Instance;
 		}
 	}
 	
 	#endregion
+
 	private void ResetAchievments()
 	{
 		mCompletedAchievements = 0;
@@ -107,38 +108,43 @@ public class AchievementManager
 			tempAchievement.Type = (Achievements)i;
 			tempAchievement.Status = false;
 			ListOfAchievements.Add (tempAchievement);
-
+            ProfilesManagementScript.Singleton.CurrentProfile.Achievements = ListOfAchievements;
 			PlayerPrefs.SetInt("Achievement" + i, 0);
 			PlayerPrefs.SetInt("AchievementFired" + i, 0);
 		}
 		PlayerPrefs.Save();
 	}
 
-	private void PopulateAchievments()
+    public void PopulateAchievements(bool newUser)
 	{
-		bool po = "true" == PlayerPrefs.GetString("AchievementsActive");
+//		bool po = "true" == PlayerPrefs.GetString("AchievementsActive");
 
 		ListOfAchievements.Clear ();
 
-		if(!po)
+        if(newUser)
 		{
 			ResetAchievments();
 		}
 
-		for(int i =0; i < (int)Achievements.Count; i++)
-		{
+        else
+        {
+            ListOfAchievements = ProfilesManagementScript.Singleton.CurrentProfile.Achievements;
+        }
 
-			mCount[i] = PlayerPrefs.GetInt("Achievement" + i);
-			bool fired = PlayerPrefs.GetInt("AchievementFired" + i) == 1;
-			mAchievmentsFired[i] = fired;
-			mCompletedAchievements += fired?1:0;
-
-			AchievementDetails tempAchievement = new AchievementDetails ();
-			tempAchievement.Type = (Achievements)i;
-			tempAchievement.Status = fired;
-			ListOfAchievements.Add (tempAchievement);
-
-		}
+//		for(int i =0; i < (int)Achievements.Count; i++)
+//		{
+//
+//			mCount[i] = PlayerPrefs.GetInt("Achievement" + i);
+//			bool fired = PlayerPrefs.GetInt("AchievementFired" + i) == 1;
+//			mAchievmentsFired[i] = fired;
+//			mCompletedAchievements += fired?1:0;
+//
+//			AchievementDetails tempAchievement = new AchievementDetails ();
+//			tempAchievement.Type = (Achievements)i;
+//			tempAchievement.Status = fired;
+//			ListOfAchievements.Add (tempAchievement);
+//
+//		}
 
 	}
 
@@ -151,6 +157,7 @@ public class AchievementManager
 			PlayerPrefs.SetInt("AchievementFired" + i, mAchievmentsFired[i]?1:0);
 		}
 		PlayerPrefs.Save();
+        ProfilesManagementScript.Singleton.CurrentProfile.Achievements = ListOfAchievements;
 	}
 
 	public void AddToAchievment(Achievements item)
@@ -171,6 +178,7 @@ public class AchievementManager
 				mAchievmentsFired[i] = true;
 			}
 		}
+        ProfilesManagementScript.Singleton.CurrentProfile.Achievements = ListOfAchievements;
 	}
 
 

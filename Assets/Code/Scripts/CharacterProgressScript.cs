@@ -650,12 +650,16 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 
 
+		
 		RaycastHit hitInfo;
 		bool hadRayCollision = false;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hitInfo))
 		{
-			hadRayCollision = true;
+			if (UIGlobalVariablesScript.Singleton.TutHandler.IsPlaying){
+				hadRayCollision = UIGlobalVariablesScript.Singleton.TutHandler.CheckCharacterProgress(this, hitInfo);
+			}  else 
+				hadRayCollision = true;
 			//Debug.Log ("Ray Collision : ["+hitInfo.collider.gameObject.name+"];");
 		}
 
@@ -697,6 +701,8 @@ public class CharacterProgressScript : MonoBehaviour
 			EatAlphaTimer = 0;
 
 			PlayedEatingSound = false;
+
+			UIGlobalVariablesScript.Singleton.TutHandler.EatStrawberry();
 			break;
 		}
 		case ActionId.WaitEatingFinish:
@@ -1405,7 +1411,8 @@ public class CharacterProgressScript : MonoBehaviour
 							FeedMyselfTimer = 0;
 						}
 					}
-				}
+			}
+
 				
 				
 
@@ -1557,7 +1564,10 @@ public class CharacterProgressScript : MonoBehaviour
 
 		if((DateTime.Now - LastSavePerformed).TotalSeconds >= 4)
 		{
-            SaveAndLoad.Instance.SaveDataToProfile();
+//            ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].;
+            SaveAndLoad.Instance.SaveAllData();
+            LastSavePerformed = DateTime.Now;
+            Debug.Log("just saved...");
 		}
 
 		if(Input.GetButtonDown("Fire1"))
@@ -1599,6 +1609,8 @@ public class CharacterProgressScript : MonoBehaviour
 		SleepBoundingBox.SetActive(false);
 		UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.SleepToIdle);
 		UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
+		
+		UIGlobalVariablesScript.Singleton.TutHandler.ExitSleep ();
 	}
 
 

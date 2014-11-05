@@ -27,13 +27,26 @@ public class TutorialHandler : MonoBehaviour {
 	private bool m_PlayingTutorial, m_EndingTutorial;
 	private int m_CurTutorial_i;
 	private int m_Letter_i, m_Lesson_i, m_Entry_i;
-	
-	private int m_SavedDepth;
+
 	private GameObject m_CurrentListening;
+	private string m_CurrentExitCond;
+	public string CurrentExitCond{ get { return m_CurrentExitCond; } }
 	private bool m_WaitingForInput;
 
 	private const string TutorialPlayerPrefID = "TUTORIALS_COMPLETED";
-	
+
+	private float m_Timer;
+	private int m_WaitingForSpecific = -1;
+	private void SetTimerOnTutorial(int TutId, float time){
+		Debug.Log ("Setting Timer. Tut : ["+TutId+"]; Time : ["+time+"];");
+		m_WaitingForSpecific = TutId;
+		m_Timer = time;
+	}
+	private void TurnOffTimer(){
+		m_WaitingForSpecific = -1;
+		m_Timer = 0;
+	}
+
 	public bool IsPlaying
 	{
 		get
@@ -65,6 +78,7 @@ public class TutorialHandler : MonoBehaviour {
 			for (int i = 0; i < Tutorials.Length; i++) {
 				if (StartConditions (i)) {
 					if (TutorialUIParent == null) return;
+					TurnOffTimer();
 					TutorialUIParent.SetActive (true);
 					WormAnimator.gameObject.SetActive(true);
 					//Blocker.gameObject.SetActive(true);
@@ -101,17 +115,14 @@ public class TutorialHandler : MonoBehaviour {
 				TutorialUIParent.SetActive (false);
 			}
 		}
-		/*
-		Debug.Log ("Argh : [" + UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().height+":"+UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().width+ "];");
-		Blocker.GetComponent<BoxCollider> ().size = new Vector3 (
-			UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().width, 
-			UIGlobalVariablesScript.Singleton.UIRoot.GetComponent<UIPanel>().height, 1);
-		*/
-
+		if (m_Timer > 0)
+						m_Timer -= Time.deltaTime;
 	}
 
 
 
+
+	//- EXIT STAMPS ----------------------------------------------------------------
 	public void OnTutorialClick(GameObject go){
 		if (go == m_CurrentListening) {
 			UIEventListener.Get (m_CurrentListening).onClick -= OnTutorialClick;
@@ -122,6 +133,22 @@ public class TutorialHandler : MonoBehaviour {
 			NextButtonPress(true);
 		}
 	}
+	
+	public void ExitSleep(){
+		if (m_CurrentExitCond == "WakeUp") {
+			m_WaitingForInput = false;
+			NextButtonPress(true);
+		}
+	}
+	public void EatStrawberry(){
+		if (m_CurrentExitCond == "EatStrawberry") {
+			m_WaitingForInput = false;
+			NextButtonPress(true);
+		}
+	}
+
+	
+	//- EXIT STAMPS ----------------------------------------------------------------
 	public void NextButtonPress(bool ignoreCheck = false){
 
 		int maxEntries = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].TutEntries.Length;
@@ -133,24 +160,61 @@ public class TutorialHandler : MonoBehaviour {
 		
 		m_Letter_i = 0;
 		m_Entry_i += 1;
-		string exitstr = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].ExitStr;
-		bool noNext = (exitstr != "None" && !ignoreCheck);
+		m_CurrentExitCond = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].ExitStr;
+
+		bool noNext = (m_CurrentExitCond != "None" && !ignoreCheck);
 		if (noNext) maxEntries -= 1;
 		
 		if (m_Entry_i >= maxEntries) {
 
+			// - When at the end of a lesson, this code here fires
 			if (noNext) {
 
-				m_CurrentListening = GOFromString (exitstr);
-				UIWidget widget = m_CurrentListening.GetComponent<UIWidget> ();
-				m_SavedDepth = widget.depth;
-				//widget.depth = Blocker.depth + 1;
-				m_CurrentListening.GetComponent<BoxCollider>().enabled = true;
+				//Exit stamp handling
 
-				UIEventListener.Get (m_CurrentListening).onClick += OnTutorialClick;
-				
-				NextButton.gameObject.SetActive(false);
-				m_WaitingForInput = true;
+				switch(m_CurrentExitCond){
+				case ("Stats"):
+					m_CurrentListening = UIGlobalVariablesScript.Singleton.StatsButton;
+					UIWidget widget = m_CurrentListening.GetComponent<UIWidget> ();
+					m_CurrentListening.GetComponent<BoxCollider>().enabled = true;
+
+					UIEventListener.Get (m_CurrentListening).onClick += OnTutorialClick;
+					
+					NextButton.gameObject.SetActive(false);
+					m_WaitingForInput = true;
+					break;
+				case("EatStrawberry"):
+					
+					PersistentData.Singleton.AddItemToInventory(InventoryItemId.Strawberry, 1);
+
+					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<BoxCollider>().enabled = true;
+					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = InventoryItemId.Strawberry;
+					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UISprite>().spriteName = "strawberry";
+					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIButton>().normalSprite = "strawberry";
+					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIClickButtonMasterScript>().enabled = false;
+
+
+					ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].Hungry = 0;
+					PersistentData.Singleton.Hungry = 0;
+
+
+					//InterfaceItemLinkToModelScript[] links = UIGlobalVariablesScript.Singleton.PanelFoods.GetComponentsInChildren<InterfaceItemLinkToModelScript>(true);
+					/*
+					Debug.Log ("Finding strawberries : ["+links.Length+"];");
+					for (int i = 0; i<links.Length;i++){
+						Debug.Log ("Food Item : ["+links[i].ItemID+"];");
+						if (links[i].ItemID == InventoryItemId.Strawberry){
+							links[i].GetComponent<BoxCollider>().enabled = true;
+							break;
+						}
+					}
+					*/
+					m_WaitingForInput = true;
+					break;
+				default:
+					m_WaitingForInput = true;
+					break;
+				}
 			} else {
 				NextLesson ();
 			}
@@ -163,56 +227,73 @@ public class TutorialHandler : MonoBehaviour {
 		m_Letter_i = 0;
 		m_Entry_i =0;
 		int maxLessons = Tutorials [m_CurTutorial_i].Lessons.Length;
-
+		
 		Debug.Log ("maxLessons : [" + maxLessons + "];");
-
+		
 		if (++m_Lesson_i >= maxLessons) {
 			WormAnimator.SetTrigger ("worm_GoIn");
-
+			
 			PlayerPrefs.SetString(TutorialPlayerPrefID + m_CurTutorial_i,"true");
 			//TutorialReader.Instance.TutorialFinished[m_CurTutorial_i] = true;
 			
 			//Blocker.gameObject.SetActive(false);
 			Block(false);
-
+			
 			m_EndingTutorial = true;
 			NextButton.gameObject.SetActive(false);
+			
+			switch (m_CurTutorial_i){
+			case (0):
+				SetTimerOnTutorial(1,10f);
+				break;
+			case (1):
+				SetTimerOnTutorial(2,20f);
+				break;
+			}
 		}
 	}
-
-	private GameObject GOFromString(string str){
-		switch (str) {
-		case ("Stats"):
-			return StatsButton;
+	
+	
+	//- ENTRY CONDITIONS ----------------------------------------------------------------
+	public bool CheckCharacterProgress(CharacterProgressScript script, RaycastHit hitInfo){
+		bool cont = false;
+		switch (m_CurrentExitCond) {
+		case ("WakeUp"):
+			if (hitInfo.collider.gameObject == script.SleepBoundingBox)
+				cont = true;
 			break;
-		default:
-			return null;
 		}
+		return cont;
 	}
-
 
 	//This method test whether or not to start the tutorial.
 	private bool StartConditions(int id){
 		//if (TutorialReader.Instance.TutorialFinished[id] == true) return false;
 		if (PlayerPrefs.GetString (TutorialPlayerPrefID + id) == "true")
 						return false;
+		if (m_WaitingForSpecific != -1 && id != m_WaitingForSpecific)
+						return false;
 		
 		//Maybe consider replacing int with an enum? So that they're easier to identify.
 		switch (id) {
 		case (0):
 			return true;
-			break;
+		case (1):
+			return (m_Timer<0);
+		case (2):
+			return (m_Timer<0);
+
 		default:
 			return false;
-			break;
 		}
 	}
 
-	public void ResetTutorials(){
-		for (int i = 0; i < Tutorials.Length; i++) {
-			PlayerPrefs.SetString(TutorialPlayerPrefID + i,"false");
-		}
-	}
+
+
+
+
+
+
 
 	private UIButton[] m_Buttons;
 	private bool[] m_EnabledButtons;
@@ -235,6 +316,14 @@ public class TutorialHandler : MonoBehaviour {
 			m_BoolArraySet = false;
 		}
 		NextButton.GetComponent<BoxCollider> ().enabled = true;
+	}
+
+	
+	public void ResetTutorials(){
+		for (int i = 0; i < Tutorials.Length; i++) {
+			PlayerPrefs.SetString(TutorialPlayerPrefID + i,"false");
+			TurnOffTimer();
+		}
 	}
 }
 

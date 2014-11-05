@@ -34,7 +34,6 @@ public class PersistentData
 	public System.DateTime CreatedOn;
 
 
-
 	private int age;
 	private bool audioIsOn;
 	private float happy;

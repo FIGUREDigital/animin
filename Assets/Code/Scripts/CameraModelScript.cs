@@ -227,6 +227,7 @@ public class CameraModelScript : MonoBehaviour
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().PickupItem(child);
 
 			}
+			UIGlobalVariablesScript.Singleton.TutHandler.EatStrawberry();
 
 			//Debug.Log("DCREATED!!!");
 			// Destroy this icon as it's no longer needed
