@@ -60,6 +60,7 @@ public class ProfilesManagementScript : MonoBehaviour
 //        ProfilesManagementScript.Singleton.CurrentProfile = CurrentProfile;
         ListOfPlayerProfiles = new List<PlayerProfileData>();
         SaveAndLoad.Instance.LoadAllData();
+        Debug.Log(ListOfPlayerProfiles.Count);
 
     }
 
