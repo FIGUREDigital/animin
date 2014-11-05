@@ -1557,7 +1557,10 @@ public class CharacterProgressScript : MonoBehaviour
 
 		if((DateTime.Now - LastSavePerformed).TotalSeconds >= 4)
 		{
-            SaveAndLoad.Instance.SaveDataToProfile();
+//            ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].;
+            SaveAndLoad.Instance.SaveAllData();
+            LastSavePerformed = DateTime.Now;
+            Debug.Log("just saved...");
 		}
 
 		if(Input.GetButtonDown("Fire1"))

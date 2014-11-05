@@ -55,7 +55,7 @@ public class ProfilesManagementScript : MonoBehaviour
     void LoadProfileData()
     {
         CurrentProfile = new PlayerProfileData();
-        ProfilesManagementScript.Singleton.CurrentProfile = CurrentProfile;
+//        ProfilesManagementScript.Singleton.CurrentProfile = CurrentProfile;
         ListOfPlayerProfiles = new List<PlayerProfileData>();
         SaveAndLoad.Instance.LoadAllData();
 
@@ -89,8 +89,11 @@ public class ProfilesManagementScript : MonoBehaviour
 		AniminsScreen.SetActive(true);
         PlayerProfileData tempData = new PlayerProfileData();
         tempData = PlayerProfileData.CreateNewProfile(Account.Instance.UserName);
+        tempData.UniqueID = Account.Instance.UniqueID;
         ListOfPlayerProfiles.Add(tempData);
         SaveAndLoad.Instance.SaveAllData();
+		CurrentProfile = tempData;
+        AchievementManager.Instance.PopulateAchievements(true);
 
 	}
 
@@ -117,6 +120,8 @@ public class ProfilesManagementScript : MonoBehaviour
             ListOfPlayerProfiles.Add(tempData);
             SaveAndLoad.Instance.SaveAllData();
             Debug.Log("Saved");
+			CurrentProfile = tempData;
+            AchievementManager.Instance.PopulateAchievements(true);
 		} 
 		else 
 		{

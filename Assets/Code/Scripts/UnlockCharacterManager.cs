@@ -152,7 +152,7 @@ public class UnlockCharacterManager
 		
         UnlockInUIAndProfile(mId);
         ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Add(mId);
-        SaveAndLoad.Instance.SaveDataToProfile();
+        SaveAndLoad.Instance.SaveAchievementsToProfile();
         ShopManager.Instance.EndStore();
         OpenShop();
 	}
