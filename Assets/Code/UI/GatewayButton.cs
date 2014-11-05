@@ -6,6 +6,10 @@ public class GatewayButton : MonoBehaviour {
 
 	[SerializeField]
 	private bool mActive;
+	public bool Active {
+		get { return mActive;}
+		set { mActive = value;}
+	}
 	private ParentalGateway gateway;
 
 	void Start()

@@ -190,6 +190,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 		UIRoot root = GameObject.FindObjectOfType<UIRoot>();
 		go.transform.parent = root.gameObject.transform;
 		go.transform.localScale = Vector3.one;
+		go.transform.localPosition = Vector3.zero;
 		go.GetComponent<ParentalGateway>().Open(prev, next);
 	}
 

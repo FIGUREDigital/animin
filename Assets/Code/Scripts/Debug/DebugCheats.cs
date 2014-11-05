@@ -16,6 +16,7 @@ public enum CheatButtons
 	DebugToggle,
 	AddTime,
 	ResetTutorials,
+	ResetParentalPassword,
 }
 
 public class DebugCheats : MonoBehaviour 
@@ -110,6 +111,9 @@ public class DebugCheats : MonoBehaviour
 		case CheatButtons.ResetTutorials:
 			GameObject tuthandler = GameObject.Find("TutorialHandler");
 			tuthandler.GetComponent<TutorialHandler>().ResetTutorials();
+			break;
+		case CheatButtons.ResetParentalPassword:
+			PlayerPrefs.SetString ("ParentalPassword", "");
 			break;
 
 		case CheatButtons.DebugToggle:
