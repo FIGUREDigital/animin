@@ -89,16 +89,15 @@ public class FlurryLogger{
 
 	public void CharacterPurchasedIAP()
 	{
-
-		for(int i = 1; i < PlayerProfileData.ActiveProfile.Characters.Length; i++)
+		for(int i = 1; i < ProfilesManagementScript.Singleton.CurrentProfile.Characters.Length; i++)
 		{
-			if(PlayerProfileData.ActiveProfile.Characters[i].CreatedOn != null)
+			if(ProfilesManagementScript.Singleton.CurrentProfile.Characters[i].CreatedOn != null)
 			{
 				return;
 			}
 
 		}
-		TimeSpan useLength = DateTime.Now.Subtract(PlayerProfileData.ActiveProfile.Characters[0].CreatedOn);
+		TimeSpan useLength = DateTime.Now.Subtract(ProfilesManagementScript.Singleton.CurrentProfile.Characters[0].CreatedOn);
 		Debug.Log ("FLURRY LOGGER : [ConversionTime];");
 
 		Dictionary<string,string> dict = new Dictionary<string,string> ();
@@ -111,15 +110,15 @@ public class FlurryLogger{
 	public void CharacterPurchasedWeb()
 	{
 		
-		for(int i = 1; i < PlayerProfileData.ActiveProfile.Characters.Length; i++)
+		for(int i = 1; i < ProfilesManagementScript.Singleton.CurrentProfile.Characters.Length; i++)
 		{
-			if(PlayerProfileData.ActiveProfile.Characters[i].CreatedOn != null)
+			if(ProfilesManagementScript.Singleton.CurrentProfile.Characters[i].CreatedOn != null)
 			{
 				return;
 			}
 			
 		}
-		TimeSpan useLength = DateTime.Now.Subtract(PlayerProfileData.ActiveProfile.Characters[0].CreatedOn);
+		TimeSpan useLength = DateTime.Now.Subtract(ProfilesManagementScript.Singleton.CurrentProfile.Characters[0].CreatedOn);
 		Debug.Log ("FLURRY LOGGER : [ConversionTime];");
 		
 		Dictionary<string,string> dict = new Dictionary<string,string> ();
