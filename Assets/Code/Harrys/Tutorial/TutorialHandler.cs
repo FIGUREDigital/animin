@@ -89,6 +89,8 @@ public class TutorialHandler : MonoBehaviour {
 					m_Letter_i = 0;
 					m_Lesson_i = 0;
 					m_Entry_i = 0;
+					
+					MakeScreensVisible(new GameObject[]{UIGlobalVariablesScript.Singleton.CaringScreenRef});
 
 					m_PlayingTutorial = true;
 					break;
@@ -323,6 +325,34 @@ public class TutorialHandler : MonoBehaviour {
 		for (int i = 0; i < Tutorials.Length; i++) {
 			PlayerPrefs.SetString(TutorialPlayerPrefID + i,"false");
 			TurnOffTimer();
+		}
+	}
+
+
+	public void MakeScreensVisible(GameObject[] turnons){
+		GameObject[] turnoffs = new GameObject[]{
+			UIGlobalVariablesScript.Singleton.CaringScreenRef,
+			UIGlobalVariablesScript.Singleton.AlarmUI,
+			UIGlobalVariablesScript.Singleton.StereoUI,
+			UIGlobalVariablesScript.Singleton.MainMenuPopupObjectRef,
+			UIGlobalVariablesScript.Singleton.LightbulbUI,
+			UIGlobalVariablesScript.Singleton.AchievementsScreenRef,
+			UIGlobalVariablesScript.Singleton.EDMBoxUI,
+			UIGlobalVariablesScript.Singleton.PianoUI,
+			UIGlobalVariablesScript.Singleton.JunoUI,
+			UIGlobalVariablesScript.Singleton.MinigamesMenuMasterScreenRef,
+			UIGlobalVariablesScript.Singleton.StatsScreenRef,
+			UIGlobalVariablesScript.Singleton.PicturesScreenRef,
+			UIGlobalVariablesScript.Singleton.SettingsScreenRef,
+			UIGlobalVariablesScript.Singleton.CreditsScreenRef,
+			UIGlobalVariablesScript.Singleton.UIRoot.transform.FindChild ("ParentalControlsUI").gameObject,
+			UIGlobalVariablesScript.Singleton.UIRoot.transform.FindChild ("UI - Set Parental Password").gameObject
+		};
+		for (int i = 0; i < turnoffs.Length; i++){
+			turnoffs[i].SetActive(false);
+		}
+		for (int i = 0; i < turnons.Length; i++){
+			turnons[i].SetActive(true);
 		}
 	}
 }
