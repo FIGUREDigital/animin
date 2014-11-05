@@ -112,6 +112,9 @@ public class UIGlobalVariablesScript : MonoBehaviour
 	public GameObject StatsButton;
 	public GameObject MinigamesButton;
 
+    public GameObject ParentalGateway;
+    public GameObject PurchaseAniminViaPaypal;
+
 	[SerializeField]
 	private TutorialHandler TutorialHandler;
 	public TutorialHandler TutHandler{ get { return TutorialHandler; } }
@@ -184,14 +187,20 @@ public class UIGlobalVariablesScript : MonoBehaviour
 		}
 	}
 
+    public void LoadAniminPaypalPurchaseScreen()
+    {
+        PurchaseAniminViaPaypal = (GameObject)GameObject.Instantiate (Resources.Load("NGUIPrefabs/UI - PaypalCharacterSelect"));
+        PurchaseAniminViaPaypal.SetActive( false );
+    }
+
 	public void OpenParentalGateway(GameObject prev, GameObject next)
 	{
-		GameObject go = (GameObject)Instantiate(Resources.Load("Prefabs/Parental Gateway"));
+        ParentalGateway = (GameObject)Instantiate(Resources.Load("Prefabs/Parental Gateway"));
 		UIRoot root = GameObject.FindObjectOfType<UIRoot>();
-		go.transform.parent = root.gameObject.transform;
-		go.transform.localScale = Vector3.one;
-		go.transform.localPosition = Vector3.zero;
-		go.GetComponent<ParentalGateway>().Open(prev, next);
+        ParentalGateway.transform.parent = root.gameObject.transform;
+        ParentalGateway.transform.localScale = Vector3.one;
+        ParentalGateway.transform.localPosition = Vector3.zero;
+        ParentalGateway.GetComponent<ParentalGateway>().Open(prev, next);
 	}
 
     public void LaunchWebview(PersistentData.TypesOfAnimin type, decimal price)
@@ -215,6 +224,8 @@ public class UIGlobalVariablesScript : MonoBehaviour
 
 		EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
         EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition );
+        Debug.Log("http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition);
+
 		#endif
 		
 	}
