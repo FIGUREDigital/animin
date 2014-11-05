@@ -650,12 +650,16 @@ public class CharacterProgressScript : MonoBehaviour
 		}
 
 
+		
 		RaycastHit hitInfo;
 		bool hadRayCollision = false;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hitInfo))
 		{
-			hadRayCollision = true;
+			if (UIGlobalVariablesScript.Singleton.TutHandler.IsPlaying){
+				hadRayCollision = UIGlobalVariablesScript.Singleton.TutHandler.CheckCharacterProgress(this, hitInfo);
+			}  else 
+				hadRayCollision = true;
 			//Debug.Log ("Ray Collision : ["+hitInfo.collider.gameObject.name+"];");
 		}
 
@@ -1599,6 +1603,8 @@ public class CharacterProgressScript : MonoBehaviour
 		SleepBoundingBox.SetActive(false);
 		UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.SleepToIdle);
 		UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
+		
+		UIGlobalVariablesScript.Singleton.TutHandler.ExitSleep ();
 	}
 
 
