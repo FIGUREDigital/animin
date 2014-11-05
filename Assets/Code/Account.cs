@@ -62,7 +62,7 @@ public class Account
         {            
 			webForm.AddField( "NewUser", "0" );
             webForm.AddField( "ID", UniqueID );
-			Debug.Log ("test"+UniqueID+"test");
+//			Debug.Log ("test"+UniqueID+"test");
         }
 
         webForm.AddField( "Address", address );
