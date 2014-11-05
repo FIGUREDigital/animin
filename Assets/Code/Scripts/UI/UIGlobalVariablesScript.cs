@@ -193,7 +193,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 		go.GetComponent<ParentalGateway>().Open(prev, next);
 	}
 
-	public void LaunchWebview()
+    public void LaunchWebview(PersistentData.TypesOfAnimin type, decimal price)
 	{
 		Debug.Log( "Buying with webview" );
 
@@ -210,8 +210,10 @@ public class UIGlobalVariablesScript : MonoBehaviour
 			height *= 2;
 		}
 		
+        string GetUrlAddition = "?Type="+type+"&Price="+price; 
+
 		EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
-		EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php" );
+        EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition );
 		#endif
 		
 	}
