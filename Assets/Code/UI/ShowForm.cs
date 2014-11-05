@@ -4,18 +4,19 @@ using System.Collections;
 public class ShowForm : MonoBehaviour
 {
     public GameObject Parent;
-    public GameObject WebviewEnabler;
+    private GameObject PurchaseAniminViaPaypal;
 
     public void Start()
     {
-		WebviewEnabler.SetActive( false );
+        PurchaseAniminViaPaypal = (GameObject)GameObject.Instantiate (Resources.Load("NGUIPrefabs/UI - PaypalCharacterSelect"));
+        PurchaseAniminViaPaypal.SetActive( false );
     }
 
     private void OnClick()
     {
 //        Debug.Log( "Buying with webview" );
 
-		UIGlobalVariablesScript.Singleton.OpenParentalGateway( Parent, WebviewEnabler );
+        UIGlobalVariablesScript.Singleton.OpenParentalGateway( Parent, PurchaseAniminViaPaypal );
 //		LaunchWebview ();
 
     }
