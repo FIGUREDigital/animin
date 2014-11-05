@@ -156,6 +156,7 @@ public class CharacterProgressScript : MonoBehaviour
 	public DateTime NextHappynBonusTimeAt;
 	public DateTime LastSavePerformed;
 	public DateTime LastTimeToilet;
+	public DateTime LastGiftTime;
 
 	private bool IsDetectingSwipeRight;
 	private int SwipesDetectedCount;
@@ -242,6 +243,8 @@ public class CharacterProgressScript : MonoBehaviour
 	public float PortalTimer;
 	public float SmallCooldownTimer;
 	private const float M_SHIT_TIME = 300.0f;
+	private const float M_GIFT_TIME = 100.0f;
+	private const float M_HAPPINESS_DEGREDATION = 0.1f;
 
 	// Use this for initialization
 	void Awake () 
@@ -557,9 +560,9 @@ public class CharacterProgressScript : MonoBehaviour
 		EvolutionManager.Instance.UpdateEvo();
 
 
-		PersistentData.Singleton.Hungry -= Time.deltaTime * 0.2f;
-		PersistentData.Singleton.Fitness -= Time.deltaTime * 0.2f;
-		PersistentData.Singleton.Health -= Time.deltaTime * 0.2f;
+		PersistentData.Singleton.Hungry -= Time.deltaTime * M_HAPPINESS_DEGREDATION;
+		PersistentData.Singleton.Fitness -= Time.deltaTime * M_HAPPINESS_DEGREDATION;
+		PersistentData.Singleton.Health -= Time.deltaTime * M_HAPPINESS_DEGREDATION;
 	
 		//TextTest.color = new Color(1,1,1, TextTest.color.a - Time.deltaTime * 0.6f);
 		//if(TextTest.color.a < 0)
@@ -1504,6 +1507,12 @@ public class CharacterProgressScript : MonoBehaviour
 			MoveTo(this.transform.position + new Vector3(UnityEngine.Random.Range(-40, 40), 0, randomDistanceA * sign), false);
 
 			LastTimeToilet = DateTime.Now;
+		}
+
+		if((DateTime.Now - LastGiftTime).TotalSeconds >= M_GIFT_TIME && !animationController.IsSleeping && animationController.IsIdle && !IsMovingTowardsLocation)
+		{
+			GetRandomItem();
+			LastGiftTime = DateTime.Now;
 		}
 
 
