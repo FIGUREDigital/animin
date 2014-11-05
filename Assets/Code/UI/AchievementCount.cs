@@ -9,5 +9,9 @@ public class AchievementCount : MonoBehaviour
 		label = GetComponent<UILabel>();
 		label.text = AchievementManager.Instance.CompletedAchievements.ToString();
 	}
+	void OnEnable()
+	{
+		label.text = AchievementManager.Instance.CompletedAchievements.ToString();
+	}
 
 }
