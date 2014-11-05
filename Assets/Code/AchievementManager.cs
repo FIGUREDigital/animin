@@ -15,7 +15,7 @@ public class AchievementManager
 		Heal,
 		Count
 	}
-
+	[System.Serializable]
 	public class AchievementDetails
 	{
 		public Achievements Type;
