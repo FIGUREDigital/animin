@@ -67,7 +67,7 @@ public class SoundEngineScript : MonoBehaviour
 
 	void Update()
 	{
-		if(!PlayerProfileData.ActiveProfile.Settings.AudioEnabled) 
+        if(!ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled) 
 		{
 			if(SoundFxLooper1.isPlaying)
 				SoundFxLooper1.Stop();
@@ -236,7 +236,7 @@ public class SoundEngineScript : MonoBehaviour
 	
 	public void PlayFart()
 	{
-		if(!PlayerProfileData.ActiveProfile.Settings.AudioEnabled) return;
+        if(!ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled) return;
 
 		this.audio.PlayOneShot( FartSounds[Random.Range(0, FartSounds.Length)] );
 	}
@@ -270,13 +270,13 @@ public class SoundEngineScript : MonoBehaviour
 
 	public void Play(GenericSoundId id)
 	{
-		if(!PlayerProfileData.ActiveProfile.Settings.AudioEnabled) return;
+        if(!ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled) return;
 		this.audio.PlayOneShot(GenericSounds[(int)id]);
 	}
 
     public void Play(PersistentData.TypesOfAnimin animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
 	{
-		if(!PlayerProfileData.ActiveProfile.Settings.AudioEnabled) return;
+        if(!ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled) return;
 		if (CreatureSounds [(int)animin, (int)creatureId, (int)soundId] == null) {
 			Debug.Log ("Panic! Sound : [" + animin + "|" + creatureId + "|" + soundId + "] is not valid");
 			return;

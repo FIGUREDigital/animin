@@ -7,7 +7,7 @@ using System;
 public class PlayerProfileData
 {
     /// <summary>No Description</summary>
-    public static PlayerProfileData ActiveProfile;
+//    public static PlayerProfileData ActiveProfile;
 
     /// <summary>No Description</summary>
     private int FileVersion = 1;

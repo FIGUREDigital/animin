@@ -89,9 +89,9 @@ public class CharacterChoiceItem : MonoBehaviour
 	private void UpdateAge()
 	{
 		UILabel label = mAgeLabel.GetComponent<UILabel>();
-		if(PlayerProfileData.ActiveProfile != null)
+        if(ProfilesManagementScript.Singleton.CurrentProfile != null)
 		{
-			PersistentData pd = PlayerProfileData.ActiveProfile.Characters[(int)mId];
+            PersistentData pd = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)mId];
 			label.text = "Age " + pd.Age;
 		}
 		else

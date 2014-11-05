@@ -36,7 +36,7 @@ public class ProfilesManagementScript : MonoBehaviour
 
     public List<PlayerProfileData> ListOfPlayerProfiles;
 
-    public PlayerProfileData CurrentProfile;      
+    public PlayerProfileData CurrentProfile; 
 
 	void Awake()
 	{
@@ -49,12 +49,13 @@ public class ProfilesManagementScript : MonoBehaviour
 			go.AddComponent<ArCameraManager>();
             LoadProfileData();
 		}
+
 	}
 
     void LoadProfileData()
     {
         CurrentProfile = new PlayerProfileData();
-		PlayerProfileData.ActiveProfile = CurrentProfile;
+        ProfilesManagementScript.Singleton.CurrentProfile = CurrentProfile;
         ListOfPlayerProfiles = new List<PlayerProfileData>();
         SaveAndLoad.Instance.LoadAllData();
 
@@ -67,7 +68,7 @@ public class ProfilesManagementScript : MonoBehaviour
 		//PlayerProfileData.ActiveProfile = PlayerProfileData.GetDefaultProfile();
 		//if(PlayerProfileData.ActiveProfile == null)
 		//{
-			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("DefaultProfile");
+        ProfilesManagementScript.Singleton.CurrentProfile = PlayerProfileData.CreateNewProfile("DefaultProfile");
 		//}
 		
 		EvolutionManager.Instance.Deserialize();

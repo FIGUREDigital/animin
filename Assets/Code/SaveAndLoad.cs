@@ -77,7 +77,7 @@ public class SaveAndLoad {
 
     public void SaveDataToProfile()
     {
-        PlayerProfileData profile = PlayerProfileData.ActiveProfile;
+        PlayerProfileData profile = ProfilesManagementScript.Singleton.CurrentProfile;
 
         for (int i = 0; i < (int)PersistentData.TypesOfAnimin.Count-1; i++) 
         {

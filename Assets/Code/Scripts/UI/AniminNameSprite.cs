@@ -20,7 +20,7 @@ public class AniminNameSprite : MonoBehaviour {
 		sprite.atlas = mAtlas;
 
 		string name = "";
-		switch(PlayerProfileData.ActiveProfile.ActiveAnimin)
+        switch(ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin)
 		{
             case PersistentData.TypesOfAnimin.Pi:
 			name = mPiSprite;

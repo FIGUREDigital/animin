@@ -166,7 +166,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 	public static void SetSoundSprite()
 	{
-		if(PlayerProfileData.ActiveProfile.Settings.AudioEnabled)
+        if(ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled)
 			UIGlobalVariablesScript.Singleton.SoundSprite.GetComponent<UISprite>().spriteName = "pauseScreenSound";
 		else
 			UIGlobalVariablesScript.Singleton.SoundSprite.GetComponent<UISprite>().spriteName = "soundOff";
@@ -193,7 +193,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
 		case UIFunctionalityId.AudioOnOffGame:
 		{
-			PlayerProfileData.ActiveProfile.Settings.AudioEnabled = !PlayerProfileData.ActiveProfile.Settings.AudioEnabled;
+                    ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled = !ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled;
 
 			SetSoundSprite();
 

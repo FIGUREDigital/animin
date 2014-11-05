@@ -75,10 +75,10 @@ public class LoadProfileMG2 : MonoBehaviour {
 	}
 	void Awake(){
 
-		if (PlayerProfileData.ActiveProfile == null) {
+        if (ProfilesManagementScript.Singleton.CurrentProfile == null) {
 			Debug.Log ("PlayerProfileData.ActiveProfile = null!");
-			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("Dummy");
-            PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters [(int)PersistentData.TypesOfAnimin.Pi];
+            ProfilesManagementScript.Singleton.CurrentProfile = PlayerProfileData.CreateNewProfile("Dummy");
+            PersistentData.Singleton = ProfilesManagementScript.Singleton.CurrentProfile.Characters [(int)PersistentData.TypesOfAnimin.Pi];
 		}
 
 

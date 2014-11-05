@@ -258,10 +258,10 @@ public class CharacterProgressScript : MonoBehaviour
 		//PersistentData.Singleton.SetDefault();
 		//PersistentData.Singleton.Load();
 
-		if(PlayerProfileData.ActiveProfile == null)
+        if(ProfilesManagementScript.Singleton.CurrentProfile == null)
 		{
-			PlayerProfileData.ActiveProfile = PlayerProfileData.CreateNewProfile("buildintest");
-            PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)PersistentData.TypesOfAnimin.Tbo];
+            ProfilesManagementScript.Singleton.CurrentProfile = PlayerProfileData.CreateNewProfile("buildintest");
+            PersistentData.Singleton = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)PersistentData.TypesOfAnimin.Tbo];
 		}
 
 

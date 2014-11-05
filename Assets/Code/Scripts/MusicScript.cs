@@ -11,7 +11,7 @@ public class MusicScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(!PlayerProfileData.ActiveProfile.Settings.AudioEnabled) 
+        if(!ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled) 
 		{
 			if(this.GetComponent<AudioSource>().isPlaying)
 				this.GetComponent<AudioSource>().Stop();
