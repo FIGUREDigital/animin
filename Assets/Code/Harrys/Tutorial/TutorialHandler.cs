@@ -257,13 +257,13 @@ public class TutorialHandler : MonoBehaviour {
 				SetTimerOnTutorial(3,20f);
 				break;
 			case (3):
-				SetTimerOnTutorial(3,60f);
+				SetTimerOnTutorial(4,60f);
 				break;
 			case (4):
-				SetTimerOnTutorial(3,60f);
+				SetTimerOnTutorial(5,60f);
 				break;
 			case (5):
-				SetTimerOnTutorial(3,20f);
+				SetTimerOnTutorial(6,20f);
 				break;
 			}
 		}

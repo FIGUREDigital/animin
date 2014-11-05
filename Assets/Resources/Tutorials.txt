@@ -63,7 +63,7 @@
 	  	<Lesson>
 		  	<TutEntries>
 		  		<TutEntry text = "If you print the gamecard (found in the stats screen)"/>
-		  		<TutEntry text = "You'll be able to unleash your animin into the real world!"/>
+		  		<TutEntry text = "You'll be able to see your Animin into the real world!"/>
 	  		</TutEntries>
 	  		<Stamp exit = "None"/>
 	  	</Lesson>
