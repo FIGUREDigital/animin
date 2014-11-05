@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class ItemPickupSavedData
 {
 	public CharacterProgressScript ScriptRef;
@@ -56,7 +57,7 @@ public enum InventoryItemId
 	Count,
 }
 
-
+[System.Serializable]
 public class InventoryItemBankData
 {
 	public InventoryItemId Id;
@@ -64,7 +65,7 @@ public class InventoryItemBankData
 	public string SpriteName;
 	public PopupItemType ItemType;
 }
-
+[System.Serializable]
 public class InventoryItemData
 {
 	public static InventoryItemBankData[] Items;
@@ -122,13 +123,13 @@ public enum AniminSubevolutionStageId
 
 	Count,
 }
-
+[System.Serializable]
 public class AniminSubevolutionStageData
 {
 	public static float[] Stages = new float[] { 10, 20, 30, 40, 50, 60, 70, 80};
 
 }
-
+[System.Serializable]
 public class HappyStateRange
 {
 	public static HappyStateRange[] HappyStates = new HappyStateRange[] 
@@ -149,7 +150,7 @@ public class HappyStateRange
 	public AnimationHappyId Id;
 }
 
-
+[System.Serializable]
 public class CharacterProgressScript : MonoBehaviour 
 {
 	//public List<AchievementId> Achievements = new List<AchievementId>();
