@@ -321,8 +321,10 @@ public class ServerManager : MonoBehaviour {
 
         data.AddField( "CardNumber", __code );
         data.AddField( "UserID", Account.Instance.UniqueID );
+        data.AddField("Animin", ProfilesManagementScript.Singleton.AniminToUnlockId.ToString());
 
-		var request = new WWW("http://terahard.org/Teratest/DatabaseAndScripts/CheckCardLegitimacy.php", data);//new WWW("http://leaderboard.eu01.aws.af.cm/api/GET/access/", data);
+		var request = new WWW("http://terahard.org/Teratest/DatabaseAndScripts/CheckCardLegitimacy.php", data);
+        //new WWW("http://leaderboard.eu01.aws.af.cm/api/GET/access/", data);
 		
 		yield return request;
 		

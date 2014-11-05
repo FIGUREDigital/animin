@@ -26,7 +26,7 @@ public class CloseWebView : MonoBehaviour
             {
                 Destroy(UIGlobalVariablesScript.Singleton.PurchaseAniminViaPaypal);
             }
-            transform.parent.gameObject.SetActive(false);
+            transform.gameObject.SetActive(false);
 		}
 #if UNITY_IOS
       EtceteraBinding.inlineWebViewClose();  

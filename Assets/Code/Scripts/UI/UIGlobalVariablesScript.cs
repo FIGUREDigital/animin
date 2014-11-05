@@ -224,7 +224,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 
 		EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
         EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition );
-        Debug.Log("http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition);
+//        Debug.Log("http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition);
 
 		#endif
 		
