@@ -150,7 +150,7 @@ public class HappyStateRange
 	public AnimationHappyId Id;
 }
 
-[System.Serializable]
+//[System.Serializable]
 public class CharacterProgressScript : MonoBehaviour 
 {
 	//public List<AchievementId> Achievements = new List<AchievementId>();

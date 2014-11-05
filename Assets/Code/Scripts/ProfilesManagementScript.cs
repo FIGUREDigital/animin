@@ -96,6 +96,7 @@ public class ProfilesManagementScript : MonoBehaviour
         SaveAndLoad.Instance.SaveAllData();
 		CurrentProfile = tempData;
         AchievementManager.Instance.PopulateAchievements(true);
+		UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
         CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
 
 	}
@@ -133,6 +134,7 @@ public class ProfilesManagementScript : MonoBehaviour
             Debug.Log("Saved");
 			CurrentProfile = tempData;
             AchievementManager.Instance.PopulateAchievements(true);
+			UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
             CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
 		} 
 		else 

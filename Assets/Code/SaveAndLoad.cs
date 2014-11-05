@@ -36,6 +36,7 @@ public class SaveAndLoad {
 	public SaveAndLoad()
 	{
 		ProfileList = new List<ProfilesToStore> ();
+		PlayerPrefs.DeleteAll ();
 	}
 
 	public void LoadAllData()
