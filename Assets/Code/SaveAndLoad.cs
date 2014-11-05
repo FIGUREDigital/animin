@@ -75,62 +75,6 @@ public class SaveAndLoad {
 
 	}	
 
-    public void SaveDataToProfile()
-    {
-        PlayerProfileData profile = ProfilesManagementScript.Singleton.CurrentProfile;
-
-        for (int i = 0; i < (int)PersistentData.TypesOfAnimin.Count-1; i++) 
-        {
-            PlayerProfileData.CharacterData tempCharacter = CollectCharacterData((PersistentData.TypesOfAnimin)i);
-            profile.ListOfDataForAnimin.Add(tempCharacter);
-        }
-    }
-
-    private PlayerProfileData.CharacterData CollectCharacterData(PersistentData.TypesOfAnimin characterType)
-	{
-        PlayerProfileData.CharacterData tempCharacter = new PlayerProfileData.CharacterData ();
-
-		tempCharacter.Type = characterType;
-
-        tempCharacter.ItemList = new List<PlayerProfileData.ItemDetails> ();
-
-		for (int i = 0; i < PersistentData.Singleton.Inventory.Count; i++) 
-		{
-            PlayerProfileData.ItemDetails tempItem = new PlayerProfileData.ItemDetails();
-
-			tempItem.ID = PersistentData.Singleton.Inventory[i].Id;
-
-			tempItem.Amount = PersistentData.Singleton.Inventory[i].Count;
-
-			tempCharacter.ItemList.Add(tempItem);
-		}
-		
-        tempCharacter.Achievements = new List<AchievementManager.AchievementDetails>();
-        for (int j=0; j < AchievementManager.Instance.ListOfAchievements.Count; j++)
-        {
-            tempCharacter.Achievements.Add(AchievementManager.Instance.ListOfAchievements[j]);
-        }   
-
-        tempCharacter.ZEF = PersistentData.Singleton.ZefTokens;
-        tempCharacter.Age = PersistentData.Singleton.Age;
-        tempCharacter.EvolutionLevel = PersistentData.Singleton.Evolution; 
-        tempCharacter.AnimEvolution = PersistentData.Singleton.AniminEvolutionId;
-
-//		public DateTime NextHappynBonusTimeAt; // TODO: Figure out where these are stored
-//		public DateTime LastTimeToilet;		
-
-        tempCharacter.LastSavePerformed = DateTime.Now;
-
-        tempCharacter.Happiness = new PlayerProfileData.HappinessData();
-
-        tempCharacter.Happiness.Happiness = PersistentData.Singleton.Happy;
-        tempCharacter.Happiness.Fitness = PersistentData.Singleton.Fitness;
-        tempCharacter.Happiness.Health = PersistentData.Singleton.Health;
-        tempCharacter.Happiness.Hunger = PersistentData.Singleton.Hungry;
-
-		return tempCharacter;
-	}
-
     public List<PlayerProfileData> LoadProfileData()
     {
         List<PlayerProfileData>  tempProfile = new List<PlayerProfileData> ();
@@ -152,5 +96,4 @@ public class SaveAndLoad {
             ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Add(ProfileList[i].PlayerData);            
         }
 	}
-
 }

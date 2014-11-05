@@ -38,6 +38,8 @@ public class ProfilesManagementScript : MonoBehaviour
 
     public PlayerProfileData CurrentProfile; 
 
+    public PersistentData CurrentAnimin;
+
 	void Awake()
 	{
 		Singleton = this;
@@ -55,7 +57,7 @@ public class ProfilesManagementScript : MonoBehaviour
     void LoadProfileData()
     {
         CurrentProfile = new PlayerProfileData();
-        ProfilesManagementScript.Singleton.CurrentProfile = CurrentProfile;
+//        ProfilesManagementScript.Singleton.CurrentProfile = CurrentProfile;
         ListOfPlayerProfiles = new List<PlayerProfileData>();
         SaveAndLoad.Instance.LoadAllData();
 
@@ -89,10 +91,22 @@ public class ProfilesManagementScript : MonoBehaviour
 		AniminsScreen.SetActive(true);
         PlayerProfileData tempData = new PlayerProfileData();
         tempData = PlayerProfileData.CreateNewProfile(Account.Instance.UserName);
+        tempData.UniqueID = Account.Instance.UniqueID;
         ListOfPlayerProfiles.Add(tempData);
         SaveAndLoad.Instance.SaveAllData();
+		CurrentProfile = tempData;
+        AchievementManager.Instance.PopulateAchievements(true);
+        CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
 
 	}
+
+    public void LoginExistingUser()
+    {
+        CurrentProfile = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[0]; // TODO: Make it the user they actually click on once more are shown on profile selection screen
+        AchievementManager.Instance.PopulateAchievements(false);
+        UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
+        CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
+    }
 
 	public void CheckProfileLoginPasscode(string code)
 	{
@@ -117,6 +131,9 @@ public class ProfilesManagementScript : MonoBehaviour
             ListOfPlayerProfiles.Add(tempData);
             SaveAndLoad.Instance.SaveAllData();
             Debug.Log("Saved");
+			CurrentProfile = tempData;
+            AchievementManager.Instance.PopulateAchievements(true);
+            CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
 		} 
 		else 
 		{
