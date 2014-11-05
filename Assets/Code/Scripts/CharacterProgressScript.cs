@@ -657,6 +657,7 @@ public class CharacterProgressScript : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hitInfo))
 		{
+			Debug.Log("TUTORIAL PLAYING? : ["+UIGlobalVariablesScript.Singleton.TutHandler.IsPlaying+"]");
 			if (UIGlobalVariablesScript.Singleton.TutHandler.IsPlaying){
 				hadRayCollision = UIGlobalVariablesScript.Singleton.TutHandler.CheckCharacterProgress(this, hitInfo);
 			}  else 
