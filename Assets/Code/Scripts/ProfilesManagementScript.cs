@@ -38,6 +38,8 @@ public class ProfilesManagementScript : MonoBehaviour
 
     public PlayerProfileData CurrentProfile; 
 
+    public PersistentData CurrentAnimin;
+
 	void Awake()
 	{
 		Singleton = this;
@@ -94,8 +96,17 @@ public class ProfilesManagementScript : MonoBehaviour
         SaveAndLoad.Instance.SaveAllData();
 		CurrentProfile = tempData;
         AchievementManager.Instance.PopulateAchievements(true);
+        CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
 
 	}
+
+    public void LoginExistingUser()
+    {
+        CurrentProfile = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[0]; // TODO: Make it the user they actually click on once more are shown on profile selection screen
+        AchievementManager.Instance.PopulateAchievements(false);
+        UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
+        CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
+    }
 
 	public void CheckProfileLoginPasscode(string code)
 	{
@@ -122,6 +133,7 @@ public class ProfilesManagementScript : MonoBehaviour
             Debug.Log("Saved");
 			CurrentProfile = tempData;
             AchievementManager.Instance.PopulateAchievements(true);
+            CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
 		} 
 		else 
 		{
