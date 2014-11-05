@@ -241,6 +241,7 @@ public class CharacterProgressScript : MonoBehaviour
 	private List<Vector3> SwipeHistoryPositions = new List<Vector3>();
 	public float PortalTimer;
 	public float SmallCooldownTimer;
+	private const float M_SHIT_TIME = 300.0f;
 
 	// Use this for initialization
 	void Awake () 
@@ -1475,7 +1476,7 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 		}
 
-		if((DateTime.Now - LastTimeToilet).TotalSeconds >= 90 && !animationController.IsSleeping && animationController.IsIdle && !IsMovingTowardsLocation)
+		if((DateTime.Now - LastTimeToilet).TotalSeconds >= M_SHIT_TIME && !animationController.IsSleeping && animationController.IsIdle && !IsMovingTowardsLocation)
 		{
 			GameObject newPoo;
 			if(UnityEngine.Random.Range(0, 2) == 0)
@@ -1684,8 +1685,11 @@ public class CharacterProgressScript : MonoBehaviour
 			{*/
 				//ShowText("yum yum");
 			PersistentData.Singleton.Hungry += item.Points;
-			
-			AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.EatFruit);
+
+			if(item.Id == InventoryItemId.Blueberry || item.Id == InventoryItemId.Strawberry || item.Id == InventoryItemId.watermelon)
+			{
+				AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.EatFruit);
+			}
 				//Stop(true);
 						
 
