@@ -116,9 +116,10 @@ public class SaveAndLoad {
         tempCharacter.EvolutionLevel = PersistentData.Singleton.Evolution; 
         tempCharacter.AnimEvolution = PersistentData.Singleton.AniminEvolutionId;
 
-//		public DateTime NextHappynBonusTimeAt;
-        tempCharacter.LastSavePerformed = DateTime.Now;
+//		public DateTime NextHappynBonusTimeAt; // TODO: Figure out where these are stored
 //		public DateTime LastTimeToilet;		
+
+        tempCharacter.LastSavePerformed = DateTime.Now;
 
         tempCharacter.Happiness = new PlayerProfileData.HappinessData();
 
