@@ -26,9 +26,9 @@ public class SelectCharacterClickScript : MonoBehaviour
 		//PersistentData.Singleton.AniminEvolutionId = AniminEvolutionStageId.Baby;
 		//PersistentData.Singleton.Save();
 
-		PlayerProfileData.ActiveProfile.ActiveAnimin = Animin;
+        ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin = Animin;
 
-		PersistentData.Singleton = PlayerProfileData.ActiveProfile.Characters[(int)Animin];
+        PersistentData.Singleton = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)Animin];
 
 		if (!ProfilesManagementScript.Singleton.BeginLoadLevel) {	
 			ProfilesManagementScript.Singleton.BeginLoadLevel = true;

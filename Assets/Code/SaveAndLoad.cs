@@ -77,7 +77,7 @@ public class SaveAndLoad {
 
     public void SaveDataToProfile()
     {
-        PlayerProfileData profile = PlayerProfileData.ActiveProfile;
+        PlayerProfileData profile = ProfilesManagementScript.Singleton.CurrentProfile;
 
         for (int i = 0; i < (int)PersistentData.TypesOfAnimin.Count-1; i++) 
         {
@@ -116,9 +116,10 @@ public class SaveAndLoad {
         tempCharacter.EvolutionLevel = PersistentData.Singleton.Evolution; 
         tempCharacter.AnimEvolution = PersistentData.Singleton.AniminEvolutionId;
 
-//		public DateTime NextHappynBonusTimeAt;
-        tempCharacter.LastSavePerformed = DateTime.Now;
+//		public DateTime NextHappynBonusTimeAt; // TODO: Figure out where these are stored
 //		public DateTime LastTimeToilet;		
+
+        tempCharacter.LastSavePerformed = DateTime.Now;
 
         tempCharacter.Happiness = new PlayerProfileData.HappinessData();
 

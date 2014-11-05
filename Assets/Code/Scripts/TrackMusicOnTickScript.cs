@@ -11,7 +11,7 @@ public class TrackMusicOnTickScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(PlayerProfileData.ActiveProfile.Settings.AudioEnabled)
+        if(ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled)
 			this.GetComponent<UISprite>().spriteName = "pauseScreenSound";
 		else
 			this.GetComponent<UISprite>().spriteName = "soundOff";
@@ -19,7 +19,7 @@ public class TrackMusicOnTickScript : MonoBehaviour {
 
 	void OnClick()
 	{
-		PlayerProfileData.ActiveProfile.Settings.AudioEnabled = !PlayerProfileData.ActiveProfile.Settings.AudioEnabled;
+        ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled = !ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled;
 
 	}
 }

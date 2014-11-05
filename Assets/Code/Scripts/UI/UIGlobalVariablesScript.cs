@@ -220,7 +220,7 @@ public class UIGlobalVariablesScript : MonoBehaviour
 			height *= 2;
 		}
 		
-        string GetUrlAddition = "?Type="+type+"&Price="+price; 
+        string GetUrlAddition = "?Type="+type+"&Price="+price+"&UserID=" + Account.Instance.UniqueID; 
 
 		EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
         EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition );

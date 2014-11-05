@@ -20,7 +20,7 @@ public class SelectAniminToPlayClickScript : MonoBehaviour
 		ProfilesManagementScript.Singleton.OLD_ProfilesScreen.SetActive(false);
 		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 
-		PlayerProfileData.ActiveProfile = ProfileRef;
+        ProfilesManagementScript.Singleton.CurrentProfile = ProfileRef;
 
 		ProfilesManagementScript.Singleton.PiAge.text = "Age 1";
 		ProfilesManagementScript.Singleton.TBOAge.text = "Age 1";
