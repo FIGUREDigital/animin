@@ -17,7 +17,7 @@ public class NonARSceneReadout : MonoBehaviour {
 	void Update () {
 		if (gameObject.activeInHierarchy) {
 			bool isActive = UIGlobalVariablesScript.Singleton.NonARWorldRef.activeInHierarchy;
-			m_label.text = ("Input.Acceleration : [" + (Input.acceleration) + "]");
+			m_label.text = ("Tutorial Playing : [" + (UIGlobalVariablesScript.Singleton.TutHandler.IsPlaying) + "]");
 		}
 	}
 }
