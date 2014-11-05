@@ -139,13 +139,13 @@ public class TutorialHandler : MonoBehaviour {
 	}
 	
 	public void ExitSleep(){
-		if (m_CurrentExitCond == "WakeUp") {
+		if (m_CurrentExitCond == "WakeUp" && !m_WaitingForInput) {
 			m_WaitingForInput = false;
 			NextButtonPress(true);
 		}
 	}
 	public void EatStrawberry(){
-		if (m_CurrentExitCond == "EatStrawberry") {
+		if (m_CurrentExitCond == "EatStrawberry" &&  !m_WaitingForInput) {
 			m_WaitingForInput = false;
 			NextButtonPress(true);
 		}
