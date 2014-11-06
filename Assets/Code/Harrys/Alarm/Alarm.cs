@@ -17,6 +17,6 @@ public class Alarm : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("Alarm is currently set to time: [" + m_HoursSelector.CurrentlySelected + ":" + m_MinutesSelector.CurrentlySelected + "];");
+		//Debug.Log ("Alarm is currently set to time: [" + m_HoursSelector.CurrentlySelected + ":" + m_MinutesSelector.CurrentlySelected + "];");
 	}
 }
