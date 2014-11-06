@@ -103,9 +103,17 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	}
 
-    public void LoginExistingUser()
+    public void LoginExistingUser(PlayerProfileData userToLogin)
     {
-        CurrentProfile = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[0]; // TODO: Make it the user they actually click on once more are shown on profile selection screen
+        foreach(PlayerProfileData tempPlayerProfileData in ProfilesManagementScript.Singleton.ListOfPlayerProfiles)
+        {
+            if (tempPlayerProfileData == userToLogin)
+            {
+                CurrentProfile = tempPlayerProfileData;
+                break;
+            }
+        }
+         
         AchievementManager.Instance.PopulateAchievements(false);
         UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
         CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
@@ -166,8 +174,7 @@ public class ProfilesManagementScript : MonoBehaviour
 				newProfile.transform.localScale = new Vector3(1,1,1);
 				newProfile.transform.GetChild(1).GetComponent<UILabel>().text = profiles[i].ProfileName;
 				newProfile.transform.localPosition = new Vector3(i * 180 + 360, 0, 0);
-				newProfile.GetComponent<SelectAniminToPlayClickScript>().ProfileRef = profiles[i];
-
+                newProfile.GetComponent<LoginUser>().ThisProfile = profiles[i];
 
 			}
 		}

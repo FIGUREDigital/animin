@@ -3,9 +3,11 @@ using System.Collections;
 
 public class LoginUser : MonoBehaviour 
 {
-	void OnClick()
+    public PlayerProfileData ThisProfile;
+
+    void OnClick()
 	{
-        ProfilesManagementScript.Singleton.LoginExistingUser();
+        ProfilesManagementScript.Singleton.LoginExistingUser(ThisProfile);
 
         ProfilesManagementScript.Singleton.SelectProfile.SetActive(false);
         ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
