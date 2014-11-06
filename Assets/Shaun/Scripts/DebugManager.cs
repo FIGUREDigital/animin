@@ -13,7 +13,8 @@ public static class DebugManager {
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public static void ShowDebugLog(string type, string copy, object parameter1 = null, object parameter2 = null) {
-		if (__showClassDebugs && type == "class") Debug.Log("++++	"	+	copy	+	"\n");
+		if (__showClassDebugs && type == "class") 
+            Debug.Log("++++	"	+	copy	+	"\n");
 		
 		if (__showBroadcastDebugs && type == "broadcast") {
 			if (parameter1 == null) {

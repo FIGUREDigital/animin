@@ -8,6 +8,7 @@ public class PlayerProfileData
 {
     /// <summary>No Description</summary>
 //    public static PlayerProfileData ActiveProfile;
+    public bool FirstTimePlaying; 
 
     /// <summary>No Description</summary>
     private int FileVersion = 1;

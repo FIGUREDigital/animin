@@ -60,7 +60,7 @@ public class ProfilesManagementScript : MonoBehaviour
 //        ProfilesManagementScript.Singleton.CurrentProfile = CurrentProfile;
         ListOfPlayerProfiles = new List<PlayerProfileData>();
         SaveAndLoad.Instance.LoadAllData();
-        Debug.Log(ListOfPlayerProfiles.Count);
+//        Debug.Log(ListOfPlayerProfiles.Count);
 
     }
 
@@ -165,8 +165,10 @@ public class ProfilesManagementScript : MonoBehaviour
 				
 				newProfile.transform.localScale = new Vector3(1,1,1);
 				newProfile.transform.GetChild(1).GetComponent<UILabel>().text = profiles[i].ProfileName;
-				newProfile.transform.localPosition = new Vector3(i * 180 + 180, 0, 0);
+				newProfile.transform.localPosition = new Vector3(i * 180 + 360, 0, 0);
 				newProfile.GetComponent<SelectAniminToPlayClickScript>().ProfileRef = profiles[i];
+
+
 			}
 		}
 		else

@@ -15,7 +15,7 @@ public class ProfileChecker : MonoBehaviour
 		NewUser = transform.FindChild("NewUser").gameObject;
 
 		initialStartup = PlayerPrefs.GetString("First Login") != "true";
-		SaveAndLoad.Instance.LoadAllData ();
+//		SaveAndLoad.Instance.LoadAllData ();
 		if(initialStartup)
 		{
 			PlayerPrefs.SetString("First Login", "true");
@@ -23,13 +23,10 @@ public class ProfileChecker : MonoBehaviour
 		}
 		else
 		{
-            Debug.Log(ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count);
             User.SetActive(true);
-            Debug.Log(ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count);
             if (ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count > 0)
             {
-                User.GetComponentInChildren<UILabel>().text = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[0].ProfileName;
-				Debug.Log("hi");
+                User.GetComponentInChildren<UILabel>().text = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[0].ProfileName;				
             }
             else
             {
