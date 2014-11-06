@@ -713,7 +713,6 @@ public class CharacterProgressScript : MonoBehaviour
 
                     PlayedEatingSound = false;
 
-                    UIGlobalVariablesScript.Singleton.TutHandler.EatStrawberry();
                     break;
                 }
             case ActionId.WaitEatingFinish:
@@ -1630,7 +1629,7 @@ public class CharacterProgressScript : MonoBehaviour
         UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.SleepToIdle);
         UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
 		
-        UIGlobalVariablesScript.Singleton.TutHandler.ExitSleep();
+        UIGlobalVariablesScript.Singleton.TutHandler.TriggerExitCond("Initial", "WakeUp");
     }
 
 

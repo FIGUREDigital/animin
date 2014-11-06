@@ -3,7 +3,7 @@
 <Tutorials>
 
 
-  <Tutorial id = "00">
+  <Tutorial id = "00" name = "Initial">
   <!---Description : This tutorial will play at the start, when the user first starts the app, telling them how to view Stats-->
   	<Lessons>
 	  	<Lesson>
@@ -18,8 +18,8 @@
   	</Lessons>
   </Tutorial>
   
-  <Tutorial id = "01">
-  <!---Description : This tutorial tells the user to do something else-->
+  <Tutorial id = "01" name = "Hungry">
+
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
@@ -38,8 +38,8 @@
   	</Lessons>
   </Tutorial>
   
-  <Tutorial id = "02">
-  <!---Description : This tutorial will play at the start, when the user first starts the app, telling them how to view Stats-->
+  <Tutorial id = "02" name ="CheckStats">
+  <!---Description : Check statistics screen-->
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
@@ -57,7 +57,7 @@
   	</Lessons>
   </Tutorial>
 
-<Tutorial id = "03">
+<Tutorial id = "03" name = "GameCard">
   <!---Description : Game card tutorial-->
   	<Lessons>
 	  	<Lesson>
@@ -70,7 +70,7 @@
   	</Lessons>
   </Tutorial>
   
-<Tutorial id = "04">
+<Tutorial id = "04" name = "Medicine">
   <!---Description : Meds tutorial -->
   	<Lessons>
 	  	<Lesson>
@@ -83,7 +83,7 @@
   	</Lessons>
   </Tutorial>
 
-<Tutorial id = "05">
+<Tutorial id = "05" name = "Broom">
   <!---Description : Broom tutorial-->
   	<Lessons>
 	  	<Lesson>
@@ -96,7 +96,7 @@
   	</Lessons>
   </Tutorial>
   
-  <Tutorial id = "06">
+  <Tutorial id = "06" name = "Zef">
   <!---Description : Zef tutorial-->
   	<Lessons>
 	  	<Lesson>
@@ -108,7 +108,7 @@
   	</Lessons>
   </Tutorial>
   
-<Tutorial id = "07">
+<Tutorial id = "07" name = "Game">
   <!---Description : Games tutorial-->
   	<Lessons>
 	  	<Lesson>
@@ -120,6 +120,63 @@
 	  	</Lesson>
   	</Lessons>
   </Tutorial>
+
+
+<Tutorial id = "07" name = "Game">
+  <!---Description : Games tutorial-->
+    <Lessons>
+        <Lesson>
+            <TutEntries>
+                <TutEntry text = "Play the mini-games to keep your Animin fit and win items and ZEF"/>
+                <TutEntry text = "You also need to play mini-games to keep your Animin fit"/>
+            </TutEntries>
+            <Stamp exit = "None"/>
+        </Lesson>
+    </Lessons>
+</Tutorial>
+
+
+<Tutorial id = "08" name = "Fart">
+  <!---Description : Fart tutorial-->
+    <Lessons>
+        <Lesson>
+            <TutEntries>
+                <TutEntry text = "Oh my Gosh! That is so gross!"/>
+                <TutEntry text = "Hahahahaha!!!"/>
+            </TutEntries>
+            <Stamp exit = "None"/>
+        </Lesson>
+    </Lessons>
+</Tutorial>
+
+
+<Tutorial id = "09" name = "Challenge">
+  <!---Description : After leaving box land for the second time-->
+    <Lessons>
+        <Lesson>
+            <TutEntries>
+                <TutEntry text = "See if you can beat my score of 7,000!"/>
+                <TutEntry text = "I bet you can't..."/>
+            </TutEntries>
+            <Stamp exit = "None"/>
+        </Lesson>
+    </Lessons>
+</Tutorial>
+
+
+<Tutorial id = "10" name = "BoxHighScore">
+  <!---Description : After beating score of 7000 in box land-->
+    <Lessons>
+        <Lesson>
+            <TutEntries>
+                <TutEntry text = "Woah!"/>
+                <TutEntry text = "You're getting great, you beat my top score!"/>
+                <TutEntry text = "Do you think you can make it to 10,000 points? That would be crazy."/>
+            </TutEntries>
+            <Stamp exit = "None"/>
+        </Lesson>
+    </Lessons>
+</Tutorial>
   
   
 </Tutorials>

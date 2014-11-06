@@ -16,6 +16,15 @@ public class ParentalGateway : MonoBehaviour
 	[SerializeField]
 	UILabel Question;
 
+
+    private const int Min = 100;
+    private const int Max = 500;
+    private int GetRandRange {
+        get{
+            return Random.Range(Min,Max);
+        }
+    }
+
 	private bool mLogPurchase;
 
 	public void Open(GameObject prev, GameObject next, bool LogPurchase = false)
@@ -32,7 +41,7 @@ public class ParentalGateway : MonoBehaviour
 
 		buttons = GetComponentsInChildren<GatewayButton> ();
 
-		int result = Random.Range (100, 900);
+        int result = GetRandRange;
 		int first = Random.Range (0, result);
 		int second = result - first;
 
@@ -42,7 +51,7 @@ public class ParentalGateway : MonoBehaviour
 				buttons[i].GetComponentInChildren<UILabel>().text = second.ToString();
 				buttons[i].Active = true;
 			} else {
-				buttons[i].GetComponentInChildren<UILabel>().text = (Random.Range(100,900).ToString());
+                buttons[i].GetComponentInChildren<UILabel>().text = (GetRandRange.ToString());
 				buttons[i].Active = false;
 			}
 		}

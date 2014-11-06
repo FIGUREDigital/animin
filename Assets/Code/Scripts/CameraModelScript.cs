@@ -228,7 +228,7 @@ public class CameraModelScript : MonoBehaviour
 
 			}
 			if(UIGlobalVariablesScript.Singleton.TutHandler.CurrentExitCond == "EatStrawberry"){
-				UIGlobalVariablesScript.Singleton.TutHandler.EatStrawberry();
+                UIGlobalVariablesScript.Singleton.TutHandler.TriggerExitCond("Hungry", "EatStrawberry");
 			}
 
 			//Debug.Log("DCREATED!!!");

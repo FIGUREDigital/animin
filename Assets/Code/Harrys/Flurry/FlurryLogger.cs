@@ -14,21 +14,21 @@ public class FlurryLogger{
 	public void Init(){
 		if (m_Inited) return;
 		Debug.Log ("FLURRY LOGGER : [Init];");
-		FlurryAnalytics.startSession ("VWK79FC9CHBVXY4VXXY6");
-		FlurryAnalytics.setSessionReportsOnCloseEnabled (true);
-		FlurryAnalytics.setSessionReportsOnPauseEnabled (true);
+//		FlurryAnalytics.startSession ("VWK79FC9CHBVXY4VXXY6");
+//		FlurryAnalytics.setSessionReportsOnCloseEnabled (true);
+//		FlurryAnalytics.setSessionReportsOnPauseEnabled (true);
 		
 		var dict = new Dictionary<string,string> ();
 		dict.Add ("DeviceModel", SystemInfo.deviceModel);
 		
-		FlurryAnalytics.logEventWithParameters ("DeviceStats", dict, false);
-		FlurryAnalytics.logEvent ("SessionTime", true);
+//		FlurryAnalytics.logEventWithParameters ("DeviceStats", dict, false);
+//		FlurryAnalytics.logEvent ("SessionTime", true);
 		
 		m_Inited = true;
 	}
 	public void EndSession(){
 		Debug.Log ("FLURRY LOGGER : [End Session];");
-		FlurryAnalytics.endTimedEvent ("SessionTime");
+//		FlurryAnalytics.endTimedEvent ("SessionTime");
 	}
 
 
@@ -37,13 +37,13 @@ public class FlurryLogger{
 
 	public void StartMainScreenTimer(){
 		Debug.Log ("FLURRY LOGGER : [StartMainScreenTimer];");
-		FlurryAnalytics.logEvent ("MainMenuStart",true);
+//		FlurryAnalytics.logEvent ("MainMenuStart",true);
 		TimingMainScreen = true;
 	}
 	public void EndMainScreenTimer(){
 		Debug.Log ("FLURRY LOGGER : [EndMainScreenTimer];");
 		if (!TimingMainScreen) return;
-		FlurryAnalytics.endTimedEvent ("MainMenuStart");
+//		FlurryAnalytics.endTimedEvent ("MainMenuStart");
 		TimingMainScreen = false;
 	}
 
@@ -59,7 +59,7 @@ public class FlurryLogger{
 		Dictionary<string,string> dict = new Dictionary<string,string> ();
 		dict.Add ("Minigame", game.ToString());
 
-		FlurryAnalytics.logEventWithParameters ("TimeInMinigame", dict, true);
+//		FlurryAnalytics.logEventWithParameters ("TimeInMinigame", dict, true);
 		TimingMinigame = true;
 	}
 	public void EndMinigame(){
@@ -69,7 +69,7 @@ public class FlurryLogger{
 		Dictionary<string,string> dict = new Dictionary<string,string> ();
 		dict.Add ("DateTime", DateTime.Now.ToString ("dd:MM:yyyy hh:mm"));
 
-		FlurryAnalytics.logEventWithParameters ("TimeInMinigame", dict, true);
+//		FlurryAnalytics.logEventWithParameters ("TimeInMinigame", dict, true);
 
 		TimingMinigame = false;
 	}
@@ -80,13 +80,13 @@ public class FlurryLogger{
 
 	public void StartARCard(){
 		Debug.Log ("FLURRY LOGGER : [StartARCard];");
-		FlurryAnalytics.logEvent ("ARCardTime",false);
+//		FlurryAnalytics.logEvent ("ARCardTime",false);
 		TimingARCard = true;
 	}
 	public void EndARCard(){
 		Debug.Log ("FLURRY LOGGER : [EndARCard];");
 		if (!TimingARCard) return;
-		FlurryAnalytics.endTimedEvent ("ARCardTime");
+//		FlurryAnalytics.endTimedEvent ("ARCardTime");
 		TimingARCard = false;
 	}
 
@@ -107,7 +107,7 @@ public class FlurryLogger{
 		dict.Add ("TimeToBuy", useLength.ToString ());
 		dict.Add ("ItemBought", UnlockCharacterManager.Instance.ID.ToString());
 		dict.Add ("ItemBought", "In App Purchase");
-		FlurryAnalytics.logEventWithParameters ("ConversionTime", dict, false);
+//		FlurryAnalytics.logEventWithParameters ("ConversionTime", dict, false);
 	}
 
 	public void CharacterPurchasedWeb()
@@ -128,7 +128,7 @@ public class FlurryLogger{
 		dict.Add ("TimeToBuy", useLength.ToString ());
 		dict.Add ("ItemBought", UnlockCharacterManager.Instance.ID.ToString());
 		dict.Add ("ItemBought", "Webview");
-		FlurryAnalytics.logEventWithParameters ("ConversionTime", dict, false);
+//		FlurryAnalytics.logEventWithParameters ("ConversionTime", dict, false);
 	}
 
 

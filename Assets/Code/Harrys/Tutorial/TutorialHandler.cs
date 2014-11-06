@@ -9,6 +9,7 @@ public class TutorialHandler : MonoBehaviour {
 		get { return TutorialReader.Instance.Tutorials;}
 	}
 
+    //-Gameobject Stuff -------
 	[SerializeField]
 	private GameObject TutorialUIParent;
 	[SerializeField]
@@ -16,13 +17,27 @@ public class TutorialHandler : MonoBehaviour {
 	[SerializeField]
 	private UILabel TutorialText;
 	[SerializeField]
-	private UIButton NextButton;
+    private UIButton NextButton;
+    [SerializeField]
+    private GameObject StatsButton;
 
-//	[SerializeField]
-//	private UIWidget Blocker;
 
-	[SerializeField]
-	private GameObject StatsButton;
+    //-Start Conditions
+    public bool[] TutorialConditions;
+
+    public void SetTutorialCondition(string name, bool value){
+        for (int i = 0; i < Tutorials.Length; i++)
+        {
+            if (name == Tutorials[i].Name)
+            {
+                TutorialConditions[Tutorials[i].id_num] = value;
+                return;
+            }
+        }
+        Debug.Log("ERROR: Tutorial Name [" + name + "] not found!");
+    }
+
+
 
 	private bool m_PlayingTutorial, m_EndingTutorial;
 	private int m_CurTutorial_i;
@@ -36,17 +51,29 @@ public class TutorialHandler : MonoBehaviour {
 	private bool m_WaitingForInput;
 
 	private const string TutorialPlayerPrefID = "TUTORIALS_COMPLETED";
+    private bool CheckPref(int id){
+        return PlayerPrefs.GetString(TutorialPlayerPrefID + id) == "true";
+    }
+
+
+
+
+
 
 	private float m_Timer;
-	private int m_WaitingForSpecific = -1;
+	private int m_TutorialCountingDown= -1;
+    private bool /*the secret to comedy*/ m_IsTiming;
+
 	private void SetTimerOnTutorial(int TutId, float time){
 		Debug.Log ("Setting Timer. Tut : ["+TutId+"]; Time : ["+time+"];");
-		m_WaitingForSpecific = TutId;
+		m_TutorialCountingDown = TutId;
 		m_Timer = time;
+        m_IsTiming = true;
 	}
 	private void TurnOffTimer(){
-		m_WaitingForSpecific = -1;
+		m_TutorialCountingDown = -1;
 		m_Timer = 0;
+        m_IsTiming = false;
 	}
 
 	public bool IsPlaying
@@ -56,6 +83,13 @@ public class TutorialHandler : MonoBehaviour {
 			return (m_PlayingTutorial || m_EndingTutorial);
 		}
 	}
+
+
+
+
+
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -68,8 +102,12 @@ public class TutorialHandler : MonoBehaviour {
 			if (PlayerPrefs.GetString(TutorialPlayerPrefID + i) == null)
 				PlayerPrefs.SetString(TutorialPlayerPrefID + i,"false");
 		}
+        TutorialConditions = new bool[Tutorials.Length];
+        SetTutorialCondition("Initial", true);
 	}
 	
+
+
 	// Update is called once per frame
 	void Update () {
 		if (!m_PlayingTutorial) {
@@ -80,7 +118,6 @@ public class TutorialHandler : MonoBehaviour {
 			for (int i = 0; i < Tutorials.Length; i++) {
 				if (StartConditions (i)) {
 					if (TutorialUIParent == null) return;
-					TurnOffTimer();
 					TutorialUIParent.SetActive (true);
 					WormAnimator.gameObject.SetActive(true);
 					//Blocker.gameObject.SetActive(true);
@@ -119,14 +156,78 @@ public class TutorialHandler : MonoBehaviour {
 				TutorialUIParent.SetActive (false);
 			}
 		}
-		if (m_Timer > 0)
-						m_Timer -= Time.deltaTime;
+        if (m_IsTiming)
+        {
+            if (m_Timer > 0)
+                m_Timer -= Time.deltaTime;
+            else
+            {
+                TutorialConditions[m_TutorialCountingDown] = true;
+                TurnOffTimer();
+            }
+        }
 	}
 
 
 
 
-	//- EXIT STAMPS ----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+    //- ENTRY CONDITIONS ----------------------------------------------------------------
+    public bool CheckCharacterProgress(CharacterProgressScript script, RaycastHit hitInfo){
+        bool cont = false;
+        switch (m_CurrentExitCond) {
+            case ("WakeUp"):
+                if (hitInfo.collider.gameObject == script.SleepBoundingBox)
+                    cont = true;
+                break;
+        }
+        return cont;
+    }
+
+    //This method test whether or not to start the tutorial.
+    private bool StartConditions(int id){
+
+        if (CheckPref(id))
+            return false;
+
+        return TutorialConditions[id];
+
+        /*switch (id) {
+        case (0):
+            return true;
+        case (1):
+            return (m_Timer<0);
+        case (2):
+            return (m_Timer<0);
+        case (3):
+            return (m_Timer<0);
+        case (4):
+            return (m_Timer<0);
+        case (5):
+            return (m_Timer<0);
+        case (6):
+            return (m_Timer<0);
+        case (7):
+            return (m_Timer<0);
+            
+        default:
+            return false;
+        }
+        */      
+    }
+
+
+    //- EXIT STAMPS ----------------------------------------------------------------
 	public void OnTutorialClick(GameObject go){
 		if (go == m_CurrentListening) {
 			UIEventListener.Get (m_CurrentListening).onClick -= OnTutorialClick;
@@ -137,22 +238,25 @@ public class TutorialHandler : MonoBehaviour {
 			NextButtonPress(true);
 		}
 	}
-	
-	public void ExitSleep(){
-		if (m_CurrentExitCond == "WakeUp" && m_WaitingForInput) {
-			m_WaitingForInput = false;
-			NextButtonPress(true);
-		}
-	}
-	public void EatStrawberry(){
-		if (m_CurrentExitCond == "EatStrawberry" &&  m_WaitingForInput) {
-			m_WaitingForInput = false;
-			NextButtonPress(true);
-		}
-	}
+    public void TriggerExitCond(string TutorialName, string StampName){
+        Debug.Log("Current Tutorial Name : ["+Tutorials[m_CurTutorial_i].Name+"]; Name to Change : ["+TutorialName+"];");
+        if (Tutorials[m_CurTutorial_i].Name == TutorialName)
+        {
+            TriggerExitCond(Tutorials[m_CurTutorial_i].id_num, StampName);
+        }
+    }
+    public void TriggerExitCond(int id, string StampName){
+        if (Tutorials[m_CurTutorial_i].id_num == id && 
+            Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].ExitStr == StampName && 
+            m_WaitingForInput)
+        {
+            m_WaitingForInput = false;
+            NextButtonPress(true);
+        }
+    }
 
 	
-	//- EXIT STAMPS ----------------------------------------------------------------
+	//- End of Lesson Processing ----------------------------------------------------------------
 	public void NextButtonPress(bool ignoreCheck = false){
 
 		int maxEntries = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].TutEntries.Length;
@@ -200,19 +304,6 @@ public class TutorialHandler : MonoBehaviour {
 
 					ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].Hungry = 0;
 					PersistentData.Singleton.Hungry = 0;
-
-
-					//InterfaceItemLinkToModelScript[] links = UIGlobalVariablesScript.Singleton.PanelFoods.GetComponentsInChildren<InterfaceItemLinkToModelScript>(true);
-					/*
-					Debug.Log ("Finding strawberries : ["+links.Length+"];");
-					for (int i = 0; i<links.Length;i++){
-						Debug.Log ("Food Item : ["+links[i].ItemID+"];");
-						if (links[i].ItemID == InventoryItemId.Strawberry){
-							links[i].GetComponent<BoxCollider>().enabled = true;
-							break;
-						}
-					}
-					*/
 					m_WaitingForInput = true;
 					break;
 				default:
@@ -225,6 +316,7 @@ public class TutorialHandler : MonoBehaviour {
 		}
 	}
 
+    //----Load next lesson------------------------------------------------
 	public void NextLesson(){
 		if (m_WaitingForInput) return;
 		
@@ -235,9 +327,13 @@ public class TutorialHandler : MonoBehaviour {
 		Debug.Log ("maxLessons : [" + maxLessons + "];");
 		
 		if (++m_Lesson_i >= maxLessons) {
+
+            //----This code is fired at the end of a tutorial----------------
+
 			WormAnimator.SetTrigger ("worm_GoIn");
 			
 			PlayerPrefs.SetString(TutorialPlayerPrefID + m_CurTutorial_i,"true");
+
 			//TutorialReader.Instance.TutorialFinished[m_CurTutorial_i] = true;
 			
 			//Blocker.gameObject.SetActive(false);
@@ -245,7 +341,21 @@ public class TutorialHandler : MonoBehaviour {
 			
 			m_EndingTutorial = true;
 			NextButton.gameObject.SetActive(false);
-			
+
+            /*
+            for (int i = 0; i < Tutorials.Length; i++)
+            {
+                if (Tutorials[i].Timer != null)
+                {
+                    int trig = Tutorials[i].Timer.trigi;
+                    if (trig == m_CurTutorial_i && !CheckPref(trig))
+                    {
+                        SetTimerOnTutorial(trig,Tutorials[i].Timer.secf);
+                    }
+                }
+            }
+            */
+
 			switch (m_CurTutorial_i){
 			case (0):
 				SetTimerOnTutorial(1,10f);
@@ -269,51 +379,7 @@ public class TutorialHandler : MonoBehaviour {
 				SetTimerOnTutorial(7,20f);
 				break;
 			}
-		}
-	}
-	
-	
-	//- ENTRY CONDITIONS ----------------------------------------------------------------
-	public bool CheckCharacterProgress(CharacterProgressScript script, RaycastHit hitInfo){
-		bool cont = false;
-		switch (m_CurrentExitCond) {
-		case ("WakeUp"):
-			if (hitInfo.collider.gameObject == script.SleepBoundingBox)
-				cont = true;
-			break;
-		}
-		return cont;
-	}
 
-	//This method test whether or not to start the tutorial.
-	private bool StartConditions(int id){
-		//if (TutorialReader.Instance.TutorialFinished[id] == true) return false;
-		if (PlayerPrefs.GetString (TutorialPlayerPrefID + id) == "true")
-						return false;
-		if (m_WaitingForSpecific != -1 && id != m_WaitingForSpecific)
-						return false;
-		
-		//Maybe consider replacing int with an enum? So that they're easier to identify.
-		switch (id) {
-		case (0):
-			return true;
-		case (1):
-			return (m_Timer<0);
-		case (2):
-			return (m_Timer<0);
-		case (3):
-			return (m_Timer<0);
-		case (4):
-			return (m_Timer<0);
-		case (5):
-			return (m_Timer<0);
-		case (6):
-			return (m_Timer<0);
-		case (7):
-			return (m_Timer<0);
-			
-		default:
-			return false;
 		}
 	}
 

@@ -20,16 +20,54 @@ public class ArrayOfTutorials{
 	[XmlArrayItem("Tutorial", typeof(Tutorial))]
 	public Tutorial[] Tutorials{ get; set; }
 }
+
+
 [Serializable()]
 public class Tutorial{
+
+    //[XmlElement("Timer", typeof(Timer))]
+    //public Timer Timer{ get; set; }
+
 	[XmlArray("Lessons")]
 	[XmlArrayItem("Lesson", typeof(Lesson))]
 	public Lesson[] Lessons{ get; set; }
 	[System.Xml.Serialization.XmlAttribute("id")]
-	public string id { get; set; }
+    public string id { get; set; }
+    [System.Xml.Serialization.XmlAttribute("name")]
+    public string Name { get; set; }
 
-	public int id_num { get { return Convert.ToInt32(id); } }
+	public int id_num
+    {
+        get
+        {
+            return UInt16.Parse(id);
+        }
+    }
 }
+/*
+[Serializable()]
+public class Timer{
+    [System.Xml.Serialization.XmlAttribute("seconds")]
+    public string seconds { get; set; }
+    public float secf
+    {
+        get
+        {
+            return float.Parse(seconds);
+        }
+    }
+    [System.Xml.Serialization.XmlAttribute("trigger")]
+    public string trigger { get; set; }
+    public int trigi
+    {
+        get
+        {
+            return UInt16.Parse(trigger);
+        }
+    }
+}
+*/
+
 [Serializable()]
 public class Lesson{
 	[XmlArray("TutEntries")]
