@@ -12,9 +12,9 @@ public class SelectDay : MonoBehaviour {
 		if (grid == null)
 						Debug.Log ("I didn't find Grid");
 		for (int i=0; i <grid.GetComponentsInChildren<UILabel>().Length; i++) {
-			Debug.Log("Comparing : ["+this+":"+grid.GetComponentsInChildren<UILabel>()[i].gameObject+"];");
+			//Debug.Log("Comparing : ["+this+":"+grid.GetComponentsInChildren<UILabel>()[i].gameObject+"];");
 			if (this.gameObject == grid.GetComponentsInChildren<UILabel>()[i].gameObject){
-				Debug.Log("Found!");
+				//Debug.Log("Found!");
 				my_i = i;
 				break;
 			}
@@ -26,7 +26,7 @@ public class SelectDay : MonoBehaviour {
 	
 	}
 	void OnClick(){
-		Debug.Log ("Clicked: : ["+this.name+"]; i : ["+my_i+"];");
+		//Debug.Log ("Clicked: : ["+this.name+"]; i : ["+my_i+"];");
 
 
 		Color col = (m_clicked?Color.white:Color.red);
