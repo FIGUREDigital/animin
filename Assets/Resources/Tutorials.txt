@@ -13,7 +13,7 @@
 		  		<TutEntry text = "I wonder how he got here..."/>
 		  		<TutEntry text = "Why don’t you wake it up!"/>
 	  		</TutEntries>
-	  		<Stamp exit = "WakeUp"/>
+	  		<Stamp exit = "None"/>
 	  	</Lesson>
   	</Lessons>
   </Tutorial>
@@ -23,7 +23,7 @@
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
-		  		<TutEntry text = "T-Bo looks hungry."/>
+		  		<TutEntry text = "Your Animin looks hungry."/>
 		  		<TutEntry text = "Why don’t you feed him a strawberry?"/>
 		  		<TutEntry text = "Drag one out from the food menu."/>
 	  		</TutEntries>
