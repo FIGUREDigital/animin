@@ -17,9 +17,13 @@ public class ScreenshotScript : MonoBehaviour {
 		}
 		else
 		{
+#if UNITY_IOS
 			string screenshotName = "screenshot"  + DateTime.Now.ToString("s") + ".png";
 			StartCoroutine( EtceteraBinding.takeScreenShot( screenshotName, imagePath =>
 			{EtceteraBinding.saveImageToPhotoAlbum (imagePath);}) );
+#elif UNITY_ANDROID
+			Application.CaptureScreenshot(Application.persistentDataPath + "/screenshot.png");
+#endif
 		}
 		Invoke("PopPhotoSaved",0.3f);
 	}
