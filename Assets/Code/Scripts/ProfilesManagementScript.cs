@@ -27,6 +27,8 @@ public class ProfilesManagementScript : MonoBehaviour
 	public bool BeginLoadLevel;
 	public GameObject[] AniminSprites;
 
+    //public UILabel TempDebugPanel;
+
 	public UILabel PiAge;
 	public UILabel TBOAge;
 	public UILabel KelsiAge;
@@ -50,6 +52,7 @@ public class ProfilesManagementScript : MonoBehaviour
 			go.name = "ArCameraManager";
 			go.AddComponent<ArCameraManager>();
             LoadProfileData();
+            //TempDebugPanel.text = "Awake";
 		}
 
 	}
@@ -67,20 +70,23 @@ public class ProfilesManagementScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
+        //TempDebugPanel.text = "Start";
 		//PlayerProfileData.ActiveProfile = PlayerProfileData.GetDefaultProfile();
 		//if(PlayerProfileData.ActiveProfile == null)
 		//{
-        ProfilesManagementScript.Singleton.CurrentProfile = PlayerProfileData.CreateNewProfile("DefaultProfile");
+        //ProfilesManagementScript.Singleton.CurrentProfile = PlayerProfileData.CreateNewProfile("DefaultProfile");
 		//}
-		
-		EvolutionManager.Instance.Deserialize();
+
+        //TempDebugPanel.text = "About to refresh";
+        RefreshProfiles ();
+
+        //EvolutionManager.Instance.Deserialize();
 
 		//ServerManager.Register("ServerProfile");
 		//AppDataManager.SetUsername("ServerProfile");
 
 		Debug.Log("-----Registered----");
-		RefreshProfiles();
+        
 
 		//ServerManager.AddLeaderboardScore(15, 1);
 		//ServerManager.GetLeaderboardScores(1);
@@ -159,15 +165,17 @@ public class ProfilesManagementScript : MonoBehaviour
 	private void RefreshProfiles()
 	{
         List<PlayerProfileData> profiles = new List<PlayerProfileData>();
-
+        //TempDebugPanel.text = "About to load";
         profiles = SaveAndLoad.Instance.LoadProfileData();
+
+        //TempDebugPanel.text = "Profiles null";
 
 		if(profiles != null)
 		{
-//            Debug.Log(profiles.Count);
+            Debug.Log(profiles.Count);
+            //TempDebugPanel.text = profiles.Count.ToString();
             for(int i=0;i<profiles.Count;++i)
-			{	
-
+			{
                 GameObject newProfile = (GameObject)Instantiate(PrefabProfile);
 				newProfile.transform.parent = ProfilesRoot.transform;
 				
@@ -175,7 +183,6 @@ public class ProfilesManagementScript : MonoBehaviour
 				newProfile.transform.GetChild(1).GetComponent<UILabel>().text = profiles[i].ProfileName;
 				newProfile.transform.localPosition = new Vector3(i * 180 + 360, 0, 0);
                 newProfile.GetComponent<LoginUser>().ThisProfile = profiles[i];
-
 			}
 		}
 		else
