@@ -105,11 +105,11 @@ public class ChestScript : MonoBehaviour
 					{
 					GameObject zef = null;
 
-					if(i < 3)
+					if(i < Coins.Length * 0.33f)
 					{
 						zef = progressScript.SpawnStageItem(FoodItems[Random.Range(0, FoodItems.Count)], Vector3.zero);
 					}
-					else if(i < 5)
+					else if(i < Coins.Length * 0.5f)
 					{
 						zef = progressScript.SpawnStageItem(MedicalItems[Random.Range(0, MedicalItems.Count)], Vector3.zero);
 					}
