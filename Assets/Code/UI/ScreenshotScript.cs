@@ -6,7 +6,7 @@ using System;
 public class ScreenshotScript : MonoBehaviour {
 
 	[SerializeField]
-	private UISprite PhotoSaved;
+	private UITexture PhotoSaved;
 
 	// Use this for initialization
 	void OnClick()

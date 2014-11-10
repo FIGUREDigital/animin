@@ -8,7 +8,10 @@ public class InputUsername : MonoBehaviour {
 	{
 		mInput = gameObject.transform.parent.GetComponentInChildren<UIInput>();
 		string name =  NGUIText.StripSymbols(mInput.value);
-//		PlayerPrefs.SetString("Username", name);
+		if(name == "" || name == " " || name == null)
+		{
+			return;
+		}
 		Account.Instance.UserName = name;
 	    StartCoroutine( Account.Instance.WWWSendData( true, name, "","","", "","" ) );
 
