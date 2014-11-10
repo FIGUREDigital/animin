@@ -9,19 +9,84 @@ class MyEditorScript {
 	
 	static string APP_NAME = "Animin";
 	static string TARGET_DIR = "target";
+	static string IOS = "_iOS";
+	static string ANDROID = "_Android.apk";
 
 	[MenuItem ("Custom/Build iOS/Release")]
 	static void PerformiOSBuild()
 	{
-		string target_dir = APP_NAME;
-		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.AcceptExternalModificationsToPlayer);
+		string target_dir = APP_NAME + IOS;
+		string target = TARGET_DIR + "/" + target_dir;
+		if(Directory.Exists(target))
+		{
+			GenericBuild(SCENES, target, BuildTarget.iPhone, BuildOptions.AcceptExternalModificationsToPlayer);
+		}
+		else
+		{
+			GenericBuild(SCENES, target, BuildTarget.iPhone, BuildOptions.None);
+		}
+		CorrectBundleID ();
 	}
 
 	[MenuItem ("Custom/Build iOS/Dev")]
 	static void PerformiOSBuildDev()
 	{
-		string target_dir = APP_NAME;
-		GenericBuild (SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.iPhone, BuildOptions.Development | BuildOptions.AcceptExternalModificationsToPlayer);
+		string target_dir = APP_NAME + IOS;
+		string target = TARGET_DIR + "/" + target_dir;
+		if(Directory.Exists(target))
+		{
+			GenericBuild (SCENES, target, BuildTarget.iPhone, BuildOptions.Development | BuildOptions.AcceptExternalModificationsToPlayer);
+		}
+		else
+		{
+			GenericBuild (SCENES, target, BuildTarget.iPhone, BuildOptions.Development);
+		}
+		CorrectBundleID ();	
+	}
+
+	[MenuItem ("Custom/Build iOS/Clean")]
+	static void CleaniOSBuild()
+	{
+		string target_dir = APP_NAME + IOS;
+		string target = TARGET_DIR + "/" + target_dir;
+		if(Directory.Exists(target))
+		{
+			Directory.Delete(target);
+		}
+	}
+
+	[MenuItem ("Custom/Build Android/Release")]
+	static void PerformAndroidBuild()
+	{
+		string target_dir = APP_NAME + ANDROID;
+		string target = TARGET_DIR + "/" + target_dir;
+		if(File.Exists(target))
+		{
+			File.Delete(target);
+		}
+		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.Android, BuildOptions.None);
+	}
+	
+	[MenuItem ("Custom/Build Android/Dev")]
+	static void PerformAndroidBuildDev()
+	{
+		string target_dir = APP_NAME + ANDROID;
+		string target = TARGET_DIR + "/" + target_dir;
+		if(File.Exists(target))
+		{
+			File.Delete(target);
+		}
+		GenericBuild (SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.Android, BuildOptions.Development);
+	}
+	[MenuItem ("Custom/Build Android/Clean")]
+	static void CleanAndroidBuild()
+	{
+		string target_dir = APP_NAME + ANDROID;
+		string target = TARGET_DIR + "/" + target_dir;
+		if(File.Exists(target))
+		{
+			File.Delete(target);
+		}
 	}
 	
 	private static string[] FindEnabledEditorScenes() {
@@ -45,10 +110,10 @@ class MyEditorScript {
 		if (res.Length > 0) {
 			throw new Exception("BuildPlayer failure: " + res);
 		}
-		CorrectBundleID ();
 		Debug.Log("BUILD SUCCEEDED!");
 		Debug.Log("Output: " + target_dir);
 	}
+
 
 	static void CorrectBundleID()
 	{

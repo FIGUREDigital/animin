@@ -127,8 +127,7 @@ public class ItunesButtonUpdate : MonoBehaviour
 		StoreKitManager.purchaseCancelledEvent += purchaseCancelled;
 		StoreKitManager.purchaseFailedEvent += purchaseUnsuccessful;
 #elif UNITY_ANDROID
-        GoogleIABManager.purchaseSucceededEvent += purchaseSuccessful;
-		GoogleIABManager.purchaseCancelledEvent += purchaseCancelled;
+		GoogleIABManager.purchaseSucceededEvent += purchaseSuccessful;
 		GoogleIABManager.purchaseFailedEvent += purchaseUnsuccessful;
 #endif
     }
@@ -148,7 +147,6 @@ public class ItunesButtonUpdate : MonoBehaviour
 #elif UNITY_ANDROID
 		if(Application.isEditor){ return; }
         GoogleIABManager.purchaseSucceededEvent -= purchaseSuccessful;
-		GoogleIABManager.purchaseCancelledEvent -= purchaseCancelled;
 		GoogleIABManager.purchaseFailedEvent -= purchaseUnsuccessful;
 #endif
     }

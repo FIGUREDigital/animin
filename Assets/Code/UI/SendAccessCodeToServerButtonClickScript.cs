@@ -51,7 +51,6 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 		StoreKitManager.purchaseFailedEvent += purchaseUnsuccessful;
 		#elif UNITY_ANDROID
         GoogleIABManager.purchaseSucceededEvent += purchaseSuccessful;
-		GoogleIABManager.purchaseCancelledEvent += purchaseUnsuccessful;
         GoogleIABManager.purchaseFailedEvent += purchaseUnsuccessful;
 		#endif
 	}
@@ -64,7 +63,6 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 		StoreKitManager.purchaseFailedEvent -= purchaseUnsuccessful;
 		#elif UNITY_ANDROID
         GoogleIABManager.purchaseSucceededEvent -= purchaseSuccessful;
-		GoogleIABManager.purchaseCancelledEvent -= purchaseUnsuccessful;
         GoogleIABManager.purchaseFailedEvent -= purchaseUnsuccessful;
 		#endif
 	}

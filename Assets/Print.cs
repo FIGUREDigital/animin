@@ -14,7 +14,9 @@ public class Print : MonoBehaviour
 		string path = Application.persistentDataPath + "/printOut.png";
 		Debug.Log("Photo saved to: " + path);
 		File.WriteAllBytes(path, bytes);
+#if UNITY_IOS
 		EtceteraBinding.saveImageToPhotoAlbum(path);
+#endif
 		PopPhotoSaved();
 
 	}
