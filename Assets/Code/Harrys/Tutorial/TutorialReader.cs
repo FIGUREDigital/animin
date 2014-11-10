@@ -25,8 +25,8 @@ public class ArrayOfTutorials{
 [Serializable()]
 public class Tutorial{
 
-    //[XmlElement("Timer", typeof(Timer))]
-    //public Timer Timer{ get; set; }
+    [XmlElement("Condition", typeof(Condition))]
+    public Condition Condition{ get; set; }
 
 	[XmlArray("Lessons")]
 	[XmlArrayItem("Lesson", typeof(Lesson))]
@@ -44,18 +44,21 @@ public class Tutorial{
         }
     }
 }
-/*
+
+[Serializable()]
+public class Condition{ 
+    [XmlElement("Timer", typeof(Timer))]
+    public Timer Timer{ get; set; }
+
+
+    [XmlElement("Initial", typeof(Initial))]
+    public Initial Initial{ get; set; }
+    public bool isInitial { get { return Initial==null; }}
+}
+
+
 [Serializable()]
 public class Timer{
-    [System.Xml.Serialization.XmlAttribute("seconds")]
-    public string seconds { get; set; }
-    public float secf
-    {
-        get
-        {
-            return float.Parse(seconds);
-        }
-    }
     [System.Xml.Serialization.XmlAttribute("trigger")]
     public string trigger { get; set; }
     public int trigi
@@ -65,8 +68,18 @@ public class Timer{
             return UInt16.Parse(trigger);
         }
     }
+    [System.Xml.Serialization.XmlAttribute("seconds")]
+    public string seconds { get; set; }
+    public float secf
+    {
+        get
+        {
+            return float.Parse(seconds);
+        }
+    }
 }
-*/
+public class Initial{}
+
 
 [Serializable()]
 public class Lesson{

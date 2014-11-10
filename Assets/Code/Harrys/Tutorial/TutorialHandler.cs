@@ -158,10 +158,12 @@ public class TutorialHandler : MonoBehaviour {
 		}
         if (m_IsTiming)
         {
+            Debug.Log("Timing : ["+((int)m_Timer)+"];");
             if (m_Timer > 0)
                 m_Timer -= Time.deltaTime;
             else
             {
+                Debug.Log("Turning off timer. Cond : ["+m_TutorialCountingDown+"] = true;");
                 TutorialConditions[m_TutorialCountingDown] = true;
                 TurnOffTimer();
             }
@@ -247,7 +249,7 @@ public class TutorialHandler : MonoBehaviour {
     }
     public void TriggerExitCond(int id, string StampName){
         if (Tutorials[m_CurTutorial_i].id_num == id && 
-            Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].ExitStr == StampName && 
+            //Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].ExitStr == StampName && 
             m_WaitingForInput)
         {
             m_WaitingForInput = false;
@@ -264,8 +266,6 @@ public class TutorialHandler : MonoBehaviour {
 
 		//Debug.Log ("Testing Entry : ["+m_Entry_i+":"+maxEntries+"]; Lesson : ["+m_Lesson_i+":"+maxLessons+"];");
 		
-		Debug.Log ("Testing : ["+ (m_Entry_i + 1) + ":" + (maxEntries) + "];");
-		
 		m_Letter_i = 0;
 		m_Entry_i += 1;
 		m_CurrentExitCond = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].ExitStr;
@@ -281,25 +281,25 @@ public class TutorialHandler : MonoBehaviour {
 				//Exit stamp handling
 
 				switch(m_CurrentExitCond){
-				case ("Stats"):
-					m_CurrentListening = UIGlobalVariablesScript.Singleton.StatsButton;
-					UIWidget widget = m_CurrentListening.GetComponent<UIWidget> ();
-					m_CurrentListening.GetComponent<BoxCollider>().enabled = true;
+    				case ("Stats"):
+    					m_CurrentListening = UIGlobalVariablesScript.Singleton.StatsButton;
+    					UIWidget widget = m_CurrentListening.GetComponent<UIWidget> ();
+    					m_CurrentListening.GetComponent<BoxCollider>().enabled = true;
 
-					UIEventListener.Get (m_CurrentListening).onClick += OnTutorialClick;
+    					UIEventListener.Get (m_CurrentListening).onClick += OnTutorialClick;
+    					
+    					NextButton.gameObject.SetActive(false);
+    					m_WaitingForInput = true;
+    					break;
+                    case("EatStrawberry"):
 					
-					NextButton.gameObject.SetActive(false);
-					m_WaitingForInput = true;
-					break;
-				case("EatStrawberry"):
-					
-					PersistentData.Singleton.AddItemToInventory(InventoryItemId.Strawberry, 1);
+                        PersistentData.Singleton.AddItemToInventory(InventoryItemId.Strawberry, 1);
 
-					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<BoxCollider>().enabled = true;
-					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = InventoryItemId.Strawberry;
-					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UISprite>().spriteName = "strawberry";
-					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIButton>().normalSprite = "strawberry";
-					UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIClickButtonMasterScript>().enabled = false;
+                        UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = InventoryItemId.Strawberry;
+                        UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UISprite>().spriteName = "strawberry";
+                        UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIButton>().normalSprite = "strawberry";
+                        UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIClickButtonMasterScript>().enabled = false;
+                        UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIButton>().isEnabled = true;
 
 
 					ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].Hungry = 0;
@@ -324,7 +324,7 @@ public class TutorialHandler : MonoBehaviour {
 		m_Entry_i =0;
 		int maxLessons = Tutorials [m_CurTutorial_i].Lessons.Length;
 		
-		Debug.Log ("maxLessons : [" + maxLessons + "];");
+		//Debug.Log ("maxLessons : [" + maxLessons + "];");
 		
 		if (++m_Lesson_i >= maxLessons) {
 
@@ -342,46 +342,26 @@ public class TutorialHandler : MonoBehaviour {
 			m_EndingTutorial = true;
 			NextButton.gameObject.SetActive(false);
 
-            /*
+
             for (int i = 0; i < Tutorials.Length; i++)
             {
-                if (Tutorials[i].Timer != null)
+                if (Tutorials[i].Condition != null)
                 {
-                    int trig = Tutorials[i].Timer.trigi;
-                    if (trig == m_CurTutorial_i && !CheckPref(trig))
+                    if (Tutorials[i].Condition.Timer != null)
                     {
-                        SetTimerOnTutorial(trig,Tutorials[i].Timer.secf);
+                        int trig = Tutorials[i].Condition.Timer.trigi;
+                        if (trig == m_CurTutorial_i && !CheckPref(i))
+                        {
+                            SetTimerOnTutorial(i, Tutorials[i].Condition.Timer.secf);
+                        }
                     }
                 }
             }
-            */
-
-			switch (m_CurTutorial_i){
-			case (0):
-				SetTimerOnTutorial(1,10f);
-				break;
-			case (1):
-				SetTimerOnTutorial(2,20f);
-				break;
-			case (2):
-				SetTimerOnTutorial(3,20f);
-				break;
-			case (3):
-				SetTimerOnTutorial(4,60f);
-				break;
-			case (4):
-				SetTimerOnTutorial(5,60f);
-				break;
-			case (5):
-				SetTimerOnTutorial(6,20f);
-				break;
-			case (6):
-				SetTimerOnTutorial(7,20f);
-				break;
-			}
-
 		}
 	}
+
+
+
 
 
 
@@ -395,25 +375,59 @@ public class TutorialHandler : MonoBehaviour {
 	private bool m_BoolArraySet;
 
 	private void Block (bool on){
+
 		if (on && !m_BoolArraySet) {
 			m_Buttons = UIGlobalVariablesScript.Singleton.UIRoot.GetComponentsInChildren<UIButton>(true);
 			m_EnabledButtons = new bool[m_Buttons.Length];
 			for (int i = 0; i < m_Buttons.Length; i++){
-				m_EnabledButtons[i] = m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled;
-				m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled = false;
+                //TweenButton(m_Buttons[i].gameObject, false);
+				//m_EnabledButtons[i] = m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled;
+				//m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled = false;
+
+                //m_Buttons[i].gameObject.GetComponent<UIButton>().SetState(UIButtonColor.State.Disabled, false);
+                m_Buttons[i].gameObject.GetComponent<UIButton>().isEnabled = false;
 			}
 			m_BoolArraySet = true;
+
 		} else {
-			for (int i = 0; i < m_Buttons.Length; i++){
-				m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled = m_EnabledButtons[i];
+            for (int i = 0; i < m_Buttons.Length; i++){
+                //TweenButton(m_Buttons[i].gameObject, true);
+                //m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled = m_EnabledButtons[i];
+                //m_Buttons[i].gameObject.GetComponent<UIButton>().SetState(UIButtonColor.State.Normal, false);
+                m_Buttons[i].gameObject.GetComponent<UIButton>().isEnabled = true;
+
 			}
 			m_Buttons = null;
 			m_BoolArraySet = false;
 		}
 		NextButton.GetComponent<BoxCollider> ().enabled = true;
 	}
-
 	
+    private void TweenButton(GameObject button, bool active){
+        TweenColor tween = button.GetComponent<TweenColor>();
+        if (tween != null)
+        {
+            if (active)
+            {
+                tween.from = button.GetComponent<UIButton>().disabledColor;
+                tween.to = button.GetComponent<UIButton>().defaultColor;
+            }
+            else
+            {
+                tween.from = button.GetComponent<UIButton>().defaultColor;
+                tween.to = button.GetComponent<UIButton>().disabledColor;
+            }
+            tween.duration = 1;
+            tween.enabled = true;
+        }
+    }
+
+
+
+
+
+
+
 	public void ResetTutorials(){
 		for (int i = 0; i < Tutorials.Length; i++) {
 			PlayerPrefs.SetString(TutorialPlayerPrefID + i,"false");
@@ -449,19 +463,3 @@ public class TutorialHandler : MonoBehaviour {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

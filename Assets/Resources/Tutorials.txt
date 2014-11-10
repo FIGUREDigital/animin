@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTutorials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+
+
+
+
+
+
+
+<!--
+CONDIITIONS:
+    Types:
+    Initial
+        Descriptiuon:   This one is activated as soon as the game starts.
+        Parameters:     None
+    Timer
+        Description:    A timer is activated when the end of another tutorial.
+        Parameters:
+            Trigger:    Trigger ID. When the tutorial specified in the ID here ends the timer will begin. EG Setting "trigger = 0" will begin the timer when tutorial with the id of 0 ends.
+            Seconds:    The time in seconds for the timer to run for before this tutorial begins.
+-->
+
+
+
 <Tutorials>
-
-
   <Tutorial id = "00" name = "Initial">
   <!---Description : This tutorial will play at the start, when the user first starts the app, telling them how to view Stats-->
+    <Condition>
+       <Initial/>
+    </Condition>
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
@@ -20,7 +45,7 @@
   
   <Tutorial id = "01" name = "Hungry">
     <Condition>
-       <Timer trigger = "0" seconds = "60"/>
+       <Timer trigger = "0" seconds = "10"/>
     </Condition>
   	<Lessons>
 	  	<Lesson>
