@@ -22,42 +22,6 @@ public class PlayerProfileData
     public List<PersistentData.TypesOfAnimin> UnlockedAnimins = new List<PersistentData.TypesOfAnimin>();
     public List<AchievementManager.AchievementDetails> Achievements;
 
-//    public List<CharacterData> ListOfDataForAnimin = new List<CharacterData>();
-//
-//    public class CharacterData
-//    {
-//        public PersistentData.TypesOfAnimin Type;
-//
-//        public DateTime NextHappynBonusTimeAt;
-//        public DateTime LastSavePerformed;
-//        public DateTime LastTimeToilet;
-//		public bool NotFirstTime;
-//
-//        public List<ItemDetails> ItemList;
-//        public float EvolutionLevel;
-//        public AniminEvolutionStageId AnimEvolution;
-//        public HappinessData Happiness;
-//        public List<AchievementManager.AchievementDetails> Achievements;
-//        public int Age;
-//        public int ZEF;
-//
-//    }
-//
-//    public class ItemDetails
-//    {
-//        public InventoryItemId ID;
-//        public int Amount;
-//    }
-//
-//    public class HappinessData
-//    {
-//        public float Happiness;
-//        public float Health;
-//        public float Hunger;
-//        public float Fitness;
-//
-//    }
-
     /// <summary>No Description</summary>
     public static PlayerProfileData GetDefaultProfile()
     {

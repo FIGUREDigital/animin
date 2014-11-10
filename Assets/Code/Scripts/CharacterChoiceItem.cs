@@ -16,26 +16,28 @@ public class CharacterChoiceItem : MonoBehaviour
 	[SerializeField]
     private PersistentData.TypesOfAnimin mId;
 
+    private SelectCharacterClickScript characterClickScript;
+
 	// Use this for initialization
 	void Start () 
 	{
 
-		switch(mId)
-		{
-            case PersistentData.TypesOfAnimin.Pi:
-			mUnlocked = PlayerPrefs.GetInt("piUnlocked")==1?true:false;
-			break;
-            case PersistentData.TypesOfAnimin.Kelsey:
-			mUnlocked = PlayerPrefs.GetInt("kelseyUnlocked")==1?true:false;
-			break;
-            case PersistentData.TypesOfAnimin.Mandi:
-			mUnlocked = PlayerPrefs.GetInt("mandiUnlocked")==1?true:false;
-			break;
-            case PersistentData.TypesOfAnimin.Tbo:
-			break;
-		default:
-			break;
-		}
+	    for (int i = 0; i < ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Count; i++)
+	    {
+	        if (ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins[i] == PersistentData.TypesOfAnimin.TboAdult)
+	        {
+	            mId = PersistentData.TypesOfAnimin.TboAdult;
+	            characterClickScript = GetComponentInChildren<SelectCharacterClickScript>();
+                characterClickScript.Animin = PersistentData.TypesOfAnimin.TboAdult;
+	        }
+
+            if (mId == ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins[i])
+	        {
+	            mUnlocked = true;
+	            break;
+	        }
+	    }
+
 		if(mSprite == null)
 		{
 			Debug.LogWarning("CANNOT FIND SPRITE FOR CHARACTER. ATTEMPTING TO RESOLVE.");

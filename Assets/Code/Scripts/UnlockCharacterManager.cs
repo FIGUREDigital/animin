@@ -144,13 +144,13 @@ public class UnlockCharacterManager
         switch(mId)
 		{
             case PersistentData.TypesOfAnimin.Pi:
-			PlayerPrefs.SetInt("piUnlocked", 1);
+            //PlayerPrefs.SetInt("piUnlocked", 1);
 			break;
             case PersistentData.TypesOfAnimin.Kelsey:
-			PlayerPrefs.SetInt("kelseyUnlocked", 1);
+            //PlayerPrefs.SetInt("kelseyUnlocked", 1);
 			break;
             case PersistentData.TypesOfAnimin.Mandi:
-			PlayerPrefs.SetInt("mandiUnlocked", 1);
+            //PlayerPrefs.SetInt("mandiUnlocked", 1);
 			break;
             case PersistentData.TypesOfAnimin.Tbo:
 		default:
@@ -177,6 +177,10 @@ public class UnlockCharacterManager
 
     public void UnlockInUIAndProfile(PersistentData.TypesOfAnimin typeToUnlock)
     {
+        if (typeToUnlock == PersistentData.TypesOfAnimin.TboAdult)
+        {
+            typeToUnlock = PersistentData.TypesOfAnimin.Tbo;
+        }
         Debug.Log("unlock");
         ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
         CharacterChoiceItem character = GameObject.Find(typeToUnlock.ToString()).GetComponent<CharacterChoiceItem>();

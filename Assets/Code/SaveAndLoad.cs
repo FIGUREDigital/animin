@@ -70,12 +70,10 @@ public class SaveAndLoad {
             tempProfile.PlayerData = new PlayerProfileData();
             tempProfile.PlayerData = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[i];
             ProfileList.Add(tempProfile);
-//            Debug.Log ("Save "+i+ " "+ ProfileList[ProfileList.Count-1].PlayerData.ProfileName);
-//            for (int j =0; j< ProfileList.Count; j++)
-//            {
-//                Debug.Log ("Save prof "+i+ " "+j+" "+ ProfileList[i].PlayerData.ProfileName);
-//            }
         }
+
+        ProfileList[0].PlayerData.UnlockedAnimins.Add(PersistentData.TypesOfAnimin.TboAdult);
+
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");
 		bf.Serialize(file, ProfileList);

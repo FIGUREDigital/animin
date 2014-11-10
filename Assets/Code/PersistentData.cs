@@ -15,9 +15,11 @@ public class PersistentData
 	public enum TypesOfAnimin
 	{
         Pi = 0,
-        Tbo = 1,
-        Kelsey = 2,
-        Mandi = 3,
+        Tbo,
+        TboAdult,
+        Kelsey,
+        Mandi,
+
         Count,
 	}
 
@@ -134,7 +136,6 @@ public class PersistentData
 		Fitness = MaxFitness;
 		Health = MaxHealth;
 		ZefTokens = 0;
-
 
 	}
 
