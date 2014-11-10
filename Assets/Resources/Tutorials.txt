@@ -19,7 +19,9 @@
   </Tutorial>
   
   <Tutorial id = "01" name = "Hungry">
-
+    <Condition>
+       <Timer trigger = "0" seconds = "60"/>
+    </Condition>
   	<Lessons>
 	  	<Lesson>
 		  	<TutEntries>
