@@ -254,7 +254,7 @@ public class TrackVFMG1 : MonoBehaviour, ITrackableEventHandler
 				
 				//				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
 				//				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
-				//UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbOutPortal); <Also looks dodgy
+				//UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.JumbOutPortal); <Also looks dodgy
 				//				progressScript.CurrentAction = ActionId.SmallCooldownPeriod;
 				//				progressScript.SmallCooldownTimer = 0.5f;
 				

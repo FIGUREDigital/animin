@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class CameraModelScript : MonoBehaviour 
@@ -54,29 +54,6 @@ public class CameraModelScript : MonoBehaviour
 
 						CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 
-
-						/*if(popScript.Type == PopupItemType.Food)
-						{
-							progressScript.OnInteractWithPopupItem(popScript);
-							DestroyChildModelAndHide();
-						}
-						else if(popScript.Type == PopupItemType.Item)
-						{
-							if(progressScript.ObjectHolding == null)
-							{
-								Spawn(true);
-							}
-							else
-							{
-								DestroyChildModelAndHide();
-							}
-						}
-						else if(popScript.Type == PopupItemType.Medicine)
-						{
-							progressScript.OnInteractWithPopupItem(popScript);
-							DestroyChildModelAndHide();
-						}*/
-
 						DestroyChildModelAndHide();
 					}
 					else
@@ -104,7 +81,6 @@ public class CameraModelScript : MonoBehaviour
 
 	private void Spawn(bool holdInHands)
 	{
-		Debug.Log ("SpriteRef : ["+SpriteRef+"];");
 		if(SpriteRef != null)
 		{
 			InterfaceItemLinkToModelScript refScript = SpriteRef.GetComponent<InterfaceItemLinkToModelScript>();
@@ -116,56 +92,18 @@ public class CameraModelScript : MonoBehaviour
 
 			UIPopupItemScript popScript = child.GetComponent<UIPopupItemScript>();
 
-			bool hasRemainingItemsOfThisId = ProfilesManagementScript.Singleton.CurrentAnimin.RemoveItemFromInventory(popScript.Id, 1);
+			bool hasRemainingItemsOfThisId = PersistentData.Singleton.RemoveItemFromInventory(popScript.Id, 1);
 
 		
 			if(!hasRemainingItemsOfThisId)
 			{
 				//Debug.Log("!hasRemainingItemsOfThisId");
-				InventoryItemData itemData = ProfilesManagementScript.Singleton.CurrentAnimin.GetNextItemType(InventoryItemData.Items[(int)popScript.Id].ItemType);
+				InventoryItemData itemData = PersistentData.Singleton.GetNextItemType(InventoryItemData.Items[(int)popScript.Id].ItemType);
 
 				if(itemData != null)
 				{
 					SpriteRef.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)itemData.Id].SpriteName;
 					SpriteRef.GetComponent<InterfaceItemLinkToModelScript>().ItemID = itemData.Id;
-
-	//				List<GameObject> allSprites = new List<GameObject>();
-	//				UIClickButtonMasterScript.PopulateInterfaceItems(InventoryItemData.Items[(int)popScript.Id].ItemType, allSprites);
-	//
-	//				for(int i=0;i<allSprites.Count;++i)
-	//				{
-	//				
-	//					string prefabId = allSprites[i].GetComponent<InterfaceItemLinkToModelScript>().Item3DPrefab;
-	//					Debug.Log(prefabId);
-	//					if(prefabId == InventoryItemData.Items[(int)popScript.Id].PrefabId)
-	//					{
-	//						Debug.Log("FOUND!");
-	//						SpriteRef.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)popScript.Id].SpriteName;
-	//						SpriteRef.GetComponent<ReferencedObjectScript>().Reference  = allSprites[i];
-	//						break;
-	//					}
-	//				}
-
-					//subItems[panelCount].transform.GetChild(0).gameObject.GetComponent<InterfaceItemLinkToModelScript>().Item3DPrefab = InventoryItemData.Items[(int)inventoryItems[i + 0].Id].PrefabId;
-					//su
-				 	/*InventoryItemData itemData = ProfilesManagementScript.Singleton.CurrentAnimin.GetNextItemType(InventoryItemData.Items[(int)popScript.Id].ItemType);
-
-					if(itemData != null)
-					{
-						Debug.Log(itemData.Id.ToString());
-					}
-
-					//if(itemData == null)
-					{
-						SpriteRef.GetComponent<UIButton>().normalSprite = "empty_icon";
-						SpriteRef.GetComponent<ReferencedObjectScript>().Reference  = null;
-					}
-					//else
-					{
-					//	SpriteRef.GetComponent<UIButton>().normalSprite = InventoryItemData.Items[(int)popScript.Id].SpriteName;
-						//SpriteRef.GetComponent<ReferencedObjectScript>().Reference  = InventoryItemData.Items[(int)popScript.Id].PrefabId;
-
-					}*/
 				}
 				else
 				{
@@ -180,12 +118,13 @@ public class CameraModelScript : MonoBehaviour
 
 			child.transform.parent = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().ActiveWorld.transform;
 
+			UIPopupItemScript scriptRef = child.GetComponent<UIPopupItemScript> ();
 
 			float scale = 0.1f;
-			if (popScript != null) {
-				if (popScript.Id == InventoryItemId.woodSword)
+			if (scriptRef != null) {
+				if (scriptRef.Id == InventoryItemId.woodSword)
 					scale = 0.3f;
-				else if (popScript.Id == InventoryItemId.woodFrame)
+				else if (scriptRef.Id == InventoryItemId.woodFrame)
 					scale = 0.3f;
 				else
 					scale = 0.1f;
@@ -226,14 +165,6 @@ public class CameraModelScript : MonoBehaviour
 				UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().PickupItem(child);
 
 			}
-
-            UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocExitCond("Hungry", "EatStrawberry");
-
-            if (popScript.Id == InventoryItemId.Boombox)
-            {
-                UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("BBPlace");
-            }
-
 
 			//Debug.Log("DCREATED!!!");
 			// Destroy this icon as it's no longer needed

@@ -25,12 +25,12 @@ public class UIClickButtonMasterScript : MonoBehaviour
         }
 		
         List<InventoryItemData> inventoryItems = new List<InventoryItemData>();
-        for (int i = 0; i < PersistentData.Singleton.Inventory.Count; ++i)
+        for (int i = 0; i < ProfilesManagementScript.Singleton.CurrentAnimin.Inventory.Count; ++i)
         {
-//			Debug.Log(PersistentData.Singleton.Inventory[i].Id.ToString());
-            if (InventoryItemData.Items[(int)PersistentData.Singleton.Inventory[i].Id].ItemType != typeToLoad)
+//			Debug.Log(ProfilesManagementScript.Singleton.CurrentAnimin.Inventory[i].Id.ToString());
+            if (InventoryItemData.Items[(int)ProfilesManagementScript.Singleton.CurrentAnimin.Inventory[i].Id].ItemType != typeToLoad)
                 continue;
-            inventoryItems.Add(PersistentData.Singleton.Inventory[i]);
+            inventoryItems.Add(ProfilesManagementScript.Singleton.CurrentAnimin.Inventory[i]);
         }
 		
 		
@@ -148,7 +148,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
                             }
                             else
                             {
-                                PersistentData.Singleton.AddItemToInventory(script.GroundItems[i].GetComponent<UIPopupItemScript>().Id, 1);
+                                ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(script.GroundItems[i].GetComponent<UIPopupItemScript>().Id, 1);
                             }
                         }
                         Destroy(script.GroundItems[i]);
@@ -208,7 +208,7 @@ public class UIClickButtonMasterScript : MonoBehaviour
                 }
             case UIFunctionalityId.ResetAnimin:
                 {
-                    PersistentData.Singleton.SetDefault(PersistentData.Singleton.PlayerAniminId);
+                    ProfilesManagementScript.Singleton.CurrentAnimin.SetDefault(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId);
                     Application.LoadLevel("VuforiaTest");
 
                     break;

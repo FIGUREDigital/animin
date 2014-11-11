@@ -31,7 +31,7 @@ public class DroppedItemScript : MonoBehaviour {
 		bool isNonArScene = UIGlobalVariablesScript.Singleton.NonSceneRef.activeInHierarchy;
 		
 		if (this.transform.position.y <= -350) {
-			PersistentData.Singleton.AddItemToInventory(m_ItemScript.Id,1);
+			ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(m_ItemScript.Id,1);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().GroundItems.Remove(this.gameObject);
 			UnityEngine.Object.Destroy(this.gameObject);
 		}

@@ -21,15 +21,15 @@ public class SelectCharacterClickScript : MonoBehaviour
 
 	void OnClick()
 	{
-		//PersistentData.Singleton.SetDefault();
-		//PersistentData.Singleton.PlayerAniminId = Animin;
-		//PersistentData.Singleton.AniminEvolutionId = AniminEvolutionStageId.Baby;
-		//PersistentData.Singleton.Save();
+		//ProfilesManagementScript.Singleton.CurrentAnimin.SetDefault();
+		//ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId = Animin;
+		//ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId = AniminEvolutionStageId.Baby;
+		//ProfilesManagementScript.Singleton.CurrentAnimin.Save();
 
         ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin = Animin;
 
-        ProfilesManagementScript.Singleton.AssignCurrentAniminToVariable;
-//        PersistentData.Singleton = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)Animin];
+        ProfilesManagementScript.Singleton.AssignCurrentAniminToVariable();
+//        ProfilesManagementScript.Singleton.CurrentAnimin = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)Animin];
 
 		if (!ProfilesManagementScript.Singleton.BeginLoadLevel) {	
 			ProfilesManagementScript.Singleton.BeginLoadLevel = true;

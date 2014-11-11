@@ -225,7 +225,7 @@ public class MinigameCollectorScript : MonoBehaviour
 		
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
 		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
-		UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
+		UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
 		//progressScript.CurrentAction = ActionId.EnterPortalToNonAR;
 		
 
@@ -583,7 +583,7 @@ public class MinigameCollectorScript : MonoBehaviour
 			if(d <= 25)
 			{
 				Points += 200;
-				PersistentData.Singleton.Fitness += 10;
+				ProfilesManagementScript.Singleton.CurrentAnimin.Fitness += 10;
 				GameObject.Destroy(Collections[i]);
 
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.Star_Collect);

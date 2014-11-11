@@ -25,7 +25,7 @@ public class EvoBar : MonoBehaviour
 	void OnEnable()
 	{
 		//PlaceMarkers();
-		AniminEvolutionStageId id = PersistentData.Singleton.AniminEvolutionId;
+		AniminEvolutionStageId id = ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId;
 		overlay1.SetActive(false);
 		overlay2.SetActive(false);
 		overlay3.SetActive(false);
@@ -49,12 +49,12 @@ public class EvoBar : MonoBehaviour
 	
 	private void PlaceMarkers()
 	{
-		mEvoID = PersistentData.Singleton.AniminEvolutionId;
+		mEvoID = ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId;
 		if(mEvoID == mPrevEvoID && !initial)
 		{
 			return;
 		}
-		mPrevEvoID = PersistentData.Singleton.AniminEvolutionId;
+		mPrevEvoID = ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId;
 		initial = false;
 
 		if(mMarkers.Count > 0)
@@ -74,7 +74,7 @@ public class EvoBar : MonoBehaviour
 		int min = 0;
 		int max = 0;
 		int diff = 0;
-		AniminEvolutionStageId stage = PersistentData.Singleton.AniminEvolutionId;
+		AniminEvolutionStageId stage = ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId;
 
 		switch(stage)
 		{

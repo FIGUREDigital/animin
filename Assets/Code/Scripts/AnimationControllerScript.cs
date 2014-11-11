@@ -683,7 +683,7 @@ public class AnimationControllerScript : MonoBehaviour
 						else if(random == 3) 
 						{
 							IsIdleWave = true;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.IdleWave);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.IdleWave);
 						}
 					}
 
@@ -694,11 +694,11 @@ public class AnimationControllerScript : MonoBehaviour
 				case 3:
 				case 4:
 				{
-					if(randomAnimationGroup == 4 && (PersistentData.Singleton.Hungry <= 30 || PersistentData.Singleton.Health <= 30))
+					if(randomAnimationGroup == 4 && (ProfilesManagementScript.Singleton.CurrentAnimin.Hungry <= 30 || ProfilesManagementScript.Singleton.CurrentAnimin.Health <= 30))
 					{
 						List<int> randomHungryOrUnwell = new List<int>();
-						if(PersistentData.Singleton.Hungry <= 30) randomHungryOrUnwell.Add(0);
-						if(PersistentData.Singleton.Health <= 30) randomHungryOrUnwell.Add(1);
+						if(ProfilesManagementScript.Singleton.CurrentAnimin.Hungry <= 30) randomHungryOrUnwell.Add(0);
+						if(ProfilesManagementScript.Singleton.CurrentAnimin.Health <= 30) randomHungryOrUnwell.Add(1);
 
 						if(randomHungryOrUnwell[Random.Range(0, randomHungryOrUnwell.Count)] == 0)
 						{
@@ -706,7 +706,7 @@ public class AnimationControllerScript : MonoBehaviour
 							//TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(15.0f, 20.0f);
 							LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 							//sadUnwellLoopState = HungrySadUnwellLoopId.PlayHungry;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Hungry);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Hungry);
 						}
 						else
 						{
@@ -714,18 +714,18 @@ public class AnimationControllerScript : MonoBehaviour
 							//TimeForNextHungryUnwellSadAnimation = UnityEngine.Random.Range(15.0f, 20.0f);
 							LengthOfHungryUnwellSadAnimation = UnityEngine.Random.Range(3.0f, 5.0f);
 							//sadUnwellLoopState = HungrySadUnwellLoopId.PlayUnwell;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Unwell);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Unwell);
 						}
 
 					}
 					else
 					{
 
-//						Debug.Log("HAPPY: " + PersistentData.Singleton.Happy.ToString());
+//						Debug.Log("HAPPY: " + ProfilesManagementScript.Singleton.CurrentAnimin.Happy.ToString());
 						List<AnimationHappyId> animationList = new List<AnimationHappyId>();
 						for(int a=0;a<HappyStateRange.HappyStates.Length;++a)
 						{
-							if(PersistentData.Singleton.Happy >= HappyStateRange.HappyStates[a].Min && PersistentData.Singleton.Happy <= HappyStateRange.HappyStates[a].Max)
+							if(ProfilesManagementScript.Singleton.CurrentAnimin.Happy >= HappyStateRange.HappyStates[a].Min && ProfilesManagementScript.Singleton.CurrentAnimin.Happy <= HappyStateRange.HappyStates[a].Max)
 							{
 								animationList.Add(HappyStateRange.HappyStates[a].Id);
 							}
@@ -737,47 +737,47 @@ public class AnimationControllerScript : MonoBehaviour
 						if(finalAnimationId == AnimationHappyId.Happy5) 
 						{
 							IsHappy = AnimationHappyId.Happy5;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Happy4);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Happy4);
 						}
 						else if(finalAnimationId == AnimationHappyId.Happy4) 
 						{
 							IsHappy = AnimationHappyId.Happy4;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Happy4);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Happy4);
 						}
 						else if(finalAnimationId == AnimationHappyId.Happy3) 
 						{
 							IsHappy = AnimationHappyId.Happy3;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Happy3);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Happy3);
 						}
 						else if(finalAnimationId == AnimationHappyId.Happy2) 
 						{
 							IsHappy = AnimationHappyId.Happy2;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Happy2);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Happy2);
 						}
 						else if(finalAnimationId == AnimationHappyId.Happy1) 
 						{
 							IsHappy = AnimationHappyId.Happy1;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Happy1);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Happy1);
 						}
 						else if(finalAnimationId == AnimationHappyId.Sad1) 
 						{
 							IsHappy = AnimationHappyId.Sad1;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Sad1);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Sad1);
 						}
 						else if(finalAnimationId == AnimationHappyId.Sad2) 
 						{
 							IsHappy = AnimationHappyId.Sad2;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Sad2);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Sad2);
 						}
 						else if(finalAnimationId == AnimationHappyId.Sad3) 
 						{
 							IsHappy = AnimationHappyId.Sad3;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Sad3);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Sad3);
 						}
 						else if(finalAnimationId == AnimationHappyId.Sad4) 
 						{
 							IsHappy = AnimationHappyId.Sad4;
-							UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.Sad4);
+							UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.Sad4);
 						}
 					}
 
@@ -795,7 +795,7 @@ public class AnimationControllerScript : MonoBehaviour
 						} 
 						else if(randomItem != null)
 						{
-						if(PersistentData.Singleton.Happy < 50)
+						if(ProfilesManagementScript.Singleton.CurrentAnimin.Happy < 50)
 							{
 								script.ShouldThrowObjectAfterPickup = true;
 								script.IsGoingToPickUpObject = randomItem;
@@ -834,8 +834,8 @@ public class AnimationControllerScript : MonoBehaviour
 
 				CharacterProgressScript progressScript = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 				UIGlobalVariablesScript.Singleton.SoundEngine.Play(
-					PersistentData.Singleton.PlayerAniminId,
-					PersistentData.Singleton.AniminEvolutionId,
+					ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId,
+					ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId,
 					(CreatureSoundId)((int)CreatureSoundId.RandomTalk1 + randomId ));
 
 				TimeToPlayIdleSoundFX = UnityEngine.Random.Range(6.0f, 9.0f);

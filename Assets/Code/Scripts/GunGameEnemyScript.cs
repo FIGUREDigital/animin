@@ -144,6 +144,8 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
                     GameObject newObject = minigame.SpawnEnemyStart(Level + 1);
                     newObject.transform.localPosition = this.gameObject.transform.localPosition;
 
+                    newObject.GetComponent<GunGameEnemyScript>().HasMerged = true;
+
                     HasMerged = true;
                     enemyScript.HasMerged = true;
 

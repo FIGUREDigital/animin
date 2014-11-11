@@ -192,7 +192,7 @@ public class TutorialHandler : MonoBehaviour {
 
 
 
-        if (PersistentData.Singleton.Health / PersistentData.MaxHealth <= 0.4f)
+        if (ProfilesManagementScript.Singleton.CurrentAnimin.Health / PersistentData.MaxHealth <= 0.4f)
         {
             UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("HealthBelow40");
         }
@@ -386,7 +386,7 @@ public class TutorialHandler : MonoBehaviour {
                         switch (CurrentLesson.EndCondition.AdHocCond.call)
                         {
                             case ("EatStrawberry"):
-                                PersistentData.Singleton.AddItemToInventory(InventoryItemId.Strawberry, 1);
+                                ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Strawberry, 1);
 
                                 UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = InventoryItemId.Strawberry;
                                 UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UISprite>().spriteName = "strawberry";
@@ -396,7 +396,7 @@ public class TutorialHandler : MonoBehaviour {
 
 
                                 ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].Hungry = 0;
-                                PersistentData.Singleton.Hungry = 0;
+                                ProfilesManagementScript.Singleton.CurrentAnimin.Hungry = 0;
                                 break;
                         }
                         m_CurrentAdHocExitCond = CurrentLesson.EndCondition.AdHocCond.call;
@@ -421,7 +421,7 @@ public class TutorialHandler : MonoBehaviour {
     					break;
                     case("EatStrawberry"):
 					
-                        PersistentData.Singleton.AddItemToInventory(InventoryItemId.Strawberry, 1);
+                        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Strawberry, 1);
 
                         UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = InventoryItemId.Strawberry;
                         UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UISprite>().spriteName = "strawberry";
@@ -431,7 +431,7 @@ public class TutorialHandler : MonoBehaviour {
 
 
 					ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].Hungry = 0;
-					PersistentData.Singleton.Hungry = 0;
+					ProfilesManagementScript.Singleton.CurrentAnimin.Hungry = 0;
 					m_WaitingForInput = true;
 					break;
 				default:

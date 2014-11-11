@@ -111,7 +111,7 @@ public class EvolutionManager
 	}
 	public void AddZef(int amount)
 	{
-		PersistentData.Singleton.ZefTokens += amount;
+		ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens += amount;
 		ZefChanged();
 	}
 
@@ -122,17 +122,17 @@ public class EvolutionManager
 
 	public void RemoveZef(int amount)
 	{
-		PersistentData.Singleton.ZefTokens -= amount;
-		if(PersistentData.Singleton.ZefTokens < 0)
+		ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens -= amount;
+		if(ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens < 0)
 		{
-			PersistentData.Singleton.ZefTokens = 0;
+			ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens = 0;
 		}
 		ZefChanged();
 	}
 
 	private void ZefChanged () 
 	{
-		if(PersistentData.Singleton.ZefTokens >= mNextMarker)
+		if(ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens >= mNextMarker)
 		{
 			mNextMarker += MARKER_RATE;
 			if(mMarkers.Count > mCurrentMarker)
@@ -156,8 +156,8 @@ public class EvolutionManager
 		int min =0;
 		int max =0;
 		int curZef =0;
-		curZef = PersistentData.Singleton.ZefTokens;
-		AniminEvolutionStageId stage = PersistentData.Singleton.AniminEvolutionId;
+		curZef = ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens;
+		AniminEvolutionStageId stage = ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId;
 		switch(stage)
 		{
 		case AniminEvolutionStageId.Baby:
@@ -180,12 +180,12 @@ public class EvolutionManager
 		int diff = max - min;
 		float percentage = (curZef * 100f) / (diff * 100f);
 
-		PersistentData.Singleton.Evolution = percentage;
+		ProfilesManagementScript.Singleton.CurrentAnimin.Evolution = percentage;
 	}
 
 	private void CheckHappiness()
 	{
-		float happiness = PersistentData.Singleton.Happy;
+		float happiness = ProfilesManagementScript.Singleton.CurrentAnimin.Happy;
 		if(happiness < HAPPINESS_FAIL_THRESHOLD)
 		{
 			mHappinessState = HappinessState.Failing;
@@ -237,8 +237,8 @@ public class EvolutionManager
 
 	private void CheckEvolution()
 	{
-		int zef = PersistentData.Singleton.ZefTokens;
-		AniminEvolutionStageId stage = PersistentData.Singleton.AniminEvolutionId;
+		int zef = ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens;
+		AniminEvolutionStageId stage = ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId;
 		AniminEvolutionStageId correctStage = AniminEvolutionStageId.Count;
 		if(zef < BABY_EVOLVE_THRESHOLD)
 		{
@@ -271,14 +271,14 @@ public class EvolutionManager
 	}
 	private void Evolve()
 	{
-		PersistentData.Singleton.AniminEvolutionId = mCorrectStage;
-		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, mCorrectStage);
+		ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId = mCorrectStage;
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().LoadCharacter(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, mCorrectStage);
 		AchievementsScript.Singleton.Show(AchievementTypeId.Evolution, 100);
 	}
 	private void Devolve()
 	{
-		PersistentData.Singleton.AniminEvolutionId = mCorrectStage;
-		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().LoadCharacter(PersistentData.Singleton.PlayerAniminId, mCorrectStage);
+		ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId = mCorrectStage;
+		UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterSwapManagementScript>().LoadCharacter(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, mCorrectStage);
 	}
 
 	public List<string> Deserialize()

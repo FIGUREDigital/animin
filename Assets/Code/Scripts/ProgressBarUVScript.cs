@@ -29,7 +29,7 @@ public class ProgressBarUVScript : MonoBehaviour
 		if(Timer <= 0)
 		{
 			Timer = 1;
-			Accumulator += PersistentData.Singleton.Happy;
+			Accumulator += ProfilesManagementScript.Singleton.CurrentAnimin.Happy;
 			SamplesTaken++;
 
 			if(SamplesTaken >= SamplesPerTrigger)
