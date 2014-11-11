@@ -47,7 +47,7 @@ public class PlayerProfileData
         }
 
         profile.Settings.AudioEnabled = true;
-
+        profile.UnlockedAnimins.Add(PersistentData.TypesOfAnimin.Tbo);
         return profile;
     }
 

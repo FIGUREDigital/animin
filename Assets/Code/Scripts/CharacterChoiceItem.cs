@@ -14,29 +14,19 @@ public class CharacterChoiceItem : MonoBehaviour
 	[SerializeField]
 	private bool mUnlocked;
 	[SerializeField]
-    private PersistentData.TypesOfAnimin mId;
+    public PersistentData.TypesOfAnimin ThisCharacter;
 
-    private SelectCharacterClickScript characterClickScript;
+    public SelectCharacterClickScript CharacterClickScript;
 
 	// Use this for initialization
+
+    void Awake()
+    {
+        CharacterClickScript = GetComponentInChildren<SelectCharacterClickScript>();
+    }
+
 	void Start () 
-	{
-
-	    for (int i = 0; i < ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Count; i++)
-	    {
-	        if (ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins[i] == PersistentData.TypesOfAnimin.TboAdult)
-	        {
-	            mId = PersistentData.TypesOfAnimin.TboAdult;
-	            characterClickScript = GetComponentInChildren<SelectCharacterClickScript>();
-                characterClickScript.Animin = PersistentData.TypesOfAnimin.TboAdult;
-	        }
-
-            if (mId == ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins[i])
-	        {
-	            mUnlocked = true;
-	            break;
-	        }
-	    }
+	{    
 
 		if(mSprite == null)
 		{
@@ -83,9 +73,9 @@ public class CharacterChoiceItem : MonoBehaviour
 
 	void OnEnable()
 	{
-		ChangeLockedState(mUnlocked || UnlockCharacterManager.Instance.CheckCharacterPurchased(mId));
-//        Debug.Log(mId);
-		Invoke ("UpdateAge", 0.1f);
+//        CheckLockedState();
+//        ChangeLockedState(mUnlocked);
+//		Invoke ("UpdateAge", 0.1f);
 	}
 
 	private void UpdateAge()
@@ -93,7 +83,7 @@ public class CharacterChoiceItem : MonoBehaviour
 		UILabel label = mAgeLabel.GetComponent<UILabel>();
         if(ProfilesManagementScript.Singleton.CurrentProfile != null)
 		{
-            PersistentData pd = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)mId];
+            PersistentData pd = ProfilesManagementScript.Singleton.CurrentAnimin;
 			label.text = "Age " + pd.Age;
 		}
 		else
@@ -102,17 +92,13 @@ public class CharacterChoiceItem : MonoBehaviour
 		}
 	}
 
-	public void ChangeLockedState(bool unlocked)
+    public void ChangeLockedState(bool unlocked)
 	{
-		mUnlocked = unlocked;
+        Debug.Log("Unlocking... " + ThisCharacter);
+        mUnlocked = unlocked;
 		mSprite.SetActive(mUnlocked);
 		mDisabledSprite.SetActive(!mUnlocked);
 		mLockedButton.SetActive(!mUnlocked);
 		mAgeLabel.SetActive(mUnlocked);
-	}
-	public void UnlockCharacter()
-	{
-		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
-		character.ChangeLockedState(true);
 	}
 }

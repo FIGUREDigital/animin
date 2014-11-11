@@ -25,12 +25,6 @@ public class SaveAndLoad {
 	
 	#endregion
 
-//	[System.Serializable]
-//	public class ProfilesToStore
-//	{
-//        public PlayerProfileData PlayerData; 		
-//	}
-
     public List<PlayerProfileData> ProfileList; 
 
     public void Awake()
@@ -67,34 +61,33 @@ public class SaveAndLoad {
 	public void SaveAllData()
 	{
         File.Delete(Application.persistentDataPath + "/savedGames.anidat");
-        Debug.Log("Save section " + 1);
+//        Debug.Log("Save section " + 1);
         ProfileList.Clear();
-        Debug.Log("Save section " + 2);
-        Debug.Log("Save section " + 3);
+//        Debug.Log("Save section " + 2);
+//        Debug.Log("Save section " + 3);
         for (int i =0; i< ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count; i++)
         {
-            Debug.Log("Save section " + 4);
+//            Debug.Log("Save section " + 4);
             PlayerProfileData tempProfile = new PlayerProfileData();
-            Debug.Log("Save section " + 5);
-            Debug.Log("Save section " + 6);
+//            Debug.Log("Save section " + 5);
+//            Debug.Log("Save section " + 6);
             tempProfile = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[i];
-            Debug.Log("Save section " + 7);
+//            Debug.Log("Save section " + 7);
             ProfileList.Add(tempProfile);
-            Debug.Log("Save section " + 8);
+//            Debug.Log("Save section " + 8);
         }
-        Debug.Log("Save section " + 9);
-        ProfileList[0].UnlockedAnimins.Add(PersistentData.TypesOfAnimin.TboAdult);
-        Debug.Log("Save section " + 10);
+//        Debug.Log("Save section " + 9);
+//        Debug.Log("Save section " + 10);
 		BinaryFormatter bf = new BinaryFormatter();
-        Debug.Log("Save section " + 11);
+//        Debug.Log("Save section " + 11);
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");
-        Debug.Log("Save section " + 12);
+//        Debug.Log("Save section " + 12);
 		bf.Serialize(file, ProfileList);
-        Debug.Log("Save section " + 13);
-        Debug.Log("Savesize " + ProfileList.Count);
-        Debug.Log("Save section " + 14);
+//        Debug.Log("Save section " + 13);
+//        Debug.Log("Savesize " + ProfileList.Count);
+//        Debug.Log("Save section " + 14);
 		file.Close();
-        Debug.Log("Save section " + 15);
+//        Debug.Log("Save section " + 15);
 
 	}	
 

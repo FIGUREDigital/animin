@@ -62,8 +62,6 @@ public class ShopManager
     }
 
 
-
-
     private const float TIMEOUT_TIME = 10.0f;
     private float m_TimeoutTimer = TIMEOUT_TIME;
     
@@ -114,9 +112,6 @@ public class ShopManager
     }
 
     public static RestoreStatus CurrentRestoreStatus;
-	
-
-
 
 
 

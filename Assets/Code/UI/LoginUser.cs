@@ -10,7 +10,7 @@ public class LoginUser : MonoBehaviour
         ProfilesManagementScript.Singleton.LoginExistingUser(ThisProfile);
 
         ProfilesManagementScript.Singleton.SelectProfile.SetActive(false);
-        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+//        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 
 	}
 }

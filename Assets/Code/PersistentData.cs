@@ -16,9 +16,9 @@ public class PersistentData
 	{
         Pi = 0,
         Tbo,
-        TboAdult,
         Kelsey,
         Mandi,
+        TboAdult,
 
         Count,
 	}

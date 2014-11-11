@@ -102,8 +102,10 @@ public class ProfilesManagementScript : MonoBehaviour
 		Debug.Log("just saved...new");
 		CurrentProfile = tempData;
         AchievementManager.Instance.PopulateAchievements(true);
-		UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
+		
         CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
+        ActivateAniminSelectionScreen();
+        UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
 
 	}
 
@@ -119,8 +121,10 @@ public class ProfilesManagementScript : MonoBehaviour
         }
          
         AchievementManager.Instance.PopulateAchievements(false);
-        UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
+
         CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
+        ActivateAniminSelectionScreen();
+        UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
     }
 
 	public void CheckProfileLoginPasscode(string code)
@@ -147,11 +151,13 @@ public class ProfilesManagementScript : MonoBehaviour
             
 			CurrentProfile = tempData;
             AchievementManager.Instance.PopulateAchievements(true);
-			UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
+			
             CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
 
 			SaveAndLoad.Instance.SaveAllData();
 			Debug.Log("Saved succesful login");
+            ActivateAniminSelectionScreen();
+            UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
 		} 
 		else 
 		{
@@ -159,6 +165,13 @@ public class ProfilesManagementScript : MonoBehaviour
 		}
 
 	}
+
+    public void ActivateAniminSelectionScreen()
+    {
+        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
+        CharacterChoiceManager.Instance.FindCharacterChoices(AniminsScreen);
+
+    }
 
 	private void RefreshProfiles()
 	{
@@ -170,7 +183,7 @@ public class ProfilesManagementScript : MonoBehaviour
 
 		if(profiles != null)
 		{
-            Debug.Log(profiles.Count);
+//            Debug.Log(profiles.Count);
             //TempDebugPanel.text = profiles.Count.ToString();
             for(int i=0;i<profiles.Count;++i)
 			{
