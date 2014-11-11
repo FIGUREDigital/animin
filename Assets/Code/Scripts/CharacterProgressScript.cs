@@ -1272,6 +1272,8 @@ public class CharacterProgressScript : MonoBehaviour
 								
                                     UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.PatReact);
                                 }
+                                Debug.Log("Tap");
+                                UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocExitCond("Attention","tap");
                             }
                             else if ((hitInfo.collider.tag == "Items") && hitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
                             {
