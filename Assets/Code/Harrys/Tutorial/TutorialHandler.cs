@@ -23,14 +23,14 @@ public class TutorialHandler : MonoBehaviour {
 
 
     //-Start Conditions
-    public bool[] TutorialConditions;
+    public bool[] StartConditions;
 
     public void SetTutorialCondition(string name, bool value){
         for (int i = 0; i < Tutorials.Length; i++)
         {
             if (name == Tutorials[i].Name)
             {
-                TutorialConditions[Tutorials[i].id_num] = value;
+                StartConditions[Tutorials[i].id_num] = value;
                 return;
             }
         }
@@ -46,9 +46,10 @@ public class TutorialHandler : MonoBehaviour {
 	private GameObject m_CurrentListening;
 	public GameObject CurrentListeningGO{ get { return m_CurrentListening; } }
 
-	private string m_CurrentExitCond;
-	public string CurrentExitCond{ get { return m_CurrentExitCond; } }
+	private string m_CurrentAdHocExitCond;
+    public string CurrentAdHocExitCond{ get { return m_CurrentAdHocExitCond; } }
 	private bool m_WaitingForInput;
+
 
 	private const string TutorialPlayerPrefID = "TUTORIALS_COMPLETED";
     private bool CheckPref(int id){
@@ -102,8 +103,28 @@ public class TutorialHandler : MonoBehaviour {
 			if (PlayerPrefs.GetString(TutorialPlayerPrefID + i) == null)
 				PlayerPrefs.SetString(TutorialPlayerPrefID + i,"false");
 		}
-        TutorialConditions = new bool[Tutorials.Length];
-        SetTutorialCondition("Initial", true);
+        StartConditions = new bool[Tutorials.Length];
+        for (int i = 0 ; i < Tutorials.Length; i ++){
+            if (Tutorials[i].Condition != null)
+            {
+                if (Tutorials[i].Condition.Initial != null)
+                {
+                    StartConditions[i] = true;
+                }
+                if (Tutorials[i].Condition.ButtonCond != null)
+                {
+                    ButtonCond buttcond = Tutorials[i].Condition.ButtonCond;
+                    GameObject go = GameObject.Find(buttcond.name);
+                    if (go != null)
+                    {
+                        if (go.GetComponent<UIButton>() != null && go.GetComponent<BoxCollider>() != null)
+                        {
+                            UIEventListener.Get(go).onClick += OnTutorialStartClick;
+                        }
+                    }
+                }
+            }
+        }
 	}
 	
 
@@ -116,7 +137,7 @@ public class TutorialHandler : MonoBehaviour {
 			
 			//TutorialReader.Instance.test();
 			for (int i = 0; i < Tutorials.Length; i++) {
-				if (StartConditions (i)) {
+				if (CheckStartCondition (i)) {
 					if (TutorialUIParent == null) return;
 					TutorialUIParent.SetActive (true);
 					WormAnimator.gameObject.SetActive(true);
@@ -164,10 +185,26 @@ public class TutorialHandler : MonoBehaviour {
             else
             {
                 Debug.Log("Turning off timer. Cond : ["+m_TutorialCountingDown+"] = true;");
-                TutorialConditions[m_TutorialCountingDown] = true;
+                StartConditions[m_TutorialCountingDown] = true;
                 TurnOffTimer();
             }
         }
+
+
+
+        if (PersistentData.Singleton.Health / PersistentData.MaxHealth <= 0.4f)
+        {
+            UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("HealthBelow40");
+        }
+        if (Time.timeSinceLevelLoad >= (5 * 60))
+        {
+            UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("5Minutes");
+        }
+        if (Time.timeSinceLevelLoad >= (9 * 60))
+        {
+            UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("9Minutes");
+        }
+
 	}
 
 
@@ -187,9 +224,19 @@ public class TutorialHandler : MonoBehaviour {
     //- ENTRY CONDITIONS ----------------------------------------------------------------
     public bool CheckCharacterProgress(CharacterProgressScript script, RaycastHit hitInfo){
         bool cont = false;
+        /*
         switch (m_CurrentExitCond) {
             case ("WakeUp"):
                 if (hitInfo.collider.gameObject == script.SleepBoundingBox)
+                    cont = true;
+                break;
+        }
+        */
+        switch (m_CurrentAdHocExitCond)
+        {
+            case("walkto"):
+            case("runto"):
+                if (hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
                     cont = true;
                 break;
         }
@@ -197,12 +244,12 @@ public class TutorialHandler : MonoBehaviour {
     }
 
     //This method test whether or not to start the tutorial.
-    private bool StartConditions(int id){
+    private bool CheckStartCondition(int id){
 
         if (CheckPref(id))
             return false;
 
-        return TutorialConditions[id];
+        return StartConditions[id];
 
         /*switch (id) {
         case (0):
@@ -228,11 +275,43 @@ public class TutorialHandler : MonoBehaviour {
         */      
     }
 
+    public void TriggerAdHocStartCond(string call){
+        if (IsPlaying)
+            return;
 
-    //- EXIT STAMPS ----------------------------------------------------------------
-	public void OnTutorialClick(GameObject go){
+        for (int i = 0; i < Tutorials.Length; i++)
+        {
+            if (CheckPref(i) == true) continue;
+            if (Tutorials[i].Condition == null)  continue;
+            if (Tutorials[i].Condition.AdHocCond == null)  continue;
+            if (Tutorials[i].Condition.AdHocCond.call == call)
+            {
+                StartConditions[i] = true;
+            }
+        }
+    }
+
+
+    public void OnTutorialStartClick(GameObject go){
+        if (!IsPlaying)
+        {
+            for (int i = 0; i < Tutorials.Length; i++)
+            {
+                if (CheckPref(i) == true) continue;
+                if (Tutorials[i].Condition == null)  continue;
+                if (Tutorials[i].Condition.ButtonCond == null)  continue;
+                Debug.Log("Checking GameObject : ["+go.name+"] against : ["+Tutorials[i].Condition.ButtonCond.name+"];");
+                if (go.name == Tutorials[i].Condition.ButtonCond.name)
+                {
+                    StartConditions[i] = true;
+                }
+            }
+        }
+    }
+    //- EXIT Conditions ----------------------------------------------------------------
+	public void OnTutorialEndClick(GameObject go){
 		if (go == m_CurrentListening) {
-			UIEventListener.Get (m_CurrentListening).onClick -= OnTutorialClick;
+			UIEventListener.Get (m_CurrentListening).onClick -= OnTutorialEndClick;
 			m_WaitingForInput = false;
 			//go.GetComponent<UIWidget>().depth = m_SavedDepth;
 			go.GetComponent<BoxCollider>().enabled = false;
@@ -240,16 +319,18 @@ public class TutorialHandler : MonoBehaviour {
 			NextButtonPress(true);
 		}
 	}
-    public void TriggerExitCond(string TutorialName, string StampName){
+
+    public void TriggerAdHocExitCond(string TutorialName, string StampName){
         Debug.Log("Current Tutorial Name : ["+Tutorials[m_CurTutorial_i].Name+"]; Name to Change : ["+TutorialName+"];");
         if (Tutorials[m_CurTutorial_i].Name == TutorialName)
         {
-            TriggerExitCond(Tutorials[m_CurTutorial_i].id_num, StampName);
+            TriggerAdHocExitCond(Tutorials[m_CurTutorial_i].id_num, StampName);
         }
     }
-    public void TriggerExitCond(int id, string StampName){
+    public void TriggerAdHocExitCond(int id, string StampName){
         if (Tutorials[m_CurTutorial_i].id_num == id && 
             //Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].ExitStr == StampName && 
+            Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].EndCondition.AdHocCond.call == CurrentAdHocExitCond &&
             m_WaitingForInput)
         {
             m_WaitingForInput = false;
@@ -261,26 +342,73 @@ public class TutorialHandler : MonoBehaviour {
 	//- End of Lesson Processing ----------------------------------------------------------------
 	public void NextButtonPress(bool ignoreCheck = false){
 
-		int maxEntries = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].TutEntries.Length;
+        Lesson CurrentLesson = Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i];
+
+        int maxEntries = CurrentLesson.TutEntries.Length;
 
 
-		//Debug.Log ("Testing Entry : ["+m_Entry_i+":"+maxEntries+"]; Lesson : ["+m_Lesson_i+":"+maxLessons+"];");
+		Debug.Log ("Testing Entry : ["+m_Entry_i+":"+maxEntries+"]");
 		
 		m_Letter_i = 0;
 		m_Entry_i += 1;
-		m_CurrentExitCond = Tutorials [m_CurTutorial_i].Lessons [m_Lesson_i].ExitStr;
 
-		bool noNext = (m_CurrentExitCond != "None" && !ignoreCheck);
-		if (noNext) maxEntries -= 1;
-		
+        bool noNext = false;
+        if (CurrentLesson.EndCondition != null)
+            noNext = true;
+        if (ignoreCheck)
+            noNext = false;
+
+        if (noNext) maxEntries -= 1;
+
 		if (m_Entry_i >= maxEntries) {
 
-			// - When at the end of a lesson, this code here fires
 			if (noNext) {
 
-				//Exit stamp handling
+                // - When at the end of a lesson, this code here fires
+                switch(CurrentLesson.EndCondition.type){
+                    case (Condition.Type.UIButton):
+                        GameObject go = GameObject.Find(CurrentLesson.EndCondition.ButtonCond.name);
+                        if (go != null && go.GetComponent<UIButton>() != null)
+                        {
+                            //Enable Button
+                            go.GetComponent<UIButton>().isEnabled = true;
 
-				switch(m_CurrentExitCond){
+                            //Set up listener
+                            UIEventListener.Get(go).onClick += OnTutorialEndClick;
+
+
+                            //Set Tutorial to wait for listener input
+                            m_CurrentListening = go;
+                            m_WaitingForInput = true;
+                        }
+                        break;
+                    case(Condition.Type.AdHoc):
+                        switch (CurrentLesson.EndCondition.AdHocCond.call)
+                        {
+                            case ("EatStrawberry"):
+                                PersistentData.Singleton.AddItemToInventory(InventoryItemId.Strawberry, 1);
+
+                                UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<InterfaceItemLinkToModelScript>().ItemID = InventoryItemId.Strawberry;
+                                UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UISprite>().spriteName = "strawberry";
+                                UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIButton>().normalSprite = "strawberry";
+                                UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIClickButtonMasterScript>().enabled = false;
+                                UIGlobalVariablesScript.Singleton.FoodButton.GetComponent<UIButton>().isEnabled = true;
+
+
+                                ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].Hungry = 0;
+                                PersistentData.Singleton.Hungry = 0;
+                                break;
+                        }
+                        m_CurrentAdHocExitCond = CurrentLesson.EndCondition.AdHocCond.call;
+                        m_WaitingForInput = true;
+                        break;
+                }
+
+                //Disable next button
+                NextButton.gameObject.SetActive(false);
+
+				//Exit stamp handling
+                /*OnTutorialEndClickurrentExitCond){
     				case ("Stats"):
     					m_CurrentListening = UIGlobalVariablesScript.Singleton.StatsButton;
     					UIWidget widget = m_CurrentListening.GetComponent<UIWidget> ();
@@ -310,11 +438,16 @@ public class TutorialHandler : MonoBehaviour {
 					m_WaitingForInput = true;
 					break;
 				}
+                */  
+
+
+
 			} else {
 				NextLesson ();
 			}
 		}
 	}
+
 
     //----Load next lesson------------------------------------------------
 	public void NextLesson(){
@@ -380,20 +513,12 @@ public class TutorialHandler : MonoBehaviour {
 			m_Buttons = UIGlobalVariablesScript.Singleton.UIRoot.GetComponentsInChildren<UIButton>(true);
 			m_EnabledButtons = new bool[m_Buttons.Length];
 			for (int i = 0; i < m_Buttons.Length; i++){
-                //TweenButton(m_Buttons[i].gameObject, false);
-				//m_EnabledButtons[i] = m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled;
-				//m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled = false;
-
-                //m_Buttons[i].gameObject.GetComponent<UIButton>().SetState(UIButtonColor.State.Disabled, false);
                 m_Buttons[i].gameObject.GetComponent<UIButton>().isEnabled = false;
 			}
 			m_BoolArraySet = true;
 
 		} else {
             for (int i = 0; i < m_Buttons.Length; i++){
-                //TweenButton(m_Buttons[i].gameObject, true);
-                //m_Buttons[i].gameObject.GetComponent<BoxCollider>().enabled = m_EnabledButtons[i];
-                //m_Buttons[i].gameObject.GetComponent<UIButton>().SetState(UIButtonColor.State.Normal, false);
                 m_Buttons[i].gameObject.GetComponent<UIButton>().isEnabled = true;
 
 			}
@@ -402,26 +527,6 @@ public class TutorialHandler : MonoBehaviour {
 		}
 		NextButton.GetComponent<BoxCollider> ().enabled = true;
 	}
-	
-    private void TweenButton(GameObject button, bool active){
-        TweenColor tween = button.GetComponent<TweenColor>();
-        if (tween != null)
-        {
-            if (active)
-            {
-                tween.from = button.GetComponent<UIButton>().disabledColor;
-                tween.to = button.GetComponent<UIButton>().defaultColor;
-            }
-            else
-            {
-                tween.from = button.GetComponent<UIButton>().defaultColor;
-                tween.to = button.GetComponent<UIButton>().disabledColor;
-            }
-            tween.duration = 1;
-            tween.enabled = true;
-        }
-    }
-
 
 
 

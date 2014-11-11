@@ -347,8 +347,24 @@ public class CharacterProgressScript : MonoBehaviour
 				}
                 BetweenSceneData.Instance.ResetPoints();
             }
-            
+            if (BetweenSceneData.Instance.minigame == BetweenSceneData.Minigame.Collector)
+            {
+                UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("BoxLandReturn");
+                if (BetweenSceneData.Instance.Points >= 7000)
+                {
+                    UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("BoxLandScoreBreak1");
+                }
+            }
             exitSleep();
+        }
+
+        if (DateTime.Now.Subtract(PersistentData.Singleton.CreatedOn).Days >= 1)
+        {
+            UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("1DayEvolve");
+        }
+        if (DateTime.Now.Subtract(PersistentData.Singleton.CreatedOn).Days >= 3)
+        {
+            UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("3DayEvolve");
         }
     }
 
@@ -1161,8 +1177,10 @@ public class CharacterProgressScript : MonoBehaviour
                             }
 
                             if (cleanedShit)
+                            {
                                 UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.CleanPooPiss);
-
+                                UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("CleanPiss");
+                            }
 												
                             if (TouchesObjcesWhileSwiping.Contains(this.gameObject) && !cleanedShit && !animationController.IsTickled)
                             {
@@ -1239,6 +1257,7 @@ public class CharacterProgressScript : MonoBehaviour
                                 else if (ObjectHolding != null && ObjectHolding/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().NonInteractable)
                                 {
                                     //Debug.Log("HIT THE CHARACTER FOR INTERACTION 3");
+                                    UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("Fart");
                                     UIGlobalVariablesScript.Singleton.SoundEngine.PlayFart();
                                 }
                                 else if (ObjectHolding == null && UIGlobalVariablesScript.Singleton.DragableUI3DObject.transform.childCount == 0 && !animationController.IsPat)
@@ -1419,9 +1438,14 @@ public class CharacterProgressScript : MonoBehaviour
                                     HidePopupMenus();
 
                                 if (RequestedToMoveToCounter > 1)
+                                {
                                     MoveTo(point, true);
-                                else
+                                    UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocExitCond("Walk", "runto");
+                                }else
+                                {
                                     MoveTo(point, false);
+                                    UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocExitCond("Walk", "walkto");
+                                }
                             }
 						
 						
@@ -1529,6 +1553,7 @@ public class CharacterProgressScript : MonoBehaviour
             {
                 newPoo = GameObject.Instantiate(PooPrefab) as GameObject;
                 UIGlobalVariablesScript.Singleton.SoundEngine.Play(GenericSoundId.TakePoo);
+                UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("Shit"); //Hey, we have naming conventions. I'm gonna stick to them.
             }
             else
             {
@@ -1649,7 +1674,7 @@ public class CharacterProgressScript : MonoBehaviour
         UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.SleepToIdle);
         UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
 		
-        UIGlobalVariablesScript.Singleton.TutHandler.TriggerExitCond("Initial", "WakeUp");
+//        UIGlobalVariablesScript.Singleton.TutHandler.TriggerExitCond("Initial", "WakeUp");
     }
 
 
@@ -1776,6 +1801,13 @@ public class CharacterProgressScript : MonoBehaviour
 			}
 			else
 			{*/
+
+
+                    if (PersistentData.Singleton.Health / PersistentData.MaxHealth <= 0.4f)
+                    {
+                        UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("HealFrom40");
+                    }
+
                     //ShowText("I feel good");
                     PersistentData.Singleton.Health += item.Points;
                     Stop(true);
