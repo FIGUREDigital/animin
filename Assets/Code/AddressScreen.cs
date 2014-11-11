@@ -15,8 +15,9 @@ public class AddressScreen : MonoBehaviour
 
 	public void Send()
 	{
-		Debug.Log("Preparing email");
+		Debug.Log("Reading Address");
 		ReadAddress();
+		Debug.Log("Preparing email");
 		PrepareEmail();
 		Debug.Log("Email sent!");
 	}
@@ -44,7 +45,9 @@ public class AddressScreen : MonoBehaviour
 		
 		SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
 		SmtpServer.Port = 587;
+		Debug.Log("DO THE THING");
 		SmtpServer.Credentials = new NetworkCredential("animindev@gmail.com","Code1red") as ICredentialsByHost;
+		Debug.Log("THE THING WORKS");
 		SmtpServer.EnableSsl = true;
 		SmtpServer.Timeout = 20000;
 		SmtpServer.UseDefaultCredentials = false;
