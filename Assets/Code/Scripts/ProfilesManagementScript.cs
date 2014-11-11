@@ -75,6 +75,7 @@ public class ProfilesManagementScript : MonoBehaviour
         //ProfilesManagementScript.Singleton.CurrentProfile = PlayerProfileData.CreateNewProfile("DefaultProfile");
 		//}
         AniminsScreen.SetActive(true);
+        CharacterChoiceManager.Instance.Initialised = false;
         CharacterChoiceManager.Instance.FindCharacterChoices(AniminsScreen);
         AniminsScreen.SetActive(false);
         //TempDebugPanel.text = "About to refresh";
