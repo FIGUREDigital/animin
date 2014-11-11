@@ -12,8 +12,8 @@ public class CloseButtons : MonoBehaviour {
 	}
 	void Init()
 	{
-		mButtons = GetComponentsInChildren<UIButton>();
-		view = GetComponentInChildren<OpenInGamePurchaseView>();
+		mButtons = GetComponentsInChildren<UIButton>(true);
+        view = GetComponentInChildren<OpenInGamePurchaseView>();
 	}
 	
 	// Update is called once per frame
@@ -29,6 +29,7 @@ public class CloseButtons : MonoBehaviour {
 		}
 		foreach(UIButton button in mButtons)
 		{
+            if (button.gameObject == view.gameObject)continue;
 			button.gameObject.SetActive(false);
 		}
 	}
@@ -41,6 +42,7 @@ public class CloseButtons : MonoBehaviour {
 		}
 		foreach(UIButton button in mButtons)
 		{
+            if (button.gameObject == view.gameObject)continue;
 			button.gameObject.SetActive(true);
 		}
 		view.gameObject.SetActive(true);
