@@ -85,10 +85,12 @@ public class GunsMinigameScript : Photon.MonoBehaviour
             {
                 m_StateBeforePaused = State;
                 State = GameStateId.Paused;
+                UIGlobalVariablesScript.Singleton.SoundEngine.StopLoop();
             }
             else
             {
                 State = m_StateBeforePaused;
+                UIGlobalVariablesScript.Singleton.SoundEngine.PlayLoop(GenericSoundId.GunLoop);
             }
         }
         get { return m_Paused; }
