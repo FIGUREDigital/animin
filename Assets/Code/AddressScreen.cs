@@ -114,7 +114,8 @@ Name: {2}
 
 Address: {3}
 
-Lots of love, Ad xx
+With thanks,
+Team Animin
 ", userName, secretCode, realName, address);
 	}
 }
