@@ -44,7 +44,7 @@ public class AddressScreen : MonoBehaviour
 		
 		SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
 		SmtpServer.Port = 587;
-		SmtpServer.Credentials = (ICredentialsByHost) new NetworkCredential("animindev@gmail.com","Code1red");
+		SmtpServer.Credentials = new NetworkCredential("animindev@gmail.com","Code1red") as ICredentialsByHost;
 		SmtpServer.EnableSsl = true;
 		SmtpServer.Timeout = 20000;
 		SmtpServer.UseDefaultCredentials = false;
