@@ -51,7 +51,6 @@ public class ProfilesManagementScript : MonoBehaviour
 			GameObject go = new GameObject();
 			go.name = "ArCameraManager";
 			go.AddComponent<ArCameraManager>();
-            LoadProfileData();
             //TempDebugPanel.text = "Awake";
 		}
 
@@ -76,6 +75,7 @@ public class ProfilesManagementScript : MonoBehaviour
 		//}
 
         //TempDebugPanel.text = "About to refresh";
+        LoadProfileData();
         RefreshProfiles ();
 
         //EvolutionManager.Instance.Deserialize();
@@ -173,7 +173,7 @@ public class ProfilesManagementScript : MonoBehaviour
 
     }
 
-	private void RefreshProfiles()
+    private void RefreshProfiles()
 	{
         List<PlayerProfileData> profiles = new List<PlayerProfileData>();
         //TempDebugPanel.text = "About to load";
