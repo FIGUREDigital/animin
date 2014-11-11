@@ -28,6 +28,7 @@ public class SelectCharacterClickScript : MonoBehaviour
 
         ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin = Animin;
 
+        ProfilesManagementScript.Singleton.AssignCurrentAniminToVariable;
 //        PersistentData.Singleton = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)Animin];
 
 		if (!ProfilesManagementScript.Singleton.BeginLoadLevel) {	
