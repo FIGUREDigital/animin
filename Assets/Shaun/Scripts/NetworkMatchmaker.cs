@@ -61,7 +61,7 @@ public class NetworkMatchmaker : MonoBehaviour {
 		if (__doTraces) Debug.Log("OnJoinedLobby\t:\t" + GameController.instance.multiplayerType + "\n");
 
 		if (GameController.instance.multiplayerType == MultiplayerType.FRIEND_START) {
-			if (__doTraces) Debug.Log ("GameController.instance.username\t:\t"	+	GameController.instance.username + "\n");
+			if (__doTraces) Debug.Log ("GameController.instance.username\t:\t"	+	ProfilesManagementScript.Singleton.CurrentProfile.ProfileName + "\n");
             PhotonNetwork.CreateRoom(ProfilesManagementScript.Singleton.CurrentProfile.ProfileName);
 		} else if (GameController.instance.multiplayerType == MultiplayerType.FRIEND_JOIN) {
 			Debug.Log ("GameController.instance.friendUsername\t:\t"+	GameController.instance.friendUsername);

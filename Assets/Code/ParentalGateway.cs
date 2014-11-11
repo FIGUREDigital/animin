@@ -34,6 +34,7 @@ public class ParentalGateway : MonoBehaviour
 		nextScreen = next;
 		prevScreen.SetActive(false);
 		this.gameObject.SetActive(true);
+		Pass(); //NO LONGER A KIDS GAME
 
 		bool passwordSet = (PlayerPrefs.GetString ("ParentalPassword") != null && PlayerPrefs.GetString ("ParentalPassword") != "");
 		EquationScreen.SetActive (!passwordSet);
@@ -62,6 +63,7 @@ public class ParentalGateway : MonoBehaviour
 	{
 		if(mLogPurchase)
 		{
+			FlurryLogger.Instance.CharacterPurchasedWeb();
 		}
 		Destroy(this.gameObject, 0);
 		nextScreen.SetActive(true);
