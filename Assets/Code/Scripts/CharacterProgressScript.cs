@@ -153,7 +153,6 @@ public class HappyStateRange
     public AnimationHappyId Id;
 }
 
-//[System.Serializable]
 public class CharacterProgressScript : MonoBehaviour
 {
     //public List<AchievementId> Achievements = new List<AchievementId>();
@@ -268,10 +267,6 @@ public class CharacterProgressScript : MonoBehaviour
             PersistentData.Singleton = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)PersistentData.TypesOfAnimin.Tbo];
         }
 
-
-
-
-
         //TextTest.color = new Color(1, 1, 1, 0.0f);
 
         Physics.IgnoreLayerCollision(
@@ -375,7 +370,7 @@ public class CharacterProgressScript : MonoBehaviour
 
     public GameObject SpawnStageItem(string prefabId, Vector3 position)
     {
-        //Argi, you're a cunt.
+
         CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 		
         GameObject resource = Resources.Load<GameObject>(prefabId);

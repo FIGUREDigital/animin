@@ -129,6 +129,10 @@ public class UnlockCharacterManager
 			s1 = "com.apples.animin.characterunlock3";
 			s2 = "com.apples.animin.characterpurchase3";
 			break;
+			case PersistentData.TypesOfAnimin.TboAdult:
+			s1 = "com.apples.animin.characterunlock4";
+			s2 = "com.apples.animin.characterpurchase4";
+			break;
 			
 		default:
             case PersistentData.TypesOfAnimin.Tbo:

@@ -25,17 +25,22 @@ public class SaveAndLoad {
 	
 	#endregion
 
-	[System.Serializable]
-	public class ProfilesToStore
-	{
-        public PlayerProfileData PlayerData; 		
-	}
+//	[System.Serializable]
+//	public class ProfilesToStore
+//	{
+//        public PlayerProfileData PlayerData; 		
+//	}
 
-	public List<ProfilesToStore> ProfileList; 
+    public List<PlayerProfileData> ProfileList; 
+
+    public void Awake()
+    {
+        Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
+    }
 
 	public SaveAndLoad()
 	{
-		ProfileList = new List<ProfilesToStore> ();
+        ProfileList = new List<PlayerProfileData> ();
 //		PlayerPrefs.DeleteAll ();
 	}
 
@@ -48,7 +53,7 @@ public class SaveAndLoad {
 		{
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(Application.persistentDataPath + "/savedGames.anidat", FileMode.Open);
-			ProfileList = (List<ProfilesToStore>)bf.Deserialize(file);
+            ProfileList = (List<PlayerProfileData>)bf.Deserialize(file);
 			file.Close();
 			Debug.Log ("Save data loaded");
             RepopulateData();
@@ -61,24 +66,35 @@ public class SaveAndLoad {
 
 	public void SaveAllData()
 	{
-//        File.Delete(Application.persistentDataPath + "/savedGames.anidat");
+        File.Delete(Application.persistentDataPath + "/savedGames.anidat");
+        Debug.Log("Save section " + 1);
         ProfileList.Clear();
-        ProfilesToStore tempProfile;
+        Debug.Log("Save section " + 2);
+        Debug.Log("Save section " + 3);
         for (int i =0; i< ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count; i++)
         {
-            tempProfile = new ProfilesToStore();
-            tempProfile.PlayerData = new PlayerProfileData();
-            tempProfile.PlayerData = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[i];
+            Debug.Log("Save section " + 4);
+            PlayerProfileData tempProfile = new PlayerProfileData();
+            Debug.Log("Save section " + 5);
+            Debug.Log("Save section " + 6);
+            tempProfile = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[i];
+            Debug.Log("Save section " + 7);
             ProfileList.Add(tempProfile);
+            Debug.Log("Save section " + 8);
         }
-
-        ProfileList[0].PlayerData.UnlockedAnimins.Add(PersistentData.TypesOfAnimin.TboAdult);
-
+        Debug.Log("Save section " + 9);
+        ProfileList[0].UnlockedAnimins.Add(PersistentData.TypesOfAnimin.TboAdult);
+        Debug.Log("Save section " + 10);
 		BinaryFormatter bf = new BinaryFormatter();
+        Debug.Log("Save section " + 11);
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");
+        Debug.Log("Save section " + 12);
 		bf.Serialize(file, ProfileList);
-//        Debug.Log("Savesize " + ProfileList.Count);
+        Debug.Log("Save section " + 13);
+        Debug.Log("Savesize " + ProfileList.Count);
+        Debug.Log("Save section " + 14);
 		file.Close();
+        Debug.Log("Save section " + 15);
 
 	}	
 
@@ -88,7 +104,7 @@ public class SaveAndLoad {
 
         for (int i =0; i< ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count; i++)
         {
-            tempProfile.Add(ProfileList[i].PlayerData);
+            tempProfile.Add(ProfileList[i]);
 //            Debug.Log("Profile load "+ i + " " + ProfileList[i].PlayerData.ProfileName);
         }
 
@@ -101,7 +117,7 @@ public class SaveAndLoad {
 
         for (int i =0; i< ProfileList.Count; i++)
         {
-            ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Add(ProfileList[i].PlayerData);            
+            ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Add(ProfileList[i]);            
         }
 
 	}
