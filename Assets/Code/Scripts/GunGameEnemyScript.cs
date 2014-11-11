@@ -134,6 +134,7 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
                 if (allEnemies[i] == this.gameObject) continue;
                 GunGameEnemyScript enemyScript = allEnemies[i].GetComponent<GunGameEnemyScript>();
                 if (enemyScript.Level != this.Level) continue;
+                if (enemyScript.Level != 0) continue;
                 if (enemyScript.HasMerged) continue;
 
                 float radius = Vector3.Distance(allEnemies[i].transform.localPosition, this.gameObject.transform.localPosition);
@@ -144,7 +145,6 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
                     GameObject newObject = minigame.SpawnEnemyStart(Level + 1);
                     newObject.transform.localPosition = this.gameObject.transform.localPosition;
 
-                    newObject.GetComponent<GunGameEnemyScript>().HasMerged = true;
 
                     HasMerged = true;
                     enemyScript.HasMerged = true;
