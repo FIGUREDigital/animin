@@ -94,6 +94,11 @@ public class ProfilesManagementScript : MonoBehaviour
 		//ServerManager.GetLeaderboardScores(1);
 	}
 
+	public void AssignCurrentAniminToVariable()
+	{
+		CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
+	}
+
 	public void NewUserProfileAdded()
 	{
 		NewUser.SetActive(false);
@@ -105,14 +110,12 @@ public class ProfilesManagementScript : MonoBehaviour
         SaveAndLoad.Instance.SaveAllData();
 		Debug.Log("just saved...new");
 		CurrentProfile = tempData;
-        AchievementManager.Instance.PopulateAchievements(true);
-		
-        CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
+        AchievementManager.Instance.PopulateAchievements(true);		
+        
         ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
         UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
 
 	}
-
     public void LoginExistingUser(PlayerProfileData userToLogin)
     {
         foreach(PlayerProfileData tempPlayerProfileData in ProfilesManagementScript.Singleton.ListOfPlayerProfiles)
