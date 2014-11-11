@@ -16,6 +16,8 @@ public class BetweenSceneData
             m_ReturnFromMiniGame = value;
         }
     }
+    public enum Minigame {Collector, Guns};
+    public Minigame minigame;
 
 
     private int m_Points;

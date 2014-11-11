@@ -21,44 +21,48 @@ public class ArrayOfTutorials{
 	public Tutorial[] Tutorials{ get; set; }
 }
 
-
 [Serializable()]
-public class Tutorial{
+public class Condition{ 
 
-    [XmlElement("Condition", typeof(Condition))]
-    public Condition Condition{ get; set; }
-
-	[XmlArray("Lessons")]
-	[XmlArrayItem("Lesson", typeof(Lesson))]
-	public Lesson[] Lessons{ get; set; }
-	[System.Xml.Serialization.XmlAttribute("id")]
-    public string id { get; set; }
-    [System.Xml.Serialization.XmlAttribute("name")]
-    public string Name { get; set; }
-
-	public int id_num
+    public enum Type {None,Initial,Timer,UIButton,Collider,AdHoc};
+    public Type type
     {
         get
         {
-            return UInt16.Parse(id);
+            if (Initial != null)
+                return Type.Initial;
+            if (Timer != null)
+                return Type.Timer;
+            if (ButtonCond != null)
+                return Type.UIButton;
+            if (AdHocCond != null)
+                return Type.AdHoc;
+            return Type.None;
         }
     }
+
+
+
+    [XmlElement("Initial", typeof(InitialCond))]
+    public InitialCond Initial{ get; set; }
+    [XmlElement("Timer", typeof(TimerCond))]
+    public TimerCond Timer{ get; set; }
+    [XmlElement("Uibutton", typeof(ButtonCond))]
+    public ButtonCond ButtonCond{ get; set; }
+    [XmlElement("AdHoc", typeof(AdHocCond))]
+    public AdHocCond AdHocCond{ get; set; }
+
+
+    //[XmlElement("UIButton", typeof(TutorialCond))]
+    //public TutorialCond TutorialCondition{ get; set; }
 }
 
 [Serializable()]
-public class Condition{ 
-    [XmlElement("Timer", typeof(Timer))]
-    public Timer Timer{ get; set; }
-
-
-    [XmlElement("Initial", typeof(Initial))]
-    public Initial Initial{ get; set; }
-    public bool isInitial { get { return Initial==null; }}
-}
-
-
+public class TutorialCond{}
 [Serializable()]
-public class Timer{
+public class InitialCond:TutorialCond{}
+[Serializable()]
+public class TimerCond:TutorialCond{
     [System.Xml.Serialization.XmlAttribute("trigger")]
     public string trigger { get; set; }
     public int trigi
@@ -78,7 +82,41 @@ public class Timer{
         }
     }
 }
-public class Initial{}
+[Serializable()]
+public class ButtonCond:TutorialCond{
+    [System.Xml.Serialization.XmlAttribute("name")]
+    public string name {get;set;}
+}
+[Serializable()]
+public class AdHocCond:TutorialCond{
+    [System.Xml.Serialization.XmlAttribute("call")]
+    public string call {get;set;}
+}
+
+[Serializable()]
+public class Tutorial{
+
+    [XmlElement("StartCondition", typeof(Condition))]
+    public Condition Condition{ get; set; }
+
+	[XmlArray("Lessons")]
+	[XmlArrayItem("Lesson", typeof(Lesson))]
+	public Lesson[] Lessons{ get; set; }
+	[System.Xml.Serialization.XmlAttribute("id")]
+    public string id { get; set; }
+    [System.Xml.Serialization.XmlAttribute("name")]
+    public string Name { get; set; }
+
+	public int id_num
+    {
+        get
+        {
+            return UInt16.Parse(id);
+        }
+    }
+}
+
+
 
 
 [Serializable()]
@@ -87,19 +125,13 @@ public class Lesson{
 	[XmlArrayItem("TutEntry", typeof(TutEntry))]
 	public TutEntry[] TutEntries{ get; set; }
 
-	[XmlElement("Stamp", typeof(Stamp))]
-	public Stamp ExitStamp{ get; set; }
-	public string ExitStr { get { return ExitStamp.exit; } }
+    [XmlElement("EndCondition", typeof(Condition))]
+    public Condition EndCondition{ get; set; }
 }
 [Serializable()]
 public class TutEntry{
 	[System.Xml.Serialization.XmlAttribute("text")]
 	public string text { get; set; }
-}
-[Serializable()]
-public class Stamp{
-	[System.Xml.Serialization.XmlAttribute("exit")]
-	public string exit { get; set; }
 }
 
 
