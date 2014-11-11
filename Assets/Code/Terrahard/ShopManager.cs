@@ -135,12 +135,23 @@ public class ShopManager
 
         // print the products to the console
         foreach( StoreKitProduct product in productList )
-            Debug.Log( product.ToString() + "\n" );
+//            Debug.Log( product.ToString() + "\n" );
 
-		if(productList.Count > 0)
+        if(productList.Count > 0 && !mShopReady)
 		{
-			mShopReady = true;
+                mShopReady = true;
+                Debug.Log("Go to shop");
+            ProfilesManagementScript.Singleton.ContinueToInAppPurchase(true);
+
 		}
+        else if (productList.Count <= 0 && !mShopReady)
+        {
+                mShopReady = true;
+                Debug.Log("Avoid shop");
+                ProfilesManagementScript.Singleton.ContinueToInAppPurchase(false);
+
+        }
+
     }
 
 	private void productListRequestFailedEvent( string error)
@@ -373,7 +384,8 @@ public class ShopManager
 
     public void StartStore(string[] shopItems)
     {
-		mShopReady = false;
+        Debug.Log("Start store array");
+        mShopReady = false;
 		mItems.Clear();
         //m_CurrentShopState = ShopState.InShop;
         string[] ids = new string[ shopItems.Length ];
@@ -390,7 +402,8 @@ public class ShopManager
     }
 	public void StartStore(List<Item> shopItems)
 	{
-		mShopReady = false;
+        Debug.Log("Start store list");
+        mShopReady = false;
 		//m_CurrentShopState = ShopState.InShop;
 		string[] ids = new string[ shopItems.Count ];
 		for( int i = 0; i < ids.Length; i++ )
@@ -407,7 +420,7 @@ public class ShopManager
     public void EndStore()
     {
 		Debug.Log("Close Shop");
-		mShopReady = false;
+		mShopReady = true;
         CurrentPurchaseStatus = PurchaseStatus.Idle;
     }
 }

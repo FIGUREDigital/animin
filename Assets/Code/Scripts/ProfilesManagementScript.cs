@@ -51,9 +51,7 @@ public class ProfilesManagementScript : MonoBehaviour
 			GameObject go = new GameObject();
 			go.name = "ArCameraManager";
 			go.AddComponent<ArCameraManager>();
-            LoadProfileData();
-            //TempDebugPanel.text = "Awake";
-		}
+            LoadProfileData();		}
 
 	}
 
@@ -74,7 +72,9 @@ public class ProfilesManagementScript : MonoBehaviour
 		//{
         //ProfilesManagementScript.Singleton.CurrentProfile = PlayerProfileData.CreateNewProfile("DefaultProfile");
 		//}
-
+        AniminsScreen.SetActive(true);
+        CharacterChoiceManager.Instance.FindCharacterChoices(AniminsScreen);
+        AniminsScreen.SetActive(false);
         //TempDebugPanel.text = "About to refresh";
         RefreshProfiles ();
 
@@ -104,7 +104,7 @@ public class ProfilesManagementScript : MonoBehaviour
         AchievementManager.Instance.PopulateAchievements(true);
 		
         CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
-        ActivateAniminSelectionScreen();
+        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
         UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
 
 	}
@@ -123,7 +123,7 @@ public class ProfilesManagementScript : MonoBehaviour
         AchievementManager.Instance.PopulateAchievements(false);
 
         CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
-        ActivateAniminSelectionScreen();
+        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
         UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
     }
 
@@ -156,7 +156,7 @@ public class ProfilesManagementScript : MonoBehaviour
 
 			SaveAndLoad.Instance.SaveAllData();
 			Debug.Log("Saved succesful login");
-            ActivateAniminSelectionScreen();
+            ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
             UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
 		} 
 		else 
@@ -166,11 +166,10 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	}
 
-    public void ActivateAniminSelectionScreen()
+    public void ActivateShopItemCheck()
     {
-        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-        CharacterChoiceManager.Instance.FindCharacterChoices(AniminsScreen);
-
+        ShopManager.Instance.EndStore();
+        UnlockCharacterManager.Instance.OpenShop();
     }
 
 	private void RefreshProfiles()
@@ -241,13 +240,28 @@ public class ProfilesManagementScript : MonoBehaviour
 //		newprof.Save();
 //		RefreshProfiles();
 
-
 	}
 
 	public void OnRejectedProfile()
 	{
 		Debug.Log("NO PROFILE FOR YOU");
 	}
+
+    public void ContinueToInAppPurchase(bool shouldContinue)
+    {
+        ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
+        if(shouldContinue)
+        {
+            ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Shop Unavailable");
+            ProfilesManagementScript.Singleton.ErrorBox.SetActive(true);
+        }
+
+    }
+
 	
 	// Update is called once per frame
 	void Update () 
