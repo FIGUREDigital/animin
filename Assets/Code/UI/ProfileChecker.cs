@@ -3,7 +3,9 @@ using System.Collections;
 
 public class ProfileChecker : MonoBehaviour 
 {
-	GameObject Login;
+	//script no longer in use with new profile system
+
+    GameObject Login;
 	GameObject User;
 	GameObject NewUser;
 

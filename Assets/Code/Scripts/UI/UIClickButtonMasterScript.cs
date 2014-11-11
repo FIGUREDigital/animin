@@ -353,11 +353,11 @@ public class UIClickButtonMasterScript : MonoBehaviour
 			AchievementManager.Instance.AddToAchievment(AchievementManager.Achievements.PlayMinigames);
 			UIGlobalVariablesScript.SelectedMinigameToPlay = sender.GetComponent<UIClickButtonMasterScript>().FunctionalityId;
 
-			//GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetSinglePlayer();
-			//HandleClick(UIFunctionalityId.StartSelectedMinigame, sender);
+			GameObject.Find("MultiplayerObject").GetComponent<GameController>().SetSinglePlayer();
+			HandleClick(UIFunctionalityId.StartSelectedMinigame, sender);
 
-			UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(true);
-			UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(false);
+			//UIGlobalVariablesScript.Singleton.StartMinigameScreenRef.SetActive(true);
+			//UIGlobalVariablesScript.Singleton.MinigameMenuScreeRef.SetActive(false);
 
 
 			break;

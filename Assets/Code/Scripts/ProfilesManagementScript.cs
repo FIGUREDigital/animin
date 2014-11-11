@@ -59,12 +59,10 @@ public class ProfilesManagementScript : MonoBehaviour
 
     void LoadProfileData()
     {
+        SaveAndLoad.Instance.Awake();
         CurrentProfile = new PlayerProfileData();
-//        ProfilesManagementScript.Singleton.CurrentProfile = CurrentProfile;
         ListOfPlayerProfiles = new List<PlayerProfileData>();
         SaveAndLoad.Instance.LoadAllData();
-//        Debug.Log(ListOfPlayerProfiles.Count);
-
     }
 
 	// Use this for initialization
@@ -101,7 +99,7 @@ public class ProfilesManagementScript : MonoBehaviour
         tempData.UniqueID = Account.Instance.UniqueID;
         ListOfPlayerProfiles.Add(tempData);
         SaveAndLoad.Instance.SaveAllData();
-				Debug.Log("just saved...new");
+		Debug.Log("just saved...new");
 		CurrentProfile = tempData;
         AchievementManager.Instance.PopulateAchievements(true);
 		UnlockCharacterManager.Instance.CheckInitialCharacterUnlock();
