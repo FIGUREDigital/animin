@@ -18,7 +18,7 @@ public class AddressScreen : MonoBehaviour
 		Debug.Log("Reading Address");
 		ReadAddress();
 		Debug.Log("Preparing email");
-		PrepareEmail();
+		OpenExternalEmail();
 		Debug.Log("Email sent!");
 	}
 
@@ -35,7 +35,29 @@ public class AddressScreen : MonoBehaviour
 		}
 	}
 
-	private void PrepareEmail() {
+
+	private void OpenExternalEmail()
+	{
+			
+		string email = "sendcard@animin.me";
+			
+		string subject = MyEscapeURL("Purchase by user " + secretCode);
+			
+		string body = MyEscapeURL(Body());
+			
+			
+		Application.OpenURL ("mailto:" + email + "?subject=" + subject + "&body=" + body);
+			
+	}  
+		
+	string MyEscapeURL (string url)
+	{
+			
+		return WWW.EscapeURL(url).Replace("+","%20");
+	}
+
+	private void PrepareEmail() 
+	{
 		MailMessage mail = new MailMessage();
 		SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 		mail.From = new MailAddress("animindev@gmail.com");
