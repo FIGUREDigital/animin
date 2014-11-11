@@ -15,9 +15,11 @@ public class PersistentData
 	public enum TypesOfAnimin
 	{
         Pi = 0,
-        Tbo = 1,
-        Kelsey = 2,
-        Mandi = 3,
+        Tbo,
+        Kelsey,
+        Mandi,
+        TboAdult,
+
         Count,
 	}
 
@@ -135,7 +137,6 @@ public class PersistentData
 		Health = MaxHealth;
 		ZefTokens = 0;
 
-
 	}
 
 	public void AddItemToInventory(InventoryItemId id, int count)
@@ -239,25 +240,25 @@ public class PersistentData
 		return false;
 	}
 	
-	public void Save(SaveLoadDictionary dictionary)
-	{
-		dictionary.Write("Hungry", Hungry);
-		dictionary.Write("Fitness", Fitness);
-		dictionary.Write("Evolution", Evolution);
-		dictionary.Write("AniminId", (int)PlayerAniminId);
-		dictionary.Write("AniminEvolutionId", (int)AniminEvolutionId);
-		dictionary.Write("ZefTokens", ZefTokens);
-	}
-
-
-	public void Load(SaveLoadDictionary dictionary)
-	{
-		dictionary.ReadFloat("Hungry", ref hungry);
-		dictionary.ReadFloat("Fitness", ref fitness);
-		dictionary.ReadFloat("Evolution", ref evolution);
-		dictionary.ReadAniminId("AniminId", ref PlayerAniminId);
-		dictionary.ReadAniminEvolutionId("AniminEvolutionId", ref AniminEvolutionId);
-		dictionary.ReadInt("ZefTokens", ref ZefTokens);
-	
-	}
+//	public void Save(SaveLoadDictionary dictionary)
+//	{
+//		dictionary.Write("Hungry", Hungry);
+//		dictionary.Write("Fitness", Fitness);
+//		dictionary.Write("Evolution", Evolution);
+//		dictionary.Write("AniminId", (int)PlayerAniminId);
+//		dictionary.Write("AniminEvolutionId", (int)AniminEvolutionId);
+//		dictionary.Write("ZefTokens", ZefTokens);
+//	}
+//
+//
+//	public void Load(SaveLoadDictionary dictionary)
+//	{
+//		dictionary.ReadFloat("Hungry", ref hungry);
+//		dictionary.ReadFloat("Fitness", ref fitness);
+//		dictionary.ReadFloat("Evolution", ref evolution);
+//		dictionary.ReadAniminId("AniminId", ref PlayerAniminId);
+//		dictionary.ReadAniminEvolutionId("AniminEvolutionId", ref AniminEvolutionId);
+//		dictionary.ReadInt("ZefTokens", ref ZefTokens);
+//	
+//	}
 }

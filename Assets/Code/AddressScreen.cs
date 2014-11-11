@@ -38,7 +38,7 @@ public class AddressScreen : MonoBehaviour
 		MailMessage mail = new MailMessage();
 		SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 		mail.From = new MailAddress("animindev@gmail.com");
-		mail.To.Add("hello@animin.me");
+		mail.To.Add("sendcard@animin.me");
 		mail.Subject ="Purchase by user " + secretCode;
 		mail.Body = Body();
 		
@@ -63,7 +63,7 @@ public class AddressScreen : MonoBehaviour
 
 	void SendEmail()
 	{
-		MailMessage mail = new MailMessage("animinDev@animin.me", "hello@animin.me");
+		MailMessage mail = new MailMessage("animinDev@animin.me", "sendcard@animin.me");
 		SmtpClient client = new SmtpClient
 		{
 			Host = "smtp.gmail.com",

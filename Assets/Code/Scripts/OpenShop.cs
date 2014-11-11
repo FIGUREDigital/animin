@@ -12,10 +12,8 @@ public class OpenShop : MonoBehaviour {
 	void OnEnable()
 	{
 		UnlockCharacterManager.Instance.OpenShop();
-	}
-
+	}	
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}

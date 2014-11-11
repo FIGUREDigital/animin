@@ -14,28 +14,20 @@ public class CharacterChoiceItem : MonoBehaviour
 	[SerializeField]
 	private bool mUnlocked;
 	[SerializeField]
-    private PersistentData.TypesOfAnimin mId;
+    public PersistentData.TypesOfAnimin ThisCharacter;
+
+    public SelectCharacterClickScript CharacterClickScript;
 
 	// Use this for initialization
-	void Start () 
-	{
 
-		switch(mId)
-		{
-            case PersistentData.TypesOfAnimin.Pi:
-			mUnlocked = PlayerPrefs.GetInt("piUnlocked")==1?true:false;
-			break;
-            case PersistentData.TypesOfAnimin.Kelsey:
-			mUnlocked = PlayerPrefs.GetInt("kelseyUnlocked")==1?true:false;
-			break;
-            case PersistentData.TypesOfAnimin.Mandi:
-			mUnlocked = PlayerPrefs.GetInt("mandiUnlocked")==1?true:false;
-			break;
-            case PersistentData.TypesOfAnimin.Tbo:
-			break;
-		default:
-			break;
-		}
+    void Awake()
+    {
+        CharacterClickScript = GetComponentInChildren<SelectCharacterClickScript>();
+    }
+
+	void Start () 
+	{    
+
 		if(mSprite == null)
 		{
 			Debug.LogWarning("CANNOT FIND SPRITE FOR CHARACTER. ATTEMPTING TO RESOLVE.");
@@ -81,9 +73,9 @@ public class CharacterChoiceItem : MonoBehaviour
 
 	void OnEnable()
 	{
-		ChangeLockedState(mUnlocked || UnlockCharacterManager.Instance.CheckCharacterPurchased(mId));
-//        Debug.Log(mId);
-		Invoke ("UpdateAge", 0.1f);
+//        CheckLockedState();
+//        ChangeLockedState(mUnlocked);
+//		Invoke ("UpdateAge", 0.1f);
 	}
 
 	private void UpdateAge()
@@ -91,7 +83,7 @@ public class CharacterChoiceItem : MonoBehaviour
 		UILabel label = mAgeLabel.GetComponent<UILabel>();
         if(ProfilesManagementScript.Singleton.CurrentProfile != null)
 		{
-            PersistentData pd = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)mId];
+            PersistentData pd = ProfilesManagementScript.Singleton.CurrentAnimin;
 			label.text = "Age " + pd.Age;
 		}
 		else
@@ -100,17 +92,13 @@ public class CharacterChoiceItem : MonoBehaviour
 		}
 	}
 
-	public void ChangeLockedState(bool unlocked)
+    public void ChangeLockedState(bool unlocked)
 	{
-		mUnlocked = unlocked;
+        Debug.Log("Unlocking... " + ThisCharacter);
+        mUnlocked = unlocked;
 		mSprite.SetActive(mUnlocked);
 		mDisabledSprite.SetActive(!mUnlocked);
 		mLockedButton.SetActive(!mUnlocked);
 		mAgeLabel.SetActive(mUnlocked);
-	}
-	public void UnlockCharacter()
-	{
-		CharacterChoiceItem character = GameObject.Find(mId.ToString()).GetComponent<CharacterChoiceItem>();
-		character.ChangeLockedState(true);
 	}
 }

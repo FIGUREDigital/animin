@@ -143,9 +143,11 @@ public class EvolutionManager
 			mEvoStar = !mEvoStar;
 			mCurrentMarker++;
 		}
-
-		CheckEvolution();
-		UpdateEvoBar();
+	    if (ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin != PersistentData.TypesOfAnimin.Tbo)
+	    {
+	        CheckEvolution();
+	    }
+	    UpdateEvoBar();
 
 	}
 

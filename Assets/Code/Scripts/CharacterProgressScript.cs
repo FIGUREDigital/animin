@@ -153,7 +153,6 @@ public class HappyStateRange
     public AnimationHappyId Id;
 }
 
-//[System.Serializable]
 public class CharacterProgressScript : MonoBehaviour
 {
     //public List<AchievementId> Achievements = new List<AchievementId>();
@@ -268,10 +267,6 @@ public class CharacterProgressScript : MonoBehaviour
             PersistentData.Singleton = ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)PersistentData.TypesOfAnimin.Tbo];
         }
 
-
-
-
-
         //TextTest.color = new Color(1, 1, 1, 0.0f);
 
         Physics.IgnoreLayerCollision(
@@ -335,12 +330,21 @@ public class CharacterProgressScript : MonoBehaviour
         {
             if (BetweenSceneData.Instance.Points >= 0)
             {
-                if (BetweenSceneData.Instance.Points >= 3000)
+                if (BetweenSceneData.Instance.Points >= 7500)
+				{
                     AchievementsScript.Singleton.Show(AchievementTypeId.Gold, BetweenSceneData.Instance.Points);
-                else if (BetweenSceneData.Instance.Points >= 2000)
+					SpawnChests(3);
+				}
+                else if (BetweenSceneData.Instance.Points >= 5000)
+				{
                     AchievementsScript.Singleton.Show(AchievementTypeId.Silver, BetweenSceneData.Instance.Points);
-                else if (BetweenSceneData.Instance.Points >= 1000)
+					SpawnChests(2);
+				}
+                else if (BetweenSceneData.Instance.Points >= 2500)
+				{
                     AchievementsScript.Singleton.Show(AchievementTypeId.Bronze, BetweenSceneData.Instance.Points);
+					SpawnChests(1);
+				}
                 BetweenSceneData.Instance.ResetPoints();
             }
             if (BetweenSceneData.Instance.minigame == BetweenSceneData.Minigame.Collector)
@@ -351,7 +355,6 @@ public class CharacterProgressScript : MonoBehaviour
                     UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("BoxLandScoreBreak1");
                 }
             }
-            SpawnChests();
             exitSleep();
         }
 
@@ -383,7 +386,7 @@ public class CharacterProgressScript : MonoBehaviour
 
     public GameObject SpawnStageItem(string prefabId, Vector3 position)
     {
-        //Argi, you're a cunt.
+
         CharacterProgressScript script = UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>();
 		
         GameObject resource = Resources.Load<GameObject>(prefabId);
@@ -526,10 +529,27 @@ public class CharacterProgressScript : MonoBehaviour
         return closestFood;
     }
 
-    public void SpawnChests()
+    public void SpawnChests(int value)
     {
+		string prefab = "Prefabs/chest_gold";
+		switch(value)
+		{
+		case 1:
+			prefab = "Prefabs/chest_bronze";
+			break;
+		case 2:
+			prefab = "Prefabs/chest_silver";
+			break;
+		case 3:
+			prefab = "Prefabs/chest_gold";
+			break;
+		case 0:
+		default:
+			return;
+			break;
+		}
         Debug.Log("Spawn Chests");
-        GameObject resource = Resources.Load<GameObject>("Prefabs/chest_gold");
+        GameObject resource = Resources.Load<GameObject>(prefab);
 
         GameObject instance = Instantiate(resource) as GameObject;
         instance.transform.parent = ActiveWorld.transform;
@@ -814,7 +834,6 @@ public class CharacterProgressScript : MonoBehaviour
             case ActionId.ExitPortalMainStage:
                 {
                     Debug.Log("ExitPortalmainStage");
-                    SpawnChests();	
 			
                     UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
                     UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
