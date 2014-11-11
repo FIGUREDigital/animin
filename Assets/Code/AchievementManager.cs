@@ -120,7 +120,7 @@ public class AchievementManager
 	{
 //		bool po = "true" == PlayerPrefs.GetString("AchievementsActive");
 
-		ListOfAchievements.Clear ();
+        if (ListOfAchievements!=null)ListOfAchievements.Clear ();
 
         if(newUser)
 		{

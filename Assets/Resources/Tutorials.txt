@@ -201,7 +201,7 @@
                 <Lesson>
                     <TutEntries>
                         <TutEntry text="Animins grow older much faster than humans. 3 human days are equal to 1 Animin year!"/>
-                        <TutEntry text="Which means TBo will be 1 tomorrow..."/>
+                        <TutEntry text="Which means your Animin will be 1 tomorrow..."/>
                     </TutEntries>
                 </Lesson>
             </Lessons>
@@ -219,7 +219,7 @@
             <Lessons>
                 <Lesson>
                     <TutEntries>
-                        <TutEntry text="Happy Birthday TBo!!!"/>
+                        <TutEntry text="Happy Birthday!!!"/>
                         <TutEntry text="Your Animin is now 1 year old!"/>
                     </TutEntries>
                 </Lesson>

@@ -96,7 +96,7 @@ public class CharacterChoiceItem : MonoBehaviour
 	{
         Debug.Log("Unlocking... " + ThisCharacter);
         mUnlocked = unlocked;
-		mSprite.SetActive(mUnlocked);
+        mSprite.SetActive(mUnlocked);
 		mDisabledSprite.SetActive(!mUnlocked);
 		mLockedButton.SetActive(!mUnlocked);
 		mAgeLabel.SetActive(mUnlocked);

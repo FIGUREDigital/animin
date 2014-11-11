@@ -625,7 +625,7 @@ public class CharacterControllerScript : Photon.MonoBehaviour
 
 			}
 
-			else if(itemType == PopupItemType.Food && PersistentData.Singleton.Hungry < CharacterProgressScript.ConsideredHungryLevels)
+			else if(itemType == PopupItemType.Food && ProfilesManagementScript.Singleton.CurrentAnimin.Hungry < CharacterProgressScript.ConsideredHungryLevels)
 			{
 				this.GetComponent<CharacterProgressScript>().PickupItem(hit.gameObject);
 				this.GetComponent<CharacterProgressScript>().CurrentAction = ActionId.EatItem;

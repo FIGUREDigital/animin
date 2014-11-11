@@ -277,7 +277,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
             //Debug.Log("OnTrackingFound: caring screen");
             {
                 //return;
-                UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbInPortal);
+                UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.JumbInPortal);
                 UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimationControllerScript>().IsEnterPortal = true;
                 progress.CurrentAction = ActionId.EnterPortalToAR;
 
@@ -347,7 +347,7 @@ public class TrackVuforiaScript : MonoBehaviour, ITrackableEventHandler
 
                 UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().Timer = 0;
                 UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<AnimateCharacterOutPortalScript>().JumbId = AnimateCharacterOutPortalScript.JumbStateId.Jumbout;
-                UIGlobalVariablesScript.Singleton.SoundEngine.Play(PersistentData.Singleton.PlayerAniminId, PersistentData.Singleton.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
+                UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.JumbOutPortal);
                 //UIGlobalVariablesScript.Singleton.ARPortal.GetComponent<PortalScript>().Show(true);
                 progressScript.CurrentAction = ActionId.SmallCooldownPeriod;
                 progressScript.SmallCooldownTimer = 0.5f;

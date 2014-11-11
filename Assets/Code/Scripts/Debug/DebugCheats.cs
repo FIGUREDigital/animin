@@ -61,14 +61,14 @@ public class DebugCheats : MonoBehaviour
 			break;
 
 		case CheatButtons.Evolve:
-			switch(PersistentData.Singleton.AniminEvolutionId)
+			switch(ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId)
 			{
 			case AniminEvolutionStageId.Baby:
-				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold + 50;
+				ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold + 50;
 				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			case AniminEvolutionStageId.Kid:
-				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold + 50;
+				ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold + 50;
 				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			case AniminEvolutionStageId.Adult:
@@ -78,17 +78,17 @@ public class DebugCheats : MonoBehaviour
 			break;
 
 		case CheatButtons.Devolve:
-			switch(PersistentData.Singleton.AniminEvolutionId)
+			switch(ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId)
 			{
 			case AniminEvolutionStageId.Baby:
 			default:
 				break;
 			case AniminEvolutionStageId.Kid:
-				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold - 50;
+				ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold - 50;
 				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			case AniminEvolutionStageId.Adult:
-				PersistentData.Singleton.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold - 50;
+				ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold - 50;
 				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			}
@@ -96,12 +96,12 @@ public class DebugCheats : MonoBehaviour
 
 		case CheatButtons.GiveZeff:
 			EvolutionManager.Instance.AddZef();
-			cheatDefs.OutputText = "Zef: " + PersistentData.Singleton.ZefTokens;
+			cheatDefs.OutputText = "Zef: " + ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens;
 			break;
 
 		case CheatButtons.TakeZeff:
 			EvolutionManager.Instance.RemoveZef();
-			cheatDefs.OutputText = "Zef: " + PersistentData.Singleton.ZefTokens;
+			cheatDefs.OutputText = "Zef: " + ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens;
 			break;
 
 		case CheatButtons.AddTime:

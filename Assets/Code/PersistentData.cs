@@ -5,8 +5,6 @@ using System;
 [System.Serializable]
 public class PersistentData
 {
-	public static PersistentData Singleton = new PersistentData();
-
 	static PersistentData()
 	{
 		

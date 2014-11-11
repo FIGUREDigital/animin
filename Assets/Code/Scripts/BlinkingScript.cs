@@ -82,7 +82,7 @@ public class BlinkingScript : MonoBehaviour
 			NextBlinkCounter -= Time.deltaTime;
 			renderer.material.mainTexture = Default;
 
-			if(PersistentData.Singleton.Happy >= 50)
+			if(ProfilesManagementScript.Singleton.CurrentAnimin.Happy >= 50)
 			{
 				NextHappyIdleTimer -= Time.deltaTime;
 				StayHappyIdleTimer = 1.5f;
