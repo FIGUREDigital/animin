@@ -166,8 +166,7 @@ public class UnlockCharacterManager
         ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Add(m_CurrentCharacterFocus);
         SaveAndLoad.Instance.SaveAllData();
 		Debug.Log("just saved...unlock");
-        ShopManager.Instance.EndStore();
-        OpenShop();
+        ShopManager.Instance.EndStore();        
 	}
 
 	public void CheckInitialCharacterUnlock()
