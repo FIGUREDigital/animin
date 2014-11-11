@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -51,7 +51,9 @@ public class ProfilesManagementScript : MonoBehaviour
 			GameObject go = new GameObject();
 			go.name = "ArCameraManager";
 			go.AddComponent<ArCameraManager>();
-            LoadProfileData();		}
+            //TempDebugPanel.text = "Awake";
+
+		}
 
 	}
 
@@ -76,6 +78,7 @@ public class ProfilesManagementScript : MonoBehaviour
         CharacterChoiceManager.Instance.FindCharacterChoices(AniminsScreen);
         AniminsScreen.SetActive(false);
         //TempDebugPanel.text = "About to refresh";
+        LoadProfileData();
         RefreshProfiles ();
 
         //EvolutionManager.Instance.Deserialize();
@@ -172,7 +175,7 @@ public class ProfilesManagementScript : MonoBehaviour
         UnlockCharacterManager.Instance.OpenShop();
     }
 
-	private void RefreshProfiles()
+    private void RefreshProfiles()
 	{
         List<PlayerProfileData> profiles = new List<PlayerProfileData>();
         //TempDebugPanel.text = "About to load";

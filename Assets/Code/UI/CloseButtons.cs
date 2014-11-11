@@ -4,7 +4,16 @@ using System.Collections;
 public class CloseButtons : MonoBehaviour {
 
 	private UIButton[] mButtons;
-	private OpenInGamePurchaseView view;
+    private OpenInGamePurchaseView view;
+    private ShowForm buyForm;
+
+    private bool Exception(UIButton uib){
+        if (uib.gameObject == view.gameObject)
+            return true;
+        if (uib.gameObject.GetComponent<ShowForm>()!=null)
+            return true;
+        return false;
+    }
 	// Use this for initialization
 	void Start () 
 	{
@@ -12,8 +21,9 @@ public class CloseButtons : MonoBehaviour {
 	}
 	void Init()
 	{
-		mButtons = GetComponentsInChildren<UIButton>();
-		view = GetComponentInChildren<OpenInGamePurchaseView>();
+        mButtons = GetComponentsInChildren<UIButton>(true);
+        view = GetComponentInChildren<OpenInGamePurchaseView>();
+        buyForm = view.gameObject.GetComponentInChildren<ShowForm>();
 	}
 	
 	// Update is called once per frame
@@ -29,6 +39,7 @@ public class CloseButtons : MonoBehaviour {
 		}
 		foreach(UIButton button in mButtons)
 		{
+            if (Exception(button))continue;
 			button.gameObject.SetActive(false);
 		}
 	}
@@ -41,6 +52,7 @@ public class CloseButtons : MonoBehaviour {
 		}
 		foreach(UIButton button in mButtons)
 		{
+            if (Exception(button))continue;
 			button.gameObject.SetActive(true);
 		}
 		view.gameObject.SetActive(true);
