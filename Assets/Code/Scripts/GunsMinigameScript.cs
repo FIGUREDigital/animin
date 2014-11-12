@@ -66,6 +66,28 @@ public class GunsMinigameScript : Photon.MonoBehaviour
     public Texture[] Go321Textures;
     private float FillUpTimer;
 
+
+
+
+    public enum TutorialStateId
+    {
+        None = 0,
+        ShowEnemies,
+        ShowMove,
+        Completed,
+    }
+    private TutorialStateId m_TutorialID = TutorialStateId.None;
+    public TutorialStateId TutorialID {
+        get{
+            return m_TutorialID;
+        }
+    }
+
+    [SerializeField]
+    private GameObject TutorialEnemies;
+    [SerializeField]
+    private GameObject TutorialMove;
+
     private GameStateId m_StateBeforePaused = GameStateId.Paused;
     private bool m_Paused;
     public bool Paused
@@ -102,7 +124,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         CurrentBullets.Clear();
         CurrentBullets.Add(BulletPrefab[Random.Range(0, BulletPrefab.Length)]);
 
-
+        AdvanceTutorial();
     }
 
 
@@ -114,6 +136,8 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         {
             case GameStateId.Initialize:
                 {
+                    if (TutorialID == TutorialStateId.ShowEnemies)
+                        break;
                     FillUpTimer = 0;
                     AmmoTimer = 1;
                     //				GunPrefab.SetActive(true);
@@ -127,20 +151,20 @@ public class GunsMinigameScript : Photon.MonoBehaviour
                     //if(GameController.instance.gameType == GameType.SOLO || PhotonNetwork.isMasterClient)
 
                     //SpawnAnimin(AniminId.Tbo, AniminEvolutionStageId.Baby);
-                    Go321Sprite.gameObject.SetActive(true);
+                    Go321Sprite.gameObject.SetActive(false);
                     Go321Sprite.mainTexture = Go321Textures[0];
                     Go321Sprite.gameObject.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
                     TweenScale.Begin(Go321Sprite.gameObject, 0.6f, new Vector3(1.1f, 1.1f, 1.1f));
                     MeterBar.width = 0;
 
-                    if (GameController.instance.gameType == GameType.NETWORK)
-                    {
-                        State = GameStateId.WaitForPlayersToConnect;
-                    }
-                    else
-                    {
-                        State = GameStateId.PrepareToStart3;
-                    }
+                        if (GameController.instance.gameType == GameType.NETWORK)
+                        {
+                            State = GameStateId.WaitForPlayersToConnect;
+                        }
+                        else
+                        {
+                                State = GameStateId.PrepareToStart3;
+                        }
 
 					LocalPlayerCharacter = UIGlobalVariablesScript.Singleton.MainCharacterRef;
 					PlayersCharacters.Add(UIGlobalVariablesScript.Singleton.MainCharacterRef);
@@ -162,7 +186,6 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
                     break;
                 }
-
      
             case GameStateId.WaitForPlayersToConnect:
                 {
@@ -188,6 +211,7 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
             case GameStateId.PrepareToStart3:
                 {
+                    Go321Sprite.gameObject.SetActive(true);
                     if (Go321Sprite.gameObject.transform.localScale.x == 1.1f)
                     {
                         Go321Sprite.mainTexture = Go321Textures[1];
@@ -382,6 +406,36 @@ public class GunsMinigameScript : Photon.MonoBehaviour
         }
 
         PointsLabel.text = Points.ToString() + " pts";
+
+        if (m_TutorialID == TutorialStateId.ShowEnemies && Input.GetButtonUp("Fire1"))
+            AdvanceTutorial();
+    }
+
+    public void AdvanceTutorial()
+    {
+        TutorialEnemies.SetActive(false);
+        TutorialMove.SetActive(false);
+
+        if (ProfilesManagementScript.Singleton.CurrentProfile.TutorialCanonClashPlayed == false)
+        {
+            m_TutorialID = (TutorialStateId)((int)m_TutorialID + 1);
+
+            if (m_TutorialID == TutorialStateId.ShowEnemies)
+            {
+                TutorialEnemies.SetActive(true);
+            }
+            else if (m_TutorialID == TutorialStateId.ShowMove)
+            {
+                TutorialMove.SetActive(true);
+            }
+            else if (m_TutorialID == TutorialStateId.Completed)
+            {
+                ProfilesManagementScript.Singleton.CurrentProfile.TutorialCanonClashPlayed = true;
+                SaveAndLoad.Instance.SaveAllData();
+            }
+        }
+        else
+            Debug.Log("False...");
     }
 
     [RPC]

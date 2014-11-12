@@ -172,6 +172,10 @@ public class JoystiqScript : MonoBehaviour {
 				if( UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().TutorialId == MinigameCollectorScript.TutorialStateId.ShowMovement)
 					UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript>().AdvanceTutorial();
 
+            if (UIGlobalVariablesScript.Singleton.GunGameScene!= null && UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>()!=null)
+            if( UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().TutorialID == GunsMinigameScript.TutorialStateId.ShowMove)
+                UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().AdvanceTutorial();
+
 
 			Vector3 middle = bottomLeftWorld + (topRightWorld - bottomLeftWorld) / 2;
 
