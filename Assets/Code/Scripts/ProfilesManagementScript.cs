@@ -230,6 +230,11 @@ public class ProfilesManagementScript : MonoBehaviour
             LoadingSpinner.SetActive(false);
             AniminsScreen.SetActive(true);
         }
+        else if(resultId == "Something went wrong, please try again in a bit...")
+        {
+            LoadingSpinner.SetActive(false);
+            AniminsScreen.SetActive(true);
+        }
 		else
 		{
 			Debug.Log("INVALID CODE RESPONSE");
