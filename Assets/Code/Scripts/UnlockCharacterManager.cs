@@ -3,13 +3,25 @@ using System.Collections;
 
 public class UnlockCharacterManager
 {
+#if UNITY_IOS
 	public const string PI_UNLOCK = "com.apples.animin.characterunlock1";
 	public const string KELSEY_UNLOCK = "com.apples.animin.characterunlock2";
 	public const string MANDI_UNLOCK = "com.apples.animin.characterunlock3";
+	public const string TBOADULT_UNLOCK = "com.apples.animin.characterunlock4";
 	public const string PI_PURCHASE = "com.apples.animin.characterpurchase1";
 	public const string KELSEY_PURCHASE = "com.apples.animin.characterpurchase2";
 	public const string MANDI_PURCHASE = "com.apples.animin.characterpurchase3";
     public const string TBOADULT_PURCHASE = "com.apples.animin.characterpurchase4";
+#elif UNITY_ANDROID
+	public const string PI_UNLOCK = "com.apples.animin.characterunlock1";
+	public const string KELSEY_UNLOCK = "com.apples.animin.characterunlock2";
+	public const string MANDI_UNLOCK = "com.apples.animin.characterunlock3";
+	public const string TBOADULT_UNLOCK = "com.apples.animin.characterunlock4";
+	public const string PI_PURCHASE = "com.apples.animin.characterpurchase1";
+	public const string KELSEY_PURCHASE = "com.apples.animin.characterpurchase2";
+	public const string MANDI_PURCHASE = "com.apples.animin.characterpurchase3";
+	public const string TBOADULT_PURCHASE = "com.apples.animin.characterpurchase4";
+#endif
 
 	private static string mBuyItem;
     private static PersistentData.TypesOfAnimin m_CurrentCharacterFocus;
@@ -48,8 +60,8 @@ public class UnlockCharacterManager
             case PersistentData.TypesOfAnimin.Pi:
 			mBuyItem = free ? PI_UNLOCK : PI_PURCHASE;
 			break;
-            case PersistentData.TypesOfAnimin.Tbo:
-			Debug.LogError("TBO should be unlocked initially. What are you changing?");
+            case PersistentData.TypesOfAnimin.TboAdult:
+			mBuyItem = free ? TBOADULT_UNLOCK : TBOADULT_PURCHASE;
 			break;
             case PersistentData.TypesOfAnimin.Kelsey:
 			mBuyItem = free ? KELSEY_UNLOCK : KELSEY_PURCHASE;
