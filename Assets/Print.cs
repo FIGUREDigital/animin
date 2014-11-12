@@ -17,7 +17,15 @@ public class Print : MonoBehaviour
 #if UNITY_IOS
 		EtceteraBinding.saveImageToPhotoAlbum(filepath);
 #elif UNITY_ANDROID
-		EtceteraAndroid.saveImageToGallery(filepath,"printOut.png");
+		bool saved = EtceteraAndroid.saveImageToGallery(filepath,"printOut.png");
+		if(saved)
+		{
+			Debug.Log("Image moved to gallery");
+		}
+		else
+		{
+			Debug.Log("Image not moved");
+		}
 #endif
 		PopPhotoSaved();
 

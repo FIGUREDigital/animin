@@ -19,12 +19,23 @@ public class ScreenshotScript : MonoBehaviour {
 		{
 
 			string screenshotName = "screenshot"  + DateTime.Now.ToString("s") + ".png";
+			Debug.Log("Saving photo to: " + screenshotName);
 #if UNITY_IOS
 			StartCoroutine( EtceteraBinding.takeScreenShot( screenshotName, imagePath =>
 			{EtceteraBinding.saveImageToPhotoAlbum (imagePath);}) );
 #elif UNITY_ANDROID
+			string path = Application.persistentDataPath + screenshotName;
 			Application.CaptureScreenshot(screenshotName);
-			EtceteraAndroid.saveImageToGallery(screenshotName,screenshotName);
+			Debug.Log("Moving file from " + path);
+			bool saved = EtceteraAndroid.saveImageToGallery(path,screenshotName);
+			if(saved)
+			{
+				Debug.Log("File moved");
+			}
+			else
+			{
+				Debug.Log("File moved fail!");
+			}
 #endif
 		}
 		Invoke("PopPhotoSaved",0.3f);
