@@ -26,6 +26,7 @@ public class ProfilesManagementScript : MonoBehaviour
 	public GameObject AddressInput;
 	public bool BeginLoadLevel;
 	public GameObject[] AniminSprites;
+    public GameObject DemoCardPopup;
 
     //public UILabel TempDebugPanel;
 
@@ -173,75 +174,34 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	}
 
-    public void ActivateShopItemCheck()
-    {
-        ShopManager.Instance.EndStore();
-        UnlockCharacterManager.Instance.OpenShop();
-    }
-
     private void RefreshProfiles()
-	{
+    {
         List<PlayerProfileData> profiles = new List<PlayerProfileData>();
         //TempDebugPanel.text = "About to load";
         profiles = SaveAndLoad.Instance.LoadProfileData();
 
         //TempDebugPanel.text = "Profiles null";
 
-		if(profiles != null)
-		{
-//            Debug.Log(profiles.Count);
+        if(profiles != null)
+        {
+            //            Debug.Log(profiles.Count);
             //TempDebugPanel.text = profiles.Count.ToString();
             for(int i=0;i<profiles.Count;++i)
-			{
+            {
                 GameObject newProfile = (GameObject)Instantiate(PrefabProfile);
-				newProfile.transform.parent = ProfilesRoot.transform;
-				
-				newProfile.transform.localScale = new Vector3(1,1,1);
-				newProfile.transform.GetChild(1).GetComponent<UILabel>().text = profiles[i].ProfileName;
-				newProfile.transform.localPosition = new Vector3(i * 180 + 360, 0, 0);
-                newProfile.GetComponent<LoginUser>().ThisProfile = profiles[i];
-			}
-		}
-		else
-		{
-			Debug.Log("No profiles found");
-		}
-	}
+                newProfile.transform.parent = ProfilesRoot.transform;
 
-	public void OnAccessCodeResult(string resultId)
-	{
-		Debug.Log(resultId);
-		if(resultId == "Card successfully activated")
-		{
-			UnlockCharacterManager.Instance.BuyCharacter(AniminToUnlockId, true);
-		}
-		else if(resultId == "Card number not valid")
-		{
-			LoadingSpinner.SetActive(false);
-			AniminsScreen.SetActive(true);
-		}
-		else if(resultId == "Card number already used")
-		{
-			LoadingSpinner.SetActive(false);
-			AniminsScreen.SetActive(true);
-		}
-        else if(resultId == "Animin already activated")
-        {
-            LoadingSpinner.SetActive(false);
-            AniminsScreen.SetActive(true);
+                newProfile.transform.localScale = new Vector3(1,1,1);
+                newProfile.transform.GetChild(1).GetComponent<UILabel>().text = profiles[i].ProfileName;
+                newProfile.transform.localPosition = new Vector3(i * 180 + 360, 0, 0);
+                newProfile.GetComponent<LoginUser>().ThisProfile = profiles[i];
+            }
         }
-        else if(resultId == "Something went wrong, please try again in a bit...")
+        else
         {
-            LoadingSpinner.SetActive(false);
-            AniminsScreen.SetActive(true);
+            Debug.Log("No profiles found");
         }
-		else
-		{
-			Debug.Log("INVALID CODE RESPONSE");
-			LoadingSpinner.SetActive(false);
-			AniminsScreen.SetActive(true);
-		}
-	}
+    }
 
 	public void OnAllowCreateProfile(string name)
 	{
@@ -259,6 +219,52 @@ public class ProfilesManagementScript : MonoBehaviour
 		Debug.Log("NO PROFILE FOR YOU");
 	}
 
+    public void ActivateShopItemCheck()
+    {
+        ShopManager.Instance.EndStore();
+        UnlockCharacterManager.Instance.OpenShop();
+    }
+
+    public void OnAccessCodeResult(string resultId)
+    {
+        Debug.Log(resultId);
+        if(resultId == "Card successfully activated")
+        {
+            UnlockCharacterManager.Instance.BuyCharacter(AniminToUnlockId, true);
+        }
+        else if(resultId == "Card number not valid")
+        {
+            LoadingSpinner.SetActive(false);
+            AniminsScreen.SetActive(true);
+        }
+        else if(resultId == "Card number already used")
+        {
+            LoadingSpinner.SetActive(false);
+            AniminsScreen.SetActive(true);
+        }
+        else if(resultId == "Animin already activated")
+        {
+            LoadingSpinner.SetActive(false);
+            AniminsScreen.SetActive(true);
+        }
+        else if(resultId == "Something went wrong, please try again in a bit...")
+        {
+            LoadingSpinner.SetActive(false);
+            AniminsScreen.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("INVALID CODE RESPONSE");
+            LoadingSpinner.SetActive(false);
+            AniminsScreen.SetActive(true);
+        }
+    }
+
+    public void ShowDemoCardPopup()
+    {
+        DemoCardPopup.SetActive(true);
+    }
+
     public void ContinueToInAppPurchase(bool shouldContinue)
     {
         ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
@@ -273,7 +279,6 @@ public class ProfilesManagementScript : MonoBehaviour
         }
 
     }
-
 	
 	// Update is called once per frame
 	void Update () 
