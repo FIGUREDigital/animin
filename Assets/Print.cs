@@ -11,13 +11,13 @@ public class Print : MonoBehaviour
 	{
 		Texture2D screenshot = Resources.Load<Texture2D>("printOut");
 		var bytes = screenshot.EncodeToPNG();
-		string path = Application.persistentDataPath + "/printOut.png";
-		Debug.Log("Photo saved to: " + path);
-		File.WriteAllBytes(path, bytes);
+		string filepath = Application.persistentDataPath + "/printOut.png";
+		Debug.Log("Photo saved to: " + filepath);
+		File.WriteAllBytes(filepath, bytes);
 #if UNITY_IOS
-		EtceteraBinding.saveImageToPhotoAlbum(path);
+		EtceteraBinding.saveImageToPhotoAlbum(filepath);
 #elif UNITY_ANDROID
-		EtceteraAndroid.saveImageToGallery(path,"printOut.png");
+		EtceteraAndroid.saveImageToGallery(filepath,"printOut.png");
 #endif
 		PopPhotoSaved();
 
