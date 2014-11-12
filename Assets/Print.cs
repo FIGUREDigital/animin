@@ -16,6 +16,8 @@ public class Print : MonoBehaviour
 		File.WriteAllBytes(path, bytes);
 #if UNITY_IOS
 		EtceteraBinding.saveImageToPhotoAlbum(path);
+#elif UNITY_ANDROID
+		EtceteraAndroid.saveImageToGallery(path,"printOut.png");
 #endif
 		PopPhotoSaved();
 
