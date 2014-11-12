@@ -23,7 +23,7 @@ public class Account
 
 	private const string SERVER_SEND_URL = "http://terahard.org/Teratest/DatabaseAndScripts/AddData.php";
 
-	private const string SERVER_CHECK_URL = "http://terahard.org/Teratest/DatabaseAndScripts/CheckLoginData.php";   
+	private const string SERVER_CHECK_URL = "http://terahard.org/Teratest/DatabaseAndScripts/CheckLoginData.php"; 
 
     public string UniqueID{get {return ProfilesManagementScript.Singleton.CurrentProfile.UniqueID;}}
 

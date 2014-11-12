@@ -190,6 +190,8 @@ public class UIClickButtonMasterScript : MonoBehaviour
 
             case UIFunctionalityId.GoToMainMenuFromGame:
                 {
+                    SaveAndLoad.Instance.SaveAllData();
+
                     Application.LoadLevel("Menu");
 
                     break;

@@ -143,10 +143,14 @@ public class EvolutionManager
 			mEvoStar = !mEvoStar;
 			mCurrentMarker++;
 		}
-	    if (ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin != PersistentData.TypesOfAnimin.Tbo)
+	    if (ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin == PersistentData.TypesOfAnimin.Tbo)
 	    {
-	        CheckEvolution();
+            ProfilesManagementScript.Singleton.ShowEvolutionPurchaseWarning();
 	    }
+        else
+        {
+            CheckEvolution();
+        }
 	    UpdateEvoBar();
 
 	}

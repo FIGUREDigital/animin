@@ -19,6 +19,8 @@ public class PlayerProfileData
     public List<PersistentData.TypesOfAnimin> UnlockedAnimins = new List<PersistentData.TypesOfAnimin>();
     public List<AchievementManager.AchievementDetails> Achievements;
 
+    public bool BuyFullTbo;
+
     public bool TutorialBoxLandPlayed;
     public bool TutorialCanonClashPlayed;
 

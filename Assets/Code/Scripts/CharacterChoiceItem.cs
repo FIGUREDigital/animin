@@ -94,7 +94,7 @@ public class CharacterChoiceItem : MonoBehaviour
 
     public void ChangeLockedState(bool unlocked)
 	{
-        Debug.Log("Unlocking... " + ThisCharacter);
+        Debug.Log("Adjusting profile image for... " + ThisCharacter);
         mUnlocked = unlocked;
         mSprite.SetActive(mUnlocked);
 		mDisabledSprite.SetActive(!mUnlocked);

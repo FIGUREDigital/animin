@@ -28,12 +28,16 @@ public class ProfilesManagementScript : MonoBehaviour
 	public GameObject[] AniminSprites;
     public GameObject DemoCardPopup;
 
+    private GameObject EvolveTboToAdultWarning;
+
     public ItunesButtonUpdate ItunesScript;
 
 	public UILabel PiAge;
 	public UILabel TBOAge;
 	public UILabel KelsiAge;
 	public UILabel MandiAge;
+
+    public bool SentToPurchaseAdultTBOFromMainScene;
 
     public PersistentData.TypesOfAnimin AniminToUnlockId;
 
@@ -42,6 +46,8 @@ public class ProfilesManagementScript : MonoBehaviour
     public PlayerProfileData CurrentProfile; 
 
     public PersistentData CurrentAnimin;
+
+
 
 	void Awake()
 	{
@@ -175,11 +181,7 @@ public class ProfilesManagementScript : MonoBehaviour
 
     private void RefreshProfiles()
     {
-        List<PlayerProfileData> profiles = new List<PlayerProfileData>();
-        //TempDebugPanel.text = "About to load";
-        profiles = SaveAndLoad.Instance.LoadProfileData();
-
-        //TempDebugPanel.text = "Profiles null";
+        List<PlayerProfileData> profiles = SaveAndLoad.Instance.StateData.ProfileList;
 
         if(profiles != null)
         {
@@ -204,13 +206,13 @@ public class ProfilesManagementScript : MonoBehaviour
 
 	public void OnAllowCreateProfile(string name)
 	{
-//		ProfilesManagementScript.Singleton.CreateUsernameScreen.SetActive(false);
-//		ProfilesManagementScript.Singleton.ProfilesScreen.SetActive(true);
+////		ProfilesManagementScript.Singleton.CreateUsernameScreen.SetActive(false);
+////		ProfilesManagementScript.Singleton.ProfilesScreen.SetActive(true);
+////
+////		PlayerProfileData newprof = CreateNewProfile(name);
+////		newprof.Save();
+////		RefreshProfiles();
 //
-//		PlayerProfileData newprof = CreateNewProfile(name);
-//		newprof.Save();
-//		RefreshProfiles();
-
 	}
 
 	public void OnRejectedProfile()
@@ -220,6 +222,7 @@ public class ProfilesManagementScript : MonoBehaviour
 
     public void ActivateShopItemCheck()
     {
+
         ShopManager.Instance.EndStore();
         UnlockCharacterManager.Instance.OpenShop();
     }
@@ -280,6 +283,42 @@ public class ProfilesManagementScript : MonoBehaviour
         PurchaseChoiceScreen.SetActive(true);
     }
 
+    public void ShowEvolutionPurchaseWarning()
+    {
+        EvolveTboToAdultWarning = (GameObject)GameObject.Instantiate (Resources.Load("NGUIPrefabs/UI - EvolveBabyTboWarning"));
+        EvolveTboToAdultWarning.SetActive( true );
+
+    }
+
+	public void CloseEvolutionPurchaseWarning(bool andContinue)
+    {
+        Destroy(EvolveTboToAdultWarning);
+
+        if (andContinue)
+        {
+            SentToPurchaseAdultTBOFromMainScene = true;
+            SaveAndLoad.Instance.SaveAllData();
+            Application.LoadLevel(0);
+        }
+    }
+
+    public void FasttrackThroughProfileSelect()
+    {
+        Debug.Log("Fast track initialised...");
+        SelectProfile.SetActive(false);
+        AniminsScreen.SetActive(false);
+        LoadingSpinner.SetActive(true);
+        AniminToUnlockId = PersistentData.TypesOfAnimin.TboAdult;
+        if( Application.isEditor)
+        {
+            ProfilesManagementScript.Singleton.ContinueToInAppPurchase(true);
+        }
+        else
+        {
+            ActivateShopItemCheck();
+        }
+    }
+
     public void ContinueToInAppPurchase(bool shouldContinue)
     {
         ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
@@ -291,6 +330,19 @@ public class ProfilesManagementScript : MonoBehaviour
         {
             Debug.Log("Shop Unavailable");
             ProfilesManagementScript.Singleton.ErrorBox.SetActive(true);
+        }
+
+    }
+
+    void OnLevelWasLoaded(int level)
+    {
+        SaveAndLoad.Instance.LoadAllData();
+        Debug.Log(SentToPurchaseAdultTBOFromMainScene);
+        if (level == 0 && SentToPurchaseAdultTBOFromMainScene)
+        {
+            Debug.Log("Level loaded");
+            SentToPurchaseAdultTBOFromMainScene = false;
+            FasttrackThroughProfileSelect();
         }
 
     }

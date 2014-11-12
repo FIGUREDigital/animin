@@ -24,8 +24,15 @@ public class SaveAndLoad {
 	}
 	
 	#endregion
+    [System.Serializable]
+    public class ProfileStateData
+    {
+        public List<PlayerProfileData> ProfileList; 
+        public PlayerProfileData CurrentProfile;
+        public bool UpgradeTbo;
+    }
 
-    public List<PlayerProfileData> ProfileList; 
+    public ProfileStateData StateData;
 
     public void Awake()
     {
@@ -34,7 +41,9 @@ public class SaveAndLoad {
 
 	public SaveAndLoad()
 	{
-        ProfileList = new List<PlayerProfileData> ();
+        StateData = new ProfileStateData();
+
+        StateData.ProfileList = new List<PlayerProfileData> ();
 //		PlayerPrefs.DeleteAll ();
 	}
 
@@ -47,7 +56,7 @@ public class SaveAndLoad {
 		{
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(Application.persistentDataPath + "/savedGames.anidat", FileMode.Open);
-            ProfileList = (List<PlayerProfileData>)bf.Deserialize(file);
+            StateData = (ProfileStateData)bf.Deserialize(file);
 			file.Close();
 			Debug.Log ("Save data loaded");
             RepopulateData();
@@ -61,57 +70,47 @@ public class SaveAndLoad {
 	public void SaveAllData()
 	{
         File.Delete(Application.persistentDataPath + "/savedGames.anidat");
-//        Debug.Log("Save section " + 1);
-        ProfileList.Clear();
-//        Debug.Log("Save section " + 2);
-//        Debug.Log("Save section " + 3);
+        StateData.ProfileList.Clear();
         for (int i =0; i< ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count; i++)
         {
-//            Debug.Log("Save section " + 4);
             PlayerProfileData tempProfile = new PlayerProfileData();
-//            Debug.Log("Save section " + 5);
-//            Debug.Log("Save section " + 6);
             tempProfile = ProfilesManagementScript.Singleton.ListOfPlayerProfiles[i];
-//            Debug.Log("Save section " + 7);
-            ProfileList.Add(tempProfile);
-//            Debug.Log("Save section " + 8);
+            StateData.ProfileList.Add(tempProfile);
         }
-//        Debug.Log("Save section " + 9);
-//        Debug.Log("Save section " + 10);
+        StateData.CurrentProfile = ProfilesManagementScript.Singleton.CurrentProfile;
+        StateData.UpgradeTbo = ProfilesManagementScript.Singleton.SentToPurchaseAdultTBOFromMainScene;
 		BinaryFormatter bf = new BinaryFormatter();
-//        Debug.Log("Save section " + 11);
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.anidat");
-//        Debug.Log("Save section " + 12);
-		bf.Serialize(file, ProfileList);
-//        Debug.Log("Save section " + 13);
-//        Debug.Log("Savesize " + ProfileList.Count);
-//        Debug.Log("Save section " + 14);
+        bf.Serialize(file, StateData);
+
 		file.Close();
-//        Debug.Log("Save section " + 15);
 
 	}	
 
-    public List<PlayerProfileData> LoadProfileData()
-    {
-        List<PlayerProfileData>  tempProfile = new List<PlayerProfileData> ();
-
-        for (int i =0; i< ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count; i++)
-        {
-            tempProfile.Add(ProfileList[i]);
-//            Debug.Log("Profile load "+ i + " " + ProfileList[i].PlayerData.ProfileName);
-        }
-
-        return tempProfile;
-    }
+//    public List<PlayerProfileData> LoadProfileData()
+//    {
+//        ProfileStateData tempstate = new ProfileStateData();
+//
+//        tempstate.ProfileList = new List<PlayerProfileData> ();
+//
+//        for (int i =0; i< ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Count; i++)
+//        {
+//            tempProfile.Add(ProfileList[i]);
+//        }
+//
+//        return tempProfile;
+//    }
 
 	public void RepopulateData()
 	{
         ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Clear();
 
-        for (int i =0; i< ProfileList.Count; i++)
+        for (int i =0; i< StateData.ProfileList.Count; i++)
         {
-            ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Add(ProfileList[i]);            
+            ProfilesManagementScript.Singleton.ListOfPlayerProfiles.Add(StateData.ProfileList[i]);            
         }
+        ProfilesManagementScript.Singleton.CurrentProfile = StateData.CurrentProfile;
+        ProfilesManagementScript.Singleton.SentToPurchaseAdultTBOFromMainScene = StateData.UpgradeTbo;
 
 	}
 }
