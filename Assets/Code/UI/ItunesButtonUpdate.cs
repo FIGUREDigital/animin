@@ -42,7 +42,7 @@ public class ItunesButtonUpdate : MonoBehaviour
             case PersistentData.TypesOfAnimin.Pi:
 			mPiHeader.SetActive(true);
 			break;
-            case PersistentData.TypesOfAnimin.Tbo:
+            case PersistentData.TypesOfAnimin.TboAdult:
 			mTboHeader.SetActive(true);
 			break;
             case PersistentData.TypesOfAnimin.Kelsey:
@@ -117,7 +117,7 @@ public class ItunesButtonUpdate : MonoBehaviour
 			return;
 		}
 		mRegistered = true;
-		Debug.Log("Register Itunes Listeners");
+		Debug.Log("Register Itunes Listeners from itunes buttin script");
 		if(Application.isEditor){ return; }
         
 #if UNITY_IOS

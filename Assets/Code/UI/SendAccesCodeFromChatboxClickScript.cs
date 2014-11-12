@@ -24,10 +24,12 @@ public class SendAccesCodeFromChatboxClickScript : MonoBehaviour {
 	{
 		// It's a good idea to strip out all symbols as we don't want user input to alter colors, add new lines, etc
 		string text = NGUIText.StripSymbols(mInput.value);
-		
+        Debug.Log("Submitting code..." + text);
+
 		if (!string.IsNullOrEmpty(text))
 		{
-            Account.Instance.CheckPurchaseCode(text);
+            Debug.Log("Code is not empty, continuing...");
+            ProfilesManagementScript.Singleton.CheckCharacterCodeValidity(text);
 
 			//ServerManager.Register(text);
 			mInput.enabled = false;

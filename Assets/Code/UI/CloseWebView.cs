@@ -30,6 +30,9 @@ public class CloseWebView : MonoBehaviour
 		}
 #if UNITY_IOS
       EtceteraBinding.inlineWebViewClose();  
+#elif UNITY_ANDROID
+		EtceteraAndroid.inlineWebViewClose();
+
 #endif
 	}
 }

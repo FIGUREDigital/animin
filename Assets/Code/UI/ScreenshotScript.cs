@@ -23,7 +23,8 @@ public class ScreenshotScript : MonoBehaviour {
 			StartCoroutine( EtceteraBinding.takeScreenShot( screenshotName, imagePath =>
 			{EtceteraBinding.saveImageToPhotoAlbum (imagePath);}) );
 #elif UNITY_ANDROID
-			Application.CaptureScreenshot(Application.persistentDataPath + "/" + screenshotName);
+			Application.CaptureScreenshot(screenshotName);
+			EtceteraAndroid.saveImageToGallery(screenshotName,screenshotName);
 #endif
 		}
 		Invoke("PopPhotoSaved",0.3f);
