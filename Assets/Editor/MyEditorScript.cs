@@ -119,7 +119,7 @@ class MyEditorScript {
 	{
 		string file = TARGET_DIR + "/" + APP_NAME + IOS + "/Info.plist";
 		string text = File.ReadAllText(file);
-		text = text.Replace(@"com.animin.${PRODUCT_NAME}", @"com.do.dog");
+		text = text.Replace(@"com.figuredigital.${PRODUCT_NAME}", @"com.do.dog");
 		File.WriteAllText(file, text);
 
 	}
