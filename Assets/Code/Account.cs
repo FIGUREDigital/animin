@@ -37,15 +37,10 @@ public class Account
 
 	public string Addressee;
 
-    public Account()
-    {
-        UniqueID = PlayerPrefs.GetString( "PLAYER_ID" );
-    }
-
-    public void CreateAccount( string name )
-    {
-
-    }
+    public string[] DemoCodes =
+        {
+            "789456789456",
+        };
 
 	public IEnumerator WWWSendData( bool newUser,string name, string character, string address, string addressee, string firstname, string lastname)
     {
@@ -146,6 +141,60 @@ public class Account
 		}
 		
 	}
+
+    public IEnumerator CheckPurchaseCode(string code) 
+    {
+
+        bool DemoCode = CheckDemoCode(code);
+
+        if (DemoCode)
+        {
+            //do something
+
+        }
+        else
+        {
+            WWWForm data = new WWWForm();
+
+            data.AddField( "CardNumber", code );
+            data.AddField( "UserID", UniqueID );
+            data.AddField("Animin", ProfilesManagementScript.Singleton.AniminToUnlockId.ToString());
+
+            var w = new WWW("http://terahard.org/Teratest/DatabaseAndScripts/CheckCardLegitimacy.php", data);
+
+            yield return w;
+
+            if (w.error != null)
+            {
+                Debug.Log(w.error);
+                ProfilesManagementScript.Singleton.OnAccessCodeResult("Something went wrong, please try again in a bit...");
+            }
+
+            else
+            {           
+
+                Debug.Log(w.text);                              
+                       
+                ProfilesManagementScript.Singleton.OnAccessCodeResult(w.text);
+
+            }
+        }
+    }
+
+    public bool CheckDemoCode(string code)
+    {
+
+        for (int i=0; i < DemoCodes.Length; i++ )
+        {
+            if (code == DemoCodes[i])
+            {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public void ClearAccountClassData()
     {
 

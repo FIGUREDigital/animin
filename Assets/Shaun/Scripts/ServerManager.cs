@@ -310,8 +310,11 @@ public class ServerManager : MonoBehaviour {
 
 	// CODE
 	//
-	
-	private IEnumerator Access() {
+
+	// Access has been moved to Account.cs - 12/11/2014 - JH
+
+	/* 
+     * private IEnumerator Access() {
 		DebugManager.ShowDebugLog("function", "Access		", __code);
 
 		WWWForm data = new WWWForm();
@@ -334,22 +337,18 @@ public class ServerManager : MonoBehaviour {
 		bool success = false;
 		string returnCode = string.Empty;
 		
-		if (request.error != null && request.error != "") {
+		if (request.error != null && request.error != "") 
+        {
 			DebugManager.ShowDebugLog("trace", "ERROR");
-		} else {
+		} 
+        else 
+        {
 			DebugManager.ShowDebugLog("trace", "NO ERROR");
 			
-			DebugManager.ShowDebugLog("trace", "request.text	", request.text);
+			DebugManager.ShowDebugLog("trace", "request.text	", request.text);	
 			
-			/*
-			if (request.text != null && request.text != "") {
-				DebugManager.ShowDebugLog("trace", "TEXT");
-			} else {
-				DebugManager.ShowDebugLog("trace", "NO TEXT");
-			}
-			*/
-			
-			if (request.text != "") {
+			if (request.text != "") 
+            {
                 
                 Debug.Log( request.text );
                 if( request.text == "Card successfully activated" )
@@ -358,31 +357,6 @@ public class ServerManager : MonoBehaviour {
                 }
 
 				returnCode = request.text;
-
-                /*
-				Dictionary<string, object> responseDictionary = Prime31.Json.decode(request.text) as Dictionary<string, object>;
-				//DebugManager.ShowDebugLog("trace", "responseDictionary	", responseDictionary);
-				DebugManager.ShowDebugLog("trace", "responseDictionary	", responseDictionary.Count);
-				
-                
-				if (responseDictionary != null) 
-				{
-					if (responseDictionary.ContainsKey("status")) 
-						DebugManager.ShowDebugLog("trace", "status\t\t\t", responseDictionary["status"]);
-					
-					if (responseDictionary.ContainsKey("status")) 
-					{
-						returnCode = responseDictionary["status"].ToString();
-						if (responseDictionary["status"].ToString() == "1") {
-							// Code activated
-							success = true;
-						} else if (responseDictionary["status"].ToString() == "2") {
-							// Code already used
-						} else if (responseDictionary["status"].ToString() == "3") {
-							// Code not valid
-						}
-					}
-				}*/
 			}
 		}
 		
@@ -394,6 +368,7 @@ public class ServerManager : MonoBehaviour {
 		
 		//MainController.instance.Broadcast(ACCESS_CALL_COMPLETE, success, MenuManager.guiHolder, true);
 	}
+    */
 
 
 	// LEADERBOARD

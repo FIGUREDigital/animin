@@ -239,6 +239,11 @@ public class TutorialHandler : MonoBehaviour {
                 if (hitInfo.collider.name.StartsWith("Invisible Ground Plane"))
                     cont = true;
                 break;
+            case("tap"):
+                if (hitInfo.collider.name.StartsWith("MainCharacter") || hitInfo.collider.gameObject == script.ObjectHolding)
+                    cont = true;
+                break;
+
         }
         return cont;
     }
@@ -321,7 +326,7 @@ public class TutorialHandler : MonoBehaviour {
 	}
 
     public void TriggerAdHocExitCond(string TutorialName, string StampName){
-        Debug.Log("Current Tutorial Name : ["+Tutorials[m_CurTutorial_i].Name+"]; Name to Change : ["+TutorialName+"];");
+        //Debug.Log("Current Tutorial Name : ["+Tutorials[m_CurTutorial_i].Name+"]; Name to Change : ["+TutorialName+"];");
         if (Tutorials[m_CurTutorial_i].Name == TutorialName)
         {
             TriggerAdHocExitCond(Tutorials[m_CurTutorial_i].id_num, StampName);

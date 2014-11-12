@@ -27,7 +27,7 @@ public class SendAccesCodeFromChatboxClickScript : MonoBehaviour {
 		
 		if (!string.IsNullOrEmpty(text))
 		{
-			ServerManager.Access(text);
+            Account.Instance.CheckPurchaseCode(text);
 
 			//ServerManager.Register(text);
 			mInput.enabled = false;
