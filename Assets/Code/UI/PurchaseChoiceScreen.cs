@@ -8,9 +8,12 @@ public class PurchaseChoiceScreen : MonoBehaviour {
 	[SerializeField]
 	private GameObject mSocialButtons;
 
+    public ItunesButtonUpdate iTunesBuyPics;
+
 	void OnEnable()
 	{
-		mTitle.SetActive(false);
+        ProfilesManagementScript.Singleton.ItunesScript = this.GetComponentInChildren<ItunesButtonUpdate>();
+        mTitle.SetActive(false);
 		mSocialButtons.SetActive(false);
 	}
 

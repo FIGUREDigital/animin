@@ -13,7 +13,6 @@ public class ItunesButtonUpdate : MonoBehaviour
 	[SerializeField]
 	private GameObject mMandiHeader;
 
-	private int mId;
 	private bool mRegistered;
 
 	void Start()
@@ -23,7 +22,7 @@ public class ItunesButtonUpdate : MonoBehaviour
 	void OnEnable()
 	{
 		RegisterListeners();
-		SetCharacterIcons();
+        SetCharacterIcons(ProfilesManagementScript.Singleton.AniminToUnlockId);
 	}
 	
 	void OnDisable()
@@ -31,33 +30,32 @@ public class ItunesButtonUpdate : MonoBehaviour
 		//UnregisterListeners();
 	}
 
-	void SetCharacterIcons()
+    public void SetCharacterIcons(PersistentData.TypesOfAnimin typeToPurchase)
 	{
 		mPiHeader.SetActive(false);
 		mTboHeader.SetActive(false);
 		mKelseyHeader.SetActive(false);
-		mMandiHeader.SetActive(false);
+		mMandiHeader.SetActive(false);		
 
-		int code = (int)ProfilesManagementScript.Singleton.AniminToUnlockId;
-		switch(code)
+        switch(typeToPurchase)
 		{
-		case 0:
+            case PersistentData.TypesOfAnimin.Pi:
 			mPiHeader.SetActive(true);
 			break;
-		case 1:
+            case PersistentData.TypesOfAnimin.Tbo:
 			mTboHeader.SetActive(true);
 			break;
-		case 2:
+            case PersistentData.TypesOfAnimin.Kelsey:
 			mKelseyHeader.SetActive(true);
 			break;
-		case 3:
+            case PersistentData.TypesOfAnimin.Mandi:
 			mMandiHeader.SetActive(true);
 			break;
 		default:
 			break;
 
 		}
-		mId = (int)ProfilesManagementScript.Singleton.AniminToUnlockId;
+		
 	}
 
 

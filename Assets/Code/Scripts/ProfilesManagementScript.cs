@@ -28,7 +28,7 @@ public class ProfilesManagementScript : MonoBehaviour
 	public GameObject[] AniminSprites;
     public GameObject DemoCardPopup;
 
-    //public UILabel TempDebugPanel;
+    public ItunesButtonUpdate ItunesScript;
 
 	public UILabel PiAge;
 	public UILabel TBOAge;
@@ -262,7 +262,13 @@ public class ProfilesManagementScript : MonoBehaviour
 
     public void ShowDemoCardPopup()
     {
+        PurchaseChoiceScreen.SetActive(false);
         DemoCardPopup.SetActive(true);
+    }
+
+    public void CloseDemoCardPopup()
+    {
+        ItunesScript.SetCharacterIcons(AniminToUnlockId);
     }
 
     public void ContinueToInAppPurchase(bool shouldContinue)
