@@ -13,9 +13,10 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 	}
 	void OnClick()
 	{
-		SubmitFunction.OnSubmit();
+		
 		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
+        SubmitFunction.OnSubmit();
 		RegisterListeners ();
 
 	}

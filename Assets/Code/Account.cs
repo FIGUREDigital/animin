@@ -25,7 +25,7 @@ public class Account
 
 	private const string SERVER_CHECK_URL = "http://terahard.org/Teratest/DatabaseAndScripts/CheckLoginData.php";   
 
-    public string UniqueID;
+    public string UniqueID{get {return ProfilesManagementScript.Singleton.CurrentProfile.UniqueID;}}
 
 	public string UserName;
 
@@ -39,7 +39,7 @@ public class Account
 
     public string[] DemoCodes =
         {
-            "789456789456",
+            "456789",
         };
 
 	public IEnumerator WWWSendData( bool newUser,string name, string character, string address, string addressee, string firstname, string lastname)
@@ -90,10 +90,10 @@ public class Account
         {
             if( newUser )
             {
-                UniqueID = w.text;
-				UniqueID = UniqueID.Replace(System.Environment.NewLine, "");
+
+                string tempID = w.text.Replace(System.Environment.NewLine, "");
 //				Debug.Log("test"+UniqueID+"test");
-                PlayerPrefs.SetString( "PLAYER_ID", UniqueID );
+                ProfilesManagementScript.Singleton.NewUserProfileAdded(name, tempID);
             }
 
 //            Debug.Log( w.text );
@@ -102,14 +102,16 @@ public class Account
 
 		if (newUser) 
 		{
-			ProfilesManagementScript.Singleton.NewUserProfileAdded();
+			
 		}
 
     }
 	public IEnumerator WWWCheckLoginCode( string code )
-	{
-		
-		WWWForm webForm = new WWWForm();
+	{       		
+
+        Debug.Log("here");
+
+        WWWForm webForm = new WWWForm();
 
 		webForm.AddField( "Code", code );
 		
@@ -142,14 +144,19 @@ public class Account
 		
 	}
 
-    public IEnumerator CheckPurchaseCode(string code) 
+    public IEnumerator WWCheckPurchaseCode(string code) 
     {
+        Debug.Log("Checking purchase code " + code);
 
-        bool DemoCode = CheckDemoCode(code);
+        bool demoCode = CheckDemoCode(code);
 
-        if (DemoCode)
+        Debug.Log("It is a demo code... " + demoCode);
+
+        if (demoCode)
         {
-            //do something
+            Debug.Log("Demo code entered. Current selected animin is " + ProfilesManagementScript.Singleton.AniminToUnlockId);
+            ProfilesManagementScript.Singleton.AniminToUnlockId = PersistentData.TypesOfAnimin.TboAdult;
+            ProfilesManagementScript.Singleton.ShowDemoCardPopup();
 
         }
         else
@@ -159,6 +166,8 @@ public class Account
             data.AddField( "CardNumber", code );
             data.AddField( "UserID", UniqueID );
             data.AddField("Animin", ProfilesManagementScript.Singleton.AniminToUnlockId.ToString());
+
+
 
             var w = new WWW("http://terahard.org/Teratest/DatabaseAndScripts/CheckCardLegitimacy.php", data);
 
@@ -197,8 +206,6 @@ public class Account
 
     public void ClearAccountClassData()
     {
-
-        UniqueID = "";
 
         UserName = "";
 

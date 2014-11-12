@@ -66,7 +66,7 @@ public class ProfilesManagementScript : MonoBehaviour
         SaveAndLoad.Instance.LoadAllData();
     }
 
-	// Use this for initialization
+	
 	void Start ()
 	{
         //TempDebugPanel.text = "Start";
@@ -100,13 +100,13 @@ public class ProfilesManagementScript : MonoBehaviour
 		CurrentAnimin = CurrentProfile.Characters[(int)CurrentProfile.ActiveAnimin];
 	}
 
-	public void NewUserProfileAdded()
+    public void NewUserProfileAdded(string name, string id)
 	{
 		NewUser.SetActive(false);
 		AniminsScreen.SetActive(true);
         PlayerProfileData tempData = new PlayerProfileData();
-        tempData = PlayerProfileData.CreateNewProfile(Account.Instance.UserName);
-        tempData.UniqueID = Account.Instance.UniqueID;
+        tempData = PlayerProfileData.CreateNewProfile(name);
+        tempData.UniqueID = id;
         ListOfPlayerProfiles.Add(tempData);
         SaveAndLoad.Instance.SaveAllData();
 		Debug.Log("just saved...new");
@@ -148,8 +148,7 @@ public class ProfilesManagementScript : MonoBehaviour
 		if (successful) 
         {
 			ProfilesManagementScript.Singleton.LoginUser.SetActive (false);
-			ProfilesManagementScript.Singleton.AniminsScreen.SetActive (true);
-			Account.Instance.UniqueID = code;
+			ProfilesManagementScript.Singleton.AniminsScreen.SetActive (true);			
             NewUser.SetActive(false);
             AniminsScreen.SetActive(true);
             PlayerProfileData tempData = new PlayerProfileData();
@@ -225,9 +224,15 @@ public class ProfilesManagementScript : MonoBehaviour
         UnlockCharacterManager.Instance.OpenShop();
     }
 
+    public void CheckCharacterCodeValidity(string code)
+    {
+        Debug.Log("Passing character code through singleton...");
+        StartCoroutine(Account.Instance.WWCheckPurchaseCode(code));
+    }
+
     public void OnAccessCodeResult(string resultId)
     {
-        Debug.Log(resultId);
+        Debug.Log("Access code result is... "+resultId);
         if(resultId == "Card successfully activated")
         {
             UnlockCharacterManager.Instance.BuyCharacter(AniminToUnlockId, true);
@@ -264,11 +269,15 @@ public class ProfilesManagementScript : MonoBehaviour
     {
         PurchaseChoiceScreen.SetActive(false);
         DemoCardPopup.SetActive(true);
+        LoadingSpinner.SetActive(false);
     }
 
     public void CloseDemoCardPopup()
     {
+        Debug.Log("Switching purchase to " + AniminToUnlockId);
         ItunesScript.SetCharacterIcons(AniminToUnlockId);
+        DemoCardPopup.SetActive(false);
+        PurchaseChoiceScreen.SetActive(true);
     }
 
     public void ContinueToInAppPurchase(bool shouldContinue)
