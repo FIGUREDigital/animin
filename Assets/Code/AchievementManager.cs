@@ -108,6 +108,10 @@ public class AchievementManager
 			AchievementDetails tempAchievement = new AchievementDetails ();
 			tempAchievement.Type = (Achievements)i;
 			tempAchievement.Status = false;
+			if(ListOfAchievements == null)
+			{
+				ListOfAchievements = new List<AchievementDetails>();
+			}
 			ListOfAchievements.Add (tempAchievement);
             ProfilesManagementScript.Singleton.CurrentProfile.Achievements = ListOfAchievements;
 			PlayerPrefs.SetInt("Achievement" + i, 0);
