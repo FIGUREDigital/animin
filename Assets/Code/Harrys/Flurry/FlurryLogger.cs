@@ -19,7 +19,11 @@ public class FlurryLogger{
 		FlurryAnalytics.startSession ("VWK79FC9CHBVXY4VXXY6");
 		FlurryAnalytics.setSessionReportsOnCloseEnabled (true);
 		FlurryAnalytics.setSessionReportsOnPauseEnabled (true);
+#elif UNITY_ANDROID
+		FlurryAndroid.setContinueSessionMillis(20000);
+		FlurryAndroid.onStartSession("K98433N9XWCVX5NHTPCN",false,false);
 #endif
+
 		
 		var dict = new Dictionary<string,string> ();
 		dict.Add ("DeviceModel", SystemInfo.deviceModel);
@@ -27,6 +31,9 @@ public class FlurryLogger{
 #if UNITY_IOS
 		FlurryAnalytics.logEventWithParameters ("DeviceStats", dict, false);
 		FlurryAnalytics.logEvent ("SessionTime", true);
+#elif UNITY_ANDROID
+		FlurryAndroid.logEvent ("DeviceStats", dict, false);
+		FlurryAndroid.logEvent ("SessionTime", true);
 #endif
 		
 		m_Inited = true;
@@ -35,6 +42,8 @@ public class FlurryLogger{
 		Debug.Log ("FLURRY LOGGER : [End Session];");
 #if UNITY_IOS
 		FlurryAnalytics.endTimedEvent ("SessionTime");
+#elif UNITY_ANDROID
+		FlurryAndroid.endTimedEvent ("SessionTime");
 #endif
 	}
 
@@ -46,6 +55,8 @@ public class FlurryLogger{
 		Debug.Log ("FLURRY LOGGER : [StartMainScreenTimer];");
 #if UNITY_IOS
 		FlurryAnalytics.logEvent ("MainMenuStart",true);
+#elif UNITY_ANDROID
+		FlurryAndroid.logEvent("MainMenuStart",true);
 #endif
 		TimingMainScreen = true;
 	}
@@ -54,6 +65,8 @@ public class FlurryLogger{
 		if (!TimingMainScreen) return;
 #if UNITY_IOS
 		FlurryAnalytics.endTimedEvent ("MainMenuStart");
+#elif UNITY_ANDROID
+		FlurryAndroid.endTimedEvent ("MainMenuStart");
 #endif
 		TimingMainScreen = false;
 	}
@@ -71,6 +84,8 @@ public class FlurryLogger{
 		dict.Add ("Minigame", game.ToString());
 #if UNITY_IOS
 		FlurryAnalytics.logEventWithParameters ("TimeInMinigame", dict, true);
+#elif UNITY_ANDROID
+		FlurryAndroid.logEvent ("TimeInMinigame", dict, true);
 #endif
 		TimingMinigame = true;
 	}
@@ -82,6 +97,8 @@ public class FlurryLogger{
 		dict.Add ("DateTime", DateTime.Now.ToString ("dd:MM:yyyy hh:mm"));
 #if UNITY_IOS
 		FlurryAnalytics.logEventWithParameters ("TimeInMinigame", dict, true);
+#elif UNITY_ANDROID
+		FlurryAndroid.logEvent ("TimeInMinigame", dict, true);
 #endif
 
 		TimingMinigame = false;
@@ -95,6 +112,8 @@ public class FlurryLogger{
 		Debug.Log ("FLURRY LOGGER : [StartARCard];");
 #if UNITY_IOS
 		FlurryAnalytics.logEvent ("ARCardTime",false);
+#elif UNITY_ANDROID
+		FlurryAndroid.logEvent ("ARCardTime",false);
 #endif
 		TimingARCard = true;
 	}
@@ -103,6 +122,8 @@ public class FlurryLogger{
 		if (!TimingARCard) return;
 #if UNITY_IOS
 		FlurryAnalytics.endTimedEvent ("ARCardTime");
+#elif UNITY_ANDROID
+		FlurryAndroid.endTimedEvent ("ARCardTime");
 #endif
 		TimingARCard = false;
 	}
@@ -126,6 +147,8 @@ public class FlurryLogger{
 		dict.Add ("ItemBought", "In App Purchase");
 #if UNITY_IOS
 		FlurryAnalytics.logEventWithParameters ("ConversionTime", dict, false);
+#elif UNITY_ANDROID
+		FlurryAndroid.logEvent ("ConversionTime", dict, false);
 #endif
 	}
 
@@ -149,6 +172,8 @@ public class FlurryLogger{
 		dict.Add ("ItemBought", "Webview");
 #if UNITY_IOS
 		FlurryAnalytics.logEventWithParameters ("ConversionTime", dict, false);
+#elif UNITY_ANDROID
+		FlurryAndroid.logEvent ("ConversionTime", dict, false);
 #endif
 	}
 
