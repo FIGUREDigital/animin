@@ -37,9 +37,9 @@ public class Account
 
 	public string Addressee;
 
-    public int[] DemoCodes =
+    public string[] DemoCodes =
         {
-            789456789456,
+            "789456789456",
         };
 
 	public IEnumerator WWWSendData( bool newUser,string name, string character, string address, string addressee, string firstname, string lastname)
