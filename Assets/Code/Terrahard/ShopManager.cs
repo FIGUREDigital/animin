@@ -216,7 +216,20 @@ public class ShopManager
         //GUIDebug.Log("queryInventorySucceededEvent");
         Prime31.Utils.logObject( purchases );
         Prime31.Utils.logObject( skus );
-
+		if(skus.Count > 0 && !mShopReady)
+		{
+			mShopReady = true;
+			Debug.Log("Go to shop");
+			ProfilesManagementScript.Singleton.ContinueToInAppPurchase(true);
+			
+		}
+		else if (skus.Count <= 0 && !mShopReady)
+		{
+			mShopReady = true;
+			Debug.Log("Avoid shop");
+			ProfilesManagementScript.Singleton.ContinueToInAppPurchase(false);
+			
+		}
         for( int i = 0; i < purchases.Count; i++ )
         {
             //GUIDebug.Log( "purchases " + purchases[ i ] );
