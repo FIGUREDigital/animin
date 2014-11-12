@@ -60,7 +60,6 @@ public class MinigameCollectorScript : MonoBehaviour
 	public GameObject[] HeartUI;
 	public GameObject[] StarsUI;
 
-
 	// Use this for initialization
 	void Awake () 
 	{
@@ -122,26 +121,29 @@ public class MinigameCollectorScript : MonoBehaviour
 		TutorialMoveGraphic.SetActive(false);
 		TutorialSwipeLevelGraphic.SetActive(false);
 
-		TutorialId = (TutorialStateId) ((int)TutorialId + 1);
+        if (ProfilesManagementScript.Singleton.CurrentProfile.TutorialBoxLandPlayed == false)
+        {
+            TutorialId = (TutorialStateId)((int)TutorialId + 1);
 
-		if(TutorialId == TutorialStateId.ShowMovement)
-		{
-			TutorialMoveGraphic.SetActive(true);
-		}
-		else if(TutorialId == TutorialStateId.ShowJumb)
-		{
-			TutorialJumbGraphic.SetActive(true);
-		}
-		else if(TutorialId == TutorialStateId.ShowSwipeLevel)
-		{
-			TutorialSwipeLevelGraphic.SetActive(true);
-			TutorialHandGraphic.SetActive(true);
-		}
-		else if(TutorialId == TutorialStateId.Completed)
-		{
-
-		}
-
+            if (TutorialId == TutorialStateId.ShowMovement)
+            {
+                TutorialMoveGraphic.SetActive(true);
+            }
+            else if (TutorialId == TutorialStateId.ShowJumb)
+            {
+                TutorialJumbGraphic.SetActive(true);
+            }
+            else if (TutorialId == TutorialStateId.ShowSwipeLevel)
+            {
+                TutorialSwipeLevelGraphic.SetActive(true);
+                TutorialHandGraphic.SetActive(true);
+            }
+            else if (TutorialId == TutorialStateId.Completed)
+            {
+                ProfilesManagementScript.Singleton.CurrentProfile.TutorialBoxLandPlayed = true;
+                SaveAndLoad.Instance.SaveAllData();
+            }
+        }
 	}
 
 
