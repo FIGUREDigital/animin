@@ -8,7 +8,7 @@ public class GetOBB : MonoBehaviour {
     void Start()
     {
         #if UNITY_ANDROID
-        if(Application.IsEditor)return;
+        if(Application.isEditor)return;
         if (!GooglePlayDownloader.RunningOnAndroid())
         {
             Debug.Log("Use GooglePlayDownloader only on Android device!");
