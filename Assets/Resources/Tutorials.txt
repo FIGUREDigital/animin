@@ -3,23 +3,30 @@
     <!--
          CONDIITIONS:
          Types:
+         
          None
          Description:    Self-explanatory. If set as a start condition, tutorial will never start. If set as an end condition, tutorial will end on its own.
          Paramters:      None
+         
          Initial - TUTORIAL START CONDITION ONLY
          Description:    This one is activated as soon as the game starts.
          Parameters:     None
-         Timer
+         
+         Timer - START CONDITION ONLY (End Condition TBA)
          Description:    A timer is activated when the end of another tutorial.
          Parameters:
          Trigger:        Trigger ID. When the tutorial specified in the ID here ends the timer will begin. EG Setting "trigger = 0" will begin the timer when tutorial with the id of 0 ends.  - TUTORIAL START CONDITION ONLY
          Seconds:        The time in seconds for the timer to run for before this tutorial begins.
+         
          UIButton
          Description:    Event is triggered when a specific UIButton is used.
          Parameters:
          Name:           Name of the gameobject the UIButton is attached to (look it up in Unity).
-         Collider
-         Description:    Used for interacting with stuff in the scene rather than the environment.
+         
+         AdHoc
+         Desciption:     Coders, this one's for you. If you use this, you can put manual calls throughout the code to trigger Tutorials and exit conditions.
+         Parameters:
+         Call:           The callsign of the AdHoc call. Use this in code to trigger the condition.
          -->
     <Tutorials>
         <Tutorial id="00" name="Initial">
