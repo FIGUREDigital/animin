@@ -16,7 +16,7 @@ public class GooglePlayDownloader
 	private static AndroidJavaClass Environment;
 	private const string Environment_MEDIA_MOUNTED = "mounted";
 
-    private const string bundleID = "com.figuredigital.animin";
+    private const string bundleID = "com.unity3d.player.UnityPlayer";
 
 	static GooglePlayDownloader()
 	{
@@ -112,7 +112,7 @@ public class GooglePlayDownloader
 			AndroidJavaObject current_activity = unity_player.GetStatic<AndroidJavaObject>("currentActivity");
 			obb_package = current_activity.Call<string>("getPackageName");
 			AndroidJavaObject package_info = current_activity.Call<AndroidJavaObject>("getPackageManager").Call<AndroidJavaObject>("getPackageInfo", obb_package, 0);
-			obb_version = package_info.Get<int>("3");
+            obb_version = package_info.Get<int>("versionCode");
 		}
 	}
 }
