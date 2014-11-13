@@ -249,6 +249,12 @@ public class CharacterProgressScript : MonoBehaviour
     private const float M_GIFT_TIME = 100.0f;
     private const float M_HAPPINESS_DEGREDATION = 0.1f;
 
+    private bool m_IsBlinking;
+    private float m_BlinkTimer;
+    private SkinnedMeshRenderer[] m_SkinnedMeshRenderers;
+    private Texture m_DefaultTexture;
+    private Texture m_BlinkTexture;
+
     // Use this for initialization
     void Awake()
     {
@@ -322,13 +328,6 @@ public class CharacterProgressScript : MonoBehaviour
         ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.woodFrame, 1);
         ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.woodSword, 1);
 
-
-
-        //Adrian, please forgive me, but I couldn't think of where else in the labrynth to put this little UI update thingymaboodle.
-
-        //End Forgiveness
-
-
         if (BetweenSceneData.Instance.ReturnFromMiniGame)
         {
             if (BetweenSceneData.Instance.Points >= 0)
@@ -369,6 +368,15 @@ public class CharacterProgressScript : MonoBehaviour
         {
             UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("3DayEvolve");
         }
+
+        m_SkinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        m_DefaultTexture = m_SkinnedMeshRenderers[0].material.mainTexture;
+
+        BlinkRef bref = this.GetComponentInChildren<BlinkRef>();
+        if (bref!=null) m_BlinkTexture = bref.Blink;
+
+
+
     }
 
 
@@ -600,6 +608,13 @@ public class CharacterProgressScript : MonoBehaviour
             }
         }
     }
+
+    private void ReplaceTexture(Texture tex){
+        for (int i = 0; i < m_SkinnedMeshRenderers.Length; i++)
+        {
+            m_SkinnedMeshRenderers[i].material.mainTexture = tex;
+        }
+    }
 	
     // Update is called once per frame
     void Update()
@@ -623,6 +638,34 @@ public class CharacterProgressScript : MonoBehaviour
             (ProfilesManagementScript.Singleton.CurrentAnimin.Health / 100.0f))
         / 3.0f)
         * PersistentData.MaxHappy;
+
+
+        if (m_SkinnedMeshRenderers != null && m_DefaultTexture!= null && m_BlinkTexture!=null)
+        {
+            m_BlinkTimer += Time.deltaTime;
+            if (!m_IsBlinking)
+            {
+                if (m_BlinkTimer >= 1f)
+                {
+                    m_BlinkTimer = 0;
+                    if (UnityEngine.Random.value <= 0.5f)
+                    {
+                        m_IsBlinking = true;
+                        ReplaceTexture(m_BlinkTexture);
+                    }
+                }
+            }
+            else
+            {
+                if (m_BlinkTimer >= 0.2f)
+                {
+                    m_BlinkTimer = 0;
+                    m_IsBlinking = false;
+                    ReplaceTexture(m_DefaultTexture);
+                }
+            }
+        }
+
 
 
         //Debug.Log("Hungry: " + (Hungry / 100.0f).ToString());
