@@ -226,7 +226,8 @@ public class ProfilesManagementScript : MonoBehaviour
         ShopManager.Instance.EndStore();
         UnlockCharacterManager.Instance.OpenShop();
 #if UNITY_ANDROID
-		Invoke ("CheckTimeout", 15);
+		Debug.Log("Set up timeout");
+		Invoke ("CheckTimeout", 30);
 #endif
     }
 
@@ -234,6 +235,7 @@ public class ProfilesManagementScript : MonoBehaviour
 	{
 		if(!ShopManager.Instance.ShopReady)
 		{
+			Debug.Log("GIAB Timeout");
 			ShopManager.Instance.ShopReady = true;
 			ProfilesManagementScript.Singleton.ContinueToInAppPurchase(false);
 		}
