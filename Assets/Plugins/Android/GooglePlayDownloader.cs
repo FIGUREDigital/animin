@@ -5,6 +5,7 @@ using System;
 
 public class GooglePlayDownloader
 {
+    #if UNITY_ANDROID
 	private static AndroidJavaClass detectAndroidJNI;
 	public static bool RunningOnAndroid()
 	{
@@ -115,4 +116,5 @@ public class GooglePlayDownloader
             obb_version = package_info.Get<int>("versionCode");
 		}
 	}
+    #endif
 }
