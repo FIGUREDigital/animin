@@ -20,10 +20,23 @@ public class TutorialHandler : MonoBehaviour {
     private UIButton NextButton;
     [SerializeField]
     private GameObject StatsButton;
+    [SerializeField]
+    private HandPointer TutorialHand;
 
 
     //-Start Conditions
-    public bool[] StartConditions;
+    private bool[] m_StartConditions;
+    public bool[] StartConditions
+    {
+        get
+        {
+            return m_StartConditions;
+        }
+        set
+        {
+            m_StartConditions = value;
+        }
+    }
 
     public void SetTutorialCondition(string name, bool value){
         for (int i = 0; i < Tutorials.Length; i++)
@@ -97,6 +110,7 @@ public class TutorialHandler : MonoBehaviour {
 		//Blocker.gameObject.SetActive (false);
 		WormAnimator.gameObject.SetActive(false);
 		TutorialUIParent.SetActive (false);
+        TutorialHand.gameObject.SetActive(false);
 
 		TutorialReader.Instance.Deserialize ();
 		for (int i = 0; i < Tutorials.Length; i++) {
@@ -203,6 +217,13 @@ public class TutorialHandler : MonoBehaviour {
         if (Time.timeSinceLevelLoad >= (9 * 60))
         {
             UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("9Minutes");
+        }
+
+
+
+        if (IsPlaying)
+        {
+
         }
 
 	}
@@ -345,7 +366,8 @@ public class TutorialHandler : MonoBehaviour {
 
 	
 	//- End of Lesson Processing ----------------------------------------------------------------
-	public void NextButtonPress(bool ignoreCheck = false){
+    public void NextButtonPress(bool ignoreCheck = false){
+        TutorialHand.gameObject.SetActive(false);
 
         Lesson CurrentLesson = Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i];
 
@@ -382,6 +404,9 @@ public class TutorialHandler : MonoBehaviour {
                             UIEventListener.Get(go).onClick += OnTutorialEndClick;
 
 
+                            TutorialHand.gameObject.SetActive(true);
+                            TutorialHand.gameObject.transform.position = go.transform.position;
+
                             //Set Tutorial to wait for listener input
                             m_CurrentListening = go;
                             m_WaitingForInput = true;
@@ -402,6 +427,9 @@ public class TutorialHandler : MonoBehaviour {
 
                                 ProfilesManagementScript.Singleton.CurrentProfile.Characters[(int)ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin].Hungry = 0;
                                 ProfilesManagementScript.Singleton.CurrentAnimin.Hungry = 0;
+
+                                TutorialHand.gameObject.SetActive(true);
+                                TutorialHand.gameObject.transform.position = UIGlobalVariablesScript.Singleton.FoodButton.transform.position;
                                 break;
                         }
                         m_CurrentAdHocExitCond = CurrentLesson.EndCondition.AdHocCond.call;
