@@ -210,24 +210,28 @@ public class UIGlobalVariablesScript : MonoBehaviour
 		StartCoroutine( Account.Instance.WWWSendData( false, Account.Instance.UserName, "", "", "", "", "" ));
 		ExitWebviewButton.SetActive( true );
 		
+		int x = 0;
+		int y = 100;
+		int width = Screen.width - (x * 4);
+		int height = Screen.height - (y * 4);
 
-		int width = 360;
-		int height = 300;
-		
-		if( Screen.width > 960 )
-		{
-			width *= 2;
-			height *= 2;
-		}
-		
+		Debug.Log(string.Format("Screen width : {0}\nScreen height : {1}\nScreen Dpi : {2}\nScreen Dimensions : {3}, {4}\nWebview x = {5}, y = {6}",
+		                        Screen.width,
+		                        Screen.height,
+		                        Screen.dpi,
+		                        width,
+		                        height,
+		                        x,
+		                        y));
         string GetUrlAddition = "?Type="+type+"&Price="+price+"&UserID=" + Account.Instance.UniqueID; 
 #if UNITY_IOS
-		EtceteraBinding.inlineWebViewShow( 50, 10, width, height );
+		EtceteraBinding.inlineWebViewShow( x, y, width, height );
         EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition );
-//        Debug.Log("http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition);
-
+//        Debug.Log("http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition);0
 #elif UNITY_ANDROID
-		EtceteraAndroid.inlineWebViewShow("http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition, 50, 10, width, height );
+
+		EtceteraAndroid.inlineWebViewShow("http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition, x, y, Screen.width - (x*2), Screen.height - (y*2) );
+
 #endif
 		
 	}

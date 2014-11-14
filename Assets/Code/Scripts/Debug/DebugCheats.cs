@@ -64,11 +64,11 @@ public class DebugCheats : MonoBehaviour
 			switch(ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId)
 			{
 			case AniminEvolutionStageId.Baby:
-				ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold + 50;
+				ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens = EvolutionManager.Instance.BabyEvolutionThreshold - 1;
 				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			case AniminEvolutionStageId.Kid:
-				ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold + 50;
+				ProfilesManagementScript.Singleton.CurrentAnimin.ZefTokens = EvolutionManager.Instance.KidEvolutionThreshold - 1;
 				EvolutionManager.Instance.RemoveZef(0);
 				break;
 			case AniminEvolutionStageId.Adult:
