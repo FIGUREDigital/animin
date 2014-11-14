@@ -5,15 +5,22 @@ using System;
 
 public class GooglePlayDownloader
 {
-    #if UNITY_ANDROID
+
+	#if UNITY_ANDROID
 	private static AndroidJavaClass detectAndroidJNI;
+	#endif
 	public static bool RunningOnAndroid()
 	{
+#if UNITY_ANDROID
 		if (detectAndroidJNI == null)
 			detectAndroidJNI = new AndroidJavaClass("android.os.Build");
 		return detectAndroidJNI.GetRawClass() != IntPtr.Zero;
+#else
+		return false;
+#endif
 	}
-	
+
+	#if UNITY_ANDROID
 	private static AndroidJavaClass Environment;
 	private const string Environment_MEDIA_MOUNTED = "mounted";
 
@@ -34,7 +41,6 @@ public class GooglePlayDownloader
 			dl_service.SetStatic("SALT", new byte[]{1, 43, 256-12, 256-1, 54, 98, 256-100, 256-12, 43, 2, 256-8, 256-4, 9, 5, 256-106, 256-108, 256-33, 45, 256-1, 84});
 		}
 	}
-	
 	public static string GetExpansionFilePath()
 	{
 		populateOBBData();
@@ -116,5 +122,5 @@ public class GooglePlayDownloader
             obb_version = package_info.Get<int>("versionCode");
 		}
 	}
-    #endif
+	#endif
 }

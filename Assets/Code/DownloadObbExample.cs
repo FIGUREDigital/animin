@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class DownloadObbExample : MonoBehaviour {
-	
+public class DownloadObbExample : MonoBehaviour 
+{
+#if UNITY_ANDROID
 	void OnGUI()
 	{
 		if (!GooglePlayDownloader.RunningOnAndroid())
@@ -29,4 +30,5 @@ public class DownloadObbExample : MonoBehaviour {
 		}
 
 	}
+#endif
 }

@@ -90,15 +90,15 @@ public class ItunesButtonUpdate : MonoBehaviour
 #elif UNITY_ANDROID
     void purchaseSuccessful( GooglePurchase transaction)
 	{
-		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
-		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-		UnregisterListeners();
+		Debug.Log(string.Format("Purchase of {0} Successful",transaction.productId));
+		UnlockCharacterManager.Instance.UnlockCharacter();
+		GoToAddress();
 	}
 	void purchaseCancelled( string response )
 	{
-		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
-		ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
-		UnregisterListeners();
+		Debug.Log("Purchase Cancelled. Response "+ response);
+		ShopManager.Instance.EndStore();
+		ReturnToMainScreen();
 	}
 #endif
 
