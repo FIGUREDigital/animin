@@ -46,6 +46,10 @@ public class ShopManager
 		{
 			return mShopReady;
 		}
+		set
+		{
+			mShopReady = value;
+		}
 	}
 
 	private List<Item> mItems = new List<Item>();

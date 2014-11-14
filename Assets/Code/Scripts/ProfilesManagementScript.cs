@@ -225,7 +225,19 @@ public class ProfilesManagementScript : MonoBehaviour
 
         ShopManager.Instance.EndStore();
         UnlockCharacterManager.Instance.OpenShop();
+#if UNITY_ANDROID
+		Invoke ("CheckTimeout", 15);
+#endif
     }
+
+	private void CheckTimeout()
+	{
+		if(!ShopManager.Instance.ShopReady)
+		{
+			ShopManager.Instance.ShopReady = true;
+			ProfilesManagementScript.Singleton.ContinueToInAppPurchase(false);
+		}
+	}
 
     public void CheckCharacterCodeValidity(string code)
     {

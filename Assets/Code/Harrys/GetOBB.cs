@@ -7,6 +7,7 @@ public class GetOBB : MonoBehaviour {
 
     void Start()
     {
+#if DEBUG
         #if UNITY_ANDROID
         if(Application.isEditor)return;
         if (!GooglePlayDownloader.RunningOnAndroid())
@@ -35,5 +36,6 @@ public class GetOBB : MonoBehaviour {
             }
         }
         #endif
+#endif
     }
 }
