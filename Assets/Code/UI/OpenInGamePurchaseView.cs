@@ -16,7 +16,10 @@ public class OpenInGamePurchaseView : MonoBehaviour
     }
 
 	void OnClick()
-	{
+    {
+        if (Application.loadedLevelName == "VuforiaTest")
+            UIGlobalVariablesScript.Singleton.TutHandler.Lock = !mOpen;
+
 		mOpen = !mOpen;
 		Debug.Log( "opening" + name );
 		Parent.SetActive( mOpen );
