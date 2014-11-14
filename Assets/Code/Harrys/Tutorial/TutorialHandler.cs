@@ -23,6 +23,12 @@ public class TutorialHandler : MonoBehaviour {
     [SerializeField]
     private HandPointer TutorialHand;
 
+    private bool m_Locked;
+    public bool Lock{
+        get { return m_Locked; }
+        set { m_Locked = value; }
+    }
+
 
     //-Start Conditions
     private bool[] m_StartConditions;
@@ -148,26 +154,29 @@ public class TutorialHandler : MonoBehaviour {
 		if (!m_PlayingTutorial) {
 			//I HATE MONODEVELOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 //																								OOOOOOOOOOOOOOOOOOOOOOOOOP!
-			
+            if(!m_Locked){
 			//TutorialReader.Instance.test();
 			for (int i = 0; i < Tutorials.Length; i++) {
-				if (CheckStartCondition (i)) {
-					if (TutorialUIParent == null) return;
-					TutorialUIParent.SetActive (true);
-					WormAnimator.gameObject.SetActive(true);
-					//Blocker.gameObject.SetActive(true);
-					Block(true);
-					WormAnimator.SetTrigger ("worm_GoOut");
+                    if (CheckStartCondition(i))
+                    {
+                        if (TutorialUIParent == null)
+                            return;
+                        TutorialUIParent.SetActive(true);
+                        WormAnimator.gameObject.SetActive(true);
+                        //Blocker.gameObject.SetActive(true);
+                        Block(true);
+                        WormAnimator.SetTrigger("worm_GoOut");
 
-					m_CurTutorial_i = i;
-					m_Letter_i = 0;
-					m_Lesson_i = 0;
-					m_Entry_i = 0;
+                        m_CurTutorial_i = i;
+                        m_Letter_i = 0;
+                        m_Lesson_i = 0;
+                        m_Entry_i = 0;
 					
-					MakeScreensVisible(new GameObject[]{UIGlobalVariablesScript.Singleton.CaringScreenRef});
+                        MakeScreensVisible(new GameObject[]{ UIGlobalVariablesScript.Singleton.CaringScreenRef });
 
-					m_PlayingTutorial = true;
-					break;
+                        m_PlayingTutorial = true;
+                        break;
+                    }
 				}
 			}
 		} else if (!m_EndingTutorial){
