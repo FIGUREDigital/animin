@@ -29,6 +29,7 @@ public class CloseWebView : MonoBehaviour
             }
             transform.gameObject.SetActive(false);
 		}
+        CardPostedUI.Instantiate();
 #if UNITY_IOS
       EtceteraBinding.inlineWebViewClose();  
 #elif UNITY_ANDROID
