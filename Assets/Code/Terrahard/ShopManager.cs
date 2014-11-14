@@ -10,6 +10,7 @@ using System.Linq;
 
 public class ShopManager
 {
+	private const string publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqWSuyg1d82CxPSUf3S/qMjxGZ4JsCEMPzfTAbqxVUTS9QSt7bdtJP8EJyWfEr/OlNKWtAk+ZeqS6fzZnwv3Z+/F2Wv1UUIEkI8qFlwaFtljFCpR2AAZnUlK0myym5LNs8yTvmX5shGe3SNGW5tDsj4RLuP9pq+iiJer6ZjbXthubABF6VF6xPH4Dy4MOQOw52JaOJxPaLXpthEWdytlxOcSR1IlzDfOz+Ky7QH1Li0TV9PPlgGXlHLAOwGG5Tyw4iJmjeLuBrNLH0e8ihp2im9gWnrMzVMTMHN8xzfKv+ZiwDaFaP9FY5srMljdnyCtZg9tMjPVf6yAZKIeJGA2eFwIDAQAB";
     #region Singleton
 
     private static ShopManager s_Instance;
@@ -92,6 +93,7 @@ public class ShopManager
         GoogleIABManager.purchaseFailedEvent += purchaseFailed;
         GoogleIABManager.consumePurchaseSucceededEvent += consumePurchaseSucceededEvent;
         GoogleIABManager.consumePurchaseFailedEvent += consumePurchaseFailedEvent;
+		GoogleIAB.init(publicKey);
 #endif
         
     }
@@ -401,6 +403,7 @@ public class ShopManager
 
     public void StartStore(string[] shopItems)
     {
+
         Debug.Log("Start store array");
         mShopReady = false;
 		mItems.Clear();
@@ -419,6 +422,7 @@ public class ShopManager
     }
 	public void StartStore(List<Item> shopItems)
 	{
+
         Debug.Log("Start store list");
         mShopReady = false;
 		//m_CurrentShopState = ShopState.InShop;

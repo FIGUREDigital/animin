@@ -80,13 +80,15 @@ public class UnlockCharacterManager
 	public void OpenShop()
 	{
 		Debug.Log("Opening Shop");
-		string[] shopItems = new string[6];
+		string[] shopItems = new string[8];
 		shopItems [0] = PI_UNLOCK;
 		shopItems [1] = KELSEY_UNLOCK;
 		shopItems [2] = MANDI_UNLOCK;
-		shopItems [3] = PI_PURCHASE;
-		shopItems [4] = KELSEY_PURCHASE;
-		shopItems [5] = MANDI_PURCHASE;
+		shopItems [3] = TBOADULT_UNLOCK;
+		shopItems [4] = PI_PURCHASE;
+		shopItems [5] = KELSEY_PURCHASE;
+		shopItems [6] = MANDI_PURCHASE;
+		shopItems [7] = TBOADULT_PURCHASE;
 		ShopManager.Instance.StartStore (shopItems);
 	}
 
