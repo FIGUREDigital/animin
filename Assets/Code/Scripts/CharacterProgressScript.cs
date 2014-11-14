@@ -333,20 +333,20 @@ public class CharacterProgressScript : MonoBehaviour
             if (BetweenSceneData.Instance.Points >= 0)
             {
                 if (BetweenSceneData.Instance.Points >= 7500)
-				{
+                {
                     AchievementsScript.Singleton.Show(AchievementTypeId.Gold, BetweenSceneData.Instance.Points);
-					SpawnChests(3);
-				}
+                    SpawnChests(3);
+                }
                 else if (BetweenSceneData.Instance.Points >= 5000)
-				{
+                {
                     AchievementsScript.Singleton.Show(AchievementTypeId.Silver, BetweenSceneData.Instance.Points);
-					SpawnChests(2);
-				}
+                    SpawnChests(2);
+                }
                 else if (BetweenSceneData.Instance.Points >= 2500)
-				{
+                {
                     AchievementsScript.Singleton.Show(AchievementTypeId.Bronze, BetweenSceneData.Instance.Points);
-					SpawnChests(1);
-				}
+                    SpawnChests(1);
+                }
                 BetweenSceneData.Instance.ResetPoints();
             }
             if (BetweenSceneData.Instance.minigame == BetweenSceneData.Minigame.Collector)
@@ -373,7 +373,8 @@ public class CharacterProgressScript : MonoBehaviour
         m_DefaultTexture = m_SkinnedMeshRenderers[0].material.mainTexture;
 
         BlinkRef bref = this.GetComponentInChildren<BlinkRef>();
-        if (bref!=null) m_BlinkTexture = bref.Blink;
+        if (bref != null)
+            m_BlinkTexture = bref.Blink;
 
 
 
@@ -517,10 +518,10 @@ public class CharacterProgressScript : MonoBehaviour
 
         for (int i = 0; i < GroundItems.Count; ++i)
         {
-            if (GroundItems[i].GetComponent<ReferencedObjectScript>() == null)
+            if (GroundItems[i].GetComponent<UIPopupItemScript>() == null)
                 continue;
 
-            UIPopupItemScript itemData = GroundItems[i].GetComponent<ReferencedObjectScript>().Reference.GetComponent<UIPopupItemScript>();
+            UIPopupItemScript itemData = GroundItems[i].GetComponent<UIPopupItemScript>();
             if (itemData.Type == PopupItemType.Food)
             {
                 if (closestFood == null)
@@ -542,23 +543,23 @@ public class CharacterProgressScript : MonoBehaviour
 
     public void SpawnChests(int value)
     {
-		string prefab = "Prefabs/chest_gold";
-		switch(value)
-		{
-		case 1:
-			prefab = "Prefabs/chest_bronze";
-			break;
-		case 2:
-			prefab = "Prefabs/chest_silver";
-			break;
-		case 3:
-			prefab = "Prefabs/chest_gold";
-			break;
-		case 0:
-		default:
-			return;
-			break;
-		}
+        string prefab = "Prefabs/chest_gold";
+        switch (value)
+        {
+            case 1:
+                prefab = "Prefabs/chest_bronze";
+                break;
+            case 2:
+                prefab = "Prefabs/chest_silver";
+                break;
+            case 3:
+                prefab = "Prefabs/chest_gold";
+                break;
+            case 0:
+            default:
+                return;
+                break;
+        }
         Debug.Log("Spawn Chests");
         GameObject resource = Resources.Load<GameObject>(prefab);
 
@@ -609,7 +610,8 @@ public class CharacterProgressScript : MonoBehaviour
         }
     }
 
-    private void ReplaceTexture(Texture tex){
+    private void ReplaceTexture(Texture tex)
+    {
         for (int i = 0; i < m_SkinnedMeshRenderers.Length; i++)
         {
             m_SkinnedMeshRenderers[i].material.mainTexture = tex;
@@ -640,7 +642,7 @@ public class CharacterProgressScript : MonoBehaviour
         * PersistentData.MaxHappy;
 
 
-        if (m_SkinnedMeshRenderers != null && m_DefaultTexture!= null && m_BlinkTexture!=null)
+        if (m_SkinnedMeshRenderers != null && m_DefaultTexture != null && m_BlinkTexture != null)
         {
             m_BlinkTimer += Time.deltaTime;
             if (!m_IsBlinking)
@@ -1047,7 +1049,7 @@ public class CharacterProgressScript : MonoBehaviour
 				
 
 				}*/
-				else if (IsDetectFlick && !Input.GetButton("Fire1") && (Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) > 25) && ObjectHolding != null)
+				    else if (IsDetectFlick && !Input.GetButton("Fire1") && (Vector3.Distance(Input.mousePosition, MousePositionAtDragIfMouseMoves) > 25) && ObjectHolding != null)
                     {
                         //Debug.Log("IsDetectFlick");
 
@@ -1316,7 +1318,7 @@ public class CharacterProgressScript : MonoBehaviour
                                     UIGlobalVariablesScript.Singleton.SoundEngine.Play(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId, CreatureSoundId.PatReact);
                                 }
                                 Debug.Log("Tap");
-                                UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocExitCond("Attention","tap");
+                                UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocExitCond("Attention", "tap");
                             }
                             else if ((hitInfo.collider.tag == "Items") && hitInfo.collider/*.GetComponent<ReferencedObjectScript>().Reference*/.GetComponent<UIPopupItemScript>().Type == PopupItemType.Token)
                             {
@@ -1386,12 +1388,12 @@ public class CharacterProgressScript : MonoBehaviour
 
                                 bool isItemAlreadyOn = false;
                                 if ((UIGlobalVariablesScript.Singleton.AlarmUI.activeInHierarchy
-                                || UIGlobalVariablesScript.Singleton.StereoUI.activeInHierarchy
-                                || UIGlobalVariablesScript.Singleton.JunoUI.activeInHierarchy
-                                || UIGlobalVariablesScript.Singleton.EDMBoxUI.activeInHierarchy
-                                || UIGlobalVariablesScript.Singleton.PianoUI.activeInHierarchy
-                                || UIGlobalVariablesScript.Singleton.LightbulbUI.activeInHierarchy)
-                                && (LastKnownObjectWithMenuUp == moveHitInfo.collider.gameObject))
+                                    || UIGlobalVariablesScript.Singleton.StereoUI.activeInHierarchy
+                                    || UIGlobalVariablesScript.Singleton.JunoUI.activeInHierarchy
+                                    || UIGlobalVariablesScript.Singleton.EDMBoxUI.activeInHierarchy
+                                    || UIGlobalVariablesScript.Singleton.PianoUI.activeInHierarchy
+                                    || UIGlobalVariablesScript.Singleton.LightbulbUI.activeInHierarchy)
+                                    && (LastKnownObjectWithMenuUp == moveHitInfo.collider.gameObject))
                                 {
                                     isItemAlreadyOn = true;
                                 }
@@ -1489,7 +1491,8 @@ public class CharacterProgressScript : MonoBehaviour
                                 {
                                     MoveTo(point, true);
                                     UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocExitCond("Walk", "runto");
-                                }else
+                                }
+                                else
                                 {
                                     MoveTo(point, false);
                                     UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocExitCond("Walk", "walkto");
@@ -1504,11 +1507,15 @@ public class CharacterProgressScript : MonoBehaviour
                     {
                         if (!IsMovingTowardsLocation && !animationController.IsWakingUp && ObjectHolding == null && ProfilesManagementScript.Singleton.CurrentAnimin.Hungry <= ConsideredHungryLevels && !animationController.IsTickled)
                         {
+                            Debug.Log("Famished!");
                             FeedMyselfTimer += Time.deltaTime;
 
                             if (FeedMyselfTimer >= 1)
                             {
+                                Debug.Log("Feed myself!");
                                 GameObject closestFood = GetClosestFoodToEat();
+
+                                Debug.Log(closestFood==null?"Didn't find a closest food" : "Found a closest food");
                                 if (closestFood != null)
                                 {
                                     IsGoingToPickUpObject = closestFood;
