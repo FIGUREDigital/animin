@@ -42,6 +42,9 @@ public class MinigameCollectorScript : MonoBehaviour
 	private int StarsCollected;
 	private int Points;
 	public TutorialStateId TutorialId;
+    public void ResetTutorial(){
+        TutorialId = TutorialStateId.None;
+    }
 	public GameObject TutorialMoveGraphic;
 	public GameObject TutorialJumbGraphic;
 	public GameObject TutorialSwipeLevelGraphic;
