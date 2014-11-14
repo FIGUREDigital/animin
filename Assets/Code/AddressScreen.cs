@@ -108,7 +108,7 @@ public class AddressScreen : MonoBehaviour
 		return string.Format(
 @"
 New Purchase by user: {0}
-Customer Id: {1}
+Profile Id: {1}
 
 Name: {2}
 

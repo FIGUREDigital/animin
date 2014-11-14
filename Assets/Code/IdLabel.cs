@@ -20,7 +20,7 @@ public class IdLabel : MonoBehaviour {
 		{
 			FindLabel();
 		}
-		label.text = "ID: " + Account.Instance.UniqueID;
+		label.text = "Profile ID: " + Account.Instance.UniqueID;
 	}
 	
 	// Update is called once per frame
