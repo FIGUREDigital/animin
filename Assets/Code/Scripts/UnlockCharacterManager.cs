@@ -31,6 +31,10 @@ public class UnlockCharacterManager
 		{
 			return m_CurrentCharacterFocus;
 		}
+		set
+		{
+			m_CurrentCharacterFocus = value;
+		}
 	}
 
 

@@ -225,7 +225,16 @@ public class UIGlobalVariablesScript : MonoBehaviour
 		                        y));
         string GetUrlAddition = "?Type="+type+"&Price="+price+"&UserID=" + Account.Instance.UniqueID; 
 #if UNITY_IOS
-		EtceteraBinding.inlineWebViewShow( x, y, width, height );
+		int w = 360;
+		int h = 300;
+		
+		if( Screen.width > 960 )
+		{
+			w *= 2;
+			h *= 2;
+		}
+
+		EtceteraBinding.inlineWebViewShow( x, y, w, h );
         EtceteraBinding.inlineWebViewSetUrl( "http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition );
 //        Debug.Log("http://terahard.org/Teratest/DatabaseAndScripts/BuyAniminFromPaypal.php"+ GetUrlAddition);0
 #elif UNITY_ANDROID
