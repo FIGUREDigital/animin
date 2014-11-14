@@ -82,6 +82,12 @@ public class GunsMinigameScript : Photon.MonoBehaviour
             return m_TutorialID;
         }
     }
+    public void ResetTutorial(){
+        m_TutorialID = TutorialStateId.None;
+        m_TutPause = true;
+    }
+
+    private bool m_TutPause;
 
     [SerializeField]
     private GameObject TutorialEnemies;
@@ -407,8 +413,9 @@ public class GunsMinigameScript : Photon.MonoBehaviour
 
         PointsLabel.text = Points.ToString() + " pts";
 
-        if (m_TutorialID == TutorialStateId.ShowEnemies && Input.GetButtonUp("Fire1"))
+        if (m_TutorialID == TutorialStateId.ShowEnemies && Input.GetButtonUp("Fire1")&&!m_TutPause)
             AdvanceTutorial();
+        m_TutPause = false;
     }
 
     public void AdvanceTutorial()
