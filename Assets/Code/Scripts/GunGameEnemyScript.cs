@@ -189,6 +189,26 @@ public class GunGameEnemyScript : Photon.MonoBehaviour
             RotateToLookAtPoint(TargetToFollow.transform.position);
 
             UpdateRotationLookAt();
+
+
+            //Being Foregiveness
+            GameObject mainChara = UIGlobalVariablesScript.Singleton.MainCharacterRef;
+
+            Vector3 charaPos = mainChara.transform.position;
+            float arb = 20f;
+            Vector3 dist = this.transform.position - charaPos;
+            float dist_amt = (this.transform.position - charaPos).magnitude;
+            if (dist.y > -0.5f) {
+                Vector3 nearest = charaPos + ((this.collider.bounds.center - charaPos).normalized * Mathf.Min (mainChara.GetComponent<CharacterController> ().radius * arb, dist_amt));
+                bool contains = this.collider.bounds.Contains (nearest);
+                if (contains) {
+                    //UIGlobalVariablesScript.Singleton.CubeRunnerMinigameSceneRef.GetComponent<MinigameCollectorScript> ().OnEvilCharacterHit (this.gameObject);
+                    UIGlobalVariablesScript.Singleton.GunGameScene.GetComponent<GunsMinigameScript>().OnHitByEnemy(this.gameObject, mainChara);
+                }
+                Debug.DrawLine (charaPos, nearest, Color.red);
+                Debug.DrawLine (charaPos, this.collider.bounds.center, Color.green);
+            }
+            //End Forgiveness
         }
     }
 
