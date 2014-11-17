@@ -5,186 +5,216 @@ using System.Collections;
 using System.Collections.Generic;
 using Prime31;
 
-public class FlurryLogger{
+public class FlurryLogger
+{
 	
-	bool m_Inited = false;
+    bool m_Inited = false;
     private string m_SessionTime = "SessionTime";
     private string m_MainMenuStart = "MainMenuStart";
     private string m_TimeInMinigame = "TimeInMinigame";
-	public void Init(){
-		if (m_Inited) return;
-		Debug.Log ("FLURRY LOGGER : [Init];");
+
+    public void Init()
+    {
+        if (m_Inited)
+            return;
+        Debug.Log("FLURRY LOGGER : [Init];");
 
 #if UNITY_IOS
-		FlurryAnalytics.startSession ("VWK79FC9CHBVXY4VXXY6");
-		FlurryAnalytics.setSessionReportsOnCloseEnabled (true);
-		FlurryAnalytics.setSessionReportsOnPauseEnabled (true);
+        FlurryAnalytics.startSession("VWK79FC9CHBVXY4VXXY6");
+        FlurryAnalytics.setSessionReportsOnCloseEnabled(true);
+        FlurryAnalytics.setSessionReportsOnPauseEnabled(true);
 #elif UNITY_ANDROID
 		FlurryAndroid.setContinueSessionMillis(20000);
-		FlurryAndroid.onStartSession("K98433N9XWCVX5NHTPCN",false,false);
+        FlurryAndroid.onStartSession("K98433N9XWCVX5NHTPCN",false,false);
+        FlurryAndroid.setLogEnabled(true);
+        FlurryAndroid.setLogEvents(true);
 #endif
 
 		
-		var dict = new Dictionary<string,string> ();
-		dict.Add ("DeviceModel", SystemInfo.deviceModel);
+        var dict = new Dictionary<string,string>();
+        dict.Add("DeviceModel", SystemInfo.deviceModel);
 
 #if UNITY_IOS
-		FlurryAnalytics.logEventWithParameters ("DeviceStats", dict, false);
-		FlurryAnalytics.logEvent ("SessionTime", true);
+        FlurryAnalytics.logEventWithParameters("DeviceStats", dict, false);
+        FlurryAnalytics.logEvent("SessionTime", true);
 #elif UNITY_ANDROID
 		FlurryAndroid.logEvent ("DeviceStats", dict, false);
 		FlurryAndroid.logEvent ("SessionTime", true);
 #endif
 		
-		m_Inited = true;
-	}
-	public void EndSession(){
-		Debug.Log ("FLURRY LOGGER : [End Session];");
+        m_Inited = true;
+    }
+
+    public void EndSession()
+    {
+        Debug.Log("FLURRY LOGGER : [End Session];");
 #if UNITY_IOS
-		FlurryAnalytics.endTimedEvent ("SessionTime");
+        FlurryAnalytics.endTimedEvent("SessionTime");
 #elif UNITY_ANDROID
 		FlurryAndroid.endTimedEvent ("SessionTime");
 #endif
-	}
+    }
 
 
 
-	private bool TimingMainScreen;
+    private bool TimingMainScreen;
 
-	public void StartMainScreenTimer(){
-		Debug.Log ("FLURRY LOGGER : [StartMainScreenTimer];");
+    public void StartMainScreenTimer()
+    {
+        Debug.Log("FLURRY LOGGER : [StartMainScreenTimer];");
 #if UNITY_IOS
-		FlurryAnalytics.logEvent ("MainMenuStart",true);
+        FlurryAnalytics.logEvent("MainMenuStart", true);
 #elif UNITY_ANDROID
 		FlurryAndroid.logEvent("MainMenuStart",true);
 #endif
-		TimingMainScreen = true;
-	}
-	public void EndMainScreenTimer(){
-		Debug.Log ("FLURRY LOGGER : [EndMainScreenTimer];");
-		if (!TimingMainScreen) return;
+        TimingMainScreen = true;
+    }
+
+    public void EndMainScreenTimer()
+    {
+        Debug.Log("FLURRY LOGGER : [EndMainScreenTimer];");
+        if (!TimingMainScreen)
+            return;
 #if UNITY_IOS
-		FlurryAnalytics.endTimedEvent ("MainMenuStart");
+        FlurryAnalytics.endTimedEvent("MainMenuStart");
 #elif UNITY_ANDROID
 		FlurryAndroid.endTimedEvent ("MainMenuStart");
 #endif
-		TimingMainScreen = false;
-	}
+        TimingMainScreen = false;
+    }
 
 
 
-	public enum Minigame{Cuberunners, Gungame};
-	private bool TimingMinigame;
+    public enum Minigame
+    {
+Cuberunners,
+        Gungame}
 
-	public void StartMinigame(Minigame game){
+    ;
+
+    private bool TimingMinigame;
+
+    public void StartMinigame(Minigame game)
+    {
 		
-		Debug.Log ("FLURRY LOGGER : [StartMinigame];");
+        Debug.Log("FLURRY LOGGER : [StartMinigame];");
 
-		Dictionary<string,string> dict = new Dictionary<string,string> ();
-		dict.Add ("Minigame", game.ToString());
+        Dictionary<string,string> dict = new Dictionary<string,string>();
+        dict.Add("Minigame", game.ToString());
 #if UNITY_IOS
-		FlurryAnalytics.logEventWithParameters ("TimeInMinigame", dict, true);
+        FlurryAnalytics.logEventWithParameters("TimeInMinigame", dict, true);
 #elif UNITY_ANDROID
 		FlurryAndroid.logEvent ("TimeInMinigame", dict, true);
 #endif
-		TimingMinigame = true;
-	}
-	public void EndMinigame(){
-		if (!TimingMinigame) return;
-		Debug.Log ("FLURRY LOGGER : [EndMinigame];");
+        TimingMinigame = true;
+    }
 
-		Dictionary<string,string> dict = new Dictionary<string,string> ();
-		dict.Add ("DateTime", DateTime.Now.ToString ("dd:MM:yyyy hh:mm"));
+    public void EndMinigame()
+    {
+        if (!TimingMinigame)
+            return;
+        Debug.Log("FLURRY LOGGER : [EndMinigame];");
+
+        Dictionary<string,string> dict = new Dictionary<string,string>();
+        dict.Add("DateTime", DateTime.Now.ToString("dd:MM:yyyy hh:mm"));
 #if UNITY_IOS
-		FlurryAnalytics.logEventWithParameters ("TimeInMinigame", dict, true);
+        FlurryAnalytics.logEventWithParameters("TimeInMinigame", dict, true);
 #elif UNITY_ANDROID
 		FlurryAndroid.logEvent ("TimeInMinigame", dict, true);
 #endif
 
-		TimingMinigame = false;
-	}
+        TimingMinigame = false;
+    }
 
 
 
-	private bool TimingARCard;
+    private bool TimingARCard;
 
-	public void StartARCard(){
-		Debug.Log ("FLURRY LOGGER : [StartARCard];");
+    public void StartARCard()
+    {
+        Debug.Log("FLURRY LOGGER : [StartARCard];");
 #if UNITY_IOS
-		FlurryAnalytics.logEvent ("ARCardTime",false);
+        FlurryAnalytics.logEvent("ARCardTime", false);
 #elif UNITY_ANDROID
 		FlurryAndroid.logEvent ("ARCardTime",false);
 #endif
-		TimingARCard = true;
-	}
-	public void EndARCard(){
-		Debug.Log ("FLURRY LOGGER : [EndARCard];");
-		if (!TimingARCard) return;
+        TimingARCard = true;
+    }
+
+    public void EndARCard()
+    {
+        Debug.Log("FLURRY LOGGER : [EndARCard];");
+        if (!TimingARCard)
+            return;
 #if UNITY_IOS
-		FlurryAnalytics.endTimedEvent ("ARCardTime");
+        FlurryAnalytics.endTimedEvent("ARCardTime");
 #elif UNITY_ANDROID
 		FlurryAndroid.endTimedEvent ("ARCardTime");
 #endif
-		TimingARCard = false;
-	}
+        TimingARCard = false;
+    }
 
-	public void CharacterPurchasedIAP()
-	{
-		for(int i = 1; i < ProfilesManagementScript.Singleton.CurrentProfile.Characters.Length; i++)
-		{
-			if(ProfilesManagementScript.Singleton.CurrentProfile.Characters[i].CreatedOn != null)
-			{
-				return;
-			}
+    public void CharacterPurchasedIAP()
+    {
+        for (int i = 1; i < ProfilesManagementScript.Singleton.CurrentProfile.Characters.Length; i++)
+        {
+            if (ProfilesManagementScript.Singleton.CurrentProfile.Characters[i].CreatedOn != null)
+            {
+                return;
+            }
 
-		}
-		TimeSpan useLength = DateTime.Now.Subtract(ProfilesManagementScript.Singleton.CurrentProfile.Characters[0].CreatedOn);
-		Debug.Log ("FLURRY LOGGER : [ConversionTime];");
+        }
+        TimeSpan useLength = DateTime.Now.Subtract(ProfilesManagementScript.Singleton.CurrentProfile.Characters[0].CreatedOn);
+        Debug.Log("FLURRY LOGGER : [ConversionTime];");
 
-		Dictionary<string,string> dict = new Dictionary<string,string> ();
-		dict.Add ("TimeToBuy", useLength.ToString ());
-		dict.Add ("ItemBought", UnlockCharacterManager.Instance.ID.ToString());
-		dict.Add ("ItemBought", "In App Purchase");
+        Dictionary<string,string> dict = new Dictionary<string,string>();
+        dict.Add("TimeToBuy", useLength.ToString());
+        dict.Add("ItemBought", UnlockCharacterManager.Instance.ID.ToString());
+        dict.Add("ItemBought", "In App Purchase");
 #if UNITY_IOS
-		FlurryAnalytics.logEventWithParameters ("ConversionTime", dict, false);
+        FlurryAnalytics.logEventWithParameters("ConversionTime", dict, false);
 #elif UNITY_ANDROID
 		FlurryAndroid.logEvent ("ConversionTime", dict, false);
 #endif
-	}
+    }
 
-	public void CharacterPurchasedWeb()
-	{
+    public void CharacterPurchasedWeb()
+    {
 		
-		for(int i = 1; i < ProfilesManagementScript.Singleton.CurrentProfile.Characters.Length; i++)
-		{
-			if(ProfilesManagementScript.Singleton.CurrentProfile.Characters[i].CreatedOn != null)
-			{
-				return;
-			}
+        for (int i = 1; i < ProfilesManagementScript.Singleton.CurrentProfile.Characters.Length; i++)
+        {
+            if (ProfilesManagementScript.Singleton.CurrentProfile.Characters[i].CreatedOn != null)
+            {
+                return;
+            }
 			
-		}
-		TimeSpan useLength = DateTime.Now.Subtract(ProfilesManagementScript.Singleton.CurrentProfile.Characters[0].CreatedOn);
-		Debug.Log ("FLURRY LOGGER : [ConversionTime];");
+        }
+        TimeSpan useLength = DateTime.Now.Subtract(ProfilesManagementScript.Singleton.CurrentProfile.Characters[0].CreatedOn);
+        Debug.Log("FLURRY LOGGER : [ConversionTime];");
 		
-		Dictionary<string,string> dict = new Dictionary<string,string> ();
-		dict.Add ("TimeToBuy", useLength.ToString ());
-		dict.Add ("ItemBought", UnlockCharacterManager.Instance.ID.ToString());
-		dict.Add ("ItemBought", "Webview");
+        Dictionary<string,string> dict = new Dictionary<string,string>();
+        dict.Add("TimeToBuy", useLength.ToString());
+        dict.Add("ItemBought", UnlockCharacterManager.Instance.ID.ToString());
+        dict.Add("ItemBought", "Webview");
 #if UNITY_IOS
-		FlurryAnalytics.logEventWithParameters ("ConversionTime", dict, false);
+        FlurryAnalytics.logEventWithParameters("ConversionTime", dict, false);
 #elif UNITY_ANDROID
 		FlurryAndroid.logEvent ("ConversionTime", dict, false);
 #endif
-	}
+    }
 
 
-	private static FlurryLogger m_Instance;
-	public static FlurryLogger Instance{
-		get{
-			if (m_Instance == null){
-				m_Instance = new FlurryLogger();
-			}
-			return m_Instance;
-		}
-	}
+    private static FlurryLogger m_Instance;
+
+    public static FlurryLogger Instance
+    {
+        get
+        {
+            if (m_Instance == null)
+            {
+                m_Instance = new FlurryLogger();
+            }
+            return m_Instance;
+        }
+    }
 }
