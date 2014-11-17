@@ -27,7 +27,7 @@ public class FlurryLogger
 		FlurryAndroid.setContinueSessionMillis(20000);
         FlurryAndroid.onStartSession("K98433N9XWCVX5NHTPCN",false,false);
         FlurryAndroid.setLogEnabled(true);
-        FlurryAndroid.setLogEvents(true);
+
 #endif
 
 		
@@ -48,11 +48,12 @@ public class FlurryLogger
     public void EndSession()
     {
         Debug.Log("FLURRY LOGGER : [End Session];");
-#if UNITY_IOS
+        #if UNITY_IOS
         FlurryAnalytics.endTimedEvent("SessionTime");
-#elif UNITY_ANDROID
+        #elif UNITY_ANDROID
 		FlurryAndroid.endTimedEvent ("SessionTime");
-#endif
+        #endif
+        ProfilesManagementScript.Singleton.SendRealTimeNotification("LoggedIn",-1);
     }
 
 
@@ -87,10 +88,8 @@ public class FlurryLogger
 
     public enum Minigame
     {
-Cuberunners,
-        Gungame}
-
-    ;
+        Cuberunners,
+        Gungame};
 
     private bool TimingMinigame;
 

@@ -23,7 +23,7 @@ public class CloseButtons : MonoBehaviour {
 	{
         mButtons = GetComponentsInChildren<UIButton>(true);
         view = GetComponentInChildren<OpenInGamePurchaseView>();
-        buyForm = view.gameObject.GetComponentInChildren<ShowForm>();
+        if (view != null)buyForm = view.gameObject.GetComponentInChildren<ShowForm>();
 	}
 	
 	// Update is called once per frame

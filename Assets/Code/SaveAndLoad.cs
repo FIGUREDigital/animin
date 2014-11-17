@@ -65,7 +65,7 @@ public class SaveAndLoad {
 		{
             ProfilesManagementScript.Singleton.SendRealTimeNotification("Downloads",1);
             #if UNITY_IOS
-            ProfilesManagementScript.Singleton.SendRealTimeNotification("IOS");
+            ProfilesManagementScript.Singleton.SendRealTimeNotification("IOS",1);
             #elif UNITY_ANDROID
             ProfilesManagementScript.Singleton.SendRealTimeNotification("Android",1);
             #endif
