@@ -21,9 +21,11 @@ public class Account
 
     #endregion
 
-	private const string SERVER_SEND_URL = "http://terahard.org/Teratest/DatabaseAndScripts/AddData.php";
+    private const string SERVER_SEND_URL = "animin.me/wp-admin/DatabaseAndScripts/AddData.php";
 
-	private const string SERVER_CHECK_URL = "http://terahard.org/Teratest/DatabaseAndScripts/CheckLoginData.php"; 
+    private const string SERVER_CHECK_URL = "animin.me/wp-admin/DatabaseAndScripts/CheckLoginData.php"; 
+
+    private const string SERVER_CHECK_CARD_URL = "animin.me/wp-admin/DatabaseAndScripts/CheckCardLegitimacy.php"; 
 
     public string UniqueID{get {return ProfilesManagementScript.Singleton.CurrentProfile.UniqueID;}}
 
@@ -169,7 +171,7 @@ public class Account
 
 
 
-            var w = new WWW("http://terahard.org/Teratest/DatabaseAndScripts/CheckCardLegitimacy.php", data);
+            var w = new WWW(SERVER_CHECK_CARD_URL, data);
 
             yield return w;
 

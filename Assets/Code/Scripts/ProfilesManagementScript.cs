@@ -222,7 +222,7 @@ public class ProfilesManagementScript : MonoBehaviour
 
     public void ActivateShopItemCheck()
     {
-
+        Debug.Log("Activate shop");
         ShopManager.Instance.EndStore();
         UnlockCharacterManager.Instance.OpenShop();
 #if UNITY_ANDROID

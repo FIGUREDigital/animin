@@ -421,6 +421,7 @@ public class ShopManager
 #if UNITY_IOS
 		StoreKitBinding.requestProductData( ids );
 #elif UNITY_ANDROID
+        ids = RemoveUnneccesaryIDsForAndroid(ids);
         GoogleIAB.queryInventory( ids );
 #endif
     }
@@ -438,9 +439,28 @@ public class ShopManager
 		#if UNITY_IOS
 		StoreKitBinding.requestProductData( ids );
 		#elif UNITY_ANDROID
+        ids = RemoveUnneccesaryIDsForAndroid(ids);
 		GoogleIAB.queryInventory( ids );
 		#endif
 	}
+
+    public string[] RemoveUnneccesaryIDsForAndroid(string[] tempStringArray)
+    {
+        List<string> tempStringList = new List<string>();
+
+        foreach(string tempString in tempStringArray)
+        {
+            if (!tempString.Contains("_UNLOCK"))
+            {
+                tempStringList.Add(tempString);
+                Debug.Log(tempString);
+            }
+        }
+
+        tempStringArray = tempStringList.ToArray();
+
+        return tempStringArray;
+    }
 
     public void EndStore()
     {

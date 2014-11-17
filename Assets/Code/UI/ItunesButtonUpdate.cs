@@ -110,6 +110,7 @@ public class ItunesButtonUpdate : MonoBehaviour
 		ShopManager.Instance.EndStore();
 		UnregisterListeners();
 	}
+
 	void RegisterListeners()
 	{
 		if(mRegistered)
@@ -117,7 +118,7 @@ public class ItunesButtonUpdate : MonoBehaviour
 			return;
 		}
 		mRegistered = true;
-		Debug.Log("Register Itunes Listeners from itunes buttin script");
+		Debug.Log("Register Itunes Listeners from itunes button script");
 		if(Application.isEditor){ return; }
         
 #if UNITY_IOS
