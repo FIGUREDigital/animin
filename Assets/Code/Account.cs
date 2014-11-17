@@ -27,6 +27,10 @@ public class Account
 
     private const string SERVER_CHECK_CARD_URL = "animin.me/wp-admin/DatabaseAndScripts/CheckCardLegitimacy.php"; 
 
+    private const string SERVER_REALTIME_SEND_URL = "http://terahard.org/Teratest/DatabaseAndScripts/RealtimeDataSend.php"; 
+
+    private const string SERVER_REALTIME_GET_URL = "http://terahard.org/Teratest/DatabaseAndScripts/RealtimeDataGet.php";
+
     public string UniqueID{get {return ProfilesManagementScript.Singleton.CurrentProfile.UniqueID;}}
 
 	public string UserName;
@@ -109,9 +113,7 @@ public class Account
 
     }
 	public IEnumerator WWWCheckLoginCode( string code )
-	{       		
-
-        Debug.Log("here");
+	{   
 
         WWWForm webForm = new WWWForm();
 
@@ -203,6 +205,40 @@ public class Account
             }
         }
         return false;
+
+    }
+
+    public IEnumerator WWSendRealtimeNotification(string dataType, string amount)
+    {
+        //Data types:
+        // LoggedIn
+        // Downloads
+        // AniminUnlock
+        // IOS
+        // Android
+
+        Debug.Log("Registering " + amount + " " + dataType + " with realtime database");
+
+        WWWForm webForm = new WWWForm();
+
+        webForm.AddField( "DataType", dataType );
+
+        webForm.AddField("AmountToAdd", amount);
+
+        WWW w = new WWW( SERVER_REALTIME_SEND_URL, webForm );
+
+        yield return w;
+
+        if( w.error != null )
+        {
+            Debug.Log( w.error );
+        }
+        else
+        {   
+            Debug.Log( w.text );
+            Debug.Log( "Finished uploading data" );                          
+
+        }
 
     }
 

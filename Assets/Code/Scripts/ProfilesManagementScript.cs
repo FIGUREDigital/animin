@@ -59,6 +59,7 @@ public class ProfilesManagementScript : MonoBehaviour
 			go.name = "ArCameraManager";
 			go.AddComponent<ArCameraManager>();
             //TempDebugPanel.text = "Awake";
+            SendRealTimeNotification("LoggedIn", 1);
 
 		}
 
@@ -346,6 +347,11 @@ public class ProfilesManagementScript : MonoBehaviour
             ProfilesManagementScript.Singleton.ErrorBox.SetActive(true);
         }
 
+    }
+
+    public void SendRealTimeNotification(string dataType, int amount)
+    {
+        StartCoroutine( Account.Instance.WWSendRealtimeNotification( dataType, amount.ToString() ) );
     }
 
     void OnLevelWasLoaded(int level)

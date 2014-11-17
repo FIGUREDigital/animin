@@ -50,7 +50,7 @@ public class SaveAndLoad {
 	public void LoadAllData()
 	{
 		
-//        File.Delete(Application.persistentDataPath + "/savedGames.anidat");
+//        File.Delete(Application.persistentDataPath + "/savedGames.aniÍdat");
 
         if(File.Exists(Application.persistentDataPath + "/savedGames.anidat")) 
 		{
@@ -63,7 +63,12 @@ public class SaveAndLoad {
 		}
 		else
 		{
-			Debug.Log ("No save data");
+            ProfilesManagementScript.Singleton.SendRealTimeNotification("Downloads",1);
+            #if UNITY_IOS
+            ProfilesManagementScript.Singleton.SendRealTimeNotification("IOS");
+            #elif UNITY_ANDROID
+            ProfilesManagementScript.Singleton.SendRealTimeNotification("Android",1);
+            #endif
 		}
 	}
 

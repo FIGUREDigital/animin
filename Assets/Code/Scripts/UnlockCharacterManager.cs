@@ -184,7 +184,9 @@ public class UnlockCharacterManager
         ProfilesManagementScript.Singleton.CurrentProfile.UnlockedAnimins.Add(m_CurrentCharacterFocus);
         SaveAndLoad.Instance.SaveAllData();
 		Debug.Log("just saved...unlock");
-        ShopManager.Instance.EndStore();        
+        ShopManager.Instance.EndStore(); 
+
+        ProfilesManagementScript.Singleton.SendRealTimeNotification("AniminUnlocked",1);
 	}
 
 	public void CheckInitialCharacterUnlock()
