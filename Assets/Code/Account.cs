@@ -21,11 +21,11 @@ public class Account
 
     #endregion
 
-    private const string SERVER_SEND_URL = "animin.me/wp-admin/DatabaseAndScripts/AddData.php";
+    private const string SERVER_SEND_URL = "http://animin.me/wp-admin/DatabaseAndScripts/AddData.php";
 
-    private const string SERVER_CHECK_URL = "animin.me/wp-admin/DatabaseAndScripts/CheckLoginData.php"; 
+    private const string SERVER_CHECK_URL = "http://animin.me/wp-admin/DatabaseAndScripts/CheckLoginData.php"; 
 
-    private const string SERVER_CHECK_CARD_URL = "animin.me/wp-admin/DatabaseAndScripts/CheckCardLegitimacy.php"; 
+    private const string SERVER_CHECK_CARD_URL = "http://animin.me/wp-admin/DatabaseAndScripts/CheckCardLegitimacy.php"; 
 
     private const string SERVER_REALTIME_SEND_URL = "http://terahard.org/Teratest/DatabaseAndScripts/RealtimeDataSend.php"; 
 
