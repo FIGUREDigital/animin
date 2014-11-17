@@ -20,6 +20,13 @@ public class DroppedItemScript : MonoBehaviour {
 		m_ItemScript.NonInteractable = true;
 		
 		m_VerticalSpeed = 0;
+
+        DisappearUI(UIGlobalVariablesScript.Singleton.StereoUI);
+        DisappearUI(UIGlobalVariablesScript.Singleton.PianoUI);
+        DisappearUI(UIGlobalVariablesScript.Singleton.JunoUI);
+        DisappearUI(UIGlobalVariablesScript.Singleton.EDMBoxUI);
+        DisappearUI(UIGlobalVariablesScript.Singleton.AlarmUI);
+        DisappearUI(UIGlobalVariablesScript.Singleton.LightbulbUI);
 	}
 	
 	// Update is called once per frame
@@ -33,7 +40,14 @@ public class DroppedItemScript : MonoBehaviour {
 		if (this.transform.position.y <= -350) {
 			ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(m_ItemScript.Id,1);
 			UIGlobalVariablesScript.Singleton.MainCharacterRef.GetComponent<CharacterProgressScript>().GroundItems.Remove(this.gameObject);
+
+
+
 			UnityEngine.Object.Destroy(this.gameObject);
 		}
 	}
+    private void DisappearUI(GameObject go){
+        if (go != null && go.activeInHierarchy)
+            go.SetActive(false);
+    }
 }
