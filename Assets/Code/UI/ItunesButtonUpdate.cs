@@ -69,7 +69,8 @@ public class ItunesButtonUpdate : MonoBehaviour
 	void GoToAddress()
 	{
 		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(false);
-		ProfilesManagementScript.Singleton.AddressInput.SetActive(true);
+        //ProfilesManagementScript.Singleton.AddressInput.SetActive(true);
+        ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 	}
 
 #if UNITY_IOS
