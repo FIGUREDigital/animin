@@ -182,9 +182,13 @@ public class TutorialHandler : MonoBehaviour {
 		} else if (!m_EndingTutorial){
 			if (m_Entry_i >= Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].TutEntries.Length) NextLesson();
 			string text = Tutorials[m_CurTutorial_i].Lessons[m_Lesson_i].TutEntries[m_Entry_i].text;
-			if (text.Length >= m_Letter_i){
 
-				TutorialText.text = text.Substring(0,m_Letter_i++);
+			if (text.Length >= m_Letter_i){
+                Debug.Log("DeltaTime : [" + Time.deltaTime+"]; Multiplied : [" + Time.deltaTime * 100+"];");
+
+                m_Letter_i += (int)(m_Lesson_i + Mathf.Max((Time.deltaTime * 75f),1));
+
+                TutorialText.text = text.Substring(0,Mathf.Min(m_Letter_i,text.Length));
 				NextButton.gameObject.SetActive(false);
 			} else {
 				if (!m_WaitingForInput)
