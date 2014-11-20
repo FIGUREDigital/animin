@@ -12,6 +12,8 @@ public class messageChanger : MonoBehaviour {
 		platform = "iTunes";
 #elif UNITY_ANDROID
 		platform = "Play";
+#else
+		platform = "";
 #endif
 		string body = "We're having problems connecting to the " + platform + " store at the moment, please try again later or turn on wi-fi.";
 		gameObject.GetComponent<UILabel>().text = body;

@@ -21,6 +21,15 @@ public class UnlockCharacterManager
 	public const string KELSEY_PURCHASE = "com.android.animin.characterpurchase2";
 	public const string MANDI_PURCHASE = "com.android.animin.characterpurchase3";
 	public const string TBOADULT_PURCHASE = "com.android.animin.characterpurchase4";
+#else
+	public const string PI_UNLOCK = "com.android.animin.characterunlock1";
+	public const string KELSEY_UNLOCK = "com.android.animin.characterunlock2";
+	public const string MANDI_UNLOCK = "com.android.animin.characterunlock3";
+	public const string TBOADULT_UNLOCK = "com.android.animin.characterunlock4";
+	public const string PI_PURCHASE = "com.android.animin.characterpurchase1";
+	public const string KELSEY_PURCHASE = "com.android.animin.characterpurchase2";
+	public const string MANDI_PURCHASE = "com.android.animin.characterpurchase3";
+	public const string TBOADULT_PURCHASE = "com.android.animin.characterpurchase4";
 #endif
 
 	private static string mBuyItem;
