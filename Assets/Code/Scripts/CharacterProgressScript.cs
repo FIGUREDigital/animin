@@ -54,6 +54,8 @@ public enum InventoryItemId
     Syringe,
     Plaster,
 
+    Radio,
+
     Count,
 }
 
@@ -74,37 +76,40 @@ public class InventoryItemData
     public static void Initialize()
     {
         Items = new InventoryItemBankData[(int)InventoryItemId.Count];
-        Items[(int)InventoryItemId.Strawberry] = new InventoryItemBankData() { Id = InventoryItemId.Strawberry, PrefabId = "Prefabs/strawberry2", SpriteName = "strawberry", ItemType = PopupItemType.Food };
-        Items[(int)InventoryItemId.Spinach] = new InventoryItemBankData() { Id = InventoryItemId.Spinach, PrefabId = "Prefabs/spinach", SpriteName = "spinach_icon", ItemType = PopupItemType.Food };
-        Items[(int)InventoryItemId.Blueberry] = new InventoryItemBankData() { Id = InventoryItemId.Blueberry, PrefabId = "Prefabs/blueberry", SpriteName = "blueberry_icon", ItemType = PopupItemType.Food };
-        Items[(int)InventoryItemId.AlmondMilk] = new InventoryItemBankData() { Id = InventoryItemId.AlmondMilk, PrefabId = "Prefabs/almondMilk", SpriteName = "almondmilk_icon", ItemType = PopupItemType.Food };
-        Items[(int)InventoryItemId.Avocado] = new InventoryItemBankData() { Id = InventoryItemId.Avocado, PrefabId = "Prefabs/avocado", SpriteName = "avocado_icon", ItemType = PopupItemType.Food };
-        //Items[(int)InventoryItemId.Noodles] = new InventoryItemBankData() { Id = InventoryItemId.Blueberry, PrefabId = "Prefabs/blueberry", SpriteName = "blueberry_icon", ItemType = PopupItemType.Food };
-        Items[(int)InventoryItemId.Carrot] = new InventoryItemBankData() { Id = InventoryItemId.Carrot, PrefabId = "Prefabs/carrot", SpriteName = "carrot_icon", ItemType = PopupItemType.Food };
-        Items[(int)InventoryItemId.Chips] = new InventoryItemBankData() { Id = InventoryItemId.Chips, PrefabId = "Prefabs/chips", SpriteName = "chips_icon", ItemType = PopupItemType.Food };
-        Items[(int)InventoryItemId.Toast] = new InventoryItemBankData() { Id = InventoryItemId.Toast, PrefabId = "Prefabs/toast", SpriteName = "jam_icon", ItemType = PopupItemType.Food };
-        Items[(int)InventoryItemId.watermelon] = new InventoryItemBankData() { Id = InventoryItemId.watermelon, PrefabId = "Prefabs/watermelon", SpriteName = "watermelon_icon", ItemType = PopupItemType.Food };
-        //Items[(int)InventoryItemId.Noodles] = new InventoryItemBankData() { Id = InventoryItemId.Noodles, PrefabId = "Prefabs/Noodles", SpriteName = "blueberry_icon", ItemType = PopupItemType.Food };
-        Items[(int)InventoryItemId.Carrot] = new InventoryItemBankData() { Id = InventoryItemId.Carrot, PrefabId = "Prefabs/Carrot", SpriteName = "carrot_icon", ItemType = PopupItemType.Food };
-        //Items[(int)InventoryItemId.Banana] = new InventoryItemBankData() { Id = InventoryItemId.Banana, PrefabId = "Prefabs/banana", SpriteName = "banana_icon", ItemType = PopupItemType.Food };
 
-        Items[(int)InventoryItemId.Boombox] = new InventoryItemBankData() { Id = InventoryItemId.Boombox, PrefabId = "Prefabs/boombox", SpriteName = "boombox_icon", ItemType = PopupItemType.Item };
-        Items[(int)InventoryItemId.Clock] = new InventoryItemBankData() { Id = InventoryItemId.Clock, PrefabId = "Prefabs/mintclock", SpriteName = "mintclock_icon", ItemType = PopupItemType.Item };
-        Items[(int)InventoryItemId.EDMJuno] = new InventoryItemBankData() { Id = InventoryItemId.EDMJuno, PrefabId = "Prefabs/juno", SpriteName = "juno_icon", ItemType = PopupItemType.Item };
-        Items[(int)InventoryItemId.EDM808] = new InventoryItemBankData() { Id = InventoryItemId.EDM808, PrefabId = "Prefabs/808", SpriteName = "808_icon", ItemType = PopupItemType.Item };
-        Items[(int)InventoryItemId.EDMKsynth] = new InventoryItemBankData() { Id = InventoryItemId.EDMKsynth, PrefabId = "Prefabs/ksynth", SpriteName = "ksynth_icon", ItemType = PopupItemType.Item };
-        Items[(int)InventoryItemId.Lightbulb] = new InventoryItemBankData() { Id = InventoryItemId.Lightbulb, PrefabId = "Prefabs/Lightbulb", SpriteName = "lightbulb_icon", ItemType = PopupItemType.Item };
-        //Items[(int)InventoryItemId.mintclock] = new InventoryItemBankData() { Id = InventoryItemId.mintclock, PrefabId = "Prefabs/mintclock", SpriteName = "mintclock_icon", ItemType = PopupItemType.Item };
-        Items[(int)InventoryItemId.paperCalendar] = new InventoryItemBankData() { Id = InventoryItemId.paperCalendar, PrefabId = "Prefabs/paperCalendar", SpriteName = "calendar_icon", ItemType = PopupItemType.Item };
-        Items[(int)InventoryItemId.Camera] = new InventoryItemBankData() { Id = InventoryItemId.Camera, PrefabId = "Prefabs/camera", SpriteName = "camera_icon", ItemType = PopupItemType.Item };
-        Items[(int)InventoryItemId.FartButton] = new InventoryItemBankData() { Id = InventoryItemId.FartButton, PrefabId = "Prefabs/fartbutton", SpriteName = "fartbutton_icon", ItemType = PopupItemType.Item };
+        /*00*/Items[(int)InventoryItemId.Strawberry] = new InventoryItemBankData() { Id = InventoryItemId.Strawberry, PrefabId = "Prefabs/strawberry2", SpriteName = "strawberry", ItemType = PopupItemType.Food };
+        /*01*/Items[(int)InventoryItemId.Spinach] = new InventoryItemBankData() { Id = InventoryItemId.Spinach, PrefabId = "Prefabs/spinach", SpriteName = "spinach_icon", ItemType = PopupItemType.Food };
+        /*02*/Items[(int)InventoryItemId.Blueberry] = new InventoryItemBankData() { Id = InventoryItemId.Blueberry, PrefabId = "Prefabs/blueberry", SpriteName = "blueberry_icon", ItemType = PopupItemType.Food };
+        /*03*/Items[(int)InventoryItemId.AlmondMilk] = new InventoryItemBankData() { Id = InventoryItemId.AlmondMilk, PrefabId = "Prefabs/almondMilk", SpriteName = "almondmilk_icon", ItemType = PopupItemType.Food };
+        /*04*/Items[(int)InventoryItemId.Avocado] = new InventoryItemBankData() { Id = InventoryItemId.Avocado, PrefabId = "Prefabs/avocado", SpriteName = "avocado_icon", ItemType = PopupItemType.Food };
+        /*05*///Items[(int)InventoryItemId.Noodles] = new InventoryItemBankData() { Id = InventoryItemId.Blueberry, PrefabId = "Prefabs/blueberry", SpriteName = "blueberry_icon", ItemType = PopupItemType.Food };
+        /*06*/Items[(int)InventoryItemId.Carrot] = new InventoryItemBankData() { Id = InventoryItemId.Carrot, PrefabId = "Prefabs/carrot", SpriteName = "carrot_icon", ItemType = PopupItemType.Food };
+        /*07*/Items[(int)InventoryItemId.Chips] = new InventoryItemBankData() { Id = InventoryItemId.Chips, PrefabId = "Prefabs/chips", SpriteName = "chips_icon", ItemType = PopupItemType.Food };
+        /*08*/Items[(int)InventoryItemId.Toast] = new InventoryItemBankData() { Id = InventoryItemId.Toast, PrefabId = "Prefabs/toast", SpriteName = "jam_icon", ItemType = PopupItemType.Food };
+        /*09*/Items[(int)InventoryItemId.watermelon] = new InventoryItemBankData() { Id = InventoryItemId.watermelon, PrefabId = "Prefabs/watermelon", SpriteName = "watermelon_icon", ItemType = PopupItemType.Food };
+        /*10*///Items[(int)InventoryItemId.Noodles] = new InventoryItemBankData() { Id = InventoryItemId.Noodles, PrefabId = "Prefabs/Noodles", SpriteName = "blueberry_icon", ItemType = PopupItemType.Food };
+        /*11*/Items[(int)InventoryItemId.Carrot] = new InventoryItemBankData() { Id = InventoryItemId.Carrot, PrefabId = "Prefabs/Carrot", SpriteName = "carrot_icon", ItemType = PopupItemType.Food };
+        /*12*///Items[(int)InventoryItemId.Banana] = new InventoryItemBankData() { Id = InventoryItemId.Banana, PrefabId = "Prefabs/banana", SpriteName = "banana_icon", ItemType = PopupItemType.Food };
 
-        Items[(int)InventoryItemId.woodSword] = new InventoryItemBankData() { Id = InventoryItemId.woodSword, PrefabId = "Prefabs/woodSword", SpriteName = "woodSword_icon", ItemType = PopupItemType.Item };
-        Items[(int)InventoryItemId.woodFrame] = new InventoryItemBankData() { Id = InventoryItemId.woodFrame, PrefabId = "Prefabs/woodFrame", SpriteName = "woodFrame_icon", ItemType = PopupItemType.Item };
+        /*13*/Items[(int)InventoryItemId.Boombox] = new InventoryItemBankData() { Id = InventoryItemId.Boombox, PrefabId = "Prefabs/boombox", SpriteName = "boombox_icon", ItemType = PopupItemType.Item };
+        /*14*/Items[(int)InventoryItemId.Clock] = new InventoryItemBankData() { Id = InventoryItemId.Clock, PrefabId = "Prefabs/mintclock", SpriteName = "mintclock_icon", ItemType = PopupItemType.Item };
+        /*15*/Items[(int)InventoryItemId.EDMJuno] = new InventoryItemBankData() { Id = InventoryItemId.EDMJuno, PrefabId = "Prefabs/juno", SpriteName = "juno_icon", ItemType = PopupItemType.Item };
+        /*16*/Items[(int)InventoryItemId.EDM808] = new InventoryItemBankData() { Id = InventoryItemId.EDM808, PrefabId = "Prefabs/808", SpriteName = "808_icon", ItemType = PopupItemType.Item };
+        /*17*/Items[(int)InventoryItemId.EDMKsynth] = new InventoryItemBankData() { Id = InventoryItemId.EDMKsynth, PrefabId = "Prefabs/ksynth", SpriteName = "ksynth_icon", ItemType = PopupItemType.Item };
+        /*18*/Items[(int)InventoryItemId.Lightbulb] = new InventoryItemBankData() { Id = InventoryItemId.Lightbulb, PrefabId = "Prefabs/Lightbulb", SpriteName = "lightbulb_icon", ItemType = PopupItemType.Item };
+        /*19*///Items[(int)InventoryItemId.mintclock] = new InventoryItemBankData() { Id = InventoryItemId.mintclock, PrefabId = "Prefabs/mintclock", SpriteName = "mintclock_icon", ItemType = PopupItemType.Item };
+        /*20*/Items[(int)InventoryItemId.paperCalendar] = new InventoryItemBankData() { Id = InventoryItemId.paperCalendar, PrefabId = "Prefabs/paperCalendar", SpriteName = "calendar_icon", ItemType = PopupItemType.Item };
+        /*21*/Items[(int)InventoryItemId.Camera] = new InventoryItemBankData() { Id = InventoryItemId.Camera, PrefabId = "Prefabs/camera", SpriteName = "camera_icon", ItemType = PopupItemType.Item };
+        /*22*/Items[(int)InventoryItemId.FartButton] = new InventoryItemBankData() { Id = InventoryItemId.FartButton, PrefabId = "Prefabs/fartbutton", SpriteName = "fartbutton_icon", ItemType = PopupItemType.Item };
+
+        /*24*/Items[(int)InventoryItemId.woodSword] = new InventoryItemBankData() { Id = InventoryItemId.woodSword, PrefabId = "Prefabs/woodSword", SpriteName = "woodSword_icon", ItemType = PopupItemType.Item };
+        /*25*/Items[(int)InventoryItemId.woodFrame] = new InventoryItemBankData() { Id = InventoryItemId.woodFrame, PrefabId = "Prefabs/woodFrame", SpriteName = "woodFrame_icon", ItemType = PopupItemType.Item };
 
 
-        Items[(int)InventoryItemId.Pill] = new InventoryItemBankData() { Id = InventoryItemId.Pill, PrefabId = "Prefabs/capsule", SpriteName = "mediumpill_icon", ItemType = PopupItemType.Medicine };
-        Items[(int)InventoryItemId.Plaster] = new InventoryItemBankData() { Id = InventoryItemId.Plaster, PrefabId = "Prefabs/plaster", SpriteName = "plaster_icon", ItemType = PopupItemType.Medicine };
+        /*26*/Items[(int)InventoryItemId.Pill] = new InventoryItemBankData() { Id = InventoryItemId.Pill, PrefabId = "Prefabs/capsule", SpriteName = "mediumpill_icon", ItemType = PopupItemType.Medicine };
+        /*27*/Items[(int)InventoryItemId.Plaster] = new InventoryItemBankData() { Id = InventoryItemId.Plaster, PrefabId = "Prefabs/plaster", SpriteName = "plaster_icon", ItemType = PopupItemType.Medicine };
+
+        /*23*/Items[(int)InventoryItemId.Radio] = new InventoryItemBankData() { Id = InventoryItemId.Radio, PrefabId = "Prefabs/radio", SpriteName = "radio_icon", ItemType = PopupItemType.Item };
     }
 
     public InventoryItemId Id;
@@ -251,9 +256,6 @@ public class CharacterProgressScript : MonoBehaviour
 
     private bool m_IsBlinking;
     private float m_BlinkTimer;
-    private SkinnedMeshRenderer[] m_SkinnedMeshRenderers;
-    private Texture m_DefaultTexture;
-    private Texture m_BlinkTexture;
 
     // Use this for initialization
     void Awake()
@@ -301,32 +303,46 @@ public class CharacterProgressScript : MonoBehaviour
         this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(ProfilesManagementScript.Singleton.CurrentAnimin.PlayerAniminId, ProfilesManagementScript.Singleton.CurrentAnimin.AniminEvolutionId);
         //this.GetComponent<CharacterSwapManagementScript>().LoadCharacter(AniminId.Mandi   , AniminEvolutionStageId.Adult);
         
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.AlmondMilk, 3);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Avocado, 1);
+        /*00*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.AlmondMilk, 3);
+        /*01*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Avocado, 1);
         //AddItemToInventory(InventoryItemId.Banana, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Blueberry, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Boombox, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Camera, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Carrot, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Chips, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Clock, 4);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.EDM808, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.EDMJuno, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.EDMKsynth, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.FartButton, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Lightbulb, 1);
+        /*02*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Blueberry, 1);
+        /*03*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Boombox, 1);
+        /*04*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Camera, 1);
+        /*05*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Carrot, 1);
+        /*06*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Chips, 1);
+        /*07*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Clock, 4);
+        /*08*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.EDM808, 1);
+        /*09*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.EDMJuno, 1);
+        /*10*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.EDMKsynth, 1);
+        /*11*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.FartButton, 1);
+        /*12*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Lightbulb, 1);
         //AddItemToInventory(InventoryItemId.mintclock, 1);
         //AddItemToInventory(InventoryItemId.Noodles, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.paperCalendar, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Pill, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Plaster, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Spinach, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Strawberry, 1);
+        /*13*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.paperCalendar, 1);
+        /*14*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Pill, 1);
+        /*15*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Plaster, 1);
+        /*16*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Spinach, 1);
+        /*17*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Strawberry, 1);
         //	ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Syringe, 1);	<< ADRIAN!!
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Toast, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.watermelon, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.woodFrame, 1);
-        ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.woodSword, 1);
+        /*18*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Toast, 1);
+        /*19*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.watermelon, 1);
+        /*20*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.woodFrame, 1);
+        /*21*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.woodSword, 1);
+
+        /*21*/ProfilesManagementScript.Singleton.CurrentAnimin.AddItemToInventory(InventoryItemId.Radio, 1);
+
+        for (int i = 0; i < ProfilesManagementScript.Singleton.CurrentAnimin.Inventory.Count; i++)
+        {
+            for (int j = 0; j < ProfilesManagementScript.Singleton.CurrentAnimin.Inventory.Count; j++)
+            {
+                if (ProfilesManagementScript.Singleton.CurrentAnimin.Inventory[i].Id == ProfilesManagementScript.Singleton.CurrentAnimin.Inventory[j].Id && i != j)
+                {
+                    Debug.Log("Duplicate found : [" + i + "|" + j + "]; ID :[" + ProfilesManagementScript.Singleton.CurrentAnimin.Inventory[i].Id + "];");
+                }
+            }
+        }
+
 
         if (BetweenSceneData.Instance.ReturnFromMiniGame)
         {
@@ -369,12 +385,6 @@ public class CharacterProgressScript : MonoBehaviour
             UIGlobalVariablesScript.Singleton.TutHandler.TriggerAdHocStartCond("3DayEvolve");
         }
 
-        m_SkinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
-        m_DefaultTexture = m_SkinnedMeshRenderers[0].material.mainTexture;
-
-        BlinkRef bref = this.GetComponentInChildren<BlinkRef>();
-        if (bref != null)
-            m_BlinkTexture = bref.Blink;
 
 
 
@@ -612,9 +622,9 @@ public class CharacterProgressScript : MonoBehaviour
 
     private void ReplaceTexture(Texture tex)
     {
-        for (int i = 0; i < m_SkinnedMeshRenderers.Length; i++)
+        for (int i = 0; i < GetComponentsInChildren<SkinnedMeshRenderer>().Length; i++)
         {
-            m_SkinnedMeshRenderers[i].material.mainTexture = tex;
+            GetComponentsInChildren<SkinnedMeshRenderer>()[i].material.mainTexture = tex;
         }
     }
 	
@@ -641,8 +651,8 @@ public class CharacterProgressScript : MonoBehaviour
         / 3.0f)
         * PersistentData.MaxHappy;
 
-
-        if (m_SkinnedMeshRenderers != null && m_DefaultTexture != null && m_BlinkTexture != null)
+        /*
+        if (GetComponentsInChildren<SkinnedMeshRenderer>() != null && this.GetComponentInChildren<BlinkRef>() != null)
         {
             m_BlinkTimer += Time.deltaTime;
             if (!m_IsBlinking)
@@ -653,7 +663,7 @@ public class CharacterProgressScript : MonoBehaviour
                     if (UnityEngine.Random.value <= 0.5f)
                     {
                         m_IsBlinking = true;
-                        ReplaceTexture(m_BlinkTexture);
+                        ReplaceTexture(this.GetComponentInChildren<BlinkRef>().Blink);
                     }
                 }
             }
@@ -663,10 +673,11 @@ public class CharacterProgressScript : MonoBehaviour
                 {
                     m_BlinkTimer = 0;
                     m_IsBlinking = false;
-                    ReplaceTexture(m_DefaultTexture);
+                    ReplaceTexture(GetComponent<CharacterSwapManagementScript>().CurrentModel.renderer.material.mainTexture);
                 }
             }
         }
+        */
 
 
 
@@ -1675,7 +1686,7 @@ public class CharacterProgressScript : MonoBehaviour
         UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, ProfilesManagementScript.Singleton.CurrentAnimin.Hungry / 100.0f), UIGlobalVariablesScript.Singleton.HungryControlBarRef.transform.localPosition.y, 0);
         UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, ProfilesManagementScript.Singleton.CurrentAnimin.Health / 100.0f), UIGlobalVariablesScript.Singleton.HealthControlBarRef.transform.localPosition.y, 0);
         UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, 
-                ProfilesManagementScript.Singleton.CurrentAnimin.Happy / PersistentData.MaxHappy), UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition.y, 0);
+        ProfilesManagementScript.Singleton.CurrentAnimin.Happy / PersistentData.MaxHappy), UIGlobalVariablesScript.Singleton.HapynessControlBarRef.transform.localPosition.y, 0);
         UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition = new Vector3(Mathf.Lerp(-80.51972f, 617.2906f, ProfilesManagementScript.Singleton.CurrentAnimin.Fitness / 100.0f), UIGlobalVariablesScript.Singleton.FitnessControlBarRef.transform.localPosition.y, 0);
         //UIGlobalVariablesScript.Singleton.EvolutionControlBarRef.GetComponent<UISlider>().value = Evolution / 100.0f;
 

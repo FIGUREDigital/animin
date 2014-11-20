@@ -867,7 +867,7 @@ public class AnimationControllerScript : MonoBehaviour
         {
             if (MediaPlayerPluginScript.IsPlaying || MediaDebugDummy.On)
             {
-                IsDanceBOP = true;
+                //IsDanceBOP = true;
             }
         }
         if (IsDanceBOP)
@@ -932,11 +932,11 @@ public class AnimationControllerScript : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("jump_in_portal"))
             IsEnterPortal = false;
 
-        //if (animator.GetCurrentAnimatorStateInfo(0).IsName("dance"))
-        //    IsDance = false;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("dance"))
+            IsDance = false;
 
-        //if (animator.GetCurrentAnimatorStateInfo(0).IsName("DanceAlternative"))
-            //IsDanceBOP = false;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("DanceAlternative"))
+            IsDanceBOP = false;
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("DanceAlternative"))
         {
             if( animator.GetBool("IsWalking") ||

@@ -144,8 +144,9 @@ public class EvolutionManager
 			mCurrentMarker++;
 		}
 	    if (ProfilesManagementScript.Singleton.CurrentProfile.ActiveAnimin == PersistentData.TypesOfAnimin.Tbo)
-	    {
-            ProfilesManagementScript.Singleton.ShowEvolutionPurchaseWarning();
+        //if (false)
+        {
+            //ProfilesManagementScript.Singleton.ShowEvolutionPurchaseWarning();
 	    }
         else
         {

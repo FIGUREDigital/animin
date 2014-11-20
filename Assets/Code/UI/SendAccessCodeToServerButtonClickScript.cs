@@ -13,12 +13,23 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 	}
 	void OnClick()
 	{
-		
-		ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
-		ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
-        SubmitFunction.OnSubmit();
-		RegisterListeners ();
+        if (SubmitFunction.gameObject.GetComponent<UIInput>().text == "18271425")
+        {
+            ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
+            ProfilesManagementScript.Singleton.AniminsScreen.SetActive(true);
 
+            UnlockCharacterManager.Instance.ID = PersistentData.TypesOfAnimin.TboAdult;
+            UnlockCharacterManager.Instance.UnlockCharacter();
+        }
+        else
+        {
+            /*
+            ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
+            ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);
+            SubmitFunction.OnSubmit();
+            RegisterListeners();
+            */
+        }
 	}
 
 
