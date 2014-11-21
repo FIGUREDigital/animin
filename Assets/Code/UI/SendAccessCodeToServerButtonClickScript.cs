@@ -5,6 +5,8 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
 
 	public SendAccesCodeFromChatboxClickScript SubmitFunction;
 
+    [SerializeField]
+    public GameObject IncorrectLabel;
 
 	// Use this for initialization
 	void Start () 
@@ -23,6 +25,7 @@ public class SendAccessCodeToServerButtonClickScript : MonoBehaviour {
         }
         else
         {
+            IncorrectLabel.SetActive(true);
             /*
             ProfilesManagementScript.Singleton.PurchaseChoiceScreen.SetActive(false);
             ProfilesManagementScript.Singleton.LoadingSpinner.SetActive(true);

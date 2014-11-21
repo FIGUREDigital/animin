@@ -9,8 +9,10 @@ public class TestPauser : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-//		if (Application.isEditor && Input.GetKeyDown (KeyCode.Space)) {
-//			UnityEditor.EditorApplication.isPaused = true;
-//		}
+        #if UNITY_EDITOR
+		if (Input.GetKeyDown (KeyCode.P)) {
+			UnityEditor.EditorApplication.isPaused = true;
+		}
+        #endif
 	}
 }
