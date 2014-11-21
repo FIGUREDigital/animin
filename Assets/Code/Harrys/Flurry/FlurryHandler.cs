@@ -7,7 +7,13 @@ public class FlurryHandler : MonoBehaviour {
 		FlurryLogger.Instance.Init ();
 	}
 
-	void OnApplicationQuit(){
+	void OnApplicationPause(){
 		FlurryLogger.Instance.EndSession ();
-	}
+    }
+    void OnApplicationQuit(){
+        FlurryLogger.Instance.EndSession ();
+    }
+    void OnApplicationResumer(){
+        FlurryLogger.Instance.StartSession();
+    }
 }

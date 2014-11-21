@@ -18,31 +18,36 @@ public class FlurryLogger
         if (m_Inited)
             return;
         Debug.Log("FLURRY LOGGER : [Init];");
+        StartSession();
+
+		
+        m_Inited = true;
+    }
+    public void StartSession(){
+        Debug.Log("FLURRY LOGGER : [Start];");
 
         #if UNITY_IOS
-            FlurryAnalytics.startSession("VWK79FC9CHBVXY4VXXY6");
-            FlurryAnalytics.setSessionReportsOnCloseEnabled(true);
-            FlurryAnalytics.setSessionReportsOnPauseEnabled(true);
+        FlurryAnalytics.startSession("VWK79FC9CHBVXY4VXXY6");
+        FlurryAnalytics.setSessionReportsOnCloseEnabled(true);
+        FlurryAnalytics.setSessionReportsOnPauseEnabled(true);
         #elif UNITY_ANDROID
-            FlurryAndroid.setContinueSessionMillis(20000);
+        FlurryAndroid.setContinueSessionMillis(20000);
         FlurryAndroid.onStartSession("K98433N9XWCVX5NHTPCN",false,true);
-            FlurryAndroid.setLogEnabled(true);
+        FlurryAndroid.setLogEnabled(true);
 
         #endif
 
-		
+
         var dict = new Dictionary<string,string>();
         dict.Add("DeviceModel", SystemInfo.deviceModel);
 
         #if UNITY_IOS
-            FlurryAnalytics.logEventWithParameters("DeviceStats", dict, false);
-            FlurryAnalytics.logEvent("SessionTime", true);
+        FlurryAnalytics.logEventWithParameters("DeviceStats", dict, false);
+        FlurryAnalytics.logEvent("SessionTime", true);
         #elif UNITY_ANDROID
-    		FlurryAndroid.logEvent ("DeviceStats", dict, false);
-    		FlurryAndroid.logEvent ("SessionTime", true);
+        FlurryAndroid.logEvent ("DeviceStats", dict, false);
+        FlurryAndroid.logEvent ("SessionTime", true);
         #endif
-		
-        m_Inited = true;
     }
 
     public void EndSession()
