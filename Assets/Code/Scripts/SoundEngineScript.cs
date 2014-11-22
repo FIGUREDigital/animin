@@ -276,6 +276,8 @@ public class SoundEngineScript : MonoBehaviour
 
     public void Play(PersistentData.TypesOfAnimin animin, AniminEvolutionStageId creatureId, CreatureSoundId soundId)
 	{
+        if (animin == PersistentData.TypesOfAnimin.TboAdult)
+            animin = PersistentData.TypesOfAnimin.Tbo;
         if(!ProfilesManagementScript.Singleton.CurrentProfile.Settings.AudioEnabled) return;
 		if (CreatureSounds [(int)animin, (int)creatureId, (int)soundId] == null) {
 			Debug.Log ("Panic! Sound : [" + animin + "|" + creatureId + "|" + soundId + "] is not valid");
